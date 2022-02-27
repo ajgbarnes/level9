@@ -11,7 +11,7 @@
         "type" : "v1",
         "loadAddress" : "0x1100",
         "commonFragmentsAddr" : "0x70D7",
-        "messagesStartAddr" : "0x34B7",
+        "messagesStartAddr" : "0x34BF",
         "dictionaryAddr": "0x1180",
         "filename" : "SNOWBAL"
     },
