@@ -4,6 +4,8 @@ These are absolutely iconic adventure games for the BBC Micro - always been fasc
 
 I do not hold the copyright to the original games, only the python programs that inspect and read them. The original game Copyright remains with Level 9.
 
+Thank you to David Kinder and Glen Summers for their work on the C Level 9 interpreter.
+
 Feedback and comments are always appreciated to help preserve and understand the internals of this classic.
 
 # Game Dictionaries and Descriptions
@@ -23,6 +25,24 @@ For all the supported Level 9 a-code version 1 games, the descriptions and dicti
 * [Dungeon Adventure Descriptions](https://github.com/ajgbarnes/level9/blob/main/game-text/dungeon-adventure-descs.txt)
 * [Lords of Time Descriptions](https://github.com/ajgbarnes/level9/blob/main/game-text/lords-of-time-v1-descs.txt)
 * [Snowball Descriptions](https://github.com/ajgbarnes/level9/blob/main/game-text/snowball-v1-descs.txt)
+
+SPOILERS: The full game walkthroughs and response text can be found here:
+
+## Extracted Full Game Walkthroughs and Text
+* [Adventure Quest Walkthrough](https://github.com/ajgbarnes/level9/blob/main/full-game-text/adventure-quest-v1.txt)
+* [Colossal Aventure Walkthrough](https://github.com/ajgbarnes/level9/blob/main/full-game-text/colossal-adventure-v1.txt)
+* [Dungeon Adventure Walkthrough](https://github.com/ajgbarnes/level9/blob/main/full-game-text/dungeon-adventure.txt)
+* [Lords of Time Walkthrough](https://github.com/ajgbarnes/level9/blob/main/full-game-text/lords-of-time-v1.txt)
+* [Snowball Walkthrough](https://github.com/ajgbarnes/level9/blob/main/full-game-text/snowball-v1.txt)
+
+The test scripts used to generate the above walkthroughs were sourced from [David Kinder's Github Level 9 repository](https://github.com/DavidKinder/Level9) and tweaked slightly to work with my parser:
+
+## Extracted Full Game Walkthroughs and Text
+* [Adventure Quest Test Script](https://github.com/ajgbarnes/level9/blob/main/full-game-text/adventure-quest-v1.txt)
+* [Colossal Aventure Test Script](https://github.com/ajgbarnes/level9/blob/main/full-game-text/colossal-adventure-v1.txt)
+* [Dungeon Adventure Test Script](https://github.com/ajgbarnes/level9/blob/main/full-game-text/dungeon-adventure.txt)
+* [Lords of Time Test Script](https://github.com/ajgbarnes/level9/blob/main/full-game-text/lords-of-time-v1.txt)
+* [Snowball Test Script](https://github.com/ajgbarnes/level9/blob/main/full-game-text/snowball-v1.txt)
 
 
 # Pre-requisities
@@ -85,4 +105,14 @@ python descriptions.py --game <game-name>
 
 # Level 9 v1 Parser / Interpreter
 
-To be released imminently for running Lords of Time in the first instance - needs a little work to run the others - recording of it running through a scripted input game can be found on Youtube showing [Level 9's Lords of Time](https://www.youtube.com/watch?v=epD8R3tzTPk).
+To be released imminently for running all v1 BBC Micro games including:
+
+* Adventure Quest
+* Colossal Aventure
+* Dungeon Adventure
+* Lords of Time
+* Snowball Test
+
+Needs a code tidy now I understand how it should all work and want to comment as much as possible.
+
+Here is a recording of it running through a scripted input game showing [Level 9's Lords of Time](https://www.youtube.com/watch?v=epD8R3tzTPk).  It currently works with ALL v1 Level 9 games for the BBC Micro.
