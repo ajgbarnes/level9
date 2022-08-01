@@ -74,10 +74,10 @@ If you want to derive the file offset instead of the runtime memory address, loo
 The supported games can be seen by typing the following on the command line:
 
 ```
-python dictionary.py --game <game-name>
+python dictionary.py --game
 ```
 
-To run the dictionary extractor on a particular game, replace "<game-name>" with the name of one listed in the output from the previous command:
+To run the dictionary extractor on a particular game, replace "\<game-name\>" with the name of one listed in the output from the previous command:
 
 ```
 python dictionary.py --game <game-name>
@@ -94,10 +94,10 @@ If you want to derive the file offset instead of the runtime memory address, loo
 The supported games can be seen by typing the following on the command line:
 
 ```
-python descriptions.py --game <game-name>
+python descriptions.py --game 
 ```
 
-To run the descriptions extractor on a particular game, replace "<game-name>" with the name of one listed in the output from the previous command:
+To run the descriptions extractor on a particular game, replace "\<game-name\>" with the name of one listed in the output from the previous command:
 
 ```
 python descriptions.py --game <game-name>
@@ -116,3 +116,29 @@ To be released imminently for running all v1 BBC Micro games including:
 Needs a code tidy now I understand how it should all work and want to comment as much as possible.
 
 Here is a recording of it running through a scripted input game showing [Level 9's Lords of Time](https://www.youtube.com/watch?v=epD8R3tzTPk).  It currently works with ALL v1 Level 9 games for the BBC Micro.
+
+The supported games can be seen by typing the following on the command line:
+
+```
+python parser.py --game
+```
+
+This will respond with:
+
+```
+PS C:\Users\ajgba\Desktop\lords\level9> python parser.py
+usage: parser.py [-h] [--script SCRIPT] [--logging {info,debug}] --game {lords,snowball,colossal,dungeon,dungeon-old,adventure}
+parser.py: error: the following arguments are required: --game
+```
+
+To run the a particular adventure game, replace "\<game-name\>" with the name of one listed in the output from the previous command:
+
+```
+python parser.py --game <game-name>
+```
+
+To test a game or see it played out in full, use the **--script** switch as below:
+
+```
+python parser.py --game lords --script test-scripts\lords-of-time-v1.txt
+```
