@@ -90,7 +90,7 @@ In game at any point, \#dictionary and \#dict will print the dictionary.
 
 # Descriptions Extractor
 
-A Python program to extract all available game descriptions - including rooms, exits, objects, different object states. This is now no longer a seperate programme but part of the main parser.py.
+A Python program to extract all available game descriptions - including rooms, exits, objects, different object states. This is now no longer a seperate programme but part of the main level9.py.
 
 Each line output will have an description code (in hex), the address in runtime memory where it would be found and the description itself.  Given the way the game engine works, most description are fragments brought together with game engine constants and variable values for lookup.
 
@@ -122,11 +122,13 @@ Now released and should work with games from the BBC Micro, Oric, ZX Spectrum et
 * Lords of Time
 * Snowball Test
 
+It was intended to be ultra portable so rus on the command line for now (that will change to support graphics but allow a user to choose).  
+
 Here is a recording of it running through a scripted input game showing [Level 9's Lords of Time](https://www.youtube.com/watch?v=epD8R3tzTPk).  It currently works with ALL v1 Level 9 games for the BBC Micro and tested with a few from the Oric (.tap) and ZX Spectrum (.tzx). Others may work - I have not tried any C64 versions yet partly because I don't understand the D64 format yet (doesn't appear to preserve the binary in "raw" that can be read and interpreted)
 
 The supported games can be seen by typing the following on the command line:
 
-```
+``` 
 python level9.py --game 
 or
 python level9.py -g
@@ -143,23 +145,23 @@ level9.py: error: one of the arguments -g/--game -f/--file is required
 To run the a particular adventure game, replace "\<game-name\>" with the name of one listed in the output from the previous command:
 
 ```
-python parser.py --game <game-name>
+python level9.py --game <game-name>
 ```
 
 To test a game or see it played out in full, use the **--autoGame** switch as below:
 
 ```
-python parser.py --game lords --autoGame
+python level9.py --game lords --autoGame
 or
-python parser.py --game lords --a
+python level9.py --game lords --a
 ```
 
 To test a game and use your own script use the **--script** switch as below:
 
 ```
-python parser.py --game lords --script test-scripts\lords-of-time-v1.txt
+python level9.py --game lords --script test-scripts\lords-of-time-v1.txt
 or
-python parser.py -g lords --s test-scripts\lords-of-time-v1.txt
+python level9.py -g lords --s test-scripts\lords-of-time-v1.txt
 ```
 
 To see all command line options,, use the command below:
@@ -192,6 +194,7 @@ options:
 ## TODO
 
 1. Write up how the compression algorithm seems to work for common word fragments / messages
+2. Add a Python UI so it's prepared for the graphics (as an option)
 
 ## Level 9 Additional Commands
 
