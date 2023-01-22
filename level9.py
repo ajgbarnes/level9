@@ -1228,7 +1228,7 @@ def vm_fn_jump(data, opCode, pc):
     tableOffset   = vm_variables[offsetVar] * 2
     jumpTableAddress = aCodeStartAddr + aCodeOffset + tableOffset
 
-    print(hex(aCodeOffset), hex(offsetVar), hex(vm_variables[offsetVar]), hex(data[jumpTableAddress] + (data[jumpTableAddress+1] * 256)))
+    #print(hex(aCodeOffset), hex(offsetVar), hex(vm_variables[offsetVar]), hex(data[jumpTableAddress] + (data[jumpTableAddress+1] * 256)))
 
     pc = aCodeStartAddr + data[jumpTableAddress] + (data[jumpTableAddress+1] * 256) - 1
 

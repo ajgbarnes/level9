@@ -29,8 +29,8 @@ On the left hand side, a typical Level 9 adventure game file is shown with its c
 - **Dictionary** - a compressed and encoded list of commands and objects that the adventure game understands
 - **Common Word Fragments** - an extracted list of commonly occuring common word fragments from the dictionary and messages above.  This can themselves contain common word fragment references.
 - **Lists** - there are two kinds - reference and dynamic lists. Reference information could be an object's initial location and a dynamic list could be an object's current location.
-- **Exits** - Each location has at least one exit (direction a player can move in).  There is a table which defines them for all locations.
-- **Jump tables** - a bit like a list of function references, a table of absolute locations in the A-Code where to "jump" to. 
+- **Exits** - Each location has at least one exit (direction a player can move in).  There is a table which defines them for all locations.  Some of the exits can be used for inverse movement lookup (if there's no exit moving W from location 1, is there an exit moving E to location 1 from another location and does the flag allow this).
+- **Jump tables** - a bit like a list of function references, a table of absolute locations in the A-Code where to "jump" to. Version 1 games have a maximum of one and only seen in Colossal Adventure and Adventure Quest.
 
 
 The right hand side details the engine with the following components:
@@ -387,12 +387,13 @@ Notes:
 
 Performs one of a number of system utility functions. It has a single constant operand that indicates which function is required:
 
+- 0x01 - Exit gracefully (all games use this on 'no' to 'Another game?')
 - 0x02 - Generate new random seed
     1. The oldSeed should be zero before loading the game
     2. To be authenticate the following algorithm should be used (Javascript / Python-esque):
 
         > ((((((oldSeed << 8) + 0x0A) - oldSeed) <<>  2) + oldSeed) + 1) & 0xFFFF
-    3. Set the variable value to this value
+    3. Set the variable value to the lowest 8-bits of this value
 - 0x03 - Save current game
     - Save all the variable 16-bit values to a file or similar persistent storage
     - Save the 8-bit values of the any dynamic lists to a file or similar persistent storage
