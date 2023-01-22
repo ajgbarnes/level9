@@ -93,8 +93,9 @@ v1Configuration = {
     },    
     "lords" : {
         "version"           : 1,
-        #"filename"          : "roms/LORDSOF",
-        "filename"          : "roms/lot.tzx",
+        "filename"          : "roms/LORDSOF",
+        #"filename"          : "roms/lot.tzx",
+        #"filename"          : "roms/LordsOfTime.ssd",
         "script"            : "test-scripts/lords-of-time-v1.txt",
 
         "signatureBytes"    : b'\x00\x06\x00\x00\x65',
