@@ -74,6 +74,7 @@ ne;
 w;
 u;
 s;
+
 chop willow [it leaves a tear];
 get tear ;
 n;
@@ -115,6 +116,7 @@ u;
 get bone;
 u [the spear keeps the tiger away];
 open tin;
+
 give tin [the tiger becomes happy, but it has a sore tooth];
 get tooth;
 light match;
@@ -360,6 +362,7 @@ e;
 n;
 u;
 u;
+
 get star [you must wear the gauntlets or your hands become toast!];
 d;
 d;
@@ -529,4 +532,4 @@ throw tear;
 throw buckle;
 w;
 e;
-throw chip [all ingredients are now in the cauldron, and soon the timelords are defeated. way to go!!];
+throw chip [all ingredients are now in the cauldron, and soon the timelords are defeated. way to go!!]; 56

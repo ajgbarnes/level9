@@ -1,0 +1,100 @@
+
+Colossal
+========
+
+There is some basic code at 0x1100 in Colossal (need to unwind it)
+
+Main entry point is 7351 see fnInitGame:
+
+    Reads 7323/4 and puts in 80/81 (a-code start)
+    Hardcodes and puts value 1180 (dict start) into 82/83
+    Calls "writeCharToScreen" (73AC) with #0F
+        Calls OSASCI which calls OSWRCH which does a VDU 15 (switch page mode off)
+    Calls "resetNextCharPointer" puts $0000 into 62/63
+    Set chars on current line 64 to zero
+    Sets escape handler to 7AA1
+    Call main loop JSR 737C
+
+Main loop is 737C
+    Get return address from the stack, subtract 3 from it and put it back on the stack
+        (so it returns to 7379 (7378+1) and calls this sub-routine again)
+    Get next opcode (acode)
+    Store 7th bit in 6E
+    Store 6th bit in 6F
+    Check if 8th bit set and if so
+        Go to list handler and return
+    Get bottom 5 bits (& 0x1F)
+    Times by 2 for the lookup table offset
+    Add lookup table offset to lookup table start address
+    Load command address from lookup table ($79B0)
+    Add command address to stack
+    Return (calls command address)
+
+
+
+Exits
+    Get operand1 (variable for current location) and store in 86
+    Get operand2 (varaible for direction) and store in 87
+    Lookup exits start address at $7329/A
+    Store exits start address in 7C/7D
+    Reset dictionary pointer to $1B00
+    Get nth location exists data (see notes)
+
+Colossal objects
+================
+List 0 = nothing 
+List 1 = 0500
+List 2 = 1895 - initial object locations?
+List 3 = 0580 - object Location
+List 4 = 18B5 - inital object state?
+List 5 = 05D0 - object state?
+
+1895 - 18B4 - initial object locations
+18B5 - 18D4 - initial object state
+
+0xD - 040A - current location
+
+
+
+Dungeon Adventure
+=================
+
+Address lookup is at 7329
+
+7325: 00 00 00 04 20 0E FF 2E 0C 71 00 04 06 07 01 08  .... ....q......
+7335: 02 03 05 0A 09 0C 0B FF FF 0F 00 00 C0 00 00 00  ................
+7345: 6A 17 00 05 00 00 00 00 00 00 00 00 AD 23 73 85  j............#s.
+7355: 80 AD 24 73 85 81 A9 00 85 82 A9 11 85 83 A9 0F  ..$s............
+
+7327/8  - 0400 - variable storage
+7329/A  - 0E20 - exits address
+732B/C  - 2EFF - messages
+732D/E  - 710C - common fragments
+732F/3E - inverse directions table
+(dictionary hard coded?)
+
+Pointer Lookup is at 7343
+
+7343: 00 00 6A 17 00 05 00 00 00 00 00 00 00 00 AD 23  ..j............#
+7353: 73 85 80 AD 24 73 85 81 A9 00 85 82 A9 11 85 83  s...$s..........
+7363: A9 0F 20 AC 73 20 45 75 A9 00 85 64 A9 A1 8D 02  .. .s Eu...d....
+7373: 02 A9 7A 8D 03 02 20 7C 73 38 68 E9 03 AA 68 E9  ..z... |s8h...h.
+
+7344/5 - always 0000
+7345/6 - list 1 - 176A - initial location?
+7346/7 - list 2 - 0500 - List storage (object location?)
+
+7319: 8F 6B 40 00 00 A5 75 4C 51 73 40 18 00 00 00 04  .k@...uLQs@.....
+7329: 20 0E FF 2E 0C 71 00 04 06 07 01 08 02 03 05 0A   ....q..........
+7339: 09 0C 0B FF FF +0F 00 00 C0 00 00 00 6A 17 00 05  ............j...
+7349: 00 00 00 00 00 00 00 00 AD 23 73 85 80 AD 24 73  .........#s...$s
+
+731E/F 00 00 - end of common fragments?
+7320/0 JMP...
+7321/2 - main entry point - 7351
+7323/4 - exits - 1840
+
+
+
+
+

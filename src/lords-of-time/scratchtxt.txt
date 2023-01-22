@@ -1,0 +1,33 @@
+
+
+
+00+   - input string
+60    - zp_common_word_fragment_index_lsb
+61    - zp_common_word_fragment_index_msb
+62/63 - current char lsb/msb in the string buffer
+6a    - General Cache 1
+6b    - General Cache 2
+6c    - General Cache 3
+6e    - 7th bit of control code from 5C20
+6f    - 6th bit of control code from 5C20
+70/71 - vm workspace pointer?
+72/73 - counter for looping through common word fragments
+74/75 - cache for the vm workspace pointer
+76/77 - input string pointer
+7A/7B - current word start?
+7C/7D - dictionary pointer
+80/81 - virtual machine
+82/83 - start dictionary memory location - constant
+84/85 - instruction memory pointer
+        used as a memory address to write in to zero page string buffer of input
+        puts the character code there
+86 - cache of input value after ANDing with $7F
+
+$1220 - Dictionary 
+$2083 - Game descriptions separated by $01
+$5A0B - Common word fragments
+$5C20 - virtual machine commands
+
+
+
+

@@ -8,6 +8,12 @@ Thank you to David Kinder and Glen Summers for their work on the C Level 9 inter
 
 Feedback and comments are always appreciated to help preserve and understand the internals of this classic.
 
+# Level 9 Version 1 Specification
+
+I have written a [specificaiton for Version 1 games](https://github.com/ajgbarnes/level9/A-Code%20Version%201%20Specification) which I will extended to include later version over time.  It hopefully gives a pretty good introduction into how the Level 9 game engines should work, if you wish to write your own or just want to understand it academically.  
+
+It's not perfect, but I will proof read it again and improve over time. Any feedback is welcome. 
+
 # Game Dictionaries and Descriptions
 
 For all the supported Level 9 a-code version 1 games, the descriptions and dictionaries have been pre-extracted below:
@@ -49,7 +55,7 @@ The test scripts used to generate the above walkthroughs were sourced from [Davi
 
 [Download this package as a zip file](https://github.com/ajgbarnes/level9/archive/refs/heads/main.zip) and extract somewhere or clone via git.
 
-This should run on any platform that supports Python 3 - I have tried it so far on Windows 10 and MacOS Monterrey. Install the Python 3 interpreter and make sure it's in your PATH for your operating system.
+This should run on any platform that supports Python 3.10+ - I have tried it so far on Windows 10 and MacOS Monterrey and later. Install the Python 3 interpreter and make sure it's in your PATH for your operating system.
 
 Check you have the right version by typing the following from the command line
 
@@ -65,7 +71,7 @@ python3 --version
 
 # Dictionary Extractor
 
-A Python program to extract the dictionary of commands and objects from the game - this is everything that the game understands. 
+A Python program to extract the dictionary of commands and objects from the game - this is everything that the game understands. This is now no longer a seperate programme but part of the main level9.py.
 
 Each line output will have an object code (in hex), the address in runtime memory where it would be found and the keyword.  There may be more than one keyword for a particular object code as sometimes synonyms are defined. 
 
@@ -74,18 +80,24 @@ If you want to derive the file offset instead of the runtime memory address, loo
 The supported games can be seen by typing the following on the command line:
 
 ```
-python dictionary.py --game
+python level9.py --game 
+or
+python level9.py -g 
 ```
 
 To run the dictionary extractor on a particular game, replace "\<game-name\>" with the name of one listed in the output from the previous command:
 
 ```
-python dictionary.py --game <game-name>
+python level9.py --game <game-name> --dictionary
+or
+python level9.py -g <game-name> -d
 ```
+
+In game at any point, \#dictionary and \#dict will print the dictionary.
 
 # Descriptions Extractor
 
-A Python program to extract all available game descriptions - including rooms, exits, objects, different object states. 
+A Python program to extract all available game descriptions - including rooms, exits, objects, different object states. This is now no longer a seperate programme but part of the main parser.py.
 
 Each line output will have an description code (in hex), the address in runtime memory where it would be found and the description itself.  Given the way the game engine works, most description are fragments brought together with game engine constants and variable values for lookup.
 
@@ -94,18 +106,22 @@ If you want to derive the file offset instead of the runtime memory address, loo
 The supported games can be seen by typing the following on the command line:
 
 ```
-python descriptions.py --game 
+python level9.py --game 
+or
+python level9.py -g 
 ```
 
 To run the descriptions extractor on a particular game, replace "\<game-name\>" with the name of one listed in the output from the previous command:
 
 ```
-python descriptions.py --game <game-name>
+python level9.py --game <game-name> --messages
+or
+python level9.py -g <game-name> -m
 ```
 
 # Level 9 v1 Parser / Interpreter
 
-To be released imminently for running all v1 BBC Micro games including:
+Now released and should work with games from the BBC Micro, Oric, ZX Spectrum etc including:
 
 * Adventure Quest
 * Colossal Aventure
@@ -113,22 +129,22 @@ To be released imminently for running all v1 BBC Micro games including:
 * Lords of Time
 * Snowball Test
 
-Needs a code tidy now I understand how it should all work and want to comment as much as possible.
-
-Here is a recording of it running through a scripted input game showing [Level 9's Lords of Time](https://www.youtube.com/watch?v=epD8R3tzTPk).  It currently works with ALL v1 Level 9 games for the BBC Micro.
+Here is a recording of it running through a scripted input game showing [Level 9's Lords of Time](https://www.youtube.com/watch?v=epD8R3tzTPk).  It currently works with ALL v1 Level 9 games for the BBC Micro and tested with a few from the Oric (.tap) and ZX Spectrum (.tzx). Others may work - I have not tried any C64 versions yet partly because I don't understand the D64 format yet (doesn't appear to preserve the binary in "raw" that can be read and interpreted)
 
 The supported games can be seen by typing the following on the command line:
 
 ```
-python parser.py --game
+python level9.py --game 
+or
+python level9.py -g
 ```
 
 This will respond with:
 
 ```
-PS C:\Users\ajgba\Desktop\lords\level9> python parser.py
-usage: parser.py [-h] [--script SCRIPT] [--logging {info,debug}] --game {lords,snowball,colossal,dungeon,dungeon-old,adventure}
-parser.py: error: the following arguments are required: --game
+usage: level9.py [-h] [-d | -m] (-g {adventure,colossal,dungeon,lords,snowball} | -f FILE) [-s SCRIPT | -a]
+                 [--logging {info,debug}]
+level9.py: error: one of the arguments -g/--game -f/--file is required
 ```
 
 To run the a particular adventure game, replace "\<game-name\>" with the name of one listed in the output from the previous command:
@@ -137,8 +153,144 @@ To run the a particular adventure game, replace "\<game-name\>" with the name of
 python parser.py --game <game-name>
 ```
 
-To test a game or see it played out in full, use the **--script** switch as below:
+To test a game or see it played out in full, use the **--autoGame** switch as below:
+
+```
+python parser.py --game lords --autoGame
+or
+python parser.py --game lords --a
+```
+
+To test a game and use your own script use the **--script** switch as below:
 
 ```
 python parser.py --game lords --script test-scripts\lords-of-time-v1.txt
+or
+python parser.py -g lords --s test-scripts\lords-of-time-v1.txt
 ```
+
+To see all command line options,, use the command below:
+
+```
+python level9.py -h
+```
+
+Which will respond with:
+
+```
+usage: level9.py [-h] [-d | -m] (-g {adventure,colossal,dungeon,lords,snowball} | -f FILE) [-s SCRIPT | -a]
+                 [--logging {info,debug}]
+level9.py: error: one of the arguments -g/--game -f/--file is required
+PS C:\Users\ajgba\Desktop\lords\level9> python level9.py -h
+usage: level9.py [-h] [-d | -m] (-g {adventure,colossal,dungeon,lords,snowball} | -f FILE) [-s SCRIPT | -a]
+                 [--logging {info,debug}]
+
+options:
+  -h, --help            show this help message and exit
+  -d, --dictionary
+  -m, --messages
+  -g {adventure,colossal,dungeon,lords,snowball}, --game {adventure,colossal,dungeon,lords,snowball}
+  -f FILE, --file FILE
+  -s SCRIPT, --script SCRIPT
+  -a, --autoGame
+  --logging {info,debug}
+```
+
+# Level 9 Additional Commands
+
+The interpreter has been extended to include the following commands, mostly for my aid in debugging (these can also be included in script files):
+
+|Command|Description|
+| --- | --- | 
+|#vars|lists all game variable values|
+|#var \<number\>|displays a single game variable value|
+|#seed \<number\>|sets the random seed to the value - useful for debugging when a game contains random events|
+|#setvar \<number\> \<value\> |Sets variable to the value. Can be decimal or hexadecimal values (0xNN)|
+|#setlist \<number\> \<value\> | Set item <number> to <value>. Can be decimal or hexadecimal values (0xNN)|
+|#list |lists all the values in the listarea (these can be manipulated with #setlist to e.g. put objects in your current location or inventory)|
+|#message \<number\> |print message number|
+|#dict / #dictionary  | print the dictionary for the game|
+
+# Level 9 v1 Decompile4r
+
+It's not perfect and needs some tidying up and so far the following are available:
+
+* [Adventure Quest]
+* [Colossal Aventure]
+* [Dungeon Adventure]
+* [Lords of Time]
+* [Snowball Test]
+
+The supported games can be seen by typing the following on the command line:
+
+```
+python decompiler.py --game 
+or
+python decompiler.py -g
+```
+
+And to run a decompilation:
+
+```
+python decompiler.py --game <game-name>
+or
+python decompiler.py -g <game-name>
+```
+
+Note that some games will end in error as it runs past the end of the A-Code. Will fix that soon but all of the A-Code is there beforehand.
+
+No compiler yet and the source for compilation would NOT look like this.  This is purely informational which you can use alongside the dictionary and message extraction files to understand the game mechanics.
+
+# BBC Micro Game Common Game Engine 
+
+The engine for the BBC Micro games is more or less common across the 5 supported games - there are a few differences as below. It appears that Lords of Time and Snowball are later manifestations however they are not perfect and introduce some bugs/features.
+
+- For Lords of Time and Snowball, there is a memory checksum generation routine which is not present in my copies of the other games
+- For Lords of Time and Snowball, the break handler location is set at the start of fn_init_game and at the end for the rest
+- Dungeon Adventure is too big to fit into one file on disk and be loaded - it is split across two with the exits going into the first with some relocation code.  All other data is in the second file and loaded into $1100 onwards by the loader.
+- Name of the save file
+- Values of some of the junk bytes
+- Game code header information - BBC Micro does embed locations of lists, a-code etc.  Pretty much everything but the dictionary which is a hard coded address in the engine.  Shame, it was almost a header but this changes in v2 onwards.
+- The Break Handler for Snowball and Lords of Time only prints "Err" whereas it prints "Error" for all the others
+- The end memory locations in the save game files for Snowball and Lords of Time are reduced from $0400-$06FF to $0400-$05FF
+- Only Colossal Adventure and Adventure Quest use jump tables - the code is latently there however for Snowball / Lords of Time the pushing of A to the stack and pulling it back afterwards was removed.  Looks like a page boundary addition fix
+- The clear variables routine (fn_clear_variables) doesn't do anything for Snowball and Lords of Time - it pointlessly loops - it runs into the clear stack routine for these two games
+- I don't truly understand the clear stack routine (why it sets the stack pointer to $01E0 or $0180) - will play with that at some point i.e. why not back to higher?
+
+## Common Version 1 Engine TODO
+
+- Tidy up the comments in level9-v1-engine.asm and make them less Lords of Time specific
+- Remove the memory locations in the comments for the level9-v1-engine.asm (they are specific to the Lords of Time as that's where I started)
+- Proof read the comments and improve in level9-v1-engine.asm   
+- Update the memory location tables in the main.asm files as they all reflect Lords of Time right now
+
+## Building the games
+
+Enter the directory for any of the games e.g.
+
+```
+cd src\dungeon-adventure
+```
+
+To generate the source file(s) outside of a disk image (can be used with the leve9.py interpreter):
+
+```
+.\beebasm -i .\main.asm
+```
+
+Note for Dungeon Adventure, to use the file, you'll need to use a hex editor and cut and paste the Dungeo1 contents to before the Dungeo2 content and save it. BBC micro had to split these across 2 files for disk access.
+
+To generate a bootable disk image to use with e.g. beebjit or BeebEm.  For all but Dungeon Adventure this should work with the level9.py interpreter.
+
+```
+.\beebasm -i .\main.asm -di template.ssd -do Adventure.ssd
+.\beebasm -i .\main.asm -di template.ssd -do Colossal.ssd
+.\beebasm -i .\main.asm -di template.ssd -do Dungeon.ssd
+.\beebasm -i .\main.asm -di template.ssd -do LordsOfTime.ssd
+.\beebasm -i .\main.asm -di template.ssd -do Snowball.ssd
+```
+
+Enjoy!
+
+Andy
+

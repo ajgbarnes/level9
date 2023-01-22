@@ -1,0 +1,299 @@
+0xA1 <variable1>
+       1A00 is referenced at 7349 + 2 * (A1 & 1F)
+       variable2 = 1A00 + 2* value of <variable1>
+       It is set to 24 a LOT
+       however when looking at itemst have state it also gets set 
+
+       e.g. var 87 = 0x2 (from 0x1e16) when you do an inv  (hourglass)
+            var 87 = 0x2 (from 0x1e1b) when you do an inv (matchbox)
+
+
+0x500 is where the items are stored and their location
+
+0xA1 - 
+       sets a VARIABLE (always 24?) to the value of 1E00-1E9B 
+       Initialise lise from memory
+0xA2 - Sets a VARIABLE (always 24?) to the value of a list area 0x5C) oo 0x59b
+       sets 0x5c9 - 0x59b on every move
+       on entering room 0x5a1 is set to 0x3 (unwound?)
+       when you wind the clock 0x5a1 is set to 0x2 (wound?)
+0xE2 - change location of item
+       stored in 0x500+
+
+
+e.g. (must be able to generate this)
+
+0x550 - 0x59f objects correlate to messages 0x50 - 0x9f
+
+0x566 - fine hourglass
+0x56b - matchbox
+0x571 - masai spear
+0x57a - candlelook
+
+To make all objects appear in the clock:
+
+    for x in range(80,159):
+        vm_listarea[x]=3
+
+
+value of item is it's location
+
+
+
+
+When you get an item the list value is set to 0xFF
+and then to the locatiom
+inventory is e2ninv
+
+
+
+opCode:  0xa2 targetAddress:  0x5c9 value: 0xfe lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5ca value: 0x1d lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5cb value: 0x21 lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5cc value: 0x35 lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5cd value: 0x33 lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5ce value: 0x36 lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5cf value: 0x3a lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5d0 value: 0x43 lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5d1 value: 0x41 lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5d2 value: 0x4a lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5d3 value: 0x4c lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5d4 value: 0x4d lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5d5 value: 0x51 lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5d6 value: 0x59 lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5d7 value: 0xf4 lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5d8 value: 0xfe lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5d9 value: 0xfe lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5da value: 0x5e lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5db value: 0xff lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5dc value: 0x8b lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5dd value: 0x9a lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5de value: 0x9a lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5df value: 0xa6 lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5e0 value: 0xbd lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5e1 value: 0x13 lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5e2 value: 0x25 lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5e3 value: 0x7d lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5e4 value: 0xfe lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5e5 value: 0xfe lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5e6 value: 0xfe lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5e7 value: 0xfe lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5e8 value: 0xfe lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5e9 value: 0xfe lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5ea value: 0xfe lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5eb value: 0xfe lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x59b value: 0xa9 lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x59b value: 0xa9 lookupAddr:  0x614d
+
+
+opCode:  0xa2 targetAddress:  0x5c9 value: 0xfe lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5ca value: 0x1d lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5cb value: 0x21 lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5cc value: 0x35 lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5cd value: 0x33 lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5ce value: 0x36 lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5cf value: 0x3a lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5d0 value: 0x43 lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5d1 value: 0x41 lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5d2 value: 0x4a lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5d3 value: 0x4c lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5d4 value: 0x4d lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5d5 value: 0x51 lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5d6 value: 0x59 lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5d7 value: 0xf4 lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5d8 value: 0xfe lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5d9 value: 0xfe lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5da value: 0x5e lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5db value: 0xff lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5dc value: 0x8b lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5dd value: 0x9a lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5de value: 0x9a lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5df value: 0xa6 lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5e0 value: 0xbd lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5e1 value: 0x13 lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5e2 value: 0x25 lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5e3 value: 0x7d lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5e4 value: 0xfe lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5e5 value: 0xfe lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5e6 value: 0xfe lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5e7 value: 0xfe lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5e8 value: 0xfe lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5e9 value: 0xfe lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5ea value: 0xfe lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x5eb value: 0xfe lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x59b value: 0xa9 lookupAddr:  0x614d
+opCode:  0xa2 targetAddress:  0x59b value: 0xa9 lookupAddr:  0x614d
+
+
+
+
+EXITS....
+
+
+On a command it checks to see if you can go that way e.g. N 
+
+       Location n start position is always 2 bytes past the nth byte with the 8th bit set
+       If the current byte does NOT have bit 8 set then check the byte+2 (repeat until 8th bit not set)
+       8th bit is last byte pair for current location?
+
+       Direction
+              Variable 1 is the current location
+              Variable 2 (cmd/obj) is the direction to check and held in 0x10
+              Variable 3 is always 0x00
+              Variable 4 is the current location 
+
+              If bit 5 set and bits 1-4 == code that was looked up for direction
+                     if next byte = from location
+
+
+              If ok, 
+                     variable3 is set to the bits 5-7 of the direction byte that matched e.g. 7
+                     variable4 is set to the to location (byte after the direction that matched) e.g. 2
+
+              7335+direction code is used to lookup the inverse direction 
+              So South is mapped to North (south has a code of 0x4 so 7339 = 01 below)
+              7335   00 04 06 07 01 08 02 03 05 0A 09 0C 0B FF FF 0F
+
+              Then looks up the inverse direction to see if you can arrive at this location by going that way
+              (I can go South if I can go North to this location)
+
+       Look seems to set cmdobj to 0x1
+When displaying a location it checks each direction to see if you can go that way in the following order
+       Variable 1 is the current location
+       Variable 2 (cmd/obj) is the direction to check and held in 0x10
+
+location exits
+0x1      0x1b00
+0x2      0x1b02
+0x3      0x1b04
+0x4      0x1b16
+0x5      0x1b18
+0x6      0x1b1a
+0x7      0x1b1c
+0x8      0x1b20
+0x9      0x1b22
+0xa      0x1b24
+0xb      0x1b26
+0xc      0x1b28
+0xd      0x1b2c
+0xe      0x1b32
+0xf      0x1b34
+0x10     0x1b36
+0x11     0x1b38
+0x12     0x1b3a
+0x13     0x1b40
+
+
+You can go North to 0x2
+You can go North to 0x4
+You can go West to 0x6
+You can go South to 0xd8
+You can go West to 0x7
+You can go In to 0x8
+You can go West to 0x8
+You can go West to 0xd
+You can go Down to 0x8
+You can go South to 0x9
+You can go East to 0x9
+You can go North to 0x8
+You can go Out to 0xe
+You can go West to 0xe
+You can go West to 0x10
+You can go South-east to 0xe
+You can go West to 0x13
+You can go South to 0x11
+You can go Cross to 0x12
+You can go North-east to 0xe
+
+
+0x1  /  0x1226 NORTH
+0x2  /  0x1231 NEAST
+0x2  /  0x123d NORTHEAST
+0x2  /  0x127c NORTH-EAST
+0x3  /  0x122c EAST
+0x4  /  0x1237 SOUTH
+0x5  /  0x1247 SOUTHEAST
+0x5  /  0x1287 SOUTH-EAST
+0x5  /  0x1266 SEAST
+0x6  /  0x1256 SOUTHWEST
+0x6  /  0x129d SOUTH-WEST
+0x6  /  0x1276 SWEST
+0x7  /  0x1251 WEST
+0x8  /  0x1260 NWEST
+0x8  /  0x126c NORTHWEST
+0x8  /  0x1292 NORTH-WEST
+0x9  /  0x12a8 UPWARDS
+0xa  /  0x12b0 DOWNWARDS
+0xb  /  0x12ba INSIDE
+0xb  /  0x12c1 ENTER
+0xb  /  0x12c7 INTO
+0xb  /  0x12cc BOARD
+0xc  /  0x12d2 OUTSIDE
+0xc  /  0x12da LEAVE
+0xd  /  0x12e0 CROSS
+0xd  /  0x12e6 ACROSS
+0xe  /  0x12ed CLIMB
+0xf  /  0x12f3 JUMP
+
+
+
+
+Saving
+======
+
+Handled at 7428
+
+
+743E sets this up
+37/38 set to 746D  filename
+39    set to 00    load address low byte
+3A    set to 04    load address high byte
+3B    set to FF    blank
+3C    set to FF    blank
+3D                 execution address low byte
+3E                 execution address high byte
+3F                 blank
+40                 blank
+41    set to 00    start address low byte
+42    set to 04    start address high byte
+43    set to FF    blank
+44    set to FF    blank
+45    set to FF    end address low byte
+46    set to 06    end address high byte
+47    set to FF    blank
+48    set to FF    blank
+
+
+
+746D contains filename 'TIMEDAT' terminated by 0D
+A=0 OSFILE save block of memory returning file length and attributes
+X=$37  Address of file parameter block (low byte)
+Y=$00  Address of file parameter block (high byte)
+
+Restore
+=======
+Handled at 7431
+
+743E sets this up
+37/38 set to 746D  filename
+39    set to 00    load address low byte
+3A    set to 04    load address high byte
+3B    set to FF    blank
+3C    set to FF    blank
+3D                 execution address low byte
+3E                 execution address high byte
+3F                 blank
+40                 blank
+41    set to 00    start address low byte
+42    set to 04    start address high byte
+43    set to FF    blank
+44    set to FF    blank
+45    set to FF    end address low byte
+46    set to 06    end address high byte
+47    set to FF    blank
+48    set to FF    blank
+
+746D contains filename 'TIMEDAT' terminated by 0D
+A=FF OSFILE load block of memory returning file length and attributes
+X=$37  Address of file parameter block (low byte)
+Y=$00  Address of file parameter block (high byte)
