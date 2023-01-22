@@ -10,7 +10,7 @@ Feedback and comments are always appreciated to help preserve and understand the
 
 # Level 9 Version 1 Specification
 
-I have written a [specificaiton for Version 1 games](https://github.com/ajgbarnes/level9/A-Code%20Version%201%20Specification) which I will extended to include later version over time.  It hopefully gives a pretty good introduction into how the Level 9 game engines should work, if you wish to write your own or just want to understand it academically.  
+I have written a [specificaiton for Version 1 games](https://github.com/ajgbarnes/level9/blob/main/A-Code%20Version%201%20Specification.md) which I will extended to include later version over time.  It hopefully gives a pretty good introduction into how the Level 9 game engines should work, if you wish to write your own or just want to understand it academically.  
 
 It's not perfect, but I will proof read it again and improve over time. Any feedback is welcome. 
 
@@ -284,6 +284,17 @@ To generate a bootable disk image to use with e.g. beebjit or BeebEm.  For all b
 .\beebasm -i .\main.asm -di template.ssd -do LordsOfTime.ssd
 .\beebasm -i .\main.asm -di template.ssd -do Snowball.ssd
 ```
+
+## Useful References
+
+The following may be useful references when understand the BBC Micro Version code:
+
+1. [BBC Micro Zero Page Variable Usage](https://github.com/ajgbarnes/level9/blob/main/BBC%20Micro%20Variables%20Usage.md)
+2. [BBC Micro Level 9 Common Engine](https://github.com/ajgbarnes/level9/tree/main/src/level9-v1-engine)
+3. [Level 9 Version 1 A-Code Specifition](https://github.com/ajgbarnes/level9/blob/main/A-Code%20Version%201%20Specification.md)
+4. [BBC Micro Compiler Memory Locations](https://github.com/ajgbarnes/level9/blob/main/BBC%20Micro%20Memory%20Locations.md)
+
+A useful reference when understand the BBC Micro code is the BBC Micro Version 1 Compiled Memory Maps alongside the 
 
 Enjoy!
 
