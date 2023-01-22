@@ -10,7 +10,7 @@ Feedback and comments are always appreciated to help preserve and understand the
 
 # Level 9 Version 1 Specification
 
-I have written a [specificaiton for Version 1 games](https://github.com/ajgbarnes/level9/blob/main/A-Code%20Version%201%20Specification.md) which I will extended to include later version over time.  It hopefully gives a pretty good introduction into how the Level 9 game engines should work, if you wish to write your own or just want to understand it academically.  
+I have written a [specification for Version 1 games](https://github.com/ajgbarnes/level9/blob/main/A-Code%20Version%201%20Specification.md) which I will extended to include later version over time.  It hopefully gives a pretty good introduction into how the Level 9 game engines should work, if you wish to write your own or just want to understand it academically.  
 
 It's not perfect, but I will proof read it again and improve over time. Any feedback is welcome. 
 
