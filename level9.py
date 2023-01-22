@@ -1692,10 +1692,10 @@ exitsAddr            = aCodeStartAddr + v1Configuration[game]['offsets']['exitsO
 messagesStartAddr    = aCodeStartAddr + v1Configuration[game]['offsets']['messagesOffset']
 commonFragmentsAddr  = aCodeStartAddr + v1Configuration[game]['offsets']['fragmentsOffset']
 
-print(hex(dictionaryAddr))
-print(hex(exitsAddr))
-print(hex(messagesStartAddr))
-print(hex(commonFragmentsAddr))
+# print(hex(dictionaryAddr))
+# print(hex(exitsAddr))
+# print(hex(messagesStartAddr))
+# print(hex(commonFragmentsAddr))
 
 # Set the program counter to the start of the A-Code
 pc = aCodeStartAddr
@@ -1714,9 +1714,6 @@ if(args.messages):
 # Main virtual machine loop - find the next operator in the A-Code and
 # despatch it to a command or the list handler
 while(True):
-
-    if(pc >= 0x1D6e and pc < 0x1dff):
-        sys.exit()
 
     # Get the next instruction / opCoden
     opCode = data[pc]

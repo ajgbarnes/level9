@@ -36,7 +36,7 @@
 v1Configuration = {
     "adventure" : {
         "version"           : 1,
-        "filename"          : "ADQUEST",
+        "filename"          : "roms/ADQUEST",
         "script"            : "test-scripts/adventure-quest-v1.txt",
         "signatureBytes"    : b'\x00\x06\x00\x00\x46',
         "offsets" : {
@@ -55,7 +55,7 @@ v1Configuration = {
     },    
     "colossal" : {
         "version"           : 1,
-        "filename"          : "COLOSS2",
+        "filename"          : "roms/COLOSS2",
         "script"            : "test-scripts/colossal-adventure-v1.txt",
         "signatureBytes"    : b'\x20\x04\x00\x49\x00',
         "offsets" : {
@@ -74,7 +74,7 @@ v1Configuration = {
     },    
     "dungeon" : {
         "version"           : 1,
-        "filename"          : "Dungeo2",
+        "filename"          : "roms/Dungeo2",
         "script"            : "test-scripts/dungeon-adventure-v1.txt",
         "signatureBytes"    : b'\x00\x06\x00\x00\x44',
         "offsets" : {
@@ -93,9 +93,10 @@ v1Configuration = {
     },    
     "lords" : {
         "version"           : 1,
-        "filename"          : "LORDSOF",
+        #"filename"          : "roms/LORDSOF",
+        "filename"          : "roms/lot.tzx",
         "script"            : "test-scripts/lords-of-time-v1.txt",
-        #"filename"          : "lot.tzx",
+
         "signatureBytes"    : b'\x00\x06\x00\x00\x65',
         "offsets" : {
             "dictionaryOffset"  : -0x4a00,
@@ -113,7 +114,8 @@ v1Configuration = {
     },
     "snowball" : {
         "version"           : 1,
-        "filename"          : "SNOWBAL",
+        #"filename"          : "roms/SNOWBAL",
+        "filename"          : "roms/oric-snowball.tap",
         "script"            : "test-scripts/snowball-v1.txt",
         "signatureBytes"    : b'\x00\x06\x00\x00\xd4',
         "offsets" : {

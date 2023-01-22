@@ -41,7 +41,7 @@ SPOILERS: The full game walkthroughs and response text can be found here:
 * [Lords of Time Walkthrough](https://github.com/ajgbarnes/level9/blob/main/full-game-text/lords-of-time-v1.txt)
 * [Snowball Walkthrough](https://github.com/ajgbarnes/level9/blob/main/full-game-text/snowball-v1.txt)
 
-The test scripts used to generate the above walkthroughs were sourced from [David Kinder's Github Level 9 repository](https://github.com/DavidKinder/Level9) and tweaked slightly to work with my parser:
+The test scripts used to generate the above walkthroughs were sourced from [David Kinder's Github Level 9 repository](https://github.com/DavidKinder/Level9) and tweaked slightly to work with my parser.
 
 
 # Pre-requisities
@@ -189,7 +189,11 @@ options:
   --logging {info,debug}
 ```
 
-# Level 9 Additional Commands
+## TODO
+
+1. Write up how the compression algorithm seems to work for common word fragments / messages
+
+## Level 9 Additional Commands
 
 The interpreter has been extended to include the following commands, mostly for my aid in debugging (these can also be included in script files):
 
@@ -252,7 +256,7 @@ The engine for the BBC Micro games is more or less common across the 5 supported
 - The clear variables routine (fn_clear_variables) doesn't do anything for Snowball and Lords of Time - it pointlessly loops - it runs into the clear stack routine for these two games
 - I don't truly understand the clear stack routine (why it sets the stack pointer to $01E0 or $0180) - will play with that at some point i.e. why not back to higher?
 
-## Common Version 1 Engine TODO
+## Common Version 1 Engine & Other TODO
 
 - Tidy up the comments in level9-v1-engine.asm and make them less Lords of Time specific
 - Remove the memory locations in the comments for the level9-v1-engine.asm (they are specific to the Lords of Time as that's where I started)
