@@ -43,13 +43,6 @@ SPOILERS: The full game walkthroughs and response text can be found here:
 
 The test scripts used to generate the above walkthroughs were sourced from [David Kinder's Github Level 9 repository](https://github.com/DavidKinder/Level9) and tweaked slightly to work with my parser:
 
-## Extracted Full Game Walkthroughs and Text
-* [Adventure Quest Test Script](https://github.com/ajgbarnes/level9/blob/main/full-game-text/adventure-quest-v1.txt)
-* [Colossal Aventure Test Script](https://github.com/ajgbarnes/level9/blob/main/full-game-text/colossal-adventure-v1.txt)
-* [Dungeon Adventure Test Script](https://github.com/ajgbarnes/level9/blob/main/full-game-text/dungeon-adventure.txt)
-* [Lords of Time Test Script](https://github.com/ajgbarnes/level9/blob/main/full-game-text/lords-of-time-v1.txt)
-* [Snowball Test Script](https://github.com/ajgbarnes/level9/blob/main/full-game-text/snowball-v1.txt)
-
 
 # Pre-requisities
 
@@ -211,15 +204,17 @@ The interpreter has been extended to include the following commands, mostly for 
 |#message \<number\> |print message number|
 |#dict / #dictionary  | print the dictionary for the game|
 
-# Level 9 v1 Decompile4r
+# Level 9 v1 Decompiler
 
 It's not perfect and needs some tidying up and so far the following are available:
 
-* [Adventure Quest]
-* [Colossal Aventure]
-* [Dungeon Adventure]
-* [Lords of Time]
-* [Snowball Test]
+* [Adventure Quest](https://github.com/ajgbarnes/level9/blob/main/decompilation/adventure-quest-v1.txt)
+* [Colossal Aventure](https://github.com/ajgbarnes/level9/blob/main/decompilation/colossal-adventure-v1.txt)
+* [Dungeon Adventure](https://github.com/ajgbarnes/level9/blob/main/decompilation/dungeon-adventure-v1.txt)
+* [Lords of Time](https://github.com/ajgbarnes/level9/blob/main/decompilation/lords-of-time-v1.txt)
+* [Snowball Test](https://github.com/ajgbarnes/level9/blob/main/decompilation/snowball-v1.txt)
+
+NOTE - I do have annotated versions of these which are nearing completion.
 
 The supported games can be seen by typing the following on the command line:
 
