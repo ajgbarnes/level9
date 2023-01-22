@@ -219,7 +219,7 @@ It's not perfect and needs some tidying up and so far the following are availabl
 * [Colossal Aventure](https://github.com/ajgbarnes/level9/blob/main/decompilation/colossal-adventure-v1.txt)
 * [Dungeon Adventure](https://github.com/ajgbarnes/level9/blob/main/decompilation/dungeon-adventure-v1.txt)
 * [Lords of Time](https://github.com/ajgbarnes/level9/blob/main/decompilation/lords-of-time-v1.txt)
-* [Snowball Test](https://github.com/ajgbarnes/level9/blob/main/decompilation/snowball-v1.txt)
+* [Snowball](https://github.com/ajgbarnes/level9/blob/main/decompilation/snowball-v1.txt)
 
 NOTE - I do have annotated versions of these which are nearing completion.
 
