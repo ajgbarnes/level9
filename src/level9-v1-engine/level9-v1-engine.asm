@@ -177,6 +177,11 @@ zp_move_direction=$0087
 zp_to_location=$0088
 zp_inverse_direction_counter=$0088
 
+; *******************************************************
+; NOTE: Comments and memory locations before labels
+;       are specific to Lords of Time
+; *******************************************************
+
 
 ;7320
 .fn_game_entry_point
