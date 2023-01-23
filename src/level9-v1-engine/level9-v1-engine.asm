@@ -199,22 +199,21 @@ IF config_savefile = "TIMEDAT" OR config_savefile = "SNOWDAT"
 
 ;7326
         ; Start page MSB for fn_get_data_checksum
-        ; LSB is initially set to $00 so
-        ; it's for looping over $1200 to $1272  
+        ; LSB is initially set to $00 
 .data_checksum_start_page_msb             
         EQUB    HI(config_load_address)
 
 ;7327
 .data_checksum_loop_counter_max
-        ; Number of times around the loop - so the
-        ; routine loops 114 times adding all the byte
-        ; values together into a single byte as a checksum
+        ; Number of pages of memory to loop around starting
+        ; at the page MSB above (config_load_address)
         EQUB    config_checksum_page_loops
 
 ;7328
 .data_calculated_checksum
         ; Data Checksum value 
-        ; (dictionary, lists, a-code, common word fragments)
+        ; (dictionary, lists, a-code, common word fragments
+        ; and the 6502 code)
         EQUB    $EA
 ENDIF
 
@@ -5142,7 +5141,7 @@ IF config_savefile = "TIMEDAT" OR config_savefile = "SNOWDAT"
         ; 8. Returns
         ; ----------------------------------------------
         
-        ; Set the LSB of the address to $00
+        ; Set the LSB of the address ($006A) to $00
         LDA     #$00
         STA     zp_temp_cache_1
 
@@ -5150,12 +5149,15 @@ IF config_savefile = "TIMEDAT" OR config_savefile = "SNOWDAT"
 IF config_savefile = "TIMEDAT"
         ; Set the start value of the checksum to $00      
         LDA     #$00
-ENDIF        
+ENDIF    
+        ;$7328
         STA     data_calculated_checksum ; contains $EA (NOP)by default
 
-        ; Set the MSB of the address to $12        
+        ; Set the MSB ($006B) of the address to $12  
         LDA     data_checksum_start_page_msb
         STA     zp_temp_cache_2
+
+        ; Start address in $6A/$6B is $1200
 
         ; Set the index counter to zero
         ; (Never changes as the actual address
@@ -5171,7 +5173,7 @@ ENDIF
 
         ; Add this to the checksum 
         CLC
-        ADC     data_calculated_checksum  ; $00 first time around
+        ADC     data_calculated_checksum  ; $00 first time around for LoT
         STA     data_calculated_checksum  
 
         ; $6A/$6B = $1200, the start address tje first time around
