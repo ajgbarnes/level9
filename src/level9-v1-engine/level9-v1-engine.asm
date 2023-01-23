@@ -829,7 +829,7 @@ ENDIF
         ; $003A = $04
         ; $003B = $FF
         ; $003C = $FF
-        LDA     #$00
+        LDA     #$00 
         STA     zp_file_parameter_block+2
 
 
@@ -846,7 +846,7 @@ ENDIF
 
         ; Set the start address of the file 
         ; to save (set to $FFFF0400)
-        ; (and pad the other two variables $43/$44 with $FF)
+        ; (and pad the other two variabl        es $43/$44 with $FF)
         ; $0041 = $00
         ; $0042 = $04
         ; $0043 = $FF
