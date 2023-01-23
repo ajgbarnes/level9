@@ -421,7 +421,8 @@ ENDIF
         LDA     #$00
         STA     zp_chars_on_current_line
 
-        ; Colossal cave puts the setting of the break handler here 
+        ; Colossal cave / Adventure Quest / Dungeon Adventure 
+        ; put the setting of the break handler here 
         ; whilst the others have and the start of this fn
 IF config_savefile != "TIMEDAT" AND config_savefile != "SNOWDAT"
         ; Set the BRKV handler
