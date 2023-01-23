@@ -424,7 +424,7 @@ ENDIF
         ; Colossal cave / Adventure Quest / Dungeon Adventure 
         ; put the setting of the break handler here 
         ; whilst the others have and the start of this fn
-IF config_savefile != "TIMEDAT" AND config_savefile != "SNOWDAT"
+        IF config_savefile != "TIMEDAT" AND config_savefile != "SNOWDAT"
         ; Set the BRKV handler
         ; for when a BRK instruction is 
         ; executed - handler is at $7AAA
@@ -477,7 +477,10 @@ ENDIF
         AND     #$40
 
         ; Store the A-code opcode's 7th bit
-        ; TODO - why
+        ; This is used when a command has constant(s) e.g.
+        ; messagec / varcon / ifxxct - if set there is 
+        ; only one operand, if not set there are two operands
+        ; for the constant
         STA     zp_opcode_7th_bit
 
         ; Restore the A-code opcode
@@ -491,11 +494,11 @@ ENDIF
         ; $20 = 32 = 0010 0000
         AND     #$20
 
-        ; TODO
         ; Store the A-code opcode's 6th bit 
         ; This is used to indicate how many operands
-        ; a command has:
-        ;
+        ; a command has for the goto / intgosub / ifxxct
+        ; / ifxxvt offset
+        ; 
         ; 0 - two operands
         ; 1 - single operand
         STA     zp_opcode_6th_bit
@@ -841,7 +844,8 @@ ENDIF
         ; as it doesn't get executed so 
         ; $003D - $0040 are undefined here
 
-        ; Set the file length to $0400 TODO CHECK
+        ; Set the start address of the file 
+        ; to save (set to $FFFF0400)
         ; (and pad the other two variables $43/$44 with $FF)
         ; $0041 = $00
         ; $0042 = $04
@@ -856,6 +860,7 @@ ENDIF
         STX     zp_file_parameter_block+13
         
         ; Set the end address to $06FF or $05FF
+        ; depending on the game
         ; (and pad the other two
         ; variables $47/$48 with $FF)        
         ; $0045 = $00
