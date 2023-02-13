@@ -55,7 +55,7 @@ The right hand side details the engine with the following components:
 ```
 - An A-Code operator can be either a Command or a List Handler function
     - List handler functions have bit-8 set to 1
-    - Command Handers have bit-8 set to 0
+    - Command Handlers have bit-8 set to 0
     - There is room in the operators for and engine for up to 30 different commands however for the BBC Micro Version 1 only 22 are implemented
     - Only four List Handler functions are supported
 - An A-Code operand can be:
@@ -135,8 +135,8 @@ The following table defines the list of commands (note that the # column is the 
 |23|0x17|ilins|Illegal instruction - forces a break on a BBC Micro|
 |24|0x18|[ifeqct](#ifeqct)|if variable == constant then goto offset/absolute|
 |25|0x19|[ifnect](#ifnect)|if variable != constant then goto offset/absolute|
-|26|0x1A|[ifgtct](#ifgtct)|if variable > constant then goto offset/absolute|
-|27|0x1B|[ifltct](#ifltct)|if variable < constant then goto offset/absolute|
+|26|0x1A|[ifltct](#ifltct)|if variable < constant then goto offset/absolute|
+|27|0x1B|[ifgtct](#ifgtct)|if variable > constant then goto offset/absolute|
 |28|0x1C|ilins|Illegal instruction - forces a break on a BBC Micro|
 |29|0x1D|ilins|Illegal instruction - forces a break on a BBC Micro|
 |30|0x1E|ilins|Illegal instruction - forces a break on a BBC Micro|
@@ -164,7 +164,7 @@ Specifically, depending on the command, and Bits 7-6, one of the following patte
     - If set to 0, a double byte (16-bit) goto offset in the operands
 - Bits 5-1 - the actual operator opcode for the command 
 
-Note that not all commands use either both or one of Bits 7-6. It is possible to genecate A-Code that does but it would be ignored by the engine. And this has not been seen in BBC Micro Version 1 A-Code and therefore those combinations have not been documented here.
+Note that not all commands use either both or one of Bits 7-6. It is possible to generate A-Code that does but it would be ignored by the engine. And this has not been seen in BBC Micro Version 1 A-Code and therefore those combinations have not been documented here.
 
 The full list of commands, the operator opcodes and potential operands:
 
@@ -196,22 +196,22 @@ The full list of commands, the operator opcodes and potential operands:
 |             | 0011&nbsp;0010 | 0x32   |     0x12  | &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;offset&gt; |    
 | [ifgtvt](#ifgtvt)           | 0001&nbsp;0011 | 0x13   |     0x13  | &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;offset lsb&gt; &lt;offset msb&gt; |  
 |             | 0011&nbsp;0011 | 0x33   |     0x13  | &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;offset&gt; |    
-| [ifeqct](#ifeqct)           | 0001&nbsp;1000 | 0x18   |     0x18  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
-|             | 0011&nbsp;1000 | 0x38   |     0x18  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant lsb&gt; &lt;constant msb&gt; &lt;offset&gt; |
-|             | 0101&nbsp;1000 | 0x58   |     0x18  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
-|             | 0111&nbsp;1000 | 0x78   |     0x18  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
-| [ifnect](#ifnect)            | 0001&nbsp;1001 | 0x19   |     0x19  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
-|             | 0011&nbsp;1001 | 0x39   |     0x19  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant lsb&gt; &lt;constant msb&gt; &lt;offset&gt; |
-|             | 0101&nbsp;1001 | 0x59   |     0x19  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
-|             | 0111&nbsp;1001 | 0x79   |     0x19  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
-| [ifltct](#ifltct)            | 0001&nbsp;1010 | 0x1A   |     0x1A  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
-|             | 0011&nbsp;1010 | 0x3A   |     0x1A  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant lsb&gt; ;constant msb&gt; &lt;offset&gt; |
-|             | 0101&nbsp;1010 | 0x5A   |     0x1A  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
-|             | 0111&nbsp;1010 | 0x7A   |     0x1A  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
-| [ifgtct](#ifgtct)            | 0001&nbsp;1011 | 0x1B   |     0x1B  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
-|             | 0011&nbsp;1011 | 0x3B   |     0x1B  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant lsb&gt; &lt;constant msb&gt; &lt;offset&gt; |
-|             | 0101&nbsp;1011 | 0x5B   |     0x1B  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
-|             | 0111&nbsp;1011 | 0x7B   |     0x1B  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant lsb&gt; &lt;constant msb&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
+| [ifeqct](#ifeqct)           | 0001&nbsp;1000 | 0x18   |     0x18  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant lsb&gt; &lt;constant msb&gt;  &lt;offset lsb&gt;  &lt;offset msb&gt;|
+|             | 0011&nbsp;1000 | 0x38   |     0x18  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant lsb&gt; &lt;constant msb&gt; &lt;offset&gt; |
+|             | 0101&nbsp;1000 | 0x58   |     0x18  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
+|             | 0111&nbsp;1000 | 0x78   |     0x18  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant&gt; &lt;offset&gt;|
+| [ifnect](#ifnect)            | 0001&nbsp;1001 | 0x19   |     0x19  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant lsb&gt; &lt;constant msb&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
+|             | 0011&nbsp;1001 | 0x39   |     0x19  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant lsb&gt; &lt;constant msb&gt; &lt;offset&gt; |
+|             | 0101&nbsp;1001 | 0x59   |     0x19  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
+|             | 0111&nbsp;1001 | 0x79   |     0x19  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant&gt; &lt;offset&gt;|
+| [ifltct](#ifltct)            | 0001&nbsp;1010 | 0x1A   |     0x1A  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant lsb&gt; &lt;constant msb&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
+|             | 0011&nbsp;1010 | 0x3A   |     0x1A  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant lsb&gt; &lt;constant msb&gt; &lt;offset&gt; |
+|             | 0101&nbsp;1010 | 0x5A   |     0x1A  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
+|             | 0111&nbsp;1010 | 0x7A   |     0x1A  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant&gt; &lt;offset&gt;|
+| [ifgtct](#ifgtct)            | 0001&nbsp;1011 | 0x1B   |     0x1B  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant lsb&gt; &lt;constant msb&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
+|             | 0011&nbsp;1011 | 0x3B   |     0x1B  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant lsb&gt; &lt;constant msb&gt; &lt;offset&gt; |
+|             | 0101&nbsp;1011 | 0x5B   |     0x1B  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
+|             | 0111&nbsp;1011 | 0x7B   |     0x1B  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant&gt; &lt;offset&gt;|
 
 For manual decoding, this table is also sorted by Operator OpCode values in [Appendix A](#appendix)
 
@@ -542,7 +542,7 @@ Notes:
 
 ---
 
-Uses a jump table as a lookup to a function or entry point in the A-Code.  A jump table is an index into a table of two byte (16-bit) relative addresses (relative to the start of the A-Code) into the A-Code. The program counter should be set to this address in the A-Code.  These are used in *Colossal Adventure* and *Adventure Quest* as lookup tables based on the command the player input.  The dictionary value of he command would give the index into the jump table. Hence "North" has a dictionray code of 1 so would be the 1st offset into the table (note the table is zero based and the zeroth position is never used).  Similarly, "West" would be the 7th offset into the table.  See decompliations for the full list.
+Uses a jump table as a lookup to a function or entry point in the A-Code.  A jump table is an index into a table of two byte (16-bit) relative addresses (relative to the start of the A-Code) into the A-Code. The program counter should be set to this address in the A-Code.  These are used in *Colossal Adventure* and *Adventure Quest* as lookup tables based on the command the player input.  The dictionary value of the command would give the index into the jump table. Hence "North" has a dictionary code of 1 so would be the 1st offset into the table (note the table is zero based and the zeroth position is never used).  Similarly, "West" would be the 7th offset into the table.  See decompliations for the full list.
 
 An example snippet of a jump table from Colossal Adventure:
 
@@ -575,7 +575,8 @@ An example snippet of a jump table from Colossal Adventure:
 
 - Each entry in the jump table is a 16-bit value
 - The start of the nth entry is therefore the n*2 byte
-- The relative start address of the jump table is held in the 16-bit value held in the constant lsb and constant msb.  This can be calculated as follows:
+- The relative start address of the jump table is held in the 16-bit value held in the constant lsb and constant msb[^constantOrOffset].  This can be calculated as follows:
+[^constantOrOffset]: Would it be more logical/readable to refer to this as an offset instead of a constant here?
 
     > Jump table relative start address = constant lsb + constant msb * 256
 
@@ -600,7 +601,7 @@ An example snippet of a jump table from Colossal Adventure:
 
 ---
 
-Checks to determine if the direction that a player wants to move is valid and possible from their current location. It does NOT check to see if a door is in the way or open/closed - it leaves that to the A-Code.
+Checks to determine if the direction that a player wants to move (in variable2) is valid and possible from their current location. It does NOT check to see if a door is in the way or open/closed - it leaves that to the A-Code.
 
 - Exit definitions are two byte / 16-bit values
 - Each location has at least one exit defined
@@ -609,9 +610,9 @@ Checks to determine if the direction that a player wants to move is valid and po
 - Processing should loop through to find the nth location's exits - variable1 holds the player's current location, the nth location.
 - Then, bits 4-1 should be checked for a match against variable2 (the player's desired movement location)
 - If this matches, then:
-    - variable3 should be set to Bits 7-5 of the first byte rotated into bits 3-1 e.g.
+    - variable3 should be set to Bits 7-5 of the first byte rotated into bits 3-1 and represents the flags (e.g. door) for the exit e.g.
 
-        > Set variables[variable3] = (first byte) xNNNx xxxx & 0x70 >> 5 = 0000 0NNN
+        > Set variables[variable3] = (first byte) xNNN xxxx & 0x70 >> 4 = 0000 0NNN
 
     - variable4 should be set to the second byte which is the location that player will move to
 
@@ -631,9 +632,9 @@ Checks to determine if the direction that a player wants to move is valid and po
 - If this matches, check to see if Bit 5 of the first byte is set - this indicates whether this exit can be used (1) or not (0) for inverse direction lookup
 - If this is set then:
 
-    - variable3 should be set to Bits 7-5 of the first byte rotated into bits 3-1 e.g.
+    - variable3 should be set to Bits 7-5 of the first byte rotated into bits 3-1 and represents the flags (e.g. door) for the exit e.g.
 
-        > Set variables[variable3] = (first byte) xNNNx xxxx & 0x70 >> 5 = 0000 0NNN
+        > Set variables[variable3] = (first byte) xNNN xxxx & 0x70 >> 4 = 0000 0NNN
 
     - variable4 should be set to the second byte which is the location that player will move to
 
@@ -1022,7 +1023,7 @@ Example 1 - listvv
 - The following A-Code from the Lords of Time:
 
 ```
-A2 17 18
+E2 17 18
 ```
 
 - translates to:
@@ -1050,7 +1051,7 @@ Example 3 - listv1v
 - The following A-Code from the Lords of Time:
 
 ```
-E2 17 18
+A2 17 18
 ```
 
 - translates to:
@@ -1130,10 +1131,10 @@ Offset(h)  00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F
     - So:  $01 NORTH
 - Second dictionary entry:
     - In the first line, the bytes 6-8 are < $80 and hence spell "EAS"
-    - Byte 10 is $D4 which indicates it's the last letter (>=$80)
+    - Byte 9 is $D4 which indicates it's the last letter (>=$80)
     - Subtracting $80 gives $54 which is "T"
     - Adding this last letter gives "EAST" as the dictionary word
-    - Byte 11 is $01 which means the object/command is $03 (not contiguous from the previous entry)
+    - Byte 10 is $03 which means the object/command is $03 (not contiguous from the previous entry)
 - Third dictionary entry:
     - In the first line, the bytes 11-14 are < $80 and hence spell "NEAS"
     - Byte 15 is $D4 which indicates it's the last letter (>=$80)
@@ -1145,10 +1146,10 @@ Offset(h)  00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F
     - Byte 5 is $C8 which indicates it's the last letter (>=$80)
     - Subtracting $80 gives $48 which is "H"
     - Adding this last letter gives "SOUTH" as the dictionary word
-    - Byte 6 is $02 which means the object/command is $04
+    - Byte 6 is $04 which means the object/command is $04
 - Fifth dictionary entry:
     - In the second line, the bytes 7-14 are < $80 and hence spell "NORTHEAS"
-    - Byte 5 is $D4 which indicates it's the last letter (>=$80)
+    - Byte 15 is $D4 which indicates it's the last letter (>=$80)
     - Subtracting $80 gives $54 which is "T"
     - Adding this last letter gives "NORTHEAST" as the dictionary word
     - On the third line, byte 0 is $02 which means the object/command is $02 (it's a synonym for the third dictionary word)
@@ -1365,7 +1366,7 @@ The following diagram shows how the exits are represented in memory with two byt
 - All locations have at least one exit - the A-Code logic can stop a player going that way or seeing the exit
 - Exits are not fully defined e.g. if it's possible to get from Location 1 to Location 2 by going East, then Location 2 may not have the inverse defined
 - This is handled in the engine by Inverse Location Lookup and reduces the amount of exit data that needs to be stored
-    - In the first pass of exits data, the nth location is looked up and it's exits are checked to see if the desired direction is allowed by an of the Byte 0s.  If so, it will return the target location from Byte 1.
+    - In the first pass of exits data, the nth location is looked up and it's exits are checked to see if the desired direction is allowed by any of the Byte 0s.  If so, it will return the target location from Byte 1.
     - If not it will do an Inverse Location Lookup
         - It will use a reference table to translate the player's desired direction into an inverse direction e.g. North ($01) to South ($04) or East ($03) to West ($07)
         - It will then start at the beginning of the exits table again
@@ -1381,7 +1382,7 @@ The following diagram shows how the exits are represented in memory with two byt
 
 ### *Rules*
 
-The rules for decoding exists are:
+The rules for decoding exits are:
 
     1. All exits apply to the nth location until byte 0 of a pair of bytes has the 8th bit set
     2. All locations have at least one exit defined
@@ -1390,7 +1391,7 @@ The rules for decoding exists are:
         Bit 7 - if set, there is a door in the way
         Bit 6 - if set, hide the exit from the description in a room 
         Bit 5 - if set, it can be used for reverse location lookup
-        Bits 4-1 - which direction this reprseents e.g. $01 for N or $04 for S, as per the dictionary entry id
+        Bits 4-1 - which direction this represents e.g. $01 for N or $04 for S, as per the dictionary entry id
     4. Meaning of Byte 1 bits:
         Bits 8-1 - if the player goes in the direction in Byte 0 Bits 4-1 then this is the location they will arrive in
     5. The exits table is terminated with a $00
@@ -1407,17 +1408,17 @@ The following small memory extract is used to derive a few worked examples
 ```
 Offset(h)  00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F
 
-      0000 C4 02 A1 01 11 01 83 04                           ......ƒ.
+      0000 C3 02 A1 01 11 01 83 04                           ......ƒ.
 
 ```
 
 - We start with location 1 at byte 0
-    - The first byte is D4 which is 1100 0100 in binary
+    - The first byte is C3 which is 1100 0011 in binary
         - Bit-8 is set so it's the last exit for this location (note that inverse direction lookup on other locations may also define exits for this location)
         - Bit-7 is set so there's a door in the way and the A-Code will have to deal with that
         - Bit-6 is NOT set so this exit should not be hidden from the player
         - Bit-5 is NOT set so this cannot be used for inverse location lookup
-        - Bits 4-1 are set to 0100 ($03) which is East
+        - Bits 4-1 are set to 0011 ($03) which is East
     - The second byte is $02 which is location 2
     - So moving East from location 1 takes the player to location 2
 - Moving to location 2 at byte 2:
@@ -1426,7 +1427,7 @@ Offset(h)  00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F
         - Bit-7 is NOT set so there's no door in the way 
         - Bit-6 is set so this exit should be hidden from the player
         - Bit-5 is NOT set so this cannot be used for inverse location lookup
-        - Bits 4-1 are set to 0001 ($01) which is East
+        - Bits 4-1 are set to 0001 ($01) which is North
     - The second byte is $01 which is location 1
     - So moving North from location 2 takes the player to location 1
 - Moving to location 3 at byte 4:
@@ -1473,42 +1474,42 @@ Offset(h)  00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F
 | ... |||||
 | 0x0E   | [jump](#jump)               | 0000&nbsp;1110 |     0x0E  | &lt;operator&gt; &lt;constant lsb&gt; &lt;constant msb&gt; &lt;variable&gt; |
 | 0x0F   | [exit](#exit)               | 0000&nbsp;1111 |     0x0F  | &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;variable3&gt; &lt;variable4&gt; |
-| 0x10   | [ifeqvt](#ifeqvt)           | 0001&nbsp;0000 |     0x10  | &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant lsb&gt; &lt;constant msb&gt; |    
-| 0x11   | [ifnevt](#ifnevt)           | 0001&nbsp;0001 |     0x11  | &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant lsb&gt; &lt;constant msb&gt; |    
-| 0x12   | [ifltvt](#ifltvt)           | 0001&nbsp;0010 |     0x12  | &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant lsb&gt; &lt;constant msb&gt; |    
-| 0x13   | [ifgtvt](#ifgtvt)           | 0001&nbsp;0011 |     0x13  | &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant lsb&gt; &lt;constant msb&gt; |   
+| 0x10   | [ifeqvt](#ifeqvt)           | 0001&nbsp;0000 |     0x10  | &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;offset lsb&gt;  &lt;offset msb&gt; |    
+| 0x11   | [ifnevt](#ifnevt)           | 0001&nbsp;0001 |     0x11  | &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;offset lsb&gt;  &lt;offset msb&gt; |    
+| 0x12   | [ifltvt](#ifltvt)           | 0001&nbsp;0010 |     0x12  | &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;offset lsb&gt;  &lt;offset msb&gt; |    
+| 0x13   | [ifgtvt](#ifgtvt)           | 0001&nbsp;0011 |     0x13  | &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;offset lsb&gt;  &lt;offset msb&gt; |   
 | ... |||||
-| 0x18   | [ifeqct](#ifeqct)           | 0001&nbsp;1000 |     0x18  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
-| 0x19   | [ifnect](#ifnect)           | 0001&nbsp;1001 |     0x19  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
-| 0x1A   | [ifltct](#ifltct)           | 0001&nbsp;1010 |     0x1A  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
-| 0x1B   | [ifgtct](#ifgtct)           | 0001&nbsp;1011 |     0x1B  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
+| 0x18   | [ifeqct](#ifeqct)           | 0001&nbsp;1000 |     0x18  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant lsb&gt; &lt;constant msb&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
+| 0x19   | [ifnect](#ifnect)           | 0001&nbsp;1001 |     0x19  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant lsb&gt; &lt;constant msb&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
+| 0x1A   | [ifltct](#ifltct)           | 0001&nbsp;1010 |     0x1A  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant lsb&gt; &lt;constant msb&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
+| 0x1B   | [ifgtct](#ifgtct)           | 0001&nbsp;1011 |     0x1B  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant lsb&gt; &lt;constant msb&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
 | ... |||||
 | 0x20   | [goto](#goto)               | 0010&nbsp;0000 |     0x00  | &lt;operator&gt; &lt;offset&gt;                             |
 | 0x21   | [intgosub](#intgosub)       | 0010&nbsp;0001 |     0x01  | &lt;operator&gt; &lt;offset&gt;                             |
 | ... |||||
-| 0x30   | [ifeqvt](#ifeqvt)           | 0011&nbsp;0000 |     0x10  | &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant&gt; |
-| 0x31   | [ifnevt](#ifnevt)           | 0011&nbsp;0001 |     0x11  | &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant&gt; |    
-| 0x32   | [ifltvt](#ifltvt)           | 0011&nbsp;0010 |     0x12  | &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant&gt; |    
-| 0x33   | [ifgtvt](#ifgtvt)           | 0011&nbsp;0011 |     0x13  | &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant&gt; |
+| 0x30   | [ifeqvt](#ifeqvt)           | 0011&nbsp;0000 |     0x10  | &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;offset&gt; |
+| 0x31   | [ifnevt](#ifnevt)           | 0011&nbsp;0001 |     0x11  | &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;offset&gt; |    
+| 0x32   | [ifltvt](#ifltvt)           | 0011&nbsp;0010 |     0x12  | &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;offset&gt; |    
+| 0x33   | [ifgtvt](#ifgtvt)           | 0011&nbsp;0011 |     0x13  | &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;offset&gt; |
 | ... |||||
-| 0x38   | [ifeqct](#ifeqct)           | 0011&nbsp;1000 |     0x18  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant lsb&gt; &lt;constant msb&gt; &lt;offset&gt; |
-| 0x39   | [ifnect](#ifnect)           | 0011&nbsp;1001 |     0x19  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant lsb&gt; ;constant msb&gt; &lt;offset&gt; |
-| 0x3A   | [ifltct](#ifltct)           | 0011&nbsp;1010 |     0x1A  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant lsb&gt; ;constant msb&gt; &lt;offset&gt; |
-| 0x3B   | [ifgtct](#ifgtct)           | 0011&nbsp;1011 |     0x1B  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant lsb&gt; ;constant msb&gt; &lt;offset&gt; |
+| 0x38   | [ifeqct](#ifeqct)           | 0011&nbsp;1000 |     0x18  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant lsb&gt; &lt;constant msb&gt; &lt;offset&gt; |
+| 0x39   | [ifnect](#ifnect)           | 0011&nbsp;1001 |     0x19  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant lsb&gt; &lt;constant msb&gt; &lt;offset&gt; |
+| 0x3A   | [ifltct](#ifltct)           | 0011&nbsp;1010 |     0x1A  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant lsb&gt; &lt;constant msb&gt; &lt;offset&gt; |
+| 0x3B   | [ifgtct](#ifgtct)           | 0011&nbsp;1011 |     0x1B  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant lsb&gt; &lt;constant msb&gt; &lt;offset&gt; |
 | ... |||||
 | 0x45   | [messagec](#messagec)       | 0100&nbsp;0101 |     0x05  | &lt;operator&gt; &lt;constant&gt;                           |
 | ... ||||| 
 | 0x48   | [varcon](#varcon)           | 0100&nbsp;1000 |     0x08  | &lt;operator&gt; &lt;constant&gt; &lt;variable&gt; |
 | ... |||||
-| 0x58   | [ifeqct](#ifeqct)           | 0101&nbsp;1000 |     0x18  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
-| 0x59   | [ifnect](#ifnect)           | 0101&nbsp;1001 |     0x19  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
-| 0x5A   | [ifltct](#ifltct)           | 0101&nbsp;1010 |     0x1A  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
-| 0x5B   | [ifgtct](#ifgtct)           | 0101&nbsp;1011 |     0x1B  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
+| 0x58   | [ifeqct](#ifeqct)           | 0101&nbsp;1000 |     0x18  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
+| 0x59   | [ifnect](#ifnect)           | 0101&nbsp;1001 |     0x19  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
+| 0x5A   | [ifltct](#ifltct)           | 0101&nbsp;1010 |     0x1A  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
+| 0x5B   | [ifgtct](#ifgtct)           | 0101&nbsp;1011 |     0x1B  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
 | ... |||||
-| 0x78   | [ifeqct](#ifeqct)           | 0111&nbsp;1000 |     0x18  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
-| 0x79   | [ifnect](#ifnect)           | 0111&nbsp;1001 |     0x19  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
-| 0x7A   | [ifltct](#ifltct)           | 0111&nbsp;1010 |     0x1A  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
-| 0x7B   | [ifgtct](#ifgtct)           | 0111&nbsp;1011 |     0x1B  |  &lt;operator&gt; &lt;variable1&gt; &lt;variable2&gt; &lt;constant&gt; &lt;offset lsb&gt;  &lt;offset msb&gt;|
+| 0x78   | [ifeqct](#ifeqct)           | 0111&nbsp;1000 |     0x18  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant&gt; &lt;offset&gt;|
+| 0x79   | [ifnect](#ifnect)           | 0111&nbsp;1001 |     0x19  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant&gt; &lt;offset&gt;|
+| 0x7A   | [ifltct](#ifltct)           | 0111&nbsp;1010 |     0x1A  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant&gt; &lt;offset&gt;|
+| 0x7B   | [ifgtct](#ifgtct)           | 0111&nbsp;1011 |     0x1B  |  &lt;operator&gt; &lt;variable1&gt; &lt;constant&gt; &lt;offset&gt;|
 | ... |||||
 
 ---
