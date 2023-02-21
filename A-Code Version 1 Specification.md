@@ -11,6 +11,14 @@ This document uses the same function and list handler names as the [Level 9 inte
 
 ---
 
+## Acknowledgements
+
+Many thanks to [Neil Hunter](https://github.com/neildhunter) for his diligent review of this specification, correcting many typos and cut and paste issues.
+
+---
+
+---
+
 ## *A-Code*
 
 ---
