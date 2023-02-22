@@ -321,12 +321,13 @@ def vm_fn_intreturn(data, opCode, pc):
 
 def vm_fn_printnumber(data, opCode, pc):
 
+    cmdAddress=pc
     # Get the first operand
     pc=pc+1
     variable1 = data[pc]
 
     msg = f"Print Number var[{variable1:#0{4}x}]"
-    _print_code(opCode,pc,msg)
+    _print_code(opCode,cmdAddress,msg)
 
     return pc    
 
@@ -630,7 +631,7 @@ def vm_fn_ifxxct(data,opCode,pc,operation):
         pc=pc+1
         offsetHigher = data[pc]
 
-        offset = (256 * offsetHigher + offsetLower) - 1
+        offset = (256 * offsetHigher + offsetLower)
         msg=f"If var[{variable:#0{4}x}] "+ operation + f" (constant) {constant:#0{4}x} then Goto {offset:#0{6}x}"
     _print_code(opCode,cmdAddress,msg)
 
@@ -720,7 +721,7 @@ def printJumpTable(data,pc):
 
     print('**************************************************************************')
     
-    return pc -1
+    return pc
 
 ############################################################
 # MAIN HERE
