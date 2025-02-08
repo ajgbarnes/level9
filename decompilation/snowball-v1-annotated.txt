@@ -1129,7 +1129,11 @@
 / -   The necklace serves two purposes - it allows the player to go down the cyladder
 /     (the hint sheet says also up but you can go up without the necklace)
 /     and also get past the robot on the wide ramp into the warehouse (status symbol)
-/ -   Hit sheet mentions a microscope but there isn't one in the game
+/ -   Hint sheet mentions a microscope but there isn't one in the game
+/ -   Visiting the padded cell early in the game does NOT confuse the instrumention 
+/     as stated in the hint sheet
+/ -   You cannot visit the padded cell as per the route described in the hint sheet
+/     only after you have been taken there
 
 
 **************************************************************************
