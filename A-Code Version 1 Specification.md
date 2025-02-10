@@ -240,7 +240,7 @@ Performs a goto based on the operands that follow (two similar functions):
 
 2. If Bit 6 is not set - two operands (16-bit offset) and performs an absolute goto from the start of the A-Code. So the absolute offset is a double byte / 16-bit **unsigned** offset used to find an absolute A-Code address relative to the start of the A-Code.
 
-    > A-Code address = A-Code start + offset msb * 256 + offset lsb
+    > A-Code address = A-Code start + offset lsb + offset msb * 256
 
 Possible operator values (in hexadecimal and binary):
 
@@ -269,7 +269,7 @@ Performs a gosub based on the operands that follow (two similar functions):
 
 3. If Bit 6 is not set - two operands (16-bit offset) and performs an absolute gosub from the start of the A-Code. So the absolute offset is a double byte / 16-bit **unsigned** offset used to find an absolute A-Code address relative to the start of the A-Code.
 
-    > A-Code address = A-Code start + offset msb * 256 + offset lsb
+    > A-Code address = A-Code start + offset lsb + offset msb * 256
 
 4. Calls goto to perform the branch
 
@@ -675,7 +675,7 @@ Performs a goto command if variable1 equals variable2.
 
 2. If Bit 6 is not set - two operands (16-bit offset) and performs an absolute gosub from the start of the A-Code. So the absolute offset is a double byte / 16-bit **unsigned** offset used to find an absolute A-Code address relative to the start of the A-Code.
 
-> If variables\[variable1\] == variables\[variable2\] then goto (A-Code start + offset msb * 256 + offset lsb)
+> If variables\[variable1\] == variables\[variable2\] then goto (A-Code start + offset lsb + offset msb * 256)
 
 Possible operator values (in hexadecimal and binary):
 
@@ -702,7 +702,7 @@ Performs a goto command if variable1 does not equal variable2.
 
 2. If Bit 6 is not set - two operands (16-bit offset) and performs an absolute gosub from the start of the A-Code. So the absolute offset is a double byte / 16-bit **unsigned** offset used to find an absolute A-Code address relative to the start of the A-Code.
 
-> If variables\[variable1\] != variables\[variable2\] then goto (A-Code start + offset msb * 256 + offset lsb)
+> If variables\[variable1\] != variables\[variable2\] then goto (A-Code start + offset lsb + offset msb * 256)
 
 Possible operator values (in hexadecimal and binary):
 
@@ -729,7 +729,7 @@ Performs a goto command if variable1 is less than variable2.
 
 2. If Bit 6 is not set - two operands (16-bit offset) and performs an absolute gosub from the start of the A-Code. So the absolute offset is a double byte / 16-bit **unsigned** offset used to find an absolute A-Code address relative to the start of the A-Code.
 
-> If variables\[variable1\] \< variables\[variable2\] then goto (A-Code start + offset msb * 256 + offset lsb)
+> If variables\[variable1\] \< variables\[variable2\] then goto (A-Code start + offset lsb + offset msb * 256)
 
 Possible operator values (in hexadecimal and binary):
 
@@ -756,7 +756,7 @@ Performs a goto command if variable1 is greater than variable2.
 
 2. If Bit 6 is not set - two operands (16-bit offset) and performs an absolute gosub from the start of the A-Code. So the absolute offset is a double byte / 16-bit **unsigned** offset used to find an absolute A-Code address relative to the start of the A-Code.
 
-> If variables\[variable1\] \> variables\[variable2\] then goto (A-Code start + offset msb * 256 + offset lsb)
+> If variables\[variable1\] \> variables\[variable2\] then goto (A-Code start + offset lsb + offset msb * 256)
 
 Possible operator values (in hexadecimal and binary):
 
@@ -795,7 +795,7 @@ To perform the "then"
 
 2. If Bit 6 is not set - two operands (16-bit offset) and performs an absolute gosub from the start of the A-Code. So the absolute offset is a double byte / 16-bit **unsigned** offset used to find an absolute A-Code address relative to the start of the A-Code.
 
-> ...  then goto (A-Code start + offset msb * 256 + offset lsb)
+> ...  then goto (A-Code start + offset lsb + offset msb * 256)
 
 Possible operator values (in hexadecimal and binary):
 
@@ -836,7 +836,7 @@ To perform the "then"
 
 2. If Bit 6 is not set - two operands (16-bit offset) and performs an absolute gosub from the start of the A-Code. So the absolute offset is a double byte / 16-bit **unsigned** offset used to find an absolute A-Code address relative to the start of the A-Code.
 
-> ...  then goto (A-Code start + offset msb * 256 + offset lsb)
+> ...  then goto (A-Code start + offset lsb + offset msb * 256)
 
 Possible operator values (in hexadecimal and binary):
 
@@ -877,7 +877,7 @@ To perform the "then"
 
 2. If Bit 6 is not set - two operands (16-bit offset) and performs an absolute gosub from the start of the A-Code. So the absolute offset is a double byte / 16-bit **unsigned** offset used to find an absolute A-Code address relative to the start of the A-Code.
 
-> ...  then goto (A-Code start + offset msb * 256 + offset lsb)
+> ...  then goto (A-Code start + offset lsb + offset msb * 256)
 
 Possible operator values (in hexadecimal and binary):
 
@@ -918,7 +918,7 @@ To perform the "then"
 
 2. If Bit 6 is not set - two operands (16-bit offset) and performs an absolute gosub from the start of the A-Code. So the absolute offset is a double byte / 16-bit **unsigned** offset used to find an absolute A-Code address relative to the start of the A-Code.
 
-> ...  then goto (A-Code start + offset msb * 256 + offset lsb)
+> ...  then goto (A-Code start + offset lsb + offset msb * 256)
 
 Possible operator values (in hexadecimal and binary):
 
