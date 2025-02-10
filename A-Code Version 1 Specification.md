@@ -154,7 +154,7 @@ The following table defines the list of commands (note that the # column is the 
 
 ### *Format*
 
-When an A-code operator represents a Command function, depending on the function, it will be in the following format (can have 0,1,2,3 or 4 operands):
+When an A-code operator represents a Command function, depending on the function, it will be in the following format (can have 0,1,2,3,4 or 5 operands):
 
 ```
     <operator> [<operand1>] [<operand2>] [<operand3>] [<operand4>] [<operand5>]
