@@ -554,7 +554,7 @@
 / 0x53 - Status of the toolbox:
 /        0x00 - Closed
 /        0x01 - Open
-/ 0x54 - Status of the unislime on the think ramp (0x78):
+/ 0x54 - Status of the unislime on the thick ramp (0x78):
 /        0x00 - Still on the ramp
 /        0x01 - Cleaned by the cat
 / 0x55 - Player's previous location
