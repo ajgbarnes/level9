@@ -88,11 +88,11 @@
 / ----   -----  ----------------------------------  
 / 0x00 = 0x53 - large low room                      
 / 0x03 = 0x4f - smooth simrock                      
-/ 0x06 = 0x50 - sunstantial; smooth cylinder        
+/ 0x06 = 0x50 - substantial; smooth cylinder        
 / 0x09 = 0x51 - carpetted massage parlour           
 / 0x0c = 0x52 - bare storeroom                      
 / 0x0f = 0x51 - carpetted massage parlour           
-/ 0x12 = 0x50 - sunstantial; smooth cylinder        
+/ 0x12 = 0x50 - substantial; smooth cylinder        
 / 0x15 = 0x4e - smooth surfaced cylinder            
 / 0x18 = 0x64 - wide ramp to heavy plasteel door    
 / 0x1b = 0x4e - smooth surfaced cylinder            
