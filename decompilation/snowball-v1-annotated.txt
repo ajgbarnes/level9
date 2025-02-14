@@ -1133,7 +1133,7 @@
 / -   Visiting the padded cell early in the game does NOT confuse the instrumention 
 /     as stated in the hint sheet
 / -   You cannot visit the padded cell as per the route described in the hint sheet
-/     only after you have been taken there
+/     only after you have been taken there and moved the nurtimat machine
 
 
 **************************************************************************
