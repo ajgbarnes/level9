@@ -137,7 +137,7 @@
 / When the "exits" command is called, exit flags are returned in var[0x48]
 / 
 / In this game they have the following definition:
-/ Bit 0 - If set, the direction be used inversely i.e. if this is 
+/ Bit 0 - If set, the direction can be used inversely i.e. if this is 
 /         an East entry between locations A and B then the player can go 
 /         West from B to A
 / Bit 1 - If set this a teleporation between a black and white dot
