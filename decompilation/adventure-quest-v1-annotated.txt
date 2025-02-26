@@ -454,7 +454,7 @@
 /     (approximately 4.2% chance)
 / 6.  Description 0x5f should be "You cannot breathe" not "...breath"
 / 7.  Description 0x5f should be "You cannot breathe" not "...breath"
-/ 8.  Entering the octopus lair - there is a missning space here: "You are underwaterA huge
+/ 8.  Entering the octopus lair - there is a missing space here: "You are underwaterA huge
 /     octopus leaps out and bites at your treasure"
 / 9.  Player will have an arrow fired at them when "in the centre of a magnificent cave" (0x68)
 /     or "at the north of a magnificent cave with holes all around" (0x6d)
@@ -467,7 +467,7 @@
 /     if they are not wearing the cloak (approximately 20% chance)
 / 14. There is a 50/255 chance of the BALROG striking out at the player 
 /     (approximately 20% chance)
-/ 15. If the BALROG has struck ou there is an approximately 61/255 chance
+/ 15. If the BALROG has struck out there is an approximately 61/255 chance
 /     of the player being killed (approximately 24%)
 / 16. If the player reaches "on a ledge which clings to the west wall of a
 /     large cavern" (0x75) AFTER fighting off the spider, losing the earth-stone
@@ -637,7 +637,7 @@
 /     0xc2 : in a high room. A window looks out onto the marsh to the south, and you catch a glimpse of a huge black tower nearby
 /     0xc3 : on a small ledge south of a small door marked with a black dot. There is a window in the wall above
 /     0xc4 : on a dark granite ramp at the foot of the BLACK TOWER
-/ 58. Bug. The status of the water is mistakenly set to 0x03 when filled with water rather 
+/ 58. Bug. The status of the water is mistakenly set to 0x03 when filled with water rather than
 /     0x02 (0x0bae) - which is why a few checks check "< var[0x02]" (where var[0x02]
 /     is the constant 0x02) or "> var[0x01]" (where var[0x01] is the constant 0x01)
 /     Should be set to 0x02.
