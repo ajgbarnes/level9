@@ -1902,7 +1902,7 @@ Jump Table       (Idx)
 0x0383 (0x0ba3): (0x29) If player cmd in {'FILL'} Goto 0x0b73
 0x0385 (0x0ba5): (0x2a) If player cmd in {'EMPTY', 'POUR'} Goto 0x0bc3
 0x0387 (0x0ba7): (0x2b) If player cmd in {'INSERT', 'FEED', 'GIVE', 'REPLACE', 'PUT'} Goto 0x0ac3
-0x0387 (0x0ba7): (0x2b) If player cmd in {'RUB'} Goto 0x0a44
+0x0389 (0x0ba7): (0x2b) If player cmd in {'RUB'} Goto 0x0a44
 
 **************************************************************************
 * Command: examine/inspect/help and lock/close/shut
