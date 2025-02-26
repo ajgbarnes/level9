@@ -292,8 +292,8 @@
 /        0x00 - not underwater
 /        0x01 - underwater
 / 0x1d - Status of the lung-fish
-/        0x00 - player does not have it and can breathe in air
-/        0x01 - player does have it and can breathe only in water
+/        0x00 - player can breathe in air
+/        0x01 - player can breathe only in water
 / 0x1e - Number of turns that the player has been unable to breathe
 / 0x1f - Whether the gigantic worm has eaten the sphinx or blown up by the ruby
 /        0x00 - Sphinx is still alive
@@ -676,6 +676,8 @@
 /     when it's in a location e.g.
 /     Location  - An ancient medallion lies on the ground (0x109)
 /     Inventory - The Medallion of Good (0xe1)
+/ 65. The lung-fish token is interesting - it flips whether the player can breathe in
+/     air or water each time it is picked up. What even is a "lung-fish token"?
 /        
 /     
 / 
@@ -939,11 +941,14 @@
 0x00af (0x08cf): (0x05) Print message (constant) 0x32
 
 / Branch if one of the following conditions is met:
-/ 1. The player is NOT underwater and they HAVE the lung-fish
-/ 2. The player IS underwater and they do NOT have the lung-fish
+/ 1. The player is NOT underwater and they CAN breathe in air
+/ 2. The player IS underwater and they CAN breathe in water
+/
+/ The lung-fish token changes where a player can breathe - whenever
+/ the player picks it up where they can breathe changes
 / 
-/ The player needs the lung-fish to breath underwater but cannot
-/ breaht out of water if they have the lung-fish
+/ var[0x1c] is if the player can breathe in air (0x00) or water (0x01)
+/ var[0x1d] is if the player is underwater (0x01) or not (0x00)
 0x00b1 (0x08d1): (0x10) If var[0x1c] == var[0x1d] then Goto 0x00c1
 
 / Player cannot breath
@@ -1247,7 +1252,9 @@
 
 **************************************************************************
 * Check to see if the player is on the collapsing ledge or in the river/rapids
-* and also if they drown when finally swept over (they need the lung-fish)
+* and also if they drown when finally swept over (they need to 
+* be able to breathe underwater via the lung-fish being picked up the right 
+* amount of times)
 **************************************************************************
 
 / Branch If the player is NOT in any of these locations:
@@ -1275,8 +1282,8 @@
 / Print message  "\nYou are swept over the rapids "
 0x018c (0x09ac): (0x05) Print message (constant) 0x61
 
-/ Branch if the player has the lung-fish (they can breath underwater
-/ and will avoid death)
+/ Branch if the player can breathe underwater (0x01)
+/ var[0x01] is the constant 0x01
 0x018e (0x09ae): (0x10) If var[0x1d] == var[0x01] then Goto 0x0197
 
 / Player does NOT have the lung-fish
@@ -3595,12 +3602,8 @@ Jump Table       (Idx)
 
 / Object IS the lung-fish`
 
-/ Setting the status of the lung-fish for the following outcome
-/ 0x00 - player does not have it and can breathe in air
-/ 0x01 - player does have it and can breathe only in water
-/ However... this will ALWAYS be set to 0x00 at this point 
-/ as the player won't have the lung-fish, really it should just be
-/ setting this to 0x01?
+/ Getting the lung-fish token flips the status of either being 
+/ able to breathe in air (0x00) or underwater (0x01)
 
 / Set the temporary variable to 1
 / var[0x01] is the constant 0x01
@@ -5784,7 +5787,7 @@ on the roof, and at the back of the cave is a sheer drop down into darkness" (0x
 / Reset the second supplementary to nothing (0x00)
 0x0e31 (0x1651): (0x09) Set var[0x1a] = var[0x15]
 
-/ Reset the lung-fish status to "player does not have it and can breathe in air" (0x00)
+/ Reset the lung-fish status to "player can breathe in air" (0x00)
 / var[0x15] is the constant 0x00
 0x0e34 (0x1654): (0x09) Set var[0x1d] = var[0x15]
 
