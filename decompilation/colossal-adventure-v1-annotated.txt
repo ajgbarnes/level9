@@ -1451,7 +1451,7 @@ Jump Table       (Idx)
 0x02a4 (0x0a84): (0x00) Goto 0x03ed
 
 **************************************************************************
-* Subroutine entry point - called from 0x02a7
+* Subroutine entry point - called from 0x0275
 **************************************************************************
 * Closed/locked "door checks" when "door" known to be closed
 **************************************************************************
