@@ -228,7 +228,6 @@ def _process_hash_commands(data, pc, userInput):
                     print(f"\033[0m{vm_variables[intvariable]:04x} (hex)")
                 else:
                     print(f"\033[92m{vm_variables[intvariable]:04x}\033[0m (hex)")
-                print("")           
 
         # Prints the value of ALL variables
         case ['#vars', *_]:
@@ -822,7 +821,7 @@ def vm_fn_messagev(data, opCode, pc):
     return pc
 
 ###############################################################################
-# vm_fn_messagev()
+# vm_fn_messagec()
 #
 # Prints the message with the id held in operands 1 and 2
 # 
@@ -989,13 +988,7 @@ def vm_fn_input(data,opCode,pc):
         else:
             vm_variables_previous = vm_variables.copy()
 
-        userInput = userInput.split('#')[0]            
-
-        userInput = re.sub('[,]','',userInput)
-
-        userInput = re.sub('[^a-zA-Z0-9.\- ]','',userInput)
-
-        # Restrict to the first 39 characters only
+	# Restrict to the first 39 characters only
         if(len(userInput) > 39):
             userInput=userInput[0:39]
 
@@ -1081,7 +1074,7 @@ def vm_fn_varcon(data,opCode,pc):
     return pc
 
 ###############################################################################
-# vm_fn_varcon()
+# vm_fn_varvar()
 #
 # Set the variable2's value to variable1's value
 #
@@ -1715,7 +1708,7 @@ if(args.messages):
 # despatch it to a command or the list handler
 while(True):
 
-    # Get the next instruction / opCoden
+    # Get the next instruction / opCode
     opCode = data[pc]
     opCodeClean = opCode & 0x1F
 
