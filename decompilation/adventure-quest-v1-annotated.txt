@@ -923,8 +923,10 @@
 / Set the first location supplementary message
 0x00a2 (0x08c2): (0x01) Gosub 0x0390
 
-
+/ Set the destination location to the player's current location
 0x00a5 (0x08c5): (0x09) Set var[0x18] = var[0x0b]
+
+/ Set the flag 
 0x00a8 (0x08c8): (0x09) Set var[0x1b] = var[0x01]
 
 **************************************************************************
