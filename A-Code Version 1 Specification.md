@@ -652,7 +652,7 @@ Checks to determine if the direction that a player wants to move (in variable2) 
 
 - If not, keep looping until the end of the exits is found or the end of the exits list is reached.  The exits terminator is $00
 
-See the [**exits**](#exits) section for further information on the exists format
+See the [**exits**](#exits) section for further information on the exits format
 
 
 | Hex   | Binary    | A-Code Syntax | 
@@ -1396,17 +1396,36 @@ The rules for decoding exits are:
     2. All locations have at least one exit defined
     3. Meaning of Byte 0 bits:
         Bit 8 - if set, last exit for looked up location
-        Bit 7 - if set, there is a door in the way
-        Bit 6 - if set, hide the exit from the description in a room 
+        Bit 7 - depends on the A-code
+        Bit 6 - depends on the A-code
         Bit 5 - if set, it can be used for reverse location lookup
         Bits 4-1 - which direction this represents e.g. $01 for N or $04 for S, as per the dictionary entry id
     4. Meaning of Byte 1 bits:
         Bits 8-1 - if the player goes in the direction in Byte 0 Bits 4-1 then this is the location they will arrive in
     5. The exits table is terminated with a $00
 
+The A-code defines how Bits 7 and 6 are using in the game however Bit 5 is ALWAYS used for reverse location lookup. 
+
+Snowball and Lords of Time both do the following:
+
+- Bit 7 - if set, there is a door between this location and the destination location
+- Bit 6 - if set, hide the exit from the description in a room 
+
+Adventure Quest does the following:
+
+- Bit 7 - unused
+- Bit 6 - if set, this is a teleporation between two locations so the A-code will print "There is a sensation of rapid movement.. "
+
+Colossal Adventure does the following:
+
+- Bit 7 - unused
+- Bit 6 - 
+
+
+
 ---
 
-### *Exits worked examples*
+### *Exits worked examples* (Lords of Time and Snowball)
 
 The locations below have the following 
 
