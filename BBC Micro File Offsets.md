@@ -23,10 +23,10 @@ Each of the files has a different order of the major components and the only one
 |Component|File Offset|
 |:---|:---:|
 |Dictionary|0020|
-|Messages|0e83|
 |Exits|0900|
 |list#1|0bb0|
 |list#3|0cf0|
+|Messages|0e83|
 |Fragments|480B|
 |A-code|4a20|
 |6502 Code|6120|
@@ -39,9 +39,9 @@ Each of the files has a different order of the major components and the only one
 |Exits|0430|
 |list#2|0795|
 |list#4|07b5|
+|A-code|07e0|
 |Messages|1760|
 |Fragments|5fb7|
-|A-code|07e0|
 |6502 Code|6220|
 
 ## Adventure Quest
