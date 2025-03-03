@@ -926,7 +926,7 @@ def vm_fn_function(data,opCode,pc):
 # The ids are placed in the variables identified by the first three operands
 # and the word count in the fourth.  
 #
-# Note that if it's prefixed with a hash then it'll be passsed to the hash
+# Note that if it's prefixed with a hash then it'll be passed to the hash
 # command handler - these are extensions I put in for debugging / understanding
 # 
 # Parameters: 
@@ -962,7 +962,7 @@ def vm_fn_input(data,opCode,pc):
 
     while(True):
         userInput = ''
-          
+        is_hash_command=False
         if(scriptFile):
             #time.sleep(1)
             while(True):
@@ -984,6 +984,7 @@ def vm_fn_input(data,opCode,pc):
             userInput = input().upper()
 
         if(len(userInput) > 0 and userInput[0] =="#"):
+            is_hash_command=True
             _process_hash_commands(data, pc, userInput)
         else:
             vm_variables_previous = vm_variables.copy()
@@ -1024,7 +1025,9 @@ def vm_fn_input(data,opCode,pc):
         if(wordCount>0):
             vm_listarea_previous  = vm_listarea.copy()
             break
-
+        elif(not is_hash_command):
+            vm_variables[wordCountVar]=0x016 #A-Code for no words understood
+            break
     return pc
 
 ###############################################################################
