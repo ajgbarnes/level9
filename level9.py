@@ -962,6 +962,7 @@ def vm_fn_input(data,opCode,pc):
 
     while(True):
         userInput = ''
+        hashCommand = False	    
           
         if(scriptFile):
             #time.sleep(1)
@@ -985,6 +986,7 @@ def vm_fn_input(data,opCode,pc):
 
         if(len(userInput) > 0 and userInput[0] =="#"):
             _process_hash_commands(data, pc, userInput)
+            hashCommand = True
         else:
             vm_variables_previous = vm_variables.copy()
 
@@ -994,11 +996,13 @@ def vm_fn_input(data,opCode,pc):
 
         words=list(filter(None,userInput.split(' ')))
 
-        wordCount = 0
-        vm_variables[firstWordVar]=0x00
-        vm_variables[secondWordVar]=0x00
-        vm_variables[thirdWordVar]=0x00
+        vm_variables[firstWordVar]  = 0x00
+        vm_variables[secondWordVar] = 0x00
+        vm_variables[thirdWordVar]  = 0x00
+        vm_variables[wordCountVar]  = len(words)
 
+        wordVarPointer = 0x00
+	    
         for word in words:
             code = None
             for dictWord in vm_dictionary.keys():
@@ -1007,7 +1011,7 @@ def vm_fn_input(data,opCode,pc):
                     break
             
             if(code is not None):
-                match wordCount:
+                match wordVarPointer:
                     case 0:
                         vm_variables[firstWordVar]=code
                     case 1:
@@ -1017,11 +1021,9 @@ def vm_fn_input(data,opCode,pc):
                     case other:
                         break
 
-                wordCount=wordCount+1
+                wordVarPointer=wordVarPointer+1
 
-        vm_variables[wordCountVar]=wordCount
-
-        if(wordCount>0):
+        if(vm_variables[wordCountVar]>0 and not hashCommand):
             vm_listarea_previous  = vm_listarea.copy()
             break
 
