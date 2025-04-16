@@ -926,7 +926,7 @@ def vm_fn_function(data,opCode,pc):
 # The ids are placed in the variables identified by the first three operands
 # and the word count in the fourth.  
 #
-# Note that if it's prefixed with a hash then it'll be passsed to the hash
+# Note that if it's prefixed with a hash then it'll be passed to the hash
 # command handler - these are extensions I put in for debugging / understanding
 # 
 # Parameters: 
