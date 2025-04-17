@@ -10216,7 +10216,7 @@
 0x1725 (0x2dc3): (0x10) If var[0x2b] == var[0x14] then Goto 0x1736
 
 / Branch if the dictionary id of the second word is less than the third word
-/ (no flipping to be down to get them in the right order)
+/ (no flipping to be done to get them in the right order)
 0x1729 (0x2dc7): (0x12) If var[0x2a] < var[0x2b] then Goto 0x1736
 
 / Cache the second word's dictionary id
