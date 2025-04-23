@@ -1,6 +1,6 @@
 *>>>>>>>>>>>>>>>>>>>>>>>>>>> WORK IN PROGRESS <<<<<<<<<<<<<<<<<<<<<<<<<<<<
 **************************************************************************
-* Level 9 A-Code game dissassembly for Dungeon Adventure v1
+* Level 9 A-Code game dissassembly for Dungeon Adventure (v1)
 **************************************************************************
 / 
 /
