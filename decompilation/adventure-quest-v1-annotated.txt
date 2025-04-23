@@ -1797,6 +1797,7 @@ Score is between 4,000 and 5,999
 0x02f3 (0x0b13): (0x06) Function - Clear Stack (0x06)
 
 / Increment the number of turns/commands entered by the player
+/ var[0x01] is the constant 0x01
 0x02f5 (0x0b15): (0x0a) Set var[0x30] += var[0x01]
 
 / Branch if the flames counter is NOT 0x00 and decrement it
