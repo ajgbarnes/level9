@@ -1,10 +1,21 @@
 *>>>>>>>>>>>>>>>>>>>>>>>>>>> WORK IN PROGRESS <<<<<<<<<<<<<<<<<<<<<<<<<<<<
 **************************************************************************
-* Level 9 A-Code game dissassembly for Dungeon Adventure (v1)
+* Level 9 A-Code game dissassembly for Dungeon Adventure v1
 **************************************************************************
 / 
 /
 / Created by Andy Barnes @ajgbarnes on X/Twitter
+/
+/ Location descriptions
+/ ---------------------
+/ Location text can be found by looking in the dungeon-adventure-v1-descs.txt file
+/ Location descriptions are 0x1f4 + location id
+/ 
+/ Object descriptions
+/ ---------------------
+/ Object text can be found by looking in the dungeon-adventure-v1-descs.txt file
+/ Object descriptions (when in inventory) are 0xe6 + object id
+/ Object descriptions (when in location)  are 0x140 + object id
 /
 / Lists
 / =====
@@ -31,13 +42,29 @@
 / Use of variables var[0xNN] in the A-code
 / ========================================
 /
+/ 0x01 - (Constant) 0x01
+/ 0x02 - (Constant) 0x02
+/ 0x03 - (Constant) 0x03
+/ 0x04 - (Constant) 0x04
+/ 0x05 - (Constant) 0x05
+/ 0x06 - (Constant) 0x06
+/ 0x07 - (Constant) Location code for the inventory (0xfe) i.e. player carrying an item
+/ 0x08 - (Constant) Location code for player wearing an item (0xff)
+/
+/ 0x0b - (Constant) 0x00
 /
 / 0x1e - Index into list#1 for setting object initial locations
+/      - Used as an index for looking up the current location of an object
+/ 0x1f - Used to hold the current location of an object
 /
 / 0x30 - matched input word code 1
 / 0x31 - matched input word code 2
 / 0x32 - matched input word code 3
 / 0x33 - matched input word count 
+/ 
+/ 0x37 - Status of the player's eyes
+/        0x00 - closed (cannot see)
+/        0x01 - open (can see and room description will be printed)
 /
 / 0x43 - Player's current location, defaults to "on a mud-bank, nort of a wide river" (0x32)
 /
@@ -50,6 +77,8 @@
 / 0x57 - number of turns/commands entered by the player
 /
 / 0x5d - Location description id to print - calculated a location id + 0x1f4
+/ 0x5e - Number of crosses / crucifixes carried. Player needs 1 to stop the vampire biting them
+/        and two to keep the wights back
 /
 / Notes and observations
 / ======================
@@ -112,6 +141,8 @@
 / player's inventory (0xfe)
 0x001a (0x075a): (0x08) Set var[0x07] = (constant) 0xfe
 
+/ Set the constant that represents an item being worn by 
+/ the player (0xff)
 0x001d (0x075d): (0x08) Set var[0x08] = (constant) 0xff
 
 0x0020 (0x0760): (0x08) Set var[0x09] = (constant) 0xe1
@@ -159,6 +190,9 @@
 0x009e (0x07de): (0x09) Set var[0x34] = var[0x0b]
 0x00a1 (0x07e1): (0x09) Set var[0x35] = var[0x0b]
 0x00a4 (0x07e4): (0x09) Set var[0x36] = var[0x0b]
+
+/ Reset the status of the player's eyes to closed (0x00)
+/ var[0x0b] is the constant 0x00
 0x00a7 (0x07e7): (0x09) Set var[0x37] = var[0x0b]
 0x00aa (0x07ea): (0x09) Set var[0x38] = var[0x0b]
 0x00ad (0x07ed): (0x09) Set var[0x39] = var[0x0b]
@@ -205,6 +239,9 @@
 0x0113 (0x0853): (0x09) Set var[0x5b] = var[0x0b]
 0x0116 (0x0856): (0x09) Set var[0x5c] = var[0x0b]
 0x0119 (0x0859): (0x09) Set var[0x5d] = var[0x0b]
+
+/ Reset the number of crosses / crucifixes carried to 0x00
+/ var[0x0b] is the constant 0x00
 0x011c (0x085c): (0x09) Set var[0x5e] = var[0x0b]
 0x011f (0x085f): (0x09) Set var[0x5f] = var[0x0b]
 0x0122 (0x0862): (0x09) Set var[0x60] = var[0x0b]
@@ -486,22 +523,76 @@
 0x03a0 (0x0ae0): (0x00) Goto 0x0190
 **************************************************************************
 0x03a3 (0x0ae3): (0x09) Set var[0x5e] = var[0x0b]
+
+/ Set the temporary variable to the dictionary id for the "a veneered cross" (0x7a)
 0x03a6 (0x0ae6): (0x08) Set var[0x1e] = (constant) 0x7a
+
+/ Get the current location of the "veneered cross"
 0x03a9 (0x0ae9): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
+
+/ Branch if the "veneered cross" is NOT in the player's inventory (0xfe)
+/ var[0x07] is the constant 0xfe
 0x03ac (0x0aec): (0x12) If var[0x1f] < var[0x07] then Goto 0x03b3
+
+/ The "veneered cross" is in the player's inventory (0xfe)
+
+/ Add one to the number of crosses / crucifixes carried
+/ Player needs just one to stop the vampire biting them or two to keep the wights back
+/ var[0x01] is the constant 0x01
 0x03b0 (0x0af0): (0x0a) Set var[0x5e] += var[0x01]
+
+/ Set the temporary variable to the dictionary id for the "a jewel-encrusted crucifix" (0x7b)
 0x03b3 (0x0af3): (0x08) Set var[0x1e] = (constant) 0x7b
+
+/ Get the current location of the "jewel-encrusted crucifix"
 0x03b6 (0x0af6): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
+
+/ Branch if the "veneered cross" is NOT in the player's inventory (0xfe)
+/ var[0x07] is the constant 0xfe
 0x03b9 (0x0af9): (0x12) If var[0x1f] < var[0x07] then Goto 0x03c3
+
+/ Add one to the number of crosses / crucifixes carried
+/ Player needs just one to stop the vampire biting them or two to keep the wights back
+/ var[0x01] is the constant 0x01
 0x03bd (0x0afd): (0x0a) Set var[0x5e] += var[0x01]
+
+/ REDUNDANT - basically a NOP!
 0x03c0 (0x0b00): (0x09) Set var[0x65] = var[0x65]
+
+
 0x03c3 (0x0b03): (0x09) Set var[0x4c] = var[0x0b]
 0x03c6 (0x0b06): (0x09) Set var[0x4d] = var[0x0b]
+
+/ Reset the status of the player's eyes to closed (0x00)
+/ (will be worked out later)
+/ var[0x0b] is the constant 0x00
 0x03c9 (0x0b09): (0x09) Set var[0x37] = var[0x0b]
+
+/ Branch if the player's current location is "on stepping stones leading 
+/ north to an island" (0x37)
 0x03cc (0x0b0c): (0x18) If var[0x43] == (constant) 0x37 then Goto 0x040a
+
+/ Branch if the player's current location is " on the floor of a cavern, 
+/ beside a clump of evil green toadstools. Liquid slime oozes from the 
+/ north and paths lead south and up" (0x38)
 0x03d0 (0x0b10): (0x18) If var[0x43] == (constant) 0x38 then Goto 0x040a
+
+/ Branch if the player is in a location before "on a sturdy bridge across a cave" (0xa1)
 0x03d4 (0x0b14): (0x1a) If var[0x43] < (constant) 0xa1 then Goto 0x03dc
+
+/ Branch if the player is in a location before "below a sign "Your fate is sealed!" (0xa9)
+/ Basically branch if the player is in any of the following locations:
+/ 0xa1 : on a sturdy bridge across a cave
+/ 0xa2 : on a wide ledge between a sturdy bridge and a fissure in the rock. You keep bumping into objects that you can't see
+/ 0xa3 : in a small fissure that narrows as it winds north
+/ 0xa4 : crawling through tiny cracks which lead west and south
+/ 0xa5 : in the strong room. An iron door leads west and a narrow crack splits the east wall
+/ 0xa6 : on cliff steps, broken by rock-falls
+/ 0xa7 : south a vast cavern floor, beside some small grey mushrooms. Tiny footprints lead north
+/ 0xa8 : in a viewing gallery over a deep pit. A chute leads down
 0x03d8 (0x0b18): (0x1a) If var[0x43] < (constant) 0xa9 then Goto 0x040a
+
+
 0x03dc (0x0b1c): (0x1a) If var[0x43] < (constant) 0x36 then Goto 0x03f1
 0x03e0 (0x0b20): (0x1a) If var[0x43] < (constant) 0xc8 then Goto 0x040f
 0x03e4 (0x0b24): (0x1a) If var[0x43] < (constant) 0xce then Goto 0x040a
@@ -516,6 +607,9 @@
 0x03ff (0x0b3f): (0x1a) If var[0x57] < (constant) 0x64 then Goto 0x0406
 0x0403 (0x0b43): (0x08) Set var[0x4d] = (constant) 0x75
 0x0406 (0x0b46): (0x1b) If var[0x57] > (constant) 0x64 then Goto 0x040f
+
+/ Set the status of the player's eyes to "open" (0x01)
+/ var[0x01] is the constant 0x01
 0x040a (0x0b4a): (0x09) Set var[0x37] = var[0x01]
 0x040d (0x0b4d): (0x00) Goto 0x0412
 **************************************************************************
@@ -525,16 +619,25 @@
 0x0418 (0x0b58): (0x10) If var[0x1f] == var[0x44] then Goto 0x0420
 0x041c (0x0b5c): (0x12) If var[0x1f] < var[0x07] then Goto 0x0427
 0x0420 (0x0b60): (0x10) If var[0x36] == var[0x0b] then Goto 0x0427
+
+/ Set the status of the player's eyes to "open" (0x01)
+/ var[0x01] is the constant 0x01
 0x0424 (0x0b64): (0x09) Set var[0x37] = var[0x01]
 0x0427 (0x0b67): (0x08) Set var[0x1e] = (constant) 0x76
 0x042a (0x0b6a): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
 0x042d (0x0b6d): (0x10) If var[0x1f] == var[0x44] then Goto 0x0435
 0x0431 (0x0b71): (0x12) If var[0x1f] < var[0x07] then Goto 0x043c
 0x0435 (0x0b75): (0x10) If var[0x5c] == var[0x0b] then Goto 0x043c
+
+/ Set the status of the player's eyes to "open" (0x01)
+/ var[0x01] is the constant 0x01
 0x0439 (0x0b79): (0x09) Set var[0x37] = var[0x01]
 0x043c (0x0b7c): (0x10) If var[0x1f] == var[0x43] then Goto 0x0442
 0x0440 (0x0b80): (0x00) Goto 0x0445
 **************************************************************************
+
+/ Set the status of the player's eyes to "open" (0x01)
+/ var[0x01] is the constant 0x01
 0x0442 (0x0b82): (0x09) Set var[0x37] = var[0x01]
 0x0445 (0x0b85): (0x1a) If var[0x43] < (constant) 0x71 then Goto 0x045e
 0x0449 (0x0b89): (0x1b) If var[0x43] > (constant) 0x72 then Goto 0x045e
@@ -542,6 +645,9 @@
 0x0450 (0x0b90): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
 0x0453 (0x0b93): (0x10) If var[0x1f] == var[0x43] then Goto 0x045e
 0x0457 (0x0b97): (0x10) If var[0x1f] == var[0x07] then Goto 0x045e
+
+/ Set the status of the player's eyes to "closed" (0x00)
+/ var[0x0b] is the constant 0x00
 0x045b (0x0b9b): (0x09) Set var[0x37] = var[0x0b]
 0x045e (0x0b9e): (0x19) If var[0x43] != (constant) 0x9d then Goto 0x046a
 0x0462 (0x0ba2): (0x13) If var[0x42] > var[0x0b] then Goto 0x046a
@@ -690,10 +796,16 @@
 0x0635 (0x0d75): (0x10) If var[0x0f] == var[0x0b] then Goto 0x0640
 0x0639 (0x0d79): (0x13) If var[0x0f] > var[0x05] then Goto 0x0640
 0x063d (0x0d7d): (0x08) Set var[0x4c] = (constant) 0xdc
+
+/ Branch if the player's eyes are closed (0x00)
+/ var[0x0b] is the constant 0x00
 0x0640 (0x0d80): (0x10) If var[0x37] == var[0x0b] then Goto 0x0647
 0x0644 (0x0d84): (0x09) Set var[0x1d] = var[0x0b]
 0x0647 (0x0d87): (0x13) If var[0x20] > var[0x0b] then Goto 0x064f
 0x064b (0x0d8b): (0x10) If var[0x21] == var[0x0b] then Goto 0x0652
+
+/ Set the status of the player's eyes to "closed" (0x00)
+/ var[0x0b] is the constant 0x00
 0x064f (0x0d8f): (0x09) Set var[0x37] = var[0x0b]
 0x0652 (0x0d92): (0x09) Set var[0x4e] = var[0x4c]
 0x0655 (0x0d95): (0x02) Return
@@ -988,7 +1100,13 @@
 0x0944 (0x1084): (0x05) Print message (constant) 0x10f
 0x0947 (0x1087): (0x01) Gosub 0x1488
 0x094a (0x108a): (0x19) If var[0x43] != (constant) 0x3f then Goto 0x0958
+
+/ Branch if the status of the player's eyes is "closed" (0x00)
+/ var[0x0b] is the constant 0x00
 0x094e (0x108e): (0x10) If var[0x37] == var[0x0b] then Goto 0x0958
+
+/ Player's eyes are open (0x01)
+
 / Print message  "You can't move! "
 0x0952 (0x1092): (0x05) Print message (constant) 0x116
 0x0955 (0x1095): (0x00) Goto 0x0149
