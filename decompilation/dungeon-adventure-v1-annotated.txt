@@ -530,7 +530,7 @@
 / Get the current location of the "veneered cross"
 0x03a9 (0x0ae9): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
 
-/ Branch if the "veneered cross" is NOT in the player's inventory (0xfe)
+/ Branch if the "veneered cross" is NOT in the player's inventory (0xfe) or being worn (0xff)
 / var[0x07] is the constant 0xfe
 0x03ac (0x0aec): (0x12) If var[0x1f] < var[0x07] then Goto 0x03b3
 
@@ -547,7 +547,7 @@
 / Get the current location of the "jewel-encrusted crucifix"
 0x03b6 (0x0af6): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
 
-/ Branch if the "veneered cross" is NOT in the player's inventory (0xfe)
+/ Branch if the "veneered cross" is NOT in the player's inventory (0xfe) or being worn (0xff)
 / var[0x07] is the constant 0xfe
 0x03b9 (0x0af9): (0x12) If var[0x1f] < var[0x07] then Goto 0x03c3
 
