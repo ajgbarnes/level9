@@ -1,5 +1,5 @@
 **************************************************************************
-* Level 9 A-Code game dissassembly for Lords of Time
+* Level 9 A-Code game dissassembly for Lords of Time (v1)
 **************************************************************************
 
 / Created by Andy Barnes @ajgbarnes on X/Twitter
