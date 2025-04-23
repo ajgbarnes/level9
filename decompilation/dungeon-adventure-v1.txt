@@ -1,7 +1,6 @@
 **************************************************************************
-Level 9 A-Code game dissassembly for
+Level 9 A-Code game dissassembly for Dungeon Adventure (v1)
 **************************************************************************
-0x740
 0x0000 (0x0740): (0x00) Goto 0x0006
 **************************************************************************
 0x0003 (0x0743): (0x00) Goto 0x0144
@@ -2160,6 +2159,5 @@ Level 9 A-Code game dissassembly for
 0x1628 (0x1d68): (0x08) Set var[0x15] = (constant) 0xac
 0x162b (0x1d6b): (0x00) Goto 0x12e7
 **************************************************************************
-0x162e (0x1d6e): (0x1b) If var[0x87] > (constant) 0x55 then Goto 0x15b2
-0x1632 (0x1d72): (0x08) Set var[0x69] = (constant) 0x01
-Version 1 games only supported 5 lists and this is accessing list 6
+Level 9 A-Code game dissassembly complete
+**************************************************************************
