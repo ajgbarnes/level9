@@ -62,6 +62,10 @@
 /        0x00         - player can currently hear
 /        0x01 to 0x04 - player is deaf for this number of remaining turns (decrements by 1 each turn)
 /
+/ 0x1a - Status of the dwarf 
+/        0x00 - not following the player
+/        0x01 - following the player
+/
 / 0x1e - Index into list#1 for setting object initial locations
 /      - Used as an index for looking up the current location of an object
 / 0x1f - Used to hold the current location of an object
@@ -69,6 +73,10 @@
 / 0x25 - Status of the cold cream (prevents the fire elemental leaping on the player)
 /        0x00 - not smeared on the player
 /        0x01 - smeared on the player
+/
+/ 0x28 - Indicates whether the skeletons are still guarding the dwarf
+/        0x00 - Stil guarding the dwarf
+/        0x01 - Clanked off after the player waved the staff
 /
 / 0x30 - matched input word code 1
 / 0x31 - matched input word code 2
@@ -80,6 +88,12 @@
 /        0x01 - open (can see and room description will be printed)
 /
 / 0x43 - Player's current location, defaults to "on a mud-bank, nort of a wide river" (0x32)
+/
+/ 0x4c - First location supplementary message, can be set to:
+/        0x78 - A grotesque bloated yellow bird with big ears squats on the nest
+/        0x8f - A host of skeletons are guarding a bearded dwarf
+/        
+/        
 /
 / 0x4f - Maximum number of items a player can carry - defaults to 0x04
 /        Can be:
@@ -191,6 +205,9 @@
 0x0047 (0x0787): (0x09) Set var[0x17] = var[0x0b]
 0x004a (0x078a): (0x09) Set var[0x18] = var[0x0b]
 0x004d (0x078d): (0x09) Set var[0x19] = var[0x0b]
+
+/ Initialise the status of the dwarf to not following the player (0x00)
+/ var[0x0b] is the constant 0x00
 0x0050 (0x0790): (0x09) Set var[0x1a] = var[0x0b]
 0x0053 (0x0793): (0x09) Set var[0x1b] = var[0x0b]
 0x0056 (0x0796): (0x09) Set var[0x1c] = var[0x0b]
@@ -349,12 +366,22 @@
 0x017c (0x08bc): (0x04) Print message var[0x4d]
 / Print message  "\n "
 0x017e (0x08be): (0x05) Print message (constant) 0x28
+
+/ Branch if the dwarf is NOT following the player (0x00)
+/ var[0x0b] is the constant 0x00
 0x0180 (0x08c0): (0x10) If var[0x1a] == var[0x0b] then Goto 0x0186
+
+/ Dwarf IS following the player (0x01)
+
 / Print message  "A dwarf is following you\n "
 0x0184 (0x08c4): (0x05) Print message (constant) 0x92
+
 0x0186 (0x08c6): (0x08) Set var[0x38] = (constant) 0x141
 0x018a (0x08ca): (0x09) Set var[0x44] = var[0x43]
 0x018d (0x08cd): (0x01) Gosub 0x156e
+
+
+
 0x0190 (0x08d0): (0x09) Set var[0x44] = var[0x43]
 0x0193 (0x08d3): (0x01) Gosub 0x03a3
 0x0196 (0x08d6): (0x10) If var[0x46] == var[0x0b] then Goto 0x01a6
@@ -1051,7 +1078,13 @@
 0x0772 (0x0eb2): (0x05) Print message (constant) 0x90
 0x0774 (0x0eb4): (0x00) Goto 0x0149
 **************************************************************************
+
+/ Branch if the dwarf is NOT following the player (0x00)
+/ var[0x0b] is the constant 0x00
 0x0777 (0x0eb7): (0x10) If var[0x1a] == var[0x0b] then Goto 0x07b8
+
+/ Dwarf IS following the player (0x01)
+
 0x077b (0x0ebb): (0x18) If var[0x44] == (constant) 0xcb then Goto 0x079d
 0x077f (0x0ebf): (0x18) If var[0x44] == (constant) 0xcc then Goto 0x079d
 0x0783 (0x0ec3): (0x18) If var[0x44] == (constant) 0x56 then Goto 0x079d
@@ -1092,7 +1125,11 @@
 0x07b3 (0x0ef3): (0x00) Goto 0x079d
 
 **************************************************************************
+
+/ Set the status of the dwarf to NOT following the player (0x00)
+/ var[0x0b] is the constant 0x00
 0x07b5 (0x0ef5): (0x09) Set var[0x1a] = var[0x0b]
+
 0x07b8 (0x0ef8): (0x19) If var[0x44] != (constant) 0xcf then Goto 0x07c1
 0x07bc (0x0efc): (0x10) If var[0x1b] == var[0x0b] then Goto 0x0686
 0x07c1 (0x0f01): (0x19) If var[0x44] != (constant) 0x7f then Goto 0x07d2
@@ -2127,12 +2164,31 @@
 
 0x104e (0x178e): (0x01) Gosub 0x1559
 0x1051 (0x1791): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
+
+/ Branch if the second word is NOT the "staff" (0x80)
 0x1056 (0x1796): (0x19) If var[0x31] != (constant) 0x80 then Goto 0x1069
+
+/ Player IS trying to wave the staff
+
+/ Branch if the first supplementary message is NOT set to "A host of skeletons 
+/ are guarding a bearded dwarf" (0x8f)
 0x105a (0x179a): (0x19) If var[0x4c] != (constant) 0x8f then Goto 0x1069
-/ Print message  "As you wave the skeleton staff they all clank off, leaving the dwarf. "Thank you", she says, "You saved my life. I've found a rich vein of ore above the stone face and will share it if you visit the area!" "
+
+/ Player IS waving the staff and the skeletons ARE guarding the dwarf
+
+/ Print message  "As you wave the skeleton staff they all clank off, leaving the dwarf.
+/ "Thank you", she says, "You saved my life. I've found a rich vein of ore above
+/ the stone face and will share it if you visit the area!" "
 0x105e (0x179e): (0x05) Print message (constant) 0x91
+
+/ Set the status of the skeletons to having "clanked off"
 0x1060 (0x17a0): (0x09) Set var[0x28] = var[0x01]
+
+/ Set the status of the dwarf to following the player (0x01)
+/ var[0x01] is the constant 0x01
 0x1063 (0x17a3): (0x09) Set var[0x1a] = var[0x01]
+
+/ TODO
 0x1066 (0x17a6): (0x00) Goto 0x0190
 **************************************************************************
 0x1069 (0x17a9): (0x19) If var[0x31] != (constant) 0x82 then Goto 0x107d
@@ -2240,8 +2296,14 @@
 0x116b (0x18ab): (0x00) Goto 0x12e2
 **************************************************************************
 0x116e (0x18ae): (0x19) If var[0x31] != (constant) 0x9b then Goto 0x117d
+
+/ Branch if the dwarf is NOT following the player (0x00)
+/ var[0x0b] is the constant 0x00
 0x1172 (0x18b2): (0x10) If var[0x1a] == var[0x0b] then Goto 0x12dd
+
+/ Set the status of the dwarf to NOT following the player (0x00)
 0x1177 (0x18b7): (0x09) Set var[0x1a] = var[0x0b]
+
 0x117a (0x18ba): (0x00) Goto 0x12e2
 **************************************************************************
 0x117d (0x18bd): (0x00) Goto 0x0190
@@ -2465,6 +2527,9 @@
 0x12e4 (0x1a24): (0x00) Goto 0x0149
 **************************************************************************
 0x12e7 (0x1a27): (0x0a) Set var[0x16] += var[0x01]
+
+/ Set the status of the dwarf to NOT following the player (0x00)
+/ var[0x0b] is the constant 0x00
 0x12ea (0x1a2a): (0x09) Set var[0x1a] = var[0x0b]
 0x12ed (0x1a2d): (0x09) Set var[0x44] = var[0x43]
 0x12f0 (0x1a30): (0x08) Set var[0x43] = (constant) 0xe2
