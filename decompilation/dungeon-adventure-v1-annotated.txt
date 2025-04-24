@@ -2091,23 +2091,76 @@
 * Command: "fill"
 **************************************************************************
 
+/ Check to see if the player has the object
 0x0ec5 (0x1605): (0x01) Gosub 0x1559
+
+/ Branch if the player does not have the pot 
 0x0ec8 (0x1608): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
+
+/ Branch if the second word is NOT the "pot" (0x52) and print "you can't do that"
 0x0ecd (0x160d): (0x19) If var[0x31] != (constant) 0x52 then Goto 0x15e0
+
+/ Second word is the "pot"
+
+/ Branch if the player's current location IS "on the floor of a cavern, 
+/ beside a clump of evil green toadstools. Liquid slime oozes from the
+/ north and paths lead south and up" (0x36)
 0x0ed2 (0x1612): (0x18) If var[0x43] == (constant) 0x36 then Goto 0x0ee8
+
+/ Branch if the player is NOT in one of the following locations with water:
+/ 0x2f : south of the river, on the edge of a vast field 
+/        of poppies which stretches west as far as the eye can see.
+/        A somnolant perfume hangs heavy on the breeze
+/ 0x30 : on an east-west road, south of the river and north of a steep, treeless hill
+/ 0x31 : on an east-west road beside the river and north 
+/                     of a flat grassy plain. A line of stepping stones leads
+/                     to a small island in the water
+/ 0x32 : on a mud-bank, north of a wide river. A stone bridge spans the waters, reaching from the granite cliffs above to the flat lands of the far bank, and a path climbs up to it
+/ 0x33 : under the killer-willow tree
+/ 0x34 : on the southern end of a small island, reached by stepping stones from the south. The far end of the island is occupied by a viscious-looking willow tree with six long rubbery branches
+/ 0x35 : on stepping stones leading north to an island
+/ 0x36 (already processed )
+/ 0x37 : in the middle of the floor of a giant cove, in a giant ants' nest. Small footprints lead north and south
+/ 0x38 : North of the cave floor, below a huge grey mushroom
+/ 0x39 : at the end of an aqueduct designed to drip water evenly into the depths of a deep pit below. The aqueduct leads north, a narrow fissure leads south, and steps lead down into the pit
+/ 0x3a : walking on the bed of an empty aqueduct which crosses a vast dark pit
+/ 0x3b : in a damp north-south pipe
+/ 0x3c : on an aqueduct
+/ 0x3d : in a paved tunnel below a silver pedestal. Water trickles from a silver hoop painted on one wall and seeps south. An armoured door leads east and a crack splits the north wall
+/ 0x3e : standing in shallow water at the foot of the ramp. A ladder slopes northwards to a higher part of the ramp
 0x0ed6 (0x1616): (0x1a) If var[0x43] < (constant) 0x2f then Goto 0x0ee3
 0x0eda (0x161a): (0x1b) If var[0x43] > (constant) 0x3e then Goto 0x0ee3
+
+/ Pot cannot hold water
+
 / Print message  "The water trickles out. Try a thicker liquid "
 0x0ede (0x161e): (0x05) Print message (constant) 0x9d
+
+/ TODO
 0x0ee0 (0x1620): (0x00) Goto 0x0190
+
 **************************************************************************
+* Process no water in the location
+**************************************************************************
+
 / Print message  "There's nothing to fill it with "
 0x0ee3 (0x1623): (0x05) Print message (constant) 0x9e
+
+/ TODO
 0x0ee5 (0x1625): (0x00) Goto 0x0190
+
 **************************************************************************
+* Process in the location with the slime 
+**************************************************************************
+
 / Print message  "You scoop up a good pot-full of slime "
 0x0ee8 (0x1628): (0x05) Print message (constant) 0x9f
+
+/ Set the location of the slime to in the player's inventory (0xfe)
+/ var[0x07] is the constant 0xfe
 0x0eea (0x162a): (0x09) Set var[0x40] = var[0x07]
+
+/ TODO
 0x0eed (0x162d): (0x00) Goto 0x0190
 
 **************************************************************************
