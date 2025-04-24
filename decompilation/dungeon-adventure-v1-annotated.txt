@@ -91,8 +91,13 @@
 /        0x01 - can be picked up or worn
 /        Reset to 0x01 whenever "What next?" is printed (start of each turn)
 /
+/ 0x40 - Location of the sticky slime
+/        0x00 - default location "on the floor of a cavern... " (0x36)
+/        0xnn - wherever the pot is dropped after it was filled with slime 
+/        0xfe - in the p    layer's inventory (when the pot is filled)
+/
 / 0x43 - Player's current location, defaults to "on a mud-bank, nort of a wide river" (0x32)
-/ 
+/ 0x44 - Player's target location when moving - reset to the player's current location at the start of a turn
 / 0x45 - Temporary variable for holding the location of the red-gold ring 
 /
 / 0x4c - First location supplementary message, can be set to:
@@ -112,6 +117,10 @@
 / 0x5d - Location description id to print - calculated a location id + 0x1f4
 / 0x5e - Number of crosses / crucifixes carried. Player needs 1 to stop the vampire biting them
 /        and two to keep the wights back
+/
+/ 0x61 - Unused - but seems to be a location light indicator
+/        0x00 - player cannot see location description (eyes closed)
+/        0x01 - player can see location description
 /
 / Notes and observations
 / ======================
@@ -148,7 +157,7 @@
 /    Should "A red-gold ring rolls on the ground"
 / 13.The password at the gatehouse can either be "Password!" or "Agaliarept" (or most truncations of
 /    of this e.g. say pass)
-/ 14.The password can be said multiple times
+/ 14.The password at the gatehouse can be said multiple times
 
 **************************************************************************
 * A-code entry point
@@ -315,6 +324,8 @@
 0x011c (0x085c): (0x09) Set var[0x5e] = var[0x0b]
 0x011f (0x085f): (0x09) Set var[0x5f] = var[0x0b]
 0x0122 (0x0862): (0x09) Set var[0x60] = var[0x0b]
+
+/ REDUNDANT - already initialised above
 0x0125 (0x0865): (0x09) Set var[0x5e] = var[0x0b]
 0x0128 (0x0868): (0x09) Set var[0x5f] = var[0x0b]
 0x012b (0x086b): (0x09) Set var[0x60] = var[0x0b]
@@ -347,15 +358,27 @@
 / var[0x01] is the constant 0x01
 0x0144 (0x0884): (0x04) Print message var[0x01]
 
+/ Perform location specific checks 
 0x0146 (0x0886): (0x01) Gosub 0x03a3
 
+/ Set the player's target location to be the same as the current location
 0x0149 (0x0889): (0x09) Set var[0x44] = var[0x43]
+
+/ Perform location specific checks 
 0x014c (0x088c): (0x01) Gosub 0x03a3
+
+/ Branch if the player's eyes are open and print the location description
 0x014f (0x088f): (0x10) If var[0x37] == var[0x01] then Goto 0x015a
 
+/ Unused variable set to 0x00 to indicate player cannot see
+/ var[0x0b] is the constant 0x00
 0x0153 (0x0893): (0x09) Set var[0x61] = var[0x0b]
+
 / Print message  "\nYou cannot see\n "
 0x0156 (0x0896): (0x05) Print message (constant) 0x18
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description
 0x0158 (0x0898): (0x00) Goto 0x0190
 **************************************************************************
 
@@ -365,6 +388,7 @@
 
 / Add on the location id to the description offset
 0x015e (0x089e): (0x0a) Set var[0x5d] += var[0x43]
+
 / Print message  "\nYou are "
 0x0161 (0x08a1): (0x05) Print message (constant) 0x1e
 
@@ -374,7 +398,10 @@
 / Print message  ".\n "
 0x0165 (0x08a5): (0x05) Print message (constant) 0x1f
 
+/ Unused variable set to 0x01 to indicate player cannot see location
+/ var[0x01] is the constant 0x01
 0x0167 (0x08a7): (0x09) Set var[0x61] = var[0x01]
+
 0x016a (0x08aa): (0x11) If var[0x40] != var[0x43] then Goto 0x0170
 / Print message  "The ground is very slippery\n "
 0x016e (0x08ae): (0x05) Print message (constant) 0xa2
@@ -681,6 +708,9 @@
 
 / TODO
 0x03a0 (0x0ae0): (0x00) Goto 0x0190
+
+**************************************************************************
+* Perform location specific checks 
 **************************************************************************
 0x03a3 (0x0ae3): (0x09) Set var[0x5e] = var[0x0b]
 
