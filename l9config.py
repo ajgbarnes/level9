@@ -55,7 +55,7 @@ v1Configuration = {
     },    
     "colossal" : {
         "version"           : 1,
-        "filename"          : "roms/COLOSS2",
+        "filename"          : "roms/Coloss2",
         "script"            : "test-scripts/colossal-adventure-v1.txt",
         "signatureBytes"    : b'\x20\x04\x00\x49\x00',
         "offsets" : {
