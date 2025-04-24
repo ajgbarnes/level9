@@ -15,7 +15,7 @@
 / ---------------------
 / Object text can be found by looking in the dungeon-adventure-v1-descs.txt file
 / Object descriptions (when in inventory) are 0xe6 + object id
-/ Object descriptions (when in location)  are 0x140 + object id
+/ Object descriptions (when in location)  are 0x141 + object id (TODO check this)
 /
 / Lists
 / =====
@@ -88,6 +88,8 @@
 /        0x01 - open (can see and room description will be printed)
 /
 / 0x43 - Player's current location, defaults to "on a mud-bank, nort of a wide river" (0x32)
+/ 
+/ 0x45 - Temporary variable for holding the location of the red-gold ring 
 /
 / 0x4c - First location supplementary message, can be set to:
 /        0x78 - A grotesque bloated yellow bird with big ears squats on the nest
@@ -129,6 +131,17 @@
 /    "wear cold cream" rather than "apply" or "rub"?
 / 7. In the dictionary "score" is actualy defined as "score/"
 / 8. Unsure why "draw" is a synonym to "press", "push", "rotate", "stop" and "turn"
+/ 9. A synonym for the mithril collar is "throne" (!) - player can "wear throne" to put on the collar
+/ 10.There is a hidden object "glass key" (0x99) in location "You are inside a large wooden box.
+/    A small door leads deeper into the box." (0xd7) early in the game.
+/    The object has no description for when it's in a location (0x1da), it only has a description when in
+/    the player's inventory "a glass key enscribed "This game is copyright (C) Level 9 Computing 
+/    1982 and was created by Peter R J Austin" (0x180) - at the start of the game 
+/    do the following "in", "take key" and "inv" and it will be shown. Nice!
+/ 11.Taking the red-gold ring without the gauntlet kills the player "The ring grabs your finger 
+/    and grows rapidly.. You shrink rapidly.."
+/ 12.The red-gold ring has a typo in its location description "A gold rings rolls on the ground" (0x1d7)
+/    Should "A red-gold ring rolls on the ground"
 
 **************************************************************************
 * A-code entry point
@@ -1391,6 +1404,9 @@
 * Command: "take", "pick" or "steal"
 **************************************************************************
 
+/ Check to see if the player is wearing the gauntlet before allowing them to 
+/ pick up the red-gold ring (will return immediately if the second word is 
+/ not the red-gold ring)
 0x0a0d (0x114d): (0x01) Gosub 0x129f
 
 / Branch if the player's current location is NOT "on the celing of a fine
@@ -1584,20 +1600,60 @@
 * Command: "apply", "rub", "wear" or "smeau" (!)
 **************************************************************************
 
+/ Check to see if the player is wearing the gauntlet before allowing them to 
+/ wear the red-gold ring 
 0x0b81 (0x12c1): (0x01) Gosub 0x129f
 0x0b84 (0x12c4): (0x01) Gosub 0x15c5
 0x0b87 (0x12c7): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
+
+/ TODO
+/ Branch if the player is shrunk (max inventory will be 0x00)
+/ and print "you're too weak"
+/ var[0x0b] is the constant 0x00
 0x0b8c (0x12cc): (0x10) If var[0x4f] == var[0x0b] then Goto 0x0a35
+
+/ Branch if the second word is the "blindfold" (0x48)
 0x0b91 (0x12d1): (0x18) If var[0x31] == (constant) 0x48 then Goto 0x0bc2
+
+/ Branch if the second word is the "gauntlet" / "glove" (0x4d)
 0x0b95 (0x12d5): (0x18) If var[0x31] == (constant) 0x4d then Goto 0x0bc2
+
+/ Branch if the second word is the "shield" (0x55)
 0x0b99 (0x12d9): (0x18) If var[0x31] == (constant) 0x55 then Goto 0x0bc2
+
+/ Branch if the second word is the "lamp" (0x76)
 0x0b9d (0x12dd): (0x18) If var[0x31] == (constant) 0x76 then Goto 0x0bc2
+
+/ Branch if the second word is the "belt" (0x79)
 0x0ba1 (0x12e1): (0x18) If var[0x31] == (constant) 0x79 then Goto 0x0bbd
+
+/ Branch if the second word is the "cold cream" (0x94)
 0x0ba5 (0x12e5): (0x18) If var[0x31] == (constant) 0x94 then Goto 0x0f07
+
+/ Branch if the second word is the "hangman's hood" (0x95)
 0x0baa (0x12ea): (0x18) If var[0x31] == (constant) 0x95 then Goto 0x0bc2
+
+/ Branch if the second word is the "red-gold ring" (0x96)
 0x0bae (0x12ee): (0x18) If var[0x31] == (constant) 0x96 then Goto 0x0bc2
+
+/ Branch if the second word is any other object before the 
+/ "red-gold ring" (0x8c) and print "You can't do that" 
 0x0bb2 (0x12f2): (0x1a) If var[0x31] < (constant) 0x8c then Goto 0x0bba
+
+/ Branch if the second word is one of the collars:
+/ 0x8c : a red collar
+/ 0x8d : an orange collar
+/ 0x8e : a yellow collar
+/ 0x8f : a green collar
+/ 0x90 : a blue collar
+/ 0x91 : a violet collar
+/ 0x92 : a silver collar
+/ 0x93 : a mithril collar
 0x0bb6 (0x12f6): (0x1a) If var[0x31] < (constant) 0x94 then Goto 0x0bdf
+
+/ Player is trying to wear an object that cannot be worn
+
+/ Print "You can't do that" 
 0x0bba (0x12fa): (0x00) Goto 0x15e0
 **************************************************************************
 
@@ -2485,27 +2541,85 @@
 0x1299 (0x19d9): (0x05) Print message (constant) 0x28
 0x129b (0x19db): (0xe2) Set list#2[var[0x1e]] = var[0x44] (list address 0x0740)
 0x129e (0x19de): (0x02) Return
+
 **************************************************************************
+* Check to see if the player is wearing the gauntlet before allowing them to 
+* either take or wear the red-gold ring 
+**************************************************************************
+
+/ Branch if the second word is NOT "a red-gold ring" (0x96)
 0x129f (0x19df): (0x19) If var[0x31] != (constant) 0x96 then Goto 0x12ce
+
+/ Second word is "a red-gold ring" (0x96)
+
+/ Get the current location of the "red-gold ring"
 0x12a3 (0x19e3): (0xa2) Set var[0x45] = list#2[var[0x31]] (list address 0x0740)
+
+/ Branch if the player is in the same location as the ring
 0x12a6 (0x19e6): (0x10) If var[0x43] == var[0x45] then Goto 0x12b8
+
+/ Player is NOT in the same location as the ring
+
+/ Branch if the player is NOT "in a circular room of red-gold metal.
+/ Gold rings cover the floor"
 0x12aa (0x19ea): (0x19) If var[0x43] != (constant) 0xb0 then Goto 0x12ce
+
+/ Player IS "in a circular room of red-gold metal. Gold rings cover the floor"
+/ and the "red-gold ring" is in another location
+
+/ Branch if the player has already picked up the "red-gold ring"
 0x12ae (0x19ee): (0x10) If var[0x5a] == var[0x0b] then Goto 0x12b8
+
+/ Player is in the room with gold rings covering the floor, they have
+/ previously picked up the red-gold ring and put it in another location
+/ or their inventory - don't let them pick up another
+
 / Print message  "The rings dodge "
 0x12b2 (0x19f2): (0x05) Print message (constant) 0x2da
+
+/ TODO
 0x12b5 (0x19f5): (0x00) Goto 0x0149
+
 **************************************************************************
+* Player in the same location as the "red-gold ring" so check if they are
+* wearing the gauntlet to protect themselves from the power of the ring
+**************************************************************************
+
+/ Set the temporary variable to the object id of the gauntlet (0x4d)
 0x12b8 (0x19f8): (0x08) Set var[0x1e] = (constant) 0x4d
+
+/ Get the location of the gauntlet
 0x12bb (0x19fb): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
+
+/ Branch if the player is wearing (0xff) the gauntlet
+/ var[0x08] is the constant 0xff
 0x12be (0x19fe): (0x10) If var[0x1f] == var[0x08] then Goto 0x12c8
+
+/ Player is NOT wearing the gauntlet
+
 / Print message  "The ring grabs your finger and grows rapidly..\nYou shrink rapidly.. "
 0x12c2 (0x1a02): (0x05) Print message (constant) 0x2db
+
+/ Kill the player
 0x12c5 (0x1a05): (0x00) Goto 0x12e7
+
 **************************************************************************
+* Player IS wearing the gauntlet - let them pick it up
+**************************************************************************
+
+/ Set the variable that indicates the player has picked up the ring 
+/ at least once
 0x12c8 (0x1a08): (0x09) Set var[0x5a] = var[0x01]
+
+/ Weirdly set the location of the "red-gold ring" to the player's current 
+/ location (get's changed later to the inventory)
 0x12cb (0x1a0b): (0xe2) Set list#2[var[0x31]] = var[0x43] (list address 0x0740)
+
+/ All done
 0x12ce (0x1a0e): (0x02) Return
+
 **************************************************************************
+
 / Print message  "Gulp! The return blows kill you "
 0x12cf (0x1a0f): (0x05) Print message (constant) 0x35
 0x12d1 (0x1a11): (0x00) Goto 0x12e7
@@ -2525,7 +2639,11 @@
 / Print message  "Your blow is deadly! "
 0x12e2 (0x1a22): (0x05) Print message (constant) 0x34
 0x12e4 (0x1a24): (0x00) Goto 0x0149
+
 **************************************************************************
+* Kill the player
+**************************************************************************
+
 0x12e7 (0x1a27): (0x0a) Set var[0x16] += var[0x01]
 
 / Set the status of the dwarf to NOT following the player (0x00)
