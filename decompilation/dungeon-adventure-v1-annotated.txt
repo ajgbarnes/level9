@@ -54,6 +54,10 @@
 /
 / 0x0b - (Constant) 0x00
 /
+/ 0x11 - Status of the grotesque yellow bird 
+/        0x00 - not scared away
+/        0x01 - scared away so the player can enter the nest and retrieve the large jade egg
+/
 / 0x17 - Player deafness counter (protects the player from the siren after the seeds explode)
 /        0x00         - player can currently hear
 /        0x01 to 0x04 - player is deaf for this number of remaining turns (decrements by 1 each turn)
@@ -173,7 +177,12 @@
 0x002c (0x076c): (0x09) Set var[0x0e] = var[0x0b]
 0x002f (0x076f): (0x09) Set var[0x0f] = var[0x0b]
 0x0032 (0x0772): (0x09) Set var[0x10] = var[0x0b]
+
+/ Initialise the status of the grotesque bloated yellow bird
+/ to be on it's nest (0x00)
+/ var[0x0b] is the constant 0x00
 0x0035 (0x0775): (0x09) Set var[0x11] = var[0x0b]
+
 0x0038 (0x0778): (0x09) Set var[0x12] = var[0x0b]
 0x003b (0x077b): (0x09) Set var[0x13] = var[0x0b]
 0x003e (0x077e): (0x08) Set var[0x14] = (constant) 0xab
@@ -774,9 +783,28 @@
 0x04a2 (0x0be2): (0x11) If var[0x18] != var[0x0b] then Goto 0x04ad
 0x04a6 (0x0be6): (0x19) If var[0x43] != (constant) 0x7d then Goto 0x04ad
 0x04aa (0x0bea): (0x08) Set var[0x4c] = (constant) 0x77
+
+**************************************************************************
+* Check to see if the grotesque bloated yellow bird is on the nest
+**************************************************************************
+
+/ Branch if the grotesque bloated yellow bird is NOT on the nest (0x01)
+/ var[0x0b] is the constant 0x00
 0x04ad (0x0bed): (0x11) If var[0x11] != var[0x0b] then Goto 0x04b8
+
+/ Grotesque bloated yellow bird IS on the nest (0x00)
+
+/ Branch if the player is NOT "below a small mound which is completely dwarfed 
+/ by a huge untidy nest" (0x1a)
 0x04b1 (0x0bf1): (0x19) If var[0x43] != (constant) 0x1a then Goto 0x04b8
+
+/ Player IS "below a small mound which is completely dwarfed by a huge untidy nest"
+
+/ Set the supplementary message to " A grotesque bloated yellow bird with big ears 
+/ squats on the nest" (0x78)
 0x04b5 (0x0bf5): (0x08) Set var[0x4c] = (constant) 0x78
+
+
 0x04b8 (0x0bf8): (0x11) If var[0x19] != var[0x01] then Goto 0x04c3
 0x04bc (0x0bfc): (0x19) If var[0x43] != (constant) 0x33 then Goto 0x04c3
 0x04c0 (0x0c00): (0x08) Set var[0x4c] = (constant) 0x76
@@ -1327,13 +1355,29 @@
 **************************************************************************
 
 0x0a0d (0x114d): (0x01) Gosub 0x129f
+
+/ Branch if the player's current location is NOT "on the celing of a fine
+/ room" (0xc8)
 0x0a10 (0x1150): (0x19) If var[0x43] != (constant) 0xc8 then Goto 0x0a20
+
+/ Branch if the second word is NOT "chandelier" (0xc2)
 0x0a14 (0x1154): (0x19) If var[0x31] != (constant) 0xc2 then Goto 0x0a20
+
+/ Player IS "on the ceiling of a fine room" and the second word IS 
+/ the "chandelier"
+
 / Print message  "The room inverts! "
 0x0a18 (0x1158): (0x05) Print message (constant) 0x3f
+
+/ Change the player's current location to "on the carpetted floor of a 
+/ comfortable homely room, beside a door to the east." (0xc9)
 0x0a1a (0x115a): (0x08) Set var[0x43] = (constant) 0xc9
+
+/ TODO 
 0x0a1d (0x115d): (0x00) Goto 0x0149
+
 **************************************************************************
+
 0x0a20 (0x1160): (0x01) Gosub 0x153b
 0x0a23 (0x1163): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
 0x0a28 (0x1168): (0x12) If var[0x3b] < var[0x4f] then Goto 0x0a3a
@@ -2320,22 +2364,46 @@
 * Command: "hear" or "listen"
 **************************************************************************
 
+/ Branch if the player can currently hear (0x00)
+/ var[0x0b] is the constant 0x00
 0x125e (0x199e): (0x10) If var[0x17] == var[0x0b] then Goto 0x1267
+
+/ Player is deaf
+
 / Print message  "You're temporarily deaf "
 0x1262 (0x19a2): (0x05) Print message (constant) 0x42
+
+/ TODO 
 0x1264 (0x19a4): (0x00) Goto 0x0190
-**************************************************************************
+
+/ Player is temporarily deaf
+
 / Print message  "You can't hear much "
 0x1267 (0x19a7): (0x05) Print message (constant) 0x43
+
+/ TODO
 0x1269 (0x19a9): (0x00) Goto 0x0190
+
 **************************************************************************
+
+/ Branch if the second word is NOT the "seeds" or "pod" or "poppy" (0x89)
 0x126c (0x19ac): (0x19) If var[0x31] != (constant) 0x89 then Goto 0x0190
+
+/ Player IS waving the seed pod
+
 / Print message  "\nSome seeds are dislodged and fall with loud explosions "
 0x1271 (0x19b1): (0x05) Print message (constant) 0x41
+
+/ Set the player to be temporarily deaf for 4 turns
+/ var[0x04] is the constant 0x04
 0x1273 (0x19b3): (0x09) Set var[0x17] = var[0x04]
+
+
 0x1276 (0x19b6): (0x19) If var[0x4c] != (constant) 0x78 then Goto 0x127f
+
 / Print message  ". This sound scares the bird away "
 0x127a (0x19ba): (0x05) Print message (constant) 0x79
+
 0x127c (0x19bc): (0x09) Set var[0x11] = var[0x01]
 0x127f (0x19bf): (0x00) Goto 0x0190
 **************************************************************************
