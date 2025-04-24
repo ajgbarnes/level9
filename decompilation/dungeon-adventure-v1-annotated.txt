@@ -86,6 +86,10 @@
 / 0x37 - Status of the player's eyes
 /        0x00 - closed (cannot see)
 /        0x01 - open (can see and room description will be printed)
+/ 0x3c - Indicates whether the object can be interacted with (TODO)
+/        0x00 - cannot be picked up or worn
+/        0x01 - can be picked up or worn
+/        Reset to 0x01 whenever "What next?" is printed (start of each turn)
 /
 / 0x43 - Player's current location, defaults to "on a mud-bank, nort of a wide river" (0x32)
 / 
@@ -142,6 +146,9 @@
 /    and grows rapidly.. You shrink rapidly.."
 / 12.The red-gold ring has a typo in its location description "A gold rings rolls on the ground" (0x1d7)
 /    Should "A red-gold ring rolls on the ground"
+/ 13.The password at the gatehouse can either be "Password!" or "Agaliarept" (or most truncations of
+/    of this e.g. say pass)
+/ 14.The password can be said multiple times
 
 **************************************************************************
 * A-code entry point
@@ -1601,8 +1608,11 @@
 **************************************************************************
 
 / Check to see if the player is wearing the gauntlet before allowing them to 
-/ wear the red-gold ring 
+/ wear the red-gold ring (will return immediately if the second word is 
+/ not the red-gold ring)
 0x0b81 (0x12c1): (0x01) Gosub 0x129f
+
+
 0x0b84 (0x12c4): (0x01) Gosub 0x15c5
 0x0b87 (0x12c7): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
 
@@ -2941,16 +2951,42 @@
 0x15c1 (0x1d01): (0x05) Print message (constant) 0x28
 0x15c3 (0x1d03): (0x00) Goto 0x157e
 **************************************************************************
+
+/ Branch if the player is trying to pick up something that isn't a NPC
+/ or fixed object or password or number 
 0x15c5 (0x1d05): (0x1a) If var[0x31] < (constant) 0x9b then Goto 0x15cd
+
+/ Player is trying to pick up an NPC or fixed object or password or number
+
 / Print message  "Don't be silly! "
 0x15c9 (0x1d09): (0x05) Print message (constant) 0x06
+
+
+/ Set the variable that indicates the object cannot be worn or picked up 
+/ and return
 0x15cb (0x1d0b): (0x00) Goto 0x15dc
+
 **************************************************************************
+
+/ Get the current location of the object in the second word
 0x15cd (0x1d0d): (0xa2) Set var[0x1f] = list#2[var[0x31]] (list address 0x0740)
+
+/ Branch if the object is already in the inventory (0xfe) or being worn (0xff) 
+/ and just return
 0x15d0 (0x1d10): (0x1b) If var[0x1f] > (constant) 0xfd then Goto 0x15df
+
+/ Branch if the object is in their player's current location and return
+/ (at this point var[0x43] and var[0x44] are the same
 0x15d5 (0x1d15): (0x10) If var[0x1f] == var[0x44] then Goto 0x15df
+
+/ Object is NOT in the player's current location
+
 / Print message  "You can't see it "
 0x15da (0x1d1a): (0x05) Print message (constant) 0x0c
+
+/ Set the flag that indicates they can pick it up or wear it to 
+/ indicate that they cannot (0x00)
+/ var[0x0b] is the constant 0x00
 0x15dc (0x1d1c): (0x09) Set var[0x3c] = var[0x0b]
 0x15df (0x1d1f): (0x02) Return
 **************************************************************************
