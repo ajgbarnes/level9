@@ -772,18 +772,53 @@
 
 / Branch if the player is in a location before "below a sign "Your fate is sealed!" (0xa9)
 / Basically branch if the player is in any of the following locations:
-/ 0xa1 : on a sturdy bridge across a cave
-/ 0xa2 : on a wide ledge between a sturdy bridge and a fissure in the rock. You keep bumping into objects that you can't see
-/ 0xa3 : in a small fissure that narrows as it winds north
-/ 0xa4 : crawling through tiny cracks which lead west and south
-/ 0xa5 : in the strong room. An iron door leads west and a narrow crack splits the east wall
-/ 0xa6 : on cliff steps, broken by rock-falls
-/ 0xa7 : south a vast cavern floor, beside some small grey mushrooms. Tiny footprints lead north
-/ 0xa8 : in a viewing gallery over a deep pit. A chute leads down
+/ 0xa1 :  on a wide ledge outside a tunnel entrance. A wooden bridge leads north across a 
+/         deep cavern and steps lead up and down
+/ 0xa2 : on a sturdy bridge across a cave
+/ 0xa3 : on a wide ledge between a sturdy bridge and a fissure in the rock. You keep bumping into objects that you can't see
+/ 0xa4 : in a small fissure that narrows as it winds north
+/ 0xa5 : crawling through tiny cracks which lead west and south
+/ 0xa6 : in the strong room. An iron door leads west and a narrow crack splits the east wall
+/ 0xa7 : on cliff steps, broken by rock-falls
+/ 0xa8 : south a vast cavern floor, beside some small grey mushrooms. Tiny footprints lead north
+
 0x03d8 (0x0b18): (0x1a) If var[0x43] < (constant) 0xa9 then Goto 0x040a
 
-
+/ BUG: Can never be triggered given the previous if statement
 0x03dc (0x0b1c): (0x1a) If var[0x43] < (constant) 0x36 then Goto 0x03f1
+
+/ Branch if the player's current location is one of the following:
+/ 0xa9 : in a viewing gallery over a deep pit. A chute leads down
+/ 0xaa : below a sign "Your fate is sealed! Your only hope is to descend into the Central Dungeon and collect 9 gems. Succeed and you will be free!"
+/ 0xab : in a dead-end dark room
+/ 0xac : in a dead-end dark room, below a black pedastal
+/ 0xad : in a treasure chamber
+/ 0xae : in the west crusher room beside a door into a treasure chamber
+/ 0xaf : in the east crusher room beside an opening back to the ramp
+/ 0xb0 : in a circular room of red-gold metal. Gold rings cover the floor
+/ 0xb1 : in a dead end, below a gallows tree from which a bloodless corpse hangs by one foot
+/ 0xb2 : on the brink of a deep, dark pit
+/ 0xb3 : in a deep, eerie-dark pit
+/ 0xb4 : in a small soft room between five large round fleshy pillars
+/ 0xb5 : in a dusty room, entered from the west and with a long shelf along the east wall
+/ 0xb6 : in a short east-west corridor
+/ 0xb7 : in a room surfaced with black glass
+/ 0xb8 : in the box room
+/ 0xb9 : in the condemned cell. The only way out is to go west
+/ 0xba : in the guard room. An exit leads north
+/ 0xbb : in the "Skinner box": a blank room with no way out - just nine buttons in a vertical line up one wall. The buttons are numbered 1 to 9 and a discrete notice reads "choose the best"
+/ 0xbc : in the reward room. This is empty too and has only 5 numbered buttons, labelled as follows...
+/ 0xbd : in the statue room. An incomprehensible abstract sculpture of hoops, spirals and loops sprawls around on a small circular platform in the middle of the floor. The entrance is to the west
+/ 0xbe : in an ornate, dead-end room
+/ 0xbf : in the "Exit" chamber. You seem to have survived the Central Dungeon! There is only one way out...
+/ 0xc0 : in an empty room
+/ 0xc1 : in an empty room
+/ 0xc2 : in a treasure vault. A low crawl leads west
+/ 0xc3 : in the Salt Cellar, surrounded by pillars of salt
+/ 0xc4 : 696
+/ 0xc5 : 697
+/ 0xc6 : 698
+/ 0xc7 : 699
 0x03e0 (0x0b20): (0x1a) If var[0x43] < (constant) 0xc8 then Goto 0x040f
 0x03e4 (0x0b24): (0x1a) If var[0x43] < (constant) 0xce then Goto 0x040a
 0x03e8 (0x0b28): (0x1b) If var[0x43] > (constant) 0xd8 then Goto 0x040a
