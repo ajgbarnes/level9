@@ -62,6 +62,9 @@
 /        0x00         - player can currently hear
 /        0x01 to 0x04 - player is deaf for this number of remaining turns (decrements by 1 each turn)
 /
+/ 0x19 - Status of the dryad
+/        0x00 - player has not tried to chop the tree and dryad is still inside
+/        0x01 - dryad has sprung from the tree after the player tried to chop it down
 / 0x1a - Status of the dwarf 
 /        0x00 - not following the player
 /        0x01 - following the player
@@ -74,9 +77,15 @@
 /        0x00 - not smeared on the player
 /        0x01 - smeared on the player
 /
+/ 0x27 - Status of the two evil giants:
+/        0x00 - alive and still in the clearing asleep
+/        0x01 - fought each other and rushed off
 / 0x28 - Indicates whether the skeletons are still guarding the dwarf
 /        0x00 - Stil guarding the dwarf
 /        0x01 - Clanked off after the player waved the staff
+/ 0x29 - Status of the fierce goat 
+/        0x00 - Still standing guard on the cliff
+/        0x01 - Slipped off the cliff
 /
 / 0x30 - matched input word code 1
 / 0x31 - matched input word code 2
@@ -102,6 +111,8 @@
 / 0x43 - Player's current location, defaults to "on a mud-bank, nort of a wide river" (0x32)
 / 0x44 - Player's target location when moving - reset to the player's current location at the start of a turn
 / 0x45 - Temporary variable for holding the location of the red-gold ring 
+/ 0x46 - Number of turns plus 1 that the player has been "within a circle of distored monoliths". When this reaches
+/        3 the Rakshasa appear and play the game with the player.
 /
 / 0x4c - First location supplementary message, can be set to:
 /        0x78 - A grotesque bloated yellow bird with big ears squats on the nest
@@ -117,6 +128,10 @@
 /        4  - if not shrunk and not wearing the belt
 /        10 - if not shrunk and wearing the belt
 /
+/ 0x52 - Status of the siren 
+/        0x00 - stil around 
+/        0x01 - fled in panic
+/ 
 / 0x57 - number of turns/commands entered by the player
 /
 / 0x5c - Status of the gilt miner's helmet with a lamp
@@ -1062,24 +1077,87 @@
 / palm outstretched for payment" (0x107)
 0x0466 (0x0ba6): (0x08) Set var[0x4c] = (constant) 0x107
 
+**************************************************************************
+* Check if player's current location is in the wight house
+**************************************************************************
 
+/ Branch if the player's current location is NOT in the "wight house"
 0x046a (0x0baa): (0x1a) If var[0x43] < (constant) 0x5e then Goto 0x0476
 0x046e (0x0bae): (0x1b) If var[0x43] > (constant) 0x66 then Goto 0x0476
+
+/ Player IS in the "wight house"
+
+/ Set the first supplementary message to "Several wights are trying to get at you" (0x119)
 0x0472 (0x0bb2): (0x08) Set var[0x4c] = (constant) 0x119
+
+**************************************************************************
+* Check if the player is near the evil giants
+**************************************************************************
+
+/ Branch if the evil giants have not fought each other and rushed off (0x01)
+/ var[0x0b] is the constant 0x00
 0x0476 (0x0bb6): (0x11) If var[0x27] != var[0x0b] then Goto 0x0488
+
+/ Giants have NOT fought each other (0x00)
+
+/ Branch if the player's current location is NOT "at the edge of the forest, 
+/ beneath a particularly large tree. You can just glimpse a large clearing to the north." (0x12)
 0x047a (0x0bba): (0x19) If var[0x43] != (constant) 0x12 then Goto 0x0481
+
+/ Player IS "at the edge of the forest, beneath a particularly large tree..." (0x12)
+
+/ Set the first supplementary message to "Two evil giants are asleep in the clearing"(0x44)
 0x047e (0x0bbe): (0x08) Set var[0x4c] = (constant) 0x44
+
+/ Branch if the player's current location is NOT "on a sturdy branch over the clearing" (0x10)
 0x0481 (0x0bc1): (0x19) If var[0x43] != (constant) 0x10 then Goto 0x0488
+
+/ Player IS "on a sturdy branch over the clearing" (0x10)
+
+/ Set the first supplementary message to "Two fierce giants are asleep below"(0x45)
 0x0485 (0x0bc5): (0x08) Set var[0x4c] = (constant) 0x45
+
+**************************************************************************
+* Check if the player's current location is "within a circle of distorted 
+* monoliths" if so, set the turn counter running for when the Rakshasa appear
+**************************************************************************
+
+/ Branch if player's current location is NOT " within a circle of distorted monoliths, etched 
+/ into grotesque figures by the acid rain." (0x17)
 0x0488 (0x0bc8): (0x19) If var[0x43] != (constant) 0x17 then Goto 0x0493
+
+/ Branch if the Rakshasa counter is already running (will appear when this 3)
 0x048c (0x0bcc): (0x11) If var[0x46] != var[0x0b] then Goto 0x0493
+
+/ Set the counter running for the Rakshasa to appear
 0x0490 (0x0bd0): (0x09) Set var[0x46] = var[0x01]
+
+**************************************************************************
+* Check if the siren is in the player's location
+**************************************************************************
+/ Branch if the siren has already fled in panic after the player made themself
+/ deaf with the exploding pods and moved past her
 0x0493 (0x0bd3): (0x11) If var[0x52] != var[0x0b] then Goto 0x04a2
+
+/ Branch if player's current location IS "on an east-west road beside the river and north 
+/ of a flat grassy plain." (0x31) and set the supplementary message to the young girl being there
 0x0497 (0x0bd7): (0x18) If var[0x43] == (constant) 0x31 then Goto 0x049f
+
+/ Player is NOT "on an east-west road beside the river and north of a flat grassy plain." (0x31)
+
+/ Branch if player's current location is NOT "on stepping stones leading north to an island" (0x35)
 0x049b (0x0bdb): (0x19) If var[0x43] != (constant) 0x35 then Goto 0x04a2
+
+/ Player IS "on stepping stones leading north to an island" OR "on an east-west road beside the river...."
+/ Siren is in the location...
+
+/ Set the first supplementary message to "A young girl, with flowing locks, sits on the island" (0x47)
 0x049f (0x0bdf): (0x08) Set var[0x4c] = (constant) 0x47
+
 0x04a2 (0x0be2): (0x11) If var[0x18] != var[0x0b] then Goto 0x04ad
 0x04a6 (0x0be6): (0x19) If var[0x43] != (constant) 0x7d then Goto 0x04ad
+
+/ Set the first supplementary message to "An enormous dragon lies on a golden bed" (0x77)
 0x04aa (0x0bea): (0x08) Set var[0x4c] = (constant) 0x77
 
 **************************************************************************
@@ -1102,14 +1180,27 @@
 / squats on the nest" (0x78)
 0x04b5 (0x0bf5): (0x08) Set var[0x4c] = (constant) 0x78
 
+**************************************************************************
+* Check to see if the dryad has sprung from the tree
+**************************************************************************
 
+/ Branch if the player has not attempted to chop down the tree 
+/ and the dryad has not sprung from it
+/ var[0x01] is the constant 0x01
 0x04b8 (0x0bf8): (0x11) If var[0x19] != var[0x01] then Goto 0x04c3
+
+/ Branch if the player's location is NOT "under the killer-willow tree" (0x33)
 0x04bc (0x0bfc): (0x19) If var[0x43] != (constant) 0x33 then Goto 0x04c3
+
+/ Set the first supplementary message to "A gentle dryad stands beside the tree" (0x76)
 0x04c0 (0x0c00): (0x08) Set var[0x4c] = (constant) 0x76
+
 0x04c3 (0x0c03): (0x19) If var[0x43] != (constant) 0xb1 then Goto 0x04ca
 0x04c7 (0x0c07): (0x09) Set var[0x12] = var[0x01]
 0x04ca (0x0c0a): (0x19) If var[0x43] != (constant) 0x77 then Goto 0x04d5
 0x04ce (0x0c0e): (0x13) If var[0x53] > var[0x02] then Goto 0x04d5
+
+/ Set the first supplementary message to "It's blocked by a slab of rock" (0x7d)
 0x04d2 (0x0c12): (0x08) Set var[0x4c] = (constant) 0x7d
 0x04d5 (0x0c15): (0x19) If var[0x43] != (constant) 0x78 then Goto 0x04e3
 0x04d9 (0x0c19): (0x08) Set var[0x4c] = (constant) 0x7f
@@ -1239,6 +1330,7 @@
 0x064f (0x0d8f): (0x09) Set var[0x37] = var[0x0b]
 0x0652 (0x0d92): (0x09) Set var[0x4e] = var[0x4c]
 0x0655 (0x0d95): (0x02) Return
+
 **************************************************************************
 * Command: any movement including "north", "east", "neast", "northeast".
 *          "south", "southeast", "seast", "west", "southwest", "swest",
