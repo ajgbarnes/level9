@@ -83,9 +83,9 @@
 / 0x32 - matched input word code 3
 / 0x33 - matched input word count 
 / 
-/ 0x37 - Status of the player's eyes
-/        0x00 - closed (cannot see)
-/        0x01 - open (can see and room description will be printed)
+/ 0x37 - Whethere the player can see (either eyes are open/closed or it's dark)
+/        0x00 - eyes are closed OR it's dark with no light (cannot see)
+/        0x01 - eyes are open and there is light (can see and room description will be printed)
 / 0x3c - Indicates whether the object can be interacted with (TODO)
 /        0x00 - cannot be picked up or worn
 /        0x01 - can be picked up or worn
@@ -103,6 +103,8 @@
 / 0x4c - First location supplementary message, can be set to:
 /        0x78 - A grotesque bloated yellow bird with big ears squats on the nest
 /        0x8f - A host of skeletons are guarding a bearded dwarf
+/ 0x4d - Second location supplementary message, can be set to:
+/        0x19 - A faint light shines in
 /        
 /        
 /
@@ -158,6 +160,27 @@
 / 13.The password at the gatehouse can either be "Password!" or "Agaliarept" (or most truncations of
 /    of this e.g. say pass)
 / 14.The password at the gatehouse can be said multiple times
+/ 15. There are four mysterious locations that cannot be accessed in the game each with numbers as decriptions:
+/     0xc4 : 696
+/     0xc5 : 697
+/     0xc6 : 698
+/     0xc7 : 699
+/     ...
+/     0xd9 : 717
+/     0xda : 718
+/     0xdb : 719
+/     Changing var[0x43] to one of those will take you there and you can reach the starting location (0x32) by
+/     going "leave"
+/ 16. There are two special locations with no exits or other locations connecting to them (never set):
+/     0xdc : in Valhalla
+/     0xdd : in Hades
+/ 17. If the player is an an outside location or location that can see the outdoors (location id is less than 0x36)
+/     then the sun will slowly set based on the number of turns the player has had (value of var[0x57])
+/     0x00 - 0x45 - No sun message, assumed to be daylight for the first 69 turns
+/     0x46 - 0x59 - "The sun hangs low in the sky" for turns 70 to 89 
+/     0x5a - 0x63 - "The sun is setting!" for turns 90 to 99
+/     0x64 - 0x64 - "The sun sets!" for the 100th turn
+/     0x65 - .... - No more sun messages but it's dark outside unless the player has a light
 
 **************************************************************************
 * A-code entry point
@@ -270,7 +293,7 @@
 0x00a1 (0x07e1): (0x09) Set var[0x35] = var[0x0b]
 0x00a4 (0x07e4): (0x09) Set var[0x36] = var[0x0b]
 
-/ Reset the status of the player's eyes to closed (0x00)
+/ Reset the status whether the player can see to cannot (0x00)
 / var[0x0b] is the constant 0x00
 0x00a7 (0x07e7): (0x09) Set var[0x37] = var[0x0b]
 0x00aa (0x07ea): (0x09) Set var[0x38] = var[0x0b]
@@ -367,7 +390,9 @@
 / Perform location specific checks 
 0x014c (0x088c): (0x01) Gosub 0x03a3
 
-/ Branch if the player's eyes are open and print the location description
+/ Branch if the player can see and print the location description -
+/ eyes open and there is light (0x01)
+/var[0x01] is the constant 0x01
 0x014f (0x088f): (0x10) If var[0x37] == var[0x01] then Goto 0x015a
 
 / Unused variable set to 0x00 to indicate player cannot see
@@ -753,7 +778,7 @@
 0x03c3 (0x0b03): (0x09) Set var[0x4c] = var[0x0b]
 0x03c6 (0x0b06): (0x09) Set var[0x4d] = var[0x0b]
 
-/ Reset the status of the player's eyes to closed (0x00)
+/ Reset the status that the player cannot see (0x00)
 / (will be worked out later)
 / var[0x0b] is the constant 0x00
 0x03c9 (0x0b09): (0x09) Set var[0x37] = var[0x0b]
@@ -784,7 +809,8 @@
 
 0x03d8 (0x0b18): (0x1a) If var[0x43] < (constant) 0xa9 then Goto 0x040a
 
-/ BUG: Can never be triggered given the previous if statement
+/ Branch if the player is outside or in a location e.g. with windows and work 
+/ out what's happening with the sun
 0x03dc (0x0b1c): (0x1a) If var[0x43] < (constant) 0x36 then Goto 0x03f1
 
 / Branch if the player's current location is one of the following:
@@ -820,32 +846,100 @@
 / 0xc6 : 698
 / 0xc7 : 699
 0x03e0 (0x0b20): (0x1a) If var[0x43] < (constant) 0xc8 then Goto 0x040f
+
+/ Branch if the location is one of the following:
+/ 0xc8 : on the ceiling of a fine room. A chandelier lies beside you and 
+/        the floor of the room is far above
+/ 0xc9 : on the carpetted floor of a comfortable homely room, beside a door 
+/        to the east.
+/ 0xca : in a large store room. You realise that this is_the ideal place to 
+/        any treasures that you_find, so as to get full points for them. 
+/ 0xcb : in a smooth, round north-south passage. A flickering light is visible to the north
+/ 0xcc : at a junction in the round, north-south passage, illuminated by a 
+/        jet of flame from the floor.%To the is a treasure vault, completely filled with valuables of every kind
+/ 0xcc : at a junction in the round, north-south passage, illuminated by a jet of flame from the floor. To the east is a treasure 
+/        vault, completely filled with valuables of every kind
+/ 0xcd : in a north-south passage. A dry red stain spreads from beneath a fallen stone
 0x03e4 (0x0b24): (0x1a) If var[0x43] < (constant) 0xce then Goto 0x040a
+
+/ Branch if the player is in one of the special locations e.g. 
+/ 0xd9 : 717
+/ 0xda : 718
+/ 0xdb : 719
+/ 0xdc : in Valhalla
+/ 0xdd : in Hades
 0x03e8 (0x0b28): (0x1b) If var[0x43] > (constant) 0xd8 then Goto 0x040a
+
+/ Location id is between 0xce and 0xde - in all these locations "A faint light shines in"
+/ 0xce : in a hot alcove, lit by the flames of a fire elemental
+/ 0xcf : in a huge cave of glistering rock. New passages lead north and south
+/ 0xd0 : in a corridor bending south and east
+/ 0xd1 : at the bottom of a deep chasm where the earth has been split assunder by a massive explosion. Narrow cracks lead west and down
+/ 0xd2 : in the right eye-socket of the stone face
+/ 0xd3 : in the left eye-socket of the stone face
+/ 0xd4 : in a wide, smelly passage opening to the outside, high above the river
+/ 0xd5 : in a winding, sticky east-west passage to the outside
+/ 0xd6 : in a winding, sticky east-west passage to the outside
+/ 0xd7 : inside a large wooden box. A small door leads deeper into the box
+/ 0xd8 : in a gloomy cavern, between rows of jagged, pointed stalagmites. A fetid odour drifts from a wide round passage to the north
+
+/ Set the second supplementary message to "A faint light shines in" (0x19)
 0x03ec (0x0b2c): (0x08) Set var[0x4d] = (constant) 0x19
+
+/ TODO 
 0x03ef (0x0b2f): (0x00) Goto 0x0406
+
 **************************************************************************
+* Player is outside, work out the status of the sun based on number of turns
+**************************************************************************
+
+/ Branch if the player has had less than 70 turns (0x46) - no sun status
 0x03f1 (0x0b31): (0x1a) If var[0x57] < (constant) 0x46 then Goto 0x0406
+
+/ Player has had 70 or more turns
+
+/ Set the second supplementary message to "The sun hangs low in the sky" (0x1a)
 0x03f5 (0x0b35): (0x08) Set var[0x4d] = (constant) 0x1a
+
+/ Branch if the player has had less than 90 turns (0x5a) and go with "The sun hangs low in the sky"
 0x03f8 (0x0b38): (0x1a) If var[0x57] < (constant) 0x5a then Goto 0x0406
+
+/ Player has had 90 or more turns
+
+/ Set the second supplementary message to "The sun is setting!"
 0x03fc (0x0b3c): (0x08) Set var[0x4d] = (constant) 0x1b
+
+/ Branch if the player has had less than 100 turns (0x64) and go with "The sun is setting!"
 0x03ff (0x0b3f): (0x1a) If var[0x57] < (constant) 0x64 then Goto 0x0406
+
+/ Player has had 100 or more turns
+
+/ Set the second supplementary message to "The sun sets!"
 0x0403 (0x0b43): (0x08) Set var[0x4d] = (constant) 0x75
+
+/ Branch if the player has had more than 100 turns (0x64) and
+/ and reset the second supplementary message to nothing
 0x0406 (0x0b46): (0x1b) If var[0x57] > (constant) 0x64 then Goto 0x040f
 
-/ Set the status of the player's eyes to "open" (0x01)
+/ Set the status that the player can see as the sun hasn't set yet (0x01)
 / var[0x01] is the constant 0x01
 0x040a (0x0b4a): (0x09) Set var[0x37] = var[0x01]
+
+/ Skip the second supplementary message reset
 0x040d (0x0b4d): (0x00) Goto 0x0412
-**************************************************************************
+
+/ After the 100th turn, reset the second supplementary message to Nothing
+/ var[0x0b] is the constant 0x00
 0x040f (0x0b4f): (0x09) Set var[0x4d] = var[0x0b]
+
+
 0x0412 (0x0b52): (0x08) Set var[0x1e] = (constant) 0x4c
 0x0415 (0x0b55): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
 0x0418 (0x0b58): (0x10) If var[0x1f] == var[0x44] then Goto 0x0420
 0x041c (0x0b5c): (0x12) If var[0x1f] < var[0x07] then Goto 0x0427
 0x0420 (0x0b60): (0x10) If var[0x36] == var[0x0b] then Goto 0x0427
 
-/ Set the status of the player's eyes to "open" (0x01)
+/ Set the status that the player can see (0x01)
 / var[0x01] is the constant 0x01
 0x0424 (0x0b64): (0x09) Set var[0x37] = var[0x01]
 0x0427 (0x0b67): (0x08) Set var[0x1e] = (constant) 0x76
@@ -854,14 +948,14 @@
 0x0431 (0x0b71): (0x12) If var[0x1f] < var[0x07] then Goto 0x043c
 0x0435 (0x0b75): (0x10) If var[0x5c] == var[0x0b] then Goto 0x043c
 
-/ Set the status of the player's eyes to "open" (0x01)
+/ Set the status that the player can see (0x01)
 / var[0x01] is the constant 0x01
 0x0439 (0x0b79): (0x09) Set var[0x37] = var[0x01]
 0x043c (0x0b7c): (0x10) If var[0x1f] == var[0x43] then Goto 0x0442
 0x0440 (0x0b80): (0x00) Goto 0x0445
 **************************************************************************
 
-/ Set the status of the player's eyes to "open" (0x01)
+/ Set the status that the player can see (0x01)
 / var[0x01] is the constant 0x01
 0x0442 (0x0b82): (0x09) Set var[0x37] = var[0x01]
 0x0445 (0x0b85): (0x1a) If var[0x43] < (constant) 0x71 then Goto 0x045e
@@ -871,7 +965,7 @@
 0x0453 (0x0b93): (0x10) If var[0x1f] == var[0x43] then Goto 0x045e
 0x0457 (0x0b97): (0x10) If var[0x1f] == var[0x07] then Goto 0x045e
 
-/ Set the status of the player's eyes to "closed" (0x00)
+/ Set the status that the player cannot see (0x00)
 / var[0x0b] is the constant 0x00
 0x045b (0x0b9b): (0x09) Set var[0x37] = var[0x0b]
 0x045e (0x0b9e): (0x19) If var[0x43] != (constant) 0x9d then Goto 0x046a
@@ -1041,14 +1135,14 @@
 0x0639 (0x0d79): (0x13) If var[0x0f] > var[0x05] then Goto 0x0640
 0x063d (0x0d7d): (0x08) Set var[0x4c] = (constant) 0xdc
 
-/ Branch if the player's eyes are closed (0x00)
+/ Branch if the player cannot see (0x00)
 / var[0x0b] is the constant 0x00
 0x0640 (0x0d80): (0x10) If var[0x37] == var[0x0b] then Goto 0x0647
 0x0644 (0x0d84): (0x09) Set var[0x1d] = var[0x0b]
 0x0647 (0x0d87): (0x13) If var[0x20] > var[0x0b] then Goto 0x064f
 0x064b (0x0d8b): (0x10) If var[0x21] == var[0x0b] then Goto 0x0652
 
-/ Set the status of the player's eyes to "closed" (0x00)
+/ Set the status that the player cannot see (0x00)
 / var[0x0b] is the constant 0x00
 0x064f (0x0d8f): (0x09) Set var[0x37] = var[0x0b]
 0x0652 (0x0d92): (0x09) Set var[0x4e] = var[0x4c]
@@ -1403,7 +1497,7 @@
 0x0947 (0x1087): (0x01) Gosub 0x1488
 0x094a (0x108a): (0x19) If var[0x43] != (constant) 0x3f then Goto 0x0958
 
-/ Branch if the status of the player's eyes is "closed" (0x00)
+/ Branch if the player cannot see (0x00)
 / var[0x0b] is the constant 0x00
 0x094e (0x108e): (0x10) If var[0x37] == var[0x0b] then Goto 0x0958
 
