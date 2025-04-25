@@ -131,6 +131,7 @@
 / 0x52 - Status of the siren 
 /        0x00 - stil around 
 /        0x01 - fled in panic
+/ 0x53 - Number of rocks that the player has pressed when blocked by the slab of rock (0x77)
 / 
 / 0x57 - number of turns/commands entered by the player
 /
@@ -1195,37 +1196,92 @@
 / Set the first supplementary message to "A gentle dryad stands beside the tree" (0x76)
 0x04c0 (0x0c00): (0x08) Set var[0x4c] = (constant) 0x76
 
+**************************************************************************
+* TODO Gallows tree....
+**************************************************************************
+
+/ Branch if the player's current location is NOT "in a dead end, below a gallows tree 
+/ from which a bloodless corpse hangs by one foot" (0xb1)
 0x04c3 (0x0c03): (0x19) If var[0x43] != (constant) 0xb1 then Goto 0x04ca
+
+/ Player IS "...below a gallows tree..."
+
+/ 
 0x04c7 (0x0c07): (0x09) Set var[0x12] = var[0x01]
+
+**************************************************************************
+* Check to see if the player is blocked by a slab of rock
+**************************************************************************
+
+/ Branch if the player's current location is NOT "at a junction in a steeply 
+/ sloping u-shaped passage which leads northeast and northwest. Three round
+/ rocks protrude beside an opening to the east" (0x77)
 0x04ca (0x0c0a): (0x19) If var[0x43] != (constant) 0x77 then Goto 0x04d5
+
+/ Branch if the player has pushed 3 rocks (and removed the slab)
+/ var[0x02] is the constant 0x02
 0x04ce (0x0c0e): (0x13) If var[0x53] > var[0x02] then Goto 0x04d5
+
+/ Player IS "at a junction in a steeply sloping u-shaped passage which leads 
+/ northeast and northwest. Three round rocks protrude beside an opening to the east" (0x78)
 
 / Set the first supplementary message to "It's blocked by a slab of rock" (0x7d)
 0x04d2 (0x0c12): (0x08) Set var[0x4c] = (constant) 0x7d
+
+**************************************************************************
+* Check to see if the player is in the damp hemispherical cave
+**************************************************************************
+
+/ Branch if the player's current location is NOT "in a damp hemispherical cave 
+/ with an opening to the east" (0x78)
 0x04d5 (0x0c15): (0x19) If var[0x43] != (constant) 0x78 then Goto 0x04e3
+
+/ Player IS "in a damp hemispherical cave with an opening to the east" (0x78)
+
+/ Set the first supplementary message to "A boulder rolls on a carpet of moss" (0x7f)
 0x04d9 (0x0c19): (0x08) Set var[0x4c] = (constant) 0x7f
+
+
+**************************************************************************
+
 0x04dc (0x0c1c): (0x10) If var[0x54] == var[0x0b] then Goto 0x04e3
+
+/ Set the first supplementary message to "A mossy lump sits in one corner" (0x80)
 0x04e0 (0x0c20): (0x08) Set var[0x4c] = (constant) 0x80
+
+/ Branch if the player's current location is NOT "" (0x)
 0x04e3 (0x0c23): (0x19) If var[0x43] != (constant) 0xa6 then Goto 0x04ee
 0x04e7 (0x0c27): (0x10) If var[0x0c] == var[0x01] then Goto 0x04ee
 0x04eb (0x0c2b): (0x08) Set var[0x4c] = (constant) 0x86
+
+/ Branch if the player's current location is NOT "" (0x)
 0x04ee (0x0c2e): (0x19) If var[0x43] != (constant) 0xbd then Goto 0x04f9
 0x04f2 (0x0c32): (0x10) If var[0x55] == var[0x0b] then Goto 0x04f9
 0x04f6 (0x0c36): (0x08) Set var[0x4c] = (constant) 0x8a
+
+/ Branch if the player's current location is NOT "" (0x)
 0x04f9 (0x0c39): (0x19) If var[0x43] != (constant) 0x68 then Goto 0x0504
 0x04fd (0x0c3d): (0x10) If var[0x58] == var[0x0b] then Goto 0x0504
 0x0501 (0x0c41): (0x08) Set var[0x4c] = (constant) 0x8d
+
+/ Branch if the player's current location is NOT "" (0x)
 0x0504 (0x0c44): (0x19) If var[0x43] != (constant) 0x7c then Goto 0x050f
 0x0508 (0x0c48): (0x11) If var[0x28] != var[0x0b] then Goto 0x050f
 0x050c (0x0c4c): (0x08) Set var[0x4c] = (constant) 0x8f
+
+/ Branch if the player's current location is NOT "" (0x)
 0x050f (0x0c4f): (0x19) If var[0x43] != (constant) 0x7f then Goto 0x051a
 0x0513 (0x0c53): (0x11) If var[0x5b] != var[0x0b] then Goto 0x051a
 0x0517 (0x0c57): (0x08) Set var[0x4c] = (constant) 0x98
+
+/ Branch if the player's current location is NOT "" (0x)
 0x051a (0x0c5a): (0x19) If var[0x43] != (constant) 0x23 then Goto 0x0525
 0x051e (0x0c5e): (0x11) If var[0x29] != var[0x0b] then Goto 0x0525
 0x0522 (0x0c62): (0x08) Set var[0x4c] = (constant) 0xa3
 0x0525 (0x0c65): (0x10) If var[0x13] == var[0x0b] then Goto 0x054d
 0x0529 (0x0c69): (0x11) If var[0x13] != var[0x04] then Goto 0x0567
+
+/ Branch if the player's current location is NOT "" (0x)
 0x052d (0x0c6d): (0x1b) If var[0x43] > (constant) 0x54 then Goto 0x0546
 0x0531 (0x0c71): (0x1b) If var[0x43] > (constant) 0x3e then Goto 0x0541
 0x0535 (0x0c75): (0x1b) If var[0x43] > (constant) 0x0e then Goto 0x0546
