@@ -103,13 +103,12 @@
 /        0x00 - not being worn
 /        0x01 - being worn
 /
-/ 0x25 - Status of the cold cream (prevents the fire elemental leaping on the player)
-/        0x00 - not smeared on the player
-/        0x01 - smeared on the player
-/
 / 0x24 - Status of the canivorous jelly
 /        0x00 - circling around
 /        0x01 - converged on the corpse that the player threw
+/ 0x25 - Status of the cold cream (prevents the fire elemental leaping on the player)
+/        0x00 - not smeared on the player
+/        0x01 - smeared on the player
 /
 / 0x27 - Status of the two evil giants:
 /        0x00 - alive and still in the clearing asleep
@@ -149,25 +148,33 @@
 / 0x3a - Status of the roc (only changes once per game)
 /        0x00 - has NOT previously carried the player off to its nest
 /        0x00 - HAS not previously carried the player off to its nest
-/ 
-/ 0x3c - Indicates whether the object can be interacted with (TODO)
-/        0x00 - cannot be picked up or worn
-/        0x01 - can be picked up or worn
+/ 0x3b - Number of items that the player is carrying in the inventory
+/ 0x3c - Indicates whether the command was valid e.g. player can move in that direction 
+/        or they do have the object and it's a valid action
+/        0x00 - not a valid action
+/        0x01 - valid action
 /        Reset to 0x01 whenever "What next?" is printed (start of each turn)
+/
+/ 0x3e - Number of items the player is wearing
 /
 / 0x40 - Location of the sticky slime
 /        0x00 - default location "on the floor of a cavern... " (0x36)
 /        0xnn - wherever the pot is dropped after it was filled with slime 
-/        0xfe - in the p    layer's inventory (when the pot is filled)
+/        0xfe - in the player's inventory (when the pot is filled)
 /
 / 0x42 - Status of the troll on the magnificent golden pathway"
 /        0x00 - has NOT been given the medallion
 /        0x01 - HAS been given the medallion
 / 0x43 - Player's current location, defaults to "on a mud-bank, nort of a wide river" (0x32)
 / 0x44 - Player's target location when moving - reset to the player's current location at the start of a turn
-/ 0x45 - Temporary variable for holding the location of the red-gold ring 
+/        Set to 0x00 if the player is not allowed to move in a particular direction by the Exits command
+/ 0x45 - 1. Temporary variable for holding the location of the red-gold ring 
+/        2. Temporary variable for holding the player's target location
 / 0x46 - Number of turns plus 1 that the player has been "within a circle of distored monoliths". When this reaches
 /        3 the Rakshasa appear and play the game with the player.
+/ 0x47 - Status if the mirror has reflected the sleep spell
+/        0x00 - not reflected
+/        0x01 - reflected
 /
 / 0x4b - Status of the rope in the roc's nest
 /        0x00 - not tied to the roc's nest
@@ -185,6 +192,7 @@
 /        0  - if shrunk
 /        4  - if not shrunk and not wearing the belt
 /        10 - if not shrunk and wearing the belt
+/ 0x50 - Exit flags when a player tries to move in a direction from one location to another
 /
 / 0x52 - Status of the siren 
 /        0x00 - stil around 
@@ -281,6 +289,8 @@
 /     of "A skeletal hand reaches from the earth but crumbles to dust" happeneing per turn
 / 22. After progressing past "below a ramp up the outside of the black tower" (0x08) there is a ~159 chance
 /     of being carried off by the roc (only happens once)
+/ 23. If the sleep spell hits the player and they do not have the mirror in "on an east-west road through the forest" (0x16)
+/     then any items they are wearing or in the inventory are removed from the game. Harsh!
 
 **************************************************************************
 * A-code entry point
@@ -487,7 +497,10 @@
 / Set the player's target location to be the same as the current location
 0x0149 (0x0889): (0x09) Set var[0x44] = var[0x43]
 
-/ Perform location specific checks 
+/ Perform location specific checks (again as some statuses would have changed the first
+/ time around - has the consequence of adding 2 to various counters when the location
+/ description is printed e.g. turns spent looking at the myriad of images draining the 
+/ players sanity)
 0x014c (0x088c): (0x01) Gosub 0x03a3
 
 / Branch if the player can see and print the location description -
@@ -505,6 +518,7 @@
 / Perform additional location specific checks skipping the code 
 / that prints the location description
 0x0158 (0x0898): (0x00) Goto 0x0190
+
 **************************************************************************
 
 / Set the variable to the description offset - all location descriptions 
@@ -555,6 +569,8 @@
 
 
 0x0190 (0x08d0): (0x09) Set var[0x44] = var[0x43]
+
+/ Perform location specific checks 
 0x0193 (0x08d3): (0x01) Gosub 0x03a3
 0x0196 (0x08d6): (0x10) If var[0x46] == var[0x0b] then Goto 0x01a6
 0x019a (0x08da): (0x0a) Set var[0x46] += var[0x01]
@@ -1901,39 +1917,137 @@
 *          "jump", "inside", "into", "outside" or "cross"
 **************************************************************************
 
+/ Set the target destination to nowhere (0x00)
+/ var[0x0b] is the constant 0x00
 0x0656 (0x0d96): (0x09) Set var[0x44] = var[0x0b]
+
+/ Set the exit flags to none (0x00)
+/ var[0x0b] is the constant 0x00
 0x0659 (0x0d99): (0x09) Set var[0x50] = var[0x0b]
+
+
+**************************************************************************
+* Process the player going "in" to the packing cases
+**************************************************************************
+
+/ Set the temporary variable to the object id for the packing case (0x88)
 0x065c (0x0d9c): (0x08) Set var[0x1e] = (constant) 0x88
+
+/ Get the current location of the packing case
 0x065f (0x0d9f): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
+
+/ Branch if the first word was MOT matched with "in", "inside" or "into" (0x0b)
 0x0662 (0x0da2): (0x19) If var[0x30] != (constant) 0x0b then Goto 0x0670
+
+/ First word WAS matched with "in", "inside" or "into" (0x0b)
+
+/ Branch if the packing case is NOT in the player's current location 
 0x0666 (0x0da6): (0x11) If var[0x1f] != var[0x43] then Goto 0x067d
+
+/ Packing case IS in the player's current location
+
+/ Set the target destination to "inside a large wooden box. A small door leads deeper into the box"
 0x066a (0x0daa): (0x08) Set var[0x44] = (constant) 0xd7
+
+/ TODO 
 0x066d (0x0dad): (0x00) Goto 0x09e6
+
 **************************************************************************
+* Process going "out" of the large store room to wherever the packing case is
+**************************************************************************
+
+/ Branch if the first word was MOT matched with "out" or "outside" (0x0c)
 0x0670 (0x0db0): (0x19) If var[0x30] != (constant) 0x0c then Goto 0x067d
+
+/ First word WAS matched with "out" or "outside" (0x0c)
+
+/ Branch if the player's current location is NOT "in a large store room. 
+/ You realise that this is the ideal place to leave any treasures that you 
+/ find...." (0xca)
 0x0674 (0x0db4): (0x19) If var[0x43] != (constant) 0xca then Goto 0x067d
+
+/ Player's current location IS "in a large store room. 
+/ You realise that this is the ideal place to leave any treasures that you 
+/ find...." (0xca)
+
+/ Set the target destination to the location of the packing case
 0x0678 (0x0db8): (0x09) Set var[0x44] = var[0x1f]
+
+/ Perform exit checks and valid location checks
 0x067b (0x0dbb): (0x00) Goto 0x068b
+
 **************************************************************************
+* Check to see if the player can move in the required direction from the 
+* current location and give back the target location id and exit flags
+**************************************************************************
+
+/ Check to see if the player can move in the required direction from this location
 0x067d (0x0dbd): (0x0f) Exits - check location var[0x43] can move var[0x30] - exit flags in var[0x50] and target location (or 0x00) in var[0x44]
+
+/ REMINDER
+/ var[0x50] contains the exit flags for the direction that player is trying to move
+/ var[0x44] contains the target location that it would take it to if the a-code allows it
+/ or 0x00 if not allowed
+
+/ Branch if a valid target location was found (player can move there)
+/ var[0x0b] is the constant 0x00
 0x0682 (0x0dc2): (0x13) If var[0x44] > var[0x0b] then Goto 0x068b
+
+/ Player is NOT allowed to move in that direction from the current location
+
 / Print message  "You can't move in that direction\n "
 0x0686 (0x0dc6): (0x05) Print message (constant) 0x20
+
+/ TODO 
 0x0688 (0x0dc8): (0x00) Goto 0x0190
+
 **************************************************************************
+* Check to see if the player can move into the forest clearing
+**************************************************************************
+
+/ Branch if the target destination is NOT "in a forest clearing" (0x11)
 0x068b (0x0dcb): (0x19) If var[0x44] != (constant) 0x11 then Goto 0x0694
+
+/ Target destination IS "in a forest clearing" (0x11)
+
+/ Branch if the status of the two sleeping giants is "alive and still in the clearing asleep" (0x00)
+/ and print "You must be joking!"
+/ var[0x0b] is the constant 0x00
 0x068f (0x0dcf): (0x10) If var[0x27] == var[0x0b] then Goto 0x1611
+
+/ Branch if the target destination is NOT (the second) "on an east-west road through the forest" (0x16)
 0x0694 (0x0dd4): (0x19) If var[0x44] != (constant) 0x16 then Goto 0x06b8
+
+/ Branch if the player has already reflected the sleep spell (0x01)
+/ var[0x0b] is the constant 0x00
 0x0698 (0x0dd8): (0x11) If var[0x47] != var[0x0b] then Goto 0x06b8
+
 / Print message  "A sleep spell hits you! "
 0x069c (0x0ddc): (0x05) Print message (constant) 0x51
+
+/ Set the temporary variable to the object id for the "mirror" (0x7e)
 0x069e (0x0dde): (0x08) Set var[0x1e] = (constant) 0x7e
+
+/ Get the current location of the "mirror"
 0x06a1 (0x0de1): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
+
+/ Branch if the "mirror" is in the player's inventory (0xfe)
+/ var[0x07] is the constant 0xfe
 0x06a4 (0x0de4): (0x10) If var[0x1f] == var[0x07] then Goto 0x06b3
+
+/ Player does NOT have the "mirror"
+
+/ Remove all carried and worn items from the game by setting their location
+/ to the out of game location id (0xe1)
 0x06a8 (0x0de8): (0x01) Gosub 0x145d
+
 / Print message  "You wake on the mud-bank "
 0x06ab (0x0deb): (0x05) Print message (constant) 0x52
+
+/ Set the player's current location to the start location "on a mud-bank...." (0x32)
 0x06ad (0x0ded): (0x08) Set var[0x43] = (constant) 0x32
+
+/ TODO 
 0x06b0 (0x0df0): (0x00) Goto 0x0149
 **************************************************************************
 / Print message  "But your mirror reflects it! You hear snoring from the south "
@@ -3771,14 +3885,34 @@
 0x1455 (0x1b95): (0x0a) Set var[0x31] += var[0x01]
 0x1458 (0x1b98): (0x1a) If var[0x31] < (constant) 0x9b then Goto 0x144b
 0x145c (0x1b9c): (0x02) Return
+
 **************************************************************************
+* Loop through ALL the objects in the players inventory and remove them 
+* from the game
+**************************************************************************
+
+/ Set the second word to the "axe" (0x46), the first game object
 0x145d (0x1b9d): (0x08) Set var[0x31] = (constant) 0x46
+
+/ Get the current location of the "axe" (0x46)
 0x1460 (0x1ba0): (0xa2) Set var[0x1f] = list#2[var[0x31]] (list address 0x0740)
+
+/ Branch if the axe is NOT in the player's inventory (0xfe)
+/ var[0x07] is the constant 0xfe
 0x1463 (0x1ba3): (0x12) If var[0x1f] < var[0x07] then Goto 0x1469
+
+/ Remove the object from the game by setting its location to 0xe1
 0x1467 (0x1ba7): (0x01) Gosub 0x1488
+
+/ Move to the next game object
 0x1469 (0x1ba9): (0x0a) Set var[0x31] += var[0x01]
+
+/ Loop back around until all objects have been processed 
 0x146c (0x1bac): (0x1a) If var[0x31] < (constant) 0x9b then Goto 0x1460
+
+/ All done
 0x1470 (0x1bb0): (0x02) Return
+
 **************************************************************************
 0x1471 (0x1bb1): (0x08) Set var[0x31] = (constant) 0x46
 0x1474 (0x1bb4): (0xa2) Set var[0x1f] = list#2[var[0x31]] (list address 0x0740)
@@ -3788,59 +3922,210 @@
 0x1480 (0x1bc0): (0x0a) Set var[0x31] += var[0x01]
 0x1483 (0x1bc3): (0x1a) If var[0x31] < (constant) 0x9b then Goto 0x1474
 0x1487 (0x1bc7): (0x02) Return
-**************************************************************************
+
+*************************************************************************
+* Remove the item from the game (either the player's carried items or 
+* worn items) and print an approrpiate message 
+*************************************************************************
+
+/ Get the current location of the object in the second word
 0x1488 (0x1bc8): (0xa2) Set var[0x1f] = list#2[var[0x31]] (list address 0x0740)
+
+/ Set it's current location to out of game (0xe1)
+/ var[0x09] is the constant 0xe9
 0x148b (0x1bcb): (0xe2) Set list#2[var[0x31]] = var[0x09] (list address 0x0740)
+
+/ Branch if its location was in the player's inventory (0xfe)
+/ var[0x07] is the constant 0xfe
 0x148e (0x1bce): (0x10) If var[0x1f] == var[0x07] then Goto 0x14a6
+
+/ Branch if its location was NOT being worn by the player (0xff)
+/ var[0x08] is the constant 0xff
 0x1492 (0x1bd2): (0x11) If var[0x1f] != var[0x08] then Goto 0x14ad
+
+/ Branch if the player is not wearing any items
 0x1496 (0x1bd6): (0x10) If var[0x3e] == var[0x0b] then Goto 0x149d
-0x149a (0x1bda): (0x0b) Set var[0x3e] -= var[0x01].
+
+/ Player is wearing at least one item
+
+/ Decrement the number of items the player is wearing 
+0x149a (0x1bda): (0x0b) Set var[0x3e] -= var[0x01]
+
+/ Branch if the item being put out of the game is NOT the "good strong belt" (0x79)
 0x149d (0x1bdd): (0x19) If var[0x31] != (constant) 0x79 then Goto 0x14a4
+
+/ Object being put out of the game IS the "good strong belt" (0x79)
+
+/ Reset the inventory size to 0x04
+/ var[0x04] is the constant 0x04
 0x14a1 (0x1be1): (0x09) Set var[0x4f] = var[0x04]
+
+/ Skip over decrementing the carried items as the player was wearing the item
 0x14a4 (0x1be4): (0x00) Goto 0x14ad
-**************************************************************************
+
+/ Branch if the player is not carrying any items (0x00)
+/ var[0x0b] is the constant 0x00
 0x14a6 (0x1be6): (0x10) If var[0x3b] == var[0x0b] then Goto 0x14ad
-0x14aa (0x1bea): (0x0b) Set var[0x3b] -= var[0x01].
+
+/ Player is carrying at least one item
+
+/ Decrement the number of items the player is carrying
+0x14aa (0x1bea): (0x0b) Set var[0x3b] -= var[0x01]
+
+**************************************************************************
+* Check to see if the player dropped or threw the pod onto the sleeping giants
+**************************************************************************
+
+/ Branch if the first word WAS "drop" (0x29)
 0x14ad (0x1bed): (0x18) If var[0x30] == (constant) 0x29 then Goto 0x14b5
+
+/ Branch if the first word was NOT "throw" or "hurl" (0x2b)
 0x14b1 (0x1bf1): (0x19) If var[0x30] != (constant) 0x2b then Goto 0x14f2
+
+/ First word was "throw" or "hurl" (0x2b) or "drop" (0x29)
+
+/ Branch if the first location supplementary message is NOT "Two fierce
+/ giants are asleep below" (0x45)
 0x14b5 (0x1bf5): (0x19) If var[0x4c] != (constant) 0x45 then Goto 0x14c1
+
+/ Two giants are asleep below
+
 / Print message  "It hits one giant, waking him. Seeing no other source for the attack, he attacks the other and they rush off, fighting "
 0x14b9 (0x1bf9): (0x05) Print message (constant) 0x46
+
+/ Set the status of the two evil giants to "fought each other and rushed off" (0x01)
+/ var[0x01] is the constant 0x01
 0x14bb (0x1bfb): (0x09) Set var[0x27] = var[0x01]
+
+/ Set the target destination to "in a forest clearing" (0x11)
+/ (move the player there)
 0x14be (0x1bfe): (0x08) Set var[0x44] = (constant) 0x11
+
+**************************************************************************
+* Check to see if the player dropped or threw the pot
+**************************************************************************
+/ Branch if the second word is NOT the "pot" (0x52)
 0x14c1 (0x1c01): (0x19) If var[0x31] != (constant) 0x52 then Goto 0x14d6
+
+/ Second word IS the pot
+
 / Print message  "\nThe pot shatters "
 0x14c5 (0x1c05): (0x05) Print message (constant) 0xa6
+
+/ Cache the player's target location (which is the 
+/ same at this point as the current location)
 0x14c7 (0x1c07): (0x09) Set var[0x45] = var[0x44]
+
+/ Set the target location to the out of game location id (0xe1). Also,
+/ why? It gets reset to the player's current location but no processing 
+/ checks against 0xe1 
+/ BUG? Why not use the var[0x09] the constant 0xe1
+/ BUG? Redundant code?
 0x14ca (0x1c0a): (0x08) Set var[0x44] = (constant) 0xe1
+
+/ Branch if the location of the sticky slime is NOT in its default location (0x00)
 0x14cd (0x1c0d): (0x10) If var[0x40] == var[0x0b] then Goto 0x14d6
+
+/ Slime is in the pot (oxfe)
+
 / Print message  ", and slime oozes out "
 0x14d1 (0x1c11): (0x05) Print message (constant) 0xa7
+
+/ Set the location of the slime to the player's target location (which is the 
+/ same at this point as the current location)
 0x14d3 (0x1c13): (0x09) Set var[0x40] = var[0x45]
+
+**************************************************************************
+* Check to see if the player dropped or threw the elephant brooch
+**************************************************************************
+
+/ Branch if the second word is NOT the "elephant brooch" (0x86)
 0x14d6 (0x1c16): (0x19) If var[0x31] != (constant) 0x86 then Goto 0x14f2
+
+/ Set the target location to the out of game location id (0xe1). Also,
+/ why? It gets reset to the player's current location but no processing 
+/ checks against 0xe1 
+/ var[0x09] is the constant 0xe1
 0x14da (0x1c1a): (0x09) Set var[0x44] = var[0x09]
+
+/ Branch if the player's current location is after the outdoor locations
 0x14dd (0x1c1d): (0x1b) If var[0x44] > (constant) 0x35 then Goto 0x14e6
+
+/ Outdoor location - roc will take the elephant
+
 / Print message  "As the elephant grows, a roc swoops and carries it off "
 0x14e1 (0x1c21): (0x05) Print message (constant) 0x111
+
+/ Skip ahead past the rest of the elephant checks 
 0x14e4 (0x1c24): (0x00) Goto 0x14f2
+
 **************************************************************************
+
 / Print message  "The elephant tries to grow to full size but there's no room. It implodes "
 0x14e6 (0x1c26): (0x05) Print message (constant) 0x112
+
+/ Branch if the player's current location is NOT "in the condemned cell" (0xb9)
 0x14e9 (0x1c29): (0x19) If var[0x43] != (constant) 0xb9 then Goto 0x14f2
+
+/ Elephant kills the executioner
+
 / Print message  ". The executioner has been flattened "
 0x14ed (0x1c2d): (0x05) Print message (constant) 0xf8
+
+/ Set the status of the executioner to out of the game (0xe1)
+/ var[0x09] is the constant 0xe1
 0x14ef (0x1c2f): (0x09) Set var[0x2c] = var[0x09]
+
+**************************************************************************
+* 
+**************************************************************************
+
+/ Branch if the second word is NOT the "corpse" or "body" (0x49)
 0x14f2 (0x1c32): (0x19) If var[0x31] != (constant) 0x49 then Goto 0x1502
+
+/ Branch if the player's target location (same as current) is NOT "in a 
+/ tall cavern with a large central fireplace and a wide brick chimney 
+/ leading upwards" (0x80)
 0x14f6 (0x1c36): (0x19) If var[0x44] != (constant) 0x80 then Goto 0x1502
+
+/ Player IS in the "tall cavern..."
+
 / Print message  "The jellies converge onto it "
 0x14fa (0x1c3a): (0x05) Print message (constant) 0xea
+
+/ Set the status of the carnivorous jelly to "converged on the corpse" (0x01)
+/ var[0x01] is the constant 0x01
 0x14fc (0x1c3c): (0x09) Set var[0x24] = var[0x01]
+
+/ Set the target location to the out of game location id (0xe1). Also,
+/ why? It gets reset to the player's current location but no processing 
+/ checks against 0xe1 
+/ var[0x09] is the constant 0xe1
 0x14ff (0x1c3f): (0x09) Set var[0x44] = var[0x09]
+
+/ Branch if the second word is NOT a colour
+/ 0x8d : ORANGE
+/ 0x8e : YELLOW
+/ 0x8f : GREEN
+/ 0x90 : BLUE
+/ 0x91 : VIOLET
+/ 0x91 : INDIGO
+/ 0x92 : SILVER
 0x1502 (0x1c42): (0x1a) If var[0x31] < (constant) 0x8c then Goto 0x1514
 0x1506 (0x1c46): (0x1b) If var[0x31] > (constant) 0x93 then Goto 0x1514
+
+/ Second word IS a colour
+
+/ Get the current location of the <colourin the second word> collar
 0x150a (0x1c4a): (0xa2) Set var[0x1f] = list#2[var[0x31]] (list address 0x0740)
+
+/ Branch if the player is NOT waring the collar (0xff)
+/ var[0x09] is the constant 0xff
 0x150d (0x1c4d): (0x12) If var[0x1f] < var[0x08] then Goto 0x1514
+
+/ TODO
 0x1511 (0x1c51): (0x09) Set var[0x0a] = var[0x0b]
+
 0x1514 (0x1c54): (0x19) If var[0x31] != (constant) 0x48 then Goto 0x151b
 0x1518 (0x1c58): (0x09) Set var[0x21] = var[0x0b]
 0x151b (0x1c5b): (0x1a) If var[0x43] < (constant) 0x2f then Goto 0x153a
@@ -3981,11 +4266,20 @@
 0x1609 (0x1d49): (0x05) Print message (constant) 0x06
 0x160b (0x1d4b): (0x09) Set var[0x3c] = var[0x0b]
 0x160e (0x1d4e): (0x00) Goto 0x0190
+
 **************************************************************************
+* Print you must be joking
+**************************************************************************
+
 / Print message  "You must be joking! "
 0x1611 (0x1d51): (0x05) Print message (constant) 0x23
+
+/ Set the indicator to show it was not a valid action
 0x1613 (0x1d53): (0x09) Set var[0x3c] = var[0x0b]
+
+/ TODO
 0x1616 (0x1d56): (0x00) Goto 0x0190
+
 **************************************************************************
 / Print message  "You can't see it "
 0x1619 (0x1d59): (0x05) Print message (constant) 0x0c
