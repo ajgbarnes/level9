@@ -53,10 +53,27 @@
 / 0x09 - (Constant) Location code for when an item is removed from the game (0xe1)
 /
 / 0x0b - (Constant) 0x00
+/ 0x0c - Status of the iron door in the strong room 
+/        0x00 - closed and bolted
+/        0x01 - unbolted and open
 /
+/ 0x0e - Status of the ants
+/        0x00 - player has not grown huge and trodden on the giant ants
+/        0x01 - player HAS grown huge and trodden on the giant ants
+/ 
 / 0x11 - Status of the grotesque yellow bird 
 /        0x00 - not scared away
 /        0x01 - scared away so the player can enter the nest and retrieve the large jade egg
+/
+/ 0x13 - Status of the boulder rolling down from above (decrements by one each turn when rolling)
+/        0x00 - not rolling at the player
+/        0x01 - "Sounds of a boulder echo up from below" if the player hid in the brink of a deep, dark pit (0xb2)
+/        0x02 - "Sounds of a boulder echo up from below" if the player hid in the brink of a deep, dark pit (0xb2)
+/        0x03 - "Sounds of a boulder echo up from below" if the player hid in the brink of a deep, dark pit (0xb2)
+/        0x04 - player will be dead if not in a safe location
+/               "Sounds of a boulder echo up from below" if the player hid in the brink of a deep, dark pit (0xb2)
+/        0x05 - one more turn before the boulder either passes or kills the player
+/        0x06 - boulder has started rolling, two more turns until it passes or kills the player
 /
 / 0x17 - Player deafness counter (protects the player from the siren after the seeds explode)
 /        0x00         - player can currently hear
@@ -69,6 +86,10 @@
 /        0x00 - not following the player
 /        0x01 - following the player
 /
+/ 0x1c - Status of the main door north of the bridge  on a narrow north-south bridge (0x2a)
+/        0x00 - shut
+/        0x01 - open
+/
 / 0x1e - Index into list#1 for setting object initial locations
 /      - Used as an index for looking up the current location of an object
 / 0x1f - Used to hold the current location of an object
@@ -76,6 +97,10 @@
 / 0x25 - Status of the cold cream (prevents the fire elemental leaping on the player)
 /        0x00 - not smeared on the player
 /        0x01 - smeared on the player
+/
+/ 0x24 - Status of the canivorous jelly
+/        0x00 - circling around
+/        0x01 - converged on the corpse that the player threw
 /
 / 0x27 - Status of the two evil giants:
 /        0x00 - alive and still in the clearing asleep
@@ -87,12 +112,19 @@
 /        0x00 - Still standing guard on the cliff
 /        0x01 - Slipped off the cliff
 /
-/ 0x30 - matched input word code 1
-/ 0x31 - matched input word code 2
-/ 0x32 - matched input word code 3
-/ 0x33 - matched input word count 
+/ 0x2d - Status of the rotting bridge / psychedlic mushroom
+/        0x00 - player has NOT eaten the psychedlic mushroom and can still only see the rotting bridge
+/        0x01 - player HS eaten the psychedlic mushroom and can see a fine golden pathway
+/
+/ 0x30 - Matched input word code 1
+/ 0x31 - Matched input word code 2
+/ 0x32 - Matched input word code 3
+/ 0x33 - Matched input word count 
+/ 0x34 - Whether the player is invisible - eating the mushroom will make them invisible for 9 turns
+/        0x00         - can be seen 
+/        0x01 to 0x09 - invisible
 / 
-/ 0x37 - Whethere the player can see (either eyes are open/closed or blindfolded or it's dark)
+/ 0x37 - Whether the player can see (either eyes are open/closed or blindfolded or it's dark)
 /        0x00 - eyes are closed OR it's dark with no light (cannot see)
 /        0x01 - eyes are open, not blindfolded and there is light (can see and room description will be printed)
 / 0x3c - Indicates whether the object can be interacted with (TODO)
@@ -114,6 +146,9 @@
 / 0x46 - Number of turns plus 1 that the player has been "within a circle of distored monoliths". When this reaches
 /        3 the Rakshasa appear and play the game with the player.
 /
+/ 0x4b - Status of the rope in the roc's nest
+/        0x00 - not tied to the roc's nest
+/        0x01 - tied to the roc's nest
 / 0x4c - First location supplementary message, can be set to:
 /        0x78 - A grotesque bloated yellow bird with big ears squats on the nest
 /        0x8f - A host of skeletons are guarding a bearded dwarf
@@ -132,13 +167,24 @@
 /        0x00 - stil around 
 /        0x01 - fled in panic
 / 0x53 - Number of rocks that the player has pressed when blocked by the slab of rock (0x77)
-/ 
+/ 0x53 - Status of the boulder in the damp hemispherical cave
+/        0x00 - Not pushed, moss still on walls and floro
+/        0x01 - Pushed, exit open and moss in a lump in the corner
+/
+/ 0x55 - Status of the statue int he statue room
+/        0x00 - not turned
+/        0x01 - turned and opening east revealed
+/
 / 0x57 - number of turns/commands entered by the player
 /
+/ 0x5b - Status of the vampire
+/        0x00 - still alive (or undead)
+/        0x01 - killed by the wooden cross
 / 0x5c - Status of the gilt miner's helmet with a lamp
 /        0x00 - unlit and wisp not captured
 /        0x01 - wisp captured in lamp and gives ever lasting light
-/ 0x5d - Location description id to print - calculated a location id + 0x1f4
+/ 0x5d - 1. Location description id to print - calculated a location id + 0x1f4
+/        2. Random number for determining if a boulder will roll at the player if on the straight or winding stairs
 / 0x5e - Number of crosses / crucifixes carried. Player needs 1 to stop the vampire biting them
 /        and two to keep the wights back
 /
@@ -205,6 +251,8 @@
 /     0x65 - .... - No more sun messages but it's dark outside unless the player has a light
 / 18. BUG - if the player is in the same location as the "gilt miner's helmet with a lamp" they will be able to see
 /     if the helmet has not captured the wisp yet - if they pick it up they won't be able to see. (0x043c)
+/ 19. Player has a ~5% chance of a boulder rolling at them on the winding / straight stairs
+/ 20. Eating the mushroom on the wide ledge beween a sturdy bridge and a fissure in the rock, makes the player invisible for 9 turns
 
 **************************************************************************
 * A-code entry point
@@ -1243,102 +1291,426 @@
 
 
 **************************************************************************
+* Check to see if the player has pushed the boulder in the damp hemispherical cave
+**************************************************************************
 
+/ Branch if the player has NOT already pushed the boulder (0x00) in the damp hemispherical
+/ cave to move the moss into a mossy lump in one corner and open the entrance
+/ var[0x0b] is the constant 0x01
 0x04dc (0x0c1c): (0x10) If var[0x54] == var[0x0b] then Goto 0x04e3
+
+/ Player HAS pushed the boulder
 
 / Set the first supplementary message to "A mossy lump sits in one corner" (0x80)
 0x04e0 (0x0c20): (0x08) Set var[0x4c] = (constant) 0x80
 
-/ Branch if the player's current location is NOT "" (0x)
+**************************************************************************
+* Check to see if the player has opened the door in the strong room
+**************************************************************************
+
+/ Branch if the player's current location is NOT "in the strong room. 
+/ An iron door leads west and a narrow crack splits the east wall" (0xa6)
 0x04e3 (0x0c23): (0x19) If var[0x43] != (constant) 0xa6 then Goto 0x04ee
+
+/ Branch if the iron door bolt is NOT slid back and the door opened (0x00)
+/ var[0x0b] is the constant 0x00
 0x04e7 (0x0c27): (0x10) If var[0x0c] == var[0x01] then Goto 0x04ee
+
+/ Door still closed 
+
+/ Set the first supplementary message to "The door is bolted" 0x86
 0x04eb (0x0c2b): (0x08) Set var[0x4c] = (constant) 0x86
 
-/ Branch if the player's current location is NOT "" (0x)
+**************************************************************************
+* Check to see if the player has turned the statue in the statue room
+**************************************************************************
+
+/ Branch if the player's current location is NOT "in the statue room...." (0xbd)
 0x04ee (0x0c2e): (0x19) If var[0x43] != (constant) 0xbd then Goto 0x04f9
+
+/ Branch if the player has NOT yet turned the statue (0x00)
+/ var[0x0b] is the constant 0x00
 0x04f2 (0x0c32): (0x10) If var[0x55] == var[0x0b] then Goto 0x04f9
+
+/ Player HAS turned the statue (0x01)
+
+/ Set the first supplementary message to "An opening leads east" (0x8a)
 0x04f6 (0x0c36): (0x08) Set var[0x4c] = (constant) 0x8a
 
-/ Branch if the player's current location is NOT "" (0x)
+**************************************************************************
+* TODO throne room
+**************************************************************************
+
+/ Branch if the player's current location is NOT "n a long throne room lined with skin..." (0x68)
 0x04f9 (0x0c39): (0x19) If var[0x43] != (constant) 0x68 then Goto 0x0504
+
+/ TODO 
+/ var[0x0b] is the constant 0x00
 0x04fd (0x0c3d): (0x10) If var[0x58] == var[0x0b] then Goto 0x0504
+
+/ Set the first supplementary message to "There is a square pit in the floor" (0x8d)
 0x0501 (0x0c41): (0x08) Set var[0x4c] = (constant) 0x8d
 
-/ Branch if the player's current location is NOT "" (0x)
+**************************************************************************
+* Check to see if the skeletons are still guarding the dwarf
+**************************************************************************
+
+/ Branch if the player's current location is NOT "in the lower chamber. There are 6 exits" (0x7c)
 0x0504 (0x0c44): (0x19) If var[0x43] != (constant) 0x7c then Goto 0x050f
+
+/ Branch if the player HAS waved the staff and the skeletons have clanked off leaving the dwarf
+/ var[0x0b] is the constant 0x00
 0x0508 (0x0c48): (0x11) If var[0x28] != var[0x0b] then Goto 0x050f
+
+/ Player has NOT waved the staff (0x00)
+
+/ Set the first supplementary message to "A host of skeletons are guarding a bearded dwarf" (0x8f)
 0x050c (0x0c4c): (0x08) Set var[0x4c] = (constant) 0x8f
 
-/ Branch if the player's current location is NOT "" (0x)
+**************************************************************************
+* Check to see if the vampire is still alive
+**************************************************************************
+
+/ Branch if the player's current location is NOT "at a tight junction above a narrow pit" (0x7f)
 0x050f (0x0c4f): (0x19) If var[0x43] != (constant) 0x7f then Goto 0x051a
+
+/ Branch if the player HAS killed the vampire (0x01)
+/ var[0x0b] is the constant 0x00
 0x0513 (0x0c53): (0x11) If var[0x5b] != var[0x0b] then Goto 0x051a
+
+/ Player has NOT killed the vampire (0x00)
+
+/ Set the first supplementary message to "A vampire cowers back" (0x98)
 0x0517 (0x0c57): (0x08) Set var[0x4c] = (constant) 0x98
 
-/ Branch if the player's current location is NOT "" (0x)
+**************************************************************************
+* Check to see if fierce goat is still on guard
+**************************************************************************
+
+/ Branch if the player's current location is NOT "on a smooth rock dome, below a narrow path" (0x23)
 0x051a (0x0c5a): (0x19) If var[0x43] != (constant) 0x23 then Goto 0x0525
+
+/ Player IS "on a smooth rock dome, below a narrow path"
+
+/ Branch if the goat has slipped off the cliff (0x01)
+/ var[0x0b] is the constant 0x00
 0x051e (0x0c5e): (0x11) If var[0x29] != var[0x0b] then Goto 0x0525
+
+/ Goat is stil guarding (0x00)
+
+/ Set the first supplementary message to "A fierce goat is on guard" (0xa3)
 0x0522 (0x0c62): (0x08) Set var[0x4c] = (constant) 0xa3
+
+**************************************************************************
+* Check to see if the boulder is rolling down from above
+**************************************************************************
+
+/ If the boulder is rolling down, they are only in a safe location if:
+/ 1. There are in location "in a gully above the "winding stairs" (0x0c)
+/ 2. On the ramps, they can go in to "on the brink of a deep, dark pit" (0xb2)
+/ 3. Location id is after ramps (after 0x54)
+
+/ Branch if the boulder is NOT rolling down towards the player (0x00)
+/ var[0x0b] is the constant 0x00
 0x0525 (0x0c65): (0x10) If var[0x13] == var[0x0b] then Goto 0x054d
+
+/ Branch if the boulder is NOT on top of the player (0x04)
+/ var[0x04] is the constant 0x04
 0x0529 (0x0c69): (0x11) If var[0x13] != var[0x04] then Goto 0x0567
 
-/ Branch if the player's current location is NOT "" (0x)
+/ Branch if the player's current location is AFTER "on a massive spiral ramp 
+/ which twists down into dark waters and up into the gloom above" (0x54) as
+/ the player will be safe from the boulder
 0x052d (0x0c6d): (0x1b) If var[0x43] > (constant) 0x54 then Goto 0x0546
+
+/ Branch if the player's current location IS in one of the ramp 
+/ locations (0x3f to 0x54) - player will be killed 
 0x0531 (0x0c71): (0x1b) If var[0x43] > (constant) 0x3e then Goto 0x0541
+
+/ Branch if the player is NOT on the windings / straight stairs (they 
+/ will be safe)
 0x0535 (0x0c75): (0x1b) If var[0x43] > (constant) 0x0e then Goto 0x0546
 0x0539 (0x0c79): (0x1a) If var[0x43] < (constant) 0x09 then Goto 0x0546
+
+/ Branch if the player IS " in a gully above the "winding stairs"" (0x0c)
+/ (they will be safe)
 0x053d (0x0c7d): (0x18) If var[0x43] == (constant) 0x0c then Goto 0x0546
+
+/ Player was in one of the following locations so will be killed by the boulder:
+/ 0x09 : at the top of the "straight stairs", a short distance below a gate-house
+/ 0x0a : half-way up the "straight stairs"
+/ 0x0b : below the "straight stairs"
+/ 0x0d : on the "winding stairs", carved into exposed rock
+/ 0x0e : on the "winding stairs", leading across a vertical slab of exposed rock
+/ 0x3f : on a wide spiral ramp which descends clockwise round an immense pit.....
+/ 0x40 : on the ramp....
+/ to   : on the ramp....
+/ 0x4e : on the ramp....
+/ 0x4f : You are on deadly slime, slipping towards the edge of the ramp
+/ 0x50 : on the ramp....
+/ to   : on the ramp....
+/ 0x53 : on the ramp....
+/ 0x54 : on a massive spiral ramp...
+
 / Print message  "\nThe boulder gets you! "
 0x0541 (0x0c81): (0x05) Print message (constant) 0xb6
+
+/ Kill the player
 0x0543 (0x0c83): (0x00) Goto 0x12e7
-**************************************************************************
+
 / Print message  "\nYou're safe when the boulder passes\n "
 0x0546 (0x0c86): (0x05) Print message (constant) 0xb7
+
+/ Set the boulder status to having passed the player safely (0x03)
+/ var[0x03] is the constant 0x03
 0x0548 (0x0c88): (0x09) Set var[0x13] = var[0x03]
+
+/ Move to the next location check
 0x054b (0x0c8b): (0x00) Goto 0x0567
+
 **************************************************************************
+* Check to see if a boulder will start rolling down towards the player
+**************************************************************************
+
+/ Bouder will roll towards a player if:
+/ 1. They are "on a loose section of the ramp" (0x43) 
+/ 2. They are "on a wobbly section of the ramp" (0x45)
+/ 3. They are on the straight / winding stairs (0x09 to 0x0f) and the random number is less than < 0x15
+/    (a 5% chance)
+
+/ Branch if the player is "on a loose section of the ramp" (0x43) and set 
+/ a boulder rolling at them 
 0x054d (0x0c8d): (0x18) If var[0x43] == (constant) 0x43 then Goto 0x0564
+
+/ Branch if the player is "on a wobbly section of the ramp" (0x45) and set 
+/ a boulder rolling at them 
 0x0551 (0x0c91): (0x18) If var[0x43] == (constant) 0x45 then Goto 0x0564
+
+/ Branch if the player is NOT on the straight / winding stairs (0x09 to 0x0f)
+/ 0x09 : at the top of the "straight stairs", a short distance below a gate-house
+/ 0x0a : half-way up the "straight stairs"
+/ 0x0b : below the "straight stairs"
+/ 0x0c : in a gully above the "winding stairs"
+/ 0x0d : on the "winding stairs", carved into exposed rock
+/ 0x0e : on the "winding stairs", leading across a vertical slab of exposed rock
+/ 0x0f : in a sheltered gully below a winding staircase
 0x0555 (0x0c95): (0x1a) If var[0x43] < (constant) 0x09 then Goto 0x0567
 0x0559 (0x0c99): (0x1b) If var[0x43] > (constant) 0x0f then Goto 0x0567
+
+/ Player IS in one of the following:
+/ 0x09 : at the top of the "straight stairs", a short distance below a gate-house
+/ 0x0a : half-way up the "straight stairs"
+/ 0x0b : below the "straight stairs"
+/ 0x0c : in a gully above the "winding stairs"
+/ 0x0d : on the "winding stairs", carved into exposed rock
+/ 0x0e : on the "winding stairs", leading across a vertical slab of exposed rock
+/ 0x0f : in a sheltered gully below a winding staircase
+
+/ Calculate a random number for the boulder rolling down
 0x055d (0x0c9d): (0x06) Function - Random - Set var[0x5d]=<random number>
+
+/ Branch if the random number is greater than 20 (0x14) 
+/ ~ 5% chance of the boulder coming at the player
 0x0560 (0x0ca0): (0x1b) If var[0x5d] > (constant) 0x14 then Goto 0x0567
+
+/ Set the boulder as rolling towards the player
 0x0564 (0x0ca4): (0x09) Set var[0x13] = var[0x06]
+
+**************************************************************************
+* Check if the main door north on the bridge is shut
+**************************************************************************
+
+/ Branch if the player's current location is NOT "on a narrow north-south bridge" (0x2a)
 0x0567 (0x0ca7): (0x19) If var[0x43] != (constant) 0x2a then Goto 0x0572
+
+/ Player IS "on a narrow north-south bridge" (0x2a
+
+/ Branch if the main door north on the bridge is open (0x01)
+/ var[0x0b] is the constant 0x00
 0x056b (0x0cab): (0x11) If var[0x1c] != var[0x0b] then Goto 0x0572
+
+/ Door is shut
+
+/ Set the first supplementary message to "The main door north of the bridge is shut" (0xba)
 0x056f (0x0caf): (0x08) Set var[0x4c] = (constant) 0xba
+
+**************************************************************************
+* Check if ghostly orcs are guarding the north-south or east-west corridor
+**************************************************************************
+
+/ Branch if the player HAS broken the gem (0x01) - ghostly orcs will no longer
+/ guard the junction
+/ var[0x0b] is the constant 0x00
 0x0572 (0x0cb2): (0x11) If var[0x2a] != var[0x0b] then Goto 0x0581
+
+/ Player has NOT broken the gem (0x00)
+
+/ Branch if the player's current location IS "in a north-south corridor which ends at a t-junction" (0x6d)
 0x0576 (0x0cb6): (0x18) If var[0x43] == (constant) 0x6d then Goto 0x057e
+
+/ Branch if the player's current location is NOT "in an east-west corridor beside an opening to the north" (0x6b)
 0x057a (0x0cba): (0x19) If var[0x43] != (constant) 0x6b then Goto 0x0581
+
+/ Player is either "in a north-south corridor which ends at a t-junction" (0x6d) or "in an east-west
+/ corridor beside an opening to the north" (0x6b)
+
+/ Set the first supplementary message to "Ghostly orcs guard the junction" (0xbb)
 0x057e (0x0cbe): (0x08) Set var[0x4c] = (constant) 0xbb
+
+**************************************************************************
+* Check to see if the player has tied the rope to the roc's nest
+**************************************************************************
+
+/ Branch if the player's current location is NOT "in the roc's nest, 
+/ where it brings "food" for storage" (0x2e)
 0x0581 (0x0cc1): (0x19) If var[0x43] != (constant) 0x2e then Goto 0x058c
+
+/ Player IS "in the roc's nest, where it brings "food" for storage" (0x2e)
+
+/ Branch if the player has NOT tied the rope to the roc's nest (0x00)
+/ var[0x0b] is the constant 0x00
 0x0585 (0x0cc5): (0x10) If var[0x4b] == var[0x0b] then Goto 0x058c
+
+/ Set the first supplementary message to "A rope hangs down" (0xc4)
 0x0589 (0x0cc9): (0x08) Set var[0x4c] = (constant) 0xc4
+
+**************************************************************************
+* Check the status of the rotting coffin in the crypt
+**************************************************************************
+
+/ Branch if the player's current location is NOT "in the crypt, beside a rotting coffin" (0x67)
 0x058c (0x0ccc): (0x19) If var[0x43] != (constant) 0x67 then Goto 0x059c
+
+/ Player IS "in the crypt, beside a rotting coffin" (0x67)
+
+/ Set the first supplementary message to "It is slightly ajar"
 0x0590 (0x0cd0): (0x08) Set var[0x4c] = (constant) 0x11e
+
+/ Branch if the coffin has NOT been nailed shut (0x00)
+/ var[0x0b] is the constant 0x00
 0x0594 (0x0cd4): (0x10) If var[0x60] == var[0x0b] then Goto 0x059c
+
+/ Set the first supplementary message to "It is nailed shut" (0x11f)
 0x0598 (0x0cd8): (0x08) Set var[0x4c] = (constant) 0x11f
+
+**************************************************************************
+* Check the status of the canivorous jelly
+**************************************************************************
+
+/ Branch if the player's current location is NOT "in a tall cavern with a 
+/ large central fireplace" (0x80)
 0x059c (0x0cdc): (0x19) If var[0x43] != (constant) 0x80 then Goto 0x05aa
+
+/ Player IS "in a tall cavern with a large central fireplace" (0x80)
+
+/ Set the first supplementary message to " Globs of carnivorous jelly are 
+/ circling round" (0xeb)
 0x05a0 (0x0ce0): (0x08) Set var[0x4c] = (constant) 0xeb
+
+/ Branch if the player has NOT thrown the corpse for the jelly to converge upon (0x00)
+/ var[0x0b] is the constant 0x00
 0x05a3 (0x0ce3): (0x10) If var[0x24] == var[0x0b] then Goto 0x05aa
+
+/ Player HAS thrown the corpse
+
+/ Set the first supplementary message to "A mound of jelly wobbles 
+/ on the floor" (0xec)
 0x05a7 (0x0ce7): (0x08) Set var[0x4c] = (constant) 0xec
+
+**************************************************************************
+* Check to see if the giant rat is guarding the corridor
+**************************************************************************
+
+/ Branch if the player's current location is NOT "at a junction between 
+/ north-south and east-west passages" (0x91)
 0x05aa (0x0cea): (0x19) If var[0x43] != (constant) 0x91 then Goto 0x05b5
+
+/ Player IS "at a junction between north-south and east-west passages" (0x91)
+
+/ Branch if the rat has fled from the "sliver of a rancid fried potato" (0x01)
+/ var[0x0b] is the constant 0x00
 0x05ae (0x0cee): (0x13) If var[0x26] > var[0x0b] then Goto 0x05b5
+
+/ Rat has NOT fled
+
+/ Set the first supplementary message to "A giant rat guards the corridor" (0xed)
 0x05b2 (0x0cf2): (0x08) Set var[0x4c] = (constant) 0xed
+
+**************************************************************************
+* Check to see if the player is tiny and can still see enormous ants
+**************************************************************************
+
+/ Branch if the player's current location is NOT "in the middle of the floor 
+/ of a giant cove, in a giant ants' nest" (0x37)
 0x05b5 (0x0cf5): (0x19) If var[0x43] != (constant) 0x37 then Goto 0x05c0
+
+/ Player IS "in the middle of the floor of a giant cove, in a giant ants' nest" (0x37)
+
+/ Branch if the player has eaten the huge grey mushroom twice and accidentally trodden on 
+/ the little ants (klling them)
+/ var[0x0b] is the constant 0x00
 0x05b9 (0x0cf9): (0x11) If var[0x0e] != var[0x0b] then Goto 0x05c0
+
+/ Player has NOT trodden on the little ants
+
+/ Set the first supplementary message to "Enormous ants tower overhead as they 
+/ walk past, completely ignoring you
 0x05bd (0x0cfd): (0x08) Set var[0x4c] = (constant) 0xfe
+
+**************************************************************************
+* Check to see if the player sees the rotting bridge or fine goldn pathway
+**************************************************************************
+
+/ Branch if the player's current location is NOT "on a wide ledge half-way 
+/ up the south side of a tall cave." (0x9b)
 0x05c0 (0x0d00): (0x19) If var[0x43] != (constant) 0x9b then Goto 0x05cf
+
+/ Player IS "on a wide ledge half-way up the south side of a tall cave." (0x9b)
+
+/ Set the first supplementary message to "A rotting bridge leads north" (0x102)
 0x05c4 (0x0d04): (0x08) Set var[0x4c] = (constant) 0x102
+
+/ Branch if the player has NOT eaten the psychedlic mushroom (0x00)
+/ var[0x0b] is the constant 0x00
 0x05c8 (0x0d08): (0x10) If var[0x2d] == var[0x0b] then Goto 0x05cf
+
+/ Set the first supplementary message to "A fine golden pathway leads north" (0x103)
 0x05cc (0x0d0c): (0x0a) Set var[0x4c] += var[0x01]
+
+**************************************************************************
+* Check to see if the troll can see the player
+**************************************************************************
+
+/ Branch if the player's current location is NOT "in the troll's 
+/ squalid store room...." (0xa0)
 0x05cf (0x0d0f): (0x19) If var[0x43] != (constant) 0xa0 then Goto 0x05e0
+
+/ Player IS "in the troll's squalid store room..."
+
+/ Branch if the player IS invisible (0x01)
+/ var[0x0b] is the constant 0x00
 0x05d3 (0x0d13): (0x11) If var[0x34] != var[0x0b] then Goto 0x05e0
+
+/ Player can be seen by the troll
+
 / Print message  "The troll sees you and throws you out! "
 0x05d7 (0x0d17): (0x05) Print message (constant) 0x104
+
+/ Move the player back outside the storeroom to "in a narrow north-south
+/ passage through the rock. A peculiar sweet smell emerges from
+/ an opening to the west. (0x9f)
 0x05da (0x0d1a): (0x08) Set var[0x43] = (constant) 0x9f
+
+/ TODO
 0x05dd (0x0d1d): (0x00) Goto 0x0190
 **************************************************************************
+
+/ Branch if the player's current location is NOT "in the condemned cell." (0xb9)
 0x05e0 (0x0d20): (0x19) If var[0x43] != (constant) 0xb9 then Goto 0x05f9
+
+/ Player IS "in the condemned cell." (0xb9)
+
+
 0x05e4 (0x0d24): (0x13) If var[0x2c] > var[0x06] then Goto 0x05f9
 0x05e8 (0x0d28): (0x0a) Set var[0x2c] += var[0x01]
 0x05eb (0x0d2b): (0x12) If var[0x2c] < var[0x06] then Goto 0x05f5
@@ -1347,7 +1719,13 @@
 0x05f2 (0x0d32): (0x00) Goto 0x12e7
 **************************************************************************
 0x05f5 (0x0d35): (0x08) Set var[0x4c] = (constant) 0x113
+
+/ Branch if the player's current location is NOT "on a wide spiral ramp which 
+/ descends clockwise round an immense pit..." (0x3f)
 0x05f9 (0x0d39): (0x19) If var[0x43] != (constant) 0x3f then Goto 0x060a
+
+/ Player IS "on a wide spiral ramp which descends clockwise round an immense pit..." (0x3f)
+
 0x05fd (0x0d3d): (0x0a) Set var[0x39] += var[0x01]
 0x0600 (0x0d40): (0x1a) If var[0x39] < (constant) 0x0a then Goto 0x060a
 / Print message  "You try to fly off the ramp "
@@ -1357,6 +1735,8 @@
 0x060a (0x0d4a): (0x10) If var[0x20] == var[0x01] then Goto 0x0612
 0x060e (0x0d4e): (0x10) If var[0x21] == var[0x0b] then Goto 0x0615
 0x0612 (0x0d52): (0x09) Set var[0x39] = var[0x0b]
+
+/ Branch if the player's current location is NOT "
 0x0615 (0x0d55): (0x1b) If var[0x43] > (constant) 0x08 then Goto 0x0635
 0x0619 (0x0d59): (0x06) Function - Random - Set var[0x5d]=<random number>
 0x061c (0x0d5c): (0x1a) If var[0x5d] < (constant) 0x28 then Goto 0x0633
