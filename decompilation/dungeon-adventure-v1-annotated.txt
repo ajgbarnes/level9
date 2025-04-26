@@ -89,10 +89,19 @@
 / 0x1c - Status of the main door north of the bridge  on a narrow north-south bridge (0x2a)
 /        0x00 - shut
 /        0x01 - open
-/
+/ 0x1d - Number of turns the player has been in the dark
+/        0x00 - Player can see
+/        .... - Incremented by 2 when the location description is displayed but only by 1 in all other instances
+/        0x04 - Player is killed by ghoul
 / 0x1e - Index into list#1 for setting object initial locations
 /      - Used as an index for looking up the current location of an object
 / 0x1f - Used to hold the current location of an object
+/ 0x20 - Status of the player's eyes:
+/        0x00 - open
+/        0x01 - closed
+/ 0x21 - Status of the blindfold:
+/        0x00 - not being worn
+/        0x01 - being worn
 /
 / 0x25 - Status of the cold cream (prevents the fire elemental leaping on the player)
 /        0x00 - not smeared on the player
@@ -112,6 +121,11 @@
 /        0x00 - Still standing guard on the cliff
 /        0x01 - Slipped off the cliff
 /
+/ 0x2c - Status of the executioner
+/        0x00        - not in the same room as the player
+/        0x02 - 0x04 - in the same room as the player
+/        0x06        - player will be killed by the executioner
+/        0xe1        - executioner has been flattened by the elephant in the brooch
 / 0x2d - Status of the rotting bridge / psychedlic mushroom
 /        0x00 - player has NOT eaten the psychedlic mushroom and can still only see the rotting bridge
 /        0x01 - player HS eaten the psychedlic mushroom and can see a fine golden pathway
@@ -127,6 +141,15 @@
 / 0x37 - Whether the player can see (either eyes are open/closed or blindfolded or it's dark)
 /        0x00 - eyes are closed OR it's dark with no light (cannot see)
 /        0x01 - eyes are open, not blindfolded and there is light (can see and room description will be printed)
+/
+/ 0x39 - Counter for how long the player has been staring at the myriad of moving images around an immense pit
+/        0x00 - not at all
+/        .... - additional turns / commands (increments by 2 when the location is printed, by 1 if not)
+/        0x0a - will try to fly off the ramp
+/ 0x3a - Status of the roc (only changes once per game)
+/        0x00 - has NOT previously carried the player off to its nest
+/        0x00 - HAS not previously carried the player off to its nest
+/ 
 / 0x3c - Indicates whether the object can be interacted with (TODO)
 /        0x00 - cannot be picked up or worn
 /        0x01 - can be picked up or worn
@@ -185,6 +208,7 @@
 /        0x01 - wisp captured in lamp and gives ever lasting light
 / 0x5d - 1. Location description id to print - calculated a location id + 0x1f4
 /        2. Random number for determining if a boulder will roll at the player if on the straight or winding stairs
+/        3. Random number for determining if 
 / 0x5e - Number of crosses / crucifixes carried. Player needs 1 to stop the vampire biting them
 /        and two to keep the wights back
 /
@@ -253,6 +277,10 @@
 /     if the helmet has not captured the wisp yet - if they pick it up they won't be able to see. (0x043c)
 / 19. Player has a ~5% chance of a boulder rolling at them on the winding / straight stairs
 / 20. Eating the mushroom on the wide ledge beween a sturdy bridge and a fissure in the rock, makes the player invisible for 9 turns
+/ 21. After progressing past "below a ramp up the outside of the black tower" (0x08) there is a ~15% chance 
+/     of "A skeletal hand reaches from the earth but crumbles to dust" happeneing per turn
+/ 22. After progressing past "below a ramp up the outside of the black tower" (0x08) there is a ~159 chance
+/     of being carried off by the roc (only happens once)
 
 **************************************************************************
 * A-code entry point
@@ -1703,6 +1731,9 @@
 
 / TODO
 0x05dd (0x0d1d): (0x00) Goto 0x0190
+
+**************************************************************************
+* Check to see if the executioner attacks the player
 **************************************************************************
 
 / Branch if the player's current location is NOT "in the condemned cell." (0xb9)
@@ -1710,15 +1741,34 @@
 
 / Player IS "in the condemned cell." (0xb9)
 
-
+/ Branch if the executioner is dead and out of the game (0xe1)
 0x05e4 (0x0d24): (0x13) If var[0x2c] > var[0x06] then Goto 0x05f9
+
+/ Increment the number of turns the executioner has been waiting
+/ (actually gets incremented twice as this gets called twice if the room description
+/ is displayed, all other actions only once)
 0x05e8 (0x0d28): (0x0a) Set var[0x2c] += var[0x01]
+
+/ Branch if it's been less than 3 turns (when this will be 0x06)
+/ var[0x06] is the constant 0x06
 0x05eb (0x0d2b): (0x12) If var[0x2c] < var[0x06] then Goto 0x05f5
+
+/ It's been 3 turns
+
 / Print message  "The executioner attacks "
 0x05ef (0x0d2f): (0x05) Print message (constant) 0x114
+
+/ Kill the player
 0x05f2 (0x0d32): (0x00) Goto 0x12e7
-**************************************************************************
+
+/ Player isn't killed yet
+
+/ Set the first supplementary message to "A hooded executioner blocks the only exit" (0x113)
 0x05f5 (0x0d35): (0x08) Set var[0x4c] = (constant) 0x113
+
+**************************************************************************
+* Check to see if the player has their sanity drained away
+**************************************************************************
 
 / Branch if the player's current location is NOT "on a wide spiral ramp which 
 / descends clockwise round an immense pit..." (0x3f)
@@ -1726,45 +1776,122 @@
 
 / Player IS "on a wide spiral ramp which descends clockwise round an immense pit..." (0x3f)
 
+/ Increment the number of turns the player has had their sanity draining away with their
+/ gaze locked on the myriad of moving images
+/ (actually gets incremented twice as this gets called twice if the room description
+/ is displayed, all other actions only once)
+/ var[0x01] is the constant 0x01
 0x05fd (0x0d3d): (0x0a) Set var[0x39] += var[0x01]
+
+/ Branch if player has reached 10 or more turns (half that for descriptions)
 0x0600 (0x0d40): (0x1a) If var[0x39] < (constant) 0x0a then Goto 0x060a
+
 / Print message  "You try to fly off the ramp "
 0x0604 (0x0d44): (0x05) Print message (constant) 0x117
+
+/ Kill the player
 0x0607 (0x0d47): (0x00) Goto 0x12e7
-**************************************************************************
+
+/ Branch if the player's eyes are "closed" (0x01)
+/ var[0x01] is the constant 0x01
 0x060a (0x0d4a): (0x10) If var[0x20] == var[0x01] then Goto 0x0612
+
+/ Player's eyes are open (0x00)
+
+/ Branch if the player is NOT wearing the blindfold (0x00)
 0x060e (0x0d4e): (0x10) If var[0x21] == var[0x0b] then Goto 0x0615
+
+/ Player either has their eyes closed OR is wearing the blindfold so 
+/ reset their sanity being drained away
+
+/ Reset so that the player is NOT having their sanity drained away (0x00)
+/ var[0x0b] is the constant 0x00
 0x0612 (0x0d52): (0x09) Set var[0x39] = var[0x0b]
 
-/ Branch if the player's current location is NOT "
+**************************************************************************
+* Check to see if the skeletal hand appears or if the roc takes the player
+* to its nest
+**************************************************************************
+
+/ Branch if the player's current location is after "below a ramp up
+/ the outside of the black tower." (0x08)
 0x0615 (0x0d55): (0x1b) If var[0x43] > (constant) 0x08 then Goto 0x0635
+
+/ Get a random number
 0x0619 (0x0d59): (0x06) Function - Random - Set var[0x5d]=<random number>
+
+/ Branch if the random number is less than 40 (0x28) and print the skeletal hand message
 0x061c (0x0d5c): (0x1a) If var[0x5d] < (constant) 0x28 then Goto 0x0633
+
+/ Branch if the roc has previously carried the player off to its nest and print 
+/ the skeletal hand message
 0x0620 (0x0d60): (0x11) If var[0x3a] != var[0x0b] then Goto 0x0635
+
+/ Player has NOT been previously carried off by the roc
+
+/ Branch if the random numbner is greater than 90 (0x5a)
 0x0624 (0x0d64): (0x1b) If var[0x5d] > (constant) 0x5a then Goto 0x0635
+
+/ Random number was between 40 and 90
+
 / Print message  "\nA great roc carries you off! "
 0x0628 (0x0d68): (0x05) Print message (constant) 0xc1
+
+/ Set the status of the roc to "has previously carried the player off to its nest" (0x01)
 0x062a (0x0d6a): (0x09) Set var[0x3a] = var[0x01]
+
+/ Set the player's current location to "in the roc's nest, where it brings "food" for storage" (0x2e)
 0x062d (0x0d6d): (0x08) Set var[0x43] = (constant) 0x2e
+
+/ TODO 
 0x0630 (0x0d70): (0x00) Goto 0x0149
-**************************************************************************
+
 / Print message  "\nA skeletal hand reaches from the earth but crumbles to dust "
 0x0633 (0x0d73): (0x05) Print message (constant) 0xc2
+
+/ Branch if the orcs are NOT camped around (0x00)
+/ var[0x0b] is the constant 0x00
 0x0635 (0x0d75): (0x10) If var[0x0f] == var[0x0b] then Goto 0x0640
+
+/ Branch if the orcs have fled acter the hold has been blown (0x06)
+/ var[0x05] is the constant 0x05
 0x0639 (0x0d79): (0x13) If var[0x0f] > var[0x05] then Goto 0x0640
+
+/ Orcs are camped all around
+
+/ Set the first location supplementary message to "An army of orcs is 
+/ camped all around" (0xdc)
 0x063d (0x0d7d): (0x08) Set var[0x4c] = (constant) 0xdc
 
 / Branch if the player cannot see (0x00)
 / var[0x0b] is the constant 0x00
 0x0640 (0x0d80): (0x10) If var[0x37] == var[0x0b] then Goto 0x0647
+
+/ Reset the number of turns in the dark to 0x00
+/ used to determine when a ghoul emerges and kills the player at 0x04
+/ var[0x0b] is the constant 0x00
 0x0644 (0x0d84): (0x09) Set var[0x1d] = var[0x0b]
+
+/ Branch if the player's eyes are closed (0x01) and set the cannot see
+/ variable 
+/ var[0x0b] is the constant 0x00
 0x0647 (0x0d87): (0x13) If var[0x20] > var[0x0b] then Goto 0x064f
+
+/ Branch if the player is NOT wearing the blindfold (0x00)
+/ var[0x0b] is the constant 0x00
 0x064b (0x0d8b): (0x10) If var[0x21] == var[0x0b] then Goto 0x0652
+
+/ Player has eyes closed or is wearing the blindfold
 
 / Set the status that the player cannot see (0x00)
 / var[0x0b] is the constant 0x00
 0x064f (0x0d8f): (0x09) Set var[0x37] = var[0x0b]
+
+/ TODO - seems to be cache of the first supplementary message
+/ as this is called twice when printing a location description
 0x0652 (0x0d92): (0x09) Set var[0x4e] = var[0x4c]
+
+/ All done
 0x0655 (0x0d95): (0x02) Return
 
 **************************************************************************
@@ -2598,7 +2725,11 @@
 * Command: "close", "lock" or "shut"
 **************************************************************************
 
+/ Branch if the second word is NOT "eyes" (0xc5)
 0x0cdb (0x141b): (0x19) If var[0x31] != (constant) 0xc5 then Goto 0x0ce5
+
+/ Set the status of the player's eyes to closed (0x01)
+/ var[0x01] is the constant 0x01
 0x0cdf (0x141f): (0x09) Set var[0x20] = var[0x01]
 0x0ce2 (0x1422): (0x00) Goto 0x0190
 
