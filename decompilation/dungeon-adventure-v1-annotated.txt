@@ -306,6 +306,8 @@
 /     then any items they are wearing or in the inventory are removed from the game. Harsh!
 / 24. The small salt pig contains a pearl that is revealed with it is dissolved in shallow water
 / 25. A synonym for the "bird" is "busby" for those old enough to remember the BT mascot...
+/ 26. Weirdly a synonym for "ball" and "sphere" is "blach"
+/ 27. "Wight" is in the directionary as "wightd" - should be "wights"
 
 / TODO what happens to collars when you wear a new one
 
@@ -3676,13 +3678,20 @@
 / var[0x04] is the constant 0x04
 0x1273 (0x19b3): (0x09) Set var[0x17] = var[0x04]
 
-
+/ Branch if the first location supplementary message is NOT "A grotesque 
+/ bloated yellow bird with big ears squats on the nest" (0x78)
 0x1276 (0x19b6): (0x19) If var[0x4c] != (constant) 0x78 then Goto 0x127f
+
+/ Bird is on the nest
 
 / Print message  ". This sound scares the bird away "
 0x127a (0x19ba): (0x05) Print message (constant) 0x79
 
+/ Set the status of the bird to "scared away" (0x01)
+/ var[0x01] is the constant 0x01
 0x127c (0x19bc): (0x09) Set var[0x11] = var[0x01]
+
+/ TODO 
 0x127f (0x19bf): (0x00) Goto 0x0190
 **************************************************************************
 0x1282 (0x19c2): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
@@ -3779,6 +3788,8 @@
 0x12ce (0x1a0e): (0x02) Return
 
 **************************************************************************
+* Print "Gulp! The return blows kill you" and kill the player
+**************************************************************************
 
 / Print message  "Gulp! The return blows kill you "
 0x12cf (0x1a0f): (0x05) Print message (constant) 0x35
@@ -3787,12 +3798,17 @@
 0x12d1 (0x1a11): (0x00) Goto 0x12e7
 
 **************************************************************************
+* Print "Your attack is futile"
+**************************************************************************
+
 / Print message  "Your attack is futile "
 0x12d3 (0x1a13): (0x05) Print message (constant) 0x36
 
 / TODO 
 0x12d5 (0x1a15): (0x00) Goto 0x0149
 
+**************************************************************************
+* Print "It dodges"
 **************************************************************************
 
 / Print message  "It dodges "
@@ -3802,6 +3818,8 @@
 0x12da (0x1a1a): (0x00) Goto 0x0149
 
 **************************************************************************
+* Print "You can't see it"
+**************************************************************************
 
 / Print message  "You can't see it "
 0x12dd (0x1a1d): (0x05) Print message (constant) 0x0c
@@ -3809,6 +3827,8 @@
 / TODO
 0x12df (0x1a1f): (0x00) Goto 0x0149
 
+**************************************************************************
+* Print "Your blow is deadly"
 **************************************************************************
 
 / Print message  "Your blow is deadly! "
