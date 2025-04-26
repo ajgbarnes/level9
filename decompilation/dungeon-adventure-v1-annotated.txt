@@ -51,7 +51,15 @@
 / 0x07 - (Constant) Location code for the inventory (0xfe) i.e. player carrying an item
 / 0x08 - (Constant) Location code for player wearing an item (0xff)
 / 0x09 - (Constant) Location code for when an item is removed from the game (0xe1)
-/
+/ 0x0a - Colour of colour that the player is wearing 
+/        0x00 : Not wearing a collar
+/        0x8d : ORANGE
+/        0x8e : YELLOW
+/        0x8f : GREEN
+/        0x90 : BLUE
+/        0x91 : VIOLET
+/        0x92 : INDIGO
+/        0x93 : SILVER
 / 0x0b - (Constant) 0x00
 / 0x0c - Status of the iron door in the strong room 
 /        0x00 - closed and bolted
@@ -219,6 +227,9 @@
 /        3. Random number for determining if 
 / 0x5e - Number of crosses / crucifixes carried. Player needs 1 to stop the vampire biting them
 /        and two to keep the wights back
+/ 0x5f - Status of the small ornate box with a lid
+/        0x00 - never dropped in shallow water
+/        0x01 - has been dropped in shallow water and snake inside has been drowned
 /
 / 0x61 - Unused - but seems to be a location light indicator
 /        0x00 - player cannot see location description (eyes closed)
@@ -291,6 +302,9 @@
 /     of being carried off by the roc (only happens once)
 / 23. If the sleep spell hits the player and they do not have the mirror in "on an east-west road through the forest" (0x16)
 /     then any items they are wearing or in the inventory are removed from the game. Harsh!
+/ 24. The small salt pig contains a pearl that is revealed with it is dissolved in shallow water
+
+/ TODO what happens to collars when you wear a new one
 
 **************************************************************************
 * A-code entry point
@@ -4077,7 +4091,7 @@
 0x14ef (0x1c2f): (0x09) Set var[0x2c] = var[0x09]
 
 **************************************************************************
-* 
+* Process the player dropping the corpse with the jellies
 **************************************************************************
 
 / Branch if the second word is NOT the "corpse" or "body" (0x49)
@@ -4103,43 +4117,106 @@
 / var[0x09] is the constant 0xe1
 0x14ff (0x1c3f): (0x09) Set var[0x44] = var[0x09]
 
+**************************************************************************
+* Process the player dropping a collar
+**************************************************************************
+
 / Branch if the second word is NOT a colour
 / 0x8d : ORANGE
 / 0x8e : YELLOW
 / 0x8f : GREEN
 / 0x90 : BLUE
 / 0x91 : VIOLET
-/ 0x91 : INDIGO
-/ 0x92 : SILVER
+/ 0x92 : INDIGO
+/ 0x93 : SILVER
 0x1502 (0x1c42): (0x1a) If var[0x31] < (constant) 0x8c then Goto 0x1514
 0x1506 (0x1c46): (0x1b) If var[0x31] > (constant) 0x93 then Goto 0x1514
 
 / Second word IS a colour
 
-/ Get the current location of the <colourin the second word> collar
+/ Get the current location of the <colour in the second word> collar
 0x150a (0x1c4a): (0xa2) Set var[0x1f] = list#2[var[0x31]] (list address 0x0740)
 
 / Branch if the player is NOT waring the collar (0xff)
 / var[0x09] is the constant 0xff
 0x150d (0x1c4d): (0x12) If var[0x1f] < var[0x08] then Goto 0x1514
 
-/ TODO
+/ Set the current worn collar to "none" (0x00)
+/ var[0x0b] is the constant 0x00
 0x1511 (0x1c51): (0x09) Set var[0x0a] = var[0x0b]
 
+**************************************************************************
+* Process the player dropping the blindfold
+**************************************************************************
+
+/ Branch if the second word is NOT the "blindfold" (0x48)
 0x1514 (0x1c54): (0x19) If var[0x31] != (constant) 0x48 then Goto 0x151b
+
+/ Second word IS the "blindfold" (0x48)
+
+/ Set the status of the blindfold to "not being worn" (0x00)
 0x1518 (0x1c58): (0x09) Set var[0x21] = var[0x0b]
+
+**************************************************************************
+* Process the player dropping the pig
+**************************************************************************
+
+/ Branch if the player's current location is NOT one of the following:
+/ 0x2f : south of the river, on the edge of a vast field stretches west as far as the eye can see. A somnolant perfume hangs heavy on the breeze
+/ 0x30 : on an east-west road, south of the river and north of a steep, treeless hill
+/ 0x31 : on an east-west road beside the river and north plain. A line of stepping stones leads to a small island in the water
+/ 0x32 : on a mud-bank, north of a wide river. A stone bridge spans the waters, reaching from the granite cliffs above to the flat lands of the far bank, and a path climbs up to it
+/ 0x33 : under the killer-willow tree
+/ 0x34 : on the southern end of a small island, reached by stepping stones from the south. The far end of the island is occupied by a viscious-looking willow tree with six long rubbery branches
+/ 0x35 : on stepping stones leading north to an island
+/ 0x36 : on the floor of a cavern, beside a clump of evil green toadstools. Liquid slime oozes from the north and paths lead south and up
+/ 0x37 : in the middle of the floor of a giant cove, in a giant ants' nest. Small footprints lead north and south
+/ 0x38 : North of the cave floor, below a huge grey mushroom
+/ 0x39 : at the end of an aqueduct designed to drip water evenly into the depths of a deep pit below. The aqueduct leads north, a narrow fissure leads south, and steps lead down into the pit
+/ 0x3a : walking on the bed of an empty aqueduct which crosses a vast dark pit
+/ 0x3b : in a damp north-south pipe
+/ 0x3c : on an aqueduct
+/ 0x3d : in a paved tunnel below a silver pedestal. Water trickles from a silver hoop painted on one wall and seeps south. An armoured door leads east and a crack splits the north wall
+/ 0x3e : standing in shallow water at the foot of the ramp. A ladder slopes northwards to a higher part of the ramp
 0x151b (0x1c5b): (0x1a) If var[0x43] < (constant) 0x2f then Goto 0x153a
 0x151f (0x1c5f): (0x1b) If var[0x43] > (constant) 0x3e then Goto 0x153a
+
+/ Player IS in a location with location id from 0x2f to 0x3e
+
+/ Branch if the second word is NOT the "pig" (0x51)
 0x1523 (0x1c63): (0x19) If var[0x31] != (constant) 0x51 then Goto 0x152c
+
+/ Second word is the "pig" (0x51)
+
 / Print message  "The pig dissolves! "
 0x1527 (0x1c67): (0x05) Print message (constant) 0xda
+
+/ Set the second word to the "pearl" 0x6e
 0x1529 (0x1c69): (0x08) Set var[0x31] = (constant) 0x6e
+
+/ Branch if the second word is NOT "a small ornate box with a lid" (0x4b)
 0x152c (0x1c6c): (0x19) If var[0x31] != (constant) 0x4b then Goto 0x153a
+
+/ Second word IS "a small ornate box with a lid"
+
+/ Branch if the box has been dropped in shallow water 
+/ and the drowned snake has floated from the box (0x01)
+/ var[0x0b] is the constant 0x00
 0x1530 (0x1c70): (0x13) If var[0x5f] > var[0x0b] then Goto 0x153a
+
+/ First time box has been dropped in shallow water and snake inside drowned
+
 / Print message  "A drowned snake floats from the box "
 0x1534 (0x1c74): (0x05) Print message (constant) 0x129
+
+/ Set the status of the box to being dropped in shallow water
+/ with the snake drowned (0x01)
+/ var[0x01] is the constant 0x01
 0x1537 (0x1c77): (0x09) Set var[0x5f] = var[0x01]
+
+/ All done
 0x153a (0x1c7a): (0x02) Return
+
 **************************************************************************
 0x153b (0x1c7b): (0x1a) If var[0x31] < (constant) 0x9b then Goto 0x1543
 / Print message  "Don't be silly! "
