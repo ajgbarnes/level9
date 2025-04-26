@@ -86,7 +86,9 @@
 / 0x17 - Player deafness counter (protects the player from the siren after the seeds explode)
 /        0x00         - player can currently hear
 /        0x01 to 0x04 - player is deaf for this number of remaining turns (decrements by 1 each turn)
-/
+/ 0x18 - Status of the dragon 
+/        0x00 - Alive and lieing on the golden bed
+/        0x01 - Slain
 / 0x19 - Status of the dryad
 /        0x00 - player has not tried to chop the tree and dryad is still inside
 /        0x01 - dryad has sprung from the tree after the player tried to chop it down
@@ -303,6 +305,7 @@
 / 23. If the sleep spell hits the player and they do not have the mirror in "on an east-west road through the forest" (0x16)
 /     then any items they are wearing or in the inventory are removed from the game. Harsh!
 / 24. The small salt pig contains a pearl that is revealed with it is dissolved in shallow water
+/ 25. A synonym for the "bird" is "busby" for those old enough to remember the BT mascot...
 
 / TODO what happens to collars when you wear a new one
 
@@ -3427,26 +3430,82 @@
 0x1117 (0x1857): (0x0a) Set var[0x3b] += var[0x01]
 0x111a (0x185a): (0x01) Gosub 0x1445
 0x111d (0x185d): (0x00) Goto 0x0190
+
 **************************************************************************
+
+/ Branch if the second word is NOT the "bird" (0x9e)
 0x1120 (0x1860): (0x19) If var[0x31] != (constant) 0x9e then Goto 0x112c
+
+/ Branch if the status of the grotesque yellow bird is NOT scared away (0x00)
+/ and print "Gulp! The return blows kill you"
+/ var[0x0b] is the constant 0x00
 0x1124 (0x1864): (0x10) If var[0x11] == var[0x0b] then Goto 0x12cf
+
+/ Bird has flown away
+
+/ Print "You can't see it"
 0x1129 (0x1869): (0x00) Goto 0x12dd
+
 **************************************************************************
+
+/ Branch if the second word is NOT the "dragon" (0x9f)
 0x112c (0x186c): (0x19) If var[0x31] != (constant) 0x9f then Goto 0x1138
+
+
+/ Branch if the staus of the dragon is not slain (0x01)
+/ and print "Gulp! The return blows kill you"
+/ var[0x0b] is the constant 0x00
 0x1130 (0x1870): (0x10) If var[0x18] == var[0x0b] then Goto 0x12cf
+
+/ Dragon has been slain
+
+/ Print "You can't see it"
 0x1135 (0x1875): (0x00) Goto 0x12dd
+
 **************************************************************************
+
+/ Branch if the second word is NOT the "giants" (0xa0)
 0x1138 (0x1878): (0x19) If var[0x31] != (constant) 0xa0 then Goto 0x1144
+
+/ Branch if the status of the evil giants is still asleep (0x00)
+/ and print "Gulp! The return blows kill you"
+/ var[0x0b] is the constant 0x00
 0x113c (0x187c): (0x10) If var[0x27] == var[0x0b] then Goto 0x12cf
+
+/ Giants have left
+
+/ Print "You can't see it"
 0x1141 (0x1881): (0x00) Goto 0x12dd
+
 **************************************************************************
+
+/ Branch if the second word IS the "Rakshsa" (0xa1)
+/ and print "Gulp! The return blows kill you"
+/ var[0x0b] is the constant 0x00
 0x1144 (0x1884): (0x18) If var[0x31] == (constant) 0xa1 then Goto 0x12cf
+
+**************************************************************************
+
+/ Branch if the second word is NOT the "wight" (0xa2)
 0x1149 (0x1889): (0x19) If var[0x31] != (constant) 0xa2 then Goto 0x115a
+
+/ Second word IS the "wight" (0xa2)
+
+/ BUG? Nothing else calls this and the second word will ALWAYS be "wight" (0xa2)
+/ at this point  so neither will ever branch 
 0x114d (0x188d): (0x1a) If var[0x31] < (constant) 0x5e then Goto 0x12dd
 0x1152 (0x1892): (0x1b) If var[0x31] > (constant) 0x66 then Goto 0x12dd
+
+/ Print "Gulp! The return blows kill you"
 0x1157 (0x1897): (0x00) Goto 0x12cf
+
 **************************************************************************
+
+/ Branch if the second word is the orcs, roc, siren, thierf, goat, hand, ball or non npcs 
+/ and print "Your attack is futile"
 0x115a (0x189a): (0x1b) If var[0x31] > (constant) 0xad then Goto 0x12d3
+
+
 0x115f (0x189f): (0x19) If var[0x31] != (constant) 0x9c then Goto 0x116e
 0x1163 (0x18a3): (0x10) If var[0x19] == var[0x0b] then Goto 0x12dd
 0x1168 (0x18a8): (0x09) Set var[0x19] = var[0x0b]
@@ -3723,22 +3782,39 @@
 
 / Print message  "Gulp! The return blows kill you "
 0x12cf (0x1a0f): (0x05) Print message (constant) 0x35
+
+/ Kill the player
 0x12d1 (0x1a11): (0x00) Goto 0x12e7
+
 **************************************************************************
 / Print message  "Your attack is futile "
 0x12d3 (0x1a13): (0x05) Print message (constant) 0x36
+
+/ TODO 
 0x12d5 (0x1a15): (0x00) Goto 0x0149
+
 **************************************************************************
+
 / Print message  "It dodges "
 0x12d8 (0x1a18): (0x05) Print message (constant) 0x33
+
+/ TODO
 0x12da (0x1a1a): (0x00) Goto 0x0149
+
 **************************************************************************
+
 / Print message  "You can't see it "
 0x12dd (0x1a1d): (0x05) Print message (constant) 0x0c
+
+/ TODO
 0x12df (0x1a1f): (0x00) Goto 0x0149
+
 **************************************************************************
+
 / Print message  "Your blow is deadly! "
 0x12e2 (0x1a22): (0x05) Print message (constant) 0x34
+
+/ TODO
 0x12e4 (0x1a24): (0x00) Goto 0x0149
 
 **************************************************************************
