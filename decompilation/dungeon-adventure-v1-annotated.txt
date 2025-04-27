@@ -113,6 +113,9 @@
 / 0x21 - Status of the blindfold:
 /        0x00 - not being worn
 /        0x01 - being worn
+/ 0x22 - Status of the Rakshasa 
+/        0x00 - have NOT played the die game
+/        0x01 - HAVE played the die game
 /
 / 0x24 - Status of the canivorous jelly
 /        0x00 - circling around
@@ -236,6 +239,7 @@
 /        3. Random number for determining if a roc takes tha player to its nest
 /        4. Cyclical message to print when the player dies 
 /        5. Starting location when moving the packing crate after the player dies
+/        6. Hold the number that is rolled by the Rakshasa
 / 0x5e - Number of crosses / crucifixes carried. Player needs 1 to stop the vampire biting them
 /        and two to keep the wights back
 / 0x5f - Status of the small ornate box with a lid
@@ -3658,34 +3662,85 @@
 0x11b8 (0x18f8): (0x00) Goto 0x11a7
 
 **************************************************************************
+
+/ Player answered "no" so kill them
+
 / Print message  "OK, you lose then "
 0x11ba (0x18fa): (0x05) Print message (constant) 0x6c
+
+/ Kill the player
 0x11bc (0x18fc): (0x00) Goto 0x12e7
+
 **************************************************************************
+
+/ Player answered "yes" so play the game
+
 / Print message  "I'll roll a dice: 1-3 you lose, 4-6 you win. "
 0x11bf (0x18ff): (0x05) Print message (constant) 0x57
+
+/ Set the temporary variable to the object id of the "die" (0x85)
 0x11c1 (0x1901): (0x08) Set var[0x1e] = (constant) 0x85
+
+/ Get the current location of the "die"
 0x11c4 (0x1904): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
+
+/ Branch if the "die" are not in the player's inventory
 0x11c7 (0x1907): (0x11) If var[0x1f] != var[0x07] then Goto 0x11d2
+
+/ Dice ARE in the player's inventory - so the Rakshasa use them
+/ and they are weighted to always roll a 6
+
 / Print message  "And I'll even use your dice to be fair..\n\n "
 0x11cb (0x190b): (0x05) Print message (constant) 0x6d
+
+/ Set the temporary variable to 6
+/ var[0x06] is the constant 0x06
 0x11cd (0x190d): (0x09) Set var[0x5d] = var[0x06]
+
+/ Skip the random number generation as the dice are weighted
 0x11d0 (0x1910): (0x00) Goto 0x11dc
+
 **************************************************************************
+
+/ Rakshasa die is not weighted - generate a random number
 0x11d2 (0x1912): (0x06) Function - Random - Set var[0x5d]=<random number>
+
+/ Regenerate if the number is a 6 or higher (need a number 0 to 5)
+/ var[0x05] is the constant 0x05
 0x11d5 (0x1915): (0x13) If var[0x5d] > var[0x05] then Goto 0x11d2
+
+/ Number is less than 0 to 5
+
+/ Add 1 to the dice roll to make the numbers 1 to 6
 0x11d9 (0x1919): (0x0a) Set var[0x5d] += var[0x01]
+
 / Print message  "It's a "
 0x11dc (0x191c): (0x05) Print message (constant) 0x58
+
+/ Print the dice roll or fixed number for the weighted die
 0x11de (0x191e): (0x03) Print Number var[0x5d]
+
+/ Branch if the number is 4 or 5 or 6 (player wins)
 0x11e0 (0x1920): (0x13) If var[0x5d] > var[0x03] then Goto 0x11e9
+
+/ Die roll was 1 or 2 or 3
+
 / Print message  "! YOU LOSE! "
 0x11e4 (0x1924): (0x05) Print message (constant) 0x59
+
+/ Kill the player
 0x11e6 (0x1926): (0x00) Goto 0x12e7
+
 **************************************************************************
+
 / Print message  "! YOU WIN! The Rakshasa envelop you briefly before leaving "
 0x11e9 (0x1929): (0x05) Print message (constant) 0x5a
+
+/ Set the status of the Rakshasa to "have played the die game" (0x01)
+/ var[0x01] is the constant 0x01
 0x11eb (0x192b): (0x09) Set var[0x22] = var[0x01]
+
+/ TODO
 0x11ee (0x192e): (0x00) Goto 0x0190
 
 **************************************************************************
