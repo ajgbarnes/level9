@@ -14,7 +14,7 @@
 / Object descriptions
 / ---------------------
 / Object text can be found by looking in the dungeon-adventure-v1-descs.txt file
-/ Object descriptions (when in inventory) are 0xe6 + object id
+/ Object descriptions (when in inventory) are 0xe7 + object id
 / Object descriptions (when in location)  are 0x141 + object id (TODO check this)
 /
 / Lists
@@ -308,6 +308,7 @@
 / 25. A synonym for the "bird" is "busby" for those old enough to remember the BT mascot...
 / 26. Weirdly a synonym for "ball" and "sphere" is "blach"
 / 27. "Wight" is in the directionary as "wightd" - should be "wights"
+/ 28. There is a special unnavigable location "in Limbo" (0xe0) for undiscovered objects
 
 / TODO what happens to collars when you wear a new one
 
@@ -3037,8 +3038,14 @@
 0x0e2f (0x156f): (0x08) Set var[0x1e] = (constant) 0x73
 0x0e32 (0x1572): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
 0x0e35 (0x1575): (0x11) If var[0x1f] != var[0x07] then Goto 0x0e26
+
+/ Set the temporary variable to the object id for the "jewelled needle" (0x60)
 0x0e39 (0x1579): (0x08) Set var[0x1e] = (constant) 0x60
+
+/ Check to see if the object is found if so print it
 0x0e3c (0x157c): (0x01) Gosub 0x1282
+
+/ TODO 
 0x0e3f (0x157f): (0x00) Goto 0x0190
 **************************************************************************
 0x0e42 (0x1582): (0x18) If var[0x43] == (constant) 0xb1 then Goto 0x0e56
@@ -3050,14 +3057,23 @@
 0x0e53 (0x1593): (0x00) Goto 0x0190
 **************************************************************************
 0x0e56 (0x1596): (0x10) If var[0x12] == var[0x01] then Goto 0x0e6e
+
+/ Set the temporary variable to the object id for the "short bow" (0x4a)
 0x0e5a (0x159a): (0x08) Set var[0x1e] = (constant) 0x4a
+
+/ Check to see if the object is discoverable and print it if it is
 0x0e5d (0x159d): (0x01) Gosub 0x1282
+
 0x0e60 (0x15a0): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
 0x0e65 (0x15a5): (0x08) Set var[0x1e] = (constant) 0x8d
 0x0e68 (0x15a8): (0x01) Gosub 0x1291
 0x0e6b (0x15ab): (0x00) Goto 0x0190
 **************************************************************************
+
+/ Set the temporary variable to the object id for the "blindfold" (0x48)
 0x0e6e (0x15ae): (0x08) Set var[0x1e] = (constant) 0x48
+
+/ Check to see if the object is discoverable and print it if it is
 0x0e71 (0x15b1): (0x01) Gosub 0x1282
 0x0e74 (0x15b4): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
 0x0e79 (0x15b9): (0x08) Set var[0x1e] = (constant) 0x4d
@@ -3693,22 +3709,52 @@
 
 / TODO 
 0x127f (0x19bf): (0x00) Goto 0x0190
+
 **************************************************************************
+* Check if the object in var[0x1e] is discoverable - if so print that it's 
+* been found
+**************************************************************************
+
+/ Get the current location of the object in var[0x1e]
 0x1282 (0x19c2): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
+
+/ Branch if the object's location is "in Limbo" (0xe0) i.e. waiting to be discovered
 0x1285 (0x19c5): (0x18) If var[0x1f] == (constant) 0xe0 then Goto 0x128f
+
+/ Object is NOT "in Limbo" (waiting to be discovered)
+
 / Print message  "You don't find anything "
 0x1289 (0x19c9): (0x05) Print message (constant) 0x6b
+
+/ Set the valid command flag to "not a valid action" (0x00)
+/ var[0x0b] is the constant 0x00
 0x128b (0x19cb): (0x09) Set var[0x3c] = var[0x0b]
+
+/ All done
 0x128e (0x19ce): (0x02) Return
+
 **************************************************************************
+
 / Print message  "You find:\n "
 0x128f (0x19cf): (0x05) Print message (constant) 0x7a
+
+/ Set the temporary variable to the object description offset for when an
+/ item is in the player's inventory (0xe7)
 0x1291 (0x19d1): (0x08) Set var[0x5d] = (constant) 0xe7
+
+/ Add the object id to get its inventory description
 0x1294 (0x19d4): (0x0a) Set var[0x5d] += var[0x1e]
+
+/ Print the object's inventory description
 0x1297 (0x19d7): (0x04) Print message var[0x5d]
+
 / Print message  "\n "
 0x1299 (0x19d9): (0x05) Print message (constant) 0x28
+
+/ Set the object's location to the player's current location
 0x129b (0x19db): (0xe2) Set list#2[var[0x1e]] = var[0x44] (list address 0x0740)
+
+/ All done
 0x129e (0x19de): (0x02) Return
 
 **************************************************************************
@@ -3948,8 +3994,14 @@
 0x13f3 (0x1b33): (0x05) Print message (constant) 0x12c
 0x13f6 (0x1b36): (0x00) Goto 0x12e7
 **************************************************************************
+
+/ Set the temporary variable to the object id for the "opal" (0x6d)
 0x13f9 (0x1b39): (0x08) Set var[0x1e] = (constant) 0x6d
+
+/ CHeck to see if the object is discoverable and print it if it is
 0x13fc (0x1b3c): (0x01) Gosub 0x1282
+
+/ TODO 
 0x13ff (0x1b3f): (0x00) Goto 0x0190
 
 **************************************************************************
