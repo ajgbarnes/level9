@@ -83,6 +83,7 @@
 /        0x05 - one more turn before the boulder either passes or kills the player
 /        0x06 - boulder has started rolling, two more turns until it passes or kills the player
 /
+/ 0x16 - Number of times the player has died
 / 0x17 - Player deafness counter (protects the player from the siren after the seeds explode)
 /        0x00         - player can currently hear
 /        0x01 to 0x04 - player is deaf for this number of remaining turns (decrements by 1 each turn)
@@ -224,9 +225,11 @@
 / 0x5c - Status of the gilt miner's helmet with a lamp
 /        0x00 - unlit and wisp not captured
 /        0x01 - wisp captured in lamp and gives ever lasting light
-/ 0x5d - 1. Location description id to print - calculated a location id + 0x1f4
+/ 0x5d - 1. Location description id to print - calculated as location id + 0x1f4
 /        2. Random number for determining if a boulder will roll at the player if on the straight or winding stairs
-/        3. Random number for determining if 
+/        3. Random number for determining if a roc takes tha player to its nest
+/        4. Cyclical message to print when the player dies 
+/        5. Starting location when moving the packing crate after the player dies
 / 0x5e - Number of crosses / crucifixes carried. Player needs 1 to stop the vampire biting them
 /        and two to keep the wights back
 / 0x5f - Status of the small ornate box with a lid
@@ -1865,7 +1868,7 @@
 
 / Player has NOT been previously carried off by the roc
 
-/ Branch if the random numbner is greater than 90 (0x5a)
+/ Branch if the random number is greater than 90 (0x5a)
 0x0624 (0x0d64): (0x1b) If var[0x5d] > (constant) 0x5a then Goto 0x0635
 
 / Random number was between 40 and 90
@@ -3892,23 +3895,56 @@
 / Set the status of the dwarf to NOT following the player (0x00)
 / var[0x0b] is the constant 0x00
 0x12ea (0x1a2a): (0x09) Set var[0x1a] = var[0x0b]
+
+/ Set the player's target location to be the same as their current location
 0x12ed (0x1a2d): (0x09) Set var[0x44] = var[0x43]
+
+/ Set the player's current location to 0xe2 (not a real location)
 0x12f0 (0x1a30): (0x08) Set var[0x43] = (constant) 0xe2
+
+/ Set the temporary variable to the base message id for the 
+/ cyclical messages for when a player has died
 0x12f3 (0x1a33): (0x08) Set var[0x5d] = (constant) 0x0f
+
+/ Add on the number of times the player has died 
 0x12f6 (0x1a36): (0x0a) Set var[0x5d] += var[0x16]
+
+/ Print the cyclical message from one of the following
+/ depending on how many times the player has died:
+/ 0x10 : You have managed to get yourself killed!
+/ 0x11 : You have got killed again!
+/ 0x12 : Dead yet again!!
 0x12f9 (0x1a39): (0x04) Print message var[0x5d]
+
 / Print message  "\nWant to be resurrected?\n "
 0x12fb (0x1a3b): (0x05) Print message (constant) 0x0f
+
+/ Get the player's response
 0x12fd (0x1a3d): (0x07) Input - results in word1 var[0x30], word2 var[0x31], word3 var[0x32], count var[0x33]
+
+/ If the word count is zero, loop back and get the input again
 0x1302 (0x1a42): (0x10) If var[0x33] == var[0x0b] then Goto 0x12fd
+
+/ Branch if the first word is "no" - actually matches against "North" (0x01)
+/ var[0x01] is the constant 0x01
 0x1306 (0x1a46): (0x10) If var[0x30] == var[0x01] then Goto 0x135c
+
+/ Branch if the first word is "yes" (0x1d)
 0x130a (0x1a4a): (0x18) If var[0x30] == (constant) 0x1d then Goto 0x1312
+
+/ Answer was NOT "yes" or "no"
+
 / Print message  "Please answer YES or NO\n "
 0x130e (0x1a4e): (0x05) Print message (constant) 0x09
+
+/ Ask again
 0x1310 (0x1a50): (0x00) Goto 0x12fb
+
 **************************************************************************
+
 / Print message  "\nYour ghost rushes along "
 0x1312 (0x1a52): (0x05) Print message (constant) 0x13
+
 0x1314 (0x1a54): (0x10) If var[0x49] == var[0x0b] then Goto 0x133a
 0x1318 (0x1a58): (0x13) If var[0x22] > var[0x0b] then Goto 0x133e
 0x131c (0x1a5c): (0x18) If var[0x44] == (constant) 0xc8 then Goto 0x133e
@@ -3925,18 +3961,40 @@
 **************************************************************************
 / Print message  "and enters the machine in the homely house. Your body regenerates rapidly "
 0x133e (0x1a7e): (0x05) Print message (constant) 0x15
+
+/ Branch if the player has died less than 3 times and allow the resurrection
+/ var[0x03] is the constant 0x03
 0x1340 (0x1a80): (0x12) If var[0x16] < var[0x03] then Goto 0x1348
+
+/ Player is dead for the 3rd time - don't allow the resurrection
+
 / Print message  "but the machine has been overworked. Something is wrong! Your new body slumps to the floor "
 0x1344 (0x1a84): (0x05) Print message (constant) 0x17
+
+
 0x1346 (0x1a86): (0x00) Goto 0x135c
-**************************************************************************
+
+/ Player has died less than 2 times, allow the resurrection
+
 / Print message  "and you are alive again\n "
 0x1348 (0x1a88): (0x05) Print message (constant) 0x16
+
+/ Set the player's current location to "in a large store room." (0xca)
 0x134a (0x1a8a): (0x08) Set var[0x43] = (constant) 0xca
+
+/ Set the second word to the "packing case" (0x88)
 0x134d (0x1a8d): (0x08) Set var[0x31] = (constant) 0x88
+
+/ Remove the packing case from the game (why is this necessary?)
 0x1350 (0x1a90): (0x01) Gosub 0x1488
+
+/ Set the temporary variable to the starting location "on a mud-bank" (0x32)
 0x1353 (0x1a93): (0x08) Set var[0x5d] = (constant) 0x32
+
+/ Move the packing case to the starting location
 0x1356 (0x1a96): (0xe2) Set list#2[var[0x31]] = var[0x5d] (list address 0x0740)
+
+/ TODO 
 0x1359 (0x1a99): (0x00) Goto 0x0149
 **************************************************************************
 0x135c (0x1a9c): (0x01) Gosub 0x1200
