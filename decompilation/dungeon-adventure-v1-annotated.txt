@@ -604,7 +604,13 @@
 0x0196 (0x08d6): (0x10) If var[0x46] == var[0x0b] then Goto 0x01a6
 0x019a (0x08da): (0x0a) Set var[0x46] += var[0x01]
 0x019d (0x08dd): (0x19) If var[0x43] != (constant) 0x17 then Goto 0x01a6
+
+/ Branch if this is the first turn that the Rakshasa have appeared
+/ (coundown starts at 3)
+/ var[0x03] is the constant 0x03
 0x01a1 (0x08e1): (0x10) If var[0x46] == var[0x03] then Goto 0x11a5
+
+
 0x01a6 (0x08e6): (0x10) If var[0x17] == var[0x0b] then Goto 0x01ad
 0x01aa (0x08ea): (0x0b) Set var[0x17] -= var[0x01].
 0x01ad (0x08ed): (0x10) If var[0x36] == var[0x0b] then Goto 0x01cc
@@ -3613,20 +3619,44 @@
 0x119d (0x18dd): (0x00) Goto 0x0190
 
 **************************************************************************
+
+/ Player needs the hammer to break the gem
+
 / Print message  "You need a hammer! "
 0x11a0 (0x18e0): (0x05) Print message (constant) 0xe6
+
+/ TODO 
 0x11a2 (0x18e2): (0x00) Goto 0x0190
+
 **************************************************************************
-/ Print message  "Dazzling lightening spears the hilltop and a host of fierce flames spring forth: they are Rakshasa! Their leader floats forwards. "
+* Print the messages and interaction for whent he Rakshasa first appears
+**************************************************************************
+
+/ Print message  "Dazzling lightening spears the hilltop and a host of fierce
+/ flames spring forth: they are Rakshasa! Their leader floats forwards. "
 0x11a5 (0x18e5): (0x05) Print message (constant) 0x55
-/ Print message  ""How about a game: If you win I'll strengthen the flames of your soul. If you lose, I get your body. OK?"\n "
+
+/ Print message  ""How about a game: If you win I'll strengthen the flames 
+/ of your soul. If you lose, I get your body. OK?"\n "
 0x11a7 (0x18e7): (0x05) Print message (constant) 0x56
+
+/ Get the player's response
 0x11a9 (0x18e9): (0x07) Input - results in word1 var[0x30], word2 var[0x31], word3 var[0x32], count var[0x33]
+
+/ Branch if the first word is "no" (actually matches with north in the dictionary)
 0x11ae (0x18ee): (0x10) If var[0x30] == var[0x01] then Goto 0x11ba
+
+/ BRanch if the first word is "yes" (0x1d)
 0x11b2 (0x18f2): (0x18) If var[0x30] == (constant) 0x1d then Goto 0x11bf
+
+/ Player entered something else
+
 / Print message  "Please answer YES or NO\n "
 0x11b6 (0x18f6): (0x05) Print message (constant) 0x09
+
+/ Loop back around, ask the question again and get the player's response
 0x11b8 (0x18f8): (0x00) Goto 0x11a7
+
 **************************************************************************
 / Print message  "OK, you lose then "
 0x11ba (0x18fa): (0x05) Print message (constant) 0x6c
