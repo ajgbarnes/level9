@@ -244,6 +244,7 @@
 /        6. Hold the number that is rolled by the Rakshasa
 /        7. Score to subtract for the number of times the player has died
 /        8. Score increment for various events e.g. vampire being dead
+/        9. Current location of the corpse
 / 0x5e - Number of crosses / crucifixes carried. Player needs 1 to stop the vampire biting them
 /        and two to keep the wights back
 / 0x5f - Status of the small ornate box with a lid
@@ -254,6 +255,7 @@
 /        0x00 - player cannot see location description (eyes closed)
 /        0x01 - player can see location description
 / 0x62 - Incorrectly used as the constant 0x00 in the scoring
+/ 0x63 - Message to print between objects e.g. newline
 /
 / Notes and observations
 / ======================
@@ -333,6 +335,7 @@
 /     15 points for slaying the dragon
 /     15 points for smashing the living green gem
 / 30. Bizarrely, the score return will reset the score to zero if it's > 9,998 (can't even get close)
+/ 31. Unused code between 0x15fd and 0x1608
 
 / TODO what happens to collars when you wear a new one
 
@@ -2270,7 +2273,6 @@
 / Branch if the destination is any of the rooms in the wight house (0x5e to 0x66)
 0x07d2 (0x0f12): (0x1a) If var[0x44] < (constant) 0x5e then Goto 0x07f9
 0x07d6 (0x0f16): (0x1b) If var[0x44] > (constant) 0x66 then Goto 0x07f9
-
 
 / Branch if the player has at least one cross / crucifox 
 / var[0x0b] is the constant 0x00
@@ -4773,41 +4775,116 @@
 0x153a (0x1c7a): (0x02) Return
 
 **************************************************************************
+
+/ Branch if the object in the second word is pickupable
 0x153b (0x1c7b): (0x1a) If var[0x31] < (constant) 0x9b then Goto 0x1543
+
+/ Player is trying to pick up a non-pickupable object
+
 / Print message  "Don't be silly! "
 0x153f (0x1c7f): (0x05) Print message (constant) 0x06
+
+/ Jump ahead and set the flag for the invalid command and return 
 0x1541 (0x1c81): (0x00) Goto 0x1555
+
 **************************************************************************
+
+/ Branch if the object in the second word is NOT the "corpse" (0x49)
 0x1543 (0x1c83): (0x19) If var[0x31] != (constant) 0x49 then Goto 0x154c
+
+/ Object in the second word IS the "corpse" (0x49)
+
+/ Branch if the player's current location IS "in a dead end, below a gallows 
+/ tree from which a bloodless corpse hangs by one foot" (0xb1)
 0x1547 (0x1c87): (0x18) If var[0x43] == (constant) 0xb1 then Goto 0x15e0
+
+/ Player iS NOT "in a dead end, below a gallows tree from which 
+/ a bloodless corpse hangs by one foot" (0xb1)
+
+/ Get the current location of the corpse
 0x154c (0x1c8c): (0xa2) Set var[0x5d] = list#2[var[0x31]] (list address 0x0740)
+
+/ Branch if the current location is NOT the player's current location
 0x154f (0x1c8f): (0x10) If var[0x5d] == var[0x44] then Goto 0x1558
+
 / Print message  "You can't see it "
 0x1553 (0x1c93): (0x05) Print message (constant) 0x0c
+
+/ Set the flag that indicates they can pick it up or wear it to 
+/ indicate that they cannot (0x00)
+/ var[0x0b] is the constant 0x00
 0x1555 (0x1c95): (0x09) Set var[0x3c] = var[0x0b]
+
+/ All done
 0x1558 (0x1c98): (0x02) Return
+
 **************************************************************************
+
+/ Branch if the object in the second word is pickupable
 0x1559 (0x1c99): (0x1a) If var[0x31] < (constant) 0x9b then Goto 0x1561
+
+/ Object is NOT pickupable
+
 / Print message  "Don't be silly! "
 0x155d (0x1c9d): (0x05) Print message (constant) 0x06
+
+/ Set the invalid action flag and return
 0x155f (0x1c9f): (0x00) Goto 0x156a
+
 **************************************************************************
+
+/ Get the current location of the object in the second word
 0x1561 (0x1ca1): (0xa2) Set var[0x5d] = list#2[var[0x31]] (list address 0x0740)
+
+/ Branch if the player already has the object in their inventory (0xfe) or 
+/ is wearing it (0xff)
 0x1564 (0x1ca4): (0x1b) If var[0x5d] > (constant) 0xfd then Goto 0x156d
+
 / Print message  "You don't have it "
 0x1568 (0x1ca8): (0x05) Print message (constant) 0x0b
+
+/ Set the flag that indicates they can pick it up or wear it to 
+/ indicate that they cannot (0x00)
+/ var[0x0b] is the constant 0x00
 0x156a (0x1caa): (0x09) Set var[0x3c] = var[0x0b]
+
+/ All done
 0x156d (0x1cad): (0x02) Return
+
 **************************************************************************
+* TODO
+**************************************************************************
+
+/ Set the temporary variable to the first object id "axe" (0x46)
 0x156e (0x1cae): (0x08) Set var[0x1e] = (constant) 0x46
+
+/ Set the command / action to invalid (0x00)
+/ var[0x0b] is the constant 0x00
 0x1571 (0x1cb1): (0x09) Set var[0x3c] = var[0x0b]
+
+/ Get the current location of the object
 0x1574 (0x1cb4): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
+
+/ Set the message to print between objects to newline
 0x1577 (0x1cb7): (0x08) Set var[0x63] = (constant) 0x28
+
+/ Branch if the object is in the player's current location
 0x157a (0x1cba): (0x10) If var[0x1f] == var[0x44] then Goto 0x1586
+
+/ Object IS NOT in the player's current location 
+
+/ Move to the next object id 
 0x157e (0x1cbe): (0x0a) Set var[0x1e] += var[0x01]
+
+/ If there are remaining object to process, loop back and process them
 0x1581 (0x1cc1): (0x1a) If var[0x1e] < (constant) 0x9a then Goto 0x1574
+
+/ All done
 0x1585 (0x1cc5): (0x02) Return
+
 **************************************************************************
+
+/ 
 0x1586 (0x1cc6): (0x09) Set var[0x5d] = var[0x38]
 0x1589 (0x1cc9): (0x0a) Set var[0x5d] += var[0x1e]
 0x158c (0x1ccc): (0x19) If var[0x1e] != (constant) 0x4c then Goto 0x159e
@@ -4823,12 +4900,16 @@
 0x15b1 (0x1cf1): (0x08) Set var[0x63] = (constant) 0xbf
 0x15b4 (0x1cf4): (0x0a) Set var[0x3c] += var[0x01]
 0x15b7 (0x1cf7): (0x10) If var[0x38] == var[0x0b] then Goto 0x157e
+
 / Print message  "\n "
 0x15bb (0x1cfb): (0x05) Print message (constant) 0x28
+
 0x15bd (0x1cfd): (0x04) Print message var[0x5d]
 0x15bf (0x1cff): (0x04) Print message var[0x63]
+
 / Print message  "\n "
 0x15c1 (0x1d01): (0x05) Print message (constant) 0x28
+
 0x15c3 (0x1d03): (0x00) Goto 0x157e
 **************************************************************************
 
@@ -4871,34 +4952,93 @@
 
 / All done
 0x15df (0x1d1f): (0x02) Return
+
 **************************************************************************
+* Print "You can't do that" for various actions
+**************************************************************************
+
 / Print message  "You can't do that "
 0x15e0 (0x1d20): (0x05) Print message (constant) 0x05
+
+/ Set the invalid action status (0x00)
+/ var[0x0b] is the constant 0x00
 0x15e2 (0x1d22): (0x09) Set var[0x3c] = var[0x0b]
+
+/ TODO
 0x15e5 (0x1d25): (0x00) Goto 0x0190
+
 **************************************************************************
+* Print "Please be more specific" for various actions
+**************************************************************************
+
 / Print message  "Please be more specific "
 0x15e8 (0x1d28): (0x05) Print message (constant) 0x04
+
+/ Set the invalid action status (0x00)
+/ var[0x0b] is the constant 0x00
 0x15ea (0x1d2a): (0x09) Set var[0x3c] = var[0x0b]
+
+/ TODO 
 0x15ed (0x1d2d): (0x00) Goto 0x0190
+
 **************************************************************************
+* Print "nothing happens" for various actions
+**************************************************************************
+
 / Print message  "Nothing happens "
 0x15f0 (0x1d30): (0x05) Print message (constant) 0x0a
+
+/ Set the invalid action status (0x00)
+/ var[0x0b] is the constant 0x00
 0x15f2 (0x1d32): (0x09) Set var[0x3c] = var[0x0b]
+
+/ TODO 
 0x15f5 (0x1d35): (0x00) Goto 0x0190
+
 **************************************************************************
+* Print "You can't do that" when a player tries to give an invalid object
+*************************************************************************
+*
 / Print message  "You can't do that "
 0x15f8 (0x1d38): (0x05) Print message (constant) 0x05
+
+/ TODO 
 0x15fa (0x1d3a): (0x00) Goto 0x0190
+
 **************************************************************************
+* UNUSED CODE 
+**************************************************************************
+
+/ Get the current location of the object in the second word
 0x15fd (0x1d3d): (0xa2) Set var[0x1f] = list#2[var[0x31]] (list address 0x0740)
+
+/ Branch if the object is not in the inventory (0xfe)
+/ var[0x07] is the constant 0xfe
 0x1600 (0x1d40): (0x11) If var[0x1f] != var[0x07] then Goto 0x1608
+
+/ Set the invalid action status (0x00)
+/ var[0x0b] is the constant 0x00
 0x1605 (0x1d45): (0x09) Set var[0x3c] = var[0x0b]
+
+/ All done
 0x1608 (0x1d48): (0x02) Return
+
 **************************************************************************
+* END OF UNUSED CODE
+**************************************************************************
+
+**************************************************************************
+* Print "Don't be silly" as it's not a valid action and set the flag
+**************************************************************************
+
 / Print message  "Don't be silly! "
 0x1609 (0x1d49): (0x05) Print message (constant) 0x06
+
+/ Set the flag that it's not a valid action
+/ var[0x0b] is the constant 0x00
 0x160b (0x1d4b): (0x09) Set var[0x3c] = var[0x0b]
+
+/ TODO
 0x160e (0x1d4e): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -4915,12 +5055,23 @@
 0x1616 (0x1d56): (0x00) Goto 0x0190
 
 **************************************************************************
+* For various situations print that the player cannot see the object
+**************************************************************************
+
 / Print message  "You can't see it "
 0x1619 (0x1d59): (0x05) Print message (constant) 0x0c
+
+/ TODO 
 0x161b (0x1d5b): (0x00) Goto 0x0149
+
 **************************************************************************
+* The iron door is locked so print the message
+**************************************************************************
+
 / Print message  "The door is locked! "
 0x161e (0x1d5e): (0x05) Print message (constant) 0x8e
+
+/ TODO 
 0x1620 (0x1d60): (0x00) Goto 0x0149
 **************************************************************************
 / Print message  "The sphere swallows you "
