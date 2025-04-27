@@ -130,7 +130,13 @@
 / 0x29 - Status of the fierce goat 
 /        0x00 - Still standing guard on the cliff
 /        0x01 - Slipped off the cliff
-/
+/ 0x2a - Status of the livid green gem 
+/        0x00 - not smashed
+/        0x01 - smashed
+/ 0x2b - Number of turns until the gem sucks the player's mind into the gem
+/        0x00 - not sucking the player's mind into the gem
+/        .... - number of turns until the player's mind is sucked into the gem
+/        0x04 - set to 4 turns when the player first picks up the gem
 / 0x2c - Status of the executioner
 /        0x00        - not in the same room as the player
 /        0x02 - 0x04 - in the same room as the player
@@ -3521,17 +3527,36 @@
 0x1157 (0x1897): (0x00) Goto 0x12cf
 
 **************************************************************************
+* Process the player attacking the dryad
+**************************************************************************
 
-/ Branch if the second word is the orcs, roc, siren, thierf, goat, hand, ball or non npcs 
+/ Branch if the second word IS the orcs, roc, siren, thierf, goat, hand, ball or non npcs 
 / and print "Your attack is futile"
 0x115a (0x189a): (0x1b) If var[0x31] > (constant) 0xad then Goto 0x12d3
 
-
+/ Branch if the second word is NOT the "dryad"
 0x115f (0x189f): (0x19) If var[0x31] != (constant) 0x9c then Goto 0x116e
+
+/ Second word IS the "dryad"
+
+/ Branch if the status of the dryad is "not sprung from the tree" (0x00)
+/ var[0x0b] is the constant 0x00
 0x1163 (0x18a3): (0x10) If var[0x19] == var[0x0b] then Goto 0x12dd
+
+/ Dryad HAS "sprung from the tree" (0x01) so player has chopped it before
+
+/ Make the dryad disappear (0x00)
+/ var[0x0b] is the constant 0x00
 0x1168 (0x18a8): (0x09) Set var[0x19] = var[0x0b]
+
+/ Print "Your blow is deadly!"
 0x116b (0x18ab): (0x00) Goto 0x12e2
+
 **************************************************************************
+* Process the player attacking the dwarf
+**************************************************************************
+
+/ Branch if the second word is NOT the dwarf (0x9b)
 0x116e (0x18ae): (0x19) If var[0x31] != (constant) 0x9b then Goto 0x117d
 
 / Branch if the dwarf is NOT following the player (0x00)
@@ -3541,21 +3566,52 @@
 / Set the status of the dwarf to NOT following the player (0x00)
 0x1177 (0x18b7): (0x09) Set var[0x1a] = var[0x0b]
 
+/ Print "Your blow is deadly!"
 0x117a (0x18ba): (0x00) Goto 0x12e2
+
 **************************************************************************
+
+/ TODO
 0x117d (0x18bd): (0x00) Goto 0x0190
+
 **************************************************************************
+* Process the player hitting the gem
+**************************************************************************
+
+/ Check  if the player is being silly or can't see the object / npc
 0x1180 (0x18c0): (0x01) Gosub 0x15c5
+
+/ Branch if the player can't attack the object / npc
 0x1183 (0x18c3): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
+
+/ Set the temporary variable to the "hammer" (0x4e)
 0x1188 (0x18c8): (0x08) Set var[0x1e] = (constant) 0x4e
+
+/ Get the current location of the "hammer" (0x4e)
 0x118b (0x18cb): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
+
+/ Branch if the "hammer" is NOT in the player's inventory (0xfe)
+/ var[0x07] is the constant 0xfe
 0x118e (0x18ce): (0x12) If var[0x1f] < var[0x07] then Goto 0x11a0
+
 / Print message  "The gem breaks: you are free! "
 0x1192 (0x18d2): (0x05) Print message (constant) 0xe7
+
+/ Sethe location of the "gem" to out of the game (0xe1)
+/ var[0x09] is the constant 0xe1
 0x1194 (0x18d4): (0xe2) Set list#2[var[0x31]] = var[0x09] (list address 0x0740)
+
+/ Set the number of turns until the gem sucks the player's mind to "not sucking" (0x00)
+/ var[0x0b] is the constant 0x00
 0x1197 (0x18d7): (0x09) Set var[0x2b] = var[0x0b]
+
+/ Set the status of the gem to "broken" (0x01)
+/ var[0x01] is the constant 0x01
 0x119a (0x18da): (0x09) Set var[0x2a] = var[0x01]
+
+/ TODO
 0x119d (0x18dd): (0x00) Goto 0x0190
+
 **************************************************************************
 / Print message  "You need a hammer! "
 0x11a0 (0x18e0): (0x05) Print message (constant) 0xe6
@@ -4519,6 +4575,8 @@
 / indicate that they cannot (0x00)
 / var[0x0b] is the constant 0x00
 0x15dc (0x1d1c): (0x09) Set var[0x3c] = var[0x0b]
+
+/ All done
 0x15df (0x1d1f): (0x02) Return
 **************************************************************************
 / Print message  "You can't do that "
