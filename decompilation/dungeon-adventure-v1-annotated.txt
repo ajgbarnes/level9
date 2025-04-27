@@ -96,7 +96,9 @@
 / 0x1a - Status of the dwarf 
 /        0x00 - not following the player
 /        0x01 - following the player
-/
+/ 0x1b - Dwarf treasure diving status
+/        0x00 - has NOT dived into a hidden opening
+/        0x01 - HAS dived into a hidden openin
 / 0x1c - Status of the main door north of the bridge  on a narrow north-south bridge (0x2a)
 /        0x00 - shut
 /        0x01 - open
@@ -2213,41 +2215,110 @@
 0x07b3 (0x0ef3): (0x00) Goto 0x079d
 
 **************************************************************************
+* Process the player NOT turning back when the dwarf reacted and said
+* "That's not the way to the ore!", cries the dwarf, "I'm not going that way!". 
+* Do you turn back?\n "
+**************************************************************************
 
 / Set the status of the dwarf to NOT following the player (0x00)
 / var[0x0b] is the constant 0x00
 0x07b5 (0x0ef5): (0x09) Set var[0x1a] = var[0x0b]
 
+/ Branch if the target destination is NOT "in a huge cave of glistering rock. 
+/ New passages lead north and south" (0xcf) and move to the next check
 0x07b8 (0x0ef8): (0x19) If var[0x44] != (constant) 0xcf then Goto 0x07c1
+
+/ Player IS "in a huge cave of glistering rock. New passages 
+/ lead north and south"
+
+/ Branch if the dwarf has NOT "dived into a hidden opening" (0x00)
+/ and print "you can't move in that direction"
+/ var[0x0b] is the constant 0x00
 0x07bc (0x0efc): (0x10) If var[0x1b] == var[0x0b] then Goto 0x0686
+
+/ Dwarf HAS "dived into a hidden opening" (0x01)
+
+**************************************************************************
+* Process the player meeting the vampire 
+**************************************************************************
+
+/ Branch if the target destination is NOT "at a tight junction above 
+/ a narrow pit" (0x7f)
 0x07c1 (0x0f01): (0x19) If var[0x44] != (constant) 0x7f then Goto 0x07d2
+
+/ Target destination IS "at a tight junction above a narrow pit" (0x7f)
+
+/ Branch if the vampire is NOT alive (0x01)
+/ var[0x0b] is the constant 0x00
 0x07c5 (0x0f05): (0x11) If var[0x5b] != var[0x0b] then Goto 0x07d2
+
+/ Branch if the player has at least one cross / crucifix (they will be safe
+/ from the vampire)
+/ var[0x0b] is the constant 0x00
 0x07c9 (0x0f09): (0x13) If var[0x5e] > var[0x0b] then Goto 0x07d2
+
+/ Player has zero crosses / crucifixes so will be killed by the vampire
+
 / Print message  "A vampire bites you "
 0x07cd (0x0f0d): (0x05) Print message (constant) 0x97
+
+/ Kill the player
 0x07cf (0x0f0f): (0x00) Goto 0x12e7
+
 **************************************************************************
+
+/ Branch if the destination is any of the rooms in the wight house (0x5e to 0x66)
 0x07d2 (0x0f12): (0x1a) If var[0x44] < (constant) 0x5e then Goto 0x07f9
 0x07d6 (0x0f16): (0x1b) If var[0x44] > (constant) 0x66 then Goto 0x07f9
+
+
+/ Branch if the player has at least one cross / crucifox 
+/ var[0x0b] is the constant 0x00
 0x07da (0x0f1a): (0x13) If var[0x5e] > var[0x0b] then Goto 0x07e4
+
+/ Player does not have any cross or crucifix
+
 / Print message  "\nA horde of wights attack! "
 0x07de (0x0f1e): (0x05) Print message (constant) 0x11c
+
+/ Kill the player
 0x07e1 (0x0f21): (0x00) Goto 0x12e7
+
 **************************************************************************
+
+/ Branch if the target destination in the wight house is "in the middle 
+/ of the south wall of the wight house. A musty alcove opens behind you" (0x65)
 0x07e4 (0x0f24): (0x18) If var[0x44] == (constant) 0x65 then Goto 0x07ec
+
+/ Branch if the target destination is NOT "in the middle of the wight house, 
+/ below a blue pedestal" (0x62)
 0x07e8 (0x0f28): (0x19) If var[0x44] != (constant) 0x62 then Goto 0x07f9
+
+/ Player's destination IS "in the middle of the wight house, 
+/ below a blue pedestal" (0x62)
+
 / Print message  "You force the wights back "
 0x07ec (0x0f2c): (0x05) Print message (constant) 0x11a
+
+/ Branch if the number of crosses / crucifixes that the player has 
+/ is greater than 1 
+/ var[0x01] is the constant 0x01
 0x07ef (0x0f2f): (0x13) If var[0x5e] > var[0x01] then Goto 0x07f9
+
+/ Player has only 1 cross or crucifix
+
 / Print message  "but they come from all sides.. "
 0x07f3 (0x0f33): (0x05) Print message (constant) 0x11b
+
+/ Kill the player
 0x07f6 (0x0f36): (0x00) Goto 0x12e7
 
 **************************************************************************
-* Player is heading home - ask if they want to
+* Player is heading home - ask if they want to leave the game
 **************************************************************************
 
-/ TODO 
+/ Branch if the player IS moving from "on an east-west road through the forest" (0x16)
+/ East to location id "0xe2" (not a real location, end of game if you die or complete)
 0x07f9 (0x0f39): (0x19) If var[0x44] != (constant) 0xe2 then Goto 0x0817
 
 / Print message  "A hollow voice intones: "This is your referee speaking. 
