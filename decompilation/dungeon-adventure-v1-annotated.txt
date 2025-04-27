@@ -213,7 +213,7 @@
 /        4  - if not shrunk and not wearing the belt
 /        10 - if not shrunk and wearing the belt
 / 0x50 - Exit flags when a player tries to move in a direction from one location to another
-/
+/ 0x51 - Used to calculate the player's scoer
 / 0x52 - Status of the siren 
 /        0x00 - stil around 
 /        0x01 - fled in panic
@@ -240,6 +240,8 @@
 /        4. Cyclical message to print when the player dies 
 /        5. Starting location when moving the packing crate after the player dies
 /        6. Hold the number that is rolled by the Rakshasa
+/        7. Score to subtract for the number of times the player has died
+/        8. Score increment for various events e.g. vampire being dead
 / 0x5e - Number of crosses / crucifixes carried. Player needs 1 to stop the vampire biting them
 /        and two to keep the wights back
 / 0x5f - Status of the small ornate box with a lid
@@ -249,6 +251,7 @@
 / 0x61 - Unused - but seems to be a location light indicator
 /        0x00 - player cannot see location description (eyes closed)
 /        0x01 - player can see location description
+/ 0x62 - Incorrectly used as the constant 0x00 in the scoring
 /
 / Notes and observations
 / ======================
@@ -322,6 +325,12 @@
 / 26. Weirdly a synonym for "ball" and "sphere" is "blach"
 / 27. "Wight" is in the directionary as "wightd" - should be "wights"
 / 28. There is a special unnavigable location "in Limbo" (0xe0) for undiscovered objects
+/ 29. Maximum score is 600 calculated as:
+/     15 points for each of the 37 treasures in the long store room or inventory or worn by the player (total 555)
+/     15 points for killing the vampire 
+/     15 points for slaying the dragon
+/     15 points for smashing the living green gem
+/ 30. Bizarrely, the score return will reset the score to zero if it's > 9,998 (can't even get close)
 
 / TODO what happens to collars when you wear a new one
 
@@ -3748,6 +3757,8 @@
 **************************************************************************
 
 0x11f1 (0x1931): (0x01) Gosub 0x1200
+
+/ TODO
 0x11f3 (0x1933): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -3756,6 +3767,8 @@
 
 / Create a save game file
 0x11f6 (0x1936): (0x06) Function - Save (0x03)
+
+/ TODO
 0x11f8 (0x1938): (0x00) Goto 0x0149
 
 **************************************************************************
@@ -3766,38 +3779,162 @@
 0x11fb (0x193b): (0x06) Function - Restore (0x04)
 
 0x11fd (0x193d): (0x00) Goto 0x0149
+
 **************************************************************************
+* Calculate the player's score (can be negative)
+**************************************************************************
+
+/ The following items score 15 each (total of 555):
+/ 0x5b  : an antique chair
+/ 0x5c  : a securely fastened chest
+/ 0x5d  : a selection of coins
+/ 0x5e  : a jade egg
+/ 0x5f  : a matched pair of lapis lazuli
+/ 0x60  : a jewelled needle
+/ 0x61  : an onyx oryx
+/ 0x62  : a lump of valuable ore
+/ 0x63  : a rock crystal
+/ 0x64  : a star pendant
+/ 0x65  : a sun medallion
+/ 0x66  : a very expensive trident
+/ 0x69  : an agate
+/ 0x6a  : an amethyst
+/ 0x6b  : a diamond
+/ 0x6c  : an emerald
+/ 0x6d  : an opal
+/ 0x6e  : a pearl
+/ 0x6f  : a valuable rhinestone
+/ 0x70  : a ruby
+/ 0x71  : a sapphire
+/ 0x73  : a topaz
+/ 0x73  : a cube of "sticky" metal
+/ 0x74  : rare spices
+/ 0x75  : a hollow stick
+/ 0x76  : a gilt miner's helmet with a lamp
+/ 0x78  : a golden bed
+/ 0x79  : a good, strong belt
+/ 0x7a  : a veneered cross
+/ 0x7b  : a jewel-encrusted crucifix
+/ 0x7c  : a great horn, bound by metal hoops
+/ 0x7d  : a broken mechanical face
+/ 0x7e  : a magical mirror
+/ 0x7f  : a cuddley octopus figurine
+/ 0x80  : a staff of polished bone
+/ 0x81  : a magic sword
+/ 0x82  : a magic wand
+
+/ Reset the score total to 0
+/ var[0x0b] is the constant 0x00
 0x1200 (0x1940): (0x09) Set var[0x51] = var[0x0b]
+
+/ Set the temporary variable to 15 (0x0f) - each treasure will score 15
 0x1203 (0x1943): (0x08) Set var[0x5d] = (constant) 0x0f
+
+/ Set the temporary variable to the constant for the "ethnic carving" (0x5a)
+/ (going to loop through all of the treasures)
 0x1206 (0x1946): (0x08) Set var[0x1e] = (constant) 0x5a
+
+/ Get the object's current location
 0x1209 (0x1949): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
+
+/ Branch if the object is in the player's inventory (0xfe)
+/ var[0x07] is the constant 0xfe
 0x120c (0x194c): (0x10) If var[0x1f] == var[0x07] then Goto 0x1218
+
+/ Branch if the player is wearing the object (0xff)
+/ var[0x08] is the constant 0xff
 0x1210 (0x1950): (0x10) If var[0x1f] == var[0x08] then Goto 0x1218
+
+/ Player is not wearing the object and it isn't in their inventory
+
+/ Branch if the object is NOT "in a large store room...." (0xca)
+/ (it won't be scored)
 0x1214 (0x1954): (0x19) If var[0x1f] != (constant) 0xca then Goto 0x121b
+
+/ Object is in the player's inventory or they are wearing it or it's in the large store room
+/ so score it
+
+/ Add 15 (0x0f) to the score
 0x1218 (0x1958): (0x0a) Set var[0x51] += var[0x5d]
+
+/ Move to the next treasure object
 0x121b (0x195b): (0x0a) Set var[0x1e] += var[0x01]
+
+/ Branch if there are treasures stil to be processed
 0x121e (0x195e): (0x1a) If var[0x1e] < (constant) 0x85 then Goto 0x1209
-0x1222 (0x1962): (0x09) Set var[0x5d] = var[0x16]
-0x1225 (0x1965): (0x0a) Set var[0x5d] += var[0x5d]
-0x1228 (0x1968): (0x0a) Set var[0x5d] += var[0x5d]
-0x122b (0x196b): (0x0a) Set var[0x5d] += var[0x5d]
-0x122e (0x196e): (0x0a) Set var[0x5d] += var[0x5d]
-0x1231 (0x1971): (0x0a) Set var[0x5d] += var[0x5d]
-0x1234 (0x1974): (0x0b) Set var[0x51] -= var[0x5d].
+
+**************************************************************************
+
+/ Set the temporary variable to the number of times the player has died 
+/ and multiply it by 16
+0x1222 (0x1962): (0x09) Set var[0x5d] = var[0x16] 
+0x1225 (0x1965): (0x0a) Set var[0x5d] += var[0x5d] 
+0x1228 (0x1968): (0x0a) Set var[0x5d] += var[0x5d] 
+0x122b (0x196b): (0x0a) Set var[0x5d] += var[0x5d] 
+0x122e (0x196e): (0x0a) Set var[0x5d] += var[0x5d] 
+0x1231 (0x1971): (0x0a) Set var[0x5d] += var[0x5d] 
+
+/ Subtract 32 for each time the player has died
+0x1234 (0x1974): (0x0b) Set var[0x51] -= var[0x5d]
+
+**************************************************************************
+
+/ Add 15 for the following events (max 45):
+/ 1. Vampire being dead
+/ 2. Dragon being slain
+/ 3. Gem being smashed
+
+/ Set the score increment to 15 (0x0f) for the various events below 
 0x1237 (0x1977): (0x08) Set var[0x5d] = (constant) 0x0f
+
+**************************************************************************
+
+/ Branch if the vampire is NOT dead (0x00)
+/ var[0x0b] is the constant 0x00
 0x123a (0x197a): (0x10) If var[0x5b] == var[0x0b] then Goto 0x1241
+
+/ Vampire IS dead (0x01)
+
+/ Add 15 to the score
 0x123e (0x197e): (0x0a) Set var[0x51] += var[0x5d]
+
+**************************************************************************
+
+/ Branch if the dragon is NOT slain (0x00)
+/ var[0x0b] is the constant 0x00
 0x1241 (0x1981): (0x10) If var[0x18] == var[0x0b] then Goto 0x1248
+
+/ Dragon is slain (0x01)
+
+/ Add 15 to the score
 0x1245 (0x1985): (0x0a) Set var[0x51] += var[0x5d]
+
+**************************************************************************
+
+/ Branch if the livid green gem has NOT been smashed
+/ var[0x62] is incorrectly used here as the constant 0x00 (should be var[0x0b])
 0x1248 (0x1988): (0x10) If var[0x2a] == var[0x62] then Goto 0x124f
+
+/ Add 15 to the score
 0x124c (0x198c): (0x0a) Set var[0x51] += var[0x5d]
+
+**************************************************************************
+
+/ Branch if the score is less than 9,999 (0x270f) (it will always be!)
+/ BUG?
 0x124f (0x198f): (0x1a) If var[0x51] < (constant) 0x270f then Goto 0x1257
+
+/ Reset the score to zero if it's > 9,9998
 0x1254 (0x1994): (0x09) Set var[0x51] = var[0x0b]
+
 / Print message  "\nYour score is "
 0x1257 (0x1997): (0x05) Print message (constant) 0x69
+
 0x1259 (0x1999): (0x03) Print Number var[0x51]
 / Print message  "out of 600.\n "
 0x125b (0x199b): (0x05) Print message (constant) 0x6a
+
+/ All done
 0x125d (0x199d): (0x02) Return
 
 **************************************************************************
