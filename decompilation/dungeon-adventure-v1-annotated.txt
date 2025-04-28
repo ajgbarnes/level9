@@ -700,27 +700,69 @@
 0x01ca (0x090a): (0x05) Print message (constant) 0xa9
 
 **************************************************************************
+* Decrement the number of turns until the boulder stops rolling
+**************************************************************************
 
-
+/ Branch if the boulder is not currently rolling down at the player (0x00)
+/ var[0x0b] is the constant 0x00
 0x01cc (0x090c): (0x10) If var[0x13] == var[0x0b] then Goto 0x01dd
-0x01d0 (0x0910): (0x0b) Set var[0x13] -= var[0x01].
+
+/ Boulder IS rolling down at the player
+
+/ Decrement the number of turns until the boulder stops rolling
+0x01d0 (0x0910): (0x0b) Set var[0x13] -= var[0x01]
+
+/ Branch if the player has dodged the boulder and it's now below them
 0x01d3 (0x0913): (0x12) If var[0x13] < var[0x04] then Goto 0x01db
+
+/ Boulder is still above the player
+
 / Print message  "\nYou can hear a boulder rolling down from above\n "
 0x01d7 (0x0917): (0x05) Print message (constant) 0xb4
+
+/ Skip the next message
 0x01d9 (0x0919): (0x00) Goto 0x01dd
-**************************************************************************
+
 / Print message  "\nSounds of a bounding boulder echo up from below\n "
 0x01db (0x091b): (0x05) Print message (constant) 0xb5
+
+**************************************************************************
+* Decrement the number of turns until the gem sucks the player's sanity into it
+**************************************************************************
+
+/ Branch if the gem is sucking the player's sanity
+/ var[0x0b] is the constant 0x00
 0x01dd (0x091d): (0x10) If var[0x2b] == var[0x0b] then Goto 0x01f5
+
+/ Gem IS sucking the player's sanity (0x01)
+
 / Print message  "\nThe gem is attacking your mind\n "
 0x01e1 (0x0921): (0x05) Print message (constant) 0xc7
-0x01e3 (0x0923): (0x0b) Set var[0x2b] -= var[0x01].
+
+/ Decrement the number of turns until the gem sucks the player's sanity
+0x01e3 (0x0923): (0x0b) Set var[0x2b] -= var[0x01]
+
+/ Branch if the remaining turns are greater than 0
+/ var[0x0b] is the constant 0x00
 0x01e6 (0x0926): (0x13) If var[0x2b] > var[0x0b] then Goto 0x01f5
+
+/ Remaining turns just set to zero
+
 / Print message  "\nYour mind is sucked into the gem\n "
 0x01ea (0x092a): (0x05) Print message (constant) 0xe8
+
+/ Set the temporary variable to the object id for the gem (0x98)
 0x01ec (0x092c): (0x08) Set var[0x1e] = (constant) 0x98
+
+/ Branch if gem's location is destroyed / out of game (0xe1)
+/ var[0xe1] is the constant 0xe1
 0x01ef (0x092f): (0xe2) Set list#2[var[0x1e]] = var[0x09] (list address 0x0740)
+
+/ Gem is NOT destroyed
+
+/ Kill the player
 0x01f2 (0x0932): (0x00) Goto 0x12e7
+
 **************************************************************************
 0x01f5 (0x0935): (0x0a) Set var[0x1d] += var[0x01]
 0x01f8 (0x0938): (0x12) If var[0x1d] < var[0x04] then Goto 0x0202
