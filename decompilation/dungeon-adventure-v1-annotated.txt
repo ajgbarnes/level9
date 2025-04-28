@@ -764,17 +764,44 @@
 0x01f2 (0x0932): (0x00) Goto 0x12e7
 
 **************************************************************************
+* Increment the number of turns the player has been in the dark
+* (gets reset later to 0x00 if the player is not in the dark)
+**************************************************************************
+
+/ Increment the number of turns that the player has been in the dark
 0x01f5 (0x0935): (0x0a) Set var[0x1d] += var[0x01]
+
+/ Branch if the player has been in the dark for less than 4 turns
+/ var[0x04] is the constant 0x04
 0x01f8 (0x0938): (0x12) If var[0x1d] < var[0x04] then Goto 0x0202
+
 / Print message  "\nA ghoul emerges from the dark and eats you! "
 0x01fc (0x093c): (0x05) Print message (constant) 0x100
+
+/ Kill the player
 0x01ff (0x093f): (0x00) Goto 0x12e7
+
 **************************************************************************
+* Decrement the number of turns that the player will be invisible
+**************************************************************************
+
+/ Branch if the player is NOT invisible (0x00)
+/ var[0x0b] is the constant 0x00
 0x0202 (0x0942): (0x10) If var[0x34] == var[0x0b] then Goto 0x0210
-0x0206 (0x0946): (0x0b) Set var[0x34] -= var[0x01].
+
+/ Decrement the remaining turns that the player will be invisible
+0x0206 (0x0946): (0x0b) Set var[0x34] -= var[0x01]
+
+/ Branch if the remaining turns are greater than zero (still invisible)
+/ var[0x0b] is the constant 0x00
 0x0209 (0x0949): (0x13) If var[0x34] > var[0x0b] then Goto 0x0210
+
+/ Player just became visible again
+
 / Print message  "\nYou are visible again!\n "
 0x020d (0x094d): (0x05) Print message (constant) 0x106
+
+/ 
 0x0210 (0x0950): (0x1b) If var[0x14] > (constant) 0x09 then Goto 0x0230
 0x0214 (0x0954): (0x11) If var[0x15] != var[0x43] then Goto 0x0223
 / Print message  "\nThe black spheres destroy each other "
