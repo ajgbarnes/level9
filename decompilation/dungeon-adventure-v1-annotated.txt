@@ -64,7 +64,7 @@
 / 0x0c - Status of the iron door in the strong room 
 /        0x00 - closed and bolted
 /        0x01 - unbolted and open
-/
+/ 0x0d - Unused but incremented by 50 (0x32) when a player eats something that tastes fantastic!
 / 0x0e - Status of the ants
 /        0x00 - player has not grown huge and trodden on the giant ants
 /        0x01 - player HAS grown huge and trodden on the giant ants
@@ -172,7 +172,10 @@
 / 0x2d - Status of the rotting bridge / psychedlic mushroom
 /        0x00 - player has NOT eaten the psychedlic mushroom and can still only see the rotting bridge
 /        0x01 - player HS eaten the psychedlic mushroom and can see a fine golden pathway
-/
+/ 0x2e - Size status of the player
+/        0x00 - normal size
+/        0x01 - shrunk
+/        0x02 - giant (can kill the giant ants)
 / 0x30 - Matched input word code 1
 / 0x31 - Matched input word code 2
 / 0x32 - Matched input word code 3
@@ -180,6 +183,7 @@
 / 0x34 - Whether the player is invisible - eating the mushroom will make them invisible for 9 turns
 /        0x00         - can be seen 
 /        0x01 to 0x09 - invisible
+/        0x0a         - value when first made invisible but then decremented
 / 0x35 - Number of turns that the player has been trapped in the east crusher room
 /        0x00 - not trapped
 /        0x01 - trapped but then incremented
@@ -372,6 +376,15 @@
 /     15 points for smashing the living green gem
 / 30. Bizarrely, the score return will reset the score to zero if it's > 9,998 (can't even get close)
 / 31. Unused code between 0x15fd and 0x1608
+/ 32. BUG? When the player is ""on a wide ledge outside a tunnel entrance." (0xa0)
+/     they can eat mushrooms endlessly and each "It tastes ok" but no mushrooms are mentioned and it
+/     makes no difference to the game.
+/ 33. BUG? When the player is "at the end of an aqueduct designed to drip water evenly into the depths 
+/     of a deep pit below." (0x39) they can eat mushrooms endlessly and each "It tastes ok" but no mushrooms
+/     are mentioned and it makes no difference to the game.
+/ 34. var[0x0d] increments by 50 every time the player eats the tasty mushrooms in the troll's squalid store room
+/     maybe an original part of the score and how you could reach 9,998?
+
 
 / TODO what happens to collars when you wear a new one
 
@@ -3291,54 +3304,166 @@
 * Command: "bite", "eat", "nibble", "swallow" or "taste"
 **************************************************************************
 
+/ Branch if the second word is the "mushroom" (0xa5) which will 
+/ vary on which one by location
 0x0d24 (0x1464): (0x18) If var[0x31] == (constant) 0xa5 then Goto 0x0d4d
+
+/ Player is NOT eating a mushroom
+
+/ Check the player has the object and it's not a non-pickupable object
+/ Will print "Don't be silly!" if it's not 
 0x0d28 (0x1468): (0x01) Gosub 0x1559
+
+/ Branch if an invalid command for the object (0x00)
+/ var[0x0b] is the constant 0x00
 0x0d2b (0x146b): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
+
+/ Valid command (0x01)
+
+/ Branch if the player is trying to eat the "berries" (0x47)
+/ and print "If you must.. YOu feel REALLY ILL now"
 0x0d30 (0x1470): (0x18) If var[0x31] == (constant) 0x47 then Goto 0x0d45
+
+/ Branch if the player is trying to eat the "rancid potato slices" (0x53)
+/ and print "If you must.. YOu feel REALLY ILL now"
 0x0d34 (0x1474): (0x18) If var[0x31] == (constant) 0x53 then Goto 0x0d45
+
+/ Branch if the player is trying to eat the "rare spices" (0x74)
+/ and print "If you must.. YOu feel REALLY ILL now" 
 0x0d38 (0x1478): (0x18) If var[0x31] == (constant) 0x74 then Goto 0x0d45
+
+/ Branch if the player is trying to eat the "cold cream" (0x94)
+/ and print "If you must.. YOu feel REALLY ILL now"
 0x0d3c (0x147c): (0x18) If var[0x31] == (constant) 0x94 then Goto 0x0d45
+
+/ Player is trying to eat something else
+
 / Print message  "Yeuch!! "
 0x0d40 (0x1480): (0x05) Print message (constant) 0x07
+
+/ TODO
 0x0d42 (0x1482): (0x00) Goto 0x0190
+
 **************************************************************************
+
+/ Player is eating the "berries", "rancid potato slices", "rare spices" 
+/ or "cold cream"
+
+/ Remove the object from the game
 0x0d45 (0x1485): (0x01) Gosub 0x1488
+
 / Print message  "If you must.. You feel REALLY ILL now "
 0x0d48 (0x1488): (0x05) Print message (constant) 0xf1
+
+/ TODO 
 0x0d4a (0x148a): (0x00) Goto 0x0190
+
 **************************************************************************
+
+/ Branch if the player IS "on the floor of a cavern, beside a clump of 
+/ evil green toadstools" (0x36), these are deadly poison and kill the player
 0x0d4d (0x148d): (0x18) If var[0x43] == (constant) 0x36 then Goto 0x0d70
+
+/ Branch if the player IS "on a wide ledge half-way up the south side of a 
+/ tall cave. Steps lead up and down. Several small, brightly patterned,
+/ psychaedelic mushrooms grow at the back of the ledge" 0x9b
 0x0d51 (0x1491): (0x18) If var[0x43] == (constant) 0x9b then Goto 0x0d75
+
+/ BUG? No mushroom is mentioned here and the player can "eat mushroom"
+/ even without one in the inventory
+/ Branch if the player IS "at the end of an aqueduct designed to drip water 
+/ evenly into the depths of a deep pit below." (0x39) and print "It tastes ok"
 0x0d55 (0x1495): (0x18) If var[0x43] == (constant) 0x39 then Goto 0x0d7d
+
+/ BUG? No mushroom is mentioned here and the player can "eat mushroom"
+/ even without one in the inventory
+/ Branch if the player IS "on a wide ledge outside a tunnel entrance." (0xa1)
+/ and print "It tastes ok"
 0x0d59 (0x1499): (0x18) If var[0x43] == (constant) 0xa1 then Goto 0x0d7d
+
+/ Branch if the player IS "in the troll's squalid store room, amidst junk 
+/ of every kind." (0xa0) and print "It tastes fantastic"
 0x0d5d (0x149d): (0x18) If var[0x43] == (constant) 0xa0 then Goto 0x0d82
+
+/ Branch if the player IS "south a vast cavern floor, beside some small 
+/ grey mushrooms." and shrink the player
 0x0d61 (0x14a1): (0x18) If var[0x43] == (constant) 0xa8 then Goto 0x0d8d
+
+/ Branch if the player iS "North of the cave floor, below a huge grey 
+/ mushroom" (0x38) and grow the player
 0x0d65 (0x14a5): (0x18) If var[0x43] == (constant) 0x38 then Goto 0x0d9f
+
+/ Branch if the player IS "on a wide ledge between a sturdy bridge 
+/ and a fissure in the rock." (0xa3) and make the player invisible
 0x0d69 (0x14a9): (0x18) If var[0x43] == (constant) 0xa3 then Goto 0x0db8
+
+/ Player is in a different location that does not have mushrooms
+/ Print "You can't see it"
 0x0d6d (0x14ad): (0x00) Goto 0x1619
+
 **************************************************************************
+* Player ate the evil green toadstools
+**************************************************************************
+
 / Print message  "It's deadly poison "
 0x0d70 (0x14b0): (0x05) Print message (constant) 0xf2
+
+/ Kill the player
 0x0d72 (0x14b2): (0x00) Goto 0x12e7
+
 **************************************************************************
+* Player ate the psychedlic mushrooms
+**************************************************************************
+
 / Print message  "Wowee! "
 0x0d75 (0x14b5): (0x05) Print message (constant) 0xf7
+
+/ Player will see the "fine golden pathway" instead of the rottig bridge now
 0x0d77 (0x14b7): (0x09) Set var[0x2d] = var[0x01]
+
+/ TODO
 0x0d7a (0x14ba): (0x00) Goto 0x0149
+
 **************************************************************************
+* Player ate ordinary mushrooms or the giant grey mushroom when a giant
+* or the small grey mushrooms when already shrunk
+**************************************************************************
+
 / Print message  "It tastes OK "
 0x0d7d (0x14bd): (0x05) Print message (constant) 0xf3
+
+/ TODO 
 0x0d7f (0x14bf): (0x00) Goto 0x0190
+
 **************************************************************************
+* Player ate the tasty mushrooms
+**************************************************************************
+
 / Print message  "It tastes fantastic! "
 0x0d82 (0x14c2): (0x05) Print message (constant) 0xf4
+
+/ Set the temporary variable to the constant 50 (0x52)
 0x0d84 (0x14c4): (0x08) Set var[0x5d] = (constant) 0x32
+
+/ Unused but incremented by 50 (0x32) when a player eats something that tastes fantastic!
 0x0d87 (0x14c7): (0x0a) Set var[0x0d] += var[0x5d]
+
+/ TODO 
 0x0d8a (0x14ca): (0x00) Goto 0x0190
+
 **************************************************************************
+* Player ate the small grey mushrooms and will shrink if not already shrunk
+**************************************************************************
+
+/ Branch if the player is already shrunk (0x01) and print "It tastes OK"
+/ var[0x01] is the constant 0x01
 0x0d8d (0x14cd): (0x10) If var[0x2e] == var[0x01] then Goto 0x0d7d
+
 / Print message  "You shrink "
 0x0d91 (0x14d1): (0x05) Print message (constant) 0xfa
+
+/ Set the status of the player to shurnk (0x01)
+/ var[0x01] is the constant 0x01
 0x0d93 (0x14d3): (0x09) Set var[0x2e] = var[0x01]
 
 / Player ate the small grey mushrooms and shrank so decrease the maximum inventory
@@ -3346,10 +3471,22 @@
 / var[0x0b] is the constant 0x00
 0x0d96 (0x14d6): (0x09) Set var[0x4f] = var[0x0b]
 
+/ Put eveything the player is wearing and in their inventory into the player's
+/ current location
 0x0d99 (0x14d9): (0x01) Gosub 0x1471
+
+/ TODO
 0x0d9c (0x14dc): (0x00) Goto 0x0149
+
 **************************************************************************
+* Process the player eating the large grey mushroom that makes them grow
+**************************************************************************
+
+/ Branch if the player has grown to be a giant (0x02) and just print 
+/ "It tastes OK" and do nothing else
+/ var[0x02] is the constant 0x02
 0x0d9f (0x14df): (0x10) If var[0x2e] == var[0x02] then Goto 0x0d7d
+
 / Print message  "You grow "
 0x0da3 (0x14e3): (0x05) Print message (constant) 0xfb
 
@@ -3358,16 +3495,38 @@
 / var[0x04] is the constant 0x04
 0x0da5 (0x14e5): (0x09) Set var[0x4f] = var[0x04]
 
+/ Branch if the player is currently shrunk (0x01)
+/ var[0x01] is the constant 0x01
 0x0da8 (0x14e8): (0x10) If var[0x2e] == var[0x01] then Goto 0x0db2
+
+/ Player is normal size (0x00)
+
+/ Make the player a giant (0x02)
+/ var[0x02] is the constant 0x02
 0x0dac (0x14ec): (0x09) Set var[0x2e] = var[0x02]
+
+/ TODO
 0x0daf (0x14ef): (0x00) Goto 0x0190
-**************************************************************************
+
+/ Make the player a normal size (0x00)
+/ var[0x0b] is the constant 0x00
 0x0db2 (0x14f2): (0x09) Set var[0x2e] = var[0x0b]
+
+/ TODO
 0x0db5 (0x14f5): (0x00) Goto 0x0190
+
 **************************************************************************
+* Player ate the invisible mushrooms
+**************************************************************************
+
 / Print message  "You are invisible! "
 0x0db8 (0x14f8): (0x05) Print message (constant) 0x105
+
+/ Set the status of the player to "invisible" (0xa)
+/ (number of turns before they are visible again i.e. 10)
 0x0dbb (0x14fb): (0x08) Set var[0x34] = (constant) 0x0a
+
+/ TODO
 0x0dbe (0x14fe): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -5111,8 +5270,13 @@
 0x1558 (0x1c98): (0x02) Return
 
 **************************************************************************
+* Check that the object is "pickupable" and in the player's inventory or 
+* being worn
+**************************************************************************
 
-/ Branch if the object in the second word is pickupable
+/ TODO also called by eat etc... check the commentary wording here
+
+/ Branch if the object in the second word is a pickupable
 0x1559 (0x1c99): (0x1a) If var[0x31] < (constant) 0x9b then Goto 0x1561
 
 / Object is NOT pickupable
