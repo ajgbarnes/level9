@@ -162,7 +162,14 @@
 / 0x37 - Whether the player can see (either eyes are open/closed or blindfolded or it's dark)
 /        0x00 - eyes are closed OR it's dark with no light (cannot see)
 /        0x01 - eyes are open, not blindfolded and there is light (can see and room description will be printed)
-/
+/ 0x36 - Number of remaining turns for the driftwood to burn (decrements by 1 per turn)
+/        0x00 - Not burning
+/        0x01 - Message will be printed "The burning branch is going out!"
+/        .... - Remaining turns left for the wood to burn out
+/        0x09 - Message will be printed "The wood flickers"
+/        .... - Remaining turns left for the wood to burn out
+/        0xc8 - Player is given 200 turns when initially lit (0xc8)
+/        When first lit the player is g
 / 0x39 - Counter for how long the player has been staring at the myriad of moving images around an immense pit
 /        0x00 - not at all
 /        .... - additional turns / commands (increments by 2 when the location is printed, by 1 if not)
@@ -609,16 +616,21 @@
 / Print message  "A dwarf is following you\n "
 0x0184 (0x08c4): (0x05) Print message (constant) 0x92
 
+/ Set the base message id to "an obscure ethnic carving" (0x141)
 0x0186 (0x08c6): (0x08) Set var[0x38] = (constant) 0x141
+
+/ Set the player's target location to be the same as the 
+/ player's current location
 0x018a (0x08ca): (0x09) Set var[0x44] = var[0x43]
 0x018d (0x08cd): (0x01) Gosub 0x156e
 
 
-
+/ Set the player's target location to be the same as the 
+/ player's current location
 0x0190 (0x08d0): (0x09) Set var[0x44] = var[0x43]
 
 / Perform location specific checks 
-0x0193 (0x08d3): (0x01) Gosub 0x03a3
+0x0193 (0x08d3): (0x01) Gosvub 0x03a3
 0x0196 (0x08d6): (0x10) If var[0x46] == var[0x0b] then Goto 0x01a6
 0x019a (0x08da): (0x0a) Set var[0x46] += var[0x01]
 0x019d (0x08dd): (0x19) If var[0x43] != (constant) 0x17 then Goto 0x01a6
@@ -628,22 +640,68 @@
 / var[0x03] is the constant 0x03
 0x01a1 (0x08e1): (0x10) If var[0x46] == var[0x03] then Goto 0x11a5
 
+**************************************************************************
+* Decrement the number of turns for which the player will be deaf
+**************************************************************************
 
+/ Branch if the player is not currently deaf (0x00)
+/ var[0x0b] is the constant 0x00
 0x01a6 (0x08e6): (0x10) If var[0x17] == var[0x0b] then Goto 0x01ad
-0x01aa (0x08ea): (0x0b) Set var[0x17] -= var[0x01].
+
+/ Player is deaf (0x01)
+
+/ Decrement the number of remaining turns that they are deaf
+0x01aa (0x08ea): (0x0b) Set var[0x17] -= var[0x01]
+
+**************************************************************************
+* Decrement the number of turns until the torch burns out
+**************************************************************************
+
+/ Branch if the "driftwood" / "torch" is not burning (0x00)
+/ var[0x0b] is the constant 0x00
 0x01ad (0x08ed): (0x10) If var[0x36] == var[0x0b] then Goto 0x01cc
-0x01b1 (0x08f1): (0x0b) Set var[0x36] -= var[0x01].
+
+/ Torch is burning
+
+/ Decrement the remaining turns until the torch burns out
+0x01b1 (0x08f1): (0x0b) Set var[0x36] -= var[0x01]
+
+/ Set the temporary variable to the object id for the "drfitwood " / "torch" (0x4c)
 0x01b4 (0x08f4): (0x08) Set var[0x1e] = (constant) 0x4c
+
+/ Get the current location of the "driftwood" / "torch"
 0x01b7 (0x08f7): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
+
+/ Branch if the "driftwood" / "torch" is NOT in the player's inventory
+/ var[0x07] is the constant 0xfe
 0x01ba (0x08fa): (0x12) If var[0x1f] < var[0x07] then Goto 0x01cc
+
+/ "driftwood" / "torch" IS in the player's inventory
+
+/ Branch if the remaining number of turns before it burns out is 9 
+/ and print "The wood flickers"
 0x01be (0x08fe): (0x18) If var[0x36] == (constant) 0x09 then Goto 0x01ca
+
+/ It's not 9 turns before the wood burns out
+
+/ Branch if the number of turns before it burns out is not 0
+/ var[0x0b] is the constant 0x00
 0x01c2 (0x0902): (0x11) If var[0x36] != var[0x0b] then Goto 0x01cc
+
+/ Torch just went from 0x01 to 0x00 turns left so print a message
+
 / Print message  "\nThe burning branch is going out! "
 0x01c6 (0x0906): (0x05) Print message (constant) 0xaa
+
+/ Move to the next check
 0x01c8 (0x0908): (0x00) Goto 0x01cc
-**************************************************************************
+
 / Print message  "\nThe wood flickers "
 0x01ca (0x090a): (0x05) Print message (constant) 0xa9
+
+**************************************************************************
+
+
 0x01cc (0x090c): (0x10) If var[0x13] == var[0x0b] then Goto 0x01dd
 0x01d0 (0x0910): (0x0b) Set var[0x13] -= var[0x01].
 0x01d3 (0x0913): (0x12) If var[0x13] < var[0x04] then Goto 0x01db
@@ -4884,13 +4942,19 @@
 
 **************************************************************************
 
-/ 
+/ Set the temporary variable to the base message id that was passed in
 0x1586 (0x1cc6): (0x09) Set var[0x5d] = var[0x38]
+
+/ Add on the current looping object index (starts at 0x1e ends at 0x8f)
 0x1589 (0x1cc9): (0x0a) Set var[0x5d] += var[0x1e]
+
+/ Branch if the current object id is NOT the "driftwood" / "torch" (0x4c)
 0x158c (0x1ccc): (0x19) If var[0x1e] != (constant) 0x4c then Goto 0x159e
+
+/ 
 0x1590 (0x1cd0): (0x10) If var[0x36] == var[0x0b] then Goto 0x159e
 0x1594 (0x1cd4): (0x08) Set var[0x63] = (constant) 0x70
-0x1597 (0x1cd7): (0x1b) If var[0x36] > (constant) 0x0a then Goto 0x159e
+0x1597 (0x1cd7): (0x1b) If var[0x36] > (constant) 0x0a then Goto 0x159ef
 0x159b (0x1cdb): (0x08) Set var[0x63] = (constant) 0xa8
 0x159e (0x1cde): (0x19) If var[0x1e] != (constant) 0x52 then Goto 0x15a9
 0x15a2 (0x1ce2): (0x11) If var[0x40] != var[0x07] then Goto 0x15a9
