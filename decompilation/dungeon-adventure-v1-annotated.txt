@@ -140,14 +140,19 @@
 / 0x22 - Status of the Rakshasa 
 /        0x00 - have NOT played the die game
 /        0x01 - HAVE played the die game
-/
+/ 0x23 - Status of the "battered silver face" - discovered when the player first does a "look"
+/        in the swamp / marsh locations (0x01 to 0x08)
+/        0x00 - Player has not yet discovered it
+/        0x01 - Player HAS discovered it by 
 / 0x24 - Status of the canivorous jelly
 /        0x00 - circling around
 /        0x01 - converged on the corpse that the player threw
 / 0x25 - Status of the cold cream (prevents the fire elemental leaping on the player)
 /        0x00 - not smeared on the player
 /        0x01 - smeared on the player
-/
+/ 0x26 - Status of the rat
+/        0x00 - rat is guarding the corridor
+/        0x01 - rat has fled from the stinking chip
 / 0x27 - Status of the two evil giants:
 /        0x00 - alive and still in the clearing asleep
 /        0x01 - fought each other and rushed off
@@ -176,6 +181,8 @@
 /        0x00 - normal size
 /        0x01 - shrunk
 /        0x02 - giant (can kill the giant ants)
+/
+/ 
 / 0x30 - Matched input word code 1
 / 0x31 - Matched input word code 2
 / 0x32 - Matched input word code 3
@@ -191,18 +198,17 @@
 /        0x03 - trapped for 2 turns, "The walls at the far end clash together"
 /        0x04 - trapped for 3 turns, walls try and crush player and if not wedged the player will die, "The walls near you grind together"
 /        0x05 - bars lifted and player free after wedging the walls, "The bars lift"
-/        
-/ 0x37 - Whether the player can see (either eyes are open/closed or blindfolded or it's dark)
-/        0x00 - eyes are closed OR it's dark with no light (cannot see)
-/        0x01 - eyes are open, not blindfolded and there is light (can see and room description will be printed)
-/ 0x36 - Number of remaining turns for the driftwood to burn (decrements by 1 per turn)
 /        0x00 - Not burning
 /        0x01 - Message will be printed "The burning branch is going out!"
 /        .... - Remaining turns left for the wood to burn out
 /        0x09 - Message will be printed "The wood flickers"
 /        .... - Remaining turns left for the wood to burn out
 /        0xc8 - Player is given 200 turns when initially lit (0xc8)
-/        When first lit the player is g
+/ 0x37 - Whether the player can see (either eyes are open/closed or blindfolded or it's dark)
+/        0x00 - eyes are closed OR it's dark with no light (cannot see)
+/        0x01 - eyes are open, not blindfolded and there is light (can see and room description will be printed)
+/ 0x36 - Number of remaining turns for the driftwood to burn (decrements by 1 per turn)
+/
 / 0x39 - Counter for how long the player has been staring at the myriad of moving images around an immense pit
 /        0x00 - not at all
 /        .... - additional turns / commands (increments by 2 when the location is printed, by 1 if not)
@@ -216,14 +222,18 @@
 /        0x00 - not a valid action
 /        0x01 - valid action
 /        Reset to 0x01 whenever "What next?" is printed (start of each turn)
-/
+/ 0x3d - Unused
 / 0x3e - Number of items the player is wearing
-/
+/ 0x3f - Status of the flint-thrower 
+/        0x00 - still in place throwing flint
+/        0x01 - wand waved and flint thrower dead
 / 0x40 - Location of the sticky slime
 /        0x00 - default location "on the floor of a cavern... " (0x36)
 /        0xnn - wherever the pot is dropped after it was filled with slime 
 /        0xfe - in the player's inventory (when the pot is filled)
-/
+/ 0x41 - Whether the player has said the correct password or not at the gatehouse
+/        0x00 - correct password not yet said
+/        0x01 - correct password said
 / 0x42 - Status of the troll on the magnificent golden pathway"
 /        0x00 - has NOT been given the medallion
 /        0x01 - HAS been given the medallion
@@ -238,6 +248,12 @@
 /        0x00 - not reflected
 /        0x01 - reflected
 /
+/ 0x49 - Status of if the machine has scanned the player in the large store room
+/        0x00 - player cannot be resurrected as they haven't been scanned by the machine
+/        0x01 - player can be resurrected as they haven't been scanned by the machine
+/ 0x4a - Status of the caterpillar 
+/        0x00 - not squeezed
+/        0x01 - squeezed and a silken rope has emerged 
 / 0x4b - Status of the rope in the roc's nest
 /        0x00 - not tied to the roc's nest
 /        0x01 - tied to the roc's nest
@@ -246,8 +262,6 @@
 /        0x8f - A host of skeletons are guarding a bearded dwarf
 / 0x4d - Second location supplementary message, can be set to:
 /        0x19 - A faint light shines in
-/        
-/        
 /
 / 0x4f - Maximum number of items a player can carry - defaults to 0x04
 /        Can be:
@@ -260,16 +274,18 @@
 /        0x00 - stil around 
 /        0x01 - fled in panic
 / 0x53 - Number of rocks that the player has pressed when blocked by the slab of rock (0x77)
-/ 0x53 - Status of the boulder in the damp hemispherical cave
-/        0x00 - Not pushed, moss still on walls and floro
-/        0x01 - Pushed, exit open and moss in a lump in the corner
-/
+/ 0x54 - Status of the boulder in the damp hemispherical cave
+/        0x00 - not pushed, moss still on walls and floro
+/        0x01 - pushed, exit open and moss in a lump in the corner
 / 0x55 - Status of the statue int he statue room
 /        0x00 - not turned
 /        0x01 - turned and opening east revealed
+/ 0x56 - Unused 
+/ 0x57 - Number of turns/commands entered by the player
 /
-/ 0x57 - number of turns/commands entered by the player
-/
+/ 0x5a - Status of whether the player has picked up the red gold ring
+/        0x00 - not picked up
+/        0x01 - picked up the ring
 / 0x5b - Status of the vampire
 /        0x00 - still alive (or undead)
 /        0x01 - killed by the wooden cross
@@ -290,7 +306,9 @@
 / 0x5f - Status of the small ornate box with a lid
 /        0x00 - never dropped in shallow water
 /        0x01 - has been dropped in shallow water and snake inside has been drowned
-/
+/ 0x60 - Status of the coffin 
+/        0x00 - slightly ajar
+/        0x01 - nailed shut
 / 0x61 - Unused - but seems to be a location light indicator
 /        0x00 - player cannot see location description (eyes closed)
 /        0x01 - player can see location description
@@ -384,6 +402,7 @@
 /     are mentioned and it makes no difference to the game.
 / 34. var[0x0d] increments by 50 every time the player eats the tasty mushrooms in the troll's squalid store room
 /     maybe an original part of the score and how you could reach 9,998?
+/ 35. Player can only be resurrected if they have been scanned by the machine in the large storeroom
 
 
 / TODO what happens to collars when you wear a new one
