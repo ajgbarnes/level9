@@ -173,7 +173,14 @@
 / 0x34 - Whether the player is invisible - eating the mushroom will make them invisible for 9 turns
 /        0x00         - can be seen 
 /        0x01 to 0x09 - invisible
-/ 
+/ 0x35 - Number of turns that the player has been trapped in the east crusher room
+/        0x00 - not trapped
+/        0x01 - trapped but then incremented
+/        0x02 - trapped for 1 turn,  "Iron bars slam down to block your progress"
+/        0x03 - trapped for 2 turns, "The walls at the far end clash together"
+/        0x04 - trapped for 3 turns, walls try and crush player and if not wedged the player will die, "The walls near you grind together"
+/        0x05 - bars lifted and player free after wedging the walls, "The bars lift"
+/        
 / 0x37 - Whether the player can see (either eyes are open/closed or blindfolded or it's dark)
 /        0x00 - eyes are closed OR it's dark with no light (cannot see)
 /        0x01 - eyes are open, not blindfolded and there is light (can see and room description will be printed)
@@ -886,29 +893,88 @@
 0x0240 (0x0980): (0x00) Goto 0x022b
 
 **************************************************************************
+
+/ Branch if the walls aren't about to crush the player (0x00) in 
+/ the "east crusher room" (0xaf)
 0x0242 (0x0982): (0x10) If var[0x35] == var[0x0b] then Goto 0x027c
+
+/ Branch if the walls have been wedged and the bars have lifted (0x05)
 0x0246 (0x0986): (0x13) If var[0x35] > var[0x04] then Goto 0x027c
+
+/ Increment the number of turns that the player has been stuck in the 
+/ "east crusher room" (it's actually number of turns + 1)
+/ var[0x01] is the constant 0x01
 0x024a (0x098a): (0x0a) Set var[0x35] += var[0x01]
+
+/ Branch if the it's NOT the first turn trapped here
+/ var[0x02] is the constant 0x02
 0x024d (0x098d): (0x11) If var[0x35] != var[0x02] then Goto 0x0254
+
+/ First turn trapped in the east crusher room
+
 / Print message  "Iron bars slam down to block your escape "
 0x0251 (0x0991): (0x05) Print message (constant) 0x126
+
+/ Branch if it's NOT the second turn that the player has been stuck in the 
+/ "east crusher room" (it's actually number of turns + 1)
+/ var[0x03] is the constant 0x03
 0x0254 (0x0994): (0x11) If var[0x35] != var[0x03] then Goto 0x025b
+
+/ Second turn trapped in the east crusher room
+
 / Print message  "The walls at the far end clash together "
 0x0258 (0x0998): (0x05) Print message (constant) 0x122
+
+/ Branch if it's the fourth turn and the walls are wedged (can'T
+/ get to being value 5 if they walls are not wedged before the 
+/ player is killed)
 0x025b (0x099b): (0x11) If var[0x35] != var[0x05] then Goto 0x0262
+
+/ Fourth turn but walls are wedged
+
 / Print message  "The bars lift "
 0x025f (0x099f): (0x05) Print message (constant) 0x127
+
+/ Branch if it's NOT the third turn turn 
+/ var[0x04] is the constant 0x04
 0x0262 (0x09a2): (0x11) If var[0x35] != var[0x04] then Goto 0x027c
+
+/ Number of turns in the east crusher room as reached 4 so check if 
+/ the player has wedge the room 
+
 / Print message  "The walls near you grind together "
 0x0266 (0x09a6): (0x05) Print message (constant) 0x123
+
+/ Set the temporary variable to to the object id for the "wedge" (0x56)
 0x0269 (0x09a9): (0x08) Set var[0x1e] = (constant) 0x56
+
+/ Get the current location of the "wedge"
 0x026c (0x09ac): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
+
+/ Branch if the wedge IS in the player's current lcoation
 0x026f (0x09af): (0x10) If var[0x1f] == var[0x43] then Goto 0x0279
+
+/ Wedge is NOT in the player's current location
+
+/ Set the status of the walls to crush the player (0x00)
+/ var[0x0b] is the constant 0x00
 0x0273 (0x09b3): (0x09) Set var[0x35] = var[0x0b]
+
+/ Kill the player
 0x0276 (0x09b6): (0x00) Goto 0x12e7
+
 **************************************************************************
+
+/ Wedge IS in the same location as the player and stopping the walls
+/ crushing the player (player lives)
+
 / Print message  "but they're wedged! "
 0x0279 (0x09b9): (0x05) Print message (constant) 0x124
+
+**************************************************************************
+
+
+
 0x027c (0x09bc): (0x10) If var[0x0f] == var[0x0b] then Goto 0x028f
 0x0280 (0x09c0): (0x0a) Set var[0x0f] += var[0x01]
 0x0283 (0x09c3): (0x11) If var[0x0f] != var[0x05] then Goto 0x028f
