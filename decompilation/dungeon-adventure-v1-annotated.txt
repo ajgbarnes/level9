@@ -68,7 +68,14 @@
 / 0x0e - Status of the ants
 /        0x00 - player has not grown huge and trodden on the giant ants
 /        0x01 - player HAS grown huge and trodden on the giant ants
-/ 
+/ 0x0f - Status of the orcs
+/        0x00 - Orcs are not camping
+/        0x01 - Orcs are camped all around and will block the player's movement (gets auto incremented on the first turn)
+/        0x02 - Orcs have been camped around for one turn
+/        0x03 - Orcs have been camped around for two turns
+/        0x04 - Orcs have been camped around for three turns
+/        0x05 - Orcs have been camped around for four turns, kill the player
+/        0x06 - horn blown at the army camp and orcs fled (for now)
 / 0x11 - Status of the grotesque yellow bird 
 /        0x00 - not scared away
 /        0x01 - scared away so the player can enter the nest and retrieve the large jade egg
@@ -831,6 +838,10 @@
 / Print message  "\nYou are visible again!\n "
 0x020d (0x094d): (0x05) Print message (constant) 0x106
 
+**************************************************************************
+* Process the status of the black spheres
+*************************************************************************
+
 / Branch if the first black sphere is destroyed (0xe1) or not following the player (0xab)
 0x0210 (0x0950): (0x1b) If var[0x14] > (constant) 0x09 then Goto 0x0230
 
@@ -893,6 +904,8 @@
 0x0240 (0x0980): (0x00) Goto 0x022b
 
 **************************************************************************
+* Process the status of the walls in the east crusher room
+*************************************************************************
 
 / Branch if the walls aren't about to crush the player (0x00) in 
 / the "east crusher room" (0xaf)
@@ -972,17 +985,39 @@
 0x0279 (0x09b9): (0x05) Print message (constant) 0x124
 
 **************************************************************************
+* Check the status of the camped orcs
+**************************************************************************
 
-
-
+/ Branch if the orcs are NOT camped around the player (0x00)
+/ and get the next command
+/ var[0x0b] is the constant 0x00
 0x027c (0x09bc): (0x10) If var[0x0f] == var[0x0b] then Goto 0x028f
+
+/ Orcs ARE camped around the player
+
+/ Increment the number of turns that the orcs have been camped around the player 
+/ (it's actually number of turns + 1)
 0x0280 (0x09c0): (0x0a) Set var[0x0f] += var[0x01]
+
+/ Branch if the orcs have not been camped around the player for four turns
+/ and get the next command
+/ var[0x05] is the constant 0x05
 0x0283 (0x09c3): (0x11) If var[0x0f] != var[0x05] then Goto 0x028f
+
+/ Orcs have been camped for 4 turns
+
 / Print message  "The orcs run towards you and kill you "
 0x0287 (0x09c7): (0x05) Print message (constant) 0xde
+
+/ Reset the orcs to NOT camped around the player (0x00)
+/ var[0x0b] is the constant 0x00
 0x0289 (0x09c9): (0x09) Set var[0x0f] = var[0x0b]
+
+/ Kill the player
 0x028c (0x09cc): (0x00) Goto 0x12e7
+
 **************************************************************************
+
 / Print message  "\nWhat next?\n "
 0x028f (0x09cf): (0x05) Print message (constant) 0x02
 
@@ -2179,7 +2214,7 @@
 / var[0x0b] is the constant 0x00
 0x0635 (0x0d75): (0x10) If var[0x0f] == var[0x0b] then Goto 0x0640
 
-/ Branch if the orcs have fled acter the hold has been blown (0x06)
+/ Branch if the orcs have fled after the horn has been blown (0x06)
 / var[0x05] is the constant 0x05
 0x0639 (0x0d79): (0x13) If var[0x0f] > var[0x05] then Goto 0x0640
 
