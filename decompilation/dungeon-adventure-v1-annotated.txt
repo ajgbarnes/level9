@@ -4295,8 +4295,16 @@
 * Command: "shake" or "wave"
 **************************************************************************
 
+/ Check that the player has the item in the second word
 0x104e (0x178e): (0x01) Gosub 0x1559
+
+/ Branch if the command was invalid (0x00)
+/ var[0x0b] is the constant 0x00
 0x1051 (0x1791): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
+
+**************************************************************************
+* Process the player waving the staff
+**************************************************************************
 
 / Branch if the second word is NOT the "staff" (0x80)
 0x1056 (0x1796): (0x19) If var[0x31] != (constant) 0x80 then Goto 0x1069
@@ -4323,16 +4331,44 @@
 
 / TODO
 0x1066 (0x17a6): (0x00) Goto 0x0190
+
 **************************************************************************
+* Process the player waving the wand
+**************************************************************************
+
+/ Branch if the second word is NOT the "wand" (0x82) and move to the next check
 0x1069 (0x17a9): (0x19) If var[0x31] != (constant) 0x82 then Goto 0x107d
+
+/ Second word is the "wand"
+
+/ Branch if the player's current location is NOT "in the lower chamber. There are 6 exits." (0x7c)
 0x106d (0x17ad): (0x19) If var[0x43] != (constant) 0x7c then Goto 0x107d
+
+/ Branch if the flint thrower is already dead (0x01)
+/ var[0x0b] is the constant 0x00
 0x1071 (0x17b1): (0x11) If var[0x3f] != var[0x0b] then Goto 0x107d
+
+/ Flint thrower still alive
+
 / Print message  "You hear a body fall into water far below "
 0x1075 (0x17b5): (0x05) Print message (constant) 0x9b
+
+/ Set the status of the flint thrower to dead
 0x1077 (0x17b7): (0x09) Set var[0x3f] = var[0x01]
+
+/ TODO 
 0x107a (0x17ba): (0x00) Goto 0x0190
+
 **************************************************************************
+* Process the player waving the seed pod
+**************************************************************************
+
+/ Branch if the player is waving the seed pod (0x89)
 0x107d (0x17bd): (0x18) If var[0x31] == (constant) 0x89 then Goto 0x126c
+
+/ Player is NOT waving the seed pod
+
+/ Print "Nothing happens"
 0x1082 (0x17c2): (0x00) Goto 0x15f0
 
 **************************************************************************
