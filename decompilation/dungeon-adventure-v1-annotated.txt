@@ -279,7 +279,7 @@
 /        4  - if not shrunk and not wearing the belt
 /        10 - if not shrunk and wearing the belt
 / 0x50 - Exit flags when a player tries to move in a direction from one location to another
-/ 0x51 - Used to calculate the player's scoer
+/ 0x51 - Used to calculate the player's score
 / 0x52 - Status of the siren 
 /        0x00 - stil around 
 /        0x01 - fled in panic
@@ -445,6 +445,16 @@
 /     9 -
 / 40. If the player performs a "looK" in "the Salt Cellar, surrounded by pillars of salt"
 /     then "Your body becomes a pillar of salt!" and the player is killed
+/ 41. Player accolade is based on the following:
+/      < 50  : You didn't get very far!
+/      < 100 : OK for a beginner
+/      < 200 : You had some success
+/      < 300 : A worthy efort!
+/      < 400 : You have earned the rank of Adventurer
+/      < 500 : You're clearly an experienced Adventurer!
+/      < 600 : Congratulations, Master Adventurer! You'll soon be a Grandmaster
+/        600 : All hail to thee, Grandmaster Adventurer!!
+
 
 / TODO what happens to collars when you wear a new one
 
@@ -3364,7 +3374,7 @@
 0x0b16 (0x1256): (0xe2) Set list#2[var[0x1e]] = var[0x43] (list address 0x0740)
 
 **************************************************************************
-* Process the player looking in the swamp / marsh
+* Process the player looking in the Salt Cellar
 **************************************************************************
 
 / Branch if the player's current location is NOT "in the Salt Cellar, 
@@ -3376,7 +3386,6 @@
 
 / Kill the player
 0x0b1f (0x125f): (0x00) Goto 0x12e7
-**************************************************************************
 
 / Look processing complete
 / TODO
@@ -5336,20 +5345,61 @@
 / Print message  "\nYour ghost rushes along "
 0x1312 (0x1a52): (0x05) Print message (constant) 0x13
 
+/ Branch if the machine has NOT scanned the player previously (0x00)
+/ as they cannot be resurrected
+/ var[0x0b] is the constant 0x00
 0x1314 (0x1a54): (0x10) If var[0x49] == var[0x0b] then Goto 0x133a
+
+/ Branch if the player has already met the Rakshasa (0x01)
+/ and allow the resurrection
+/ var[0x0b] is the constant 0x01
 0x1318 (0x1a58): (0x13) If var[0x22] > var[0x0b] then Goto 0x133e
+
+/ Branch if the player's current location IS "on the ceiling of a fine room. 
+/ A chandelier lies beside you and the floor of the room is far above" (0xc8)
+/ and allow the resurrection
 0x131c (0x1a5c): (0x18) If var[0x44] == (constant) 0xc8 then Goto 0x133e
+
+/ Branch if the player's current location IS "on the carpetted floor of a
+/ comfortable homely room, beside a door to the east." (0xc9)
+/ and allow the resurrection
 0x1320 (0x1a60): (0x18) If var[0x44] == (constant) 0xc9 then Goto 0x133e
+
+/ Branch if the player's current location IS "in a large store room. 
+/ You realise that this is the ideal place to leave any treasures that you ." (0xca)
+/ and allow the resurrection
 0x1324 (0x1a64): (0x18) If var[0x44] == (constant) 0xca then Goto 0x133e
+
+/ Branch if the player's current location IS "inside a large wooden box. 
+/ A small door leads deeper into the box" (0xd7)
+/ and allow the resurrection
 0x1328 (0x1a68): (0x18) If var[0x44] == (constant) 0xd7 then Goto 0x133e
+
+/ Set the temporary variable to the object id of the "packing case" (0x88)
 0x132c (0x1a6c): (0x08) Set var[0x1e] = (constant) 0x88
+
+/ Get the current location of the "packing case"
 0x132f (0x1a6f): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
+
+/ Branch if the "packing case" IS in the player's inventory (0xfe)
+/ and allow the resurrection
+/ var[0x07] is the constant 0x0fe
 0x1332 (0x1a72): (0x10) If var[0x1f] == var[0x07] then Goto 0x133e
+
+/ Branch if the "packing case" IS in the player's current location
+/ and allow the resurrection
 0x1336 (0x1a76): (0x10) If var[0x1f] == var[0x44] then Goto 0x133e
+
+/ Resurrection is NOT allowed
+
 / Print message  "but fades rapidly.. You are completely dead "
 0x133a (0x1a7a): (0x05) Print message (constant) 0x14
+
+/ TODO
 0x133c (0x1a7c): (0x00) Goto 0x135c
+
 **************************************************************************
+
 / Print message  "and enters the machine in the homely house. Your body regenerates rapidly "
 0x133e (0x1a7e): (0x05) Print message (constant) 0x15
 
@@ -5388,34 +5438,96 @@
 / TODO 
 0x1359 (0x1a99): (0x00) Goto 0x0149
 **************************************************************************
+
+/ Calculate and print the player's score 
 0x135c (0x1a9c): (0x01) Gosub 0x1200
+
+/ 0x2b : You didn't get very far!
+/ 0x2c : OK for a beginner
+/ 0x2d : You had some success
+/ 0x2e : A worthy efort!
+/ 0x2f : You have earned the rank of Adventurer
+/ 0x30 : You're clearly an experienced Adventurer!
+/ 0x31 : Congratulations, Master Adventurer! You'll soon be a Grandmaster
+/ 0x32  : All hail to thee, Grandmaster Adventurer!!
+
+/ Set the temporary variable to the base message "You didn't get very far!" (0x2b)
 0x135f (0x1a9f): (0x08) Set var[0x5d] = (constant) 0x2b
+
+/ Branch if the score is less than 50 (0x32)
 0x1362 (0x1aa2): (0x1a) If var[0x51] < (constant) 0x32 then Goto 0x1397
+
+/ Set the temporary variable to the message "OK for a beginner" (0x2c)
 0x1366 (0x1aa6): (0x0a) Set var[0x5d] += var[0x01]
+
+/ Branch if the score is less than 100 (0x64)
 0x1369 (0x1aa9): (0x1a) If var[0x51] < (constant) 0x64 then Goto 0x1397
+
+/ Set the temporary variable to the base message "You had some success" (0x2d)
 0x136d (0x1aad): (0x0a) Set var[0x5d] += var[0x01]
+
+/ Branch if the score is less than 200 (0xc8)
 0x1370 (0x1ab0): (0x1a) If var[0x51] < (constant) 0xc8 then Goto 0x1397
+
+/ Set the temporary variable to the base message "A worthy effort!" (0x2e)
 0x1374 (0x1ab4): (0x0a) Set var[0x5d] += var[0x01]
+
+/ Branch if the score is less than 300 (0x128)
 0x1377 (0x1ab7): (0x1a) If var[0x51] < (constant) 0x12c then Goto 0x1397
+
+/ Set the temporary variable to the base message "You have earned the rank of Adventurer" (0x2f)
 0x137c (0x1abc): (0x0a) Set var[0x5d] += var[0x01]
+
+/ Branch if the score is less than 400 (0x190)
 0x137f (0x1abf): (0x1a) If var[0x51] < (constant) 0x190 then Goto 0x1397
+
+/ Set the temporary variable to the base message "You're clearly an experienced Adventurer!" (0x30)
 0x1384 (0x1ac4): (0x0a) Set var[0x5d] += var[0x01]
+
+/ Branch if the score is less than 500 (0x1f4)
 0x1387 (0x1ac7): (0x1a) If var[0x51] < (constant) 0x1f4 then Goto 0x1397
+
+/ Set the temporary variable to the base message "Congratulations, Master Adventurer! You'll soon be a Grandmaster" (0x31)
 0x138c (0x1acc): (0x0a) Set var[0x5d] += var[0x01]
+
+/ Branch if the score is less than 600 (0x258)
 0x138f (0x1acf): (0x1a) If var[0x51] < (constant) 0x258 then Goto 0x1397
+
+/ Set the temporary variable to the base message "All hail to thee, Grandmaster Adventurer!!" (0x32)
 0x1394 (0x1ad4): (0x0a) Set var[0x5d] += var[0x01]
+
 0x1397 (0x1ad7): (0x04) Print message var[0x5d]
 / Print message  "\nAnother game?\n "
 0x1399 (0x1ad9): (0x05) Print message (constant) 0x0e
+
+/ Get the player's response
 0x139b (0x1adb): (0x07) Input - results in word1 var[0x30], word2 var[0x31], word3 var[0x32], count var[0x33]
+
+/ Branch if there is no entered input and ask for input again
 0x13a0 (0x1ae0): (0x10) If var[0x33] == var[0x0b] then Goto 0x139b
+
+/ Branch if the first word is "no" (actually matches against north) (0x01)
+/ var[0x01] is the constant 0x01
 0x13a4 (0x1ae4): (0x10) If var[0x30] == var[0x01] then Goto 0x13b1
+
+/ Branch if the first word is "yes" (0x1d) and reinitialise the game
 0x13a8 (0x1ae8): (0x18) If var[0x30] == (constant) 0x1d then Goto 0x0000
+
+/ Player did NOT answer "yes" or "no"
+
 / Print message  "Please answer YES or NO\n "
 0x13ad (0x1aed): (0x05) Print message (constant) 0x09
+
+/ Loop back and ask the question again
 0x13af (0x1aef): (0x00) Goto 0x1399
-**************************************************************************
+
+/ Player decided to quit
+
+/ Quit the game
 0x13b1 (0x1af1): (0x06) Function - Quit (0x01)
+
+**************************************************************************
+
 0x13b3 (0x1af3): (0x19) If var[0x43] != (constant) 0x22 then Goto 0x15f0
 / Print message  ""Pass friend!" "
 0x13b8 (0x1af8): (0x05) Print message (constant) 0xb9
