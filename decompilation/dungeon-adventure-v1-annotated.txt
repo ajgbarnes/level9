@@ -454,6 +454,13 @@
 /      < 500 : You're clearly an experienced Adventurer!
 /      < 600 : Congratulations, Master Adventurer! You'll soon be a Grandmaster
 /        600 : All hail to thee, Grandmaster Adventurer!!
+/ 42. Resurrection is NOT guaranteed and only will happen under the following circumstances:
+/     (1. Player has scanned themselves in the large store room OR
+       2. 
+
+/     1. Player has been resurrected less than 3 times
+
+/     
 
 
 / TODO what happens to collars when you wear a new one
@@ -1135,24 +1142,60 @@
 
 / At least one word was entered and matched
 
-
+/ Branch if the first word entered IS a verb or object
 0x02b0 (0x09f0): (0x1a) If var[0x30] < (constant) 0x8c then Goto 0x02b9
+
+/ Branch if the first word entered IS a colour (e.g. red.... silver)
 0x02b4 (0x09f4): (0x1a) If var[0x30] < (constant) 0x94 then Goto 0x13c0
+
+/ Branch if the first word entered IS "password!" or "agaliarept" (0xc3)
+/ which are both valid passwords.  Call the password processing routine
 0x02b9 (0x09f9): (0x18) If var[0x30] == (constant) 0xc3 then Goto 0x13b3
+
+/ Branch if the first word entered IS "hammer" or "mallet" (0x4e)
+/ and treat it as though it's a "close" or "lock" or "shut"
 0x02be (0x09fe): (0x18) If var[0x30] == (constant) 0x4e then Goto 0x0cef
+
+/ Branch if the first word entered IS "bag" or "nails" or "nail" (0x50)
+/ and treat it as though it's a "close" or "lock" or "shut"
 0x02c3 (0x0a03): (0x18) If var[0x30] == (constant) 0x50 then Goto 0x0cef
+
+/ Branch if the first word entered is a verb and process it
 0x02c8 (0x0a08): (0x1a) If var[0x30] < (constant) 0x46 then Goto 0x02d1
+
+/ First word entered is NOT a verb
+
 / Print message  "I don't understand "
 0x02cc (0x0a0c): (0x05) Print message (constant) 0x03
+
+/ TODO
 0x02ce (0x0a0e): (0x00) Goto 0x0149
+
 **************************************************************************
+* First word is a verb
+**************************************************************************
+
+/ Branch if the first word is a verb that can exist without an object
+/ (0x01 to 0x27) e.g. North or listen or inventory
 0x02d1 (0x0a11): (0x1a) If var[0x30] < (constant) 0x28 then Goto 0x02e2
+
+/ Branch if there are less than two words as anything above "0x28"
+/ needs an object e.g. take <object> or drop <object>
 0x02d5 (0x0a15): (0x12) If var[0x33] < var[0x02] then Goto 0x02dd
+
+/ Branch if the second word is not another verb but some kinda of object
 0x02d9 (0x0a19): (0x1b) If var[0x31] > (constant) 0x45 then Goto 0x02e2
+
+/ Second word IS a verb
+
 / Print message  "Please be more specific "
 0x02dd (0x0a1d): (0x05) Print message (constant) 0x04
+
+/ TODO 
 0x02df (0x0a1f): (0x00) Goto 0x0149
+
 **************************************************************************
+
 0x02e2 (0x0a22): (0x12) If var[0x30] < var[0x02] then Goto 0x02fe
 0x02e6 (0x0a26): (0x1a) If var[0x31] < (constant) 0x9b then Goto 0x02fe
 0x02ea (0x0a2a): (0x1b) If var[0x31] > (constant) 0xc8 then Goto 0x02fe
@@ -5412,7 +5455,8 @@
 / Print message  "but the machine has been overworked. Something is wrong! Your new body slumps to the floor "
 0x1344 (0x1a84): (0x05) Print message (constant) 0x17
 
-
+/ Calculate the score, display it along with an accolade
+/ and ask if the player wants to  play again
 0x1346 (0x1a86): (0x00) Goto 0x135c
 
 / Player has died less than 2 times, allow the resurrection
@@ -5527,13 +5571,27 @@
 0x13b1 (0x1af1): (0x06) Function - Quit (0x01)
 
 **************************************************************************
+* Process the password being said
+**************************************************************************
 
+/ Branch if the player's current location is NOT "outside the gatehouse" (0x22)
+/ and print "nothing happens"
 0x13b3 (0x1af3): (0x19) If var[0x43] != (constant) 0x22 then Goto 0x15f0
+
+/ Player IS at "outside the gatehouse"
+
 / Print message  ""Pass friend!" "
 0x13b8 (0x1af8): (0x05) Print message (constant) 0xb9
+
+/ Set the status of the password to correctly given (0x01)
+/ var[0x01] is the constant 0x01
 0x13ba (0x1afa): (0x09) Set var[0x41] = var[0x01]
+
+/ TODO
 0x13bd (0x1afd): (0x00) Goto 0x0190
+
 **************************************************************************
+
 0x13c0 (0x1b00): (0x1a) If var[0x43] < (constant) 0x55 then Goto 0x15f0
 0x13c5 (0x1b05): (0x1b) If var[0x43] > (constant) 0x5d then Goto 0x15f0
 0x13ca (0x1b0a): (0x12) If var[0x0a] < var[0x30] then Goto 0x13e2
