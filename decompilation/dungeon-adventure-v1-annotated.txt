@@ -440,6 +440,8 @@
 /     6 -
 /     7 -
 /     9 -
+/ 40. If the player performs a "looK" in "the Salt Cellar, surrounded by pillars of salt"
+/     then "Your body becomes a pillar of salt!" and the player is killed
 
 / TODO what happens to collars when you wear a new one
 
@@ -3218,18 +3220,48 @@
 * Command: "look"
 **************************************************************************
 
+**************************************************************************
+* Process the player looking in the swamp / marsh
+**************************************************************************
+
+/ Branch if the player's current location is after the swamp / march
+/ locations (0x08 onwards)
 0x0b06 (0x1246): (0x1b) If var[0x43] > (constant) 0x08 then Goto 0x0b19
+
+/ Branch if the player has already 
 0x0b0a (0x124a): (0x13) If var[0x23] > var[0x0b] then Goto 0x0b19
+
 / Print message  "A face looks back: your gaze is locked! You stumble towards it.. then CRUNCH! You tread on a mechanical mask "
 0x0b0e (0x124e): (0x05) Print message (constant) 0xc0
+
+/ Set the status of the "battered silver face" to discovered (0x01)
+/ var[0x01] is the constant 0x01
 0x0b10 (0x1250): (0x09) Set var[0x23] = var[0x01]
+
+/ Set the temporary variable to the object id for the "battered silver face mask" (0x7d)
 0x0b13 (0x1253): (0x08) Set var[0x1e] = (constant) 0x7d
+
+/ Set the current location of the "battered silver face mask" to the player's 
+/ current location in the swamp / mask
 0x0b16 (0x1256): (0xe2) Set list#2[var[0x1e]] = var[0x43] (list address 0x0740)
+
+**************************************************************************
+* Process the player looking in the swamp / marsh
+**************************************************************************
+
+/ Branch if the player's current location is NOT "in the Salt Cellar, 
+/ surrounded by pillars of salt" (0x2b7)
 0x0b19 (0x1259): (0x19) If var[0x43] != (constant) 0xc3 then Goto 0x0b22
+
 / Print message  "Your body becomes a pillar of salt! "
 0x0b1d (0x125d): (0x05) Print message (constant) 0xd9
+
+/ Kill the player
 0x0b1f (0x125f): (0x00) Goto 0x12e7
 **************************************************************************
+
+/ Look processing complete
+/ TODO
 0x0b22 (0x1262): (0x00) Goto 0x0149
 
 **************************************************************************
