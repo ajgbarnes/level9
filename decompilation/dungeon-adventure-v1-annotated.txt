@@ -252,6 +252,7 @@
 /        2. Temporary variable for holding the player's target location
 / 0x46 - Number of turns plus 1 that the player has been "within a circle of distored monoliths". When this reaches
 /        3 the Rakshasa appear and play the game with the player.
+/        TODO must have a secondary function
 / 0x47 - Status if the mirror has reflected the sleep spell
 /        0x00 - not reflected
 /        0x01 - reflected
@@ -418,20 +419,22 @@
 / 34. var[0x0d] increments by 50 every time the player eats the tasty mushrooms in the troll's squalid store room
 /     maybe an original part of the score and how you could reach 9,998?
 / 35. Player can only be resurrected if they have been scanned by the machine in the large storeroom
-/ 36. Function of the buttons on the throne on the ornate throne room:
-/     Initial press:
+/ 36. Function of the buttons on the throne on the ornate throne room the buttons do the following:
 /     1 - A pit opens in the floor (if closed - var[0x58] set to 0x00) otherwise "Nothing happens"
 /     2 - The pit closes (if closed - var[0x58] set to 0x01)) otherwise "Nothing happens"
 /     3 - The room fills briefly with light 
-/     4 - The entire throne rises through a trapdoor in the ceiling. It comes to rest in an odd little room (nothing happens on second presss)
+/     4 - The entire throne rises through a trapdoor in the ceiling. It comes to rest in an odd little room (nothing happens on second press)
 /     5 - Nothing happens
 /     6 - Alarms sound
 /     7 - Fire jets cross the floor!
 /     8 - "Master: I beg to report that all internal eyes are dead and enemies are in the caves. Also, thousands of enemy orcs are advancing upon us."
 /     9 - You are somewhere else! (moves the player to "Fire jets cross the floor!" (0x69) without the throne)
-/ 37. On the throne in the ornate throne room, if you press button 4 it comes to rest in an "odd little room" but 
-/     nothing seems to change
-/ 
+/ 37. On the throne in the ornate throne room, if you press button 4, the throne moves from 
+/ 38. Pressing button 1 on the "ornate" throne when it's in the "odd little room" still says "a pit opens in the floor!"
+/     even though it's NOT opened in the "odd little room"
+/ 39. The only ways out of the "odd little room" are:
+/     a. Pressing button 9 to be taking to "the pit: a large pentagonal room" (0x6f) 
+/     b. Via the packing case - the player has to bring it with them
 /     1 -
 /     2 -
 /     3 -
@@ -2633,6 +2636,11 @@
 / var[0x0b] is the constant 0x00
 0x071b (0x0e5b): (0x10) If var[0x55] == var[0x0b] then Goto 0x0686
 
+**************************************************************************
+* Check if the player can move from "in a long throne room" (0x63) to 
+* "below a sign" (0xaa) if the pit is open 
+**************************************************************************
+
 / Branch if the player's target destination is NOT "below a sign "Your fate is
 / sealed! Your only hope is to descend into the Central Dungeon and collect 9 gems. 
 / Succeed and you will be free!" (0xaa) 
@@ -2644,51 +2652,140 @@
 / lined with skin." (0x68)
 0x0724 (0x0e64): (0x19) If var[0x43] != (constant) 0x68 then Goto 0x072d
 
-/ Branc
+/ Player IS "in a long throne room lined with skin" 
+
+/ Branch if the pit IS "closed" (0x00) and print "You can't move 
+/ in that direction" 
+/ var[0x0b] is the constant 0x00 
 0x0728 (0x0e68): (0x10) If var[0x58] == var[0x0b] then Goto 0x0686
 
-/ Branch if the player's target destination is 
+**************************************************************************
+* Check if the player can move from "sitting on an ornate throne" to 
+* "in a long throne room" (0x63) - if the player has pressed button 4
+* on the throne and risen through the ceiling then they will instead 
+* go down to the "odd little room"
+**************************************************************************
+
+/ Branch if the player's target destination is "in a long throne 
+/ room lined with skin." (0x63)
 0x072d (0x0e6d): (0x19) If var[0x44] != (constant) 0x68 then Goto 0x073c
 
-/ Branch if the player's current location is NOT "
+/ Branch if the player's current location is NOT "sitting on an ornate throne. 
+/ There are nine numbered buttons along the left arm-rest" (0x5d)
 0x0731 (0x0e71): (0x19) If var[0x43] != (constant) 0x5d then Goto 0x073c
+
+/ Branch if the throne has NOT risen through the ceiling (0x00)
+/ var[0x0b] is the constant 0x00
 0x0735 (0x0e75): (0x10) If var[0x59] == var[0x0b] then Goto 0x073c
 
-/ Branch if the player's target destination is 
+/ Throne HAS risen through the ceiling (player pressed button 4 on throne)
+
+/ Set the player's target destination is "You are in an odd little room, 
+/ below a granite throne." (0x69)
 0x0739 (0x0e79): (0x08) Set var[0x44] = (constant) 0x69
 
-/ Branch if the player's current location IS "
+**************************************************************************
+* Check if the player is moving from either from, "in the strong 
+* room..." (0xa6) to"in a paved tunnel..." (0x3d) or from  ""in a paved 
+* tunnel" (x3d) to "in the strong room." (0xa6) An iron door is present
+* and it must be unbolted and open
+**************************************************************************
+
+/ Branch if the player's current location IS "in the strong room. An 
+/ iron door leads west and a narrow crack splits the east wall" (0xa6)
 0x073c (0x0e7c): (0x18) If var[0x43] == (constant) 0xa6 then Goto 0x0744
 
-/ Branch if the player's current location is NOT "
+/ Branch if the player's current location is NOT "in a paved tunnel 
+/ below a silver pedestal." (0x3d) and move to the next check
 0x0740 (0x0e80): (0x19) If var[0x43] != (constant) 0x3d then Goto 0x0751
 
-/ Branch if the player's target destination is 
+/ Player IS moving from either "in the strong room "(0xa6) or 
+/ "in a paved tunnel below a silver pedestal" (0x3d)
+
+/ This will only apply if the player is "in a paved tunnel..."
+/ Branch if the player's target destination IS "in the strong room. 
+/ An iron door leads west and a narrow crack splits the east wall"
+/ and check if the door is closed - is so print "The door is locked"
 0x0744 (0x0e84): (0x18) If var[0x44] == (constant) 0xa6 then Goto 0x074c
 
-/ Branch if the player's target destination is 
+/ Branch if the player's target destination is NOT "in a paved tunnel 
+/ below a silver pedestal and move to the next check
 0x0748 (0x0e88): (0x19) If var[0x44] != (constant) 0x3d then Goto 0x0751
+
+/ Player's target destination IS "in a paved tunnel 
+/ below a silver pedestal" and will be moving from "a strong room"
+/ will also get here from above moving the other way
+
+/ Branch if the iron door in the strong room is closed and bolted (0x00)
+/ and print "The door is locked"
+/ var[0x0b] is the constant 0x00
 0x074c (0x0e8c): (0x10) If var[0x0c] == var[0x0b] then Goto 0x161e
+
+**************************************************************************
+* Check the reaction of the skeletons when the player arrives 
+**************************************************************************
+
+/ Branch if the skeletons are NOT guarding the dwarf (0x01)
+/ var[0x0b] is the constant 0x00
 0x0751 (0x0e91): (0x11) If var[0x28] != var[0x0b] then Goto 0x0777
 
-/ Branch if the player's target destination is 
+/ Skeletons ARE guarding the dwarf (0x00)
+
+/ Branch if the player's target destination is NOT "in the lower 
+/ chamber. There are 6 exits" (0x7c)
 0x0755 (0x0e95): (0x19) If var[0x44] != (constant) 0x7c then Goto 0x076a
+
+/ Player's target destination IS "in the lower 
+/ chamber. There are 6 exits" (0x7c)
+
+/ Set the temporary variable to the "staff of polished bone "(0x80)
 0x0759 (0x0e99): (0x08) Set var[0x1e] = (constant) 0x80
+
+/ Get the current location of the "staff of polished bone"
 0x075c (0x0e9c): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
+
+/ Branch if the "staff of polished bone" IS in the player's inventory (0xfe)
+/ and let the skeletons stand to attention
+/ var[0x07] it the constant 0xfe
 0x075f (0x0e9f): (0x10) If var[0x1f] == var[0x07] then Goto 0x0768
+
+/ Player does NOT have the staff of polished bone
+
 / Print message  "Armed skeletons leap on you "
 0x0763 (0x0ea3): (0x05) Print message (constant) 0x93
+
+/ Kill the player
 0x0765 (0x0ea5): (0x00) Goto 0x12e7
+
 **************************************************************************
-/ Print message  "A party of skeletons stand to attention as you enter. (Greetings Master), they signal in semaphore, (We have captured an intruder dwarf and await your signals)! "
+
+/ Player DOES have the staff of polished bone
+
+/ Print message  "A party of skeletons stand to attention as you enter. 
+/ (Greetings Master), they signal in semaphore, (We have captured an intruder
+/  dwarf and await your signals)! "
 0x0768 (0x0ea8): (0x05) Print message (constant) 0x94
+
+/ Branch if the player's current location is NOT the "You are in the lower
+/ chamber. There are 6 exits." (0x7c)
 0x076a (0x0eaa): (0x19) If var[0x43] != (constant) 0x7c then Goto 0x0777
 
-/ Branch if the player's target destination is 
+/ Player IS "in the lower chamber. There are 6 exits."
+
+/ Branch if the player's target destination IS ""a steep earthy passage." (0x7b)
 0x076e (0x0eae): (0x18) If var[0x44] == (constant) 0x7b then Goto 0x0777
+
+/ Player IS "in the lower chamber. There are 6 exits." AND 
+/ the target destination is NOT "a steep earthy passage." (0x7b)
+
 / Print message  "The skeletons are in the way "
 0x0772 (0x0eb2): (0x05) Print message (constant) 0x90
+
+/ TODO 
 0x0774 (0x0eb4): (0x00) Goto 0x0149
+
+**************************************************************************
+* Check the behaviour of the dwarf
 **************************************************************************
 
 / Branch if the dwarf is NOT following the player (0x00)
@@ -2697,33 +2794,54 @@
 
 / Dwarf IS following the player (0x01)
 
-/ Branch if the player's target destination is 
+/ Branch if the player's target destination IS "at a junction in the round, 
+/ north-south passage, illuminated by a jet of flame from the floor. To the
+/ east is a treasure vault, completely filled with valuables of every kind" (0xcb)
+/ and print "That's not the way to the ore..."
 0x077b (0x0ebb): (0x18) If var[0x44] == (constant) 0xcb then Goto 0x079d
 
-/ Branch if the player's target destination is 
+/ Branch if the player's target destination IS "in a north-south passage. 
+/ A dry red stain spreads from beneath a fallen stone" (0xcc) 
+/ and print "That's not the way to the ore..."
 0x077f (0x0ebf): (0x18) If var[0x44] == (constant) 0xcc then Goto 0x079d
 
-/ Branch if the player's target destination is 
+/ Branch if the player's target destination IS "standing on a small round 
+/ platform surrounded by a cylinder of orange light" (0x56)
+/ and print "That's not the way to the ore..."
 0x0783 (0x0ec3): (0x18) If var[0x44] == (constant) 0x56 then Goto 0x079d
 
-/ Branch if the player's target destination is 
+/ Branch if the player's target destination IS "in a steep earthy passage" (0x7f)
+/ and print "That's not the way to the ore..."
 0x0787 (0x0ec7): (0x18) If var[0x44] == (constant) 0x7b then Goto 0x079d
 
-/ Branch if the player's target destination is 
+/ Branch if the player's target destination IS "just inside the entrance 
+/ to the wight house,... " (0x5e)
+/ and print "That's not the way to the ore..."
 0x078b (0x0ecb): (0x18) If var[0x44] == (constant) 0x5e then Goto 0x079d
 
-/ Branch if the player's target destination is 
+/ Branch if the player's target destination is NOT "in a gully above 
+/ the "winding stairs"" 
 0x078f (0x0ecf): (0x19) If var[0x44] != (constant) 0x0c then Goto 0x07b8
 
-/ Print message  "The dwarf dives into a hidden opening. You hear frantic hammering and cries of "Follow me!" "
+/ Player IS "in a gully above the "winding stairs"" (0x0c)
+
+/ Print message  "The dwarf dives into a hidden opening. You hear
+/  frantic hammering and cries of "Follow me!" "
 0x0793 (0x0ed3): (0x05) Print message (constant) 0x96
+
+/ Set the status of the dwarf to "not following the player (0x00)
+/ var[0x0b] is the constant 0x00
 0x0795 (0x0ed5): (0x09) Set var[0x1a] = var[0x0b]
+
+/ Set the dwarf's treasure diving status to "has dived" (0x01)
+/ var[0x01] is the constant 0x01
 0x0798 (0x0ed8): (0x09) Set var[0x1b] = var[0x01]
+
+/ Move to the next check
 0x079b (0x0edb): (0x00) Goto 0x07b8
 
-**************************************************************************
-
-/ Print message  ""That's not the way to the ore!", cries the dwarf, "I'm not going that way!". Do you turn back?\n "
+/ Print message  ""That's not the way to the ore!", cries the dwarf, 
+/ "I'm not going that way!". Do you turn back?\n "
 0x079d (0x0edd): (0x05) Print message (constant) 0x95
 
 / Get the player's yes or no answer
@@ -2748,15 +2866,15 @@
 / Loop back to print the message again and get a yes / no answer
 0x07b3 (0x0ef3): (0x00) Goto 0x079d
 
-**************************************************************************
-* Process the player NOT turning back when the dwarf reacted and said
-* "That's not the way to the ore!", cries the dwarf, "I'm not going that way!". 
-* Do you turn back?\n "
-**************************************************************************
-
 / Set the status of the dwarf to NOT following the player (0x00)
 / var[0x0b] is the constant 0x00
 0x07b5 (0x0ef5): (0x09) Set var[0x1a] = var[0x0b]
+
+**************************************************************************
+* Process if the player can enter the "huge cave of glistening rock" (0xcf)
+* from "You are in a gully above the "winding stairs"." (0x0c).  Can only
+* do this if the dwarf has dived into the a hidden opening.
+**************************************************************************
 
 / Branch if the target destination is NOT "in a huge cave of glistering rock. 
 / New passages lead north and south" (0xcf) and move to the next check
@@ -2770,7 +2888,7 @@
 / var[0x0b] is the constant 0x00
 0x07bc (0x0efc): (0x10) If var[0x1b] == var[0x0b] then Goto 0x0686
 
-/ Dwarf HAS "dived into a hidden opening" (0x01)
+/ Dwarf HAS "dived into a hidden opening" (0x01) so it's been allowed 
 
 **************************************************************************
 * Process the player meeting the vampire 
