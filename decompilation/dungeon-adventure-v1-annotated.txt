@@ -76,6 +76,14 @@
 /        0x04 - Orcs have been camped around for three turns
 /        0x05 - Orcs have been camped around for four turns, kill the player
 /        0x06 - horn blown at the army camp and orcs fled (for now)
+/ 0x10 - Status of the killer-willow tree
+/        0x00 - tree is holding no items
+/        0x01 - tree is holding one item
+/        0x02 - tree is holding two items
+/        0x03 - tree is holding three items
+/        0x04 - tree is holding four items
+/        0x05 - tree is holding five items
+/        0x06 - tree is holding six items
 / 0x11 - Status of the grotesque yellow bird 
 /        0x00 - not scared away
 /        0x01 - scared away so the player can enter the nest and retrieve the large jade egg
@@ -247,6 +255,7 @@
 / 0x47 - Status if the mirror has reflected the sleep spell
 /        0x00 - not reflected
 /        0x01 - reflected
+/        0x02 - masked man who fell asleep wakes up when the twig snaps and flees
 /
 / 0x49 - Status of if the machine has scanned the player in the large store room
 /        0x00 - player cannot be resurrected as they haven't been scanned by the machine
@@ -277,12 +286,17 @@
 / 0x54 - Status of the boulder in the damp hemispherical cave
 /        0x00 - not pushed, moss still on walls and floro
 /        0x01 - pushed, exit open and moss in a lump in the corner
-/ 0x55 - Status of the statue int he statue room
+/ 0x55 - Status of the statue in the statue room
 /        0x00 - not turned
 /        0x01 - turned and opening east revealed
 / 0x56 - Unused 
 / 0x57 - Number of turns/commands entered by the player
-/
+/ 0x58 - Status of the pit in the "ornate throne room"
+/        0x00 - pit is closed
+/        0x01 - pit is open (player pressed button 1)
+/ 0x59 - Status of the throne and its behaviour through button 4
+/        0x00 - not risen through a trapdoor in the ceiling
+/        0x01 - risen through a trapdoor in the ceiling 
 / 0x5a - Status of whether the player has picked up the red gold ring
 /        0x00 - not picked up
 /        0x01 - picked up the ring
@@ -301,6 +315,7 @@
 /        7. Score to subtract for the number of times the player has died
 /        8. Score increment for various events e.g. vampire being dead
 /        9. Current location of the corpse
+/        10.Message id to print when pressing the protruding buttons
 / 0x5e - Number of crosses / crucifixes carried. Player needs 1 to stop the vampire biting them
 /        and two to keep the wights back
 / 0x5f - Status of the small ornate box with a lid
@@ -403,7 +418,28 @@
 / 34. var[0x0d] increments by 50 every time the player eats the tasty mushrooms in the troll's squalid store room
 /     maybe an original part of the score and how you could reach 9,998?
 / 35. Player can only be resurrected if they have been scanned by the machine in the large storeroom
-
+/ 36. Function of the buttons on the throne on the ornate throne room:
+/     Initial press:
+/     1 - A pit opens in the floor (if closed - var[0x58] set to 0x00) otherwise "Nothing happens"
+/     2 - The pit closes (if closed - var[0x58] set to 0x01)) otherwise "Nothing happens"
+/     3 - The room fills briefly with light 
+/     4 - The entire throne rises through a trapdoor in the ceiling. It comes to rest in an odd little room (nothing happens on second presss)
+/     5 - Nothing happens
+/     6 - Alarms sound
+/     7 - Fire jets cross the floor!
+/     8 - "Master: I beg to report that all internal eyes are dead and enemies are in the caves. Also, thousands of enemy orcs are advancing upon us."
+/     9 - You are somewhere else! (moves the player to "Fire jets cross the floor!" (0x69) without the throne)
+/ 37. On the throne in the ornate throne room, if you press button 4 it comes to rest in an "odd little room" but 
+/     nothing seems to change
+/ 
+/     1 -
+/     2 -
+/     3 -
+/     4 -
+/     5 -
+/     6 -
+/     7 -
+/     9 -
 
 / TODO what happens to collars when you wear a new one
 
@@ -2426,59 +2462,214 @@
 
 / TODO 
 0x06b0 (0x0df0): (0x00) Goto 0x0149
+
 **************************************************************************
+* Process player being hit with a sleep spell but having the mirror in their inventory
+**************************************************************************
+
 / Print message  "But your mirror reflects it! You hear snoring from the south "
 0x06b3 (0x0df3): (0x05) Print message (constant) 0x53
+
+/ Set the status of the mirror to "has reflected the spell" (0x01)
+/ var[0x01] is the constant 0x01
 0x06b5 (0x0df5): (0x09) Set var[0x47] = var[0x01]
+
+/ Branch if the player's current location is NOT "in a clump of bushes 
+/ on the edge of the forest" (0x1c)
 0x06b8 (0x0df8): (0x19) If var[0x44] != (constant) 0x1c then Goto 0x06c5
+
+/ Branch if the mirror has NOT reflected the sleep spell (0x00)
+/ var[0x01] is the constant 0x00
 0x06bc (0x0dfc): (0x11) If var[0x47] != var[0x01] then Goto 0x06c5
+
+/ Mirror HAS reflected the sleep spell (0x01)
+
 / Print message  "Your foot breaks a twig: SNAP! A masked man leaps up and flees "
 0x06c0 (0x0e00): (0x05) Print message (constant) 0x54
+
+/ Set the status of the mirror to the masked man has leapt up and fled
 0x06c2 (0x0e02): (0x09) Set var[0x47] = var[0x02]
+
+**************************************************************************
+* Process player being with the siren
+**************************************************************************
+
+/ Branch if the player's current location " on the southern end of a small 
+/ island, reached by stepping stones from the south." (0x34)
 0x06c5 (0x0e05): (0x19) If var[0x44] != (constant) 0x34 then Goto 0x06db
+
+/ Branch if the siren has fled in panic (0x01)
+/ var[0x0b] is the constant 0x01
 0x06c9 (0x0e09): (0x11) If var[0x52] != var[0x0b] then Goto 0x06db
+
+/ Siren is still present
+
+/ Branch if the player is currently deaf
+/ var[0x0b] is the constant 0x00
 0x06cd (0x0e0d): (0x13) If var[0x17] > var[0x0b] then Goto 0x06d6
+
 / Print message  "The girl sings: she is a siren! You flounder into treacherous waters "
 0x06d1 (0x0e11): (0x05) Print message (constant) 0x48
+
+/ Kill the player
 0x06d3 (0x0e13): (0x00) Goto 0x12e7
+
 **************************************************************************
+
 / Print message  "You're deaf to the siren's song! She flees in panic "
 0x06d6 (0x0e16): (0x05) Print message (constant) 0x49
+
+/ Set the status of the siren to fled in panic (0x01)
+/ var[0x01] is the constant 0x01
 0x06d8 (0x0e18): (0x09) Set var[0x52] = var[0x01]
+
+**************************************************************************
+* Process player moving to where the killer-willow is
+**************************************************************************
+
+/ Branch if the player's target location is NOT "under the killer-willow tree" (0x33)
 0x06db (0x0e1b): (0x19) If var[0x44] != (constant) 0x33 then Goto 0x06e8
+
+/ Player's target location IS "under the killer-willow tree" (0x33)
+
+/ Branch if the tree is holding 6 items or no longer bothers the player
 0x06df (0x0e1f): (0x13) If var[0x10] > var[0x05] then Goto 0x06e8
+
+/ Tree has at least one spare arm free
+
 / Print message  "The tree grabs you "
 0x06e3 (0x0e23): (0x05) Print message (constant) 0x4a
+
+/ Kill the player
 0x06e5 (0x0e25): (0x00) Goto 0x12e7
+
 **************************************************************************
+* Process the player trying to move to the huge nest
+**************************************************************************
+
+/ Branch if the player's target location is NOT "in a huge nest" (0x1f)
 0x06e8 (0x0e28): (0x19) If var[0x44] != (constant) 0x1f then Goto 0x06f1
+
+/ Player IS trying to move to "a huge nest"
+
+/ Branch if the bird is still on the next (0x00) and print "You must be joking!"
+/ var[0x0b] is the constant 0x00
 0x06ec (0x0e2c): (0x10) If var[0x11] == var[0x0b] then Goto 0x1611
+
+**************************************************************************
+* Check if the player has the octopus figurine if moving to the black rooms
+**************************************************************************
+
+/ Branch if the player's target destination is NOT one of these two rooms:
+/ 0x71 : dead-end room, painted matt black. You'll have to return the way you came
+/ 0x72 : in a second dead-end black room
 0x06f1 (0x0e31): (0x1a) If var[0x44] < (constant) 0x71 then Goto 0x0705
 0x06f5 (0x0e35): (0x1b) If var[0x44] > (constant) 0x72 then Goto 0x0705
+
+/ Player's target room is either 0x71 or 0x72
+
+/ Set the temporary variable to the object id for the octopus figurine (0x7f)
 0x06f9 (0x0e39): (0x08) Set var[0x1e] = (constant) 0x7f
+
+/ Get the current location of the octopus figurine
 0x06fc (0x0e3c): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
+
+/ Branch if the octopus figurine is NOT in the player's inventory (0xfe)
+/ var[0x07] is the constant 0xfe
 0x06ff (0x0e3f): (0x11) If var[0x1f] != var[0x07] then Goto 0x0705
-/ Print message  "The octopus waves its arms and you can see. Thus "many hands make light work"!\n "
+
+/ Print message  "The octopus waves its arms and you can see. 
+/ Thus "many hands make light work"!\n "
 0x0703 (0x0e43): (0x05) Print message (constant) 0x7b
+
+**************************************************************************
+* Check if the player has pressed the 3 protruding rocks before moving to 
+* the damp hemispherical cave
+**************************************************************************
+
+/ Branch if the player's target destination is NOT "in a damp hemispherical
+/ cave with an opening to the east" and skip to the next check
 0x0705 (0x0e45): (0x19) If var[0x44] != (constant) 0x78 then Goto 0x070e
+
+/ Player's target destination IS " in a damp hemispherical cave with an 
+/ opening to the east" (0x78)
+
+/ Branch if the player has pressed less than 3 of the protruding rocks 
+/ and print "You can't move in that direction"
+/ var[0x03] is the constant 0x03
 0x0709 (0x0e49): (0x12) If var[0x53] < var[0x03] then Goto 0x0686
+
+**************************************************************************
+* Check if the player has pushed the rock to get to the "room
+* carved out of rock"
+**************************************************************************
+
+/ Branch if the player's target destination IS " a room carved out of 
+/ rugged rock with a large outcrop of stone in the middle of the floor." (0x79)
+/ to the next check
 0x070e (0x0e4e): (0x19) If var[0x44] != (constant) 0x79 then Goto 0x0717
+
+/ Player's target destination IS " a room carved out of 
+/ rugged rock with a large outcrop of stone in the middle of the floor." (0x79)
+
+/ Branch if the boulder has not been pushed (with the exit open) 
+/ and print "You can't move in that direction"
 0x0712 (0x0e52): (0x10) If var[0x54] == var[0x0b] then Goto 0x0686
+
+/ Branch if the player's target destination is "in an ornate, dead-end room" (0xb3)
 0x0717 (0x0e57): (0x19) If var[0x44] != (constant) 0xbe then Goto 0x0720
+
+**************************************************************************
+* Check if the player has turned the statue to open access to the 
+* "ornate, dead-end room"
+**************************************************************************
+
+/ Player's target destination IS "in an ornate, dead-end room" (0xbe)
+
+/ Branch if the player has NOT turned the statue (0x01)
+/ and print "You can't move in that direction"
+/ var[0x0b] is the constant 0x00
 0x071b (0x0e5b): (0x10) If var[0x55] == var[0x0b] then Goto 0x0686
+
+/ Branch if the player's target destination is NOT "below a sign "Your fate is
+/ sealed! Your only hope is to descend into the Central Dungeon and collect 9 gems. 
+/ Succeed and you will be free!" (0xaa) 
 0x0720 (0x0e60): (0x19) If var[0x44] != (constant) 0xaa then Goto 0x072d
+
+/ Player's target destination IS "below a sign"
+
+/ Branch if the player's current location is NOT "in a long throne room
+/ lined with skin." (0x68)
 0x0724 (0x0e64): (0x19) If var[0x43] != (constant) 0x68 then Goto 0x072d
+
+/ Branc
 0x0728 (0x0e68): (0x10) If var[0x58] == var[0x0b] then Goto 0x0686
+
+/ Branch if the player's target destination is 
 0x072d (0x0e6d): (0x19) If var[0x44] != (constant) 0x68 then Goto 0x073c
+
+/ Branch if the player's current location is NOT "
 0x0731 (0x0e71): (0x19) If var[0x43] != (constant) 0x5d then Goto 0x073c
 0x0735 (0x0e75): (0x10) If var[0x59] == var[0x0b] then Goto 0x073c
+
+/ Branch if the player's target destination is 
 0x0739 (0x0e79): (0x08) Set var[0x44] = (constant) 0x69
+
+/ Branch if the player's current location IS "
 0x073c (0x0e7c): (0x18) If var[0x43] == (constant) 0xa6 then Goto 0x0744
+
+/ Branch if the player's current location is NOT "
 0x0740 (0x0e80): (0x19) If var[0x43] != (constant) 0x3d then Goto 0x0751
+
+/ Branch if the player's target destination is 
 0x0744 (0x0e84): (0x18) If var[0x44] == (constant) 0xa6 then Goto 0x074c
+
+/ Branch if the player's target destination is 
 0x0748 (0x0e88): (0x19) If var[0x44] != (constant) 0x3d then Goto 0x0751
 0x074c (0x0e8c): (0x10) If var[0x0c] == var[0x0b] then Goto 0x161e
 0x0751 (0x0e91): (0x11) If var[0x28] != var[0x0b] then Goto 0x0777
+
+/ Branch if the player's target destination is 
 0x0755 (0x0e95): (0x19) If var[0x44] != (constant) 0x7c then Goto 0x076a
 0x0759 (0x0e99): (0x08) Set var[0x1e] = (constant) 0x80
 0x075c (0x0e9c): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
@@ -2490,6 +2681,8 @@
 / Print message  "A party of skeletons stand to attention as you enter. (Greetings Master), they signal in semaphore, (We have captured an intruder dwarf and await your signals)! "
 0x0768 (0x0ea8): (0x05) Print message (constant) 0x94
 0x076a (0x0eaa): (0x19) If var[0x43] != (constant) 0x7c then Goto 0x0777
+
+/ Branch if the player's target destination is 
 0x076e (0x0eae): (0x18) If var[0x44] == (constant) 0x7b then Goto 0x0777
 / Print message  "The skeletons are in the way "
 0x0772 (0x0eb2): (0x05) Print message (constant) 0x90
@@ -2502,12 +2695,24 @@
 
 / Dwarf IS following the player (0x01)
 
+/ Branch if the player's target destination is 
 0x077b (0x0ebb): (0x18) If var[0x44] == (constant) 0xcb then Goto 0x079d
+
+/ Branch if the player's target destination is 
 0x077f (0x0ebf): (0x18) If var[0x44] == (constant) 0xcc then Goto 0x079d
+
+/ Branch if the player's target destination is 
 0x0783 (0x0ec3): (0x18) If var[0x44] == (constant) 0x56 then Goto 0x079d
+
+/ Branch if the player's target destination is 
 0x0787 (0x0ec7): (0x18) If var[0x44] == (constant) 0x7b then Goto 0x079d
+
+/ Branch if the player's target destination is 
 0x078b (0x0ecb): (0x18) If var[0x44] == (constant) 0x5e then Goto 0x079d
+
+/ Branch if the player's target destination is 
 0x078f (0x0ecf): (0x19) If var[0x44] != (constant) 0x0c then Goto 0x07b8
+
 / Print message  "The dwarf dives into a hidden opening. You hear frantic hammering and cries of "Follow me!" "
 0x0793 (0x0ed3): (0x05) Print message (constant) 0x96
 0x0795 (0x0ed5): (0x09) Set var[0x1a] = var[0x0b]
@@ -3789,84 +3994,263 @@
 * Command: "draw", "press", "push", "rotate", "stop" or "turn"
 **************************************************************************
 
+/ Branch if the second word is the "rock crystal" (0x63)
 0x0f12 (0x1652): (0x18) If var[0x31] == (constant) 0x63 then Goto 0x0f2f
+
+/ Branch if the second word is the "bolt" (0xbb)
 0x0f16 (0x1656): (0x18) If var[0x31] == (constant) 0xbb then Goto 0x0f63
+
+/ Branch if the second word is "button" (0xbc)
 0x0f1a (0x165a): (0x18) If var[0x31] == (constant) 0xbc then Goto 0x0f7c
+
+/ Branch if the second word is "gate" (0xbe)
 0x0f1e (0x165e): (0x18) If var[0x31] == (constant) 0xbe then Goto 0x0cb3
+
+/ Branch if the second word is "statue" (0xbe)
 0x0f23 (0x1663): (0x18) If var[0x31] == (constant) 0xc0 then Goto 0x1030
+
+/ Branch if the second word is any object or NPC" (0xbe)
+/ and process it as attacking the object or NPC
 0x0f28 (0x1668): (0x1a) If var[0x31] < (constant) 0xc9 then Goto 0x1085
+
+/ Process pressing a number e.g. "one" (0xca) to "nine" (0xd1)
 0x0f2d (0x166d): (0x00) Goto 0x0f89
+
 **************************************************************************
+* Process pushing the rock / crystal "at a junction...."
+**************************************************************************
+
+/ Branch if the player's current location is NOT "at a junction in a steeply
+/ sloping u-shaped passage which leads northeast and northwest. Three round 
+/ rocks protrude beside an opening to the east
 0x0f2f (0x166f): (0x19) If var[0x43] != (constant) 0x77 then Goto 0x0f51
+
+/ Player is with the protrucing rocks 
+
+/ Increment the number of rocks the player has pressed
 0x0f33 (0x1673): (0x0a) Set var[0x53] += var[0x01]
+
+/ Set the message to print to "You turn one stone and nothing happens" (0x83)
 0x0f36 (0x1676): (0x08) Set var[0x5d] = (constant) 0x83
+
+/ Branch and print the above message if 1 rock has been pressed
 0x0f39 (0x1679): (0x10) If var[0x53] == var[0x01] then Goto 0x0f4c
+
+/ Set the message to print to "Another stone turned, still nothing" (0x84)
 0x0f3d (0x167d): (0x08) Set var[0x5d] = (constant) 0x84
+
+/ Branch and print the above message if 2 rocks has been pressed
 0x0f40 (0x1680): (0x10) If var[0x53] == var[0x02] then Goto 0x0f4c
+
+/ Set the message to print to "Now no stone is left unturned the slab 
+/ slides from the doorway" (0x85)
 0x0f44 (0x1684): (0x08) Set var[0x5d] = (constant) 0x85
+
+/ Branch and print the above message if 3 rocks has been pressed
 0x0f47 (0x1687): (0x11) If var[0x53] != var[0x03] then Goto 0x0190
+
+/ Print the message 
 0x0f4c (0x168c): (0x04) Print message var[0x5d]
+
+/ TOOD
 0x0f4e (0x168e): (0x00) Goto 0x0190
+
 **************************************************************************
+* Process pushing the boulder in the damp hemispherical cave
+**************************************************************************
+
+/ Branch if the player's current location is NOT "in a damp hemispherical 
+/ cave with an opening to the east" (0x78)
 0x0f51 (0x1691): (0x19) If var[0x43] != (constant) 0x78 then Goto 0x15f0
+
+/ Player IS in the damp hemispherical cave
+
+/ Branch if the player has already pushed the boulder
 0x0f56 (0x1696): (0x13) If var[0x54] > var[0x0b] then Goto 0x15f0
+
+/ Set the status of the boulder to pushed (0x01)
+/ var[0x01] is the constant 0x01
 0x0f5b (0x169b): (0x09) Set var[0x54] = var[0x01]
+
 / Print message  "The moss moves from walls and floor to the stopped stone "
 0x0f5e (0x169e): (0x05) Print message (constant) 0x81
+
+/ TODO 
 0x0f60 (0x16a0): (0x00) Goto 0x0149
+
 **************************************************************************
+
+/ Branch if the player's current location is NOT "in the strong room." (0xa6)
 0x0f63 (0x16a3): (0x19) If var[0x43] != (constant) 0xa6 then Goto 0x1619
+
+/ Branch if the status of the iron door is "closed and bolted" (0x00)
+/ and slide the bolt back
+/ var[0x0b] is the constant 0x00
 0x0f68 (0x16a8): (0x10) If var[0x0c] == var[0x0b] then Goto 0x0f74
+
+/ Door is "open and unbolted" (0x01)
+
+/ Set the door to "closed and bolted" (0x00)
+/ var[0x0b] is the constant 0x00
 0x0f6c (0x16ac): (0x09) Set var[0x0c] = var[0x0b]
+
 / Print message  "The bolt barrs the door "
 0x0f6f (0x16af): (0x05) Print message (constant) 0x87
+
+/ TODO 
 0x0f71 (0x16b1): (0x00) Goto 0x0190
 **************************************************************************
+
+/ Set the status of the door to "open and unbolted"
+/ var[0x01] is the constant 0x01
 0x0f74 (0x16b4): (0x09) Set var[0x0c] = var[0x01]
+
 / Print message  "The bolt slides back "
 0x0f77 (0x16b7): (0x05) Print message (constant) 0x82
+
+/ TODO
 0x0f79 (0x16b9): (0x00) Goto 0x0190
 **************************************************************************
+
+/ Branch if the player's current location IS "in a large store room." (0xca)
 0x0f7c (0x16bc): (0x18) If var[0x43] == (constant) 0xca then Goto 0x1028
+
+/ Branch if the number of words entered by the player is less than 3
+/ and print "Please be more specific"
+/ var[0x03] is the constant 0x03
 0x0f81 (0x16c1): (0x12) If var[0x33] < var[0x03] then Goto 0x15e8
+
+/ 3 words were entered
+
+/ Set the second word to the third word
 0x0f86 (0x16c6): (0x09) Set var[0x31] = var[0x32]
+
+/ Branch if the player has NOT entered a number (0xc9) and 
+/ "Don't be silly!" 
 0x0f89 (0x16c9): (0x1a) If var[0x31] < (constant) 0xc9 then Goto 0x1609
+
+/ Branch if he player's current location IS "in the "Skinner box"" (0xbb)
 0x0f8e (0x16ce): (0x18) If var[0x43] == (constant) 0xbb then Goto 0x0fef
+
+/ Branch if the player's current location IS "in the reward room" (0xbc)
 0x0f92 (0x16d2): (0x18) If var[0x43] == (constant) 0xbc then Goto 0x1000
+
+**************************************************************************
+* Player is in the "ornate throne room" pressing the buttons
+**************************************************************************
+
+/ Branch if he player's current location IS "sitting on an ornate throne.
+/ There are nine numbered buttons along the left arm-rest" (0x5d)
 0x0f96 (0x16d6): (0x19) If var[0x43] != (constant) 0x5d then Goto 0x1619
+
+/ Player IS "sitting on an ornate throne. There are nine numbered 
+/ buttons along the left arm-rest" (0x3d)
+
+/ Branch if the player is NOT pressing button "one" (0xc9)
 0x0f9b (0x16db): (0x19) If var[0x31] != (constant) 0xc9 then Goto 0x0fa7
+
+/ Player pressed button 1
+
+/ Branch if the pit in the floor is open (0x01)
+/ var[0x01] is the constant 0x01
 0x0f9f (0x16df): (0x10) If var[0x58] == var[0x01] then Goto 0x15f0
+
+/ Set the status of the pit to open (0x01)
+/ var[0x01] is the constant 0x01
 0x0fa4 (0x16e4): (0x09) Set var[0x58] = var[0x01]
+
+/ Branch if the player is pressing button "two" (0xca)
 0x0fa7 (0x16e7): (0x19) If var[0x31] != (constant) 0xca then Goto 0x0fb3
+
+/ Player pressed button 2
+
+/ Branch if the pit is already closed (0x00)
+/ var[0x0b] is the constant 0x00
 0x0fab (0x16eb): (0x10) If var[0x58] == var[0x0b] then Goto 0x15f0
+
+/ Pit is open (0x01)
+
+/ Set the status of the pit to closed (0x00)
+/ var[0x0b] is the constant 0x00
 0x0fb0 (0x16f0): (0x09) Set var[0x58] = var[0x0b]
+
+/ Branch if the player is NOT pressing button "four" (0xcc)
 0x0fb3 (0x16f3): (0x19) If var[0x31] != (constant) 0xcc then Goto 0x0fbf
+
+/ Player pressed button 4
+
+/ Branch if the throne has already risen through the ceiling (0x01)
+/ and print "nothing happens"
+/ var[0x01] is the constant 0x01
 0x0fb7 (0x16f7): (0x10) If var[0x59] == var[0x01] then Goto 0x15f0
+
+/ Throne has not risen through the ceiling 
+/ Set the throne to risen through the ceiling (0x01)
+/ var[0x01] is the constant 0x01
 0x0fbc (0x16fc): (0x09) Set var[0x59] = var[0x01]
+
+/ Branch if the player is NOT pressing button "five" (0xcd)
 0x0fbf (0x16ff): (0x19) If var[0x31] != (constant) 0xcd then Goto 0x0fe3
+
+/ Player pressed button 5
+
+/ Branch if the throne has NOT risen through the trap door (0x00)
+/ and print "nothing happens"
+/ var[0x0b] is the constant 0x00
 0x0fc3 (0x1703): (0x10) If var[0x59] == var[0x0b] then Goto 0x15f0
+
+/ Branch if the player is NOT "in an odd little room, below a granite throne" (0x69)
+
+/ Set the target destination to "in an odd little room, below a granite throne" (0x69)
 0x0fc8 (0x1708): (0x08) Set var[0x44] = (constant) 0x69
+
+/ TODO
 0x0fcb (0x170b): (0x09) Set var[0x38] = var[0x0b]
 0x0fce (0x170e): (0x01) Gosub 0x156e
 0x0fd1 (0x1711): (0x10) If var[0x3c] == var[0x0b] then Goto 0x15f0
 0x0fd6 (0x1716): (0x10) If var[0x3c] == var[0x02] then Goto 0x15f0
 0x0fdb (0x171b): (0x10) If var[0x3c] == var[0x04] then Goto 0x15f0
 0x0fe0 (0x1720): (0x09) Set var[0x59] = var[0x0b]
+
+/ Branch if the player is pressing "nine" (0xd1)
 0x0fe3 (0x1723): (0x19) If var[0x31] != (constant) 0xd1 then Goto 0x0fea
+
+/ 
 0x0fe7 (0x1727): (0x08) Set var[0x43] = (constant) 0x6f
 0x0fea (0x172a): (0x04) Print message var[0x31]
 0x0fec (0x172c): (0x00) Goto 0x0190
+
 **************************************************************************
+* Player is in the "skinner room" pressing the buttons
+**************************************************************************
+
+/ Branch if the player did NOT press the 9 button (0xd1) (correct
+/ number was pressed)
 0x0fef (0x172f): (0x18) If var[0x31] == (constant) 0xd1 then Goto 0x0ff8
+
+/ Player pressed another button (1 to 8)
+
 / Print message  "WRONG! The room heats up... "
 0x0ff3 (0x1733): (0x05) Print message (constant) 0x8c
+
+/ Kill the player
 0x0ff5 (0x1735): (0x00) Goto 0x12e7
+
 **************************************************************************
+
+/ Player pressed the 9 button in the skinner room
+
 / Print message  "RIGHT! Your vision blurs... "
 0x0ff8 (0x1738): (0x05) Print message (constant) 0x8b
+
+/ Change the player's location to "in the reward room"
 0x0ffa (0x173a): (0x08) Set var[0x43] = (constant) 0xbc
+
+/ TODO 
 0x0ffd (0x173d): (0x00) Goto 0x0149
+
 **************************************************************************
+
 0x1000 (0x1740): (0x1b) If var[0x31] > (constant) 0xcd then Goto 0x1609
 0x1005 (0x1745): (0x08) Set var[0x5d] = (constant) 0x0a
 0x1008 (0x1748): (0x0a) Set var[0x5d] += var[0x31]
