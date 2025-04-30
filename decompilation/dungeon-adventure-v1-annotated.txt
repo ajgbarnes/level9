@@ -14,8 +14,8 @@
 / Object descriptions
 / ---------------------
 / Object text can be found by looking in the dungeon-adventure-v1-descs.txt file
-/ Object descriptions (when in inventory) are 0xe7 + object id
-/ Object descriptions (when in location)  are 0x141 + object id (TODO check this)
+/ Object descriptions (when in inventory) are 0xe7  + object id
+/ Object descriptions (when in location)  are 0x141 + object id 
 /
 / Lists
 / =====
@@ -225,11 +225,13 @@
 /        0x00 - has NOT previously carried the player off to its nest
 /        0x00 - HAS not previously carried the player off to its nest
 / 0x3b - Number of items that the player is carrying in the inventory
-/ 0x3c - Indicates whether the command was valid e.g. player can move in that direction 
+/ 0x3c - 1. Indicates whether the command was valid e.g. player can move in that direction 
 /        or they do have the object and it's a valid action
 /        0x00 - not a valid action
 /        0x01 - valid action
-/        Reset to 0x01 whenever "What next?" is printed (start of each turn)
+/        2. Reset to 0x01 whenever "What next?" is printed (start of each turn)
+/        3. Number of items printed in a location
+/        4. Number of items printed in the inventory
 / 0x3d - Unused
 / 0x3e - Number of items the player is wearing
 / 0x3f - Status of the flint-thrower 
@@ -329,7 +331,8 @@
 /        0x00 - player cannot see location description (eyes closed)
 /        0x01 - player can see location description
 / 0x62 - Incorrectly used as the constant 0x00 in the scoring
-/ 0x63 - Message to print between objects e.g. newline
+/ 0x63 - 1. Message to print between objects e.g. newline
+/        2. Torch message to print ", burning brightly" or ", only a stump is left"
 /
 / Notes and observations
 / ======================
@@ -752,12 +755,17 @@
 / Print message  "A dwarf is following you\n "
 0x0184 (0x08c4): (0x05) Print message (constant) 0x92
 
-/ Set the base message id to "an obscure ethnic carving" (0x141)
+/ Set the base message id for objects that will be described 
+/ when in a location (as opposed to the inventory).  The object 
+/ id gets added to this offset to print the object's description 
+/ for when in a location 
 0x0186 (0x08c6): (0x08) Set var[0x38] = (constant) 0x141
 
 / Set the player's target location to be the same as the 
 / player's current location
 0x018a (0x08ca): (0x09) Set var[0x44] = var[0x43]
+
+/ TODO 
 0x018d (0x08cd): (0x01) Gosub 0x156e
 
 
@@ -6547,6 +6555,7 @@
 / Get the current location of the object
 0x1574 (0x1cb4): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
 
+/ BUG? This isn't used at all here or in the subroutine at 0x1586
 / Set the message to print between objects to newline
 0x1577 (0x1cb7): (0x08) Set var[0x63] = (constant) 0x28
 
@@ -6565,40 +6574,97 @@
 0x1585 (0x1cc5): (0x02) Return
 
 **************************************************************************
+* Print the object description 
+**************************************************************************
 
 / Set the temporary variable to the base message id that was passed in
+/ the message offset is either (0x141) for items in a location or 
+/ (0x37) for items in the inventory.  This is used to get the right object
+/ description depending on where the object is as the descriptions are
+/ different.
 0x1586 (0x1cc6): (0x09) Set var[0x5d] = var[0x38]
 
 / Add on the current looping object index (starts at 0x1e ends at 0x8f)
 0x1589 (0x1cc9): (0x0a) Set var[0x5d] += var[0x1e]
 
+**************************************************************************
+* Suffix the driftwood with a status depending on how much is left to burn
+**************************************************************************
+
 / Branch if the current object id is NOT the "driftwood" / "torch" (0x4c)
 0x158c (0x1ccc): (0x19) If var[0x1e] != (constant) 0x4c then Goto 0x159e
 
-/ 
+/ Object IS the torch
+
+/ Brance if the driftwood / torch has remaining turns left to burn
+/ var[0x0b] is the constant 0x00
 0x1590 (0x1cd0): (0x10) If var[0x36] == var[0x0b] then Goto 0x159e
+
+/ Torch IS lit
+
+/ Set the message to print to ", burning brightly" (0x70)
 0x1594 (0x1cd4): (0x08) Set var[0x63] = (constant) 0x70
+
+/ Branch if the driftwood torch has more than 10 (0x0a) turns remaining lit
 0x1597 (0x1cd7): (0x1b) If var[0x36] > (constant) 0x0a then Goto 0x159ef
+
+/ 10 turns or less remaining to burn
+
+/ Set the message to print to ", only a stump is left" (0xa8)
 0x159b (0x1cdb): (0x08) Set var[0x63] = (constant) 0xa8
+
+**************************************************************************
+* Suffix the pot with a status depending on if it's full of slime
+**************************************************************************
+
+/ Branch if the current object id is NOT the "pot" (0x52)
 0x159e (0x1cde): (0x19) If var[0x1e] != (constant) 0x52 then Goto 0x15a9
+
+/ Object IS the pot
+
+/ Branch if the location of the sticky slime is NOT in the player's 
+/ inventory (0xfe)
+/ var[0x07] is the constant 0xfe
 0x15a2 (0x1ce2): (0x11) If var[0x40] != var[0x07] then Goto 0x15a9
+
+/ Set the suffix to ", full of slime" (0xa0)
 0x15a6 (0x1ce6): (0x08) Set var[0x63] = (constant) 0xa0
+
+/ Branch if the current object id is NOT the "miner's helmet" (0x76)
 0x15a9 (0x1ce9): (0x19) If var[0x1e] != (constant) 0x76 then Goto 0x15b4
+
+/ Branch if the helmet does not have the will o'wisp lighting it (0x00)
 0x15ad (0x1ced): (0x11) If var[0x5c] != var[0x01] then Goto 0x15b4
+
+/ Will O'wisp is lighting the helmet (0x00)
+
+/ Set the suffix to "which shines brightly" (0xbf)
 0x15b1 (0x1cf1): (0x08) Set var[0x63] = (constant) 0xbf
+
+/ 
 0x15b4 (0x1cf4): (0x0a) Set var[0x3c] += var[0x01]
+
+/ Branch if the offset passed in was 0x00 and do NOT 
+/ print the object description
+/ var[0x0b] is the constant 0x00
 0x15b7 (0x1cf7): (0x10) If var[0x38] == var[0x0b] then Goto 0x157e
 
 / Print message  "\n "
 0x15bb (0x1cfb): (0x05) Print message (constant) 0x28
 
+/ Print the location or inventory description of the object
+/ based on the offset that was passed in in var[0x38]
 0x15bd (0x1cfd): (0x04) Print message var[0x5d]
+
+/ Print the suffix for the object (if any)
 0x15bf (0x1cff): (0x04) Print message var[0x63]
 
 / Print message  "\n "
 0x15c1 (0x1d01): (0x05) Print message (constant) 0x28
 
+/ Move to the next object and print it's description if necessary
 0x15c3 (0x1d03): (0x00) Goto 0x157e
+
 **************************************************************************
 
 / Branch if the player is trying to pick up something that isn't a NPC
@@ -6609,7 +6675,6 @@
 
 / Print message  "Don't be silly! "
 0x15c9 (0x1d09): (0x05) Print message (constant) 0x06
-
 
 / Set the variable that indicates the object cannot be worn or picked up 
 / and return
@@ -6774,6 +6839,7 @@
 * Remaining turns exhausted when a black sphere is following the player -
 * t will swallow them now
 **************************************************************************
+
 / Print message  "The sphere swallows you "
 0x1623 (0x1d63): (0x05) Print message (constant) 0x38
 
