@@ -706,7 +706,7 @@
 0x0156 (0x0896): (0x05) Print message (constant) 0x18
 
 / Perform additional location specific checks skipping the code 
-/ that prints the location description
+/ that prints the location description and ask "What next?" 
 0x0158 (0x0898): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -1213,6 +1213,9 @@
 0x02f5 (0x0a35): (0x13) If var[0x1f] > var[0x07] then Goto 0x02fe
 / Print message  "You're not close enough "
 0x02f9 (0x0a39): (0x05) Print message (constant) 0x37
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x02fb (0x0a3b): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -1327,7 +1330,8 @@
 / var[0x03] is the constant 0x03
 0x039e (0x0ade): (0x04) Print message var[0x03]
 
-/ TODO
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x03a0 (0x0ae0): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -2225,7 +2229,8 @@
 / an opening to the west. (0x9f)
 0x05da (0x0d1a): (0x08) Set var[0x43] = (constant) 0x9f
 
-/ TODO
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x05dd (0x0d1d): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -2478,7 +2483,8 @@
 / Print message  "You can't move in that direction\n "
 0x0686 (0x0dc6): (0x05) Print message (constant) 0x20
 
-/ TODO 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0688 (0x0dc8): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -3067,6 +3073,9 @@
 0x081f (0x0f5f): (0x13) If var[0x0a] > var[0x02] then Goto 0x083b
 / Print message  ""NOT AUTHORISED TO GO THERE!" "
 0x0823 (0x0f63): (0x05) Print message (constant) 0x7c
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0825 (0x0f65): (0x00) Goto 0x0190
 **************************************************************************
 0x0828 (0x0f68): (0x19) If var[0x44] != (constant) 0x7a then Goto 0x083b
@@ -3075,12 +3084,18 @@
 0x0832 (0x0f72): (0x10) If var[0x1f] == var[0x07] then Goto 0x083b
 / Print message  ""ONLY ARCHERS ALLOWED" "
 0x0836 (0x0f76): (0x05) Print message (constant) 0x9a
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0838 (0x0f78): (0x00) Goto 0x0190
 **************************************************************************
 0x083b (0x0f7b): (0x19) If var[0x44] != (constant) 0xd4 then Goto 0x0848
 0x083f (0x0f7f): (0x11) If var[0x3f] != var[0x0b] then Goto 0x0848
 / Print message  "A hurled flint splinters in front of your face, driving you back "
 0x0843 (0x0f83): (0x05) Print message (constant) 0x9c
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0845 (0x0f85): (0x00) Goto 0x0190
 **************************************************************************
 0x0848 (0x0f88): (0x19) If var[0x44] != (constant) 0x29 then Goto 0x0859
@@ -3088,6 +3103,9 @@
 0x0850 (0x0f90): (0x13) If var[0x41] > var[0x0b] then Goto 0x0859
 / Print message  ""OI! YOU CAN ONLY ENTER IF YOU SAY THE PASSWORD!" "
 0x0854 (0x0f94): (0x05) Print message (constant) 0xb8
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0856 (0x0f96): (0x00) Goto 0x0190
 **************************************************************************
 0x0859 (0x0f99): (0x19) If var[0x44] != (constant) 0xd0 then Goto 0x0866
@@ -3101,6 +3119,9 @@
 0x086e (0x0fae): (0x19) If var[0x44] != (constant) 0x6d then Goto 0x0877
 / Print message  ""You may not pass", intone the ghosts. "We failed the Master and our doom is to remain here whilst He lives." "
 0x0872 (0x0fb2): (0x05) Print message (constant) 0xbc
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0874 (0x0fb4): (0x00) Goto 0x0190
 **************************************************************************
 0x0877 (0x0fb7): (0x19) If var[0x43] != (constant) 0x2e then Goto 0x0880
@@ -3117,6 +3138,9 @@
 0x0899 (0x0fd9): (0x18) If var[0x44] == (constant) 0x90 then Goto 0x08b1
 / Print message  "A giant rat guards the corridor "
 0x089d (0x0fdd): (0x05) Print message (constant) 0xed
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x089f (0x0fdf): (0x00) Goto 0x0190
 **************************************************************************
 0x08a2 (0x0fe2): (0x08) Set var[0x1e] = (constant) 0x53
@@ -3135,20 +3159,32 @@
 0x08c2 (0x1002): (0x19) If var[0x44] != (constant) 0xa1 then Goto 0x08d8
 / Print message  "You're too big to go that way "
 0x08c6 (0x1006): (0x05) Print message (constant) 0xfc
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x08c8 (0x1008): (0x00) Goto 0x0190
+
 **************************************************************************
 0x08cb (0x100b): (0x19) If var[0x44] != (constant) 0xa5 then Goto 0x08d8
 0x08cf (0x100f): (0x10) If var[0x2e] == var[0x01] then Goto 0x08d8
 / Print message  "You're too big to go that way "
 0x08d3 (0x1013): (0x05) Print message (constant) 0xfc
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x08d5 (0x1015): (0x00) Goto 0x0190
+
 **************************************************************************
 0x08d8 (0x1018): (0x19) If var[0x44] != (constant) 0x37 then Goto 0x08f2
 0x08dc (0x101c): (0x13) If var[0x0e] > var[0x0b] then Goto 0x08f2
 0x08e0 (0x1020): (0x11) If var[0x2e] != var[0x0b] then Goto 0x08e9
 / Print message  "Giant ants block your path, feeling for you with sensitive antenna "
 0x08e4 (0x1024): (0x05) Print message (constant) 0xfd
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x08e6 (0x1026): (0x00) Goto 0x0190
+
 **************************************************************************
 0x08e9 (0x1029): (0x10) If var[0x2e] == var[0x01] then Goto 0x08f2
 / Print message  "You accidentally step on some little ants "
@@ -3206,7 +3242,11 @@
 0x0960 (0x10a0): (0x05) Print message (constant) 0x113
 0x0963 (0x10a3): (0x19) If var[0x4c] != (constant) 0x113 then Goto 0x096d
 0x0968 (0x10a8): (0x04) Print message var[0x4c]
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x096a (0x10aa): (0x00) Goto 0x0190
+
 **************************************************************************
 0x096d (0x10ad): (0x11) If var[0x14] != var[0x44] then Goto 0x097a
 0x0971 (0x10b1): (0x1a) If var[0x15] < (constant) 0x09 then Goto 0x097a
@@ -3241,7 +3281,11 @@
 0x09c9 (0x1109): (0x19) If var[0x4c] != (constant) 0xdc then Goto 0x09d2
 / Print message  "The orcs block you\n "
 0x09cd (0x110d): (0x05) Print message (constant) 0xdd
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x09cf (0x110f): (0x00) Goto 0x0190
+
 **************************************************************************
 0x09d2 (0x1112): (0x1a) If var[0x57] < (constant) 0x1f4 then Goto 0x09e6
 0x09d7 (0x1117): (0x13) If var[0x0f] > var[0x0b] then Goto 0x09e6
@@ -3291,16 +3335,27 @@
 **************************************************************************
 
 0x0a20 (0x1160): (0x01) Gosub 0x153b
+
+/ TODO Branch
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0a23 (0x1163): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
 0x0a28 (0x1168): (0x12) If var[0x3b] < var[0x4f] then Goto 0x0a3a
 0x0a2c (0x116c): (0x10) If var[0x4f] == var[0x0b] then Goto 0x0a35
 / Print message  "You can't carry any more "
 0x0a30 (0x1170): (0x05) Print message (constant) 0x29
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0a32 (0x1172): (0x00) Goto 0x0190
 **************************************************************************
 / Print message  "You're too weak! "
 0x0a35 (0x1175): (0x05) Print message (constant) 0x2a
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0a37 (0x1177): (0x00) Goto 0x0190
+
 **************************************************************************
 0x0a3a (0x117a): (0x19) If var[0x4c] != (constant) 0xa3 then Goto 0x0a50
 0x0a3e (0x117e): (0x19) If var[0x31] != (constant) 0x7c then Goto 0x0a50
@@ -3320,11 +3375,19 @@
 0x0a5e (0x119e): (0x05) Print message (constant) 0xbd
 0x0a60 (0x11a0): (0xe2) Set list#2[var[0x31]] = var[0x09] (list address 0x0740)
 0x0a63 (0x11a3): (0x09) Set var[0x5c] = var[0x01]
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0a66 (0x11a6): (0x00) Goto 0x0190
+
 **************************************************************************
 / Print message  "It evades your clutches "
 0x0a69 (0x11a9): (0x05) Print message (constant) 0xbe
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0a6b (0x11ab): (0x00) Goto 0x0190
+
 **************************************************************************
 0x0a6e (0x11ae): (0x19) If var[0x31] != (constant) 0x98 then Goto 0x0a7b
 0x0a72 (0x11b2): (0x13) If var[0x2b] > var[0x0b] then Goto 0x0a7b
@@ -3340,6 +3403,9 @@
 0x0a89 (0x11c9): (0x01) Gosub 0x1488
 0x0a8c (0x11cc): (0xe2) Set list#2[var[0x31]] = var[0x07] (list address 0x0740)
 0x0a8f (0x11cf): (0x0a) Set var[0x3b] += var[0x01]
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0a92 (0x11d2): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -3350,16 +3416,29 @@
 0x0a99 (0x11d9): (0x10) If var[0x5c] == var[0x0b] then Goto 0x0ab0
 0x0a9d (0x11dd): (0x08) Set var[0x31] = (constant) 0x76
 0x0aa0 (0x11e0): (0x01) Gosub 0x1559
+
+/ TODO Branch 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0aa3 (0x11e3): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
+
 0x0aa8 (0x11e8): (0x08) Set var[0x31] = (constant) 0x8a
 0x0aab (0x11eb): (0x09) Set var[0x5c] = var[0x0b]
 0x0aae (0x11ee): (0x00) Goto 0x0ab8
 **************************************************************************
 0x0ab0 (0x11f0): (0x01) Gosub 0x1559
+
+/ TODO Branch 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0ab3 (0x11f3): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
+
 0x0ab8 (0x11f8): (0x19) If var[0x31] != (constant) 0x81 then Goto 0x0ac1
 / Print message  "The sword protests: "See here guv, you're not gonna ditch me 'til I fight a dragin!" "
 0x0abc (0x11fc): (0x05) Print message (constant) 0x3c
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0abe (0x11fe): (0x00) Goto 0x0190
 **************************************************************************
 0x0ac1 (0x1201): (0x19) If var[0x31] != (constant) 0x7c then Goto 0x0ad7
@@ -3389,11 +3468,19 @@
 0x0af0 (0x1230): (0x13) If var[0x3c] > var[0x0b] then Goto 0x0af6
 / Print message  "Nothing "
 0x0af4 (0x1234): (0x05) Print message (constant) 0x1d
+
+/ TODO Branch 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0af6 (0x1236): (0x10) If var[0x3e] == var[0x0b] then Goto 0x0190
+
 / Print message  "\nAnd you are wearing:\n "
 0x0afb (0x123b): (0x05) Print message (constant) 0x26
 0x0afd (0x123d): (0x09) Set var[0x44] = var[0x08]
 0x0b00 (0x1240): (0x01) Gosub 0x156e
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0b03 (0x1243): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -3455,7 +3542,11 @@
 0x0b36 (0x1276): (0x0a) Set var[0x10] += var[0x01]
 / Print message  "The tree grabs it with a branch, raising it high into the air "
 0x0b39 (0x1279): (0x05) Print message (constant) 0x4b
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0b3b (0x127b): (0x00) Goto 0x0190
+
 **************************************************************************
 / Print message  "The tree has run out of branches: all 6 are in use! "
 0x0b3e (0x127e): (0x05) Print message (constant) 0x74
@@ -3470,7 +3561,11 @@
 0x0b5a (0x129a): (0x1a) If var[0x31] < (constant) 0x85 then Goto 0x0b64
 / Print message  ""Not valuable enough! Have it back!" "
 0x0b5e (0x129e): (0x05) Print message (constant) 0x10a
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0b61 (0x12a1): (0x00) Goto 0x0190
+
 **************************************************************************
 / Print message  "The troll takes it and leaves, gloating "
 0x0b64 (0x12a4): (0x05) Print message (constant) 0x108
@@ -3495,6 +3590,10 @@
 
 
 0x0b84 (0x12c4): (0x01) Gosub 0x15c5
+
+/ TODO Branch 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0b87 (0x12c7): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
 
 / TODO
@@ -3565,7 +3664,11 @@
 0x0bd6 (0x1316): (0x05) Print message (constant) 0x118
 0x0bd9 (0x1319): (0x00) Goto 0x135c
 **************************************************************************
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0bdc (0x131c): (0x00) Goto 0x0190
+
 **************************************************************************
 0x0bdf (0x131f): (0x08) Set var[0x1e] = (constant) 0x8c
 0x0be2 (0x1322): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
@@ -3576,6 +3679,9 @@
 0x0bf3 (0x1333): (0x09) Set var[0x0a] = var[0x31]
 0x0bf6 (0x1336): (0x00) Goto 0x0bc2
 **************************************************************************
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0bf8 (0x1338): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -3615,10 +3721,19 @@
 0x0c22 (0x1362): (0x10) If var[0x1f] == var[0x07] then Goto 0x0c2b
 / Print message  "You've no fire "
 0x0c26 (0x1366): (0x05) Print message (constant) 0x5e
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0c28 (0x1368): (0x00) Goto 0x0190
+
 **************************************************************************
 0x0c2b (0x136b): (0x01) Gosub 0x15c5
+
+/ TODO Branch 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0c2e (0x136e): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
+
 0x0c33 (0x1373): (0x18) If var[0x31] == (constant) 0x54 then Goto 0x0c5c
 0x0c37 (0x1377): (0x18) If var[0x31] == (constant) 0x55 then Goto 0x0c5c
 0x0c3b (0x137b): (0x18) If var[0x31] == (constant) 0x56 then Goto 0x0c5c
@@ -3648,7 +3763,12 @@
 **************************************************************************
 
 0x0c70 (0x13b0): (0x01) Gosub 0x0c7f
+
+/ TODO Branch
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0c72 (0x13b2): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
+
 / Print message  "99 "
 0x0c77 (0x13b7): (0x05) Print message (constant) 0x63
 0x0c79 (0x13b9): (0x09) Set var[0x36] = var[0x0b]
@@ -3667,11 +3787,20 @@
 
 0x0c94 (0x13d4): (0x19) If var[0x31] != (constant) 0x54 then Goto 0x15e0
 0x0c99 (0x13d9): (0x01) Gosub 0x1559
+
+/ TODO Branch 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0c9c (0x13dc): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
+
 0x0ca1 (0x13e1): (0x18) If var[0x43] == (constant) 0x2e then Goto 0x0caa
 / Print message  "There's nothing to tie it to "
 0x0ca5 (0x13e5): (0x05) Print message (constant) 0xc5
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0ca7 (0x13e7): (0x00) Goto 0x0190
+
 **************************************************************************
 0x0caa (0x13ea): (0x09) Set var[0x4b] = var[0x01]
 0x0cad (0x13ed): (0x01) Gosub 0x1488
@@ -3681,9 +3810,17 @@
 * Command: "open", "slide" or "unlock"
 **************************************************************************
 
+/ Branch if the player is opening the "small ornate box wtih a lid" (0x4b)
 0x0cb3 (0x13f3): (0x18) If var[0x31] == (constant) 0x4b then Goto 0x13e7
+
+/ Branch if the player is NOT opening their "eyes" (0xc5) and TODO 
 0x0cb8 (0x13f8): (0x19) If var[0x31] != (constant) 0xc5 then Goto 0x0cc2
+
+/ Set the status of the player's eyes to open (0x00)
+/ var[0x0b] is the constant 0x00
 0x0cbc (0x13fc): (0x09) Set var[0x20] = var[0x0b]
+
+/ TODO 
 0x0cbf (0x13ff): (0x00) Goto 0x0149
 **************************************************************************
 0x0cc2 (0x1402): (0x19) If var[0x44] != (constant) 0xa6 then Goto 0x0ccc
@@ -3694,6 +3831,9 @@
 0x0cd1 (0x1411): (0x18) If var[0x43] == (constant) 0x77 then Goto 0x15e0
 / Print message  "There's nothing worth opening "
 0x0cd6 (0x1416): (0x05) Print message (constant) 0x64
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0cd8 (0x1418): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -3706,12 +3846,18 @@
 / Set the status of the player's eyes to closed (0x01)
 / var[0x01] is the constant 0x01
 0x0cdf (0x141f): (0x09) Set var[0x20] = var[0x01]
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0ce2 (0x1422): (0x00) Goto 0x0190
 
 **************************************************************************
 0x0ce5 (0x1425): (0x18) If var[0x31] == (constant) 0xbd then Goto 0x0cef
 / Print message  "Nothing here's worth closing "
 0x0ce9 (0x1429): (0x05) Print message (constant) 0x115
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0cec (0x142c): (0x00) Goto 0x0190
 **************************************************************************
 0x0cef (0x142f): (0x19) If var[0x43] != (constant) 0x67 then Goto 0x0ce9
@@ -3732,6 +3878,10 @@
 0x0d16 (0x1456): (0x00) Goto 0x0149
 **************************************************************************
 0x0d19 (0x1459): (0x01) Gosub 0x1559
+
+/ TODO Branch 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0d1c (0x145c): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
 0x0d21 (0x1461): (0x00) Goto 0x15f0
 
@@ -3749,7 +3899,9 @@
 / Will print "Don't be silly!" if it's not 
 0x0d28 (0x1468): (0x01) Gosub 0x1559
 
-/ Branch if an invalid command for the object (0x00)
+/ Branch if an invalid command for the object (0x00) and perform additional 
+/ location specific checks skipping the code that prints the location description
+/ and ask "What next?" 
 / var[0x0b] is the constant 0x00
 0x0d2b (0x146b): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
 
@@ -3776,7 +3928,8 @@
 / Print message  "Yeuch!! "
 0x0d40 (0x1480): (0x05) Print message (constant) 0x07
 
-/ TODO
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0d42 (0x1482): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -3790,7 +3943,8 @@
 / Print message  "If you must.. You feel REALLY ILL now "
 0x0d48 (0x1488): (0x05) Print message (constant) 0xf1
 
-/ TODO 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0d4a (0x148a): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -3867,7 +4021,8 @@
 / Print message  "It tastes OK "
 0x0d7d (0x14bd): (0x05) Print message (constant) 0xf3
 
-/ TODO 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0d7f (0x14bf): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -3883,7 +4038,8 @@
 / Unused but incremented by 50 (0x32) when a player eats something that tastes fantastic!
 0x0d87 (0x14c7): (0x0a) Set var[0x0d] += var[0x5d]
 
-/ TODO 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0d8a (0x14ca): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -3940,14 +4096,16 @@
 / var[0x02] is the constant 0x02
 0x0dac (0x14ec): (0x09) Set var[0x2e] = var[0x02]
 
-/ TODO
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0daf (0x14ef): (0x00) Goto 0x0190
 
 / Make the player a normal size (0x00)
 / var[0x0b] is the constant 0x00
 0x0db2 (0x14f2): (0x09) Set var[0x2e] = var[0x0b]
 
-/ TODO
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0db5 (0x14f5): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -3961,7 +4119,8 @@
 / (number of turns before they are visible again i.e. 10)
 0x0dbb (0x14fb): (0x08) Set var[0x34] = (constant) 0x0a
 
-/ TODO
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0dbe (0x14fe): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -3970,7 +4129,12 @@
 **************************************************************************
 
 0x0dc1 (0x1501): (0x01) Gosub 0x1559
+
+/ TODO Branch 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0dc4 (0x1504): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
+
 0x0dc9 (0x1509): (0x00) Goto 0x15e0
 
 **************************************************************************
@@ -3978,12 +4142,26 @@
 **************************************************************************
 
 0x0dcc (0x150c): (0x01) Gosub 0x1559
+
+/ TODO Branch 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0dcf (0x150f): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
+
 0x0dd4 (0x1514): (0x19) If var[0x31] != (constant) 0x75 then Goto 0x0dec
 / Print message  "The stick emits a reedy whistle "
 0x0dd8 (0x1518): (0x05) Print message (constant) 0x65
+
+/ TODO Branch 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0dda (0x151a): (0x19) If var[0x43] != (constant) 0x2a then Goto 0x0190
+
+/ TODO Branch 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0ddf (0x151f): (0x11) If var[0x1c] != var[0x0b] then Goto 0x0190
+
 / Print message  "and the door swings open "
 0x0de4 (0x1524): (0x05) Print message (constant) 0x66
 0x0de6 (0x1526): (0x09) Set var[0x1c] = var[0x01]
@@ -3992,7 +4170,12 @@
 0x0dec (0x152c): (0x19) If var[0x31] != (constant) 0x7c then Goto 0x15e0
 / Print message  "The sound reverberates from the hills "
 0x0df1 (0x1531): (0x05) Print message (constant) 0xe4
+
+/ TODO Branch 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0df3 (0x1533): (0x19) If var[0x4c] != (constant) 0xdc then Goto 0x0190
+
 / Print message  "and the orcs flee! "
 0x0df8 (0x1538): (0x05) Print message (constant) 0xe5
 0x0dfa (0x153a): (0x09) Set var[0x0f] = var[0x06]
@@ -4003,6 +4186,10 @@
 **************************************************************************
 
 0x0e00 (0x1540): (0x01) Gosub 0x1559
+
+/ TODO Branch
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0e03 (0x1543): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
 0x0e08 (0x1548): (0x18) If var[0x4c] == (constant) 0x107 then Goto 0x0b25
 0x0e0e (0x154e): (0x00) Goto 0x15f8
@@ -4019,7 +4206,11 @@
 0x0e22 (0x1562): (0x13) If var[0x31] > var[0x0b] then Goto 0x0e82
 / Print message  "You don't find anything "
 0x0e26 (0x1566): (0x05) Print message (constant) 0x6b
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0e28 (0x1568): (0x00) Goto 0x0190
+
 **************************************************************************
 0x0e2b (0x156b): (0x19) If var[0x43] != (constant) 0x76 then Goto 0x0e26
 0x0e2f (0x156f): (0x08) Set var[0x1e] = (constant) 0x73
@@ -4032,15 +4223,20 @@
 / Check to see if the object is found if so print it
 0x0e3c (0x157c): (0x01) Gosub 0x1282
 
-/ TODO 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0e3f (0x157f): (0x00) Goto 0x0190
 **************************************************************************
 0x0e42 (0x1582): (0x18) If var[0x43] == (constant) 0xb1 then Goto 0x0e56
 0x0e46 (0x1586): (0xa2) Set var[0x1f] = list#2[var[0x31]] (list address 0x0740)
 0x0e49 (0x1589): (0x1b) If var[0x1f] > (constant) 0xfd then Goto 0x0e56
 0x0e4d (0x158d): (0x10) If var[0x1f] == var[0x43] then Goto 0x0e56
+
 / Print message  "You can't see it "
 0x0e51 (0x1591): (0x05) Print message (constant) 0x0c
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0e53 (0x1593): (0x00) Goto 0x0190
 **************************************************************************
 0x0e56 (0x1596): (0x10) If var[0x12] == var[0x01] then Goto 0x0e6e
@@ -4051,9 +4247,15 @@
 / Check to see if the object is discoverable and print it if it is
 0x0e5d (0x159d): (0x01) Gosub 0x1282
 
+/ TODO Branch
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0e60 (0x15a0): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
 0x0e65 (0x15a5): (0x08) Set var[0x1e] = (constant) 0x8d
 0x0e68 (0x15a8): (0x01) Gosub 0x1291
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0e6b (0x15ab): (0x00) Goto 0x0190
 **************************************************************************
 
@@ -4062,21 +4264,35 @@
 
 / Check to see if the object is discoverable and print it if it is
 0x0e71 (0x15b1): (0x01) Gosub 0x1282
+
+/ TODO Branch
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0e74 (0x15b4): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
 0x0e79 (0x15b9): (0x08) Set var[0x1e] = (constant) 0x4d
 0x0e7c (0x15bc): (0x01) Gosub 0x1291
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0e7f (0x15bf): (0x00) Goto 0x0190
 **************************************************************************
 0x0e82 (0x15c2): (0xa2) Set var[0x5d] = list#2[var[0x31]] (list address 0x0740)
 0x0e85 (0x15c5): (0x10) If var[0x5d] == var[0x07] then Goto 0x0e92
 0x0e89 (0x15c9): (0x10) If var[0x5d] == var[0x44] then Goto 0x0e92
+
 / Print message  "You can't see it "
 0x0e8d (0x15cd): (0x05) Print message (constant) 0x0c
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0e8f (0x15cf): (0x00) Goto 0x0190
 **************************************************************************
 0x0e92 (0x15d2): (0x1b) If var[0x31] > (constant) 0x59 then Goto 0x0e9b
 / Print message  "It is nothing special "
 0x0e96 (0x15d6): (0x05) Print message (constant) 0x50
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0e98 (0x15d8): (0x00) Goto 0x0190
 **************************************************************************
 0x0e9b (0x15db): (0x1b) If var[0x31] > (constant) 0x84 then Goto 0x0ea1
@@ -4090,8 +4306,14 @@
 0x0eb1 (0x15f1): (0x08) Set var[0x5d] = (constant) 0x169
 0x0eb5 (0x15f5): (0x0a) Set var[0x5d] += var[0x31]
 0x0eb8 (0x15f8): (0x04) Print message var[0x5d]
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0eba (0x15fa): (0x00) Goto 0x0190
 **************************************************************************
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0ebd (0x15fd): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -4101,6 +4323,8 @@
 / Print message  "It's too risky! "
 0x0ec0 (0x1600): (0x05) Print message (constant) 0x67
 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0ec2 (0x1602): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -4110,7 +4334,9 @@
 / Check to see if the player has the object
 0x0ec5 (0x1605): (0x01) Gosub 0x1559
 
-/ Branch if the player does not have the pot 
+/ Branch if the player does not have the pot and perform additional location
+/ specific checks skipping the code that prints the location description
+/ and ask "What next?" 
 0x0ec8 (0x1608): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
 
 / Branch if the second word is NOT the "pot" (0x52) and print "you can't do that"
@@ -4152,7 +4378,8 @@
 / Print message  "The water trickles out. Try a thicker liquid "
 0x0ede (0x161e): (0x05) Print message (constant) 0x9d
 
-/ TODO
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0ee0 (0x1620): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -4162,7 +4389,8 @@
 / Print message  "There's nothing to fill it with "
 0x0ee3 (0x1623): (0x05) Print message (constant) 0x9e
 
-/ TODO
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0ee5 (0x1625): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -4176,7 +4404,8 @@
 / var[0x07] is the constant 0xfe
 0x0eea (0x162a): (0x09) Set var[0x40] = var[0x07]
 
-/ TODO
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0eed (0x162d): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -4184,11 +4413,19 @@
 **************************************************************************
 
 0x0ef0 (0x1630): (0x01) Gosub 0x1559
+
+/ TODO Branch
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0ef3 (0x1633): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
 0x0ef8 (0x1638): (0x19) If var[0x31] != (constant) 0x52 then Goto 0x15e0
 0x0efd (0x163d): (0x11) If var[0x40] != var[0x07] then Goto 0x1609
+
 / Print message  "The slime is too sticky! "
 0x0f02 (0x1642): (0x05) Print message (constant) 0xa1
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0f04 (0x1644): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -4199,6 +4436,9 @@
 0x0f07 (0x1647): (0x05) Print message (constant) 0xf0
 0x0f09 (0x1649): (0x01) Gosub 0x1488
 0x0f0c (0x164c): (0x09) Set var[0x25] = var[0x01]
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0f0f (0x164f): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -4257,13 +4497,16 @@
 / slides from the doorway" (0x85)
 0x0f44 (0x1684): (0x08) Set var[0x5d] = (constant) 0x85
 
-/ Branch and print the above message if 3 rocks has been pressed
+/ Branch and print the above message if 3 rocks has been pressed and 
+/ perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0f47 (0x1687): (0x11) If var[0x53] != var[0x03] then Goto 0x0190
 
 / Print the message 
 0x0f4c (0x168c): (0x04) Print message var[0x5d]
 
-/ TOOD
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0f4e (0x168e): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -4308,7 +4551,8 @@
 / Print message  "The bolt barrs the door "
 0x0f6f (0x16af): (0x05) Print message (constant) 0x87
 
-/ TODO 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0f71 (0x16b1): (0x00) Goto 0x0190
 **************************************************************************
 
@@ -4319,7 +4563,8 @@
 / Print message  "The bolt slides back "
 0x0f77 (0x16b7): (0x05) Print message (constant) 0x82
 
-/ TODO
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0f79 (0x16b9): (0x00) Goto 0x0190
 **************************************************************************
 
@@ -4429,6 +4674,9 @@
 / 
 0x0fe7 (0x1727): (0x08) Set var[0x43] = (constant) 0x6f
 0x0fea (0x172a): (0x04) Print message var[0x31]
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0fec (0x172c): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -4479,6 +4727,9 @@
 / Print message  "A yellow light scans your body and a copy flickers in the machine "
 0x1028 (0x1768): (0x05) Print message (constant) 0x40
 0x102a (0x176a): (0x09) Set var[0x49] = var[0x01]
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x102d (0x176d): (0x00) Goto 0x0190
 **************************************************************************
 0x1030 (0x1770): (0x19) If var[0x43] != (constant) 0xbd then Goto 0x1619
@@ -4486,11 +4737,17 @@
 / Print message  "An opening leads east "
 0x1039 (0x1779): (0x05) Print message (constant) 0x8a
 0x103b (0x177b): (0x09) Set var[0x55] = var[0x01]
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x103e (0x177e): (0x00) Goto 0x0190
 **************************************************************************
 / Print message  "The exit closes again "
 0x1041 (0x1781): (0x05) Print message (constant) 0x89
 0x1043 (0x1783): (0x09) Set var[0x55] = var[0x0b]
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x1046 (0x1786): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -4500,6 +4757,8 @@
 / Print message  "Nice try, but that magic word is used up "
 0x1049 (0x1789): (0x05) Print message (constant) 0x25
 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x104b (0x178b): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -4509,7 +4768,9 @@
 / Check that the player has the item in the second word
 0x104e (0x178e): (0x01) Gosub 0x1559
 
-/ Branch if the command was invalid (0x00)
+/ Branch if the command was invalid (0x00) and perform additional location 
+/ specific checks skipping the code that prints the location description 
+/ and ask "What next?" 
 / var[0x0b] is the constant 0x00
 0x1051 (0x1791): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
 
@@ -4540,7 +4801,8 @@
 / var[0x01] is the constant 0x01
 0x1063 (0x17a3): (0x09) Set var[0x1a] = var[0x01]
 
-/ TODO
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x1066 (0x17a6): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -4567,7 +4829,8 @@
 / Set the status of the flint thrower to dead
 0x1077 (0x17b7): (0x09) Set var[0x3f] = var[0x01]
 
-/ TODO 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x107a (0x17ba): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -4593,6 +4856,9 @@
 0x1094 (0x17d4): (0x18) If var[0x31] == (constant) 0x9f then Goto 0x109d
 / Print message  ""Sorry!", says your sword, "Can't let you do that. It's against the rules for me to fight anything but dragins!" "
 0x1098 (0x17d8): (0x05) Print message (constant) 0x3b
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x109a (0x17da): (0x00) Goto 0x0190
 **************************************************************************
 / Print message  "The sword slays the dragon and they fade away, leaving the dragon's teeth and its golden bed "
@@ -4605,21 +4871,32 @@
 0x10ae (0x17ee): (0xe2) Set list#2[var[0x1f]] = var[0x44] (list address 0x0740)
 0x10b1 (0x17f1): (0x08) Set var[0x1f] = (constant) 0x78
 0x10b4 (0x17f4): (0xe2) Set list#2[var[0x1f]] = var[0x44] (list address 0x0740)
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x10b7 (0x17f7): (0x00) Goto 0x0190
 **************************************************************************
 0x10ba (0x17fa): (0x08) Set var[0x1e] = (constant) 0x46
 0x10bd (0x17fd): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
 0x10c0 (0x1800): (0x10) If var[0x1f] == var[0x07] then Goto 0x10c9
+
 / Print message  "You've no weapon "
 0x10c4 (0x1804): (0x05) Print message (constant) 0x71
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x10c6 (0x1806): (0x00) Goto 0x0190
 **************************************************************************
 0x10c9 (0x1809): (0x19) If var[0x31] != (constant) 0xb6 then Goto 0x1120
 0x10cd (0x180d): (0x18) If var[0x43] == (constant) 0x33 then Goto 0x10e0
 0x10d1 (0x1811): (0x1a) If var[0x43] < (constant) 0x10 then Goto 0x1609
 0x10d6 (0x1816): (0x1b) If var[0x43] > (constant) 0x1c then Goto 0x1609
+
 / Print message  "You hack at a branch, blunting your axe "
 0x10db (0x181b): (0x05) Print message (constant) 0x3a
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x10dd (0x181d): (0x00) Goto 0x0190
 **************************************************************************
 0x10e0 (0x1820): (0x0a) Set var[0x10] += var[0x01]
@@ -4637,6 +4914,10 @@
 / Print message  ""Stop! Woodman, spare that tree! I'll give you a reward! OK?"\n "
 0x10fb (0x183b): (0x05) Print message (constant) 0x4c
 0x10fd (0x183d): (0x07) Input - results in word1 var[0x30], word2 var[0x31], word3 var[0x32], count var[0x33]
+
+/ TODO Branch
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x1102 (0x1842): (0x10) If var[0x30] == var[0x01] then Goto 0x0190
 0x1107 (0x1847): (0x18) If var[0x30] == (constant) 0x1d then Goto 0x110f
 / Print message  "Please answer YES or NO\n "
@@ -4649,6 +4930,9 @@
 0x1114 (0x1854): (0xe2) Set list#2[var[0x1e]] = var[0x07] (list address 0x0740)
 0x1117 (0x1857): (0x0a) Set var[0x3b] += var[0x01]
 0x111a (0x185a): (0x01) Gosub 0x1445
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x111d (0x185d): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -4764,7 +5048,8 @@
 
 **************************************************************************
 
-/ TODO
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x117d (0x18bd): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -4774,7 +5059,9 @@
 / Check  if the player is being silly or can't see the object / npc
 0x1180 (0x18c0): (0x01) Gosub 0x15c5
 
-/ Branch if the player can't attack the object / npc
+/ Branch if the player can't attack the object / npc and perform additional 
+/ location specific checks skipping the code that prints the location description 
+/ and ask "What next?" 
 0x1183 (0x18c3): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
 
 / Set the temporary variable to the "hammer" (0x4e)
@@ -4802,7 +5089,8 @@
 / var[0x01] is the constant 0x01
 0x119a (0x18da): (0x09) Set var[0x2a] = var[0x01]
 
-/ TODO
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x119d (0x18dd): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -4812,7 +5100,8 @@
 / Print message  "You need a hammer! "
 0x11a0 (0x18e0): (0x05) Print message (constant) 0xe6
 
-/ TODO 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x11a2 (0x18e2): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -4923,7 +5212,8 @@
 / var[0x01] is the constant 0x01
 0x11eb (0x192b): (0x09) Set var[0x22] = var[0x01]
 
-/ TODO
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x11ee (0x192e): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -4932,7 +5222,8 @@
 
 0x11f1 (0x1931): (0x01) Gosub 0x1200
 
-/ TODO
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x11f3 (0x1933): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -5124,7 +5415,8 @@
 / Print message  "You're temporarily deaf "
 0x1262 (0x19a2): (0x05) Print message (constant) 0x42
 
-/ TODO 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x1264 (0x19a4): (0x00) Goto 0x0190
 
 / Player is temporarily deaf
@@ -5132,12 +5424,15 @@
 / Print message  "You can't hear much "
 0x1267 (0x19a7): (0x05) Print message (constant) 0x43
 
-/ TODO
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x1269 (0x19a9): (0x00) Goto 0x0190
 
 **************************************************************************
 
 / Branch if the second word is NOT the "seeds" or "pod" or "poppy" (0x89)
+/ and perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x126c (0x19ac): (0x19) If var[0x31] != (constant) 0x89 then Goto 0x0190
 
 / Player IS waving the seed pod
@@ -5162,7 +5457,8 @@
 / var[0x01] is the constant 0x01
 0x127c (0x19bc): (0x09) Set var[0x11] = var[0x01]
 
-/ TODO 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x127f (0x19bf): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -5596,7 +5892,8 @@
 / var[0x01] is the constant 0x01
 0x13ba (0x1afa): (0x09) Set var[0x41] = var[0x01]
 
-/ TODO
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x13bd (0x1afd): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -5661,13 +5958,19 @@
 / Print message  ""NOT AUTHORISED TO GO THERE!" "
 0x13e2 (0x1b22): (0x05) Print message (constant) 0x7c
 
-/ TODO 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x13e4 (0x1b24): (0x00) Goto 0x0190
 
 **************************************************************************
 
+/ Check to see if the TODO
 0x13e7 (0x1b27): (0x01) Gosub 0x15c5
+
+/ Branch if the player was told "Don't be silly" and get the next command
 0x13ea (0x1b2a): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0149
+
+
 0x13ef (0x1b2f): (0x13) If var[0x5f] > var[0x0b] then Goto 0x13f9
 / Print message  "A snake leaps out and strikes! "
 0x13f3 (0x1b33): (0x05) Print message (constant) 0x12c
@@ -5680,7 +5983,8 @@
 / CHeck to see if the object is discoverable and print it if it is
 0x13fc (0x1b3c): (0x01) Gosub 0x1282
 
-/ TODO 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x13ff (0x1b3f): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -5689,6 +5993,10 @@
 
 0x1402 (0x1b42): (0x19) If var[0x31] != (constant) 0x87 then Goto 0x15f0
 0x1407 (0x1b47): (0x01) Gosub 0x1559
+
+/ TODO Branch 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x140a (0x1b4a): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
 0x140f (0x1b4f): (0x10) If var[0x4a] == var[0x01] then Goto 0x15f0
 / Print message  "A silken rope emerges! "
@@ -5703,8 +6011,16 @@
 **************************************************************************
 
 0x1422 (0x1b62): (0x01) Gosub 0x15c5
+
+/ TODO Branch 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x1425 (0x1b65): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
 0x142a (0x1b6a): (0x01) Gosub 0x1488
+
+/ TODO Branch 
+// Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x142d (0x1b6d): (0x19) If var[0x31] != (constant) 0x97 then Goto 0x0190
 / Print message  "Warriors spring from the teeth "
 0x1432 (0x1b72): (0x05) Print message (constant) 0xe1
@@ -6245,7 +6561,8 @@
 / var[0x0b] is the constant 0x00
 0x15e2 (0x1d22): (0x09) Set var[0x3c] = var[0x0b]
 
-/ TODO
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x15e5 (0x1d25): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -6259,7 +6576,8 @@
 / var[0x0b] is the constant 0x00
 0x15ea (0x1d2a): (0x09) Set var[0x3c] = var[0x0b]
 
-/ TODO 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x15ed (0x1d2d): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -6273,7 +6591,8 @@
 / var[0x0b] is the constant 0x00
 0x15f2 (0x1d32): (0x09) Set var[0x3c] = var[0x0b]
 
-/ TODO 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x15f5 (0x1d35): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -6283,7 +6602,8 @@
 / Print message  "You can't do that "
 0x15f8 (0x1d38): (0x05) Print message (constant) 0x05
 
-/ TODO 
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x15fa (0x1d3a): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -6319,7 +6639,8 @@
 / var[0x0b] is the constant 0x00
 0x160b (0x1d4b): (0x09) Set var[0x3c] = var[0x0b]
 
-/ TODO
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x160e (0x1d4e): (0x00) Goto 0x0190
 
 **************************************************************************
@@ -6332,7 +6653,8 @@
 / Set the indicator to show it was not a valid action
 0x1613 (0x1d53): (0x09) Set var[0x3c] = var[0x0b]
 
-/ TODO
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x1616 (0x1d56): (0x00) Goto 0x0190
 
 **************************************************************************
