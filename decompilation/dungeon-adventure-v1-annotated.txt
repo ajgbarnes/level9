@@ -53,13 +53,13 @@
 / 0x09 - (Constant) Location code for when an item is removed from the game (0xe1)
 / 0x0a - Colour of colour that the player is wearing 
 /        0x00 : Not wearing a collar
-/        0x8d : ORANGE
-/        0x8e : YELLOW
-/        0x8f : GREEN
-/        0x90 : BLUE
-/        0x91 : VIOLET
-/        0x92 : INDIGO
-/        0x93 : SILVER
+/        0x8c : ORANGE
+/        0x8d : YELLOW
+/        0x8e : GREEN
+/        0x8f : BLUE
+/        0x90 : VIOLET
+/        0x91 : INDIGO
+/        0x92 : SILVER
 / 0x0b - (Constant) 0x00
 / 0x0c - Status of the iron door in the strong room 
 /        0x00 - closed and bolted
@@ -459,7 +459,16 @@
        2. 
 
 /     1. Player has been resurrected less than 3 times
-
+/ 43. The player teleports by saying a colour - which will take them to that cylinder of light
+/     from another cylinder of light. Player has to be wearing a collar colour 
+/     that has a greater or equal colour value than the cylinder of coloured light that
+/     they want to teleport to e.g. to teleport to the orange cylinder of light,
+/     the player must be wearing at least the yellow collar - they will be denied
+/     with "NOT AUTHORISED TO GO THERE!" if they are wearing the orange or red collar
+/ 44. Saying "indigo" when wearing the silver collar, takes the player to the "violet" room - presumably
+/     because the "cylinder of indigo light" isn't working and it's a "cylinder of impenetrable darkness" (0x5b)
+/     It's still possible to navigate to this room from "in a dead-end dark room, below a black pedestal" (0xac)
+/     by going up 
 /     
 
 
@@ -5592,20 +5601,71 @@
 
 **************************************************************************
 
+/ Branch if the player is NOT in one of the following locations 
+/ and print "Nothing happens"
+/ 0x55 : standing on a small round platform surrounded by a cylinder of red light
+/ 0x56 : standing on a small round platform surrounded by a cylinder of orange light
+/ 0x57 : standing on a small round platform surrounded by a cylinder of yellow light
+/ 0x58 : standing on a small round platform surrounded by a cylinder of green light
+/ 0x59 : standing on a small round platform surrounded by a cylinder of blue light
+/ 0x5a : standing on a small round platform surrounded by a cylinder of violet light
+/ 0x5b : standing on a small round platform surrounded by a cylinder of impenetrable darkness
+/ 0x5c : standing on a small round platform surrounded by a cylinder of silvery light
+/ 0x5d : sitting on an ornate throne. There are nine numbered buttons along the left arm-rest
 0x13c0 (0x1b00): (0x1a) If var[0x43] < (constant) 0x55 then Goto 0x15f0
 0x13c5 (0x1b05): (0x1b) If var[0x43] > (constant) 0x5d then Goto 0x15f0
+
+/ Player IS at "a small round platform"
+
+/ The player teleports by saying a colour - which will take them to that cylinder of light
+/ Player has to be wearing a collar colour that has a greater or equal colour value 
+/ than the cylinder of coloured light that they want to teleport to e.g. to 
+/ teleport to the orange cylinder of light, the player must be wearing at 
+/ least the yellow collar - they will be denied with "NOT AUTHORISED TO GO THERE!"
+/ if they are wearing the orange or red collar
+/ 0x00 : Not wearing a collar
+/ 0x8c : ORANGE
+/ 0x8d : YELLOW
+/ 0x8e : GREEN
+/ 0x8f : BLUE
+/ 0x90 : VIOLET
+/ 0x91 : INDIGO
+/ 0x92 : SILVER
+
+/ Branch if the player is wearing a collar with a lesser colour value 
+/ than the colour they have said and print "NOT AUTHORISED...."
 0x13ca (0x1b0a): (0x12) If var[0x0a] < var[0x30] then Goto 0x13e2
+
+/ Set the player's current location to the dictionary id for the colour
 0x13ce (0x1b0e): (0x09) Set var[0x43] = var[0x30]
+
+/ Set the temporary variable to the offset to subtract to get the 
+/ location id for the cylinder of light of that colour
 0x13d1 (0x1b11): (0x08) Set var[0x5d] = (constant) 0x37
-0x13d4 (0x1b14): (0x0b) Set var[0x43] -= var[0x5d].
+
+/ Subtract the offset to get the actual loction id 
+0x13d4 (0x1b14): (0x0b) Set var[0x43] -= var[0x5d]
+
+/ Branch and get the next command if they player is NOT in the 
+/ "impenetrable darkness (0x5b) or "sliver" cylinder of light
 0x13d7 (0x1b17): (0x1a) If var[0x43] < (constant) 0x5b then Goto 0x0149
+
+/ Add one to the location id
 0x13dc (0x1b1c): (0x0a) Set var[0x43] += var[0x01]
+
+/ TODO 
 0x13df (0x1b1f): (0x00) Goto 0x0149
+
 **************************************************************************
+
 / Print message  ""NOT AUTHORISED TO GO THERE!" "
 0x13e2 (0x1b22): (0x05) Print message (constant) 0x7c
+
+/ TODO 
 0x13e4 (0x1b24): (0x00) Goto 0x0190
+
 **************************************************************************
+
 0x13e7 (0x1b27): (0x01) Gosub 0x15c5
 0x13ea (0x1b2a): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0149
 0x13ef (0x1b2f): (0x13) If var[0x5f] > var[0x0b] then Goto 0x13f9
