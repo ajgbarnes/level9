@@ -87,7 +87,7 @@
 / 0x11 - Status of the grotesque yellow bird 
 /        0x00 - not scared away
 /        0x01 - scared away so the player can enter the nest and retrieve the large jade egg
-/
+/ 0x12 - 
 / 0x13 - Status of the boulder rolling down from above (decrements by one each turn when rolling)
 /        0x00 - not rolling at the player
 /        0x01 - "Sounds of a boulder echo up from below" if the player hid in the brink of a deep, dark pit (0xb2)
@@ -472,9 +472,8 @@
 /     because the "cylinder of indigo light" isn't working and it's a "cylinder of impenetrable darkness" (0x5b)
 /     It's still possible to navigate to this room from "in a dead-end dark room, below a black pedestal" (0xac)
 /     by going up 
+/ 45. BUG: Cannot examine an item if it's being worn. See 0x0e85
 /     
-
-
 / TODO what happens to collars when you wear a new one
 
 **************************************************************************
@@ -1735,14 +1734,23 @@
 / Branch if player's current location is NOT "on stepping stones leading north to an island" (0x35)
 0x049b (0x0bdb): (0x19) If var[0x43] != (constant) 0x35 then Goto 0x04a2
 
-/ Player IS "on stepping stones leading north to an island" OR "on an east-west road beside the river...."
+/ Player IS "on stepping stones leading north to an island" OR 
+/ "on an east-west road beside the river...."
 / Siren is in the location...
 
-/ Set the first supplementary message to "A young girl, with flowing locks, sits on the island" (0x47)
+/ Set the first supplementary message to "A young girl, with flowing locks, 
+/ sits on the island" (0x47)
 0x049f (0x0bdf): (0x08) Set var[0x4c] = (constant) 0x47
 
+/ Branch if the dragon has been slain (0x01)
+/ var[0x0b] is the constant 0x00
 0x04a2 (0x0be2): (0x11) If var[0x18] != var[0x0b] then Goto 0x04ad
+
+/ Branch if the player's current location is NOT "in the upper chamber, warmed by 
+/ a current of rising air." (0x7d)
 0x04a6 (0x0be6): (0x19) If var[0x43] != (constant) 0x7d then Goto 0x04ad
+
+/ Player IS in the "upper chamber" and dragon IS still alive
 
 / Set the first supplementary message to "An enormous dragon lies on a golden bed" (0x77)
 0x04aa (0x0bea): (0x08) Set var[0x4c] = (constant) 0x77
@@ -4289,12 +4297,23 @@
 * Command: "search" or "examine"
 **************************************************************************
 
-
+/ Branch if the second word is empty (0x00)
+/ var[0x0b] is the constant 0x00
 0x0e11 (0x1551): (0x10) If var[0x31] == var[0x0b] then Goto 0x0e2b
+
+/ Branch if the second word is the "corpse" (0x49)
 0x0e15 (0x1555): (0x18) If var[0x31] == (constant) 0x49 then Goto 0x0e42
+
+/ Branch if the second word is the "seed pod" (0x89)
 0x0e19 (0x1559): (0x18) If var[0x31] == (constant) 0x89 then Goto 0x126c
+
+/ Branch if the second word is an NPC or colour
 0x0e1e (0x155e): (0x1b) If var[0x31] > (constant) 0x99 then Goto 0x0e26
+
+/ Branch if the second word is NOT empty (a real object or verb)
+/ var[0x0b] is the constant 0x00
 0x0e22 (0x1562): (0x13) If var[0x31] > var[0x0b] then Goto 0x0e82
+
 / Print message  "You don't find anything "
 0x0e26 (0x1566): (0x05) Print message (constant) 0x6b
 
@@ -4303,9 +4322,21 @@
 0x0e28 (0x1568): (0x00) Goto 0x0190
 
 **************************************************************************
+* Second word is empty for "search" or "examine"
+**************************************************************************
+
+/ Branch if the player is NOT "in a rough-hewn store room, filled by a haystack" (0x76)
 0x0e2b (0x156b): (0x19) If var[0x43] != (constant) 0x76 then Goto 0x0e26
+
+/ Set the temporary variable to the object id for the "cube of sticky metal" (0x76)
 0x0e2f (0x156f): (0x08) Set var[0x1e] = (constant) 0x73
+
+/ Get the current location of the "cube" 
 0x0e32 (0x1572): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
+
+/ Branch if the location is NOT in the player's inventory (0xfe)
+/ and print "You don't find anything"
+/ var[0x07] is the constant 0xfe
 0x0e35 (0x1575): (0x11) If var[0x1f] != var[0x07] then Goto 0x0e26
 
 / Set the temporary variable to the object id for the "jewelled needle" (0x60)
@@ -4317,11 +4348,32 @@
 / Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0e3f (0x157f): (0x00) Goto 0x0190
+
 **************************************************************************
+* Second word is "corpse" for "search" or "examine"
+* There are two corpses, one at "dead end, below a gallows tree..." and
+* one at "the east end of a long room".  In the latter the corpse can 
+* be picked up 
+**************************************************************************
+
+/ Branch if the player's current location IS "in a dead end, below a gallows
+/ tree from which a bloodless corpse hangs by one foot" (0xb1)
 0x0e42 (0x1582): (0x18) If var[0x43] == (constant) 0xb1 then Goto 0x0e56
+
+/ Player is NOT "in a dead end..." 
+
+/ Get the current location of the "corpse" 
 0x0e46 (0x1586): (0xa2) Set var[0x1f] = list#2[var[0x31]] (list address 0x0740)
+
+/ Branch if the "corpse" is in the player's inventory (0xfe) (!)
+/ and process searching it
 0x0e49 (0x1589): (0x1b) If var[0x1f] > (constant) 0xfd then Goto 0x0e56
+
+/ Branch if the "corpse" is in the player's current location 
+/ and process searching it
 0x0e4d (0x158d): (0x10) If var[0x1f] == var[0x43] then Goto 0x0e56
+
+/ Pickupable corpse is somewhere else
 
 / Print message  "You can't see it "
 0x0e51 (0x1591): (0x05) Print message (constant) 0x0c
@@ -4329,7 +4381,9 @@
 / Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0e53 (0x1593): (0x00) Goto 0x0190
+
 **************************************************************************
+
 0x0e56 (0x1596): (0x10) If var[0x12] == var[0x01] then Goto 0x0e6e
 
 / Set the temporary variable to the object id for the "short bow" (0x4a)
@@ -4338,16 +4392,21 @@
 / Check to see if the object is discoverable and print it if it is
 0x0e5d (0x159d): (0x01) Gosub 0x1282
 
-/ TODO Branch
-/ Perform additional location specific checks skipping the code 
+/ Branch if the short bow is not discoverable (and neither is the orange collar)
+/ perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0e60 (0x15a0): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
+
+/ Set the temporary variable to the object id for the "orange collar (0x8c)
 0x0e65 (0x15a5): (0x08) Set var[0x1e] = (constant) 0x8d
+
+/ Check to see if the object is discoverable and print it if it is
 0x0e68 (0x15a8): (0x01) Gosub 0x1291
 
 / Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0e6b (0x15ab): (0x00) Goto 0x0190
+
 **************************************************************************
 
 / Set the temporary variable to the object id for the "blindfold" (0x48)
@@ -4356,20 +4415,36 @@
 / Check to see if the object is discoverable and print it if it is
 0x0e71 (0x15b1): (0x01) Gosub 0x1282
 
-/ TODO Branch
-/ Perform additional location specific checks skipping the code 
+/ Branch if the blindfold (and therefore gauntlet) has already been discovered 
+/ and perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0e74 (0x15b4): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
+
+/ Set the temporary variable to the object id for the "gauntlet" (0x4d)
 0x0e79 (0x15b9): (0x08) Set var[0x1e] = (constant) 0x4d
+
+/ Check to see if the object is discoverable and print it if it is
 0x0e7c (0x15bc): (0x01) Gosub 0x1291
 
 / Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0e7f (0x15bf): (0x00) Goto 0x0190
+
 **************************************************************************
+
+/ Set the temporary variable to the current location of the object in the 
+/ second word
 0x0e82 (0x15c2): (0xa2) Set var[0x5d] = list#2[var[0x31]] (list address 0x0740)
+
+/ Branch if the object is in the player's inventory (0xfe)
+/ BUG: This should be > var[0x07] to allow worn items to be examined
+/ var[0x07] is the constant 0xfe
 0x0e85 (0x15c5): (0x10) If var[0x5d] == var[0x07] then Goto 0x0e92
+
+/ Branch if the object is in the player's current location
 0x0e89 (0x15c9): (0x10) If var[0x5d] == var[0x44] then Goto 0x0e92
+
+/ Not in the player's inventory or 
 
 / Print message  "You can't see it "
 0x0e8d (0x15cd): (0x05) Print message (constant) 0x0c
@@ -4377,7 +4452,9 @@
 / Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0e8f (0x15cf): (0x00) Goto 0x0190
+
 **************************************************************************
+
 0x0e92 (0x15d2): (0x1b) If var[0x31] > (constant) 0x59 then Goto 0x0e9b
 / Print message  "It is nothing special "
 0x0e96 (0x15d6): (0x05) Print message (constant) 0x50
@@ -4385,13 +4462,38 @@
 / Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0e98 (0x15d8): (0x00) Goto 0x0190
+
 **************************************************************************
+
+/ Branch if the second word object is NOT a treasure 
 0x0e9b (0x15db): (0x1b) If var[0x31] > (constant) 0x84 then Goto 0x0ea1
+
+/ Object IS a treasure 
+
 / Print message  "It is very valuable!\n "
 0x0e9f (0x15df): (0x05) Print message (constant) 0x4e
+
+/ Branch if the second word object is NOT enchanted
 0x0ea1 (0x15e1): (0x1a) If var[0x31] < (constant) 0x78 then Goto 0x0ea7
+
+/ Object is enchanted - only objects between 0x78 and 0x84
+/ 0x78 : a gilt miner's helmet with a lamp
+/ 0x7a : a golden bed
+/ 0x7b : a good, strong belt
+/ 0x7c : a veneered cross
+/ 0x7d : a jewel-encrusted crucifix
+/ 0x7e : a great horn, bound by metal hoops
+/ 0x7f : a broken mechanical face
+/ 0x80 : a magical mirror
+/ 0x81 : a cuddley octopus figurine
+/ 0x82 : a staff of polished bone
+/ 0x83 : a magic sword
+/ 0x84 : a magic wand
+
 / Print message  "It is enchanted!\n "
 0x0ea5 (0x15e5): (0x05) Print message (constant) 0x4f
+
+/ Branch if the second word 
 0x0ea7 (0x15e7): (0x1a) If var[0x31] < (constant) 0x73 then Goto 0x0190
 0x0eac (0x15ec): (0x1b) If var[0x31] > (constant) 0x8b then Goto 0x0190
 0x0eb1 (0x15f1): (0x08) Set var[0x5d] = (constant) 0x169
