@@ -3497,21 +3497,43 @@
 
 / Print message  "\nYou have:\n "
 0x0ae5 (0x1225): (0x05) Print message (constant) 0x1c
+
+/ Set the base message id to the offset for inventory item descriptions.
+/ Objects have two descriptions, one for when in the inventory and 
+/ one for when in a location. The object id is added to this to get the 
+/ right descriptive message.
 0x0ae7 (0x1227): (0x08) Set var[0x38] = (constant) 0xe7
+
+/ Set the location to check for objects to the inventory (0xfe)
+/ var[0x07] is the constant 0x0fe
 0x0aea (0x122a): (0x09) Set var[0x44] = var[0x07]
+
+/ Print all the objects in the inventory
 0x0aed (0x122d): (0x01) Gosub 0x156e
+
+/ Branch if at least one object was printed
 0x0af0 (0x1230): (0x13) If var[0x3c] > var[0x0b] then Goto 0x0af6
+
+/ Zero objects were printed
+
 / Print message  "Nothing "
 0x0af4 (0x1234): (0x05) Print message (constant) 0x1d
 
-/ TODO Branch 
-/ Perform additional location specific checks skipping the code 
+/ Branch if the player is NOT wearing any objects and 
+/ perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0af6 (0x1236): (0x10) If var[0x3e] == var[0x0b] then Goto 0x0190
 
+/ Player is wearing at least one item
+
 / Print message  "\nAnd you are wearing:\n "
 0x0afb (0x123b): (0x05) Print message (constant) 0x26
+
+/ Set the location to check for objects to the inventory (0xfe)
+/ var[0x08] is the constant 0x0ff
 0x0afd (0x123d): (0x09) Set var[0x44] = var[0x08]
+
+/ Print all the objects the player is wearing 
 0x0b00 (0x1240): (0x01) Gosub 0x156e
 
 / Perform additional location specific checks skipping the code 
@@ -6542,13 +6564,14 @@
 0x156d (0x1cad): (0x02) Return
 
 **************************************************************************
-* TODO
+* Print all the objects in the location passed in var[0x44]
+* Either a location id, inventory (0xfe) or wearing (0xff)
 **************************************************************************
 
 / Set the temporary variable to the first object id "axe" (0x46)
 0x156e (0x1cae): (0x08) Set var[0x1e] = (constant) 0x46
 
-/ Set the command / action to invalid (0x00)
+/ Set the count of objects printed to 0
 / var[0x0b] is the constant 0x00
 0x1571 (0x1cb1): (0x09) Set var[0x3c] = var[0x0b]
 
@@ -6559,7 +6582,7 @@
 / Set the message to print between objects to newline
 0x1577 (0x1cb7): (0x08) Set var[0x63] = (constant) 0x28
 
-/ Branch if the object is in the player's current location
+/ Branch if the object is in the passed in location
 0x157a (0x1cba): (0x10) If var[0x1f] == var[0x44] then Goto 0x1586
 
 / Object IS NOT in the player's current location 
