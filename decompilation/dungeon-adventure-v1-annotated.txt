@@ -299,10 +299,11 @@
 /        0x09 - Message will be printed "The wood flickers"
 /        .... - Remaining turns left for the wood to burn out
 /        0xc8 - Player is given 200 turns when initially lit (0xc8)
+/ 0x36 - Number of remaining turns for the driftwood to burn (decrements by 1 per turn)
 / 0x37 - Whether the player can see (either eyes are open/closed or blindfolded or it's dark)
 /        0x00 - eyes are closed OR it's dark with no light (cannot see)
 /        0x01 - eyes are open, not blindfolded and there is light (can see and room description will be printed)
-/ 0x36 - Number of remaining turns for the driftwood to burn (decrements by 1 per turn)
+
 /
 / 0x39 - Counter for how long the player has been staring at the myriad of moving images around an immense pit
 /        0x00 - not at all
@@ -620,7 +621,10 @@
 /         1 - "World peace"   - "While humans are divided there will be war, so I will unite them. Your body will serve as a zombi in My army!" (player killed)
 /         1 - "Mystery Prize" - You win a little present (a sapphire)
 /         1 - "Nothing"       - "You'll get nothing all right! No body, no life..." (player killed)
-/     
+/ 48. Clearly the original intent was to allow the player to extinguish the driftwood to preserve it 
+/     (maybe intentionally removed?).  There are a number of issues:
+/     a. 0x0c8e - should be comparing against "driftwood" (0x4c) not 0x44
+/     b. 0x0c77 - no definition of message 0x63 - just says "99 "
 / TODO what happens to collars when you wear a new one
 
 **************************************************************************
@@ -4019,39 +4023,77 @@
 
 0x0c70 (0x13b0): (0x01) Gosub 0x0c7f
 
-/ TODO Branch
-/ Perform additional location specific checks skipping the code 
+/ BUG? Will never get here as the subroutine will print "You can't do that"
+/ or "Don't be silly!"
+
+/ Branch if the player does NOT have the object and
+/ perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0c72 (0x13b2): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
 
+/ Print "99 " (unfinished code / defintions)
+
 / Print message  "99 "
 0x0c77 (0x13b7): (0x05) Print message (constant) 0x63
+
+/ Set the driftwood to extinguished
 0x0c79 (0x13b9): (0x09) Set var[0x36] = var[0x0b]
 
 / Perform additional location specific checks, print the location description
 / and ask "What next?" 
 0x0c7c (0x13bc): (0x00) Goto 0x0149
+
 **************************************************************************
+
+/ Branch if there is a second word (it can never be 0x01 which is North as
+/ this would be sorted to be before extinguish)
 0x0c7f (0x13bf): (0x1b) If var[0x31] > (constant) 0x01 then Goto 0x0c86
+
+/ No second word
+
+/ Set the second word to the "driftwood" (0x4c)
 0x0c83 (0x13c3): (0x08) Set var[0x31] = (constant) 0x4c
+
+/ Check to see if the player has the object 
 0x0c86 (0x13c6): (0x01) Gosub 0x1559
+
+/ Branch if the second word is the "helmet" and print ""You can't do that"
 0x0c89 (0x13c9): (0x18) If var[0x31] == (constant) 0x76 then Goto 0x15e0
+
+/ Second word is NOT the helmet
+
+/ BUG? 
+/ Branch if the second word is (0x44) - first object starts at 0x46
+/ and print ""Don't be silly! " - this SHOULD have been  "driftwood" (0x4c)
 0x0c8e (0x13ce): (0x19) If var[0x31] != (constant) 0x44 then Goto 0x1609
+
+/ Second word is (0x44) - can never get here
+
+/ All done
 0x0c93 (0x13d3): (0x02) Return
 
 **************************************************************************
 * Command: "tie" or "fasten"
 **************************************************************************
 
+/ Branch if the second word is the "rope" (0x54)
 0x0c94 (0x13d4): (0x19) If var[0x31] != (constant) 0x54 then Goto 0x15e0
+
+/ Second word is NOT the "rope" (0x54)
+
+/ Check that the object is "pickupable" and in the player's inventory or 
+/ being worn
 0x0c99 (0x13d9): (0x01) Gosub 0x1559
 
-/ TODO Branch 
-/ Perform additional location specific checks skipping the code 
+/ Branch if the player doesn't have the object and
+/ perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0c9c (0x13dc): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
 
+/ Branch if the player's current location is "in the roc's nest, where 
+/ it brings "food" for storage" (0x2e)
 0x0ca1 (0x13e1): (0x18) If var[0x43] == (constant) 0x2e then Goto 0x0caa
+
 / Print message  "There's nothing to tie it to "
 0x0ca5 (0x13e5): (0x05) Print message (constant) 0xc5
 
@@ -4060,7 +4102,12 @@
 0x0ca7 (0x13e7): (0x00) Goto 0x0190
 
 **************************************************************************
+
+/ Set the status of the rope to "tied to the roc's nest" (0x01)
+/ var[0x01] is the constant 0x01
 0x0caa (0x13ea): (0x09) Set var[0x4b] = var[0x01]
+
+/ Remove the rope from the game
 0x0cad (0x13ed): (0x01) Gosub 0x1488
 
 / Perform additional location specific checks, print the location description
@@ -4084,9 +4131,16 @@
 / Perform additional location specific checks, print the location description
 / and ask "What next?" 
 0x0cbf (0x13ff): (0x00) Goto 0x0149
+
 **************************************************************************
+
+/ Branch if the player's current location is NOT "in the strong room." (0xa6)
 0x0cc2 (0x1402): (0x19) If var[0x44] != (constant) 0xa6 then Goto 0x0ccc
+
+/ Set the second word to "bolt" (0xbb)
 0x0cc6 (0x1406): (0x08) Set var[0x31] = (constant) 0xbb
+
+/ Call the "draw bolt" routine
 0x0cc9 (0x1409): (0x00) Goto 0x0f12
 **************************************************************************
 0x0ccc (0x140c): (0x18) If var[0x43] == (constant) 0x2a then Goto 0x15e0
@@ -4102,6 +4156,10 @@
 * Command: "close", "lock" or "shut"
 **************************************************************************
 
+**************************************************************************
+* Process the player closing their eyes
+**************************************************************************
+
 / Branch if the second word is NOT "eyes" (0xc5)
 0x0cdb (0x141b): (0x19) If var[0x31] != (constant) 0xc5 then Goto 0x0ce5
 
@@ -4114,22 +4172,53 @@
 0x0ce2 (0x1422): (0x00) Goto 0x0190
 
 **************************************************************************
+* Process the player closing their eyes
+**************************************************************************
+
+/ Branch if the second word is the "coffin" (0xbd)
 0x0ce5 (0x1425): (0x18) If var[0x31] == (constant) 0xbd then Goto 0x0cef
+
 / Print message  "Nothing here's worth closing "
 0x0ce9 (0x1429): (0x05) Print message (constant) 0x115
 
 / Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0cec (0x142c): (0x00) Goto 0x0190
+
 **************************************************************************
+* Process the player closing the coffin
+**************************************************************************
+
+/ Branch if the player's current location is NOT "in the crypt, beside a 
+/ rotting coffin" (0x67)
 0x0cef (0x142f): (0x19) If var[0x43] != (constant) 0x67 then Goto 0x0ce9
+
+/ Player IS "in the crypt, beside a rotting coffin"
+
+/ Set the second word to the "hammer" or "mallet" (0x4e)
 0x0cf3 (0x1433): (0x08) Set var[0x31] = (constant) 0x4e
+
+/ Get the current location of the "hammer" or "mallet" (0x4e)
 0x0cf6 (0x1436): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
+
+/ Branch if the "hammer" or "mallet" is NOT in the player's inventory
+/ var[0x07] is the constant 0xfe
 0x0cf9 (0x1439): (0x12) If var[0x1f] < var[0x07] then Goto 0x0d13
+
+/ Set the second word to the "nails" (0x50)
 0x0cfd (0x143d): (0x08) Set var[0x31] = (constant) 0x50
+
+/ Get the current location of the "nails" (0x50)
 0x0d00 (0x1440): (0xa2) Set var[0x1f] = list#2[var[0x31]] (list address 0x0740)
+
+/ Branch if the "nails" are NOT in the player's inventory
+/ var[0x07] is the constant 0xfe
 0x0d03 (0x1443): (0x12) If var[0x1f] < var[0x07] then Goto 0x0d13
+
+/ Remove the "nails" from the game
 0x0d07 (0x1447): (0x01) Gosub 0x1488
+
+/ Set the status of the coffin to "nailed shut" (0x01)
 0x0d0a (0x144a): (0x09) Set var[0x60] = var[0x01]
 
 / Print message  "You nail the coffin tight shut "
@@ -4138,20 +4227,28 @@
 / Perform additional location specific checks, print the location description
 / and ask "What next?" 
 0x0d10 (0x1450): (0x00) Goto 0x0149
+
 **************************************************************************
+
 / Print message  "You need a hammer and nails "
 0x0d13 (0x1453): (0x05) Print message (constant) 0x11d
 
 / Perform additional location specific checks, print the location description
 / and ask "What next?" 
 0x0d16 (0x1456): (0x00) Goto 0x0149
+
 **************************************************************************
+
+/ Check that the object is "pickupable" and in the player's inventory or 
+/ being worn
 0x0d19 (0x1459): (0x01) Gosub 0x1559
 
-/ TODO Branch 
-/ Perform additional location specific checks skipping the code 
+/ Branch if hthe object is not pickupable or the player doesn't have it
+/ perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0d1c (0x145c): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
+
+/ Print "Nothing happens"
 0x0d21 (0x1461): (0x00) Goto 0x15f0
 
 **************************************************************************
@@ -6540,13 +6637,36 @@
 0x1470 (0x1bb0): (0x02) Return
 
 **************************************************************************
+
+/ Set the temporary variable to the first object, the axe (0x46)
 0x1471 (0x1bb1): (0x08) Set var[0x31] = (constant) 0x46
+
+/ Loop
+
+/ Get the current location of the current object
 0x1474 (0x1bb4): (0xa2) Set var[0x1f] = list#2[var[0x31]] (list address 0x0740)
+
+/ Branch if the "axe" is NOT in the player's inventory (0xfe)
+/ var[0x07] is the constant 0xfe
 0x1477 (0x1bb7): (0x12) If var[0x1f] < var[0x07] then Goto 0x1480
+
+/ Player has the object
+
+/ Remove the object from the game (either the player's carried items or 
+/ worn items) and print an approrpiate message.  Seems slightly redundant 
+/ given could just reset the inventory counts and put it directly in the location 
 0x147b (0x1bbb): (0x01) Gosub 0x1488
+
+/ Set the location of the object to their player's current location
 0x147d (0x1bbd): (0xe2) Set list#2[var[0x31]] = var[0x44] (list address 0x0740)
+
+/ Increment the current object id
 0x1480 (0x1bc0): (0x0a) Set var[0x31] += var[0x01]
+
+/ Keep looping until all objects are processed 
 0x1483 (0x1bc3): (0x1a) If var[0x31] < (constant) 0x9b then Goto 0x1474
+
+/ All done
 0x1487 (0x1bc7): (0x02) Return
 
 *************************************************************************
