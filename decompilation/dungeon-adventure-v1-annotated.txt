@@ -193,7 +193,6 @@
 /        0x01 - shrunk
 /        0x02 - giant (can kill the giant ants)
 /
-/ 
 / 0x30 - Matched input word code 1
 / 0x31 - Matched input word code 2
 / 0x32 - Matched input word code 3
@@ -460,11 +459,18 @@
 /      < 500 : You're clearly an experienced Adventurer!
 /      < 600 : Congratulations, Master Adventurer! You'll soon be a Grandmaster
 /        600 : All hail to thee, Grandmaster Adventurer!!
-/ 42. Resurrection is NOT guaranteed and only will happen under the following circumstances:
-/     (1. Player has scanned themselves in the large store room OR
-       2. 
-
-/     1. Player has been resurrected less than 3 times
+/ 42. Resurrection is NOT guaranteed and will only happen under the following circumstances:
+/      Before any resurrection is allowed, this has to have happened just once:
+/     (- Player has scanned themselves in the large store room 
+/      After this any one of the following circumstances can be met:
+/      - Player has played dice and won with the Rakshasa (always takes precedence over below)
+/      - Player IS "on the ceiling of a fine room" (0xc8)
+/      - Player IS "on the carpetted floor of comfortable homely room..." (0xc9)
+/      - Player IS "in a large store room" (0xca)
+/      - Player IS "in a large wooden box" (0xd7)
+/      - Player HAS the packing case in their inventory
+/      - Player HAS the packing case in their current location
+/      The resurrection is only allowed if the player has been resurrected less than 3 times
 / 43. The player teleports by saying a colour - which will take them to that cylinder of light
 /     from another cylinder of light. Player has to be wearing a collar colour 
 /     that has a greater or equal colour value than the cylinder of coloured light that
@@ -591,6 +597,10 @@
 0x005f (0x079f): (0x09) Set var[0x1f] = var[0x0b]
 0x0062 (0x07a2): (0x09) Set var[0x20] = var[0x0b]
 0x0065 (0x07a5): (0x09) Set var[0x21] = var[0x0b]
+
+/ Initialise the status of having met and won the dice game with
+/ the Rakshasa to "not met and won" (0x00)
+/ var[0x0b] is the constant 0x00
 0x0068 (0x07a8): (0x09) Set var[0x22] = var[0x0b]
 0x006b (0x07ab): (0x09) Set var[0x23] = var[0x0b]
 0x006e (0x07ae): (0x09) Set var[0x24] = var[0x0b]
@@ -5937,8 +5947,10 @@
 
 / Branch if the player has already met the Rakshasa (0x01)
 / and allow the resurrection
-/ var[0x0b] is the constant 0x01
+/ var[0x0b] is the constant 0x00
 0x1318 (0x1a58): (0x13) If var[0x22] > var[0x0b] then Goto 0x133e
+
+/ Player has NOT met the Rakshasa (0x00)
 
 / Branch if the player's current location IS "on the ceiling of a fine room. 
 / A chandelier lies beside you and the floor of the room is far above" (0xc8)
