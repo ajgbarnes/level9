@@ -332,9 +332,9 @@
 / 0x41 - Whether the player has said the correct password or not at the gatehouse
 /        0x00 - correct password not yet said
 /        0x01 - correct password said
-/ 0x42 - Status of the troll on the magnificent golden pathway"
-/        0x00 - has NOT been given the medallion
-/        0x01 - HAS been given the medallion
+/ 0x42 - Status of the troll on the magnificent golden pathway
+/        0x00 - has NOT been given a treasure
+/        0x01 - HAS been given a treasure
 / 0x43 - Player's current location, defaults to "on a mud-bank, nort of a wide river" (0x32)
 / 0x44 - Player's target location when moving - reset to the player's current location at the start of a turn
 /        Set to 0x00 if the player is not allowed to move in a particular direction by the Exits command
@@ -625,8 +625,17 @@
 /     (maybe intentionally removed?).  There are a number of issues:
 /     a. 0x0c8e - should be comparing against "driftwood" (0x4c) not 0x44
 /     b. 0x0c77 - no definition of message 0x63 - just says "99 "
-/ 
-/ TODO what happens to collars when you wear a new one
+/ 49. There are a number of special locations in the game:
+/     0xe0 - Undiscovered 
+/     0xe1 - In Limbo (undiscovered or out of the game)
+/     0xe2 - player is completing the game and "A hollow voice intones: "This is your referee
+/            speaking. If you continue on this road you will return safe to civilisation and
+/            the game will end. Are you sure that you want to?"
+/            also set to this when they die
+/     0xe5 - used when the killer-willow is holding an object
+/     0xfe - in the player's inventory
+/     0xff - being worn by the player
+/ TODO what happens to collars when you wear a new one whilst still wearing the previous one
 
 **************************************************************************
 * A-code entry point
@@ -3783,12 +3792,35 @@
 * Command: "hurl" or "throw"
 **************************************************************************
 
+
+**************************************************************************
+* Process the player throwing objects at killer-willow
+**************************************************************************
+
+/ Branch if the player's current location is NOT "on the southern end of
+/ a small island, reached by stepping stones from the south." (0x34)
 0x0b25 (0x1265): (0x19) If var[0x43] != (constant) 0x34 then Goto 0x0b40
+
+/ Location IS "on the southern end of a small island, reached by
+/ stepping stones from the south." (0x34)
+
+/ Branch if all six (0x06) of the killer-willow's arms are full 
+/ var[0x05] is the constant 0x05
 0x0b29 (0x1269): (0x13) If var[0x10] > var[0x05] then Goto 0x0b3e
+
+/ Remove the thrown item from the game 
 0x0b2d (0x126d): (0x01) Gosub 0x1488
+
+/ Set the temporary variable to being held by the tree (0xe5)
 0x0b30 (0x1270): (0x08) Set var[0x5d] = (constant) 0xe5
+
+/ Set the location of the object to "being held by the tree" (0xe5)
 0x0b33 (0x1273): (0xe2) Set list#2[var[0x31]] = var[0x5d] (list address 0x0740)
+
+/ Increment the number of items that the tree is holding
+/ var[0x01] is the constant 0x01
 0x0b36 (0x1276): (0x0a) Set var[0x10] += var[0x01]
+
 / Print message  "The tree grabs it with a branch, raising it high into the air "
 0x0b39 (0x1279): (0x05) Print message (constant) 0x4b
 
@@ -3797,17 +3829,50 @@
 0x0b3b (0x127b): (0x00) Goto 0x0190
 
 **************************************************************************
+
 / Print message  "The tree has run out of branches: all 6 are in use! "
 0x0b3e (0x127e): (0x05) Print message (constant) 0x74
+
+**************************************************************************
+* Process the player throwing objects at the vampire
+**************************************************************************
+
+/ Branch if the location's first supplementary message is NOT
+/ set to "A vampire cowers back" (0x98)
 0x0b40 (0x1280): (0x19) If var[0x4c] != (constant) 0x98 then Goto 0x0b51
+
+/ Message is SET to "A vampire cowers back" (0x98)
+
+/ Branch if the second word IS "cross" (0x7a) (player is throwing)
+/ and kill the vampire
 0x0b44 (0x1284): (0x18) If var[0x31] == (constant) 0x7a then Goto 0x0b4c
+
+/ Branch if the second word is NOT the wedge (0x56)
 0x0b48 (0x1288): (0x19) If var[0x31] != (constant) 0x56 then Goto 0x0b51
+
+/ Player threw the wedge or the crjoss
+
 / Print message  "The sharp wood kills the vampire "
 0x0b4c (0x128c): (0x05) Print message (constant) 0x99
+
+/ Set the status of the vampire to dead (0x01)
+/ var[0x01] is the constant 0x01
 0x0b4e (0x128e): (0x09) Set var[0x5b] = var[0x01]
+
+**************************************************************************
+* Process the player throwing objects at the troll
+**************************************************************************
+
+/ Branch if the location's first supplementary message is NOT "A troll blocks 
+/ the bridge, palm outstretched for payment" (0x107)
 0x0b51 (0x1291): (0x19) If var[0x4c] != (constant) 0x107 then Goto 0x0b6d
+
+/ Branch if the second word is not a treasure and print "Not valuable enough..."
 0x0b56 (0x1296): (0x1a) If var[0x31] < (constant) 0x5a then Goto 0x0b5e
+
+/ Branch if the second word is not a treasure
 0x0b5a (0x129a): (0x1a) If var[0x31] < (constant) 0x85 then Goto 0x0b64
+
 / Print message  ""Not valuable enough! Have it back!" "
 0x0b5e (0x129e): (0x05) Print message (constant) 0x10a
 
@@ -3816,15 +3881,38 @@
 0x0b61 (0x12a1): (0x00) Goto 0x0190
 
 **************************************************************************
+
 / Print message  "The troll takes it and leaves, gloating "
 0x0b64 (0x12a4): (0x05) Print message (constant) 0x108
+
+/ Set the player's target destination to "in the troll's squalid store room, 
+/ amidst junk of every kind" (0xa0)
 0x0b67 (0x12a7): (0x08) Set var[0x44] = (constant) 0xa0
+
+/ Set the status of the troll to having been given a treasure (0x01)
+/ var[0x01] is the constant 0x01
 0x0b6a (0x12aa): (0x09) Set var[0x42] = var[0x01]
+
+**************************************************************************
+* Process the player throwing the ring into the opening
+**************************************************************************
+
+/ Branch if the second word is "rings" (0x36)
 0x0b6d (0x12ad): (0x19) If var[0x31] != (constant) 0x96 then Goto 0x0b7e
+
+/ Branch if the player's current location is NOT "on the ramp. A hand sign 
+/ points into a narrow opening" (0x47)
 0x0b71 (0x12b1): (0x19) If var[0x43] != (constant) 0x47 then Goto 0x0b7e
-/ Print message  "The ring lands in the hand room. You hear a struggle, then silence a "
+
+/ Print message  "The ring lands in the hand room. You hear a struggle, 
+/ then silence a "
 0x0b75 (0x12b5): (0x05) Print message (constant) 0x2dd
+
+/ Set the player's target location to "removed from the game"
+/ var[0x09] is the constant 0xe1
 0x0b78 (0x12b8): (0x09) Set var[0x44] = var[0x09]
+
+/ 
 0x0b7b (0x12bb): (0x09) Set var[0x2f] = var[0x01]
 0x0b7e (0x12be): (0x00) Goto 0x0a95
 
@@ -6602,18 +6690,33 @@
 * Command: "squash", "squeeze" or "hug"
 **************************************************************************
 
+/ Branch if the second word is NOT the "caterpillar" (0x87)
 0x1402 (0x1b42): (0x19) If var[0x31] != (constant) 0x87 then Goto 0x15f0
+
+/ Check to see if the player has the caterpillar
 0x1407 (0x1b47): (0x01) Gosub 0x1559
 
-/ TODO Branch 
+/ Branch if the player does not have the caterpillar
 / Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x140a (0x1b4a): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
+
+/ Branch if the caterpillar has already been squeezed (0x01)
+/ and print "Nothing happens"
+/ var[0x01] is the constant 0x01
 0x140f (0x1b4f): (0x10) If var[0x4a] == var[0x01] then Goto 0x15f0
+
 / Print message  "A silken rope emerges! "
 0x1414 (0x1b54): (0x05) Print message (constant) 0xc3
+
+/ Set the temporary variable to the object id for the "rope" (0x54)
 0x1416 (0x1b56): (0x08) Set var[0x1f] = (constant) 0x54
+
+/ Set the location of the rope to the player's current location
 0x1419 (0x1b59): (0xe2) Set list#2[var[0x1f]] = var[0x43] (list address 0x0740)
+
+/ Set the status of the caterpillar to squeezed (0x01)
+/ var[0x01] is the constant 0x01
 0x141c (0x1b5c): (0x09) Set var[0x4a] = var[0x01]
 
 / Perform additional location specific checks, print the location description
@@ -6636,8 +6739,10 @@
 // Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x142d (0x1b6d): (0x19) If var[0x31] != (constant) 0x97 then Goto 0x0190
+
 / Print message  "Warriors spring from the teeth "
 0x1432 (0x1b72): (0x05) Print message (constant) 0xe1
+
 0x1434 (0x1b74): (0x19) If var[0x4c] != (constant) 0xdc then Goto 0x1440
 0x1438 (0x1b78): (0x09) Set var[0x0f] = var[0x06]
 
