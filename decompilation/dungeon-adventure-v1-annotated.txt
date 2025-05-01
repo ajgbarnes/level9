@@ -87,7 +87,10 @@
 / 0x11 - Status of the grotesque yellow bird 
 /        0x00 - not scared away
 /        0x01 - scared away so the player can enter the nest and retrieve the large jade egg
-/ 0x12 - 
+/ 0x12 - Status indicator of finding the corpse at "in a dead end, below a gallows tree" (0xb1)
+/        This is bizarre or evil (see comment 46)
+/        0x00 - Undiscovered 
+/        0x01 - Discovered 
 / 0x13 - Status of the boulder rolling down from above (decrements by one each turn when rolling)
 /        0x00 - not rolling at the player
 /        0x01 - "Sounds of a boulder echo up from below" if the player hid in the brink of a deep, dark pit (0xb2)
@@ -473,6 +476,18 @@
 /     It's still possible to navigate to this room from "in a dead-end dark room, below a black pedestal" (0xac)
 /     by going up 
 / 45. BUG: Cannot examine an item if it's being worn. See 0x0e85
+/ 46. BUG? There are two corpses in the game. One "at the east end of a long room." (0x74)
+/     and the other  "in a dead end, below a gallows tree" (0xb1). Each corpse yields different
+/     objects under normal game circumstances... the one in the "long room" will yield 
+/     a "short bow" and the "orange collar" and the one in "a dead end" will yield 
+/     the "blindfold" and the "gauntlet". However... if the player finds the "dead end" body
+/     first there is a flag that is set var[0x12] on just being in that location that 
+/     prevents the "bow" and "collar" being found on the other body. Why? See 0x0e56. 
+/     If the player just visits 0xb1 and doesn't search the corpse there, but then goes to 
+/     0x74, they will find the "blindfold" and "gauntlet" on the other corpse. I haven't 
+/     analysed the game enough to determine if it's impossible to get to the second corpse 
+/     without searching the first corpse. But it should be location based checking? You can 
+/     test this yourself with #setvar 0x43 0xb1 or #setvar 0x43 0x74 to move between locations
 /     
 / TODO what happens to collars when you wear a new one
 
@@ -543,7 +558,13 @@
 / var[0x0b] is the constant 0x00
 0x0035 (0x0775): (0x09) Set var[0x11] = var[0x0b]
 
+/ Initialise the status indicator that the player has NOT visited the 
+/ "dead end, below a gallows tree" (0x00)
+/ var[0x0b] is the constant 0x00
 0x0038 (0x0778): (0x09) Set var[0x12] = var[0x0b]
+
+/ Initiase the status of the boulder to NOT rolling down the hill (0x00)
+/ var[0x0b] is the constant 0x00
 0x003b (0x077b): (0x09) Set var[0x13] = var[0x0b]
 
 / Initialise the starting location of one of the black sphere's 
@@ -1791,7 +1812,7 @@
 0x04c0 (0x0c00): (0x08) Set var[0x4c] = (constant) 0x76
 
 **************************************************************************
-* TODO Gallows tree....
+* Process the player visiting the gallows tree
 **************************************************************************
 
 / Branch if the player's current location is NOT "in a dead end, below a gallows tree 
@@ -1800,7 +1821,9 @@
 
 / Player IS "...below a gallows tree..."
 
-/ 
+/ Set the status indicator that the player HAS visited "a dead end, below a gallows tree" (0x01)
+/ This changes what can be found on either corpse to the "blindfold" and "gauntlet"
+/ var[0x01] is the constant 0x01
 0x04c7 (0x0c07): (0x09) Set var[0x12] = var[0x01]
 
 **************************************************************************
@@ -4384,6 +4407,10 @@
 
 **************************************************************************
 
+/ Branch if the player HAS visited the gallows tree (0x01) 
+/ as this changes what can be found on either corpse to the "blindfold" 
+/ and "gauntlet"
+/ var[0x01] is the constant 0x01
 0x0e56 (0x1596): (0x10) If var[0x12] == var[0x01] then Goto 0x0e6e
 
 / Set the temporary variable to the object id for the "short bow" (0x4a)
