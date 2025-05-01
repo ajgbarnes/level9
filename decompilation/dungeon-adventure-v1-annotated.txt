@@ -5006,27 +5006,52 @@
 
 / Kill the player
 0x1025 (0x1765): (0x00) Goto 0x12e7
+
 **************************************************************************
+* Player pressed the button in the large store room
+**************************************************************************
+
 / Print message  "A yellow light scans your body and a copy flickers in the machine "
 0x1028 (0x1768): (0x05) Print message (constant) 0x40
+
+/ Set the resurrection status to "can be resurrected" (0x01)
 0x102a (0x176a): (0x09) Set var[0x49] = var[0x01]
 
 / Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x102d (0x176d): (0x00) Goto 0x0190
+
 **************************************************************************
+* Process the player turning the statue in the statue room
+**************************************************************************
+
+/ Branch if the player is NOT "in the statue room...." (0xbd)
 0x1030 (0x1770): (0x19) If var[0x43] != (constant) 0xbd then Goto 0x1619
+
+/ Branch if the player has already turned the statue (0x01)
+/ var[0x01] is the constant 0x01
 0x1035 (0x1775): (0x10) If var[0x55] == var[0x01] then Goto 0x1041
+
+/ Statue was NOT already turned
+
 / Print message  "An opening leads east "
 0x1039 (0x1779): (0x05) Print message (constant) 0x8a
+
+/ Set the status of the statue to turned (0x01)
+/ var[0x01] is the constant 0x01
 0x103b (0x177b): (0x09) Set var[0x55] = var[0x01]
 
 / Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x103e (0x177e): (0x00) Goto 0x0190
+
 **************************************************************************
+
 / Print message  "The exit closes again "
 0x1041 (0x1781): (0x05) Print message (constant) 0x89
+
+/ Set the status of the statue to NOT turned (0x00)
+/ var[0x0b] is the constant 0x00
 0x1043 (0x1783): (0x09) Set var[0x55] = var[0x0b]
 
 / Perform additional location specific checks skipping the code 
