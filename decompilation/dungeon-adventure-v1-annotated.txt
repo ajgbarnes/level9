@@ -3837,15 +3837,14 @@
 / not the red-gold ring)
 0x0b81 (0x12c1): (0x01) Gosub 0x129f
 
-
+/ Chck they are not trying to pick up an NPC
 0x0b84 (0x12c4): (0x01) Gosub 0x15c5
 
-/ TODO Branch 
+/ Branch if the player does not have the object
 / Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0b87 (0x12c7): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
 
-/ TODO
 / Branch if the player is shrunk (max inventory will be 0x00)
 / and print "you're too weak"
 / var[0x0b] is the constant 0x00
@@ -3894,6 +3893,7 @@
 
 / Print "You can't do that" 
 0x0bba (0x12fa): (0x00) Goto 0x15e0
+
 **************************************************************************
 
 / Player is wearing the good strong belt so increase the maximum inventory
