@@ -440,14 +440,6 @@
 / 39. The only ways out of the "odd little room" are:
 /     a. Pressing button 9 to be taking to "the pit: a large pentagonal room" (0x6f) 
 /     b. Via the packing case - the player has to bring it with them
-/     1 -
-/     2 -
-/     3 -
-/     4 -
-/     5 -
-/     6 -
-/     7 -
-/     9 -
 / 40. If the player performs a "looK" in "the Salt Cellar, surrounded by pillars of salt"
 /     then "Your body becomes a pillar of salt!" and the player is killed
 / 41. Player accolade is based on the following:
@@ -494,6 +486,20 @@
 /     analysed the game enough to determine if it's impossible to get to the second corpse 
 /     without searching the first corpse. But it should be location based checking? You can 
 /     test this yourself with #setvar 0x43 0xb1 or #setvar 0x43 0x74 to move between locations
+/ 47. In the "skinner room" (0xbb) the nine buttons do the following:
+/     1 - "The room heats up" and kills the player
+/     2 - "The room heats up" and kills the player
+/     3 - "The room heats up" and kills the player
+/     4 - "The room heats up" and kills the player
+/     5 - "The room heats up" and kills the player
+/     6 - "The room heats up" and kills the player
+/     7 - "The room heats up" and kills the player
+/     9 - Teleports to the reward room (0xbc) with the following options
+/         1 - "Great wealth"  - Imps clothe you in gold armour and drop you into the sea (player killed)
+/         1 - "Eternal life"  - Searing flames leap up: "You can live for ever by remaining in the fire!" (player killed)
+/         1 - "World peace"   - "While humans are divided there will be war, so I will unite them. Your body will serve as a zombi in My army!" (player killed)
+/         1 - "Mystery Prize" - You win a little present (a sapphire)
+/         1 - "Nothing"       - "You'll get nothing all right! No body, no life..." (player killed)
 /     
 / TODO what happens to collars when you wear a new one
 
