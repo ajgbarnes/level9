@@ -26,12 +26,97 @@
 / list#1
 / ======
 / 
-/ There are 55 objects in the game
+/ There are 74 objects in the game:
 /
 / Obj    Object        Initial  Partial 
 / Id     Name          Loc Id   Location Description
 / ----   ------------- -------  ----------------------------------------------------------------------------------
-/
+/ 0x46   AXE            0x33    under the killer-willow tree
+/ 0x47   BERRY          0x10    on a sturdy branch over the clearing
+/ 0x48   BLINDFOLD      0xe0    in Limbo (undiscovered)
+/ 0x49   CORPSE         0x74    at the east end of a long room. Its roof is supported by dozens of stone pillars
+/ 0x4a   BOW            0xe0    in Limbo (undiscovered)
+/ 0x4b   BOX            0xb8    in the box room
+/ 0x4c   DRIFTWOOD      0x32    on a mud-bank, north of a wide river.
+/ 0x4d   GAUNTLET       0xe0    in Limbo (undiscovered)
+/ 0x4e   HAMMER         0x94    in a looted toolroom
+/ 0x4f   n/a 
+/ 0x50   NAILS          0x94    in a looted toolroom
+/ 0x51   SALT-PIG       0xc3    in the Salt Cellar, surrounded by pillars of salt
+/ 0x52   POT            0x8a    in a filthy, dead-end cell
+/ 0x53   POTATO         0x8b    in a filthy, dead-end cell
+/ 0x54   ROPE           0xe0    in Limbo (undiscovered)
+/ 0x55   SHIELD         0xab    in a dead-end dark room
+/ 0x56   WEDGE          0xac    in a dead-end dark room, below a black pedastal
+/ 0x57   n/a
+/ 0x58   n/a
+/ 0x59   n/a
+/ 0x5a   CARVING        0xe0    in Limbo (undiscovered)
+/ 0x5b   CHAIR          0xd4    in a wide, smelly passage opening to the outside, high above the river
+/ 0x5c   CHEST          0xa6    in the strong room. An iron door leads west and a narrow crack splits the east wall
+/ 0x5d   COINS          0x1c    in a clump of bushes on the edge of the forest
+/ 0x5e   EGG            0x1f    in a huge nest
+/ 0x5f   LAPIS          0x69    in an odd little room, below a granite throne
+/ 0x60   NEEDLE         0xe0    in Limbo (undiscovered)
+/ 0x61   ONYX           0x69    in a huge nest
+/ 0x62   ORE            0xcf    in a huge cave of glistering rock. New passages lead north and south
+/ 0x63   CRYSTAL        0x2e    in the roc's nest, where it brings "food" for storage
+/ 0x64   STAR           0x98    in a giant, vacant, rats nest
+/ 0x65   MEDALLION      0xce    in a hot alcove, lit by the flames of a fire elemental
+/ 0x66   TRIDENT        0x67    in the crypt, beside a rotting coffin
+/ 0x67   n/a            
+/ 0x68   n/a
+/ 0x69   AGATE          0xad    in a treasure chamber
+/ 0x6a   AMETHYST       0xb9    in the condemned cell. The only way out is to go west
+/ 0x6b   DIAMOND        0xab    on a wide ledge half-way up the south side of a tall cave. 
+/ 0x6c   EMERALD        0xb7    in a room surfaced with black glass
+/ 0x6d   OPAL           0xe0    in Limbo (undiscovered)
+/ 0x6e   PEARL          0xe0    in Limbo (undiscovered)
+/ 0x6f   RHINESTONE     0xbe    in an ornate, dead-end room
+/ 0x70   RUBY           0xb4    in a small soft room between five large round fleshy pillars
+/ 0x71   SAPPHIRE       0xe0    in Limbo (undiscovered)
+/ 0x72   TOPAZ          0xc2    in a treasure vault. A low crawl leads west
+/ 0x73   CUBE           0x73    at the west of a long room with many pillars. The only exit is at the other end
+/ 0x74   SPICES         0xa0    in the troll's squalid store room, amidst junk of every kind.
+/ 0x75   WHISTLE        0x89    in a cupboard
+/ 0x76   HELMET         0xcd    in a north-south passage. A dry red stain spreads from beneath a fallen stone
+/ 0x77   n/a       
+/ 0x78   BED            0xe0    in Limbo (undiscovered)
+/ 0x79   BELT           0x11    in a forest clearing
+/ 0x7a   CROSS          0xd5    in a winding, sticky east-west passage to the outside
+/ 0x7b   CRUCIFIX       0xcd    in a north-south passage. A dry red stain spreads from beneath a fallen stone
+/ 0x7c   HORN           0x23    on a smooth rock dome, below a narrow path
+/ 0x7d   MASK           0xe0    in Limbo (undiscovered)
+/ 0x7e   MIRROR         0x34    on the southern end of a small island, reached by stepping stones from the south
+/ 0x7f   OCTOPUS        0x71    dead-end room, painted matt black. You'll have to return the way you came
+/ 0x80   STAFF          0x72    in a second dead-end black room
+/ 0x81   SWORD          0x79    a room carved out of rugged rock with a large outcrop of stone in the middle of the floor.
+/ 0x82   WAND           0x1c    in a clump of bushes on the edge of the forest
+/ 0x83   n/a
+/ 0x84   n/a 
+/ 0x85   DICE           0x1c    in a clump of bushes on the edge of the forest
+/ 0x86   ELEPHANT       0xb5    in a dusty room, entered from the west and with a long shelf along the east wall
+/ 0x87   CATERPILLAR    0x2e    in the roc's nest, where it brings "food" for storage
+/ 0x88   CASE           0x32    on a mud-bank, north of a wide river. 
+/ 0x89   POD            0x2f    south of the river, on the edge of a vast field 
+/ 0x8a   WISP           0x04    beside a muddy puddle
+/ 0x8b   n/a 
+/ 0x8c   RED            0xa0    in the troll's squalid store room, amidst junk of every kind
+/ 0x8d   ORANGE         0xe0    in Limbo (undiscovered)
+/ 0x8e   YELLOW         0x72    in a second dead-end black room
+/ 0x8f   GREEN          0xd4    in a wide, smelly passage opening to the outside, high above the river
+/ 0x90   BLUE           0x89    in a cupboard
+/ 0x91   VIOLET         0x69    in an odd little room, below a granite throne
+/ 0x92   SILVER         0x6f    in the pit: a large pentagonal room, blackened by some past explosion 
+/ 0x93   MITHRIL        0x69    in an odd little room, below a granite throne
+/ 0x94   CREAM          0x89    in a cupboard
+/ 0x95   HOOD           0xba    in the east crusher room beside an opening back to the ramp
+/ 0x96   RINGS          0xb0    in a circular room of red-gold metal
+/ 0x97   TEETH          0xe0    in Limbo (undiscovered)
+/ 0x98   GEM            0x6f    in the pit: a large pentagonal room, blackened by some past explosion
+/ 0x99   KEY            0xd7    inside a large wooden box (it has no location description so it's hidden)
+/ 
+/ 
 / Objects
 / =======
 / 
@@ -309,7 +394,7 @@
 /        0x19 - A faint light shines in
 /        0x1a - The sun hangs low in the sky
 /        0x1b - The sun is setting!
-         0x75 - The sun sets!
+/        0x75 - The sun sets!
 / 0x4e - Final variable for the first location supplementary message
 /        (set to the value of var[0x4c])
 / 0x4f - Maximum number of items a player can carry - defaults to 0x04
