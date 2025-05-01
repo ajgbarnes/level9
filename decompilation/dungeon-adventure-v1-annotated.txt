@@ -261,7 +261,10 @@
 /        0x00 - not reflected
 /        0x01 - reflected
 /        0x02 - masked man who fell asleep wakes up when the twig snaps and flees
-/
+/ 0x48 - Status of the reward in the reward room 
+/        0x00 - Player has NOT been given a prize
+/        0x01 - Player has been given one prize (the sapphire)
+/        0x02 - Player has been given two prizes (the sapphire and then the bomb) - player killed
 / 0x49 - Status of if the machine has scanned the player in the large store room
 /        0x00 - player cannot be resurrected as they haven't been scanned by the machine
 /        0x01 - player can be resurrected as they haven't been scanned by the machine
@@ -321,6 +324,7 @@
 /        8. Score increment for various events e.g. vampire being dead
 /        9. Current location of the corpse
 /        10.Message id to print when pressing the protruding buttons
+/        11.Message id to print when pressing the buttons in the reward room
 / 0x5e - Number of crosses / crucifixes carried. Player needs 1 to stop the vampire biting them
 /        and two to keep the wights back
 / 0x5f - Status of the small ornate box with a lid
@@ -4947,23 +4951,60 @@
 0x0ffd (0x173d): (0x00) Goto 0x0149
 
 **************************************************************************
+* Player is in the "reward room" pressing buttons
+**************************************************************************
 
+/ Branch if the second word is greather than "five" (0xcd) and print "Don't be silly!"
 0x1000 (0x1740): (0x1b) If var[0x31] > (constant) 0xcd then Goto 0x1609
+
+/ Player is NOT pressing button 1-4
+
+/ Set the temporary variable to the message offset for the action that 
+/ happens when the player presses that button as below for 1-5
+/ 0xd3 : Imps clothe you in gold armour and drop you into the sea
+/ 0xd4 : Searing flames leap up: "You can live for ever by remaining in the fire!" cackles a demon, but you can't of course
+/ 0xd5 : "While humans are divided there will be war, so I will unite them. Your body will serve as a zombi in My army!"
+/ 0xd6 : You win a little present
+/ 0xd7 : "You'll get nothing all right! No body, no life..."
 0x1005 (0x1745): (0x08) Set var[0x5d] = (constant) 0x0a
+
+/ Add on the button dictionary id to get to the message id
 0x1008 (0x1748): (0x0a) Set var[0x5d] += var[0x31]
+
+/ Print the message
 0x100b (0x174b): (0x04) Print message var[0x5d]
+
+/ Branch if the player did not press button 4 and kill the player
 0x100d (0x174d): (0x19) If var[0x31] != (constant) 0xcc then Goto 0x12e7
+
+/ Set the temporary variable to the "sapphire" (0x71)
 0x1012 (0x1752): (0x08) Set var[0x1e] = (constant) 0x71
+
+/ Set the location of the "sapphine" to be in the player's inventory (0xfe)
+/ var[0x07] is the constant 0xfe
 0x1015 (0x1755): (0xe2) Set list#2[var[0x1e]] = var[0x07] (list address 0x0740)
+
+/ Change the player's current location to "on the ramp. A sign over a doorway reads..." (0x4e)
 0x1018 (0x1758): (0x08) Set var[0x43] = (constant) 0x4e
+
+/ Set the status of the the prize in the reward room to "prize given" (0x01)
+/ Player can only have one prize (the sapphire), if they go back 
+/ they will be given a bomb and killed the second time
+/ var[0x01] is the constant 0x01
 0x101b (0x175b): (0x0a) Set var[0x48] += var[0x01]
 
-/ TODO Branch
-/ Perform additional location specific checks, print the location description
+/ Branch if the player has been only received one prize and 
+/ perform additional location specific checks, print the location description
 / and ask "What next?" 
+/ var[0x01] is the constant 0x01
 0x101e (0x175e): (0x10) If var[0x48] == var[0x01] then Goto 0x0149
+
+/ Player was greedy and asked for a second prize 
+
 / Print message  ", but it's a bomb! "
 0x1023 (0x1763): (0x05) Print message (constant) 0xd8
+
+/ Kill the player
 0x1025 (0x1765): (0x00) Goto 0x12e7
 **************************************************************************
 / Print message  "A yellow light scans your body and a copy flickers in the machine "
