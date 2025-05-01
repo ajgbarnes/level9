@@ -625,6 +625,7 @@
 /     (maybe intentionally removed?).  There are a number of issues:
 /     a. 0x0c8e - should be comparing against "driftwood" (0x4c) not 0x44
 /     b. 0x0c77 - no definition of message 0x63 - just says "99 "
+/ 
 / TODO what happens to collars when you wear a new one
 
 **************************************************************************
@@ -3963,12 +3964,26 @@
 * Command: "light", "ignite" or "burn"
 **************************************************************************
 
+/ Branch if the player's current location IS "at a junction in the round, 
+/ north-south passage, illuminated by a jet of flame from the floor." (0xcc)
 0x0c10 (0x1350): (0x18) If var[0x44] == (constant) 0xcc then Goto 0x0c2b
+
+/ Branch if the "driftwood" is unlit (0x00)
+/ var[0x0b] is the constant 0x00
 0x0c14 (0x1354): (0x10) If var[0x36] == var[0x0b] then Goto 0x0c26
+
+/ Set the temporary variable to the object id for the "driftwood" (0x4c)
 0x0c18 (0x1358): (0x08) Set var[0x1e] = (constant) 0x4c
+
+/ Get the current location of the "driftwood" (0x4c)
 0x0c1b (0x135b): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
+
+/ Branch if the driftwood is in the player's current location
 0x0c1e (0x135e): (0x10) If var[0x1f] == var[0x44] then Goto 0x0c2b
+
+/ Branch if the driftwood IS in the player's inventory
 0x0c22 (0x1362): (0x10) If var[0x1f] == var[0x07] then Goto 0x0c2b
+
 / Print message  "You've no fire "
 0x0c26 (0x1366): (0x05) Print message (constant) 0x5e
 
@@ -3977,6 +3992,12 @@
 0x0c28 (0x1368): (0x00) Goto 0x0190
 
 **************************************************************************
+
+/ Player's current location is "at a junction in the round, 
+/ north-south passage, illuminated by a jet of flame from the floor." (0xcc)
+/ OR it's the driftwood
+
+/ Check if the 
 0x0c2b (0x136b): (0x01) Gosub 0x15c5
 
 / TODO Branch 
@@ -3984,33 +4005,64 @@
 / that prints the location description and ask "What next?" 
 0x0c2e (0x136e): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
 
+/ Branch if the second word is the "rope" (0x54) and "It burns to ash"
 0x0c33 (0x1373): (0x18) If var[0x31] == (constant) 0x54 then Goto 0x0c5c
+
+/ Branch if the second word is the "wedge" (0x55) and "It burns to ash"
 0x0c37 (0x1377): (0x18) If var[0x31] == (constant) 0x55 then Goto 0x0c5c
+
+/ Branch if the second word is the "shield" (0x55) and "It burns to ash"
 0x0c3b (0x137b): (0x18) If var[0x31] == (constant) 0x56 then Goto 0x0c5c
+
+/ Branch if the second word is the "carving" (0x5a) and "It burns to ash"
 0x0c3f (0x137f): (0x18) If var[0x31] == (constant) 0x5a then Goto 0x0c5c
+
+/ Branch if the second word is the "cross" (0x7a) and "It burns to ash"
 0x0c43 (0x1383): (0x18) If var[0x31] == (constant) 0x7a then Goto 0x0c5c
+
+/ Branch if the second word is the "wand" (0x82) and "It burns to ash"
 0x0c47 (0x1387): (0x18) If var[0x31] == (constant) 0x82 then Goto 0x0c5c
+
+/ Branch if the second word is the "packing case" (0x88) and "It burns to ash"
 0x0c4b (0x138b): (0x18) If var[0x31] == (constant) 0x88 then Goto 0x0c5c
+
+/ Branch if the second word is the "pod" (0x89) and "It burns to ash"
 0x0c4f (0x138f): (0x18) If var[0x31] == (constant) 0x89 then Goto 0x0c5c
+
+/ Branch if the second word is the "driftwood" (0x4c) and
 0x0c53 (0x1393): (0x18) If var[0x31] == (constant) 0x4c then Goto 0x0c64
+
 / Print message  "It won't burn "
 0x0c57 (0x1397): (0x05) Print message (constant) 0x5c
 
 / Perform additional location specific checks, print the location description
 / and ask "What next?" 
 0x0c59 (0x1399): (0x00) Goto 0x0149
+
 **************************************************************************
+
 / Print message  "It burns to ash "
 0x0c5c (0x139c): (0x05) Print message (constant) 0x5d
+
+/ Remove the object from the game
 0x0c5e (0x139e): (0x01) Gosub 0x1488
 
 / Perform additional location specific checks, print the location description
 / and ask "What next?" 
 0x0c61 (0x13a1): (0x00) Goto 0x0149
+
 **************************************************************************
+
 / Print message  "The wood burns brightly "
 0x0c64 (0x13a4): (0x05) Print message (constant) 0x62
+
+/ Branch if the drifwood is already burning
+/ var[0x0b] is the constant 0x00
 0x0c66 (0x13a6): (0x13) If var[0x36] > var[0x0b] then Goto 0x0c6d
+
+/ Driftwood NOT burning (0x00)
+
+/ Set the number of turns that the wood is burning to 200 (0xc8) turns
 0x0c6a (0x13aa): (0x08) Set var[0x36] = (constant) 0xc8
 
 / Perform additional location specific checks, print the location description
