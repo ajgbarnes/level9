@@ -2076,13 +2076,13 @@
 0x04f6 (0x0c36): (0x08) Set var[0x4c] = (constant) 0x8a
 
 **************************************************************************
-* TODO throne room
+* CHeck to see if the pit is open in the throne room
 **************************************************************************
 
-/ Branch if the player's current location is NOT "n a long throne room lined with skin..." (0x68)
+/ Branch if the player's current location is NOT "in a long throne room lined with skin..." (0x68)
 0x04f9 (0x0c39): (0x19) If var[0x43] != (constant) 0x68 then Goto 0x0504
 
-/ TODO 
+/ Branch if the pit in the throne room is closed (0x00)
 / var[0x0b] is the constant 0x00
 0x04fd (0x0c3d): (0x10) If var[0x58] == var[0x0b] then Goto 0x0504
 
