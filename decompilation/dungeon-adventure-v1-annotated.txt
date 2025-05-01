@@ -143,8 +143,8 @@
 /        0x8e : GREEN
 /        0x8f : BLUE
 /        0x90 : VIOLET
-/        0x91 : INDIGO
 /        0x92 : SILVER
+/        0x93 : MITHRIL
 / 0x0b - (Constant) 0x00
 / 0x0c - Status of the iron door in the strong room 
 /        0x00 - closed and bolted
@@ -590,9 +590,8 @@
 /     they want to teleport to e.g. to teleport to the orange cylinder of light,
 /     the player must be wearing at least the yellow collar - they will be denied
 /     with "NOT AUTHORISED TO GO THERE!" if they are wearing the orange or red collar
-/ 44. Saying "indigo" when wearing the silver collar, takes the player to the "violet" room - presumably
-/     because the "cylinder of indigo light" isn't working and it's a "cylinder of impenetrable darkness" (0x5b)
-/     It's still possible to navigate to this room from "in a dead-end dark room, below a black pedestal" (0xac)
+/ 44. There's a room called the  "cylinder of impenetrable darkness" (0x5b). It's not possible to teleport here however
+/     it's still possible to navigate to this room from "in a dead-end dark room, below a black pedestal" (0xac)
 /     by going up 
 / 45. BUG: Cannot examine an item if it's being worn. See 0x0e85
 / 46. BUG? There are two corpses in the game. One "at the east end of a long room." (0x74)
@@ -6383,9 +6382,9 @@
 / 0x8d : YELLOW
 / 0x8e : GREEN
 / 0x8f : BLUE
-/ 0x90 : VIOLET
-/ 0x91 : INDIGO
+/ 0x91 : VIOLET
 / 0x92 : SILVER
+/ 0x93 : MITHRIL
 
 / Branch if the player is wearing a collar with a lesser colour value 
 / than the colour they have said and print "NOT AUTHORISED...."
