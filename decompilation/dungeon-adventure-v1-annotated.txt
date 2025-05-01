@@ -274,12 +274,41 @@
 / 0x4b - Status of the rope in the roc's nest
 /        0x00 - not tied to the roc's nest
 /        0x01 - tied to the roc's nest
-/ 0x4c - First location supplementary message, can be set to:
-/        0x78 - A grotesque bloated yellow bird with big ears squats on the nest
-/        0x8f - A host of skeletons are guarding a bearded dwarf
+/ 0x4c - Working variable for the first location supplementary message, can be set to:
+/        0x44  - Two evil giants are asleep in the clearing
+/        0x45  - Two fierce giants are asleep below
+/        0x47  - A young girl, with flowing locks, sits on the island
+/        0x76  - A gentle dryad stands beside the tree
+/        0x77  - An enormous dragon lies on a golden bed
+/        0x78  - A grotesque bloated yellow bird with big ears squats on the nest
+/        0x7d  - It's blocked by a slab of rock
+/        0x7f  - A boulder rolls on a carpet of moss
+/        0x80  - A mossy lump sits in one corner
+/        0x86  - The door is bolted
+/        0x8a  - An opening leads east
+/        0x8d  - There is a square pit in the floor
+/        0x8f  - A host of skeletons are guarding a bearded dwarf
+/        0x98  - A vampire cowers back
+/        0xa3  - A fierce goat is on guard
+/        0xba  - The main door north of the bridge is shut
+/        0xbb  - Ghostly orcs guard the junction
+/        0xc4  - A rope hangs down
+/        0xdc  - An army of orcs is camped all around
+/        0xeb  - Globs of carnivorous jelly are circling round
+/        0xec  - A mound of jelly wobbles on the floor
+/        0xed  - A giant rat guards the corridor
+/        0xfe  - Enormous ants tower overhead as they walk past, completely ignoring you
+/        0x102 - A rotting bridge leads north
+/        0x103 - A fine golden pathway leads north
+/        0x107 - A troll blocks the bridge, palm outstretched for payment
+/        0x113 - A hooded executioner blocks the only exit
+/        0x119 - Several wights are trying to get at you
+/        0x11e - It is slightly ajar
+/        0x11f - It is nailed shut
 / 0x4d - Second location supplementary message, can be set to:
 /        0x19 - A faint light shines in
-/
+/ 0x4e - Final variable for the first location supplementary message
+/        (set to the value of var[0x4c])
 / 0x4f - Maximum number of items a player can carry - defaults to 0x04
 /        Can be:
 /        0  - if shrunk
@@ -774,15 +803,30 @@
 / var[0x01] is the constant 0x01
 0x0167 (0x08a7): (0x09) Set var[0x61] = var[0x01]
 
+/ Branch ahead if the slippery slime is NOT in the player's current 
+/ location
 0x016a (0x08aa): (0x11) If var[0x40] != var[0x43] then Goto 0x0170
+
 / Print message  "The ground is very slippery\n "
 0x016e (0x08ae): (0x05) Print message (constant) 0xa2
+
+/ Branch if the location's first supplementary message is not set (0x00)
+/ var[0x0b] is the constant 0x00
 0x0170 (0x08b0): (0x10) If var[0x4e] == var[0x0b] then Goto 0x0178
+
+/ Print the location's first supplementary message
 0x0174 (0x08b4): (0x04) Print message var[0x4e]
+
 / Print message  "\n "
 0x0176 (0x08b6): (0x05) Print message (constant) 0x28
+
+/ Branch if the location's second supplementary message is not set (0x00)
+/ var[0x0b] is the constant 0x00
 0x0178 (0x08b8): (0x10) If var[0x4d] == var[0x0b] then Goto 0x0180
+
+/ Print the location's second supplementary message
 0x017c (0x08bc): (0x04) Print message var[0x4d]
+
 / Print message  "\n "
 0x017e (0x08be): (0x05) Print message (constant) 0x28
 
@@ -1424,8 +1468,12 @@
 / REDUNDANT - basically a NOP!
 0x03c0 (0x0b00): (0x09) Set var[0x65] = var[0x65]
 
-
+/ Reset the location's first supplementary message / description to nothing (0x00)
+/ var[0x0b] is the constant 0x00
 0x03c3 (0x0b03): (0x09) Set var[0x4c] = var[0x0b]
+
+/ Reset the location's second supplementary message / description to nothing (0x00)
+/ var[0x0b] is the constant 0x00
 0x03c6 (0x0b06): (0x09) Set var[0x4d] = var[0x0b]
 
 / Reset the status that the player cannot see (0x00)
@@ -1733,7 +1781,7 @@
 
 / Player IS "at the edge of the forest, beneath a particularly large tree..." (0x12)
 
-/ Set the first supplementary message to "Two evil giants are asleep in the clearing"(0x44)
+/ Set the first supplementary message to "Two evil giants are asleep in the clearing" (0x44)
 0x047e (0x0bbe): (0x08) Set var[0x4c] = (constant) 0x44
 
 / Branch if the player's current location is NOT "on a sturdy branch over the clearing" (0x10)
@@ -2243,7 +2291,7 @@
 / Player has NOT trodden on the little ants
 
 / Set the first supplementary message to "Enormous ants tower overhead as they 
-/ walk past, completely ignoring you
+/ walk past, completely ignoring you"
 0x05bd (0x0cfd): (0x08) Set var[0x4c] = (constant) 0xfe
 
 **************************************************************************
