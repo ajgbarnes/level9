@@ -160,7 +160,7 @@
 /        0x03 - Orcs have been camped around for two turns
 /        0x04 - Orcs have been camped around for three turns
 /        0x05 - Orcs have been camped around for four turns, kill the player
-/        0x06 - horn blown at the army camp and orcs fled (for now)
+/        0x06 - horn blown at the army camp and orcs fled or killed by the skeleton warriors
 / 0x10 - Status of the killer-willow tree
 /        0x00 - tree is holding no items
 /        0x01 - tree is holding one item
@@ -6727,23 +6727,35 @@
 * Command: "bury" or "plant"
 **************************************************************************
 
+/ Check the player is NOT trying to plant or bury and NPC
 0x1422 (0x1b62): (0x01) Gosub 0x15c5
 
-/ TODO Branch 
-/ Perform additional location specific checks skipping the code 
+/ Branch if the player is trying to plant or bury an NPC and
+/ perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x1425 (0x1b65): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
+
+/ Remove the item from the game
 0x142a (0x1b6a): (0x01) Gosub 0x1488
 
-/ TODO Branch 
-// Perform additional location specific checks skipping the code 
+/ Branchi f the second word is NOT the teeth (0x97)
+/ Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x142d (0x1b6d): (0x19) If var[0x31] != (constant) 0x97 then Goto 0x0190
+
+/ Second word IS the teeth
 
 / Print message  "Warriors spring from the teeth "
 0x1432 (0x1b72): (0x05) Print message (constant) 0xe1
 
+/ Branch if the location's first supplementary message is NOT
+/ An army of orcs is camped all around" (0xdc) and print 
+/ " and attack you"
 0x1434 (0x1b74): (0x19) If var[0x4c] != (constant) 0xdc then Goto 0x1440
+
+/ Orcs ARE camped around 
+
+/ Set the status of the orcs to have fled or been killed
 0x1438 (0x1b78): (0x09) Set var[0x0f] = var[0x06]
 
 / Print message  "and kill the orcs "
@@ -6752,18 +6764,44 @@
 / Perform additional location specific checks, print the location description
 / and ask "What next?" 
 0x143d (0x1b7d): (0x00) Goto 0x0149
+
 **************************************************************************
+
 / Print message  "and attack you "
 0x1440 (0x1b80): (0x05) Print message (constant) 0xe2
+
+/ Kill the player
 0x1442 (0x1b82): (0x00) Goto 0x12e7
+
 **************************************************************************
+* Loop through all the objects and move any that at being held by the tree
+* (in location 0xe5) to the player's current location
+**************************************************************************
+
+/ Set the temporary variable to the location id for the killer-willow holding
+/ the object 
 0x1445 (0x1b85): (0x08) Set var[0x5d] = (constant) 0xe5
+
+/ Start witht he first object, the "axe"
 0x1448 (0x1b88): (0x08) Set var[0x31] = (constant) 0x46
+
+/ Get the current location of the object
 0x144b (0x1b8b): (0xa2) Set var[0x1f] = list#2[var[0x31]] (list address 0x0740)
+
+/ Branch if the item is NOT being held by the killer-willow and move 
+/ to the next object
 0x144e (0x1b8e): (0x11) If var[0x1f] != var[0x5d] then Goto 0x1455
+
+/ Set the location of the object to the player's current location 
 0x1452 (0x1b92): (0xe2) Set list#2[var[0x31]] = var[0x43] (list address 0x0740)
+
+/ Move to the next object id
 0x1455 (0x1b95): (0x0a) Set var[0x31] += var[0x01]
+
+/ Loop back around if there are still more object to process
 0x1458 (0x1b98): (0x1a) If var[0x31] < (constant) 0x9b then Goto 0x144b
+
+/ All done
 0x145c (0x1b9c): (0x02) Return
 
 **************************************************************************
