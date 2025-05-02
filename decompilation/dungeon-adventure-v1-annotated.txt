@@ -876,16 +876,49 @@
 / Reset the status whether the player can see to cannot (0x00)
 / var[0x0b] is the constant 0x00
 0x00a7 (0x07e7): (0x09) Set var[0x37] = var[0x0b]
+
+/ Initialise the TODO
+/ var[0x0b] is the constant 0x00
 0x00aa (0x07ea): (0x09) Set var[0x38] = var[0x0b]
+
+/ Initialise the number of turns the player has been staring at the 
+/ myriad of moving pictures to 0x00
+/ var[0x0b] is the constant 0x00
 0x00ad (0x07ed): (0x09) Set var[0x39] = var[0x0b]
+
+/ Initialise the status of the roc to "not carried off the player" (0x00)
+/ var[0x0b] is the constant 0x00
 0x00b0 (0x07f0): (0x09) Set var[0x3a] = var[0x0b]
+
+/ Initialise the number of items the player is carrying to 0
+/ var[0x0b] is the constant 0x00
 0x00b3 (0x07f3): (0x09) Set var[0x3b] = var[0x0b]
+
+/ Initialise the multi-purpose temporary variable to 0
+/ var[0x0b] is the constant 0x00
 0x00b6 (0x07f6): (0x09) Set var[0x3c] = var[0x0b]
+
+/ Unused
 0x00b9 (0x07f9): (0x09) Set var[0x3d] = var[0x0b]
+
+/ Initialise the number of items the player is wearing to 0
+/ var[0x0b] is the constant 0x00
 0x00bc (0x07fc): (0x09) Set var[0x3e] = var[0x0b]
+
+/ Initialise the status of the flint thrower to "alive" (0x00)
+/ var[0x0b] is the constant 0x00
 0x00bf (0x07ff): (0x09) Set var[0x3f] = var[0x0b]
+
+/ Initialise the location of the sticky slime to "on the floor of the cavern" (0x00)
+/ var[0x0b] is the constant 0x00
 0x00c2 (0x0802): (0x09) Set var[0x40] = var[0x0b]
+
+/ Initialise the status of the password to "not yet said correctly" (0x00)
+/ var[0x0b] is the constant 0x00
 0x00c5 (0x0805): (0x09) Set var[0x41] = var[0x0b]
+
+/ Initialise the status of the troll to "not received treasure" (0x00)
+/ var[0x0b] is the constant 0x00
 0x00c8 (0x0808): (0x09) Set var[0x42] = var[0x0b]
 
 / Reset the starting location here to nowhere (0x00)
