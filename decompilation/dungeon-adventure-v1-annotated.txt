@@ -3619,27 +3619,61 @@ Player IS trying to move to "at a junction..."
 0x0845 (0x0f85): (0x00) Goto 0x0190
 
 **************************************************************************
+* Check to see if the player has said the correct password at the gatehouse
+**************************************************************************
+
+/ Branch if the player's target destination is NOT "in an arch-way below
+/ the gate-house. A bridge leads north to the foot of a shattered black 
+/ tower." (0x29)
 0x0848 (0x0f88): (0x19) If var[0x44] != (constant) 0x29 then Goto 0x0859
+
+/ Player's target destination IS "in an arch-way below
+/ the gate-house. A bridge leads north to the foot of a shattered black 
+/ tower." (0x29)
+
+/ Branch if the player's current location is NOT "outside the gatehouse" (0x22)
 0x084c (0x0f8c): (0x19) If var[0x43] != (constant) 0x22 then Goto 0x0859
+
+/ Player's current location IS "outside the gatehouse" (0x22)
+
+/ Branch if the player HAS already said the correct password (0x01)
+/ var[0x0b] is the constant 0x00
 0x0850 (0x0f90): (0x13) If var[0x41] > var[0x0b] then Goto 0x0859
+
 / Print message  ""OI! YOU CAN ONLY ENTER IF YOU SAY THE PASSWORD!" "
 0x0854 (0x0f94): (0x05) Print message (constant) 0xb8
 
 / Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0856 (0x0f96): (0x00) Goto 0x0190
+
 **************************************************************************
+* Check to see if the player is blocked by the main door 
+**************************************************************************
+
+/ Branch if the player's target destination is NOT "in a corridor bending 
+/ south and east" (0xd0)
 0x0859 (0x0f99): (0x19) If var[0x44] != (constant) 0xd0 then Goto 0x0866
+
+/ Branch if the location's first supplementary message is NOT "The main door 
+/ north of the bridge is shut"
 0x085d (0x0f9d): (0x19) If var[0x4c] != (constant) 0xba then Goto 0x0866
+
 / Print message  "There's a shut door in the way!\n "
 0x0861 (0x0fa1): (0x05) Print message (constant) 0x22
 
 / Perform additional location specific checks, print the location description
 / and ask "What next?" 
 0x0863 (0x0fa3): (0x00) Goto 0x0149
+
 **************************************************************************
 0x0866 (0x0fa6): (0x19) If var[0x4c] != (constant) 0xbb then Goto 0x0877
+
+/ Branch if the player's target destination is NOT 
 0x086a (0x0faa): (0x18) If var[0x44] == (constant) 0x6b then Goto 0x0872
+
+/ Player's target destination IS 
+
 0x086e (0x0fae): (0x19) If var[0x44] != (constant) 0x6d then Goto 0x0877
 / Print message  ""You may not pass", intone the ghosts. "We failed the Master and our doom is to remain here whilst He lives." "
 0x0872 (0x0fb2): (0x05) Print message (constant) 0xbc
@@ -3651,13 +3685,23 @@ Player IS trying to move to "at a junction..."
 0x0877 (0x0fb7): (0x19) If var[0x43] != (constant) 0x2e then Goto 0x0880
 0x087b (0x0fbb): (0x10) If var[0x4b] == var[0x0b] then Goto 0x0686
 0x0880 (0x0fc0): (0x19) If var[0x4c] != (constant) 0xeb then Goto 0x088d
+
+/ Branch if the player's target destination is NOT 
 0x0884 (0x0fc4): (0x18) If var[0x44] == (constant) 0x77 then Goto 0x088d
+
+/ Player's target destination IS 
+
 / Print message  "The jelly rears up hungrily "
 0x0888 (0x0fc8): (0x05) Print message (constant) 0xe9
 0x088a (0x0fca): (0x00) Goto 0x12e7
 **************************************************************************
 0x088d (0x0fcd): (0x13) If var[0x26] > var[0x0b] then Goto 0x08b1
+
+/ Branch if the player's target destination is NOT 
 0x0891 (0x0fd1): (0x18) If var[0x44] == (constant) 0x91 then Goto 0x08a2
+
+/ Player's target destination IS 
+
 0x0895 (0x0fd5): (0x19) If var[0x43] != (constant) 0x91 then Goto 0x08b1
 0x0899 (0x0fd9): (0x18) If var[0x44] == (constant) 0x90 then Goto 0x08b1
 / Print message  "A giant rat guards the corridor "
@@ -3673,14 +3717,24 @@ Player IS trying to move to "at a junction..."
 / Print message  "The rat flees from the stinking chip! "
 0x08ac (0x0fec): (0x05) Print message (constant) 0xee
 0x08ae (0x0fee): (0x09) Set var[0x26] = var[0x01]
+
+/ Branch if the player's target destination is NOT 
 0x08b1 (0x0ff1): (0x19) If var[0x44] != (constant) 0xce then Goto 0x08be
+
+/ Player's target destination IS 
+
 0x08b5 (0x0ff5): (0x13) If var[0x25] > var[0x0b] then Goto 0x08be
 / Print message  "A fire elemental leaps on you "
 0x08b9 (0x0ff9): (0x05) Print message (constant) 0xef
 0x08bb (0x0ffb): (0x00) Goto 0x12e7
 **************************************************************************
 0x08be (0x0ffe): (0x11) If var[0x2e] != var[0x02] then Goto 0x08cb
+
+/ Branch if the player's target destination is NOT 
 0x08c2 (0x1002): (0x19) If var[0x44] != (constant) 0xa1 then Goto 0x08d8
+
+/ Player's target destination IS 
+
 / Print message  "You're too big to go that way "
 0x08c6 (0x1006): (0x05) Print message (constant) 0xfc
 
@@ -3699,7 +3753,12 @@ Player IS trying to move to "at a junction..."
 0x08d5 (0x1015): (0x00) Goto 0x0190
 
 **************************************************************************
+
+/ Branch if the player's target destination is NOT 
 0x08d8 (0x1018): (0x19) If var[0x44] != (constant) 0x37 then Goto 0x08f2
+
+/ Player's target destination IS 
+
 0x08dc (0x101c): (0x13) If var[0x0e] > var[0x0b] then Goto 0x08f2
 0x08e0 (0x1020): (0x11) If var[0x2e] != var[0x0b] then Goto 0x08e9
 / Print message  "Giant ants block your path, feeling for you with sensitive antenna "
@@ -3714,12 +3773,22 @@ Player IS trying to move to "at a junction..."
 / Print message  "You accidentally step on some little ants "
 0x08ed (0x102d): (0x05) Print message (constant) 0xff
 0x08ef (0x102f): (0x09) Set var[0x0e] = var[0x01]
+
+/ Branch if the player's target destination is NOT 
 0x08f2 (0x1032): (0x19) If var[0x44] != (constant) 0x3d then Goto 0x0901
+
+/ Player's target destination IS 
+
 0x08f6 (0x1036): (0x19) If var[0x43] != (constant) 0xa6 then Goto 0x0901
 0x08fa (0x103a): (0x11) If var[0x2e] != var[0x0b] then Goto 0x0901
 / Print message  ""
 0x08fe (0x103e): (0x05) Print message (constant) 0x101
+
+/ Branch if the player's target destination is NOT 
 0x0901 (0x1041): (0x19) If var[0x44] != (constant) 0x9d then Goto 0x090a
+
+/ Player's target destination IS 
+
 0x0905 (0x1045): (0x10) If var[0x2d] == var[0x0b] then Goto 0x1611
 0x090a (0x104a): (0x19) If var[0x44] != (constant) 0x9e then Goto 0x0918
 0x090e (0x104e): (0x13) If var[0x42] > var[0x0b] then Goto 0x0918
@@ -3731,7 +3800,12 @@ Player IS trying to move to "at a junction..."
 / and ask "What next?" 
 0x0915 (0x1055): (0x00) Goto 0x0149
 **************************************************************************
+
+/ Branch if the player's target destination is NOT 
 0x0918 (0x1058): (0x19) If var[0x44] != (constant) 0xb1 then Goto 0x092d
+
+/ Player's target destination IS 
+
 / Print message  "Spikes shoot from the wall "
 0x091c (0x105c): (0x05) Print message (constant) 0x10c
 0x091f (0x105f): (0x08) Set var[0x1e] = (constant) 0x55
@@ -3739,7 +3813,12 @@ Player IS trying to move to "at a junction..."
 0x0925 (0x1065): (0x12) If var[0x1f] < var[0x07] then Goto 0x12e7
 / Print message  "but bounce off your shield "
 0x092a (0x106a): (0x05) Print message (constant) 0x10d
+
+/ Branch if the player's target destination is NOT 
 0x092d (0x106d): (0x19) If var[0x44] != (constant) 0xb5 then Goto 0x094a
+
+/ Player's target destination IS 
+
 / Print message  "Acid sprays at your eyes "
 0x0931 (0x1071): (0x05) Print message (constant) 0x10e
 0x0934 (0x1074): (0x08) Set var[0x31] = (constant) 0x48
@@ -3767,7 +3846,12 @@ Player IS trying to move to "at a junction..."
 / and ask "What next?" 
 0x0955 (0x1095): (0x00) Goto 0x0149
 **************************************************************************
+
+/ Branch if the player's target destination is NOT 
 0x0958 (0x1098): (0x19) If var[0x44] != (constant) 0xba then Goto 0x0963
+
+/ Player's target destination IS 
+
 0x095c (0x109c): (0x11) If var[0x2c] != var[0x0b] then Goto 0x0963
 / Print message  "A hooded executioner blocks the only exit "
 0x0960 (0x10a0): (0x05) Print message (constant) 0x113
