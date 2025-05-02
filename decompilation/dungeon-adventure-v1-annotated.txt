@@ -3540,35 +3540,84 @@
 0x0815 (0x0f55): (0x00) Goto 0x0800
 
 **************************************************************************
+* Check if the player is wearing a collar when moving from "in a cylindrical 
+* room... " to "at a junction...."
+**************************************************************************
+
+/ Branch if the player's current location is NOT "in a cylindrical room 
+/ with eight exits, hewn from the rock." (0x70) and move to the next check
 0x0817 (0x0f57): (0x19) If var[0x43] != (constant) 0x70 then Goto 0x083b
+
+/ Player IS "in a cylindrical room..."
+
+/ Branch if the player's target location is NOT "at a junction in a steeply 
+/ sloping u-shaped passage which leads northeast and northwest." (0x77)
 0x081b (0x0f5b): (0x19) If var[0x44] != (constant) 0x77 then Goto 0x0828
+
+Player IS trying to move to "at a junction..."
+
+/ Branch if the player IS wearing a collar 
+/ var[0x02] is the constant 0x02
 0x081f (0x0f5f): (0x13) If var[0x0a] > var[0x02] then Goto 0x083b
+
 / Print message  ""NOT AUTHORISED TO GO THERE!" "
 0x0823 (0x0f63): (0x05) Print message (constant) 0x7c
 
 / Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0825 (0x0f65): (0x00) Goto 0x0190
+
 **************************************************************************
+* Check to see if the player is carrying the short bow when moving to 
+* "on a flight of crumbling steps" (0x7a)
+**************************************************************************
+
+/ Branch if the player's target location is NOT "on a flight of crumbling steps" (0x7a)
 0x0828 (0x0f68): (0x19) If var[0x44] != (constant) 0x7a then Goto 0x083b
+
+/ Player's target location IS "on a flight of crumbling steps" (0x7a)
+
+/ Set the temporary variable to the objet id for the "bow" (0x4a)
 0x082c (0x0f6c): (0x08) Set var[0x1e] = (constant) 0x4a
+
+/ Get the location of the short bow
 0x082f (0x0f6f): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
+
+/ Branch if the short box IS in the player's inventory (0xfe)
+/ var[0x07] is the constant 0xfe
 0x0832 (0x0f72): (0x10) If var[0x1f] == var[0x07] then Goto 0x083b
+
 / Print message  ""ONLY ARCHERS ALLOWED" "
 0x0836 (0x0f76): (0x05) Print message (constant) 0x9a
 
 / Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0838 (0x0f78): (0x00) Goto 0x0190
+
 **************************************************************************
+* Check to see if the flint thrower is blocking the player
+**************************************************************************
+
+/ Branch if the player's target destination is NOT "in a wide, smelly passage 
+/ opening to the outside, high above the river" (0xd4)
 0x083b (0x0f7b): (0x19) If var[0x44] != (constant) 0xd4 then Goto 0x0848
+
+/ Player's target destination IS "in a wide, smelly passage 
+/ opening to the outside, high above the river" (0xd4)
+
+/ Branch if the flint thrower is still alive (0x00)
+/ var[0x0b] is the constant 0x00
 0x083f (0x0f7f): (0x11) If var[0x3f] != var[0x0b] then Goto 0x0848
+
+/ Flint thrower is still alive
+
 / Print message  "A hurled flint splinters in front of your face, driving you back "
 0x0843 (0x0f83): (0x05) Print message (constant) 0x9c
 
 / Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0845 (0x0f85): (0x00) Goto 0x0190
+
 **************************************************************************
 0x0848 (0x0f88): (0x19) If var[0x44] != (constant) 0x29 then Goto 0x0859
 0x084c (0x0f8c): (0x19) If var[0x43] != (constant) 0x22 then Goto 0x0859
