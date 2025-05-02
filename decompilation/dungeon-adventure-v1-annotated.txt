@@ -4263,14 +4263,15 @@ Player IS "in a small soft room between five large round fleshy pillars."
 / var[0x01] is the constant 0x01
 0x09e3 (0x1123): (0x09) Set var[0x0f] = var[0x01]
 
-/ Branch if the exit flags indicate that the player cannot move 
-/ in that direction and that the target destination is 
-/ actually a message e.g. "No way, the water if full of piranhas" 
+/ Branch if the exit flags indicate that the player can move 
+/ in that direction and that the target destination is real
 / var[0x02] is the constant 0x02
 0x09e6 (0x1126): (0x12) If var[0x50] < var[0x02] then Goto 0x09f3
 
 / Second bit is set (0x02) so player can't move that way but 
-/ display the message
+/ the target destination is actually a message to display 
+/ e.g. "No way, the water if full of piranhas" 
+/ so display the message
 
 / Set the temporary variable to the location message id offset 500
 0x09ea (0x112a): (0x08) Set var[0x5d] = (constant) 0x1f4
