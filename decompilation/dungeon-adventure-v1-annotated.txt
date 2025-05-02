@@ -3667,73 +3667,161 @@ Player IS trying to move to "at a junction..."
 0x0863 (0x0fa3): (0x00) Goto 0x0149
 
 **************************************************************************
+* Check to see if ghostly orcs are blocking the player
+**************************************************************************
+
+/ Branch if the location's first supplementary message is NOT "Ghostly orcs
+/ guard the junction"
 0x0866 (0x0fa6): (0x19) If var[0x4c] != (constant) 0xbb then Goto 0x0877
 
-/ Branch if the player's target destination is NOT 
+/ Ghostly orcs guard the junction
+
+/ Branch if the player's target destination IS "in an east-west corridor
+/ beside an opening to the north" (0x6b) and print the message 
+/ that the player cannot pass
 0x086a (0x0faa): (0x18) If var[0x44] == (constant) 0x6b then Goto 0x0872
 
-/ Player's target destination IS 
+/ Player's target destination is NOT "in an east-west corridor beside an opening 
+/ to the north"
 
+/ Branch if the player's target destination is NOT "in a north-south corridor 
+/ which ends at a t-junction" (0x6d)
 0x086e (0x0fae): (0x19) If var[0x44] != (constant) 0x6d then Goto 0x0877
-/ Print message  ""You may not pass", intone the ghosts. "We failed the Master and our doom is to remain here whilst He lives." "
+
+/ Player is trying to move to either "in a north-south corridor which ends 
+/ at a t-junction" (0x6d) OR "in an east-west corridor
+/ beside an opening to the north" (0x6b)
+
+/ Print message  ""You may not pass", intone the ghosts. "We failed the Master
+/ and our doom is to remain here whilst He lives." "
 0x0872 (0x0fb2): (0x05) Print message (constant) 0xbc
 
 / Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0874 (0x0fb4): (0x00) Goto 0x0190
+
 **************************************************************************
+* Check if the player can move into the roc's nest 
+**************************************************************************
+
+/ Branch if the player's current location is NOT "in the roc's nest, where 
+/ it brings "food" for storage" (0x2e)
 0x0877 (0x0fb7): (0x19) If var[0x43] != (constant) 0x2e then Goto 0x0880
+
+/ Player IS "in the roc's nest..."
+
+/ Branch if the rope is NOT tied to the roc's nest (0x00)
+/ and print "You can't move in that direction"
+/ var[0x0b] is the constant 0x00
 0x087b (0x0fbb): (0x10) If var[0x4b] == var[0x0b] then Goto 0x0686
+
+/ Rope IS tied to the roc's nest (0x01)
+
+**************************************************************************
+* Check if the carnivorous jelly kills the player
+**************************************************************************
+
+/ Branch if the location's first supplementary message IS "Globs of 
+/ carnivorous jelly are circling round" (0xeb)
 0x0880 (0x0fc0): (0x19) If var[0x4c] != (constant) 0xeb then Goto 0x088d
 
-/ Branch if the player's target destination is NOT 
+/ Branch if the player's target destination IS "at a junction in a
+/ steeply sloping u-shaped passage which leads northeast and northwest." (0x77)
 0x0884 (0x0fc4): (0x18) If var[0x44] == (constant) 0x77 then Goto 0x088d
 
-/ Player's target destination IS 
+/ Player's target destination is NOT "at a junction in a steeply 
+/ sloping u-shaped passage which leads northeast and northwest." (0x77)
 
 / Print message  "The jelly rears up hungrily "
 0x0888 (0x0fc8): (0x05) Print message (constant) 0xe9
+
+/ Kill the player
 0x088a (0x0fca): (0x00) Goto 0x12e7
+
 **************************************************************************
+* Check if the giant rat is blocking the player
+**************************************************************************
+
+/ Branch if the rat has not fled (0x01)
+/ vacantr[0x0b] is the constant 0x00
 0x088d (0x0fcd): (0x13) If var[0x26] > var[0x0b] then Goto 0x08b1
 
-/ Branch if the player's target destination is NOT 
+/ Branch if the player's target destination IS "dead-end room,
+/ painted matt black." (0x91) and check if the player will 
+/ scare the rat off with the rancid potato chip
 0x0891 (0x0fd1): (0x18) If var[0x44] == (constant) 0x91 then Goto 0x08a2
 
-/ Player's target destination IS 
+/ Player's target destination is NOT "dead-end room, painted matt black." 
 
+/ Branch if the player's current location is NOT "in a cylindrical room 
+/ with eight exits, hewn from the rock." (0x91) and move to the next check
 0x0895 (0x0fd5): (0x19) If var[0x43] != (constant) 0x91 then Goto 0x08b1
+
+/ Branch if the player's target destination IS "dead-end room,
+/ painted matt black." (0x91) and move to the next check
 0x0899 (0x0fd9): (0x18) If var[0x44] == (constant) 0x90 then Goto 0x08b1
+
 / Print message  "A giant rat guards the corridor "
 0x089d (0x0fdd): (0x05) Print message (constant) 0xed
 
 / Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x089f (0x0fdf): (0x00) Goto 0x0190
-**************************************************************************
+
+/ Set the temporary variable to the object id for the rancid potato chip (0x53)
 0x08a2 (0x0fe2): (0x08) Set var[0x1e] = (constant) 0x53
+
+/ Get the current location of the rancide potato chip
 0x08a5 (0x0fe5): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
+
+/ Branch if the chip is NOT in the player's inventory (0xfe)
+/ var[0x07] is the constant 0xfe
 0x08a8 (0x0fe8): (0x12) If var[0x1f] < var[0x07] then Goto 0x08b1
+
+/ Player HAS the potato chip
+
 / Print message  "The rat flees from the stinking chip! "
 0x08ac (0x0fec): (0x05) Print message (constant) 0xee
+
+/ Set the status of the rat to fled "(0x01)
+/ var[0x01] is the constant 0x01
 0x08ae (0x0fee): (0x09) Set var[0x26] = var[0x01]
 
-/ Branch if the player's target destination is NOT 
+**************************************************************************
+* Check if a fire elemntental kills the player
+**************************************************************************
+
+/ Branch if the player's target destination is NOT "in a hot alcove, 
+/ lit by the flames of a fire elemental (0xce)
 0x08b1 (0x0ff1): (0x19) If var[0x44] != (constant) 0xce then Goto 0x08be
 
-/ Player's target destination IS 
+/ Player's target destination IS "in a hot alcove, lit by the 
+/ flames of a fire elemental" (0xce)
 
+/ Branch if the player HAS smeared on the cold cream (0x01)
+/ var[0x0b] is the constant 0x00
 0x08b5 (0x0ff5): (0x13) If var[0x25] > var[0x0b] then Goto 0x08be
+
 / Print message  "A fire elemental leaps on you "
 0x08b9 (0x0ff9): (0x05) Print message (constant) 0xef
+
+/ Kill the player
 0x08bb (0x0ffb): (0x00) Goto 0x12e7
+
 **************************************************************************
+* Check if the player is too big to go in a direction
+**************************************************************************
+
+/ Branch if the player is NOT a giant (0x02)
+/ var[0x02] is the constant 0x02
 0x08be (0x0ffe): (0x11) If var[0x2e] != var[0x02] then Goto 0x08cb
 
-/ Branch if the player's target destination is NOT 
+/ Branch if the player's target destination is NOT "on a wide ledge 
+/ outside a tunnel entrance." (0xa1)
 0x08c2 (0x1002): (0x19) If var[0x44] != (constant) 0xa1 then Goto 0x08d8
 
-/ Player's target destination IS 
+/ Player's target destination IS "on a wide ledge outside 
+/ a tunnel entrance." (0xa1)
 
 / Print message  "You're too big to go that way "
 0x08c6 (0x1006): (0x05) Print message (constant) 0xfc
@@ -3742,9 +3830,14 @@ Player IS trying to move to "at a junction..."
 / that prints the location description and ask "What next?" 
 0x08c8 (0x1008): (0x00) Goto 0x0190
 
-**************************************************************************
+/ Branch if the player's target destination is NOT "in the strong room. 
+/ An iron door leads west and a narrow crack splits the east wall" (0xa5)
 0x08cb (0x100b): (0x19) If var[0x44] != (constant) 0xa5 then Goto 0x08d8
+
+/ Branch if the player is shrunk (0x01)
+/ var[0x01] is the constant 0x01
 0x08cf (0x100f): (0x10) If var[0x2e] == var[0x01] then Goto 0x08d8
+
 / Print message  "You're too big to go that way "
 0x08d3 (0x1013): (0x05) Print message (constant) 0xfc
 
@@ -3753,14 +3846,26 @@ Player IS trying to move to "at a junction..."
 0x08d5 (0x1015): (0x00) Goto 0x0190
 
 **************************************************************************
+* Check if the player is too small to move
+**************************************************************************
 
-/ Branch if the player's target destination is NOT 
+/ Branch if the player's target destination is NOT "in the middle of the
+/ floor of a giant cove, in a giant ants' nest." (0x37)
 0x08d8 (0x1018): (0x19) If var[0x44] != (constant) 0x37 then Goto 0x08f2
 
-/ Player's target destination IS 
+/ Player's target destination IS "in the middle of the floor of a giant 
+/ cove, in a giant ants' nest." (0x37)
 
+/ Branch if the ants have been trodden on (0x01)
+/ var[0x0b] is the constant 0x00
 0x08dc (0x101c): (0x13) If var[0x0e] > var[0x0b] then Goto 0x08f2
+
+/ Branch if the player is NOT normal size (0x00)
+/ var[0x0b] is the constant 0x00
 0x08e0 (0x1020): (0x11) If var[0x2e] != var[0x0b] then Goto 0x08e9
+
+/ Player is small (0x01)
+
 / Print message  "Giant ants block your path, feeling for you with sensitive antenna "
 0x08e4 (0x1024): (0x05) Print message (constant) 0xfd
 
@@ -3769,28 +3874,65 @@ Player IS trying to move to "at a junction..."
 0x08e6 (0x1026): (0x00) Goto 0x0190
 
 **************************************************************************
+
+/ Branch if the player IS shrunk (0x01)
 0x08e9 (0x1029): (0x10) If var[0x2e] == var[0x01] then Goto 0x08f2
+
+/ Player is a giant (0x02) 
+
 / Print message  "You accidentally step on some little ants "
 0x08ed (0x102d): (0x05) Print message (constant) 0xff
+
+/ Set the status of the ants to trodden on (0x01)
+/ var[0x01] is the constant 0x01
 0x08ef (0x102f): (0x09) Set var[0x0e] = var[0x01]
 
-/ Branch if the player's target destination is NOT 
+/ Branch if the player's target destination is NOT ": in a paved tunnel
+/ below a silver pedestal." (0x3d)
 0x08f2 (0x1032): (0x19) If var[0x44] != (constant) 0x3d then Goto 0x0901
 
-/ Player's target destination IS 
+/ Player's target destination IS ": in a paved tunnel below a silver pedestal." (0x3d)
 
+/ Branch if the player's current location is NOT "in the strong room. 
+/ An iron door leads west and a narrow crack splits the east wall" (0xa6)
 0x08f6 (0x1036): (0x19) If var[0x43] != (constant) 0xa6 then Goto 0x0901
+
+/ Branch if the giant ants are trodden (0x01)
+/ var[0x0b] is the constant 0x00
 0x08fa (0x103a): (0x11) If var[0x2e] != var[0x0b] then Goto 0x0901
+
+/ Ants are still present (0x00)
+
 / Print message  ""
 0x08fe (0x103e): (0x05) Print message (constant) 0x101
 
-/ Branch if the player's target destination is NOT 
+**************************************************************************
+* Check if the player is has eaten the psychedlic mushroom
+**************************************************************************
+
+/ Branch if the player's target destination is NOT "on a magnificent 
+/ golden pathway running north-south through the air"
 0x0901 (0x1041): (0x19) If var[0x44] != (constant) 0x9d then Goto 0x090a
 
-/ Player's target destination IS 
+/ Player's target destination IS "on a magnificent golden pathway running 
+/ north-south through the air" (0x9d)
 
+/ Branch if the player has NOT eaten the psychedlic mushroom (0x00) and 
+/ print "You must be joking!"
 0x0905 (0x1045): (0x10) If var[0x2d] == var[0x0b] then Goto 0x1611
+
+/ Player HAS eaten the psychedelic mushroom (0x01)
+
+**************************************************************************
+* Check if the player is blocked by the troll 
+**************************************************************************
+
+/ Branch if the player's target destination is NOT "on a narrow ledge 
+/ between the splendid golden pathway and a narrow tunnel" (0x9e)
 0x090a (0x104a): (0x19) If var[0x44] != (constant) 0x9e then Goto 0x0918
+
+/ Branch if the troll HAS been given a treasure and moved on (0x01)
+/ var[0x0b] is the constant 0x00
 0x090e (0x104e): (0x13) If var[0x42] > var[0x0b] then Goto 0x0918
 
 / Print message  "The troll's bad breath drives you back! "
@@ -3799,39 +3941,80 @@ Player IS trying to move to "at a junction..."
 / Perform additional location specific checks, print the location description
 / and ask "What next?" 
 0x0915 (0x1055): (0x00) Goto 0x0149
+
+**************************************************************************
+* Check if the player is killed by the spikes
 **************************************************************************
 
-/ Branch if the player's target destination is NOT 
+/ Branch if the player's target destination is NOT "in a dead end,
+/ below a gallows tree from which a bloodless corpse hangs by one foot" (0xb1)
 0x0918 (0x1058): (0x19) If var[0x44] != (constant) 0xb1 then Goto 0x092d
 
-/ Player's target destination IS 
+/ Player's target destination IS "in a dead end, below a gallows tree 
+/ from which a bloodless corpse hangs by one foot" (0xb1)
 
 / Print message  "Spikes shoot from the wall "
 0x091c (0x105c): (0x05) Print message (constant) 0x10c
+
+/ Set the temporary variable to the "shield" (0x55)
 0x091f (0x105f): (0x08) Set var[0x1e] = (constant) 0x55
+
+/ Get the current location of the "shield" 
 0x0922 (0x1062): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
+
+/ Branch if the "shield" is NOT in the player's inventory (0xfe)
+/ var[0x07] is the constant 0xfe and kill the player
 0x0925 (0x1065): (0x12) If var[0x1f] < var[0x07] then Goto 0x12e7
+
 / Print message  "but bounce off your shield "
 0x092a (0x106a): (0x05) Print message (constant) 0x10d
 
-/ Branch if the player's target destination is NOT 
+**************************************************************************
+* Check if the player is killed by acid spray
+**************************************************************************
+
+/ Branch if the player's target destination is NOT "in a dusty room, 
+/ entered from the west and with a long shelf along the east wall" (0xb5)
 0x092d (0x106d): (0x19) If var[0x44] != (constant) 0xb5 then Goto 0x094a
 
-/ Player's target destination IS 
+/ Player's target destination IS in a dusty room, entered from the west and with 
+/ a long shelf along the east wall" (0xb5)
 
 / Print message  "Acid sprays at your eyes "
 0x0931 (0x1071): (0x05) Print message (constant) 0x10e
+
+/ Set the second word to the "blindfold" (0x48)
 0x0934 (0x1074): (0x08) Set var[0x31] = (constant) 0x48
+
+/ Get the location of the "blindfold" 
 0x0937 (0x1077): (0xa2) Set var[0x1f] = list#2[var[0x31]] (list address 0x0740)
+
+/ Branch if the player IS wearing the blindfold
+/ var[0x07] is the constant 0xff
 0x093a (0x107a): (0x13) If var[0x1f] > var[0x07] then Goto 0x0944
+
+/ Player is NOT wearing the blindfold 
+
 / Print message  "! You fall backwards "
 0x093e (0x107e): (0x05) Print message (constant) 0x110
+
+/ Kill the player
 0x0941 (0x1081): (0x00) Goto 0x12e7
+
 **************************************************************************
+
 / Print message  "but only destroys the blindfold "
 0x0944 (0x1084): (0x05) Print message (constant) 0x10f
+
+/ Remove the blindfold from the game
 0x0947 (0x1087): (0x01) Gosub 0x1488
+
+/ Branch if the player's current location is NOT "on a wide spiral ramp 
+/ which descends clockwise round an immense pit." (0x3f)
 0x094a (0x108a): (0x19) If var[0x43] != (constant) 0x3f then Goto 0x0958
+
+/ Player IS "on a wide spiral ramp which descends clockwise round 
+/ an immense pit." (0x3f)
 
 / Branch if the player cannot see (0x00)
 / var[0x0b] is the constant 0x00
@@ -3844,18 +4027,34 @@ Player IS trying to move to "at a junction..."
 
 / Perform additional location specific checks, print the location description
 / and ask "What next?" 
+
+/ Perform additional location specific checks skipping the code 
+/ that prints the location description and ask "What next?" 
 0x0955 (0x1095): (0x00) Goto 0x0149
+
+**************************************************************************
+* Check if the player is trying to move from the condemned cell 
+* to the guard room when the executioner is still alive
 **************************************************************************
 
-/ Branch if the player's target destination is NOT 
+/ Branch if the player's target destination is NOT "in the guard room. 
+/ An exit leads north" (0xba)
 0x0958 (0x1098): (0x19) If var[0x44] != (constant) 0xba then Goto 0x0963
 
-/ Player's target destination IS 
+/ Player's target destination IS "in the guard room. An exit leads north" (0xba)
 
+/ Branch if the executioner IS in the same room as the executioner (0x01 to 0x06)
+/ var[0x0b] is the constant 0x00
 0x095c (0x109c): (0x11) If var[0x2c] != var[0x0b] then Goto 0x0963
+
 / Print message  "A hooded executioner blocks the only exit "
 0x0960 (0x10a0): (0x05) Print message (constant) 0x113
+
+/ Branch if the location first supplementary message is NOT "A hooded 
+/ executioner blocks the only exit" (0x113)
 0x0963 (0x10a3): (0x19) If var[0x4c] != (constant) 0x113 then Goto 0x096d
+
+/ Print message  "A hooded executioner blocks the only exit " (0x113)
 0x0968 (0x10a8): (0x04) Print message var[0x4c]
 
 / Perform additional location specific checks skipping the code 
@@ -3928,6 +4127,7 @@ Player IS "in a small soft room between five large round fleshy pillars."
 
 / Kill the player
 0x0992 (0x10d2): (0x00) Goto 0x12e7
+
 **************************************************************************
 0x0995 (0x10d5): (0x10) If var[0x35] == var[0x0b] then Goto 0x099e
 0x0999 (0x10d9): (0x12) If var[0x35] < var[0x05] then Goto 0x0686
