@@ -692,11 +692,30 @@
 / Set the constant that represents an item removed from 
 / the game (0xe1)
 0x0020 (0x0760): (0x08) Set var[0x09] = (constant) 0xe1
+
+/ Initialise the collar colour that the player is wearing to none (0x00)
+/ var[0x0b] is the constant 0x00
 0x0023 (0x0763): (0x09) Set var[0x0a] = var[0x0b]
+
+/ Initialise the status of the iron door in the strong room to closed (0x00)
+/ var[0x0b] is the constant 0x00
 0x0026 (0x0766): (0x09) Set var[0x0c] = var[0x0b]
+
+/ Unused (maybe once part of the score as incremented by 50 when the player eats
+/ something that tastes fantastic)
+/ var[0x0b] is the constant 0x00
 0x0029 (0x0769): (0x09) Set var[0x0d] = var[0x0b]
+
+/ Initialise the status of the ants to alive (0x00)
+/ var[0x0b] is the constant 0x00
 0x002c (0x076c): (0x09) Set var[0x0e] = var[0x0b]
+
+/ Initialise the status of the orcs to "not camping "(0x00)
+/ var[0x0b] is the constant 0x00
 0x002f (0x076f): (0x09) Set var[0x0f] = var[0x0b]
+
+/ Initialise the status of the killer-willow to not holding anything (0x00)
+/ var[0x0b] is the constant 0x00
 0x0032 (0x0772): (0x09) Set var[0x10] = var[0x0b]
 
 / Initialise the status of the grotesque bloated yellow bird
@@ -721,28 +740,65 @@
 / to "in a dead-end dark room, below a black pedestal" (0xac)
 0x0041 (0x0781): (0x08) Set var[0x15] = (constant) 0xac
 
-
+/ Initialise the number of times the player has died to 0
+/ var[0x0b] is the constant 0x00
 0x0044 (0x0784): (0x09) Set var[0x16] = var[0x0b]
+
+/ Initialise the deafness counter to the player can hear (0x00)
+/ var[0x0b] is the constant 0x00
 0x0047 (0x0787): (0x09) Set var[0x17] = var[0x0b]
+
+/ Initialise the status of the dragon to not slain (0x00)
+/ var[0x0b] is the constant 0x00
 0x004a (0x078a): (0x09) Set var[0x18] = var[0x0b]
+
+/ Initialise the status of the dryad to "not appeared" (0x00)
+/ var[0x0b] is the constant 0x00
 0x004d (0x078d): (0x09) Set var[0x19] = var[0x0b]
 
 / Initialise the status of the dwarf to not following the player (0x00)
 / var[0x0b] is the constant 0x00
 0x0050 (0x0790): (0x09) Set var[0x1a] = var[0x0b]
+
+/ Initialise the dwarf treasure diving status to "not dived" (0x00)
+/ var[0x0b] is the constant 0x00
 0x0053 (0x0793): (0x09) Set var[0x1b] = var[0x0b]
+
+/ Initialise the status of the main door north of the bridge to closed (0x00)
+/ var[0x0b] is the constant 0x00
 0x0056 (0x0796): (0x09) Set var[0x1c] = var[0x0b]
+
+/ Initialise the number of turns that the player has been in the dark to 0
+/ var[0x0b] is the constant 0x00
 0x0059 (0x0799): (0x09) Set var[0x1d] = var[0x0b]
+
+/ Initialise the temporary variable used for holding object id for location lookups to 0x00
+/ var[0x0b] is the constant 0x00
 0x005c (0x079c): (0x09) Set var[0x1e] = var[0x0b]
+
+/ Initialise the temporary variable used for holding an object's location to 0x00
+/ var[0x0b] is the constant 0x00
 0x005f (0x079f): (0x09) Set var[0x1f] = var[0x0b]
+
+/ Initialise the status of the player's eyes to open (0x00)
+/ var[0x0b] is the constant 0x00
 0x0062 (0x07a2): (0x09) Set var[0x20] = var[0x0b]
+
+/ Initialise the status of the blindfold to "not being worn" (0x00)
+/ var[0x0b] is the constant 0x00
 0x0065 (0x07a5): (0x09) Set var[0x21] = var[0x0b]
 
 / Initialise the status of having met and won the dice game with
 / the Rakshasa to "not met and won" (0x00)
 / var[0x0b] is the constant 0x00
 0x0068 (0x07a8): (0x09) Set var[0x22] = var[0x0b]
+
+/ Initialise the status of the "battered silver face" to undiscovered (0x00)
+/ var[0x0b] is the constant 0x00
 0x006b (0x07ab): (0x09) Set var[0x23] = var[0x0b]
+
+/ Initialise the status of the carnivorous jelly to circling around (0x00)
+/ var[0x0b] is the constant 0x00
 0x006e (0x07ae): (0x09) Set var[0x24] = var[0x0b]
 
 / Reset the status of the cold cream to "not smeared on the player" (0x00)
