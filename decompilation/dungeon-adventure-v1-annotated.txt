@@ -921,20 +921,53 @@
 / var[0x0b] is the constant 0x00
 0x00c8 (0x0808): (0x09) Set var[0x42] = var[0x0b]
 
-/ Reset the starting location here to nowhere (0x00)
+/ Initialise the starting location here to nowhere (0x00)
 / this will be changed shortly 
 / var[0x0b] is the constant 0x00
 0x00cb (0x080b): (0x09) Set var[0x43] = var[0x0b]
+
+/ Initialise the player's target destination to nowhere (0x00)
+/ var[0x0b] is the constant 0x00
 0x00ce (0x080e): (0x09) Set var[0x44] = var[0x0b]
+
+/ Initialise the multi-purpose temporary variable to 0x00
+/ var[0x0b] is the constant 0x00
 0x00d1 (0x0811): (0x09) Set var[0x45] = var[0x0b]
+
+/ Initialise the number of turns the player has been in the monolith circle to 0x00
+/ var[0x0b] is the constant 0x00
 0x00d4 (0x0814): (0x09) Set var[0x46] = var[0x0b]
+
+/ Initialise the status of if the mirror has reflected the sleep spell to not (0x00)
+/ var[0x0b] is the constant 0x00
 0x00d7 (0x0817): (0x09) Set var[0x47] = var[0x0b]
+
+/ Initialise the status of the reward in the reward room to "no prize given" (0x00)
+/ var[0x0b] is the constant 0x00
 0x00da (0x081a): (0x09) Set var[0x48] = var[0x0b]
+
+/ Initialise the machine scanning status to "player not scanned" (0x00)
+/ var[0x0b] is the constant 0x00
 0x00dd (0x081d): (0x09) Set var[0x49] = var[0x0b]
+
+/ Initialise the status of the caterpillar to "not squeezed" (0x00
+/ var[0x0b] is the constant 0x00
 0x00e0 (0x0820): (0x09) Set var[0x4a] = var[0x0b]
+
+/ Initialise the status of the rope to "not tied to the roc's nest" (0x00)
+/ var[0x0b] is the constant 0x00
 0x00e3 (0x0823): (0x09) Set var[0x4b] = var[0x0b]
+
+/ Initialise the location's first supplementary message to nothing (0x00)
+/ var[0x0b] is the constant 0x00
 0x00e6 (0x0826): (0x09) Set var[0x4c] = var[0x0b]
+
+/ Initialise the location's second supplementary message to nothing (0x00)
+/ var[0x0b] is the constant 0x00
 0x00e9 (0x0829): (0x09) Set var[0x4d] = var[0x0b]
+
+/ Initialise the final variable for holding the location's first supplementary message to nothing (0x00)
+/ var[0x0b] is the constant 0x00
 0x00ec (0x082c): (0x09) Set var[0x4e] = var[0x0b]
 
 / Reset the number of items a player can carry to 0x00
