@@ -115,8 +115,30 @@
 / 0x97   TEETH          0xe0    in Limbo (undiscovered)
 / 0x98   GEM            0x6f    in the pit: a large pentagonal room, blackened by some past explosion
 / 0x99   KEY            0xd7    inside a large wooden box (it has no location description so it's hidden)
+/
+/ Exit flags
+/ ==========
+/
+/ When the "exits" command is called, exit flags are returned in var[0x50]
 / 
-/ 
+/ In this game they have the following definition:
+/ Bit 0 - If set, the direction can be used inversely i.e. if this is 
+/         an East entry between locations A and B then the player can go 
+/         West from B to A
+/ Bit 1 - If set, the user cannot move in that direction and the 
+/         target destination contains on of the following message ids to 
+/         display:
+/         0x4f : You are on deadly slime, slipping towards the edge of the ramp
+/         0x50 : on the ramp outside an ornate entrance. The ramp above looks dodgy
+/         0xde : You fall headlong into a deep pit...
+/         0xdf : No way, the water is full of pirahnas!
+/         0xe2 : A hollow voice intones: "This is your referee speaking. 
+/                If you continue on this road you will return safe to civilisation
+/                and the game will end. Are you sure that you want to?"
+/         0xe3 : The poppy scent overcomes you...
+/         0xe4 : The ground is too slippery!
+/ BIt 2 - Not used, always set to 0x00
+/
 / Objects
 / =======
 / 
@@ -295,13 +317,13 @@
 /        0x03 - trapped for 2 turns, "The walls at the far end clash together"
 /        0x04 - trapped for 3 turns, walls try and crush player and if not wedged the player will die, "The walls near you grind together"
 /        0x05 - bars lifted and player free after wedging the walls, "The bars lift"
+/ 0x36 - Number of remaining turns for the driftwood to burn (decrements by 1 per turn)
 /        0x00 - Not burning
 /        0x01 - Message will be printed "The burning branch is going out!"
 /        .... - Remaining turns left for the wood to burn out
 /        0x09 - Message will be printed "The wood flickers"
 /        .... - Remaining turns left for the wood to burn out
 /        0xc8 - Player is given 200 turns when initially lit (0xc8)
-/ 0x36 - Number of remaining turns for the driftwood to burn (decrements by 1 per turn)
 / 0x37 - Whether the player can see (either eyes are open/closed or blindfolded or it's dark)
 /        0x00 - eyes are closed OR it's dark with no light (cannot see)
 /        0x01 - eyes are open, not blindfolded and there is light (can see and room description will be printed)
@@ -637,6 +659,10 @@
 /     0xe5 - used when the killer-willow is holding an object
 /     0xfe - in the player's inventory
 /     0xff - being worn by the player
+/ 50. For no reason, the counter for "number of remaining turns until the crusher kills the 
+      player" variable (var[0x35]) keeps incementing if the player is moving between the 
+/     the west crusher room and east crusher room or the ramp and the east crusher room. Serves
+/     no purpose in the game - see 0x09a2
 / TODO what happens to collars when you wear a new one whilst still wearing the previous one
 
 **************************************************************************
@@ -4129,21 +4155,78 @@ Player IS "in a small soft room between five large round fleshy pillars."
 0x0992 (0x10d2): (0x00) Goto 0x12e7
 
 **************************************************************************
+* Check to see if the player is stuck in the east crusher room
+**************************************************************************
+
+/ Branch if "Number of turns that the player has been trapped in the
+/ east crusher room" is zero 
+/ var[0x0b] is the constant 0x00
 0x0995 (0x10d5): (0x10) If var[0x35] == var[0x0b] then Goto 0x099e
+
+/ Branch if the bars have lifted after being wedged (0x05) and
+/  print "You can't move in that direction\n "
+/ var[0x05] is the constant 0x05
 0x0999 (0x10d9): (0x12) If var[0x35] < var[0x05] then Goto 0x0686
+
+/ Bars lifted
+
+/ Branch if the target destination is NOT "in the east crusher room 
+/ beside an opening back to the ramp" (0xaf)
 0x099e (0x10de): (0x19) If var[0x44] != (constant) 0xaf then Goto 0x09a5
+
+/ Player IS "in the east crusher room beside an opening back to the ramp." (0xaf)
+
+/ Increment the number of turns the player has been trapped in the crusher room
+/ for no in game reason!
+/ var[0x01] is the constant 0x01
 0x09a2 (0x10e2): (0x0a) Set var[0x35] += var[0x01]
+
+/ Branch if the player is NOT in "on the ramp. A doorway bears the following 
+/ message: "To escape the dungeon, collect 9 gems and go through this door. 
+/ Leaving without the gems will cause your death". Clearly you must be in the central 
+/ dungeon of the Demon Lord!" (0x51)
 0x09a5 (0x10e5): (0x19) If var[0x43] != (constant) 0x51 then Goto 0x09c9
+
+/ Player's current location IS ": on the ramp. A doorway bears...." (0x51)
+
+/ Branch if the player's target location is NOT "in the "Exit" chamber. You seem 
+/ to have survived the Central Dungeon! There is only one way out..." (0xbf)
 0x09a9 (0x10e9): (0x19) If var[0x44] != (constant) 0xbf then Goto 0x09c9
+
+/ Player's is moving from "on the ramp. A doorway bears..." (0x51) to
+/ "in the "Exit" chamber..." (0xbf)
+
+/ Set the temporary variable to zero
+/ var[0x5d] is the constant 0x00
 0x09ad (0x10ed): (0x09) Set var[0x5d] = var[0x0b]
+
+/ Set temporary variable to the object id for the "agate" (0x69)
 0x09b0 (0x10f0): (0x08) Set var[0x1e] = (constant) 0x69
+
+/ Get teh current location of the "agate" (0x69)
 0x09b3 (0x10f3): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
+
+/ Branch if the "agate" is not in the player's inventory (0xfe)
+/ var[0x07] is the constant 0xfe
 0x09b6 (0x10f6): (0x12) If var[0x1f] < var[0x07] then Goto 0x09bd
+
+/ Increment the number of items in the player's inventory 
 0x09ba (0x10fa): (0x0a) Set var[0x5d] += var[0x01]
+
+/ Move to the next object id 
 0x09bd (0x10fd): (0x0a) Set var[0x1e] += var[0x01]
+
+/ Loop if there are still objects to check (although it doesn't check all of them
+/ e.g. the treasures)
 0x09c0 (0x1100): (0x1a) If var[0x1e] < (constant) 0x73 then Goto 0x09b3
+
+/ Branch if the player has less than 9 objects and kill the player
 0x09c4 (0x1104): (0x1a) If var[0x5d] < (constant) 0x09 then Goto 0x12e7
+
+/ Branch if the location's supplemental message is NOT "An army of orcs is 
+/ camped all around" (0xdc)
 0x09c9 (0x1109): (0x19) If var[0x4c] != (constant) 0xdc then Goto 0x09d2
+
 / Print message  "The orcs block you\n "
 0x09cd (0x110d): (0x05) Print message (constant) 0xdd
 
@@ -4152,23 +4235,71 @@ Player IS "in a small soft room between five large round fleshy pillars."
 0x09cf (0x110f): (0x00) Goto 0x0190
 
 **************************************************************************
+
+/ Branch if the number of turns that the player has had is less than 500
 0x09d2 (0x1112): (0x1a) If var[0x57] < (constant) 0x1f4 then Goto 0x09e6
+
+/ Player has had 500 or more turns
+
+/ Branch if the orcs are campig (or horn is blown and they fled)
+/ var[0x0d] is the constant 0x00
 0x09d7 (0x1117): (0x13) If var[0x0f] > var[0x0b] then Goto 0x09e6
+
+/ Branch if the player's current location IS "on an east-west road south
+/ of the river. A gigantic orc's head is carved into the cliff north of
+/ the river, its tongue forming a bridge over the waters to you. A ruined
+/ tower stands on top of the cliff" (0x14)
 0x09db (0x111b): (0x18) If var[0x44] == (constant) 0x14 then Goto 0x09e3
+
+/ Branch if the player's current location is NOT "below a tower of 
+/ polished marble" (0x1e)
 0x09df (0x111f): (0x19) If var[0x44] != (constant) 0x1e then Goto 0x09e6
+
+/ Player IS "on an east-west road south of the river." (0x0f) OR 
+/ "below a tower of polished marble" (0x1e)
+
+/ Set the status of the orcs to "Orcs are camped all around and 
+/ will block the player's movement " (0x01)
+/ var[0x01] is the constant 0x01
 0x09e3 (0x1123): (0x09) Set var[0x0f] = var[0x01]
+
+/ Branch if the exit flags indicate that the player cannot move 
+/ in that direction and that the target destination is 
+/ actually a message e.g. "No way, the water if full of piranhas" 
+/ var[0x02] is the constant 0x02
 0x09e6 (0x1126): (0x12) If var[0x50] < var[0x02] then Goto 0x09f3
+
+/ Second bit is set (0x02) so player can't move that way but 
+/ display the message
+
+/ Set the temporary variable to the location message id offset 500
 0x09ea (0x112a): (0x08) Set var[0x5d] = (constant) 0x1f4
+
+/ Add the target location on to this 
 0x09ee (0x112e): (0x0a) Set var[0x5d] += var[0x44]
+
+/ Print the target location description
 0x09f1 (0x1131): (0x04) Print message var[0x5d]
+
+/ If the player's target destination is "You fall headlong into a deep pit..." (0xde)
+/ kill the player
 0x09f3 (0x1133): (0x18) If var[0x44] == (constant) 0xde then Goto 0x12e7
+
+/ If the player's target destination is "The poppy scent overcomes you..." (0xe3)
+/ kill the player
 0x09f8 (0x1138): (0x18) If var[0x44] == (constant) 0xe3 then Goto 0x12e7
+
+/ If the player's target destination is "You are on deadly slime, slipping 
+/ towards the edge of the ramp" (0x4f) kill the player
 0x09fd (0x113d): (0x18) If var[0x44] == (constant) 0x4f then Goto 0x12e7
 
-/ TODO Branch 
-/ Perform additional location specific checks, print the location description
-/ and ask "What next?" 
+/ Player was not killed, just warned
+
+/ Perform additional location specific checks, print the existing 
+/ location description and ask "What next?" (player is NOT moving)
 0x0a02 (0x1142): (0x13) If var[0x50] > var[0x01] then Goto 0x0149
+
+/ Set the player's current location to the target destination (player IS moving)
 0x0a07 (0x1147): (0x09) Set var[0x43] = var[0x44]
 
 / Perform additional location specific checks, print the location description
