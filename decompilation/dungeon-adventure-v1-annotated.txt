@@ -16,6 +16,7 @@
 / Object text can be found by looking in the dungeon-adventure-v1-descs.txt file
 / Object descriptions (when in inventory) are 0xe7  + object id
 / Object descriptions (when in location)  are 0x141 + object id 
+/ Object descriptions (when examined)     are 0x169 + object id but only for treasues (0x73 to 0x8b)
 /
 / Lists
 / =====
@@ -5435,25 +5436,32 @@ Player IS "in a small soft room between five large round fleshy pillars."
 * Command: "blow" or "play"
 **************************************************************************
 
+/ Check to see if the player has the object 
 0x0dcc (0x150c): (0x01) Gosub 0x1559
 
-/ TODO Branch 
-/ Perform additional location specific checks skipping the code 
+/ Branch if the player does NOT have the object and 
+/ perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0dcf (0x150f): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
 
+/ Branch if the second word is NOT the "stick" / "whistle" (0x75)
 0x0dd4 (0x1514): (0x19) If var[0x31] != (constant) 0x75 then Goto 0x0dec
+
 / Print message  "The stick emits a reedy whistle "
 0x0dd8 (0x1518): (0x05) Print message (constant) 0x65
 
-/ TODO Branch 
-/ Perform additional location specific checks skipping the code 
-/ that prints the location description and ask "What next?" 
+/ Branch if the player's current location is NOT "on a narrow 
+/ north-south bridge" (0x2a) and perform additional location 
+/ specific checks skipping the code that prints the location
+/ description and ask "What next?" 
 0x0dda (0x151a): (0x19) If var[0x43] != (constant) 0x2a then Goto 0x0190
 
-/ TODO Branch 
-/ Perform additional location specific checks skipping the code 
-/ that prints the location description and ask "What next?" 
+/ Player IS "on a narrow north-south bridge" (0x2a)
+
+/ Branch if the status of the "main door north of the bridge" is 
+/ already open (0x01) and perform additional location specific checks 
+/ skipping the code that prints the location description and ask "What next?" 
+/ var[0x0b] is the constant 0x00
 0x0ddf (0x151f): (0x11) If var[0x1c] != var[0x0b] then Goto 0x0190
 
 / Print message  "and the door swings open "
@@ -5463,18 +5471,31 @@ Player IS "in a small soft room between five large round fleshy pillars."
 / Perform additional location specific checks, print the location description
 / and ask "What next?" 
 0x0de9 (0x1529): (0x00) Goto 0x0149
+
 **************************************************************************
+
+/ Player is NOT blowing the whistle 
+
+/ Branch if the second word is NOT the "horn" (0x7c) and print
+/ "You can't do that"
 0x0dec (0x152c): (0x19) If var[0x31] != (constant) 0x7c then Goto 0x15e0
+
 / Print message  "The sound reverberates from the hills "
 0x0df1 (0x1531): (0x05) Print message (constant) 0xe4
 
-/ TODO Branch 
-/ Perform additional location specific checks skipping the code 
-/ that prints the location description and ask "What next?" 
+/ Branch if the location supplementary message is NOT "An army of orcs 
+/ is camped all around" and perform additional location specific checks 
+/ skipping the code that prints the location description and ask "What next?" 
 0x0df3 (0x1533): (0x19) If var[0x4c] != (constant) 0xdc then Goto 0x0190
+
+/ Orcs are camped all around
 
 / Print message  "and the orcs flee! "
 0x0df8 (0x1538): (0x05) Print message (constant) 0xe5
+
+/ Set the status of the orcs to "horn blown at the army camp and orcs
+/ fled or killed by the skeleton warriors" (0x06)
+/ var[0x06] is the constant 0x06
 0x0dfa (0x153a): (0x09) Set var[0x0f] = var[0x06]
 
 / Perform additional location specific checks, print the location description
@@ -5485,13 +5506,24 @@ Player IS "in a small soft room between five large round fleshy pillars."
 * Command: "give"
 **************************************************************************
 
+/ Check to see if the player has the object 
 0x0e00 (0x1540): (0x01) Gosub 0x1559
 
-/ TODO Branch
-/ Perform additional location specific checks skipping the code 
+/ Branch if the player does NOT have the object and 
+/ perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0e03 (0x1543): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
+
+/ Player has the object 
+
+/ Branch if the location first supplementary message IS "A troll blocks 
+/ the bridge, palm outstretched for payment" and process giving an object 
+/ to the troll
 0x0e08 (0x1548): (0x18) If var[0x4c] == (constant) 0x107 then Goto 0x0b25
+
+/ Player is NOT giving to the troll
+
+/ Print "You can't do that"
 0x0e0e (0x154e): (0x00) Goto 0x15f8
 
 **************************************************************************
@@ -5698,16 +5730,26 @@ Player IS "in a small soft room between five large round fleshy pillars."
 / Print message  "It is enchanted!\n "
 0x0ea5 (0x15e5): (0x05) Print message (constant) 0x4f
 
-/ Branch if the second word 
+/ Branch if the second word is NOT a treasure (0x73 to 0x8b)
 0x0ea7 (0x15e7): (0x1a) If var[0x31] < (constant) 0x73 then Goto 0x0190
 0x0eac (0x15ec): (0x1b) If var[0x31] > (constant) 0x8b then Goto 0x0190
+
+/ Object is a treasure
+
+/ Set the temporary variable to the message id offset for the treasure
+/ descriptions (0x169)
 0x0eb1 (0x15f1): (0x08) Set var[0x5d] = (constant) 0x169
+
+/ Add the object id to the offset
 0x0eb5 (0x15f5): (0x0a) Set var[0x5d] += var[0x31]
+
+/ Print the treasure description
 0x0eb8 (0x15f8): (0x04) Print message var[0x5d]
 
 / Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0eba (0x15fa): (0x00) Goto 0x0190
+
 **************************************************************************
 
 / Perform additional location specific checks skipping the code 
