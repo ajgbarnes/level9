@@ -231,7 +231,7 @@
 /        0x00 - Alive and lieing on the golden bed
 /        0x01 - Slain
 / 0x19 - Status of the dryad
-/        0x00 - player has not tried to chop the tree and dryad is still inside
+/        0x00 - player has not tried to chop the tree and dryad is still inside or dead
 /        0x01 - dryad has sprung from the tree after the player tried to chop it down
 / 0x1a - Status of the dwarf 
 /        0x00 - not following the player
@@ -6455,19 +6455,33 @@ Player IS "in a small soft room between five large round fleshy pillars."
 0x10dd (0x181d): (0x00) Goto 0x0190
 
 **************************************************************************
-*
+* Process the player hitting the tree a second time and killng it
 **************************************************************************
 
-/ Increment the number of objects that the tree is holding
+/ Increment the number of objects that the tree is holding - it's still
+/ holding 6 items but this status is used to determine if the dryad will 
+/ appear (0x07) and offer a gift or if the player hits the tree again 
+/ and kills it (0x08)
 / var[0x01] is the constant 0x01
 0x10e0 (0x1820): (0x0a) Set var[0x10] += var[0x01]
 
-
+/ Branch if the player has been hit by the player and print that the dryad 
+/ appears and offers the player a gift
 0x10e3 (0x1823): (0x18) If var[0x10] == (constant) 0x07 then Goto 0x10f6
+
+/ Branch if the player has NOT hit the tree for second time (0x08)
 0x10e7 (0x1827): (0x19) If var[0x10] != (constant) 0x08 then Goto 0x10db
+
+/ Player hit the tree a second time
+
+/ Move all the objects that the tree is holding to the player's current location
 0x10eb (0x182b): (0x01) Gosub 0x1445
+
 / Print message  "The willow drops everything and wraps branches round its trunk "
 0x10ee (0x182e): (0x05) Print message (constant) 0x73
+
+/ Set the status of the dryad to "dead" (0x00)
+/ var[0x0b] is the constant 0x00
 0x10f0 (0x1830): (0x09) Set var[0x19] = var[0x0b]
 
 / Perform additional location specific checks, print the location description
