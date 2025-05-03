@@ -327,8 +327,10 @@
 / 0x37 - Whether the player can see (either eyes are open/closed or blindfolded or it's dark)
 /        0x00 - eyes are closed OR it's dark with no light (cannot see)
 /        0x01 - eyes are open, not blindfolded and there is light (can see and room description will be printed)
-
-/
+/ 0x38 - Base message id to add the object id to in order to get the location or inventory description
+/        0x00  - don't print the object descriptions
+/        0xe7  - print the location description of the object
+/        0x141 - print the inventory description of the object
 / 0x39 - Counter for how long the player has been staring at the myriad of moving images around an immense pit
 /        0x00 - not at all
 /        .... - additional turns / commands (increments by 2 when the location is printed, by 1 if not)
@@ -660,10 +662,14 @@
 /     0xfe - in the player's inventory
 /     0xff - being worn by the player
 / 50. For no reason, the counter for "number of remaining turns until the crusher kills the 
-      player" variable (var[0x35]) keeps incementing if the player is moving between the 
+/      player" variable (var[0x35]) keeps incementing if the player is moving between the 
 /     the west crusher room and east crusher room or the ramp and the east crusher room. Serves
 /     no purpose in the game - see 0x09a2
-/ TODO what happens to collars when you wear a new one whilst still wearing the previous one
+/ 51. BUG: Seems like the intended behaviour of button 5 on the throne in the "ornate throne room" was to return
+/     the player to the "ornate throne room" as the logic only does something after button 4 has been pressed 
+/     and the player has been risen "through a trapdoor in the ceiling" (0x68)  to the "odd little room" (0x69)
+/     however the A-code mistakenly transports the player to the same room (0x69) - see 0xfc8
+/ TODO what happens to collars when you wear a new one whilst still wearing the previous one. 
 
 **************************************************************************
 * A-code entry point
@@ -907,7 +913,7 @@
 / var[0x0b] is the constant 0x00
 0x00a7 (0x07e7): (0x09) Set var[0x37] = var[0x0b]
 
-/ Initialise the TODO
+/ Initialise the base message id for object descriptions to zero 
 / var[0x0b] is the constant 0x00
 0x00aa (0x07ea): (0x09) Set var[0x38] = var[0x0b]
 
@@ -5923,6 +5929,9 @@ Player IS "in a small soft room between five large round fleshy pillars."
 0x0f60 (0x16a0): (0x00) Goto 0x0149
 
 **************************************************************************
+* Process the player open the iron door's bolt
+**************************************************************************
+
 
 / Branch if the player's current location is NOT "in the strong room." (0xa6)
 0x0f63 (0x16a3): (0x19) If var[0x43] != (constant) 0xa6 then Goto 0x1619
@@ -5944,6 +5953,7 @@ Player IS "in a small soft room between five large round fleshy pillars."
 / Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0f71 (0x16b1): (0x00) Goto 0x0190
+
 **************************************************************************
 
 / Set the status of the door to "open and unbolted"
@@ -5956,6 +5966,7 @@ Player IS "in a small soft room between five large round fleshy pillars."
 / Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0f79 (0x16b9): (0x00) Goto 0x0190
+
 **************************************************************************
 
 / Branch if the player's current location IS "in a large store room." (0xca)
@@ -6047,22 +6058,46 @@ Player IS "in a small soft room between five large round fleshy pillars."
 
 / Branch if the player is NOT "in an odd little room, below a granite throne" (0x69)
 
+/ BUG - should take the player to the "throne room" (0x68)
 / Set the target destination to "in an odd little room, below a granite throne" (0x69)
 0x0fc8 (0x1708): (0x08) Set var[0x44] = (constant) 0x69
 
 / TODO
+/ Reset the base message id for 
 0x0fcb (0x170b): (0x09) Set var[0x38] = var[0x0b]
 0x0fce (0x170e): (0x01) Gosub 0x156e
+
+
+/ and print "Nothing happens"
 0x0fd1 (0x1711): (0x10) If var[0x3c] == var[0x0b] then Goto 0x15f0
+
+/ and print "Nothing happens"
 0x0fd6 (0x1716): (0x10) If var[0x3c] == var[0x02] then Goto 0x15f0
+
+/ and print "Nothing happens"
 0x0fdb (0x171b): (0x10) If var[0x3c] == var[0x04] then Goto 0x15f0
+
+/ Reset the status of the throne to "not risen through a trapdoor in the ceiling (0x00)
+/ var[0x0b] is the constant 0x00
 0x0fe0 (0x1720): (0x09) Set var[0x59] = var[0x0b]
 
 / Branch if the player is pressing "nine" (0xd1)
 0x0fe3 (0x1723): (0x19) If var[0x31] != (constant) 0xd1 then Goto 0x0fea
 
-/ 
+/ Set the player's current location to "in the pit: a large pentagonal room, 
+/ blackened by some past explosion and with a wide crack in the east wall" (0x6f)
 0x0fe7 (0x1727): (0x08) Set var[0x43] = (constant) 0x6f
+
+/ Print the message associated with the button (message id matches dictionary id for the button number):
+/ Button 1 - 0xc9 : A pit opens in the floor!
+/ Button 2 - 0xca : The pit closes
+/ Button 3 - 0xcb : The room fills briefly with light
+/ Button 4 - 0xcc : The entire throne rises through a trapdoor in the ceiling. It comes to rest in an odd little room
+/ Button 5 - 0xcd : The throne sinks back down
+/ Button 6 - 0xce : Alarms sound
+/ Button 7 - 0xcf : Fire jets cross the floor!
+/ Button 8 - 0xd0 : "Master: I beg to report that all internal eyes are dead and enemies are in the caves. Also, thousands of enemy orcs are advancing upon us."
+/ Button 9 - 0xd1 : You are somewhere else!
 0x0fea (0x172a): (0x04) Print message var[0x31]
 
 / Perform additional location specific checks skipping the code 
@@ -6383,12 +6418,26 @@ Player IS "in a small soft room between five large round fleshy pillars."
 / Print message  "Please answer YES or NO\n "
 0x110b (0x184b): (0x05) Print message (constant) 0x09
 0x110d (0x184d): (0x00) Goto 0x10fb
+
 **************************************************************************
+* Player accepted the dryad's gift
+**************************************************************************
+
 / Print message  "She gives you a carving and makes the tree drop everything "
 0x110f (0x184f): (0x05) Print message (constant) 0x4d
+
+/ Set the temporary variable to the object id of the carving (0x5a)
 0x1111 (0x1851): (0x08) Set var[0x1e] = (constant) 0x5a
+
+/ Set the carving's current location to the player's inventory (0xfe)
+/ var[0x07] is the constant 0xfe
 0x1114 (0x1854): (0xe2) Set list#2[var[0x1e]] = var[0x07] (list address 0x0740)
+
+/ Increment the number of objects in the player's inventory
 0x1117 (0x1857): (0x0a) Set var[0x3b] += var[0x01]
+
+/ Move all the objects that the killer-willow is holding and put them 
+/ in the player's current location
 0x111a (0x185a): (0x01) Gosub 0x1445
 
 / Perform additional location specific checks skipping the code 
@@ -8006,6 +8055,7 @@ Player IS "in a small soft room between five large round fleshy pillars."
 **************************************************************************
 * Print all the objects in the location passed in var[0x44]
 * Either a location id, inventory (0xfe) or wearing (0xff)
+* or nothing (0x00) - if nothing don't print the objects
 **************************************************************************
 
 / Set the temporary variable to the first object id "axe" (0x46)
@@ -8104,6 +8154,7 @@ Player IS "in a small soft room between five large round fleshy pillars."
 / Set the suffix to "which shines brightly" (0xbf)
 0x15b1 (0x1cf1): (0x08) Set var[0x63] = (constant) 0xbf
 
+/ TODO
 / 
 0x15b4 (0x1cf4): (0x0a) Set var[0x3c] += var[0x01]
 
