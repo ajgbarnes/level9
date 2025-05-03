@@ -673,7 +673,7 @@
 /     and the player has been risen "through a trapdoor in the ceiling" (0x68)  to the "odd little room" (0x69)
 /     however the A-code mistakenly transports the player to the same room (0x69) - see 0xfc8
 / 52. The sword cannot be dropped until the player has slain the "dragin" (dragon)
-/ TODO what happens to collars when you wear a new one whilst still wearing the previous one. 
+/ 53. Wearing a new colour collar drops the old one in the player's current location 
 
 **************************************************************************
 * A-code entry point
