@@ -191,6 +191,8 @@
 /        0x04 - tree is holding four items
 /        0x05 - tree is holding five items
 /        0x06 - tree is holding six items
+/        0x07 - player has attacked the tree once and the dryad has appeared
+/        0x08 - player has attacked the tree twice and the dryad has appeared
 / 0x11 - Status of the grotesque yellow bird 
 /        0x00 - not scared away
 /        0x01 - scared away so the player can enter the nest and retrieve the large jade egg
@@ -5808,14 +5810,26 @@ Player IS "in a small soft room between five large round fleshy pillars."
 * Command: "empty" or "pour"
 **************************************************************************
 
+/ Check that the object is a proper object
 0x0ef0 (0x1630): (0x01) Gosub 0x1559
 
-/ TODO Branch
-/ Perform additional location specific checks skipping the code 
+/ Branch if the object is not a proper object and 
+/ perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0ef3 (0x1633): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
+
+/ Branch if the object in the second word is NOT the "pot" (0x52)
+/ and print "You can't do that"
 0x0ef8 (0x1638): (0x19) If var[0x31] != (constant) 0x52 then Goto 0x15e0
+
+/ Object IS the "pot" 
+
+/ Branch if the location of the slime is NOT in the player's inventory (0xfe)
+/ which would  means it's in the "pot" 
+/ var[0x07] is the constant 0xfe
 0x0efd (0x163d): (0x11) If var[0x40] != var[0x07] then Goto 0x1609
+
+/ Slime IS in the pot
 
 / Print message  "The slime is too sticky! "
 0x0f02 (0x1642): (0x05) Print message (constant) 0xa1
@@ -5830,7 +5844,12 @@ Player IS "in a small soft room between five large round fleshy pillars."
 
 / Print message  "You clumsily smear cold cream all over yourself "
 0x0f07 (0x1647): (0x05) Print message (constant) 0xf0
+
+/ Remove the cold cream from the game
 0x0f09 (0x1649): (0x01) Gosub 0x1488
+
+/ Set the status of the "cold cream" to "smeared on player" (0x01)
+/ var[0x01] is the constant 0x01
 0x0f0c (0x164c): (0x09) Set var[0x25] = var[0x01]
 
 / Perform additional location specific checks skipping the code 
@@ -5932,7 +5951,6 @@ Player IS "in a small soft room between five large round fleshy pillars."
 **************************************************************************
 * Process the player open the iron door's bolt
 **************************************************************************
-
 
 / Branch if the player's current location is NOT "in the strong room." (0xa6)
 0x0f63 (0x16a3): (0x19) If var[0x43] != (constant) 0xa6 then Goto 0x1619
@@ -6067,7 +6085,6 @@ Player IS "in a small soft room between five large round fleshy pillars."
 / Reset the base message id for 
 0x0fcb (0x170b): (0x09) Set var[0x38] = var[0x0b]
 0x0fce (0x170e): (0x01) Gosub 0x156e
-
 
 / and print "Nothing happens"
 0x0fd1 (0x1711): (0x10) If var[0x3c] == var[0x0b] then Goto 0x15f0
@@ -7365,7 +7382,7 @@ Player IS "in a small soft room between five large round fleshy pillars."
 / Print message  "but fades rapidly.. You are completely dead "
 0x133a (0x1a7a): (0x05) Print message (constant) 0x14
 
-/ TODO
+/ Calculate and print the player's score
 0x133c (0x1a7c): (0x00) Goto 0x135c
 
 **************************************************************************
@@ -7874,7 +7891,8 @@ Player IS "in a small soft room between five large round fleshy pillars."
 
 / Two giants are asleep below
 
-/ Print message  "It hits one giant, waking him. Seeing no other source for the attack, he attacks the other and they rush off, fighting "
+/ Print message  "It hits one giant, waking him. Seeing no other source for
+/ the attack, he attacks the other and they rush off, fighting "
 0x14b9 (0x1bf9): (0x05) Print message (constant) 0x46
 
 / Set the status of the two evil giants to "fought each other and rushed off" (0x01)
@@ -7997,8 +8015,8 @@ Player IS "in a small soft room between five large round fleshy pillars."
 / 0x8f : GREEN
 / 0x90 : BLUE
 / 0x91 : VIOLET
-/ 0x92 : INDIGO
-/ 0x93 : SILVER
+/ 0x92 : SILVER
+/ 0x93 : MITHRIL
 0x1502 (0x1c42): (0x1a) If var[0x31] < (constant) 0x8c then Goto 0x1514
 0x1506 (0x1c46): (0x1b) If var[0x31] > (constant) 0x93 then Goto 0x1514
 
@@ -8135,8 +8153,6 @@ Player IS "in a small soft room between five large round fleshy pillars."
 * Check that the object is "pickupable" and in the player's inventory or 
 * being worn
 **************************************************************************
-
-/ TODO also called by eat etc... check the commentary wording here
 
 / Branch if the object in the second word is a pickupable
 0x1559 (0x1c99): (0x1a) If var[0x31] < (constant) 0x9b then Goto 0x1561
