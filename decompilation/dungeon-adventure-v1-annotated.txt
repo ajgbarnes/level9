@@ -6370,6 +6370,7 @@ Player IS "in a small soft room between five large round fleshy pillars."
 / Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x109a (0x17da): (0x00) Goto 0x0190
+
 **************************************************************************
 
 / Print message  "The sword slays the dragon and they fade away, leaving
@@ -7588,8 +7589,14 @@ Player IS "in a small soft room between five large round fleshy pillars."
 0x13e4 (0x1b24): (0x00) Goto 0x0190
 
 **************************************************************************
+* Process the player opening the ornate box with a lid
+**************************************************************************
 
-/ Check to see if the TODO
+
+/ BUG? This is a redundant check as the A-code already knows it's the 
+/ gem when it branches to this 
+/ Check to see if the item in the second word is NOT an NPC, print 
+/ "Don't be silly" if it is
 0x13e7 (0x1b27): (0x01) Gosub 0x15c5
 
 / Branch if the player was told "Don't be silly" and
@@ -7598,10 +7605,18 @@ Player IS "in a small soft room between five large round fleshy pillars."
 0x13ea (0x1b2a): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0149
 
 
+/ Branch if the box HAS already been immersed in water and the snake killed (0x01)
+/ var[0x0b] is the constant 0x00
 0x13ef (0x1b2f): (0x13) If var[0x5f] > var[0x0b] then Goto 0x13f9
+
+/ Box has NOT been immersed (0x00)
+
 / Print message  "A snake leaps out and strikes! "
 0x13f3 (0x1b33): (0x05) Print message (constant) 0x12c
+
+/ Kill the player 
 0x13f6 (0x1b36): (0x00) Goto 0x12e7
+
 **************************************************************************
 
 / Set the temporary variable to the object id for the "opal" (0x6d)
