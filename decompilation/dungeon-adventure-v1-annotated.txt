@@ -4872,11 +4872,11 @@ Player IS "in a small soft room between five large round fleshy pillars."
 / north-south passage, illuminated by a jet of flame from the floor." (0xcc)
 / OR it's the driftwood
 
-/ Check if the 
+/ Check if the player has the object
 0x0c2b (0x136b): (0x01) Gosub 0x15c5
 
-/ TODO Branch 
-/ Perform additional location specific checks skipping the code 
+/ Branch if the player does NOT have the object and
+/ perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0c2e (0x136e): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
 
