@@ -5069,9 +5069,23 @@ Player IS "in a small soft room between five large round fleshy pillars."
 
 / Call the "draw bolt" routine
 0x0cc9 (0x1409): (0x00) Goto 0x0f12
+
 **************************************************************************
+
+/ Branch if the player's current location IS "on a narrow north-south bridge" (0x2a)
+/ and print "You can't do that"
 0x0ccc (0x140c): (0x18) If var[0x43] == (constant) 0x2a then Goto 0x15e0
+
+/ Player is NOT "on a narrow north-south bridge" (0x2a)
+
+/ Branch if the player's current location IS " a junction in a steeply 
+/ sloping u-shaped passage which leads northeast and northwest. Three round rocks
+/ protrude beside an opening to the east" (0x77)
+/ and print "You can't do that"
 0x0cd1 (0x1411): (0x18) If var[0x43] == (constant) 0x77 then Goto 0x15e0
+
+/ Player it NOT at either (0x2a) or (0x77)
+
 / Print message  "There's nothing worth opening "
 0x0cd6 (0x1416): (0x05) Print message (constant) 0x64
 
