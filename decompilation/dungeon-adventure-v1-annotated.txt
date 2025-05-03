@@ -673,7 +673,8 @@
 /     and the player has been risen "through a trapdoor in the ceiling" (0x68)  to the "odd little room" (0x69)
 /     however the A-code mistakenly transports the player to the same room (0x69) - see 0xfc8
 / 52. The sword cannot be dropped until the player has slain the "dragin" (dragon)
-/ 53. Wearing a new colour collar drops the old one in the player's current location 
+/ 53.  Wearing a new colour collar drops the old one in the player's current location 
+/ 54.  Collar is "dropped" when wearing a new colour even if it's in the player's inventory rather than being worn
 
 **************************************************************************
 * A-code entry point
@@ -4572,7 +4573,6 @@ Player IS "in a small soft room between five large round fleshy pillars."
 * Command: "hurl" or "throw"
 **************************************************************************
 
-
 **************************************************************************
 * Process the player throwing objects at killer-willow
 **************************************************************************
@@ -4770,6 +4770,8 @@ Player IS "in a small soft room between five large round fleshy pillars."
 0x0bba (0x12fa): (0x00) Goto 0x15e0
 
 **************************************************************************
+* Process the player wearing the belt
+**************************************************************************
 
 / Player is wearing the good strong belt so increase the maximum inventory
 / items that they can carry to 0x0a (10)
@@ -4778,15 +4780,44 @@ Player IS "in a small soft room between five large round fleshy pillars."
 / Print message  "You feel much stronger! "
 0x0bc0 (0x1300): (0x05) Print message (constant) 0x60
 
+/ "Remove the item from the game" - will be set to out of game (0xe2)
+/ and reduce the inventory count by 1 
 0x0bc2 (0x1302): (0x01) Gosub 0x1488
+
+/ Set the current location of the belt to "being worn" (0xff)
+/ var[0x08] is the constant 0xff
 0x0bc5 (0x1305): (0xe2) Set list#2[var[0x31]] = var[0x08] (list address 0x0740)
+
+/ Add 1 to the number of items the player is wearing 
+/ var[0x01] is the constant 0x01
 0x0bc8 (0x1308): (0x0a) Set var[0x3e] += var[0x01]
+
+**************************************************************************
+* Process the player wearing the blindfold 
+**************************************************************************
+
+/ Branch if the second wrod is NOT the "blindfold" (0x48)
 0x0bcb (0x130b): (0x19) If var[0x31] != (constant) 0x48 then Goto 0x0bd2
+
+/ Second word IS the blindfold
+
+/ Set the status of the blindfold to "being worn" (0x01)
+/ var[0x01] is the constant 0x01
 0x0bcf (0x130f): (0x09) Set var[0x21] = var[0x01]
+
+/ Branch if the second word is NOT the "executioner's hood" (0x95)
 0x0bd2 (0x1312): (0x19) If var[0x31] != (constant) 0x95 then Goto 0x0bdc
+
+**************************************************************************
+* Process the player wearing the executioner's hood
+**************************************************************************
+
 / Print message  "Now YOU can take the executioner's place! "
 0x0bd6 (0x1316): (0x05) Print message (constant) 0x118
+
+/ Print the player's score and ask if they want to play again
 0x0bd9 (0x1319): (0x00) Goto 0x135c
+
 **************************************************************************
 
 / Perform additional location specific checks skipping the code 
@@ -4794,13 +4825,35 @@ Player IS "in a small soft room between five large round fleshy pillars."
 0x0bdc (0x131c): (0x00) Goto 0x0190
 
 **************************************************************************
+* Process the player wearing a collar 
+**************************************************************************
+
+/ Set the temporary variable to the object id for the "red collar" (0x8c)
+/ (going to loop through all the collars)
 0x0bdf (0x131f): (0x08) Set var[0x1e] = (constant) 0x8c
+
+/ Get the current location of the collar
 0x0be2 (0x1322): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
+
+/ Branch if the collar is NOT in the player's inventory (0xfe) or being worn (0xff)
+/ var[0x07] is the constant 0xfe
 0x0be5 (0x1325): (0x12) If var[0x1f] < var[0x07] then Goto 0x0bec
+
+/ Existing collar IS in the player's inventory or being worn 
+
+/ Set the location of the collar to the player's current location 
 0x0be9 (0x1329): (0xe2) Set list#2[var[0x1e]] = var[0x43] (list address 0x0740)
+
+/ Move to the next collar 
 0x0bec (0x132c): (0x0a) Set var[0x1e] += var[0x01]
+
+/ Loop around if there are more collars to process 
 0x0bef (0x132f): (0x1a) If var[0x1e] < (constant) 0x94 then Goto 0x0be2
+
+/ Set the currently worn collar to the colour in the second word 
 0x0bf3 (0x1333): (0x09) Set var[0x0a] = var[0x31]
+
+/ Set the status of the collar to being worn (0xff)
 0x0bf6 (0x1336): (0x00) Goto 0x0bc2
 **************************************************************************
 
