@@ -669,6 +669,7 @@
 /     the player to the "ornate throne room" as the logic only does something after button 4 has been pressed 
 /     and the player has been risen "through a trapdoor in the ceiling" (0x68)  to the "odd little room" (0x69)
 /     however the A-code mistakenly transports the player to the same room (0x69) - see 0xfc8
+/ 52. The sword cannot be dropped until the player has slain the "dragin" (dragon)
 / TODO what happens to collars when you wear a new one whilst still wearing the previous one. 
 
 **************************************************************************
@@ -6341,36 +6342,86 @@ Player IS "in a small soft room between five large round fleshy pillars."
 * Command: "attack", "kick", "fight", "kill", "chop", "hit" or "smash"
 **************************************************************************
 
+/ Branch if the second word is the "gem" (0x98) and process the player hitting
+/ the gem
 0x1085 (0x17c5): (0x18) If var[0x31] == (constant) 0x98 then Goto 0x1180
+
+/ Set the temporary variable to the "sword" (0x81)
 0x108a (0x17ca): (0x08) Set var[0x1e] = (constant) 0x81
+
+/ Get the current location of the sword" (0x81)
 0x108d (0x17cd): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
+
+/ Branch if the sword is NOT in the player's inventory (0xfe)
+/ var[0x07] is the constant 0xfe
 0x1090 (0x17d0): (0x11) If var[0x1f] != var[0x07] then Goto 0x10ba
+
+/ Player HAS the sword
+
+/ Branch if the second word IS the "dragon" (0x9f)
 0x1094 (0x17d4): (0x18) If var[0x31] == (constant) 0x9f then Goto 0x109d
-/ Print message  ""Sorry!", says your sword, "Can't let you do that. It's against the rules for me to fight anything but dragins!" "
+
+/ Player is attempting to hit another NPC other than the dragon with the sword
+
+/ Print message  ""Sorry!", says your sword, "Can't let you do that.
+/ It's against the rules for me to fight anything but dragins!" "
 0x1098 (0x17d8): (0x05) Print message (constant) 0x3b
 
 / Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x109a (0x17da): (0x00) Goto 0x0190
 **************************************************************************
-/ Print message  "The sword slays the dragon and they fade away, leaving the dragon's teeth and its golden bed "
+
+/ Print message  "The sword slays the dragon and they fade away, leaving
+/ the dragon's teeth and its golden bed "
 0x109d (0x17dd): (0x05) Print message (constant) 0x6e
+
+/ Set the status of the dragon to slain (0x01)
+/ var[0x01] is the constant 0x01
 0x109f (0x17df): (0x09) Set var[0x18] = var[0x01]
+
+/ Set the second word to the sword (set earlier in var[0x1e])
 0x10a2 (0x17e2): (0x09) Set var[0x31] = var[0x1e]
+
+/ Remove the sword from the game
 0x10a5 (0x17e5): (0x01) Gosub 0x1488
+
+/ BUG? Redundant as it's already set to 0x7d at this point
+/ Set the target destanation to "in the upper chamber, warmed by 
+/ a current of rising air." (0x7d)
 0x10a8 (0x17e8): (0x08) Set var[0x44] = (constant) 0x7d
+
+/ Set the temporary variable to the object id for the "teeth" (0x97)
 0x10ab (0x17eb): (0x08) Set var[0x1f] = (constant) 0x97
+
+/ Set the location of the "teeth" to the  "in the upper chamber, warmed by 
+/ a current of rising air." (0x7d)
 0x10ae (0x17ee): (0xe2) Set list#2[var[0x1f]] = var[0x44] (list address 0x0740)
+
+/ Set the temporary variable to the object id for the "golden bed" (0x78)
 0x10b1 (0x17f1): (0x08) Set var[0x1f] = (constant) 0x78
+
+/ Set the location of the "golden bed" to the  "in the upper chamber, warmed by 
+/ a current of rising air." (0x7d)
 0x10b4 (0x17f4): (0xe2) Set list#2[var[0x1f]] = var[0x44] (list address 0x0740)
 
 / Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x10b7 (0x17f7): (0x00) Goto 0x0190
+
 **************************************************************************
+
+/ Set the temporary variable to the "sword" (0x46)
 0x10ba (0x17fa): (0x08) Set var[0x1e] = (constant) 0x46
+
+/ Get the current location of the "sword" 
 0x10bd (0x17fd): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
+
+/ Branch if the sword IS in the player's inventory (0xfe)
+/ var[0x07] is the constant 0xfe
 0x10c0 (0x1800): (0x10) If var[0x1f] == var[0x07] then Goto 0x10c9
+
+/ Player does NOT have the sword
 
 / Print message  "You've no weapon "
 0x10c4 (0x1804): (0x05) Print message (constant) 0x71
@@ -6378,11 +6429,23 @@ Player IS "in a small soft room between five large round fleshy pillars."
 / Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x10c6 (0x1806): (0x00) Goto 0x0190
+
 **************************************************************************
+
+/ Branch if the second word is NOT the tree (0xb6)
 0x10c9 (0x1809): (0x19) If var[0x31] != (constant) 0xb6 then Goto 0x1120
+
+/ Second word IS the tree
+
+/ Branch if the player's current location IS "under the killer-willow tree" (0x33)
 0x10cd (0x180d): (0x18) If var[0x43] == (constant) 0x33 then Goto 0x10e0
+
+/ Branch if the player is NOT in a forest location (0x10 to 0x1c)
+/ and print "Don't be silly!" 
 0x10d1 (0x1811): (0x1a) If var[0x43] < (constant) 0x10 then Goto 0x1609
 0x10d6 (0x1816): (0x1b) If var[0x43] > (constant) 0x1c then Goto 0x1609
+
+/ Player IS in a forest location
 
 / Print message  "You hack at a branch, blunting your axe "
 0x10db (0x181b): (0x05) Print message (constant) 0x3a
@@ -6390,8 +6453,16 @@ Player IS "in a small soft room between five large round fleshy pillars."
 / Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x10dd (0x181d): (0x00) Goto 0x0190
+
 **************************************************************************
+*
+**************************************************************************
+
+/ Increment the number of objects that the tree is holding
+/ var[0x01] is the constant 0x01
 0x10e0 (0x1820): (0x0a) Set var[0x10] += var[0x01]
+
+
 0x10e3 (0x1823): (0x18) If var[0x10] == (constant) 0x07 then Goto 0x10f6
 0x10e7 (0x1827): (0x19) If var[0x10] != (constant) 0x08 then Goto 0x10db
 0x10eb (0x182b): (0x01) Gosub 0x1445
@@ -6402,21 +6473,38 @@ Player IS "in a small soft room between five large round fleshy pillars."
 / Perform additional location specific checks, print the location description
 / and ask "What next?" 
 0x10f3 (0x1833): (0x00) Goto 0x0149
+
 **************************************************************************
+* Dryad springs from the tree
+**************************************************************************
+
 / Print message  "A beautiful dryad springs from the tree. "
 0x10f6 (0x1836): (0x05) Print message (constant) 0x72
+
+/ Set the status of the dryad to "sprung from tree "(0x01)
+/ var[0x01] is the constant 0x01
 0x10f8 (0x1838): (0x09) Set var[0x19] = var[0x01]
+
 / Print message  ""Stop! Woodman, spare that tree! I'll give you a reward! OK?"\n "
 0x10fb (0x183b): (0x05) Print message (constant) 0x4c
+
+/ Get the response from the player
 0x10fd (0x183d): (0x07) Input - results in word1 var[0x30], word2 var[0x31], word3 var[0x32], count var[0x33]
 
-/ TODO Branch
-/ Perform additional location specific checks skipping the code 
+/ Branch if the players response is "No" (actually matches nohrt) (0x01) and
+/ perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x1102 (0x1842): (0x10) If var[0x30] == var[0x01] then Goto 0x0190
+
+/ Branch if the player's response is "yes" (0x1d)
 0x1107 (0x1847): (0x18) If var[0x30] == (constant) 0x1d then Goto 0x110f
+
 / Print message  "Please answer YES or NO\n "
 0x110b (0x184b): (0x05) Print message (constant) 0x09
+
+/ Player didn't answer "yes" or "no"
+
+/ Get the response from the player
 0x110d (0x184d): (0x00) Goto 0x10fb
 
 **************************************************************************
