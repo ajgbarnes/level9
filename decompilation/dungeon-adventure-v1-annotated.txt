@@ -1,4 +1,3 @@
-*>>>>>>>>>>>>>>>>>>>>>>>>>>> WORK IN PROGRESS <<<<<<<<<<<<<<<<<<<<<<<<<<<<
 **************************************************************************
 * Level 9 A-Code game dissassembly for Dungeon Adventure v1
 **************************************************************************
@@ -185,13 +184,13 @@
 /        0x05 - Orcs have been camped around for four turns, kill the player
 /        0x06 - horn blown at the army camp and orcs fled or killed by the skeleton warriors
 / 0x10 - Status of the killer-willow tree
-/        0x00 - tree is holding no items
+/        0x00 - tree is holding no objects
 /        0x01 - tree is holding one item
-/        0x02 - tree is holding two items
-/        0x03 - tree is holding three items
-/        0x04 - tree is holding four items
-/        0x05 - tree is holding five items
-/        0x06 - tree is holding six items
+/        0x02 - tree is holding two objects
+/        0x03 - tree is holding three objects
+/        0x04 - tree is holding four objects
+/        0x05 - tree is holding five objects
+/        0x06 - tree is holding six objects
 /        0x07 - player has attacked the tree once and the dryad has appeared
 /        0x08 - player has attacked the tree twice and the dryad has appeared
 / 0x11 - Status of the grotesque yellow bird 
@@ -341,16 +340,16 @@
 / 0x3a - Status of the roc (only changes once per game)
 /        0x00 - has NOT previously carried the player off to its nest
 /        0x00 - HAS not previously carried the player off to its nest
-/ 0x3b - Number of items that the player is carrying in the inventory
+/ 0x3b - Number of objects that the player is carrying in the inventory
 / 0x3c - 1. Indicates whether the command was valid e.g. player can move in that direction 
 /        or they do have the object and it's a valid action
 /        0x00 - not a valid action
 /        0x01 - valid action
 /        2. Reset to 0x01 whenever "What next?" is printed (start of each turn)
-/        3. Number of items printed in a location
-/        4. Number of items printed in the inventory
+/        3. Number of objects in a location
+/        4. Number of objects in the inventory
 / 0x3d - Unused
-/ 0x3e - Number of items the player is wearing
+/ 0x3e - Number of objects the player is wearing
 / 0x3f - Status of the flint-thrower 
 /        0x00 - still in place throwing flint
 /        0x01 - wand waved and flint thrower dead
@@ -371,7 +370,6 @@
 /        2. Temporary variable for holding the player's target location
 / 0x46 - Number of turns plus 1 that the player has been "within a circle of distored monoliths". When this reaches
 /        3 the Rakshasa appear and play the game with the player.
-/        TODO must have a secondary function
 / 0x47 - Status if the mirror has reflected the sleep spell
 /        0x00 - not reflected
 /        0x01 - reflected
@@ -427,7 +425,7 @@
 /        0x75 - The sun sets!
 / 0x4e - Final variable for the first location supplementary message
 /        (set to the value of var[0x4c])
-/ 0x4f - Maximum number of items a player can carry - defaults to 0x04
+/ 0x4f - Maximum number of objects a player can carry - defaults to 0x04
 /        Can be:
 /        0  - if shrunk
 /        4  - if not shrunk and not wearing the belt
@@ -494,14 +492,14 @@
 /    when all those variables are reset to 0x00 when the  
 /    "Clear Workspace" function is called (0x0006)? It's redundant.
 / 2. There are 54 objects in the game from 0x46 to 0x99 
-/ 3. The number of items a player can carry varies :
-/    a. The player can initially carry 4 items
-/    b. This increases to 10 items if the player wears the "good strong belt"
-/    c. This decreases to 0 items if the player eats the small grey mushrooms and shrinks
+/ 3. The number of objects a player can carry varies :
+/    a. The player can initially carry 4 objects
+/    b. This increases to 10 objects if the player wears the "good strong belt"
+/    c. This decreases to 0 objects if the player eats the small grey mushrooms and shrinks
 /    d. This increases to 4 itmes if the player eats the huge grey mushroom and grows
 / 4. One of the synonyms for "apply", "rub" and "wear" has a typo "smeau" (should be smear?)
 / 5. The command handler tries to process "search" / "examine" twice - see 0x0317 and 0x0344
-/    Only the first will ever get invoked. TODO second should be what?
+/    Only the first will ever get invoked. 
 / 6. The command handler tries to process "apply", "wear" / "rub" / "smeau" twice - see 0x033a and 0x0367
 /    Only the first will ever get invoked. It looks like in a previous version of the A-code, the 
 /    "rub", "smeau", "apply" had a separate dictionary id to "wear" but it was changed at some point 
@@ -553,7 +551,7 @@
 / 22. After progressing past "below a ramp up the outside of the black tower" (0x08) there is a ~159 chance
 /     of being carried off by the roc (only happens once)
 / 23. If the sleep spell hits the player and they do not have the mirror in "on an east-west road through the forest" (0x16)
-/     then any items they are wearing or in the inventory are removed from the game. Harsh!
+/     then any objects they are wearing or in the inventory are removed from the game. Harsh!
 / 24. The small salt pig contains a pearl that is revealed with it is dissolved in shallow water
 / 25. A synonym for the "bird" is "busby" for those old enough to remember the BT mascot...
 / 26. Weirdly a synonym for "ball" and "sphere" is "blach"
@@ -579,8 +577,8 @@
 /     1 - A pit opens in the floor (if closed - var[0x58] set to 0x00) otherwise "Nothing happens"
 /     2 - The pit closes (if closed - var[0x58] set to 0x01)) otherwise "Nothing happens"
 /     3 - The room fills briefly with light 
-/     4 - The entire throne rises through a trapdoor in the ceiling. It comes to rest in an odd little room (nothing happens on second press)
-/     5 - Nothing happens
+/     4 - The entire throne rises through a trapdoor in the ceiling. It comes to rest in an odd little room (nothing happens when here)
+/     5 - Nothing happens OR The throne sinks back down (only if there are NOT 0, 2 or 4 objects in the odd little room)
 /     6 - Alarms sound
 /     7 - Fire jets cross the floor!
 /     8 - "Master: I beg to report that all internal eyes are dead and enemies are in the caves. Also, thousands of enemy orcs are advancing upon us."
@@ -668,13 +666,14 @@
 /      player" variable (var[0x35]) keeps incementing if the player is moving between the 
 /     the west crusher room and east crusher room or the ramp and the east crusher room. Serves
 /     no purpose in the game - see 0x09a2
-/ 51. BUG: Seems like the intended behaviour of button 5 on the throne in the "ornate throne room" was to return
-/     the player to the "ornate throne room" as the logic only does something after button 4 has been pressed 
-/     and the player has been risen "through a trapdoor in the ceiling" (0x68)  to the "odd little room" (0x69)
-/     however the A-code mistakenly transports the player to the same room (0x69) - see 0xfc8
+/ 51. The throne only "sinks back down" from the "odd little room" (0x69) to the "long throne room" (0x68)
+/     when pressing button 5 if the number of objects in the "odd little room" (0x69) is NOT 0, 2 or 4
 / 52. The sword cannot be dropped until the player has slain the "dragin" (dragon)
-/ 53.  Wearing a new colour collar drops the old one in the player's current location 
-/ 54.  Collar is "dropped" when wearing a new colour even if it's in the player's inventory rather than being worn
+/ 53. Wearing a new colour collar drops the old one in the player's current location 
+/ 54. Collar is "dropped" when wearing a new colour even if it's in the player's inventory rather than being worn
+/ 55. In the drop command processing, there is a section of code that just shouldn't be there 0x0ac1 to 0x0acf
+/     where it's processing "drop horn" but it has much of the same code as "take horn" - impossible to trigger it
+/     because the goat has slipped off the cliff at this point when the player took the horn
 
 **************************************************************************
 * A-code entry point
@@ -931,7 +930,7 @@
 / var[0x0b] is the constant 0x00
 0x00b0 (0x07f0): (0x09) Set var[0x3a] = var[0x0b]
 
-/ Initialise the number of items the player is carrying to 0
+/ Initialise the number of objects the player is carrying to 0
 / var[0x0b] is the constant 0x00
 0x00b3 (0x07f3): (0x09) Set var[0x3b] = var[0x0b]
 
@@ -942,7 +941,7 @@
 / Unused
 0x00b9 (0x07f9): (0x09) Set var[0x3d] = var[0x0b]
 
-/ Initialise the number of items the player is wearing to 0
+/ Initialise the number of objects the player is wearing to 0
 / var[0x0b] is the constant 0x00
 0x00bc (0x07fc): (0x09) Set var[0x3e] = var[0x0b]
 
@@ -1011,7 +1010,7 @@
 / var[0x0b] is the constant 0x00
 0x00ec (0x082c): (0x09) Set var[0x4e] = var[0x0b]
 
-/ Initialise the number of items a player can carry to 0x00
+/ Initialise the number of objects a player can carry to 0x00
 / var[0x0b] is the constant 0x00
 0x00ef (0x082f): (0x09) Set var[0x4f] = var[0x0b]
 
@@ -1108,7 +1107,7 @@
 / Set the player's initial location to "on a mud-bank, nort of a wide river" (0x32)
 0x013e (0x087e): (0x08) Set var[0x43] = (constant) 0x32
 
-/ Set the maximum number of items a player can carry to 0x04 (4)
+/ Set the maximum number of objects a player can carry to 0x04 (4)
 / var[0x04] is the constant 0x04
 0x0141 (0x0881): (0x09) Set var[0x4f] = var[0x04]
 
@@ -1977,7 +1976,7 @@
 / Set the second supplementary message to "A faint light shines in" (0x19)
 0x03ec (0x0b2c): (0x08) Set var[0x4d] = (constant) 0x19
 
-/ TODO 
+/ Check if the player has had more than 100 turns and reset if so
 0x03ef (0x0b2f): (0x00) Goto 0x0406
 
 **************************************************************************
@@ -2891,8 +2890,8 @@
 / var[0x0b] is the constant 0x00
 0x064f (0x0d8f): (0x09) Set var[0x37] = var[0x0b]
 
-/ TODO - seems to be cache of the first supplementary message
-/ as this is called twice when printing a location description
+/ Set the final value of the location supplementary message into the variable 
+/ that actually gets printed
 0x0652 (0x0d92): (0x09) Set var[0x4e] = var[0x4c]
 
 / All done
@@ -2937,7 +2936,7 @@
 / Set the target destination to "inside a large wooden box. A small door leads deeper into the box"
 0x066a (0x0daa): (0x08) Set var[0x44] = (constant) 0xd7
 
-/ TODO 
+/ Check if the player can move in that direction 
 0x066d (0x0dad): (0x00) Goto 0x09e6
 
 **************************************************************************
@@ -3026,7 +3025,7 @@
 
 / Player does NOT have the "mirror"
 
-/ Remove all carried and worn items from the game by setting their location
+/ Remove all carried and worn objects from the game by setting their location
 / to the out of game location id (0xe1)
 0x06a8 (0x0de8): (0x01) Gosub 0x145d
 
@@ -3109,7 +3108,7 @@
 
 / Player's target location IS "under the killer-willow tree" (0x33)
 
-/ Branch if the tree is holding 6 items or no longer bothers the player
+/ Branch if the tree is holding 6 objects or no longer bothers the player
 0x06df (0x0e1f): (0x13) If var[0x10] > var[0x05] then Goto 0x06e8
 
 / Tree has at least one spare arm free
@@ -4221,7 +4220,7 @@ Player IS "in a small soft room between five large round fleshy pillars."
 / var[0x07] is the constant 0xfe
 0x09b6 (0x10f6): (0x12) If var[0x1f] < var[0x07] then Goto 0x09bd
 
-/ Increment the number of items in the player's inventory 
+/ Increment the number of objects in the player's inventory 
 0x09ba (0x10fa): (0x0a) Set var[0x5d] += var[0x01]
 
 / Move to the next object id 
@@ -4350,21 +4349,34 @@ Player IS "in a small soft room between five large round fleshy pillars."
 
 **************************************************************************
 
+/ Check that the object is "pickupable"
 0x0a20 (0x1160): (0x01) Gosub 0x153b
 
-/ TODO Branch
-/ Perform additional location specific checks skipping the code 
+/ Branch if the object is NOT pickupable and
+/ perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0a23 (0x1163): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
+
+/ Branch if the number of objects that the player is carrying is less
+/ than the maximum number 
 0x0a28 (0x1168): (0x12) If var[0x3b] < var[0x4f] then Goto 0x0a3a
+
+/ Player is at maximum number of objects that they can carry
+
+/ Branch if the maximum number is zero as the player is shrunk (0x00)
+/ and print that the player is too weak
+/ var[0x0b] is the constant 0x00
 0x0a2c (0x116c): (0x10) If var[0x4f] == var[0x0b] then Goto 0x0a35
+
 / Print message  "You can't carry any more "
 0x0a30 (0x1170): (0x05) Print message (constant) 0x29
 
 / Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0a32 (0x1172): (0x00) Goto 0x0190
+
 **************************************************************************
+
 / Print message  "You're too weak! "
 0x0a35 (0x1175): (0x05) Print message (constant) 0x2a
 
@@ -4373,23 +4385,65 @@ Player IS "in a small soft room between five large round fleshy pillars."
 0x0a37 (0x1177): (0x00) Goto 0x0190
 
 **************************************************************************
+* Process the player trying to get the horn from the fierce goat
+**************************************************************************
+
+/ Branch if the location supplemental message is NOT "A fierce goat is on guard" (0xa3)
+/ and move to the next check
 0x0a3a (0x117a): (0x19) If var[0x4c] != (constant) 0xa3 then Goto 0x0a50
+
+/ Branch if the second word is NOT the horn (0x7c)
+/ and move to the next check
 0x0a3e (0x117e): (0x19) If var[0x31] != (constant) 0x7c then Goto 0x0a50
+
+/ Branch if the sticky slime is in the player's current location - player will
+/ get the horn and the goat will slip off the cliff
 0x0a42 (0x1182): (0x10) If var[0x40] == var[0x43] then Goto 0x0a4b
+
 / Print message  "The goat prances daintily about and butts you off the cliff "
 0x0a46 (0x1186): (0x05) Print message (constant) 0xa4
+
+/ Kill the player 
 0x0a48 (0x1188): (0x00) Goto 0x12e7
+
 **************************************************************************
-/ Print message  "The goat dances forward but loses its footing and slips off the cliff "
+
+/ Print message  "The goat dances forward but loses its footing 
+/ and slips off the cliff "
 0x0a4b (0x118b): (0x05) Print message (constant) 0xa5
+
+/ Set the status of the goat to "slipped off cliff" (0x01)
+/ var[0x01] is the constant 0x01
 0x0a4d (0x118d): (0x09) Set var[0x29] = var[0x01]
+
+**************************************************************************
+* Process the player trying to get will o'wisp
+**************************************************************************
+
+/ Branch if the second wor is NOT the will o'wisp (0x8a)
 0x0a50 (0x1190): (0x19) If var[0x31] != (constant) 0x8a then Goto 0x0a6e
+
+/ Player is trying to take the will o'wisp
+
+/ Set the temporary variable to the location of the "helmet" 0x76
 0x0a54 (0x1194): (0x08) Set var[0x1e] = (constant) 0x76
+
+/ Get the current location of the helmet
 0x0a57 (0x1197): (0xa2) Set var[0x1f] = list#2[var[0x1e]] (list address 0x0740)
+
+/ Branch if the "helmet" is NOT in the player's inventory (0xfe)
 0x0a5a (0x119a): (0x12) If var[0x1f] < var[0x07] then Goto 0x0a69
+
+/ Helmet IS in the player's inventory (0xfe)
+
 / Print message  "You catch the will o'wisp in your helmet lamp "
 0x0a5e (0x119e): (0x05) Print message (constant) 0xbd
+
+/ Set the location of the will o'wisp to be removed from the game (0xe1)
 0x0a60 (0x11a0): (0xe2) Set list#2[var[0x31]] = var[0x09] (list address 0x0740)
+
+/ Set the status of the helmet to "will o'wisp captured (0x01)
+/ var[0x01] is the constant 0x01
 0x0a63 (0x11a3): (0x09) Set var[0x5c] = var[0x01]
 
 / Perform additional location specific checks skipping the code 
@@ -4397,6 +4451,7 @@ Player IS "in a small soft room between five large round fleshy pillars."
 0x0a66 (0x11a6): (0x00) Goto 0x0190
 
 **************************************************************************
+
 / Print message  "It evades your clutches "
 0x0a69 (0x11a9): (0x05) Print message (constant) 0xbe
 
@@ -4405,19 +4460,50 @@ Player IS "in a small soft room between five large round fleshy pillars."
 0x0a6b (0x11ab): (0x00) Goto 0x0190
 
 **************************************************************************
+* Process the player taking the gem
+**************************************************************************
+
+/ Branch if the second word is NOT the "evil green gem" (0x98)
 0x0a6e (0x11ae): (0x19) If var[0x31] != (constant) 0x98 then Goto 0x0a7b
+
+/ Second word IS the gem
+
+/ Branch if the gem is NOT sucking the player's mind already (0x01)
+/ var[0x01] is the constant 0x01
 0x0a72 (0x11b2): (0x13) If var[0x2b] > var[0x0b] then Goto 0x0a7b
+
 / Print message  "An evil force in the gem launches itself at your mind! "
 0x0a76 (0x11b6): (0x05) Print message (constant) 0xc6
+
+/ Set the number of turns until the player will have their mind absorbed to 5
+/ var[0x05] is the constant 0x05
 0x0a78 (0x11b8): (0x09) Set var[0x2b] = var[0x05]
+
+/ Branch if the second word is NOT the trident (0x66)
 0x0a7b (0x11bb): (0x19) If var[0x31] != (constant) 0x66 then Goto 0x0a89
+
+/ Second word IS the trident
+
+/ Branch if the status of the coffin is "nailed shut" (0x01)
+/ var[0x0b] is the constant 0x00
 0x0a7f (0x11bf): (0x13) If var[0x60] > var[0x0b] then Goto 0x0a89
+
 / Print message  "A zombi shambles from the coffin and attacks! "
 0x0a83 (0x11c3): (0x05) Print message (constant) 0x121
+
+/ Kill the player
 0x0a86 (0x11c6): (0x00) Goto 0x12e7
+
 **************************************************************************
+
+/ Remove the item from the game 
 0x0a89 (0x11c9): (0x01) Gosub 0x1488
+
+/ Set the locatoin of the item to back in the game in the player's inventory (0xfe)
+/ var[0x07] is the constant 0xfe
 0x0a8c (0x11cc): (0xe2) Set list#2[var[0x31]] = var[0x07] (list address 0x0740)
+
+/ Increment the number of objects the player is carrying 
 0x0a8f (0x11cf): (0x0a) Set var[0x3b] += var[0x01]
 
 / Perform additional location specific checks skipping the code 
@@ -4428,48 +4514,117 @@ Player IS "in a small soft room between five large round fleshy pillars."
 * Command: "drop"
 **************************************************************************
 
+**************************************************************************
+* Process the player trying to drop the will o'wisp
+**************************************************************************
+
+/ Branch if the second word is NOT the "will o'wisp" (0x8a)
 0x0a95 (0x11d5): (0x19) If var[0x31] != (constant) 0x8a then Goto 0x0ab0
+
+/ Branch if the will o'wisp is NOT caught in the helmet (0x00)
+/ var[0x0b] is the constant 0x00
 0x0a99 (0x11d9): (0x10) If var[0x5c] == var[0x0b] then Goto 0x0ab0
+
+/ Set the second word to the "helmet" (0x076)
 0x0a9d (0x11dd): (0x08) Set var[0x31] = (constant) 0x76
+
+/ Check that the player has the object 
 0x0aa0 (0x11e0): (0x01) Gosub 0x1559
 
-/ TODO Branch 
-/ Perform additional location specific checks skipping the code 
+/ Branch if the player doesn't have the object and 
+/ perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0aa3 (0x11e3): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
 
+/ Set the second word to back to the "will o'wisp" (0x8a)
 0x0aa8 (0x11e8): (0x08) Set var[0x31] = (constant) 0x8a
+
+/ Set the status of the will o'wisp to unlit by the will o'wisp (0x00)
+/ var[0x0b] is the constant 0x00
 0x0aab (0x11eb): (0x09) Set var[0x5c] = var[0x0b]
+
+/ Move to the next check
 0x0aae (0x11ee): (0x00) Goto 0x0ab8
+
 **************************************************************************
+
+/ Check that the player has the object 
 0x0ab0 (0x11f0): (0x01) Gosub 0x1559
 
-/ TODO Branch 
-/ Perform additional location specific checks skipping the code 
+/ Branch if the player does NOT have the object and 
+/ perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0ab3 (0x11f3): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
 
+**************************************************************************
+* Process the player trying to drop the sword
+**************************************************************************
+
+/ Branch if the second word is NOT the sword (0x81s)
 0x0ab8 (0x11f8): (0x19) If var[0x31] != (constant) 0x81 then Goto 0x0ac1
-/ Print message  "The sword protests: "See here guv, you're not gonna ditch me 'til I fight a dragin!" "
+
+/ Player IS dropping the sword 
+
+/ Print message  "The sword protests: "See here guv, you're not gonna ditch
+/ me 'til I fight a dragin!" "
 0x0abc (0x11fc): (0x05) Print message (constant) 0x3c
 
 / Perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0abe (0x11fe): (0x00) Goto 0x0190
+
 **************************************************************************
+* BUG - this WHOLE section is wrong, it has some of the code from taking 
+* the horn but this is a DROP and it's impossible to drop the horn 
+* when the fierce goat is there as it's already slipped off the cliff
+**************************************************************************
+*vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv*
+
+/ Branch if the second word is NOT the "horn" (0x7c)
 0x0ac1 (0x1201): (0x19) If var[0x31] != (constant) 0x7c then Goto 0x0ad7
+
+/ Player is trying to drop the horn 
+
+/ Branch if the location first supplemental message is NOT set to "A fierce 
+/ goat is on guard" (0xa3)
 0x0ac5 (0x1205): (0x19) If var[0x4c] != (constant) 0xa3 then Goto 0x0ad7
+
+/ Message IS set to "A fierce goat is on guard"
+
+/ Branch if the location of the sticky slime IS in the player's current location 
 0x0ac9 (0x1209): (0x10) If var[0x40] == var[0x43] then Goto 0x0ad2
 / Print message  "The goat prances daintily about and butts you off the cliff "
 0x0acd (0x120d): (0x05) Print message (constant) 0xa4
+
+/ Kill the player 
 0x0acf (0x120f): (0x00) Goto 0x12e7
+
+*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*
 **************************************************************************
-/ Print message  "The goat dances forward but loses its footing and slips off the cliff "
+* End of BUG
+**************************************************************************
+
+
+/ Print message  "The goat dances forward but loses its footing and 
+/ slips off the cliff "
 0x0ad2 (0x1212): (0x05) Print message (constant) 0xa5
+
+/ (Incorrectly) set the status of the two sleeping giants to have fled (0x01)
+/ var[0x01] is the constant 0x01
 0x0ad4 (0x1214): (0x09) Set var[0x27] = var[0x01]
+
+/ Branch if the second word IS the gem (0x98) and print "You can't do that"
 0x0ad7 (0x1217): (0x18) If var[0x31] == (constant) 0x98 then Goto 0x15e0
+
+/ Player is dropping any other item
+
+/ Remove the item from the game and decrement the number of carried objects 
 0x0adc (0x121c): (0x01) Gosub 0x1488
+
+/ Set the location of the object to the player's current location
 0x0adf (0x121f): (0xe2) Set list#2[var[0x31]] = var[0x44] (list address 0x0740)
+
+/ Check to see if any seeds were dislodged and if anything was scared away
 0x0ae2 (0x1222): (0x00) Goto 0x126c
 
 **************************************************************************
@@ -4597,7 +4752,7 @@ Player IS "in a small soft room between five large round fleshy pillars."
 / Set the location of the object to "being held by the tree" (0xe5)
 0x0b33 (0x1273): (0xe2) Set list#2[var[0x31]] = var[0x5d] (list address 0x0740)
 
-/ Increment the number of items that the tree is holding
+/ Increment the number of objects that the tree is holding
 / var[0x01] is the constant 0x01
 0x0b36 (0x1276): (0x0a) Set var[0x10] += var[0x01]
 
@@ -4774,7 +4929,7 @@ Player IS "in a small soft room between five large round fleshy pillars."
 **************************************************************************
 
 / Player is wearing the good strong belt so increase the maximum inventory
-/ items that they can carry to 0x0a (10)
+/ objects that they can carry to 0x0a (10)
 0x0bbd (0x12fd): (0x08) Set var[0x4f] = (constant) 0x0a
 
 / Print message  "You feel much stronger! "
@@ -4788,7 +4943,7 @@ Player IS "in a small soft room between five large round fleshy pillars."
 / var[0x08] is the constant 0xff
 0x0bc5 (0x1305): (0xe2) Set list#2[var[0x31]] = var[0x08] (list address 0x0740)
 
-/ Add 1 to the number of items the player is wearing 
+/ Add 1 to the number of objects the player is wearing 
 / var[0x01] is the constant 0x01
 0x0bc8 (0x1308): (0x0a) Set var[0x3e] += var[0x01]
 
@@ -5101,7 +5256,8 @@ Player IS "in a small soft room between five large round fleshy pillars."
 / Branch if the player is opening the "small ornate box wtih a lid" (0x4b)
 0x0cb3 (0x13f3): (0x18) If var[0x31] == (constant) 0x4b then Goto 0x13e7
 
-/ Branch if the player is NOT opening their "eyes" (0xc5) and TODO 
+/ Branch if the player is NOT opening their "eyes" (0xc5) and move to the
+/ next check
 0x0cb8 (0x13f8): (0x19) If var[0x31] != (constant) 0xc5 then Goto 0x0cc2
 
 / Set the status of the player's eyes to open (0x00)
@@ -5128,7 +5284,7 @@ Player IS "in a small soft room between five large round fleshy pillars."
 / Branch if the player's current location IS "on a narrow north-south bridge" (0x2a)
 / and print "You can't do that"
 0x0ccc (0x140c): (0x18) If var[0x43] == (constant) 0x2a then Goto 0x15e0
-
+     
 / Player is NOT "on a narrow north-south bridge" (0x2a)
 
 / Branch if the player's current location IS " a junction in a steeply 
@@ -5419,7 +5575,7 @@ Player IS "in a small soft room between five large round fleshy pillars."
 0x0d93 (0x14d3): (0x09) Set var[0x2e] = var[0x01]
 
 / Player ate the small grey mushrooms and shrank so decrease the maximum inventory
-/ items that they can carry to 0x00 (0)
+/ objects that they can carry to 0x00 (0)
 / var[0x0b] is the constant 0x00
 0x0d96 (0x14d6): (0x09) Set var[0x4f] = var[0x0b]
 
@@ -5444,7 +5600,7 @@ Player IS "in a small soft room between five large round fleshy pillars."
 0x0da3 (0x14e3): (0x05) Print message (constant) 0xfb
 
 / Player ate the large grey mushroom and grew so increase the maximum inventory
-/ items that they can carry to 0x04 (4)
+/ objects that they can carry to 0x04 (4)
 / var[0x04] is the constant 0x04
 0x0da5 (0x14e5): (0x09) Set var[0x4f] = var[0x04]
 
@@ -5489,15 +5645,25 @@ Player IS "in a small soft room between five large round fleshy pillars."
 * BUG - NEVER CALLED, REDUNDANT CODE (already a handler for this)
 * Command: "search" or "examine"
 **************************************************************************
+*vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv*
 
+/ Check that the object is "pickupable" and in the player's inventory or 
+/ being worn
 0x0dc1 (0x1501): (0x01) Gosub 0x1559
 
-/ TODO Branch 
-/ Perform additional location specific checks skipping the code 
+/ Branch if the player does NOT have the object and 
+/ perform additional location specific checks skipping the code 
 / that prints the location description and ask "What next?" 
 0x0dc4 (0x1504): (0x10) If var[0x3c] == var[0x0b] then Goto 0x0190
 
+/ Print "You can't do that"
 0x0dc9 (0x1509): (0x00) Goto 0x15e0
+
+*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*
+**************************************************************************
+* End of BUG
+**************************************************************************
+
 
 **************************************************************************
 * Command: "blow" or "play"
@@ -5741,7 +5907,7 @@ Player IS "in a small soft room between five large round fleshy pillars."
 0x0e82 (0x15c2): (0xa2) Set var[0x5d] = list#2[var[0x31]] (list address 0x0740)
 
 / Branch if the object is in the player's inventory (0xfe)
-/ BUG: This should be > var[0x07] to allow worn items to be examined
+/ BUG: This should be > var[0x07] to allow worn objects to be examined
 / var[0x07] is the constant 0xfe
 0x0e85 (0x15c5): (0x10) If var[0x5d] == var[0x07] then Goto 0x0e92
 
@@ -6184,24 +6350,31 @@ Player IS "in a small soft room between five large round fleshy pillars."
 / var[0x0b] is the constant 0x00
 0x0fc3 (0x1703): (0x10) If var[0x59] == var[0x0b] then Goto 0x15f0
 
-/ Branch if the player is NOT "in an odd little room, below a granite throne" (0x69)
+/ Player IS "in an odd little room, below a granite throne" (0x69)
 
-/ BUG - should take the player to the "throne room" (0x68)
 / Set the target destination to "in an odd little room, below a granite throne" (0x69)
+/ this is passed into 0x156e as the location in which to count the objects present
 0x0fc8 (0x1708): (0x08) Set var[0x44] = (constant) 0x69
 
-/ TODO
-/ Reset the base message id for 
+/ Set the object description message id offset to zero (don't want the objects printed)
 0x0fcb (0x170b): (0x09) Set var[0x38] = var[0x0b]
+
+/ Count the number of objects in the "odd little room" (0x69)
 0x0fce (0x170e): (0x01) Gosub 0x156e
 
-/ and print "Nothing happens"
+/ If there are no objects in the "odd little room" then the 
+/ throne won't move back so print "Nothing happens"
+/ var[0x0b] is the constant 0x00
 0x0fd1 (0x1711): (0x10) If var[0x3c] == var[0x0b] then Goto 0x15f0
 
-/ and print "Nothing happens"
+/ If there are 2 objects in the "odd little room" then the 
+/ throne won't move back so print "Nothing happens"
+/ var[0x02] is the constant 0x02
 0x0fd6 (0x1716): (0x10) If var[0x3c] == var[0x02] then Goto 0x15f0
 
-/ and print "Nothing happens"
+/ If there are 4 objects in the "odd little room" then the 
+/ throne won't move back so print "Nothing happens"
+/ var[0x04] is the constant 0x04
 0x0fdb (0x171b): (0x10) If var[0x3c] == var[0x04] then Goto 0x15f0
 
 / Reset the status of the throne to "not risen through a trapdoor in the ceiling (0x00)
@@ -6586,7 +6759,7 @@ Player IS "in a small soft room between five large round fleshy pillars."
 **************************************************************************
 
 / Increment the number of objects that the tree is holding - it's still
-/ holding 6 items but this status is used to determine if the dryad will 
+/ holding 6 objects but this status is used to determine if the dryad will 
 / appear (0x07) and offer a gift or if the player hits the tree again 
 / and kills it (0x08)
 / var[0x01] is the constant 0x01
@@ -6990,7 +7163,7 @@ Player IS "in a small soft room between five large round fleshy pillars."
 * Calculate the player's score (can be negative)
 **************************************************************************
 
-/ The following items score 15 each (total of 555):
+/ The following objects score 15 each (total of 555):
 / 0x5b  : an antique chair
 / 0x5c  : a securely fastened chest
 / 0x5d  : a selection of coins
@@ -7916,8 +8089,8 @@ Player IS "in a small soft room between five large round fleshy pillars."
 
 / Player has the object
 
-/ Remove the object from the game (either the player's carried items or 
-/ worn items) and print an approrpiate message.  Seems slightly redundant 
+/ Remove the object from the game (either the player's carried objects or 
+/ worn objects) and print an approrpiate message.  Seems slightly redundant 
 / given could just reset the inventory counts and put it directly in the location 
 0x147b (0x1bbb): (0x01) Gosub 0x1488
 
@@ -7934,8 +8107,8 @@ Player IS "in a small soft room between five large round fleshy pillars."
 0x1487 (0x1bc7): (0x02) Return
 
 *************************************************************************
-* Remove the item from the game (either the player's carried items or 
-* worn items) and print an approrpiate message 
+* Remove the item from the game (either the player's carried objects or 
+* worn objects) and print an approrpiate message 
 *************************************************************************
 
 / Get the current location of the object in the second word
@@ -7953,12 +8126,12 @@ Player IS "in a small soft room between five large round fleshy pillars."
 / var[0x08] is the constant 0xff
 0x1492 (0x1bd2): (0x11) If var[0x1f] != var[0x08] then Goto 0x14ad
 
-/ Branch if the player is not wearing any items
+/ Branch if the player is not wearing any objects
 0x1496 (0x1bd6): (0x10) If var[0x3e] == var[0x0b] then Goto 0x149d
 
 / Player is wearing at least one item
 
-/ Decrement the number of items the player is wearing 
+/ Decrement the number of objects the player is wearing 
 0x149a (0x1bda): (0x0b) Set var[0x3e] -= var[0x01]
 
 / Branch if the item being put out of the game is NOT the "good strong belt" (0x79)
@@ -7970,16 +8143,16 @@ Player IS "in a small soft room between five large round fleshy pillars."
 / var[0x04] is the constant 0x04
 0x14a1 (0x1be1): (0x09) Set var[0x4f] = var[0x04]
 
-/ Skip over decrementing the carried items as the player was wearing the item
+/ Skip over decrementing the carried objects as the player was wearing the item
 0x14a4 (0x1be4): (0x00) Goto 0x14ad
 
-/ Branch if the player is not carrying any items (0x00)
+/ Branch if the player is not carrying any objects (0x00)
 / var[0x0b] is the constant 0x00
 0x14a6 (0x1be6): (0x10) If var[0x3b] == var[0x0b] then Goto 0x14ad
 
 / Player is carrying at least one item
 
-/ Decrement the number of items the player is carrying
+/ Decrement the number of objects the player is carrying
 0x14aa (0x1bea): (0x0b) Set var[0x3b] -= var[0x01]
 
 **************************************************************************
@@ -8295,9 +8468,10 @@ Player IS "in a small soft room between five large round fleshy pillars."
 0x156d (0x1cad): (0x02) Return
 
 **************************************************************************
-* Print all the objects in the location passed in var[0x44]
+* Count and print all the objects in the location passed in var[0x44]
 * Either a location id, inventory (0xfe) or wearing (0xff)
-* or nothing (0x00) - if nothing don't print the objects
+* or nothing (0x00) - if nothing don't print the objects. Number of 
+* objects will be returned in var[0x3c]
 **************************************************************************
 
 / Set the temporary variable to the first object id "axe" (0x46)
@@ -8333,8 +8507,8 @@ Player IS "in a small soft room between five large round fleshy pillars."
 **************************************************************************
 
 / Set the temporary variable to the base message id that was passed in
-/ the message offset is either (0x141) for items in a location or 
-/ (0x37) for items in the inventory.  This is used to get the right object
+/ the message offset is either (0x141) for objects in a location or 
+/ (0x37) for objects in the inventory.  This is used to get the right object
 / description depending on where the object is as the descriptions are
 / different.
 0x1586 (0x1cc6): (0x09) Set var[0x5d] = var[0x38]
@@ -8396,8 +8570,9 @@ Player IS "in a small soft room between five large round fleshy pillars."
 / Set the suffix to "which shines brightly" (0xbf)
 0x15b1 (0x1cf1): (0x08) Set var[0x63] = (constant) 0xbf
 
-/ TODO
-/ 
+**************************************************************************
+
+/ Increment the number of objects in the passed in location in var[0x4c]
 0x15b4 (0x1cf4): (0x0a) Set var[0x3c] += var[0x01]
 
 / Branch if the offset passed in was 0x00 and do NOT 
