@@ -6,12 +6,12 @@
 
 / Location descriptions
 / ---------------------
-/ Location text can be found by looking in theadventure-quest-v1-descs.txt file
+/ Location text can be found by looking in the adventure-quest-v1-descs.txt file
 / Locations descriptions are 0x12c + location id
 / 
 / Object descriptions
 / ---------------------
-/ Object text can be found by looking in theadventure-quest-v1-descs.txt file
+/ Object text can be found by looking in the adventure-quest-v1-descs.txt file
 / Object descriptions (when in inventory) are 0xaa + object id
 / Object descriptions (when in location)  are 0xd2 + object id
 
