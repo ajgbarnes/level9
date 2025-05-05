@@ -794,6 +794,8 @@
 / Set the first and second supplementary messages
 0x004b (0x086b): (0x01) Gosub 0x0390
 
+/ Branch if the location has light (0x01)
+/ var[0x01] is the constant 0x01
 0x004e (0x086e): (0x10) If var[0x12] == var[0x01] then Goto 0x0073
 
 / Set the temporary object id to the location of the luminous jelly-fish (0x43)
