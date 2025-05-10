@@ -361,7 +361,7 @@
 /      - 0x00         - dynamite has not exploded yet, no explosion
 /      - 0xa9         - dynamite has exploded and water is "at the north-east end of a vast cave"
 /      - 0xa9 to 0xc3 - water advances every other turn trying to catch the player
-/      - 0xc4         - this is a hidden location that represents the fissue, there will be 
+/      - 0xc4         - this is a hidden location that represents the fissure, there will be 
 /                       a big explosion that will kill the player if they did not lock the 
 /                       heavy dungeon door. Location moves to 0xc5 on next command
 /      - 0xc5         - Water does not move beyond here, when it's in this location it
@@ -391,7 +391,7 @@
 /     dungeon door is unlocked no matter where they are (it acts as a barrier
 /     between the explosion at the fissure and the player). The door can only be locked
 /     from the side away from the fissure.
-/ 12. There's a hidden location (0xc4), the fissue, with no description
+/ 12. There's a hidden location (0xc4), the fissure, with no description
 /     which is used as the fissure that's between the two locations on the east (0xc3)
 /     and west banks (0xc5) - it allows the water to reach there and explode when it 
 /     touches the lava. 
@@ -516,7 +516,7 @@
 /     Hall of Mists" (0x31) and "the end of the "twisty passages..., all different" (0xa5).  
 / 64. There is a 0.7% (2/256) chance of the pirate appearing between (inclusive) the "east end of the 
 /     Hall of Mists" (0x31) and "the end of the "twisty passages..., all different" (0xa5).  
-/ 65. The a-code will always print "a crystal bridge spans the fissue" if the players is east 
+/ 65. The a-code will always print "a crystal bridge spans the fissure" if the players is east 
 /     or west of a wide fissure which cuts completely across the dungeon walkway (0xc3 or 0xc5).  It shouldn't 
 /     but it uses a status variable (var[0x27]) that is multi-purpose mostly for displaying messages 
 /     and is always positive based on the last additional description message printed.  Seems the intent
@@ -1344,7 +1344,7 @@ Jump Table       (Idx)
 
 / Player CAN move in the required direction
 
-/ Check rules for blocking player movement across the fissue and 
+/ Check rules for blocking player movement across the fissure and 
 / also from the spiral staircase to the dungeon walkway. For some locations
 / the target location will be 0x00 in the table unless certain conditions are met
 / at which point the a-code will add a real target location
@@ -5553,7 +5553,7 @@ the south end of a secret north-south canyon " (0x44)
 **************************************************************************
 
 / Branch if the water is " on the west bank of a wide fissure which cuts 
-/ right across the dungeon walkway." (0xc5) as it reached the fissue (0xc4)
+/ right across the dungeon walkway." (0xc5) as it reached the fissure (0xc4)
 / and caused the lava to explode and it shouldn't advance any more
 0x0d4e (0x152e): (0x18) If var[0x37] == (constant) 0xc5 then Goto 0x0d86
 
@@ -5576,7 +5576,7 @@ the south end of a secret north-south canyon " (0x44)
 
 / This location has no description (0xc4) and the player cannot get there 
 / from any location.  It's used as a check to see if the water reached 
-/ the fissue (the water can get there, not the player) as it's between the east and west
+/ the fissure (the water can get there, not the player) as it's between the east and west
 / banks of the fissure. If the water reaches here the player will be killed
  
 / If the water has rearched the fissure (0xc4), explode when it touches the lava
