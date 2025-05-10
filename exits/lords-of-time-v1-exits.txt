@@ -1,0 +1,359 @@
+Lords of Time - Location Exit Definitions
+-----------------------------------------
+
+Bit configuration:
+
+Bit 0 - where the direction can be used inversely
+Bit 1 - whether this direction should be hidden
+Bit 2 - if there is a door in this direction
+
+
+                        (Inv.)
+Address From  To  Dir   Bit 0 Bit 1 Bit 2 MsgId Location Text
+------- ---- ---- ----- ----- ----- ----- ----- -------------
+0x0900  0x01 0x02 North  Yes   No    No    0x191 in your own living room
+0x0902  0x02 0x03 Enter  No    No    Yes   0x192 in a large, cold looking room
+0x0904  0x03 0x04 North  Yes   No    Yes   0x193 inside a gigantic clock
+0x0906  0x03 0x1a NEast  No    Yes   Yes   0x193 inside a gigantic clock
+0x0908  0x03 0x31 East   No    Yes   Yes   0x193 inside a gigantic clock
+0x090a  0x03 0x47 SEast  No    Yes   Yes   0x193 inside a gigantic clock
+0x090c  0x03 0x5d South  No    Yes   Yes   0x193 inside a gigantic clock
+0x090e  0x03 0x72 SWest  No    Yes   Yes   0x193 inside a gigantic clock
+0x0910  0x03 0x8b NWest  No    Yes   Yes   0x193 inside a gigantic clock
+0x0912  0x03 0xa4 West   No    Yes   Yes   0x193 inside a gigantic clock
+0x0914  0x03 0xbf Up     No    Yes   Yes   0x193 inside a gigantic clock
+0x0916  0x04 0x06 West   Yes   No    No    0x194 at the end of a gravel drive which bends to the_southwest. The grassy lawns beside the drive are edged with the vibrant colours of summer flowers. A narrow country road runs north-south
+0x0918  0x05 0xd8 South  Yes   No    No    0x195 at roadworks where the road ends
+0x091a  0x06 0x07 West   Yes   No    No    0x196 on a winding gravel drive
+0x091c  0x07 0x08 Enter  Yes   Yes   Yes   0x197 outside a delightful country cottage
+0x091e  0x07 0x08 West   Yes   No    Yes   0x197 outside a delightful country cottage
+0x0920  0x08 0x0d West   Yes   No    No    0x198 in a bright hallway at the foot of a carpetted stairway
+0x0922  0x09 0x08 Down   Yes   No    No    0x199 on the landing at the top of the stairs
+0x0924  0x0a 0x09 South  Yes   No    No    0x19a in a cramped store-room
+0x0926  0x0b 0x09 East   Yes   No    No    0x19b in a plushly carpeted master bedroom
+0x0928  0x0c 0x0d West   No    No    No    0x19c in a lovely old-fashioned kitchen
+0x092a  0x0c 0x08 North  Yes   No    No    0x19c in a lovely old-fashioned kitchen
+0x092c  0x0d 0x0c South  No    No    No    0x19d in the living room, a long comfortable room decorated in autumn shades of brown and gold. A patio door leads to the garden
+0x092e  0x0d 0x0e Leave  Yes   Yes   Yes   0x19d in the living room, a long comfortable room decorated in autumn shades of brown and gold. A patio door leads to the garden
+0x0930  0x0d 0x0e West   Yes   No    Yes   0x19d in the living room, a long comfortable room decorated in autumn shades of brown and gold. A patio door leads to the garden
+0x0932  0x0e 0x10 West   Yes   No    No    0x19e on a patio, decorated with urns of flowers. A crazy-paving path winds southwest across the lawn_to a garden shed. The garden ends at a wooden fence
+0x0934  0x0f 0x0e SEast  Yes   No    No    0x19f in the flower garden
+0x0936  0x10 0x11 Up     No    No    No    0x1a0 at the end of the garden beside a five foot fence covered in ivy
+0x0938  0x11 0x10 Up     No    No    No    0x1a1 beside a fence on the east bank of a wide, dirty stream clogged with crisp packets and MacRonalds boxes
+0x093a  0x12 0x13 West   Yes   Yes   No    0x1a2 further upstream where the filthy stream is quite narrow. A lone narcissus grows amidst the nettles on the opposite bank
+0x093c  0x12 0x13 Cross  No    Yes   No    0x1a2 further upstream where the filthy stream is quite narrow. A lone narcissus grows amidst the nettles on the opposite bank
+0x093e  0x12 0x11 South  Yes   No    No    0x1a2 further upstream where the filthy stream is quite narrow. A lone narcissus grows amidst the nettles on the opposite bank
+0x0940  0x13 0x12 Cross  Yes   No    No    0x1a3 west of the stream
+0x0942  0x14 0x0e NEast  Yes   No    No    0x1a4 outside a garden shed
+0x0944  0x15 0x14 North  Yes   Yes   Yes   0x1a5 in a cluttered garden shed
+0x0946  0x15 0x14 Leave  Yes   No    Yes   0x1a5 in a cluttered garden shed
+0x0948  0x16 0x11 North  Yes   No    No    0x1a6 beside the polluted stream
+0x094a  0x17 0x14 West   Yes   No    No    0x1a7 at a garden gate which opens onto a paved path leading east
+0x094c  0x18 0x17 West   Yes   No    No    0x1a8 on a paved path which leads east-west beside the garden
+0x094e  0x19 0x18 West   Yes   No    No    0x1a9 in a carport with an an examination pit in the floor
+0x0950  0x19 0x03 Down   No    No    No    0x1a9 in a carport with an an examination pit in the floor
+0x0952  0x1a 0x03 South  No    No    Yes   0x1aa standing on splintered ice in a deep valley. The sky is very grey and the wind is blowing very hard
+0x0954  0x1a 0x1b North  Yes   No    No    0x1aa standing on splintered ice in a deep valley. The sky is very grey and the wind is blowing very hard
+0x0956  0x1a 0x1e NEast  No    No    No    0x1aa standing on splintered ice in a deep valley. The sky is very grey and the wind is blowing very hard
+0x0958  0x1b 0x1c North  Yes   No    No    0x1ab walking unsteadily across a slippery ice sheet
+0x095a  0x1b 0x1e NEast  No    No    No    0x1ab walking unsteadily across a slippery ice sheet
+0x095c  0x1c 0x1d North  Yes   No    No    0x1ac on very smooth ice
+0x095e  0x1c 0x1e NEast  Yes   No    No    0x1ac on very smooth ice
+0x0960  0x1d 0x1e East   Yes   No    No    0x1ad at the edge of the ice, where drifting snow has_banked up at the foot of the mountains
+0x0962  0x1e 0x1f North  Yes   Yes   No    0x1ae where a rocky track leads up the mountain
+0x0964  0x1e 0x1f Up     Yes   No    No    0x1ae where a rocky track leads up the mountain
+0x0966  0x1f 0x20 Up     Yes   No    No    0x1af laboriously climbing the snowcovered mountain
+0x0968  0x20 0x21 Up     Yes   No    No    0x1b0 at an armchair hollow in the mountainside, below a cave
+0x096a  0x21 0x22 Enter  Yes   No    No    0x1b1 on a ledge outside an odoriferous cave
+0x096c  0x22 0x28 SEast  No    No    No    0x1b2 in a huge subterranean chamber with smooth walls
+0x096e  0x22 0x24 East   Yes   No    No    0x1b2 in a huge subterranean chamber with smooth walls
+0x0970  0x23 0x22 North  Yes   No    No    0x1b3 in the freezing cave
+0x0972  0x24 0x25 East   Yes   No    No    0x1b4 at a junction
+0x0974  0x25 0x2a South  No    No    No    0x1b5 in a silver fox lair
+0x0976  0x25 0x2a South  Yes   No    No    0x1b5 in a silver fox lair
+0x0978  0x26 0x27 South  No    Yes   No    0x1b6 in the silver-veined cave
+0x097a  0x26 0x25 West   Yes   No    No    0x1b6 in the silver-veined cave
+0x097c  0x27 0x26 North  No    No    No    0x1b7 in the hidden silver vault
+0x097e  0x27 0x26 Leave  Yes   Yes   No    0x1b7 in the hidden silver vault
+0x0980  0x28 0x22 North  No    No    No    0x1b8 in a splendid frost chamber
+0x0982  0x28 0x24 NEast  Yes   No    No    0x1b8 in a splendid frost chamber
+0x0984  0x28 0x29 East   Yes   No    No    0x1b8 in a splendid frost chamber
+0x0986  0x29 0x24 North  Yes   No    No    0x1b9 in a dark, eerie cave melted from slushy black ice
+0x0988  0x29 0x2a SEast  No    No    No    0x1b9 in a dark, eerie cave melted from slushy black ice
+0x098a  0x2a 0x2b NWest  No    Yes   No    0x1ba in the frozen forest, amidst tall, snow-laden trees
+0x098c  0x2a 0x2b Cross  No    Yes   No    0x1ba in the frozen forest, amidst tall, snow-laden trees
+0x098e  0x2a 0x29 North  No    No    No    0x1ba in the frozen forest, amidst tall, snow-laden trees
+0x0990  0x2a 0x25 NEast  No    No    No    0x1ba in the frozen forest, amidst tall, snow-laden trees
+0x0992  0x2b 0x2a SEast  No    No    No    0x1bb in an intricate alpine garden
+0x0994  0x2b 0x2a Cross  No    Yes   No    0x1bb in an intricate alpine garden
+0x0996  0x2b 0x2c NWest  Yes   No    No    0x1bb in an intricate alpine garden
+0x0998  0x2c 0x2d South  Yes   No    No    0x1bc in a miniature throne room. A crack in the ice leads south
+0x099a  0x2d 0x2e Enter  Yes   No    No    0x1bd  beside a pool of icy water
+0x099c  0x2e 0x2f West   Yes   No    No    0x1be ankle-deep in icy water
+0x099e  0x2f 0x30 Down   No    No    No    0x1bf sloshing along, thigh deep in icy water which is getting deeper
+0x09a0  0x30 0x03 Down   No    No    No    0x1c0 swimming in freezing water
+0x09a2  0x31 0x03 South  No    No    Yes   0x1c1 standing below a small hill rising from a lush green grassy valley. There's an opening in the hillside. Far to the east is a watering hole, surrounded by grazing animals
+0x09a4  0x31 0x38 North  Yes   Yes   No    0x1c1 standing below a small hill rising from a lush green grassy valley. There's an opening in the hillside. Far to the east is a watering hole, surrounded by grazing animals
+0x09a6  0x31 0x38 Up     Yes   No    No    0x1c1 standing below a small hill rising from a lush green grassy valley. There's an opening in the hillside. Far to the east is a watering hole, surrounded by grazing animals
+0x09a8  0x32 0x31 West   Yes   No    No    0x1c2 west of the waterhole. The grazing animals watch you with interest: some of them look very large
+0x09aa  0x33 0x32 West   Yes   No    No    0x1c3 by a pool of muddy water. The grazing dinosaurs_walk slowly away as you approach
+0x09ac  0x34 0x31 East   Yes   No    No    0x1c4 west of the hill
+0x09ae  0x35 0x36 North  No    Yes   No    0x1c5 on the prairie
+0x09b0  0x35 0x36 NEast  No    Yes   No    0x1c5 on the prairie
+0x09b2  0x35 0x34 East   Yes   No    No    0x1c5 on the prairie
+0x09b4  0x35 0x36 South  No    Yes   No    0x1c5 on the prairie
+0x09b6  0x35 0x36 SEast  No    Yes   No    0x1c5 on the prairie
+0x09b8  0x35 0x36 SWest  No    Yes   No    0x1c5 on the prairie
+0x09ba  0x35 0x36 West   No    No    No    0x1c5 on the prairie
+0x09bc  0x35 0x36 NWest  No    Yes   No    0x1c5 on the prairie
+0x09be  0x36 0x37 Jump   No    Yes   No    0x1c6 in a deep pit, presumably an animal trap
+0x09c0  0x37 0x38 East   No    No    No    0x1c7 by the edge of the pit
+0x09c2  0x37 0x34 South  No    No    No    0x1c7 by the edge of the pit
+0x09c4  0x38 0x39 North  Yes   Yes   No    0x1c8 climbing a well-worn path
+0x09c6  0x38 0x39 Up     Yes   No    No    0x1c8 climbing a well-worn path
+0x09c8  0x39 0x3a Up     Yes   Yes   No    0x1c9 on a wide ledge outside a warm cave
+0x09ca  0x39 0x3a Enter  Yes   No    No    0x1c9 on a wide ledge outside a warm cave
+0x09cc  0x3a 0x3b Up     Yes   Yes   No    0x1ca in a large dry cave, warmed by a blazing fire
+0x09ce  0x3a 0x3b North  Yes   No    No    0x1ca in a large dry cave, warmed by a blazing fire
+0x09d0  0x3b 0x3d West   No    No    No    0x1cb in a store cave
+0x09d2  0x3b 0x3c North  Yes   No    No    0x1cb in a store cave
+0x09d4  0x3c 0x3d North  Yes   No    No    0x1cc in the handicraft cave. The cavemen have obviously been very busy as there are lots of bone bowls and stone dishes on the floor
+0x09d6  0x3d 0x3e East   Yes   No    No    0x1cd the junk-strewn pebble and shell room where the_cave people make cheap gifts for barter with travellers
+0x09d8  0x3d 0x3f SEast  Yes   No    No    0x1cd the junk-strewn pebble and shell room where the_cave people make cheap gifts for barter with travellers
+0x09da  0x3d 0x3b West   No    No    No    0x1cd the junk-strewn pebble and shell room where the_cave people make cheap gifts for barter with travellers
+0x09dc  0x3e 0x40 SEast  Yes   No    No    0x1ce in the smallest cave
+0x09de  0x3f 0x41 North  No    No    No    0x1cf in the painting studio. Clearly minimalism is all the rage
+0x09e0  0x40 0x41 East   Yes   No    No    0x1d0 in the stone age armoury
+0x09e2  0x40 0x3b SWest  Yes   No    No    0x1d0 in the stone age armoury
+0x09e4  0x41 0x3f North  No    No    No    0x1d1 in the trophy cave. Skeleton heads hang from the walls - some of them were human
+0x09e6  0x41 0x43 SEast  Yes   No    No    0x1d1 in the trophy cave. Skeleton heads hang from the walls - some of them were human
+0x09e8  0x42 0x41 West   Yes   No    No    0x1d2 in the treasure vault
+0x09ea  0x43 0x44 South  Yes   No    No    0x1d3 crossing a wooden bridge over an exceedingly deep crevasse
+0x09ec  0x44 0x45 Enter  Yes   No    Yes   0x1d4 in the invention room. You find odd scribblings_on the walls and find half-finished tools on the floor
+0x09ee  0x44 0x45 West   Yes   Yes   Yes   0x1d4 in the invention room. You find odd scribblings_on the walls and find half-finished tools on the floor
+0x09f0  0x45 0x46 Enter  Yes   No    Yes   0x1d5 in the invention alcove: "JWAAMTETS" is enscribed high on one wall
+0x09f2  0x45 0x46 West   Yes   Yes   Yes   0x1d5 in the invention alcove: "JWAAMTETS" is enscribed high on one wall
+0x09f4  0x46 0x03 Down   Yes   No    No    0x1d6 in a small recess which sounds hollow underfoot
+0x09f6  0x47 0x03 South  No    No    Yes   0x1d7 at the end of a road leading north. High stone walls block the view to east and west
+0x09f8  0x47 0x48 North  Yes   No    No    0x1d7 at the end of a road leading north. High stone walls block the view to east and west
+0x09fa  0x48 0x49 East   Yes   No    No    0x1d8 at a bend in the enclosed road
+0x09fc  0x49 0x4f NEast  Yes   No    No    0x1d9 on the road, which now cuts across a small village green. To the north is a small medieval ale-house with wattled walls and a thatched roof
+0x09fe  0x49 0x4b East   Yes   No    No    0x1d9 on the road, which now cuts across a small village green. To the north is a small medieval ale-house with wattled walls and a thatched roof
+0x0a00  0x4a 0x49 South  Yes   Yes   Yes   0x1da in the bar: a grubby room with straw on the floor - not at all the sort of place you usually frequent
+0x0a02  0x4a 0x49 Leave  Yes   No    Yes   0x1da in the bar: a grubby room with straw on the floor - not at all the sort of place you usually frequent
+0x0a04  0x4b 0x4e North  Yes   No    No    0x1db on a cobbled street leading past a dense copse to a splendid castle in the east
+0x0a06  0x4b 0x4c East   Yes   No    No    0x1db on a cobbled street leading past a dense copse to a splendid castle in the east
+0x0a08  0x4c 0x52 SEast  Yes   No    No    0x1dc at the Cobble Square west of the castle. There are pillories and stocks here, surrounded by a jeering crowd
+0x0a0a  0x4d 0x52 South  Yes   No    No    0x1dd in front of the imposing castle entrance. The drawbridge is raised
+0x0a0c  0x4d 0x4c West   Yes   No    No    0x1dd in front of the imposing castle entrance. The drawbridge is raised
+0x0a0e  0x4e 0x4f North  No    No    No    0x1de in the copse
+0x0a10  0x4e 0x4b South  Yes   Yes   No    0x1de in the copse
+0x0a12  0x4e 0x4f West   Yes   No    No    0x1de in the copse
+0x0a14  0x4f 0x4e North  No    No    No    0x1df at the edge of the copse
+0x0a16  0x4f 0x50 NEast  No    No    No    0x1df at the edge of the copse
+0x0a18  0x4f 0x4b SEast  Yes   No    No    0x1df at the edge of the copse
+0x0a1a  0x50 0x4c South  No    No    No    0x1e0 deep in the copse
+0x0a1c  0x50 0x4e West   Yes   No    No    0x1e0 deep in the copse
+0x0a1e  0x50 0x4f NWest  No    No    No    0x1e0 deep in the copse
+0x0a20  0x51 0x52 East   No    Yes   No    0x1e1 in the copse
+0x0a22  0x51 0x50 West   Yes   No    No    0x1e1 in the copse
+0x0a24  0x52 0x53 Jump   No    Yes   No    0x1e2 on the north bank of the moat
+0x0a26  0x53 0x54 South  Yes   No    No    0x1e3 standing in ankle deep scummy water below the south bank of the moat
+0x0a28  0x54 0x55 South  Yes   Yes   No    0x1e4 at the castle entrance, between two tall battle-scarred towers
+0x0a2a  0x54 0x55 Enter  Yes   No    No    0x1e4 at the castle entrance, between two tall battle-scarred towers
+0x0a2c  0x55 0x57 SEast  Yes   No    No    0x1e5 in the courtyard within the castle walls. Battered armour and notched swords litter the blood-soaked ground. The Keep stands open to the southeast
+0x0a2e  0x56 0x57 East   Yes   No    No    0x1e6 in the armoury
+0x0a30  0x56 0x59 South  Yes   No    No    0x1e6 in the armoury
+0x0a32  0x57 0x58 South  Yes   No    No    0x1e7 at the Keep entrance, in a small stone room
+0x0a34  0x57 0x59 SWest  Yes   No    No    0x1e7 at the Keep entrance, in a small stone room
+0x0a36  0x58 0x59 West   Yes   No    No    0x1e8 in a storeroom piled high with kegs and barrels
+0x0a38  0x59 0x5a West   No    No    No    0x1e9 in the rush-strewn Great Hall
+0x0a3a  0x5a 0x59 South  No    No    No    0x1ea above a narrow flight of stairs
+0x0a3c  0x5a 0x5b Down   Yes   No    No    0x1ea above a narrow flight of stairs
+0x0a3e  0x5b 0x5c Down   Yes   No    No    0x1eb descending the steep stairs
+0x0a40  0x5c 0x03 Down   No    Yes   No    0x1ec in the dungeons which are dank and depressing. There's a red cross on the wall and the earth floor looks disturbed
+0x0a42  0x5d 0x60 SEast  Yes   No    No    0x1ed on a beach in a small bay surrounded by overhanging cliffs. Breakers roll in from the sea to the north, rocking the viking longship drawn up on_the sand north of you
+0x0a44  0x5e 0x60 East   No    Yes   No    0x1ee at the edge of the sea
+0x0a46  0x5e 0x60 SEast  No    Yes   No    0x1ee at the edge of the sea
+0x0a48  0x5e 0x5d South  Yes   No    No    0x1ee at the edge of the sea
+0x0a4a  0x5f 0x5e South  No    Yes   No    0x1ef on board the ship
+0x0a4c  0x5f 0x5e Down   Yes   No    No    0x1ef on board the ship
+0x0a4e  0x60 0x64 East   No    No    No    0x1f0 between the sea and towering cliffs
+0x0a50  0x60 0x61 SEast  Yes   No    No    0x1f0 between the sea and towering cliffs
+0x0a52  0x60 0x60 West   No    No    No    0x1f0 between the sea and towering cliffs
+0x0a54  0x61 0x62 SEast  Yes   No    No    0x1f1 on the beach. There's a cave to the southeast
+0x0a56  0x62 0x63 South  Yes   Yes   No    0x1f2 outside a sea cave
+0x0a58  0x62 0x63 Enter  Yes   No    No    0x1f2 outside a sea cave
+0x0a5a  0x63 0x66 West   Yes   No    No    0x1f3 in a low cave smelling of seaweed
+0x0a5c  0x64 0x60 North  No    No    No    0x1f4 in an empty cave
+0x0a5e  0x64 0x63 SWest  Yes   No    No    0x1f4 in an empty cave
+0x0a60  0x65 0x64 West   Yes   No    No    0x1f5 an old, musty, dry cave floored with very soft earth
+0x0a62  0x66 0x67 West   Yes   No    No    0x1f6 walking along a sloping east-west passage. The ground is very damp and seaweed clings to the walls
+0x0a64  0x67 0xdd North  No    Yes   No    0x1f7 further along the damp passage, beside the entrance to a small cave
+0x0a66  0x67 0xdd Down   Yes   No    No    0x1f7 further along the damp passage, beside the entrance to a small cave
+0x0a68  0x67 0x68 South  Yes   No    No    0x1f7 further along the damp passage, beside the entrance to a small cave
+0x0a6a  0x67 0x6a West   Yes   No    No    0x1f7 further along the damp passage, beside the entrance to a small cave
+0x0a6c  0x68 0x6a West   No    No    No    0x1f8 in an obnoxious cave deep down in the rocks, beside a slimy little pool
+0x0a6e  0x69 0xff Jump   Yes   Yes   Yes   0x1f9
+0x0a70  0x6a 0x68 South  No    No    No    0x1fa in a hands and knees crawl. An opening slopes down to the north
+0x0a72  0x6a 0x6c West   Yes   No    No    0x1fa in a hands and knees crawl. An opening slopes down to the north
+0x0a74  0x6b 0xff Jump   Yes   Yes   Yes   0x1fb
+0x0a76  0x6c 0x6e Up     Yes   No    No    0x1fc at a junction of the tunnel and a vertical fissure
+0x0a78  0x6d 0xff Jump   Yes   Yes   Yes   0x1fd
+0x0a7a  0x6e 0x6f Up     Yes   No    No    0x1fe in a tight fissure
+0x0a7c  0x6f 0x70 East   Yes   No    No    0x1ff above the hole in a cave which shows signs of habitation: the ashes from a recent fire smoulder_acridly
+0x0a7e  0x70 0x71 Enter  Yes   Yes   No    0x200 in the pirate's hideout
+0x0a80  0x71 0x03 Down   No    Yes   No    0x201 in the large, empty chest
+0x0a82  0x72 0x73 North  Yes   No    No    0x202 in the entrance porch of an impressive country house with exposed oak beams
+0x0a84  0x73 0x78 Up     Yes   No    No    0x203 in a u-shaped hallway with doors to east and west. A magnificent staircase sweeps upwards to a gallery above
+0x0a86  0x74 0x73 East   Yes   No    No    0x204 at the north end of the banqueting hall
+0x0a88  0x75 0x74 North  Yes   No    No    0x205 at the south end of the hall
+0x0a8a  0x76 0x73 West   Yes   No    No    0x206 at the north end of a long room used for relaxation
+0x0a8c  0x77 0x76 North  Yes   No    No    0x207 at the south end of the long room, between two tables
+0x0a8e  0x78 0x79 North  Yes   Yes   No    0x208 at the top of the stairway, in the minstrel's gallery. A short staircase leads up
+0x0a90  0x78 0x79 Up     Yes   No    No    0x208 at the top of the stairway, in the minstrel's gallery. A short staircase leads up
+0x0a92  0x79 0x81 East   Yes   Yes   No    0x209 climbing the short stairs. Several wall panels sound hollow
+0x0a94  0x7a 0x79 Down   Yes   No    No    0x20a in the middle of a long east-west portrait gallery. Leaded windows overlook the beautiful knot gardens below
+0x0a96  0x7a 0x79 South  Yes   Yes   No    0x20a in the middle of a long east-west portrait gallery. Leaded windows overlook the beautiful knot gardens below
+0x0a98  0x7b 0x7a East   Yes   No    No    0x20b at the west end of the portrait gallery
+0x0a9a  0x7c 0x7b North  Yes   No    No    0x20c in a bedroom with a four poster bed
+0x0a9c  0x7d 0x7c North  Yes   No    No    0x20d in the bedroom of the master of the house
+0x0a9e  0x7e 0x7a West   Yes   No    No    0x20e at the east end of the long gallery
+0x0aa0  0x7f 0x7e North  Yes   No    No    0x20f in a bedroom, hung about with lavender
+0x0aa2  0x80 0x7f North  Yes   No    No    0x210 in the music room
+0x0aa4  0x81 0x81 North  Yes   Yes   No    0x211 in a hedge maze
+0x0aa6  0x81 0x82 West   Yes   Yes   No    0x211 in a hedge maze
+0x0aa8  0x82 0x89 North  No    Yes   No    0x212 in a hedge maze
+0x0aaa  0x82 0x83 South  Yes   Yes   No    0x212 in a hedge maze
+0x0aac  0x82 0x89 West   Yes   Yes   No    0x212 in a hedge maze
+0x0aae  0x83 0x87 SEast  Yes   Yes   No    0x213 in a hedge maze
+0x0ab0  0x83 0x84 SWest  Yes   Yes   No    0x213 in a hedge maze
+0x0ab2  0x83 0x89 NWest  Yes   Yes   No    0x213 in a hedge maze
+0x0ab4  0x84 0x85 SEast  Yes   No    No    0x214 in a hedge maze
+0x0ab6  0x84 0x88 West   Yes   No    No    0x214 in a hedge maze
+0x0ab8  0x85 0x84 West   No    Yes   No    0x215 in the middle of the maze
+0x0aba  0x85 0x8a Enter  Yes   Yes   No    0x215 in the middle of the maze
+0x0abc  0x85 0x8a Down   Yes   Yes   No    0x215 in the middle of the maze
+0x0abe  0x86 0x87 SWest  Yes   Yes   No    0x216 in a hedge maze
+0x0ac0  0x86 0x83 West   Yes   Yes   No    0x216 in a hedge maze
+0x0ac2  0x87 0x84 West   Yes   Yes   No    0x217 in a hedge maze
+0x0ac4  0x88 0x84 East   Yes   Yes   No    0x218 in a hedge maze
+0x0ac6  0x88 0x89 NEast  Yes   Yes   No    0x218 in a hedge maze
+0x0ac8  0x89 0x82 North  No    Yes   No    0x219 in a hedge maze
+0x0aca  0x8a 0x03 North  Yes   No    No    0x21a down the well, within reach of the water
+0x0acc  0x8b 0x8d North  Yes   No    No    0x21b on a road leading north through the gates of a walled city
+0x0ace  0x8b 0x8c South  No    No    No    0x21b on a road leading north through the gates of a walled city
+0x0ad0  0x8c 0x8b East   No    No    No    0x21c outside the north entrance of an amphitheatre: an enormous circular building of gleaming marble_and decorated with heroic statues. You can hear_the roar of the crowds inside
+0x0ad2  0x8d 0x90 NEast  Yes   No    No    0x21d just inside the gates, at a junction
+0x0ad4  0x8e 0x8d East   Yes   No    No    0x21e on the steps of a small temple. Stone columns support the lintel over its doorway
+0x0ad6  0x8f 0x8e East   Yes   Yes   No    0x21f inside the temple, which contains shrines to many gods
+0x0ad8  0x8f 0x8e Leave  Yes   No    No    0x21f inside the temple, which contains shrines to many gods
+0x0ada  0x90 0x9b NEast  Yes   No    No    0x220 at a road junction
+0x0adc  0x91 0x90 West   Yes   No    No    0x221 in a spartan barracks, beside an iron-bound locker
+0x0ade  0x92 0x91 Leave  Yes   No    No    0x222 inside the locker where soldiers store their weapons
+0x0ae0  0x93 0x8d South  Yes   No    No    0x223 on a long straight road north from the gatehouse. Around you are the buildings of a small garrison town
+0x0ae2  0x94 0x93 South  Yes   No    No    0x224 in the forum: an open courtyard surrounded by buildings
+0x0ae4  0x95 0x96 South  Yes   No    No    0x225 in the market, at a vegetable stall. Ladies, wearing long flowing robes gathered at the waist and clasped at the shoulder, are jostling to get the best buy
+0x0ae6  0x95 0x94 SEast  Yes   No    No    0x225 in the market, at a vegetable stall. Ladies, wearing long flowing robes gathered at the waist and clasped at the shoulder, are jostling to get the best buy
+0x0ae8  0x96 0x94 East   Yes   No    No    0x226 in the market, at a bread stall
+0x0aea  0x97 0x94 SWest  Yes   No    No    0x227 in a butcher's shop
+0x0aec  0x98 0x94 West   Yes   No    No    0x228 outside a tavern
+0x0aee  0x99 0x94 Leave  No    Yes   No    0x229 in the deserted treasury
+0x0af0  0x99 0x94 South  Yes   No    No    0x229 in the deserted treasury
+0x0af2  0x9a 0x8c East   Yes   Yes   Yes   0x22a in the arena of the amphitheatre, surrounded by_an immense cheering crowd
+0x0af4  0x9a 0x8c Leave  Yes   No    Yes   0x22a in the arena of the amphitheatre, surrounded by_an immense cheering crowd
+0x0af6  0x9b 0x9c NEast  Yes   No    No    0x22b in the south end of the caldarium. Steps lead down into a great square bath decorated with dolphin mosaics
+0x0af8  0x9c 0x9d South  Yes   No    No    0x22c beside a stone dolphin which pours out cold water
+0x0afa  0x9d 0x9b West   Yes   No    No    0x22d in the hot baths
+0x0afc  0x9d 0x9e South  Yes   No    No    0x22d in the hot baths
+0x0afe  0x9e 0x9f East   Yes   No    No    0x22e in the hypocaust
+0x0b00  0x9e 0xa1 South  Yes   No    No    0x22e in the hypocaust
+0x0b02  0x9e 0xa0 SEast  Yes   No    No    0x22e in the hypocaust
+0x0b04  0x9e 0x9e West   No    No    No    0x22e in the hypocaust
+0x0b06  0x9f 0x9f North  No    No    No    0x22f in the hypocaust
+0x0b08  0x9f 0xa0 South  Yes   No    No    0x22f in the hypocaust
+0x0b0a  0xa0 0xa0 East   No    No    No    0x230 in the hypocaust
+0x0b0c  0xa0 0xa0 South  No    No    No    0x230 in the hypocaust
+0x0b0e  0xa0 0xa1 West   Yes   No    No    0x230 in the hypocaust
+0x0b10  0xa1 0xa1 South  No    No    No    0x231 in the hypocaust
+0x0b12  0xa1 0xa2 West   Yes   No    No    0x231 in the hypocaust
+0x0b14  0xa2 0xa2 South  No    No    No    0x232 in the hypocaust
+0x0b16  0xa2 0xa3 West   Yes   No    No    0x232 in the hypocaust
+0x0b18  0xa3 0x03 South  No    No    No    0x233 in the hypocaust
+0x0b1a  0xa4 0xac East   Yes   No    No    0x234 on a flat rocky plain which stretches for miles. It is covered by fine grey dust. The night air_is cold. Luminous walkways travel east and west
+0x0b1c  0xa5 0xa4 East   Yes   No    No    0x235 at a walkway junction
+0x0b1e  0xa6 0xa5 East   Yes   No    No    0x236 at the Intergalactic Bureau-de-Change
+0x0b20  0xa7 0xa5 South  Yes   No    No    0x237 at the foot of the Milky Way, a long sparkling pathway which climbs up into space
+0x0b22  0xa8 0xa7 Down   Yes   No    No    0x238 halfway up the Milky Way
+0x0b24  0xa9 0xdf North  No    No    No    0x239 at the top of the Milky Way, amidst brightly twinkling stars
+0x0b26  0xa9 0xa8 Down   Yes   No    No    0x239 at the top of the Milky Way, amidst brightly twinkling stars
+0x0b28  0xaa 0xa9 North  No    Yes   No    0x23a lost among the stars
+0x0b2a  0xaa 0xa7 South  No    Yes   No    0x23a lost among the stars
+0x0b2c  0xaa 0xa7 SWest  Yes   No    No    0x23a lost among the stars
+0x0b2e  0xaa 0xa8 West   Yes   No    No    0x23a lost among the stars
+0x0b30  0xaa 0xa9 NWest  Yes   No    No    0x23a lost among the stars
+0x0b32  0xab 0xa5 North  Yes   No    No    0x23b on a walkway south. A neon sign flashes "Walkway to Mars"
+0x0b34  0xab 0xdf South  No    No    No    0x23b on a walkway south. A neon sign flashes "Walkway to Mars"
+0x0b36  0xac 0xa4 West   Yes   No    No    0x23c at a walkway junction on the grey plain
+0x0b38  0xad 0xac South  Yes   No    No    0x23d at the end of the north walkway. If you continue it will be on foot
+0x0b3a  0xae 0xad South  Yes   No    No    0x23e standing on a floating metal platform, suspended in mid-air. To the north is a starship
+0x0b3c  0xaf 0xae South  Yes   No    Yes   0x23f inside the starship
+0x0b3e  0xb0 0xaf South  Yes   No    No    0x240 in a green sleep room
+0x0b40  0xb1 0xaf East   Yes   No    No    0x241 in a space swimming pool, splashing around on a_colossal water drop which wobbles in mid-air
+0x0b42  0xb2 0xaf West   Yes   No    No    0x242 in a control room, surrounded by instrument panels
+0x0b44  0xb3 0xac West   Yes   No    No    0x243 on the edge of a wide crater
+0x0b46  0xb4 0xba Up     Yes   No    No    0x244 in a dull, lifeless crater. High up the west wall is an opening
+0x0b48  0xb4 0xb3 Up     Yes   No    No    0x244 in a dull, lifeless crater. High up the west wall is an opening
+0x0b4a  0xb5 0xb4 West   Yes   No    No    0x245 in a colossal habidome
+0x0b4c  0xb6 0xb4 North  Yes   No    No    0x246 in a long room. A guard stands beside each door
+0x0b4e  0xb7 0xb6 West   Yes   No    No    0x247 in the alcove room. Only one alcove is open
+0x0b50  0xb8 0xb6 North  Yes   No    No    0x248 in a cubicle
+0x0b52  0xb9 0xb8 East   Yes   No    Yes   0x249 in a room with no roof. An opening is visible far above
+0x0b54  0xba 0xbb Enter  Yes   No    No    0x24a outside a sports and aerobotics arena
+0x0b56  0xba 0xbb West   Yes   Yes   No    0x24a outside a sports and aerobotics arena
+0x0b58  0xbb 0xbc Down   Yes   No    No    0x24b beside a deep tropical pool
+0x0b5a  0xbb 0xbc South  Yes   Yes   No    0x24b beside a deep tropical pool
+0x0b5c  0xbc 0x03 Down   No    No    No    0x24c in a dark, dingy hole between a ladder and a low tunnel
+0x0b5e  0xbd 0xba South  Yes   No    No    0x24d in the fencing hall
+0x0b60  0xbe 0xbd West   Yes   No    No    0x24e in a robot repair shop
+0x0b62  0xbf 0xc0 South  Yes   No    No    0x24f in a fair field full of flowers. Butterflies flitter happily in the bright sunshine and a heady_perfume fills the air. You could be in paradise
+0x0b64  0xc0 0xc1 South  No    No    Yes   0x250 in front of an ugly arch: "ABANDON HOPE ALL YE WHO ENTER HERE"
+0x0b66  0xc1 0xc2 South  Yes   No    No    0x251 in the Ruined Land. Where trees and grasses once grew is a smouldering wasteland and the sun hangs low as a huge ball of red fire. The heat is terrible and the ground below your feet quivers as though in agony
+0x0b68  0xc2 0xc3 South  Yes   No    No    0x252 amidst the smoking ruins of a small village
+0x0b6a  0xc3 0xc4 Down   Yes   No    No    0x253 on the brink of a deep crack
+0x0b6c  0xc4 0xc7 East   Yes   No    No    0x254 at the bottom of a deep, earthy pit. The walls are too crumbly to climb
+0x0b6e  0xc4 0xc8 South  Yes   No    No    0x254 at the bottom of a deep, earthy pit. The walls are too crumbly to climb
+0x0b70  0xc5 0xd5 North  Yes   No    No    0x255 in a stifling maze of decayed earthy passages
+0x0b72  0xc5 0xc4 East   Yes   No    No    0x255 in a stifling maze of decayed earthy passages
+0x0b74  0xc5 0xd7 SWest  No    No    No    0x255 in a stifling maze of decayed earthy passages
+0x0b76  0xc5 0xd6 West   No    No    No    0x255 in a stifling maze of decayed earthy passages
+0x0b78  0xc6 0xc5 North  Yes   No    No    0x256 in a putrescent chamber
+0x0b7a  0xc7 0xca East   Yes   No    No    0x257 at a junction between foul passages
+0x0b7c  0xc7 0xc9 South  No    No    No    0x257 at a junction between foul passages
+0x0b7e  0xc8 0xc4 North  Yes   No    No    0x258 in a square white room, some sort of experimental laboratory
+0x0b80  0xc8 0xc7 NEast  Yes   No    No    0x258 in a square white room, some sort of experimental laboratory
+0x0b82  0xc9 0xc8 North  Yes   No    No    0x259 in a worse laboratory
+0x0b84  0xc9 0xc7 East   No    No    No    0x259 in a worse laboratory
+0x0b86  0xca 0xcb Enter  No    No    No    0x25a in a room full of strange plants which grab at you. One flower is enormous
+0x0b88  0xcb 0xcc Down   No    No    No    0x25b inside the plant. Sharp hairs block your escape_and the walls ooze digestive juices
+0x0b8a  0xcc 0xcd Down   No    No    No    0x25c climbing down a sticky tube
+0x0b8c  0xcd 0xce East   Yes   Yes   No    0x25d inside the tangled roots of the giant plant
+0x0b8e  0xce 0xcf East   Yes   No    No    0x25e in a low, earthy tunnel
+0x0b90  0xcf 0xd0 Up     Yes   No    No    0x25f at the end of the earthy tunnel. Crude steps lead upwards
+0x0b92  0xd0 0xd1 Up     Yes   No    No    0x260 climbing steep, treacherous stairs
+0x0b94  0xd1 0xd2 Up     Yes   No    No    0x261 squeezing your way up the narrow stairs
+0x0b96  0xd2 0xd3 Up     Yes   No    Yes   0x262 at the top of the stairs. You can feel a trapdoor above
+0x0b98  0xd3 0xd4 Up     No    No    No    0x263 under a long table. Seated round it are nine men, presumably the Evil Timelords
+0x0b9a  0xd4 0xdb Leave  Yes   Yes   No    0x264 standing behind the Evil Timelords as they discuss their evil plans
+0x0b9c  0xd5 0xd6 North  Yes   No    No    0x265 at a dark dead end
+0x0b9e  0xd6 0xd7 North  Yes   No    No    0x266 at a dark dead end
+0x0ba0  0xd6 0xc5 West   No    No    No    0x266 at a dark dead end
+0x0ba2  0xd7 0xc5 West   No    No    No    0x267 at a dark dead end
+0x0ba4  0xd8 0x04 South  Yes   No    No    0x268 at a crossing of country roads
+0x0ba6  0xd9 0xd8 East   Yes   No    No    0x269 on a long, straight road. To the west, it shimmers and fades away
+0x0ba8  0xda 0xd8 West   Yes   No    No    0x26a on a long road. It fades to mist in the east
+0x0baa  0xdb 0xd4 West   Yes   No    No    0x26b lost in the mists of time
+0x0bac  0xdc 0x68 Up     Yes   Yes   No    0x26c A water scorpion bites you!
+0x0bae  0xdc 0x68 Leave  Yes   No    No    0x26c A water scorpion bites you!
+0x0bb0  0xdd 0x6a Up     Yes   No    No    0x26d A giant squid attacks!
+0x0bb2  0xde 0x6c Up     Yes   No    No    0x26e Seaweed engulfs you!
