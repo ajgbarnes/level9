@@ -31,7 +31,20 @@
 / 0x57 to 0x5a - more verbs
 / 0x5b to 0x5b - static object (well not ones the player can pick up), door
 / 0x5c to 0x5e - more verbs
-
+/
+/ Exit flags
+/ ==========
+/
+/ When the "exits" command is called, exit flags are returned in var[0x4e]
+/ 
+/ In this game they have the following definition:
+/
+/ Bit 0 - If set, the direction can be used inversely i.e. if this is 
+/         an East entry between locations A and B then the player can go 
+/         West from B to A (same for all v1 games)
+/ Bit 1 - If set, there is a door in this direction between the two locations
+/ Bit 2 - Not used
+/
 / Object reference list
 / =====================
 /
