@@ -1,0 +1,308 @@
+Snowball Adventure - Location Exit Definition
+---------------------------------------------
+
+Bit configuration:
+
+Bit 0 - where the direction can be used inversely
+Bit 1 - whether this direction should be hidden
+Bit 2 - if there is a door in this direction
+
+
+                        (Inv.)
+Address From  To  Dir   Bit 0 Bit 1 Bit 2 MsgId Location Text
+------- ---- ---- ----- ----- ----- ----- ----- -------------
+0x0790  0x01 0xa0 North  Yes   No    No    0x191 at a junction of monomol ropes. Some look negociable
+0x0792  0x01 0xa0 Enter  Yes   Yes   No    0x191 at a junction of monomol ropes. Some look negociable
+0x0794  0x01 0x04 South  Yes   No    No    0x191 at a junction of monomol ropes. Some look negociable
+0x0796  0x02 0x04 East   Yes   No    No    0x192 in the web
+0x0798  0x03 0x05 West   Yes   No    No    0x193 at a junction
+0x079a  0x04 0x08 South  Yes   No    No    0x194 at a junction in the web. Plasteel ropes lead away
+0x079c  0x04 0x08 Down   Yes   Yes   No    0x194 at a junction in the web. Plasteel ropes lead away
+0x079e  0x05 0x04 West   Yes   No    No    0x195 at a web junction. Ropes lead in many directions
+0x07a0  0x06 0x02 North  Yes   No    No    0x196 at a junction of the web
+0x07a2  0x06 0x02 Up     Yes   Yes   No    0x196 at a junction of the web
+0x07a4  0x06 0x08 East   Yes   No    No    0x196 at a junction of the web
+0x07a6  0x07 0x03 North  Yes   No    No    0x197 at a junction of the web
+0x07a8  0x07 0x03 Up     Yes   Yes   No    0x197 at a junction of the web
+0x07aa  0x08 0x04 North  Yes   No    No    0x198 at a junction of the web
+0x07ac  0x08 0x04 Up     Yes   Yes   No    0x198 at a junction of the web
+0x07ae  0x09 0x0d South  Yes   No    No    0x199 in the web
+0x07b0  0x09 0x0d Down   Yes   Yes   No    0x199 in the web
+0x07b2  0x0a 0x0e South  Yes   No    No    0x19a at a junction of the web
+0x07b4  0x0a 0x0e Down   Yes   Yes   No    0x19a at a junction of the web
+0x07b6  0x0b 0x0a East   Yes   No    No    0x19b in the web
+0x07b8  0x0b 0x07 North  Yes   No    No    0x19b in the web
+0x07ba  0x0b 0x07 West   Yes   Yes   No    0x19b in the web
+0x07bc  0x0b 0x07 Up     Yes   Yes   No    0x19b in the web
+0x07be  0x0c 0x10 South  Yes   No    No    0x19c at a junction of the web
+0x07c0  0x0c 0x10 Down   Yes   Yes   No    0x19c at a junction of the web
+0x07c2  0x0d 0x0c West   Yes   No    No    0x19d at a junction of the web
+0x07c4  0x0d 0x11 South  Yes   No    No    0x19d at a junction of the web
+0x07c6  0x0d 0x11 Down   Yes   Yes   No    0x19d at a junction of the web
+0x07c8  0x0e 0x10 East   Yes   No    No    0x19e in the web
+0x07ca  0x0f 0x0b North  Yes   No    No    0x19f at a junction of the web
+0x07cc  0x0f 0x0b Up     Yes   Yes   No    0x19f at a junction of the web
+0x07ce  0x10 0x14 South  Yes   No    No    0x1a0 at a junction of the web
+0x07d0  0x10 0x14 Down   Yes   Yes   No    0x1a0 at a junction of the web
+0x07d2  0x11 0x15 South  Yes   No    No    0x1a1 at a junction of the web
+0x07d4  0x11 0x15 Down   Yes   Yes   No    0x1a1 at a junction of the web
+0x07d6  0x12 0x0e North  Yes   No    No    0x1a2 near the web base
+0x07d8  0x12 0x0e Up     Yes   Yes   No    0x1a2 near the web base
+0x07da  0x13 0x12 East   Yes   No    No    0x1a3 holding a rope
+0x07dc  0x14 0x12 West   Yes   No    No    0x1a4 at a junction of the web
+0x07de  0x15 0x16 South  Yes   No    No    0x1a5 at a junction of the web
+0x07e0  0x15 0x16 Down   Yes   Yes   No    0x1a5 at a junction of the web
+0x07e2  0x16 0x1a South  Yes   No    No    0x1a6 on a rope joining solid ice. It fans out as it enters the snow
+0x07e4  0x16 0x1a Down   No    Yes   No    0x1a6 on a rope joining solid ice. It fans out as it enters the snow
+0x07e6  0x17 0x18 Down   No    Yes   No    0x1a7 floating in space
+0x07e8  0x18 0x19 Down   No    Yes   No    0x1a8 in space near the inner surface of the hollow snowball protecting the freezers
+0x07ea  0x19 0x20 Down   No    Yes   No    0x1a9 about to hit the fast moving ice-below. You'd better match velocities..
+0x07ec  0x1a 0x26 Up     No    No    No    0x1aa on a flat snowfield north of an immense unclimbably smooth cliff. A pylon stands nearby
+0x07ee  0x1b 0x26 Up     No    No    No    0x1ab on trodden snow between a tall pylon and a hemidome calling itself the "Snowball Hilton"
+0x07f0  0x1b 0xa1 Enter  Yes   No    No    0x1ab on trodden snow between a tall pylon and a hemidome calling itself the "Snowball Hilton"
+0x07f2  0x1c 0x26 Up     No    No    No    0x1ac on churned and rutted snow below a tall pylon
+0x07f4  0x1d 0x26 Up     No    No    No    0x1ad beside the northern ice-cliff which has a tiny cave at its base. A pylon stands nearby
+0x07f6  0x1d 0x9c North  Yes   No    No    0x1ad beside the northern ice-cliff which has a tiny cave at its base. A pylon stands nearby
+0x07f8  0x1d 0x9c Enter  Yes   Yes   No    0x1ad beside the northern ice-cliff which has a tiny cave at its base. A pylon stands nearby
+0x07fa  0x1e 0x26 Up     Yes   No    No    0x1ae on smooth snow beside a pylon, dwarfed by the north cliff
+0x07fc  0x1f 0x26 Up     No    No    No    0x1af on trampled snow outside a major snowdesic dome. Brilliant light from an entrance split in the hemidome illuminates a nearby pylon
+0x07fe  0x1f 0x27 Enter  Yes   No    No    0x1af on trampled snow outside a major snowdesic dome. Brilliant light from an entrance split in the hemidome illuminates a nearby pylon
+0x0800  0x20 0x26 Up     No    No    No    0x1b0 on smooth snow, beside one of a chain of pylons. A ladder leads up the pylon to a cabin
+0x0802  0x21 0x26 Up     No    No    No    0x1b1 on soft snow outside a sagging warehouse. A dark plastic path leads from the warehouse to a nearby pylon
+0x0804  0x21 0x24 Enter  Yes   No    Yes   0x1b1 on soft snow outside a sagging warehouse. A dark plastic path leads from the warehouse to a nearby pylon
+0x0806  0x22 0xff Down   No    Yes   No    0x1b2 at the rim of a colossal hole, hundreds of meters in width. Stars are visible in its depths. The_ice-rim is splintered and gouged as if great heavy objects have been pushed over the edge
+0x0808  0x23 0x22 Jump   No    Yes   No    0x1b3 on a smooth icefield, lightly dusted with powder snow
+0x080a  0x24 0x21 North  No    Yes   No    0x1b4 in a large hanger packedwith stratogliders queued for launch. The doors of the first are open ready for embarcation
+0x080c  0x25 0x2e North  Yes   Yes   Yes   0x1b5 on a shuttle platform. A button protrudes from the barrier
+0x080e  0x26 0x25 Up     Yes   No    No    0x1b6 on a ladder up the pylon
+0x0810  0x27 0x28 Down   Yes   No    No    0x1b7 in the Robodome. A wide, rippled ramp leads down into the ground
+0x0812  0x28 0x2d Down   Yes   No    No    0x1b8 on a straight ramp
+0x0814  0x29 0x2a NEast  Yes   No    No    0x1b9 at the west corner of the cave
+0x0816  0x2a 0x2c SEast  Yes   No    No    0x1ba at the north corner of the cave
+0x0818  0x2b 0x29 NWest  Yes   No    No    0x1bb at the south corner
+0x081a  0x2c 0x2b SWest  Yes   No    No    0x1bc at the east corner of the cave
+0x081c  0x2d 0x2a North  Yes   No    No    0x1bd at the base of a straight ramp, in the middle of a cave hacked from the ice
+0x081e  0x2d 0x2c East   Yes   No    No    0x1bd at the base of a straight ramp, in the middle of a cave hacked from the ice
+0x0820  0x2d 0x2b South  Yes   No    No    0x1bd at the base of a straight ramp, in the middle of a cave hacked from the ice
+0x0822  0x2d 0x29 West   Yes   No    No    0x1bd at the base of a straight ramp, in the middle of a cave hacked from the ice
+0x0824  0x2e 0x25 Leave  Yes   No    Yes   0x1be in a snowrail carriage. Uncomfortable lumpy benches are moulded from the trash-strewn floor and_the filthy windows are opaque. There's a "go" button
+0x0826  0x2f 0x1c Leave  Yes   Yes   No    0x1bf in the high control bubble of the Snowdozer. An_engraved panel at the front of the cab has a keyhole set into it
+0x0828  0x30 0x2f Up     Yes   No    No    0x1c0 in the snowdozer's engine room
+0x082a  0x31 0x24 Leave  No    Yes   Yes   0x1c1
+0x082c  0x32 0x31 Leave  Yes   No    No    0x1c2
+0x082e  0x33 0x3a Down   Yes   No    No    0x1c3 on a significant cylindrical ledge above steps to a toroidal walkway. Transpex tubes lead away through a maze of wires and machinery
+0x0830  0x33 0x34 North  Yes   No    No    0x1c3 on a significant cylindrical ledge above steps to a toroidal walkway. Transpex tubes lead away through a maze of wires and machinery
+0x0832  0x34 0x37 Down   No    No    No    0x1c4 floating in a flexible transpex tube through the central torus of a major freezer unit. Scaled-up mechanisms are visible through the soft walls_and, far below, a circular path surrounds you
+0x0834  0x34 0x35 North  Yes   No    No    0x1c4 floating in a flexible transpex tube through the central torus of a major freezer unit. Scaled-up mechanisms are visible through the soft walls_and, far below, a circular path surrounds you
+0x0836  0x35 0x33 North  Yes   No    No    0x1c5 following a winding transpex tunnel between vast lumpy metallic discs. Tiny light sources flicker far below, providing the only illumination
+0x0838  0x36 0x37 East   Yes   No    No    0x1c6 on a toroidal walkway
+0x083a  0x37 0x3f South  No    No    Yes   0x1c7 on a curving path in a 100m torus. A wide glassy tube spans the space above through a net of wires and pipes. A button protrudes from the floor
+0x083c  0x37 0x3f Enter  No    Yes   Yes   0x1c7 on a curving path in a 100m torus. A wide glassy tube spans the space above through a net of wires and pipes. A button protrudes from the floor
+0x083e  0x37 0x38 East   Yes   No    No    0x1c7 on a curving path in a 100m torus. A wide glassy tube spans the space above through a net of wires and pipes. A button protrudes from the floor
+0x0840  0x38 0x39 East   Yes   No    No    0x1c8 on a toroidal walkway
+0x0842  0x39 0x3a East   Yes   No    No    0x1c9 on a toroidal walkway
+0x0844  0x3a 0x3b East   Yes   No    No    0x1ca on a toroidal walkway beside a ramp. Tubes criss-cross the space above
+0x0846  0x3b 0x36 East   Yes   No    No    0x1cb on a toroidal walkway
+0x0848  0x3c 0x33 Up     No    No    Yes   0x1cc in the winch room beside a pair of linedrives. A trapdoor is bolted to the low ceiling and monofibes hang down into the gloom
+0x084a  0x3d 0x3c Up     Yes   No    No    0x1cd clinging to ropes in the gloom
+0x084c  0x3e 0x3d Up     Yes   No    No    0x1ce on the elevator roof
+0x084e  0x3f 0x3e Up     Yes   Yes   No    0x1cf in a blue glass elevator. A sliding door makes up one wall; the others are featureless apart from a panel of multi-coloured buttons. Square trapdoors show in floor and ceiling
+0x0850  0x40 0x3f Up     Yes   Yes   No    0x1d0 clinging to a single rope below the elevator
+0x0852  0x41 0x40 Up     Yes   No    No    0x1d1 in a grimy pit. A rope hangs down from above
+0x0854  0x42 0x45 East   No    No    No    0x1d2 in a curving e/w corridor south of a wide entrance. A button protrudes from the floor and indicator lights decorate the ceiling
+0x0856  0x42 0x46 West   No    No    No    0x1d2 in a curving e/w corridor south of a wide entrance. A button protrudes from the floor and indicator lights decorate the ceiling
+0x0858  0x42 0x3f South  Yes   No    Yes   0x1d2 in a curving e/w corridor south of a wide entrance. A button protrudes from the floor and indicator lights decorate the ceiling
+0x085a  0x42 0x3f Enter  Yes   Yes   Yes   0x1d2 in a curving e/w corridor south of a wide entrance. A button protrudes from the floor and indicator lights decorate the ceiling
+0x085c  0x43 0x42 South  Yes   No    No    0x1d3 in a spotless white alcove beside a complex revival machine
+0x085e  0x44 0x45 East   Yes   No    No    0x1d4 in a curving east-west corridor below indicator_lights
+0x0860  0x45 0x46 East   Yes   No    No    0x1d5 in a curving e/w corridor beside a green door. Lights show above it
+0x0862  0x46 0x44 East   Yes   No    No    0x1d6 in a curving e/w corridor beside a blue door. Lights show above it
+0x0864  0x47 0x46 North  Yes   No    Yes   0x1d7 at the entrance to a blue mortuary beside indicator lights and a control panel
+0x0866  0x47 0x46 Leave  Yes   Yes   Yes   0x1d7 at the entrance to a blue mortuary beside indicator lights and a control panel
+0x0868  0x48 0x45 South  Yes   No    Yes   0x1d8 by the entrance to a green mortuary beside lights and a panel
+0x086a  0x48 0x45 Leave  Yes   Yes   Yes   0x1d8 by the entrance to a green mortuary beside lights and a panel
+0x086c  0x49 0x47 North  Yes   No    No    0x1d9 in a blue mortuary beside a smooth ceramic slab. Lights twinkle beside a trapdoor on the ceiling
+0x086e  0x49 0x49 Up     Yes   No    No    0x1d9 in a blue mortuary beside a smooth ceramic slab. Lights twinkle beside a trapdoor on the ceiling
+0x0870  0x4a 0x48 South  Yes   No    No    0x1da in a green mortuary beside a smooth slab. Indicators illuminate a trapdoor above
+0x0872  0x4a 0x4a Up     Yes   No    No    0x1da in a green mortuary beside a smooth slab. Indicators illuminate a trapdoor above
+0x0874  0x4b 0x4b East   Yes   Yes   No    0x1db at the south end of a narrowing marblon cylinder. A button emerges beside an airlock door
+0x0876  0x4b 0x98 South  Yes   No    Yes   0x1db at the south end of a narrowing marblon cylinder. A button emerges beside an airlock door
+0x0878  0x4b 0x4d North  Yes   No    No    0x1db at the south end of a narrowing marblon cylinder. A button emerges beside an airlock door
+0x087a  0x4c 0x4c East   Yes   Yes   No    0x1dc at the north end of a widening marblon cylinder. A button pokes from the floor beside an airlock door
+0x087c  0x4c 0x99 North  Yes   No    Yes   0x1dc at the north end of a widening marblon cylinder. A button pokes from the floor beside an airlock door
+0x087e  0x4c 0x50 South  Yes   No    No    0x1dc at the north end of a widening marblon cylinder. A button pokes from the floor beside an airlock door
+0x0880  0x4d 0x4f East   Yes   Yes   No    0x1dd in a wide simulated-marble tube. An immovable grill is set into the floor, and an empty padded cell can be seen between the bars
+0x0882  0x4d 0x4f West   Yes   Yes   No    0x1dd in a wide simulated-marble tube. An immovable grill is set into the floor, and an empty padded cell can be seen between the bars
+0x0884  0x4d 0x4f Up     No    Yes   No    0x1dd in a wide simulated-marble tube. An immovable grill is set into the floor, and an empty padded cell can be seen between the bars
+0x0886  0x4e 0x4c North  No    No    No    0x1de in a vast smooth-surfaced cylinder beside a contoured ramp
+0x0888  0x4e 0x4d South  Yes   No    No    0x1de in a vast smooth-surfaced cylinder beside a contoured ramp
+0x088a  0x4e 0x50 Up     No    Yes   No    0x1de in a vast smooth-surfaced cylinder beside a contoured ramp
+0x088c  0x4f 0x50 North  Yes   No    No    0x1df standing on smooth simrock on the side of a large tube. A cyladder descends through red light
+0x088e  0x4f 0x4b South  No    No    No    0x1df standing on smooth simrock on the side of a large tube. A cyladder descends through red light
+0x0890  0x4f 0x4d Up     No    Yes   No    0x1df standing on smooth simrock on the side of a large tube. A cyladder descends through red light
+0x0892  0x50 0x4e East   Yes   Yes   No    0x1e0 standing inside a substantial smooth cylinder. A ramp leads down beside you and a similar, larger ramp is just visible opposite, across the tube
+0x0894  0x50 0x4e West   Yes   Yes   No    0x1e0 standing inside a substantial smooth cylinder. A ramp leads down beside you and a similar, larger ramp is just visible opposite, across the tube
+0x0896  0x50 0x4e Up     No    Yes   No    0x1e0 standing inside a substantial smooth cylinder. A ramp leads down beside you and a similar, larger ramp is just visible opposite, across the tube
+0x0898  0x51 0x50 Up     Yes   No    No    0x1e1 in a carpetted massage parlour hung about with red velcron drapes. The ceiling is polished to a_mirror finish. A sumptuous leather couch stands_in the middle of the floor
+0x089a  0x52 0x51 West   Yes   No    No    0x1e2 in a bare storeroom
+0x089c  0x53 0x4f Up     Yes   No    No    0x1e3 in a large low room, surrounded by lights and vids. A barely-audible high pitched humming emerges from a vast display panel with the legend "Snowball IX Freezer Control" to the south. A luminous cyladder rises through the ceiling
+0x089e  0x53 0x88 South  Yes   No    No    0x1e3 in a large low room, surrounded by lights and vids. A barely-audible high pitched humming emerges from a vast display panel with the legend "Snowball IX Freezer Control" to the south. A luminous cyladder rises through the ceiling
+0x08a0  0x53 0x54 SEast  Yes   Yes   No    0x1e3 in a large low room, surrounded by lights and vids. A barely-audible high pitched humming emerges from a vast display panel with the legend "Snowball IX Freezer Control" to the south. A luminous cyladder rises through the ceiling
+0x08a2  0x54 0x56 South  No    Yes   No    0x1e4 in the southeast corner of freezer control
+0x08a4  0x54 0x55 North  Yes   No    No    0x1e4 in the southeast corner of freezer control
+0x08a6  0x55 0x53 West   Yes   No    No    0x1e5 in the northeast corner of freezer control
+0x08a8  0x55 0x88 SWest  Yes   Yes   No    0x1e5 in the northeast corner of freezer control
+0x08aa  0x56 0x88 North  Yes   No    No    0x1e6 behind the display panel. You are surrounded by_the shiny warm cases of a dozen holojectors
+0x08ac  0x57 0x53 South  Yes   No    No    0x1e7 in a wood-grained library
+0x08ae  0x58 0x57 South  Yes   No    No    0x1e8 in a cramped mempak archive. Locked racks hold titles like Fusion Mechanics, Genetics by Numbers, The Last Christians, Choosing Your Small Business Android, COBOL for the Arcturan Gigabrain, Playgirl the First Hundred Years, and The Human Race and How To Win. Each pack zaps selected highlights (much better than its real contents) at your midbrain
+0x08b0  0x59 0x5b East   Yes   No    No    0x1e9 in the condo: a small, comfortable rest area. An airbed is suspended from the ceiling
+0x08b2  0x59 0x55 South  Yes   No    No    0x1e9 in the condo: a small, comfortable rest area. An airbed is suspended from the ceiling
+0x08b4  0x5a 0x59 East   Yes   No    No    0x1ea in a small tiled room. Very little space is needed to hold a wc, shower and basin but there's nothing of any game-relevance
+0x08b6  0x5b 0x61 Down   Yes   Yes   No    0x1eb in the diner: a minute corner of the condo, equipped for eating etc. A "natural wholefood no chemicals" machine is fixed to the wall, alongside_a square hole for garbage
+0x08b8  0x5b 0x61 Enter  Yes   Yes   No    0x1eb in the diner: a minute corner of the condo, equipped for eating etc. A "natural wholefood no chemicals" machine is fixed to the wall, alongside_a square hole for garbage
+0x08ba  0x5c 0x5b South  Yes   No    No    0x1ec in a cupboard
+0x08bc  0x5d 0x4d Up     No    No    No    0x1ed in a narrow service duct, beside an aircon vent
+0x08be  0x5d 0xa2 Enter  Yes   Yes   No    0x1ed in a narrow service duct, beside an aircon vent
+0x08c0  0x5d 0xa2 Leave  Yes   No    No    0x1ed in a narrow service duct, beside an aircon vent
+0x08c2  0x5e 0x5d West   Yes   No    No    0x1ee in a tight e/w crawlway
+0x08c4  0x5f 0x5f Jump   Yes   Yes   Yes   0x1ef
+0x08c6  0x60 0x61 North  Yes   No    No    0x1f0 in a dusty corner
+0x08c8  0x60 0xa2 East   Yes   No    No    0x1f0 in a dusty corner
+0x08ca  0x61 0x62 North  Yes   No    No    0x1f1 on a rubbish tip. A garbage chute is supported by corroded wires far above, much too high for you to reach it
+0x08cc  0x61 0xa3 East   Yes   No    No    0x1f1 on a rubbish tip. A garbage chute is supported by corroded wires far above, much too high for you to reach it
+0x08ce  0x61 0xa3 Down   Yes   Yes   No    0x1f1 on a rubbish tip. A garbage chute is supported by corroded wires far above, much too high for you to reach it
+0x08d0  0x62 0x63 North  Yes   No    No    0x1f2 on a great pile of garbage
+0x08d2  0x62 0xa4 East   Yes   No    No    0x1f2 on a great pile of garbage
+0x08d4  0x62 0xa4 Down   Yes   Yes   No    0x1f2 on a great pile of garbage
+0x08d6  0x63 0xa5 East   Yes   No    No    0x1f3 in an overflowing, broken junk processor (made by GIGO industries)
+0x08d8  0x64 0x4e Up     Yes   No    No    0x1f4 on a wide ramp to heavy plasteel door. A battery of videyes surround a notable flashing sign: "DROID-HANDLED STORE SERVICE. PRIVATE"
+0x08da  0x65 0x64 Up     Yes   No    Yes   0x1f5 on a gently sloping spiral ramp above a vast warehouse. Crates reach the ceiling
+0x08dc  0x65 0xa7 Down   Yes   No    No    0x1f5 on a gently sloping spiral ramp above a vast warehouse. Crates reach the ceiling
+0x08de  0x66 0xa8 East   Yes   No    No    0x1f6 at a small counter staffed by a faceless android
+0x08e0  0x67 0xa7 South  Yes   No    No    0x1f7 at a wide counter staffed by a faceless android
+0x08e2  0x68 0xac North  Yes   No    No    0x1f8 in a corner, beside a red ticket machine
+0x08e4  0x69 0xab West   Yes   No    No    0x1f9 in a corner beside a green ticket machine
+0x08e6  0x6a 0x6b North  Yes   No    No    0x1fa in a store room
+0x08e8  0x6b 0x6c Down   Yes   No    No    0x1fb in a beige, kidney-shaped entrance hall south of a buttoned airlock
+0x08ea  0x6c 0x6d Enter  Yes   No    Yes   0x1fc in a tasteful pink and green alcove beside a security door. There's a combination panel
+0x08ec  0x6d 0x95 Down   Yes   No    No    0x1fd in a small round room
+0x08ee  0x6e 0x95 Up     Yes   No    No    0x1fe on narrow, winding stairs leading down to an airlock iris. There is the usual floor button
+0x08f0  0x6f 0x6f Jump   Yes   Yes   Yes   0x1ff
+0x08f2  0x70 0x9b Up     Yes   No    Yes   0x200 in a ruined bubble farm
+0x08f4  0x71 0x70 Up     Yes   No    No    0x201 in an observatory. All the equipment has been systematically broken and the room is in chaos
+0x08f6  0x72 0x73 North  Yes   Yes   No    0x202 at the base of Jacob's Ladder. A very long opaque tube, wound about with plaitted plasteel fibres, rises dead straight above you. A ladder runs_up the middle
+0x08f8  0x72 0x73 Up     Yes   No    No    0x202 at the base of Jacob's Ladder. A very long opaque tube, wound about with plaitted plasteel fibres, rises dead straight above you. A ladder runs_up the middle
+0x08fa  0x73 0x74 North  Yes   Yes   No    0x203 climbing Jacob's Ladder. Looking up and down, you realise it must be miles long! Hovever, in some mysterious way, it seems easier to climb than_it should
+0x08fc  0x73 0x74 Up     Yes   No    No    0x203 climbing Jacob's Ladder. Looking up and down, you realise it must be miles long! Hovever, in some mysterious way, it seems easier to climb than_it should
+0x08fe  0x74 0x75 North  Yes   Yes   No    0x204 climbing Jacob's Ladder. Although you're climbing slowly, it feels as if you're moving very rapidly..
+0x0900  0x74 0x75 Up     Yes   No    No    0x204 climbing Jacob's Ladder. Although you're climbing slowly, it feels as if you're moving very rapidly..
+0x0902  0x75 0x76 North  Yes   Yes   No    0x205 near the top of Jacob's Ladder. Above is the light at the end of the tunnel
+0x0904  0x75 0x76 Up     Yes   No    No    0x205 near the top of Jacob's Ladder. Above is the light at the end of the tunnel
+0x0906  0x76 0x78 North  Yes   No    No    0x206 on a tiny platform, suspended in the middle of a colossal metallic cylinder. A yawning gulf separates the platform from a seemingly-small metallic lip round the outside. Four frail walkways join it across the abyss and a major twisted rope_hangs down to support a corroded 5 klom snowball far below
+0x0908  0x76 0x7a East   Yes   No    No    0x206 on a tiny platform, suspended in the middle of a colossal metallic cylinder. A yawning gulf separates the platform from a seemingly-small metallic lip round the outside. Four frail walkways join it across the abyss and a major twisted rope_hangs down to support a corroded 5 klom snowball far below
+0x090a  0x76 0x79 South  Yes   No    No    0x206 on a tiny platform, suspended in the middle of a colossal metallic cylinder. A yawning gulf separates the platform from a seemingly-small metallic lip round the outside. Four frail walkways join it across the abyss and a major twisted rope_hangs down to support a corroded 5 klom snowball far below
+0x090c  0x76 0x77 West   Yes   No    No    0x206 on a tiny platform, suspended in the middle of a colossal metallic cylinder. A yawning gulf separates the platform from a seemingly-small metallic lip round the outside. Four frail walkways join it across the abyss and a major twisted rope_hangs down to support a corroded 5 klom snowball far below
+0x090e  0x77 0x85 Enter  Yes   No    No    0x207 on a wide lip west of a colossal red cylinder
+0x0910  0x77 0x79 South  Yes   Yes   No    0x207 on a wide lip west of a colossal red cylinder
+0x0912  0x77 0x79 SEast  Yes   No    No    0x207 on a wide lip west of a colossal red cylinder
+0x0914  0x78 0x85 Enter  Yes   No    No    0x208 on a wide ledge round the north edge of a huge red cylinder. A thick ramp winds upwards, there's a tiny opening in the cylinder wall, an insubstantial bridge is suspended over the abyss below_the cylinder, and if you feel tired of life there's always down..
+0x0916  0x78 0x7b Up     Yes   No    No    0x208 on a wide ledge round the north edge of a huge red cylinder. A thick ramp winds upwards, there's a tiny opening in the cylinder wall, an insubstantial bridge is suspended over the abyss below_the cylinder, and if you feel tired of life there's always down..
+0x0918  0x78 0x77 West   Yes   Yes   No    0x208 on a wide ledge round the north edge of a huge red cylinder. A thick ramp winds upwards, there's a tiny opening in the cylinder wall, an insubstantial bridge is suspended over the abyss below_the cylinder, and if you feel tired of life there's always down..
+0x091a  0x78 0x77 SWest  Yes   No    No    0x208 on a wide ledge round the north edge of a huge red cylinder. A thick ramp winds upwards, there's a tiny opening in the cylinder wall, an insubstantial bridge is suspended over the abyss below_the cylinder, and if you feel tired of life there's always down..
+0x091c  0x79 0x85 Enter  Yes   No    No    0x209 on a wide ledge south of a the abyss at the bottom of a colossal red cylinder. A 5 klom snowball hangs from a strong (!) wire down the middle of the tube. A spindly bridge joins the wire
+0x091e  0x79 0x7a East   Yes   Yes   No    0x209 on a wide ledge south of a the abyss at the bottom of a colossal red cylinder. A 5 klom snowball hangs from a strong (!) wire down the middle of the tube. A spindly bridge joins the wire
+0x0920  0x79 0x7a NEast  Yes   No    No    0x209 on a wide ledge south of a the abyss at the bottom of a colossal red cylinder. A 5 klom snowball hangs from a strong (!) wire down the middle of the tube. A spindly bridge joins the wire
+0x0922  0x7a 0x85 Enter  Yes   No    No    0x20a on a wide ledge east of the abyss. A small hole_enters the cylinder wall nearby, and a narrow bridge leads out over the abyss
+0x0924  0x7a 0x78 North  Yes   Yes   No    0x20a on a wide ledge east of the abyss. A small hole_enters the cylinder wall nearby, and a narrow bridge leads out over the abyss
+0x0926  0x7a 0x78 NWest  Yes   No    No    0x20a on a wide ledge east of the abyss. A small hole_enters the cylinder wall nearby, and a narrow bridge leads out over the abyss
+0x0928  0x7b 0x7c South  Yes   Yes   No    0x20b on a wide sloping ramp west of the red cylinder
+0x092a  0x7b 0x7c Up     Yes   No    No    0x20b on a wide sloping ramp west of the red cylinder
+0x092c  0x7c 0x7d East   Yes   Yes   No    0x20c on a wide sloping ramp south of the red cylinder
+0x092e  0x7c 0x7d Up     Yes   No    No    0x20c on a wide sloping ramp south of the red cylinder
+0x0930  0x7d 0x7e North  Yes   Yes   No    0x20d on a wide sloping ramp east of the red cylinder. Squinting up through the glare, you can make out a bunch of enormous clawhooks - each attached_to a segmented wire
+0x0932  0x7d 0x7e Up     Yes   No    No    0x20d on a wide sloping ramp east of the red cylinder. Squinting up through the glare, you can make out a bunch of enormous clawhooks - each attached_to a segmented wire
+0x0934  0x7e 0x7f West   Yes   Yes   No    0x20e at the top of the wide ramp, north of the red cylinder. The ramp curves west through a pair of heavy blast doors
+0x0936  0x7e 0x7f Enter  Yes   No    Yes   0x20e at the top of the wide ramp, north of the red cylinder. The ramp curves west through a pair of heavy blast doors
+0x0938  0x7f 0x80 West   Yes   No    No    0x20f in a wide, dark east-west corridor. The snowdozer is jammed in a pair of buckled blast doors to_the east
+0x093a  0x80 0x82 West   Yes   No    No    0x210 at a T-junction where the dark passage ends at a brightly lit corridor. Looks risky..
+0x093c  0x81 0x82 South  Yes   No    No    0x211 in a bright n/s corridor, at a pair of locked doors. You don't have time to explore the rooms beyond them: the important thing is to go south to the Control Room
+0x093e  0x82 0x83 South  Yes   No    No    0x212 at a junction in a north-south corridor
+0x0940  0x83 0x97 West   Yes   Yes   Yes   0x213 at the end of the corridor, beside the entrance_to the control room
+0x0942  0x83 0x97 Enter  Yes   No    Yes   0x213 at the end of the corridor, beside the entrance_to the control room
+0x0944  0x84 0xff Enter  Yes   Yes   Yes   0x214 beside the main instrument panel. The only control that you will ever understand (without psychomods/RNA boosts) is a red lever: "manual/autopilot"
+0x0946  0x85 0x86 Down   Yes   No    No    0x215 in a sloping crawlway
+0x0948  0x86 0x85 North  Yes   Yes   Yes   0x216 in a sloping crawlway
+0x094a  0x86 0x85 Leave  Yes   Yes   No    0x216 in a sloping crawlway
+0x094c  0x87 0x86 North  Yes   Yes   Yes   0x217
+0x094e  0x87 0x86 Leave  Yes   Yes   Yes   0x217
+0x0950  0x87 0x86 Up     Yes   No    Yes   0x217
+0x0952  0x88 0x54 East   Yes   No    No    0x218 in the southwest corner of freezer control, beside a control chair. The south wall is a wavery and obscure confusion of flickery projected vids
+0x0954  0x89 0x95 North  Yes   No    No    0x219 in a comfortable cave carved into warm sandstone. Bright sunlight streams in from the east
+0x0956  0x8a 0x89 Leave  Yes   Yes   No    0x21a in a beige alcove at the rear of the cave. A small fire burns at one side, and there's a wide ledge strewn with cut meadowsweet at the other
+0x0958  0x8a 0x89 North  Yes   No    No    0x21a in a beige alcove at the rear of the cave. A small fire burns at one side, and there's a wide ledge strewn with cut meadowsweet at the other
+0x095a  0x8b 0x95 NWest  Yes   No    No    0x21b in one cubicle of a great library. Thousands of_people are studying at similar cubicles around,_their hushed voices filling the air with a low murmering
+0x095c  0x8c 0x8b Leave  Yes   Yes   No    0x21c in a soft, pink room. Gentle shapes move restfully across the walls to soft musical rhythms
+0x095e  0x8c 0x8b NWest  Yes   No    No    0x21c in a soft, pink room. Gentle shapes move restfully across the walls to soft musical rhythms
+0x0960  0x8d 0x95 West   Yes   No    No    0x21d in a grey room, lit by flickering candles
+0x0962  0x8e 0x8d Leave  Yes   Yes   No    0x21e in a solid black room filled with a glaring white light. Despite the intensity of the illumination, you know it does not show everything clearly. Yet increasing the brightness would only dazzle: concealing more certainly
+0x0964  0x8e 0x8d West   Yes   No    No    0x21e in a solid black room filled with a glaring white light. Despite the intensity of the illumination, you know it does not show everything clearly. Yet increasing the brightness would only dazzle: concealing more certainly
+0x0966  0x8f 0x95 South  Yes   No    No    0x21f on a wide sunlit beach of yellow sand. Several large rocky outcrops rise up all around. Gulls call as they soar overhead
+0x0968  0x90 0x8f Leave  Yes   Yes   No    0x220 on a desert island in the middle of a sweeping coral atoll. Palm trees rise overhead: their fallen fronds forming a soft heap
+0x096a  0x90 0x8f South  Yes   No    No    0x220 on a desert island in the middle of a sweeping coral atoll. Palm trees rise overhead: their fallen fronds forming a soft heap
+0x096c  0x91 0x95 SWest  Yes   No    Yes   0x221 in a superb recreation lounge, surrounded by a great variety of ways of passing the time: dream-games, exercisers, learndromats, fundroids etc._All are irrepairably smashed
+0x096e  0x92 0x95 Leave  Yes   Yes   No    0x222 in a sumptious bathroom with sunken bath, jacuzzi etc.
+0x0970  0x92 0x95 SEast  Yes   No    No    0x222 in a sumptious bathroom with sunken bath, jacuzzi etc.
+0x0972  0x93 0x95 East   Yes   No    No    0x223 in a bright meadow, full of flowers and sweet grasses
+0x0974  0x94 0x93 Leave  Yes   Yes   No    0x224 under the shade of an old apple tree. The ground is covered with thick, soft moss
+0x0976  0x94 0x93 East   Yes   No    No    0x224 under the shade of an old apple tree. The ground is covered with thick, soft moss
+0x0978  0x95 0x6d Up     Yes   No    No    0x225 in a forest glade (yes, really). Warm sunlight filters through the branches overhead, and cute little furry animals peer out from the undergrowth. Narrow leaf-strewn pathways lead in all directions through fragrant vegetation
+0x097a  0x96 0x8e Up     Yes   Yes   No    0x226 in a snake-pit. Venemous reptiles are slithering towards you
+0x097c  0x96 0x8e Leave  Yes   No    No    0x226 in a snake-pit. Venemous reptiles are slithering towards you
+0x097e  0x97 0x84 West   Yes   No    No    0x227 in an open-plan control room. As the ship flies_itself there are few controls, just an assortment of computers and displays of no interest to anyone. They're decades out of date - only kept in case the modern stuff fails
+0x0980  0x98 0x4b North  Yes   No    Yes   0x228 in a cylindrical airlock between two iris doors
+0x0982  0x98 0xa0 South  Yes   No    Yes   0x228 in a cylindrical airlock between two iris doors
+0x0984  0x99 0x35 North  No    No    Yes   0x229 in a featureless clindrical airlock between two_iris doors
+0x0986  0x99 0x4c South  No    No    Yes   0x229 in a featureless clindrical airlock between two_iris doors
+0x0988  0x9a 0x6b South  Yes   No    Yes   0x22a in a cubic airlock between two iris doors
+0x098a  0x9b 0x6e Up     Yes   No    Yes   0x22b in a vertical airlock between two iris doors
+0x098c  0x9c 0x72 North  Yes   No    No    0x22c in an ice tunnel
+0x098e  0x9d 0x24 Leave  Yes   No    No    0x22d in a tiny stratoglider. It is extensibly damaged
+0x0990  0x9e 0x9d North  Yes   Yes   No    0x22e in a padded room
+0x0992  0x9e 0x9d Leave  Yes   Yes   No    0x22e in a padded room
+0x0994  0x9f 0xa1 Leave  Yes   Yes   No    0x22f in the flexible bubble body of a spidroid
+0x0996  0xa0 0x9f Enter  Yes   Yes   No    0x230 in a vast docking bay, surrounded by piles of metallic junk. The massive exterior doors are open to space and, through them, lights are visible_in the far south. A thickly knotted rope stretches into the void. At the back of the docking bay_is an airlock iris with a floor button
+0x0998  0xa0 0x98 North  No    No    Yes   0x230 in a vast docking bay, surrounded by piles of metallic junk. The massive exterior doors are open to space and, through them, lights are visible_in the far south. A thickly knotted rope stretches into the void. At the back of the docking bay_is an airlock iris with a floor button
+0x099a  0xa1 0x9a South  Yes   No    Yes   0x231 in the bright, tidy docking bay of the crew habidome. An airlock iris (with button) leads further into the dome
+0x099c  0xa2 0x66 East   Yes   Yes   No    0x232 sitting on a plasteel container high up in the Robot Stores. More crates stretch south as far as you can see, while to the north is a revolting_expanse of garbage. There's a square aperture in the wall by your head
+0x099e  0xa2 0x66 Down   Yes   No    No    0x232 sitting on a plasteel container high up in the Robot Stores. More crates stretch south as far as you can see, while to the north is a revolting_expanse of garbage. There's a square aperture in the wall by your head
+0x09a0  0xa3 0xa2 South  Yes   Yes   No    0x233 north of a wall of crates
+0x09a2  0xa3 0xa2 Down   Yes   No    No    0x233 north of a wall of crates
+0x09a4  0xa4 0xa3 South  Yes   No    No    0x234 in a cramped space between crates and piles of rubbish
+0x09a6  0xa5 0xa4 South  Yes   No    No    0x235 on a sloping junk heap
+0x09a8  0xa5 0xa4 Down   Yes   Yes   No    0x235 on a sloping junk heap
+0x09aa  0xa6 0x66 South  Yes   No    No    0x236 in a gangway between stacked cases
+0x09ac  0xa7 0xa6 South  Yes   No    No    0x237 at the base of a spiral ramp, surrounded by stacked crates and containers
+0x09ae  0xa8 0x68 East   Yes   No    No    0x238 in a gangway between stacked cases
+0x09b0  0xa9 0xa8 South  Yes   No    No    0x239 in an aisle between stacked cases
+0x09b2  0xa9 0xa6 West   Yes   No    No    0x239 in an aisle between stacked cases
+0x09b4  0xaa 0xa9 South  Yes   No    No    0x23a in the stores. Piles of cases stretch in all directions
+0x09b6  0xaa 0xa7 West   Yes   No    No    0x23a in the stores. Piles of cases stretch in all directions
+0x09b8  0xab 0xaa South  Yes   No    No    0x23b in an aisle between stacked cases in the stores
+0x09ba  0xab 0x67 West   Yes   No    No    0x23b in an aisle between stacked cases in the stores
+0x09bc  0xac 0xad North  Yes   No    No    0x23c in an aisle between crates in the stores
+0x09be  0xac 0xa9 West   Yes   No    No    0x23c in an aisle between crates in the stores
+0x09c0  0xad 0x69 North  Yes   No    No    0x23d in a gangway between stacked containers
+0x09c2  0xad 0xaa West   Yes   No    No    0x23d in a gangway between stacked containers
+0x09c4  0xae 0x49 Leave  No    No    No    0x23e in a sponge-lined coffin
+0x09c6  0xaf 0x51 South  Yes   Yes   No    0x23f lying on a comfortable couch
+0x09c8  0xaf 0x51 Leave  Yes   Yes   No    0x23f lying on a comfortable couch
+0x09ca  0xaf 0x51 Up     Yes   Yes   No    0x23f lying on a comfortable couch
+0x09cc  0xb0 0x84 Enter  Yes   No    Yes   0x240 in a broken waldo coccoon
+0x09ce  0xb1 0x59 South  Yes   Yes   No    0x241 on the airbed, floating amidst warm air currents
+0x09d0  0xb1 0x59 Up     Yes   No    No    0x241 on the airbed, floating amidst warm air currents
+0x09d2  0xb1 0x59 Down   Yes   Yes   No    0x241 on the airbed, floating amidst warm air currents
+0x09d4  0xb2 0x5e West   Yes   Yes   No    0x242 in a padded cell. The walls are lined by Tuffkwilt (TM) padding, and the only door (in the ceiling) cannot be opened by you: a wide passageway is visible through its bars. A "Nutrimat" machine is the only furniture
+0x09d6  0xb2 0x5e Enter  Yes   Yes   No    0x242 in a padded cell. The walls are lined by Tuffkwilt (TM) padding, and the only door (in the ceiling) cannot be opened by you: a wide passageway is visible through its bars. A "Nutrimat" machine is the only furniture
+0x09d8  0xb2 0x5e Leave  Yes   Yes   No    0x242 in a padded cell. The walls are lined by Tuffkwilt (TM) padding, and the only door (in the ceiling) cannot be opened by you: a wide passageway is visible through its bars. A "Nutrimat" machine is the only furniture
+0x09da  0xb3 0x88 Up     Yes   No    No    0x243 seated at the console
+0x09dc  0xb3 0x88 Down   Yes   Yes   No    0x243 seated at the console
