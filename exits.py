@@ -30,13 +30,6 @@ import argparse
 from l9config import v1Configuration
 import logging
 
-loadAddress          = int("1200",16)
-dictionaryAddr       = 128
-# Stored at 732F
-exitsAddr            = 1072
-messagesStartAddr    = 5984
-commonFragmentsAddr  = 24503
-
 directions = [
     "  -  ",
     "North",
