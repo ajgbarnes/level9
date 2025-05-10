@@ -1,5 +1,5 @@
 **************************************************************************
-* Level 9 A-Code game dissassembly for Snowball (V1)
+* Level 9 A-Code game dissassembly for Snowball (v1)
 **************************************************************************
 / Created by Andy Barnes @ajgbarnes on X/Twitter
 
@@ -25,6 +25,21 @@
 / 0xd2 to 0xdd - prepositions including at, in, on, it
 / 0xde to 0xde - unused
 / 0xdf to 0xdf - the word "everything"
+/
+/ Exit flags
+/ ==========
+/
+/ When the "exits" command is called, exit flags are returned in var[0x4e]
+/ 
+/ In this game they have the following definition:
+/
+/ Bit 0 - If set, the direction can be used inversely i.e. if this is 
+/         an East entry between locations A and B then the player can go 
+/         West from B to A (same for all v1 games)
+/ Bit 1 - If set, the direction should be hidden when the location description is printed along with exits
+/ Bit 2 - If set, there is a door in this direction between the two locations
+/
+/ Only Snowball and Lords of Time share this common bit definition for v1
 / 
 / Lists
 / -----
