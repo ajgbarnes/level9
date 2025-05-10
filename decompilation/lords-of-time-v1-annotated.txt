@@ -22,6 +22,19 @@
 / 0xe4 to 0xe5 - unused
 / 0xe6 to 0xfd - other special words
 /
+/ Exit flags
+/ ==========
+/
+/ When the "exits" command is called, exit flags are returned in var[0x4e]
+/ 
+/ In this game they have the following definition:
+/
+/ Bit 0 - If set, the direction can be used inversely i.e. if this is 
+/         an East entry between locations A and B then the player can go 
+/         West from B to A (same for all v1 games)
+/ Bit 1 - If set, the direction should be hidden when the location description is printed along with exits
+/ Bit 2 - If set, there is a door in this direction between the two locations
+/
 / Objects
 / -------
 / 1. Objects from 0x50 to 0x9f are all objects that a player
