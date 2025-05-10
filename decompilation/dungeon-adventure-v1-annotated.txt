@@ -122,6 +122,7 @@
 / When the "exits" command is called, exit flags are returned in var[0x50]
 / 
 / In this game they have the following definition:
+/
 / Bit 0 - If set, the direction can be used inversely i.e. if this is 
 /         an East entry between locations A and B then the player can go 
 /         West from B to A
@@ -137,7 +138,7 @@
 /                and the game will end. Are you sure that you want to?"
 /         0xe3 : The poppy scent overcomes you...
 /         0xe4 : The ground is too slippery!
-/ BIt 2 - Not used, always set to 0x00
+/ Bit 2 - Not used, always set to 0x00
 /
 / Objects
 / =======
