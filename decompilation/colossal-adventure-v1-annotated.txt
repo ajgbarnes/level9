@@ -1355,8 +1355,6 @@ Jump Table       (Idx)
 
 **************************************************************************
 
-/ Player CAN move in the required direction
-
 / Check rules for blocking player movement across the fissure and 
 / also from the spiral staircase to the dungeon walkway. For some locations
 / the target location will be 0x00 in the table unless certain conditions are met
@@ -1367,9 +1365,8 @@ Jump Table       (Idx)
 / cannot move in that direction
 0x0262 (0x0a42): (0x10) If var[0x17] == var[0x06] then Goto 0x027a
 
-/ var[0x04] is set randomly earlier on the previous turn to see 
-/ if an evil dwarf will spawn. It is also used here to see if the 
-/ player will fall to their death on some rocks
+/ Branch if there is NOT a door between the two locations - indicated by
+/ Bit 1 being set in the exit flags
 0x0266 (0x0a46): (0x12) If var[0x04] < var[0x02] then Goto 0x027f
 
 / If the player's current location is after "a large room knee-deep in dust"
@@ -1403,10 +1400,18 @@ Jump Table       (Idx)
 
 **************************************************************************
 
-/ TODO check which locations have that set... 
+/ The following locations and directions make the player fall to rocks below:
+/ "South" from "You are at the top of a dried-up waterfall..." (0x06)
+/ "Cross" from "You are at the top of a dried-up waterfall..." (0x06)
+/ "Cross" from "You are at a cliff edge." (0x10)
+/ "Cross" from "You are at the edge of a volcano with a fantastic view over the crater" (0x25)
+/ "Cross" from "You are at a window overlooking a huge canyon." (0x38)
+
 / Branch if the target location is NOT 0xff
 / var[0x03] is the constant 0xff
 0x027f (0x0a5f): (0x11) If var[0x17] != var[0x03] then Goto 0x0288
+
+/ Target destination WAS set to 0xff
 
 / Print message  "You fall to the rocks below "
 0x0283 (0x0a63): (0x05) Print message (constant) 0x1c
