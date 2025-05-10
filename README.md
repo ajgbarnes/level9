@@ -111,6 +111,37 @@ python level9.py --game <game-name> --messages
 or
 python level9.py -g <game-name> -m
 ```
+# Exit Definitions Extractor
+
+A Python program to extract all available exit definitions. Will merge with level9.py at some future point.
+
+Each line output will have:
+
+* File offset for the exit definition
+* From location id
+* To location id
+* Direction that the player has to move
+* Bit 0 Inverse direction indicator e.g. if a player can go East from location 1 to location 2, they can also go West
+* Bit 1 definition (see produced file for definition as it varies by game)
+* BIt 2 definition (see produced file for definition as it varies by game)
+* From location message id
+* From location description
+
+The supported games can be seen by typing the following on the command line:
+
+```
+python exits.py --game 
+or
+python exits.py -g 
+```
+
+To run the Exit Definitions extractor on a particular game, replace "\<game-name\>" with the name of one listed in the output from the previous command:
+
+```
+python exits.py --game <game-name>
+or
+python exits.py -g <game-name>
+```
 
 # Level 9 v1 Parser / Interpreter
 
