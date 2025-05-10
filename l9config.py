@@ -20,6 +20,8 @@
 #                  for the start of the A-Code (used below for the offsets)
 # offsets        - Where each of the major game file components are relative
 #                  to the start of the A-Code in the file
+# locationsStartMsgId - first message id for a location used by exits.py 
+#                  when prining locations
 # lists          - For reference lists, location in the game file (reference
 #                  list is e.g. starting location of each object). These will
 #                  always be negative and are before the A-Code for version 1 
@@ -45,6 +47,7 @@ v1Configuration = {
             "fragmentsOffset"   :  0x49d1,
             "exitsOffset"       : -0x0800            
         },
+        "locationsStartMsgId" : 0x12d,                        
         "lists" : [
             -0x0583,
             0x0000,
@@ -64,6 +67,7 @@ v1Configuration = {
             "fragmentsOffset"   :  0x57d7,
             "exitsOffset"       : -0x03b0
         },
+        "locationsStartMsgId" : 0x64,                
         "lists" : [
             0x0000,
             -0x004b,
@@ -83,6 +87,7 @@ v1Configuration = {
             "fragmentsOffset"   :  0x58cc,
             "exitsOffset"       :  0x63e0
         },
+        "locationsStartMsgId" : 0x1f4,        
         "lists" : [
             -0x00d6,
             0x0000,
@@ -94,8 +99,6 @@ v1Configuration = {
     "lords" : {
         "version"           : 1,
         "filename"          : "roms/LORDSOF",
-        #"filename"          : "roms/lot.tzx",
-        #"filename"          : "roms/LordsOfTime.ssd",
         "script"            : "test-scripts/lords-of-time-v1.txt",
 
         "signatureBytes"    : b'\x00\x06\x00\x00\x65',
@@ -105,6 +108,7 @@ v1Configuration = {
             "fragmentsOffset"   : -0x0215,
             "exitsOffset"       : -0x4120
         },
+        "locationsStartMsgId" : 0x190,        
         "lists" : [
             -0x3e70,
             0x0000,
@@ -115,8 +119,7 @@ v1Configuration = {
     },
     "snowball" : {
         "version"           : 1,
-        #"filename"          : "roms/SNOWBAL",
-        "filename"          : "roms/oric-snowball.tap",
+        "filename"          : "roms/SNOWBAL",
         "script"            : "test-scripts/snowball-v1.txt",
         "signatureBytes"    : b'\x00\x06\x00\x00\xd4',
         "offsets" : {
@@ -125,6 +128,7 @@ v1Configuration = {
             "fragmentsOffset"   :  0x5547,
             "exitsOffset"       : -0x0300
         },
+        "locationsStartMsgId" : 0x190,                
         "lists" : [
             -0x00f0,
             0x0000,
