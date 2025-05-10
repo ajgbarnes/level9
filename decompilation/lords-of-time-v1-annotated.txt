@@ -35,6 +35,8 @@
 / Bit 1 - If set, the direction should be hidden when the location description is printed along with exits
 / Bit 2 - If set, there is a door in this direction between the two locations
 /
+/ Only Snowball and Lords of Time share this common bit definition for v1
+/
 / Objects
 / -------
 / 1. Objects from 0x50 to 0x9f are all objects that a player
