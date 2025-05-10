@@ -1257,7 +1257,7 @@ Jump Table       (Idx)
 0x0237 (0x0a17): (0x0f) Exits - check location var[0x0d] can move var[0x13] - exit flags returned in var[0x04] and target location (or 0x00) in var[0x17]
 
 / REMINDER
-/ var[x013] contains the exit flags for the direction that player is trying to move
+/ var[0x04] contains the exit flags for the direction that player is trying to move
 / var[0x17] contains the target location that it would take it to if the a-code allows it
 
 / Branch if the player's current location is "...at Witt's End..." (0x4d)
