@@ -1115,8 +1115,8 @@ The rules for decoding the dictionary are therefore:
 
     1. If the character value is < 128 ($80) then print it 
     2. Else if the character value is >= 128 ($80) it is the last character, subtract 128 (or mask the 8th bit) and print it
-    3. Else if on the character after the last charcter, it is the 8-bit dictionary id, print it
-    4.  Move to the next character and loop back to (1)
+    3. Else if on the character after the last character in (2), it is the 8-bit dictionary id, print it
+    4. Move to the next character and loop back to (1)
 
 ---
 
