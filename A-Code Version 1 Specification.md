@@ -400,7 +400,7 @@ Performs one of a number of system utility functions. It has a single constant o
     1. The oldSeed should be zero before loading the game
     2. To be authenticate the following algorithm should be used (Javascript / Python-esque):
 
-        > ((((((oldSeed << 8) + 0x0A) - oldSeed) <<>  2) + oldSeed) + 1) & 0xFFFF
+        > ((((((oldSeed << 8) + 0x0A) - oldSeed) <<  2) + oldSeed) + 1) & 0xFFFF
     3. Set the variable value to the lowest 8-bits of this value
 - 0x03 - Save current game
     - Save all the variable 16-bit values to a file or similar persistent storage
