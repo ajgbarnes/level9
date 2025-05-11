@@ -64,7 +64,7 @@ python3 --version
 
 # Dictionary Extractor
 
-A Python program to extract the dictionary of commands and objects from the game - this is everything that the game understands. This is now no longer a seperate programme but part of the main level9.py.
+Extract the dictionary of commands and objects from the game - this is everything that the game understands from user input. 
 
 Each line output will have an object code (in hex), the address in runtime memory where it would be found and the keyword.  There may be more than one keyword for a particular object code as sometimes synonyms are defined. 
 
@@ -90,7 +90,7 @@ In game at any point, \#dictionary and \#dict will print the dictionary.
 
 # Descriptions Extractor
 
-A Python program to extract all available game descriptions - including rooms, exits, objects, different object states. This is now no longer a seperate programme but part of the main level9.py.
+Extract all available game descriptions - including rooms, exits, objects, different object states. 
 
 Each line output will have an description code (in hex), the address in runtime memory where it would be found and the description itself.  Given the way the game engine works, most description are fragments brought together with game engine constants and variable values for lookup.
 
@@ -113,7 +113,7 @@ python level9.py -g <game-name> -m
 ```
 # Exit Definitions Extractor
 
-A Python program to extract all available exit definitions. Will merge with level9.py at some future point.
+Extract all available exit definitions.
 
 Each line output will have:
 
@@ -138,9 +138,9 @@ python exits.py -g
 To run the Exit Definitions extractor on a particular game, replace "\<game-name\>" with the name of one listed in the output from the previous command:
 
 ```
-python exits.py --game <game-name>
+python level9.py --game <game-name> --exits
 or
-python exits.py -g <game-name>
+python level9.py -g <game-name> -e
 ```
 
 # Level 9 v1 Parser / Interpreter
