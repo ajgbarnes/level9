@@ -120,6 +120,30 @@ opCodes=[
 	"ilins",
 ]
 
+##############################################################################
+# Used to look up the directions when printing exit descriptions - each 
+# exit description has a direction associated with it from 1 to 15
+##############################################################################
+directions = [
+    "  -  ",
+    "North",
+    "NEast",
+    "East",
+    "South",
+    "SEast",
+    "SWest",
+    "West",
+    "NWest",
+    "Up",
+    "Down",
+    "Enter",
+    "Leave",
+    "Cross",
+    "Climb",
+    "Jump"
+]
+
+
 ###############################################################################
 # isValidHex()
 #
@@ -543,6 +567,110 @@ def _printAllMessages(data,messagesStartAddr):
 
         address=address+1
         byte = data[address]            
+
+###############################################################################
+# _printAllExits
+#
+# Prints all the exit descriptions in the game
+# 
+# Parameters: 
+#    data           - the game file byte array
+#    exitsAddr      - offset in the game file for the start of the exits
+#
+# Returns:
+#   n/a
+###############################################################################
+def _printAllExits(data,exitsAddr):
+
+    match game:
+        case "snowball":
+            print("Snowball Adventure - Location Exit Definition")
+            print("---------------------------------------------\n")
+            print("Bit configuration:\n")
+            print("Bit 0 - where the direction can be used inversely")
+            print("Bit 1 - whether this direction should be hidden")
+            print("Bit 2 - if there is a door in this direction")
+            print("\n")
+        case "lords":
+            print("Lords of Time - Location Exit Definitions")
+            print("-----------------------------------------\n")
+            print("Bit configuration:\n")
+            print("Bit 0 - where the direction can be used inversely")
+            print("Bit 1 - whether this direction should be hidden")
+            print("Bit 2 - if there is a door in this direction")
+            print("\n")
+        case "adventure":
+            print("Adventure Quest- Location Exit Definitions")
+            print("---------------------------------------------\n")
+            print("Bit configuration:\n")
+            print("Bit 0 - where the direction can be used inversely")
+            print("Bit 1 - if player cannot move in that direction but print the location's description as a message")
+            print("Bit 2 - not used, always set to 0x00 but printed here as 'No'")
+            print("\n")
+        case "dungeon":
+            print("Dungeon Adventure - Location Exit Definitions")
+            print("---------------------------------------------\n")
+            print("Bit configuration:\n")
+            print("Bit 0 - where the direction can be used inversely")
+            print("Bit 1 - If set this a teleporation between a black and white dot and prints 'There is a sensation of rapid movement..'")
+            print("Bit 2 - not used, always set to 0x00 but printed here as 'No'")
+            print("\n")
+        case "colossal":
+            print("Colossal Adventure - Location Exit Definitions")
+            print("----------------------------------------------\n")
+            print("Bit configuration:\n")
+            print("Bit 0 - where the direction can be used inversely")
+            print("Bit 1 - if there is a 'door' in this direction between locations")
+            print("Bit 2 - not used, always set to 0x00 but printed here as 'No'")
+            print("\n")
+
+    print(f'                        (Inv.)')
+    print(f'Address From  To  Dir   Bit 0 Bit 1 Bit 2 MsgId Location Text')
+    print(f'------- ---- ---- ----- ----- ----- ----- ----- -------------')
+
+    fromLocation = 0
+    exitPointer = exitsAddr
+    hideNulls = False
+
+    while(data[exitPointer]):
+        fromLocation = fromLocation + 1
+
+        lastExit = False
+
+        while(not lastExit):
+            exitFlags      = data[exitPointer]
+            targetLocation = data[exitPointer+1]
+
+            exitDirection = exitFlags & 0xf
+            exitAttrs     = (exitFlags & 0x70) >> 4
+
+            # Bit 2 and Bit 1 vary on purpose by game (see decompilations)
+            bit2 = "Yes" if exitAttrs & 0x04 else "No"
+            bit1 = "Yes" if exitAttrs & 0x02 else "No"
+            
+            # Bit 0 always specifies if a direction can be used inversely
+            # i.e. if you can go East from location 1 to location 2, if this is 
+            # set then you can go West from location 2 to location 1
+            reverseValid  = "Yes" if exitAttrs & 0x01 else "No"
+
+            messageId = fromLocation + locationsStartMsgId
+
+            address = _getAddrForMessageN(data, messageId)
+            message = _getMessage(data, address)
+            if(not (hideNulls and exitDirection == 0)):
+                print(f'0x{exitPointer:04x}  0x{fromLocation:02x} 0x{targetLocation:02x} {directions[exitDirection]:<5}  {reverseValid:<5} {bit1:<5} {bit2:<5} 0x{messageId:03x} {message}')
+            if(targetLocation == 0xfe):
+                print('uh oh')
+                sys.exit()
+
+            # Check the 8th bit - if it's set it's the last exit
+            # for this location
+            if(exitFlags & 0x80):
+                lastExit = True
+
+            exitPointer += 2
+     
+
 
 ###############################################################################
 # vm_fn_load_dictionary
@@ -1625,10 +1753,11 @@ signal.signal(signal.SIGINT, signal_handler)
 # Set up the command line argument parser
 parser = argparse.ArgumentParser()
 
-# Switch to print the dictionary or messages
+# Switch to print the dictionary or messages or exit definitions
 parserGroup1 = parser.add_mutually_exclusive_group(required=False)
 parserGroup1.add_argument('-d', '--dictionary',required=False, action='store_true')
 parserGroup1.add_argument('-m', '--messages',required=False, action='store_true')
+parserGroup1.add_argument('-e', '--exits',required=False, action='store_true')
 
 # Set up the first parser group - either a file or game name
 parserGroup2 = parser.add_mutually_exclusive_group(required=True)
@@ -1686,6 +1815,7 @@ dictionaryAddr       = aCodeStartAddr + v1Configuration[game]['offsets']['dictio
 exitsAddr            = aCodeStartAddr + v1Configuration[game]['offsets']['exitsOffset'] 
 messagesStartAddr    = aCodeStartAddr + v1Configuration[game]['offsets']['messagesOffset']
 commonFragmentsAddr  = aCodeStartAddr + v1Configuration[game]['offsets']['fragmentsOffset']
+locationsStartMsgId  =                  v1Configuration[game]['locationsStartMsgId']
 
 # print(hex(dictionaryAddr))
 # print(hex(exitsAddr))
@@ -1705,6 +1835,9 @@ if(args.messages):
     _printAllMessages(data, messagesStartAddr)
     sys.exit()
 
+if(args.exits):
+    _printAllExits(data,exitsAddr)
+    sys.exit()
 
 # Main virtual machine loop - find the next operator in the A-Code and
 # despatch it to a command or the list handler
@@ -1769,4 +1902,3 @@ while(True):
                 break
 
     pc=pc+1
-
