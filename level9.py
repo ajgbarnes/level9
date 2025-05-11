@@ -152,12 +152,12 @@ directions = [
 # Parameters: 
 #    string - holds the string to be validate as hex
 #
-        # Returns:
-        #    True  - string is in 0xNN format
+# Returns:
+#    True  - string is in 0xNN format
 #    False - invalid format
 ###############################################################################
 def isValidHex(string):
-    return re.search("^0x[0-9a-fA-F]{2}$", string) is not None
+    return re.search("^0x[0-9a-fA-F]{1,3}$", string) is not None
     
 ###############################################################################
 # signal_handler()
@@ -397,7 +397,7 @@ def _getAddrForMessageN(data, messageNumber):
     return messagesAddress 
 
 ###############################################################################
-# _getAddrForMessageN
+# _getMessage
 #
 # Decode the message at the passed address. Does NOT print it to the screen.
 # Loop through each byte:
