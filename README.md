@@ -234,6 +234,7 @@ The interpreter has been extended to include the following commands, mostly for 
 |Command|Description|
 | --- | --- | 
 |#dict / #dictionary  | print the dictionary for the game|
+|#exits | print all the exit defintions for the game|
 |#list |lists all the values in the listarea (these can be manipulated with #setlist to e.g. put objects in your current location or inventory)|
 |#message \<number\> |print message number|
 |#seed \<number\>|sets the random seed to the value - useful for debugging when a game contains random events|
