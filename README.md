@@ -1,5 +1,7 @@
 # Level 9 Python Tools
 
+Support for all v1 versions of Level 9 games and nascent support for v2 (Return to Eden works!).
+
 These are absolutely iconic adventure games for the BBC Micro - always been fascinated by them and how they crammed so much beautiful and eloquent English into so little memory. 
 
 I do not hold the copyright to the original games, only the python programs that inspect and read them. The original game Copyright remains with Level 9.
@@ -143,15 +145,16 @@ or
 python level9.py -g <game-name> -e
 ```
 
-# Level 9 v1 Parser / Interpreter
+# Level 9 Parser / Interpreter
 
 Now released and should work with games from the BBC Micro, Oric, ZX Spectrum etc including:
 
-* Adventure Quest
-* Colossal Aventure
-* Dungeon Adventure
-* Lords of Time
-* Snowball Test
+* Adventure Quest (V1)
+* Colossal Aventure (V1)
+* Dungeon Adventure (V1)
+* Lords of Time (V1)
+* Snowball (V1)
+* Return to Eden (v2)
 
 It was intended to be ultra portable so rus on the command line for now (that will change to support graphics but allow a user to choose).  
 
