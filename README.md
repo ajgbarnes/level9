@@ -233,14 +233,14 @@ The interpreter has been extended to include the following commands, mostly for 
 
 |Command|Description|
 | --- | --- | 
-|#vars|lists all game variable values|
-|#var \<number\>|displays a single game variable value|
-|#seed \<number\>|sets the random seed to the value - useful for debugging when a game contains random events|
-|#setvar \<number\> \<value\> |Sets variable to the value. Can be decimal or hexadecimal values (0xNN)|
-|#setlist \<number\> \<value\> | Set item <number> to <value>. Can be decimal or hexadecimal values (0xNN)|
+|#dict / #dictionary  | print the dictionary for the game|
 |#list |lists all the values in the listarea (these can be manipulated with #setlist to e.g. put objects in your current location or inventory)|
 |#message \<number\> |print message number|
-|#dict / #dictionary  | print the dictionary for the game|
+|#seed \<number\>|sets the random seed to the value - useful for debugging when a game contains random events|
+|#setlist \<number\> \<value\> | Set item <number> to <value>. Can be decimal or hexadecimal values (0xNN)|
+|#setvar \<number\> \<value\> |Sets variable to the value. Can be decimal or hexadecimal values (0xNN)|
+|#vars|lists all game variable values|
+|#var \<number\>|displays a single game variable value|
 
 # Level 9 v1 Decompiler
 
