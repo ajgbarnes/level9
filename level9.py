@@ -1951,8 +1951,6 @@ def _find_v1_a_code_start(data, version):
     else: 
         startAddress = data[0x1a] + data [0x1b] *256
 
-    print(hex(startAddress))
-    print(hex(data[startAddress]))
     return startAddress, game
 
 
