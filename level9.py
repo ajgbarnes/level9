@@ -13,7 +13,9 @@
 # - Snowball (1983)
 # - Lords of Time (1983)
 #
-# Will extend this at some point to v2, v3 and v4.
+# Nascent support for v2 files - only tested with Emerald Isle so far
+#
+# Will extend this at some point to v3 and v4.
 #
 # This is actually the second iteration as the first looked quite similar to the
 # assembly code when I was working out what it all did. 
