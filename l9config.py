@@ -20,8 +20,6 @@
 #                  for the start of the A-Code (used below for the offsets)
 # offsets        - Where each of the major game file components are relative
 #                  to the start of the A-Code in the file
-# locationsStartMsgId - first message id for a location used by exits.py 
-#                  when prining locations
 # lists          - For reference lists, location in the game file (reference
 #                  list is e.g. starting location of each object). These will
 #                  always be negative and are before the A-Code for version 1 
@@ -96,9 +94,16 @@ v1Configuration = {
             None
         ]
     },    
+    "eden" : {
+        "version"           : 2,
+        "filename"          : "roms/edenobj.bin",
+        "script"            : "test-scripts/return-to-eden-v2.txt",
+    },  
     "lords" : {
         "version"           : 1,
         "filename"          : "roms/LORDSOF",
+        #"filename"          : "roms/lot.tzx",
+        #"filename"          : "roms/LordsOfTime.ssd",
         "script"            : "test-scripts/lords-of-time-v1.txt",
 
         "signatureBytes"    : b'\x00\x06\x00\x00\x65',
