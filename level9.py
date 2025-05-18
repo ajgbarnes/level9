@@ -449,67 +449,60 @@ def _getAddrForMessageN(data, messageNumber):
 # Returns:
 #   Decoded plain text message
 ###############################################################################
-def _getMessageV1(data, msgAddress):
+def _getMessage(data, msgAddress):
 
     message=''
 
-    byte = data[msgAddress]
-    while byte:
-        if(byte >= 0x5E):
-            fragmentNumber = byte - 0x5E
-            fragmentAddr = _getAddrForFragment(data,fragmentNumber)
-
-            newMessage = _getMessageV1(data, fragmentAddr)
-            message = message + newMessage
-
-        elif(byte == 0x02):
-            # Used to denote end of some fragments?
-            break
-        elif(byte == 0x01):
-            # End of fragment or string
-            break
-        else:
-            message = message + str(chr(byte+0x1D))
-            #_getCharacter(byte)
-
-        msgAddress = msgAddress + 1
+    if(version == 1):
         byte = data[msgAddress]
+        while byte:
+            if(byte >= 0x5E):
+                fragmentNumber = byte - 0x5E
+                fragmentAddr = _getAddrForFragment(data,fragmentNumber)
 
-    return message
+                newMessage = _getMessage(data, fragmentAddr)
+                message = message + newMessage
 
-##########################################
+            elif(byte == 0x02):
+                # Used to denote end of some fragments?
+                break
+            elif(byte == 0x01):
+                # End of fragment or string
+                break
+            else:
+                message = message + str(chr(byte+0x1D))
+                #_getCharacter(byte)
 
-def _getMessageV2(data, msgAddress):
+            msgAddress = msgAddress + 1
+            byte = data[msgAddress]
 
-    message=''
-
-    # BBC Micro only allows 1 byte length for strings
-    # in v2 at least for return to eden
-    msgLength = data[msgAddress] - 1
-   
-    msgAddress = msgAddress + 1
-
-    #print(hex(msgLength))
-
-    while msgLength:
-        byte = data[msgAddress]
-        if(byte >= 0x5E):
-            fragmentNumber = byte - 0x5E
-            fragmentAddr = _getAddrForFragment(data,fragmentNumber)
-
-            newMessage = _getMessageV2(data, fragmentAddr)
-            message = message + newMessage
-            pass
-
-        elif(byte < 0x03):
-            # End of fragment or string
-            break
-        else:
-            message = message + str(chr(byte+0x1D))
-
+    else:
+        # BBC Micro only allows 1 byte length for strings
+        # in v2 at least for return to eden
+        msgLength = data[msgAddress] - 1
+    
         msgAddress = msgAddress + 1
-        msgLength = msgLength - 1
 
+        #print(hex(msgLength))
+
+        while msgLength:
+            byte = data[msgAddress]
+            if(byte >= 0x5E):
+                fragmentNumber = byte - 0x5E
+                fragmentAddr = _getAddrForFragment(data,fragmentNumber)
+
+                newMessage = _getMessage(data, fragmentAddr)
+                message = message + newMessage
+                pass
+
+            elif(byte < 0x03):
+                # End of fragment or string
+                break
+            else:
+                message = message + str(chr(byte+0x1D))
+
+            msgAddress = msgAddress + 1
+            msgLength = msgLength - 1
 
     return message
 
@@ -535,10 +528,7 @@ def _printMessage(data, msgAddress):
 
     global charsWrittenToLine
 
-    if(version == 1):
-        message=_getMessageV1(data,msgAddress)
-    else:
-        message=_getMessageV2(data,msgAddress)
+    message=_getMessage(data,msgAddress)
 
     for character in message:
         if(character == '%' and charsWrittenToLine>2):
@@ -864,8 +854,6 @@ def vm_fn_listhandler(data,opCode,pc,version):
 
     elif(opCode >= 0b11000000): # 0xC0
         # variable[ <operand2> ] = list#x[ <operand1> ]
-
-        print(hex(pc))
 
         pc=pc+1
         constant = data[pc]
@@ -1487,12 +1475,38 @@ def vm_fn_jump(data, opCode, pc):
 
 ###############################################################################
 # vm_fn_screen()
+#
+# Switch between text and graphics mode. Ignored for now until I release 
+# the graphics version (need to get floodfill working correctly).
+#
+# <operand1> - id of mode:
+# $00 - Switch back to the text
+# $01 - Show the graphics
+#
+# If <operand1> is set to $00 no other operands                
+#
+# If <operand1> is set to $01:
+# 
+# <operand2> - graphic screen to display 
+# 
+# Parameters: 
+#    data           - the game file byte array
+#    opCode         - list handler code
+#    pc             - the program counter
+#
+# Returns:
+#   Updated program counter
 ###############################################################################
 def vm_fn_screen(data, opCode, pc):
 
+    # Get the indicator for text (0x00) or graphics (0x01)
+    # to show
     pc=pc+1
     constant1 = data[pc]
 
+    # If switching to graphics mode (0x01) then there will be a second 
+    # operand that indicates which mode to switch to - although not used
+    # by the BBC as it uses a small Mode 5 window
     if(constant1 > 0x00):
         pc=pc+1
         constant2 = data[pc]
@@ -1501,6 +1515,17 @@ def vm_fn_screen(data, opCode, pc):
 
 ###############################################################################
 # vm_fn_picture()
+#
+# Show the picture in the first operand. Ignored for now...
+#
+# Parameters: 
+#    data           - the game file byte array
+#    opCode         - list handler code
+#    pc             - the program counter
+#
+# Returns:
+#   Updated program counter
+#
 ###############################################################################
 def vm_fn_picture(data, opCode, pc):
 
@@ -1511,6 +1536,17 @@ def vm_fn_picture(data, opCode, pc):
 
 ###############################################################################
 # vm_fn_cleartg()
+#
+# Clear text or graphics from the screen. Ignored for now...
+#
+# Parameters: 
+#    data           - the game file byte array
+#    opCode         - list handler code
+#    pc             - the program counter
+#
+# Returns:
+#   Updated program counter
+#
 ###############################################################################
 def vm_fn_cleartg(data, opCode, pc):
 
