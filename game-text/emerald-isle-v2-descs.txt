@@ -1,0 +1,766 @@
+0x1  /  0x972  :  
+0x2  /  0x974  :  to 
+0x3  /  0x977  : , 
+0x4  /  0x97a  : . 
+0x5  /  0x97d  : 
+
+0x6  /  0x97f  :  and 
+0x7  /  0x983  : .
+
+0x8  /  0x986  : north
+0x9  /  0x98a  : northeast
+0xa  /  0x990  : east
+0xb  /  0x993  : south
+0xc  /  0x995  : southeast
+0xd  /  0x999  : southwest
+0xe  /  0x99d  : west
+0xf  /  0x9a0  : northwest
+0x10  /  0x9a6  : up
+0x11  /  0x9a9  : down
+0x12  /  0x9ac  : in
+0x13  /  0x9ae  : out
+0x14  /  0x9b1  : across
+0x15  /  0x9b6  : Exits are 
+0x16  /  0x9be  :  to a door
+0x17  /  0x9c4  :  through a doorway
+0x18  /  0x9ce  : 
+You are 
+0x19  /  0x9d4  : You own 
+0x1a  /  0x9d9  : And you're wearing 
+0x1b  /  0x9e8  : You can see 
+0x1c  /  0x9ef  : What next
+0x1d  /  0x9f7  : Pardon?
+0x1e  /  0x9fd  : Eh?
+0x1f  /  0xa01  : What?
+0x20  /  0xa06  : You'll need to say more than that
+0x21  /  0xa1a  : Could you elaborate
+0x22  /  0xa28  : Do that to what?
+0x23  /  0xa33  : Please rephrase that
+0x24  /  0xa3e  : Please be more specific
+0x25  /  0xa4d  : I don't quite understand
+0x26  /  0xa5c  : What a mouthful! I'm only a poor little micro, you know!
+0x27  /  0xa83  : You can't
+0x28  /  0xa89  : Silly!
+0x29  /  0xa8f  : You can't see
+0x2a  /  0xa97  : You've not got
+0x2b  /  0xaa3  : You already have
+0x2c  /  0xaad  : that.
+
+0x2d  /  0xab2  :  to a gate
+0x2e  /  0xab8  :  through a gateway
+0x2f  /  0xac2  : Drop something first, then you may be able to take
+0x30  /  0xade  : 
+It's dark.
+
+0x31  /  0xae8  : ?
+0x32  /  0xaea  : Nothing happens
+0x33  /  0xaf5  : Doesn't work
+0x34  /  0xaff  : No effect
+0x35  /  0xb08  : Really stop
+0x36  /  0xb10  : Another game
+0x37  /  0xb19  : Really restore
+0x38  /  0xb22  : 
+YES or NO, please
+0x39  /  0xb30  : 
+You score 
+0x3a  /  0xb37  : /1000 and are a 
+0x3b  /  0xb42  : Sorry, I can't help
+0x3c  /  0xb50  : nothing.
+
+0x3d  /  0xb58  : That way is blocked
+0x3e  /  0xb65  : Open the door
+0x3f  /  0xb6d  : The door closes
+0x40  /  0xb76  : 
+0x41  /  0xb77  : 
+0x42  /  0xb78  : You find
+0x43  /  0xb7d  : Do WHAT with
+0x44  /  0xb86  : No one attacks
+0x45  /  0xb8f  : You chase away
+0x46  /  0xb97  : The only exit is 
+0x47  /  0xba2  : in 
+0x48  /  0xba5  : on 
+0x49  /  0xba8  : Looks 
+0x4a  /  0xbae  : . It's quite small
+0x4b  /  0xbb7  : . It's quite heavy
+0x4c  /  0xbc3  : . Seems valuable
+0x4d  /  0xbcf  : You can't do that to
+0x4e  /  0xbdb  : It's impossible to do that to
+0x4f  /  0xbed  : Your efforts have no effect on
+0x50  /  0xc04  : a copper coin
+0x51  /  0xc0c  : a bronze coin
+0x52  /  0xc15  : a silver coin
+0x53  /  0xc1e  : a gold coin
+0x54  /  0xc26  : a single ticket
+0x55  /  0xc2f  : a return ticket
+0x56  /  0xc38  : a season ticket
+0x57  /  0xc40  : a matchbox
+0x58  /  0xc48  : some carbide granules
+0x59  /  0xc55  : an identity card
+0x5a  /  0xc5f  : reward money - 
+0x5b  /  0xc6a  : a crumpled scrap of paper
+0x5c  /  0xc79  : a small key
+0x5d  /  0xc7f  : an ornate key
+0x5e  /  0xc87  : an anchor
+0x5f  /  0xc8c  : a hand axe
+0x60  /  0xc94  : a rusty lamp
+0x61  /  0xc9c  : a flat pan
+0x62  /  0xca3  : an extension ladder
+0x63  /  0xcad  : a claw hammer
+0x64  /  0xcb6  : a manual
+0x65  /  0xcbc  : a short rope
+0x66  /  0xcc4  : a long rope
+0x67  /  0xccc  : a glass lens
+0x68  /  0xcd4  : some overalls
+0x69  /  0xcdd  : pliers
+0x6a  /  0xce2  : a parachute
+0x6b  /  0xcea  : a pick
+0x6c  /  0xcef  : a long plank
+0x6d  /  0xcf8  : a glue pot
+0x6e  /  0xd00  : a screwdriver
+0x6f  /  0xd09  : sharp spikes
+0x70  /  0xd12  : a mesh armband
+0x71  /  0xd1d  : a shovel
+0x72  /  0xd23  : 
+0x73  /  0xd24  : 
+0x74  /  0xd25  : a phrase book
+0x75  /  0xd2e  : a leather wallet
+0x76  /  0xd36  : a deep bowl
+0x77  /  0xd3e  : a fence post
+0x78  /  0xd45  : yummy food
+0x79  /  0xd4e  : a boathook
+0x7a  /  0xd56  : a canoe
+0x7b  /  0xd5c  : a knotty log
+0x7c  /  0xd65  : a stone block
+0x7d  /  0xd6d  : a brooch
+0x7e  /  0xd73  : a map
+0x7f  /  0xd77  : an opal
+0x80  /  0xd7c  : a ruby
+0x81  /  0xd81  : a sapphire
+0x82  /  0xd88  : a bag of silver
+0x83  /  0xd92  : rare gems
+0x84  /  0xd99  : a sword
+0x85  /  0xd9f  : oodles of dubloons
+0x86  /  0xdab  : a coronet
+0x87  /  0xdb1  : a necklace
+0x88  /  0xdb8  : an idol
+0x89  /  0xdbe  : an ermine robe
+0x8a  /  0xdc6  : a gold nugget
+0x8b  /  0xdd1  : a figurine
+0x8c  /  0xdda  : a coconut
+0x8d  /  0xde1  : a splendid painting
+0x8e  /  0xded  : a platinum pyramid
+0x8f  /  0xdfb  : a treasure chest
+0x90  /  0xe04  : diamonds
+0x91  /  0xe0a  : 
+0x92  /  0xe0b  : 
+0x93  /  0xe0c  : 
+0x94  /  0xe0d  : 
+0x95  /  0xe0e  : any water
+0x96  /  0xe13  : an old beggar
+0x97  /  0xe1c  : the King
+0x98  /  0xe20  : a nurse
+0x99  /  0xe26  : a shopkeeper
+0x9a  /  0xe2f  : a seamstress
+0x9b  /  0xe36  : a guard
+0x9c  /  0xe3c  : 
+0x9d  /  0xe3d  : 
+0x9e  /  0xe3e  : 
+0x9f  /  0xe3f  : 
+0xa0  /  0xe40  : the statue's arm
+0xa1  /  0xe4a  : a massive boulder
+0xa2  /  0xe55  : a small round button
+0xa3  /  0xe60  : complicated carvings
+0xa4  /  0xe6d  : the ceiling
+0xa5  /  0xe74  : a fine clock
+0xa6  /  0xe7c  : a scratched drawing
+0xa7  /  0xe88  : elevator controls
+0xa8  /  0xe94  : inscribed graffiti
+0xa9  /  0xea0  : holes
+0xaa  /  0xea5  : a stone statue
+0xab  /  0xeae  : an inscription
+0xac  /  0xeb6  : a lever
+0xad  /  0xebb  : a machine with a slot
+0xae  /  0xec7  : monitor screens
+0xaf  /  0xed1  : a weird monument
+0xb0  /  0xedd  : a notice
+0xb1  /  0xee3  : pinnacles of rock beside a deep hole
+0xb2  /  0xef8  : a pit
+0xb3  /  0xefc  : a plaque with a hole
+0xb4  /  0xf08  : a metal plate
+0xb5  /  0xf11  : the roof
+0xb6  /  0xf17  : a dangling cord
+0xb7  /  0xf21  : rude runes
+0xb8  /  0xf27  : a sign
+0xb9  /  0xf2c  : a signpost
+0xba  /  0xf33  : small switches
+0xbb  /  0xf3a  : a fixed telescope
+0xbc  /  0xf46  : thick threads
+0xbd  /  0xf4e  : a tunnel
+0xbe  /  0xf54  : hanging vines
+0xbf  /  0xf5c  : 
+0xc0  /  0xf5d  : tangled wires
+0xc1  /  0xf67  : odd writing
+0xc2  /  0xf70  : a train
+0xc3  /  0xf74  : a scarecrow
+0xc4  /  0xf7c  : 
+0xc5  /  0xf7d  : 
+0xc6  /  0xf7e  : 
+0xc7  /  0xf7f  : a slot
+0xc8  /  0xf84  : 'W' cut into the lawn
+0xc9  /  0xf91  : 'E' on the ground
+0xca  /  0xf9c  : 'A' hanging in mid-air
+0xcb  /  0xfab  : 'L' marked out by pebbles
+0xcc  /  0xfbe  : 'T' carved on a tree-trunk
+0xcd  /  0xfcf  : 'H' floating on the water
+0xce  /  0xfdb  : You're on the block.
+
+0xcf  /  0xfe8  :  which are broken
+0xd0  /  0xff3  :  that is stopped
+0xd1  /  0xffe  :  hanging from the statue's arm
+0xd2  /  0x100d  :  big enough to crawl through
+0xd3  /  0x101c  : Your parachute is snagged on a branch and you swing from it, unable to move, dangling high above the jungle floor
+0xd4  /  0x105a  : Two vultures flap to a convenient perch and sit waiting
+0xd5  /  0x107a  : Wild beasts stalk nearer from all directions, keeping to the shadows
+0xd6  /  0x109f  : A great cat lunges forward from a nearby branch, claws extended
+0xd7  /  0x10c5  :  full of water
+0xd8  /  0x10cc  :  glowing brightly
+0xd9  /  0x10d7  :  across the marsh
+0xda  /  0x10e0  :  which is extended
+0xdb  /  0x10ea  :  across the river
+0xdc  /  0x10f3  : It's too short to reach across the river
+0xdd  /  0x1108  : It gets much longer. 
+0xde  /  0x1116  :  upside down trapping air
+0xdf  /  0x1123  :  supporting the ceiling
+0xe0  /  0x1130  :  holding you
+0xe1  /  0x1137  :  tied to the canoe
+0xe2  /  0x1141  :  anchoring the canoe
+0xe3  /  0x114c  :  hanging from a rock
+0xe4  /  0x1156  :  running smoothly
+0xe5  /  0x1162  :  notes
+0xe6  /  0x1168  : 
+Welcome to Level 9's Emerald Isle, copyright (C) 1985. 
+0xe7  /  0x1190  : You hear nothing special. 
+0xe8  /  0x11a2  : You mutter the magic word under your breath, rolling your eyes and crossing everything which can be crossed. Nothing happens.
+0xe9  /  0x11e8  : Time goes by 
+0xea  /  0x11f3  : No one here wants
+0xeb  /  0x11ff  : Yeuch!
+0xec  /  0x1205  : It opens. 
+0xed  /  0x120d  : It closes. 
+0xee  /  0x1215  : I didn't expect you to say that!
+0xef  /  0x122b  : 
+You're dead. 
+0xf0  /  0x1237  : and a voice intones: '
+0xf1  /  0x1246  : Clumsy Oaf
+0xf2  /  0x1250  : Not again
+0xf3  /  0x1258  : Third time unlucky
+0xf4  /  0x1265  : !'. A cloud of orange smoke billows up, then clears..
+0xf5  /  0x1287  : but you're still dead.
+0xf6  /  0x1298  : Take care!
+0xf7  /  0x12a0  : A ghoul attacks you in the dark. 
+0xf8  /  0x12b3  : Send the form supplied to Level 9 Computing and we'll provide a cluesheet. Remember to press SHIFT (or RETURN on the MSX) if the program stops, so it knows you've read the text printed and that it can carry on, and try out the following commands:
+WORDS and PICTURES, SAVE and RESTORE, INVENTORY, EXAMINE thing, SCORE and the compass directions. 
+0xf9  /  0x138b  : 
+0xfa  /  0x138c  : mere beginner
+0xfb  /  0x1395  : player of sorts
+0xfc  /  0x139f  : real adventurer
+0xfd  /  0x13a9  : master adventurer
+0xfe  /  0x13b4  : Grandmaster Adventurer, Ruler of Emerald Isle and all-round hero
+0xff  /  0x13db  : 
+0x100  /  0x13dc  : 
+0x101  /  0x13dd  : 
+0x102  /  0x13de  : 
+0x103  /  0x13df  : That's already done.
+0x104  /  0x13ed  : She gasps with delight, 'Just what I need, thank you very much indeed!', and rummages for some reward. The seamstress presses something into you hand as she leaves
+0x105  /  0x144b  : The King is working quietly when you enter. He jumps up in fury: "Goddam tourists! Will I never get any peace?". He tosses you a coin, rather harder than is necessary, and stalks out in a huff.
+0x106  /  0x14bc  : It bounces through the tree branches and is lost in the swamp below
+0x107  /  0x14dc  : "Ding, ding, ding, Ding! Ding! DING! DINGGG! CLANGGGG! CLANGGGGG!!". A solemn butler stride in to answer the bell 
+0x108  /  0x152c  : and summons a uniformed guard. 
+0x109  /  0x1541  : and leaves in disgust when he sees it's only you.
+0x10a  /  0x155d  : It's swept away!
+0x10b  /  0x156a  : The train leaves. 
+0x10c  /  0x1574  : A train arrives. 
+0x10d  /  0x157f  : Your weight triggers a trap and a poisoned spear thrusts from a wall..
+0x10e  /  0x15a6  : It lands to the south
+0x10f  /  0x15ae  :  and triggers the spear. This flies through the air and breaks against a wall
+0x110  /  0x15d4  : The floor tips down and you slide into space. 
+0x111  /  0x15ed  : It's just out of reach. 
+0x112  /  0x15fc  : The boathook reaches up to it
+0x113  /  0x160d  : A section of floor slides aside, revealing a passage. 
+0x114  /  0x162a  : It's not quite long enough and falls short. 
+0x115  /  0x1643  : 
+0x116  /  0x1644  : 
+0x117  /  0x1645  : 
+0x118  /  0x1646  : 'You have a kind face, citizen'
+0x119  /  0x165a  : 
+0x11a  /  0x165b  : 'If you want health care, you'll have to pay'
+0x11b  /  0x1678  : 'Going to buy anything?'
+0x11c  /  0x1688  : She has run out of material
+0x11d  /  0x1698  : 'Halt! Who goes there?'
+0x11e  /  0x16a9  : 
+0x11f  /  0x16aa  : 
+0x120  /  0x16ab  : 'I've not had a square meal for days'
+0x121  /  0x16c7  : 
+0x122  /  0x16c8  : 'Health is golden, as they say', she says
+0x123  /  0x16e5  : 'I'm afraid I'm out of stock of Level 9 games, but I've got a lot of copies of the Great Space Race left over. They're going cheap.. if you want one or two..'
+0x124  /  0x1745  : 'I'll never finish this dress'
+0x125  /  0x175a  : 'Friend or foe?'
+0x126  /  0x1766  : 
+0x127  /  0x1767  : 
+0x128  /  0x1768  : The beggar taps you on the shoulder in feigned friendship
+0x129  /  0x1788  : 
+0x12a  /  0x1789  : 'You're not really ill'
+0x12b  /  0x1799  : The shopkeeper watches you suspiciously
+0x12c  /  0x17b2  : She searches around
+0x12d  /  0x17be  : 'Say the password'
+0x12e  /  0x17ca  : 
+0x12f  /  0x17cb  : 
+0x130  /  0x17cc  : A cops pops up from behind a counter. "Ah! Mr Brown's wallet. We've been looking for that and I think there may be a reward." He gets you to sign some forms and hands over a bundle of notes. 
+0x131  /  0x1839  : Smash! The telescope disintegrates into small, glittering fragments - like a car hit by a juggernaut. 
+0x132  /  0x1874  : You slip on the river bed and the swift current sweeps you away. The roaring of a waterfall gets ever louder, then you're carried over the brink..
+0x133  /  0x18c0  : The river looks extremely dangerous. Are you sure
+0x134  /  0x18dd  : You don't really want to extinguish the lamp, do you
+0x135  /  0x18fa  : It falls out of the tree and lands on the soft sand below. 
+0x136  /  0x1917  : A uniformed guard steps forward. Seeing your 
+0x137  /  0x1933  : ragged clothes, he bars the way
+0x138  /  0x1944  : fine robes, he welcomes you in to the palace
+0x139  /  0x195a  : You wind the clock and it starts. The chimes for 9 o'clock ring out. 
+0x13a  /  0x197f  : A crowd of cheering people surround the clock. They are delighted that it's going again and present you with the key to the city. 
+0x13b  /  0x19c2  : The curator is delighted with the idol and examines it carefully, making copious notes. He hands you a reward. 
+0x13c  /  0x19fe  : You can't do any real digging with bare hands. 
+0x13d  /  0x1a1a  : the ground's too soft. 
+0x13e  /  0x1a2a  : The ground's too hard. 
+0x13f  /  0x1a38  : You demolish a section of wall. 
+0x140  /  0x1a49  : It reveals a tunnel. 
+0x141  /  0x1a56  : You enlarge the hole. 
+0x142  /  0x1a62  : 
+0x143  /  0x1a63  : It seems to be firmly fastened by a lot of rusty nails. 
+0x144  /  0x1a83  : It pulls free with a tearing noise. 
+0x145  /  0x1a99  : An official steps in the way. "Sorry, citizen. No passengers allowed beyond this point." 
+0x146  /  0x1acf  : The machine clanks and disgorges
+0x147  /  0x1ae2  : It doesn't fit. Try a coin. 
+0x148  /  0x1af4  : the track
+0x149  /  0x1af9  : a comfortable carriage
+0x14a  /  0x1b06  : As you step onto the track, a train races up and runs you over! Try to be more careful in future lives
+0x14b  /  0x1b3c  :  while you travel a few miles to the next station. 
+0x14c  /  0x1b58  : very small indeed: the letters are much too tiny to read
+0x14d  /  0x1b74  : like a foreign language. You can't make any sense of the words
+0x14e  /  0x1b97  : A uniformed guard jumps up and 
+0x14f  /  0x1bad  : takes your ticket
+0x150  /  0x1bb8  : punches your ticket
+0x151  /  0x1bc4  : carefully checks your season ticket
+0x152  /  0x1bd9  : yells 'Oi! No fare-dodging!'
+0x153  /  0x1bf0  : 'CLICK!'
+0x154  /  0x1bf9  : across the water to a modern city on the cliffs to the west. It seems to have skyscrapers, parkland trees and a small airport
+0x155  /  0x1c38  : A giant logging machine pushes through the trees and clanks forward 
+0x156  /  0x1c5d  : unstoppably, forcing you to turn and flee!
+0x157  /  0x1c77  : but turns aside and heads off into the sunset. 
+0x158  /  0x1c93  : An opening appears
+0x159  /  0x1c9f  : If you insist..
+0x15a  /  0x1ca9  : The food is delicious and you gobble it down eagerly. But afterwards you feel guilty. 
+0x15b  /  0x1cde  : She accepts it gladly and hands you a small object. 
+0x15c  /  0x1d00  : She accepts it and sadly shuffles off. 
+0x15d  /  0x1d1d  : An exit opens to the south. 
+0x15e  /  0x1d2c  : Try buying something. 
+0x15f  /  0x1d3b  : 'Medicine's expensive!'
+0x160  /  0x1d4b  : The nurse bites the coin to test it, then whips out a syringe and jabs it into your arm. "This protects against all disease", she says. 
+0x161  /  0x1d9a  : 
+You feel 
+0x162  /  0x1da1  : flushed
+0x163  /  0x1da8  : ill
+0x164  /  0x1dab  : at death's door
+0x165  /  0x1db5  : That involves wading through a 'gater-filled river. Not a good idea!
+0x166  /  0x1dde  : You Tarzan-swing across on the vine. Wheeee!
+0x167  /  0x1df8  : You need the right key. 
+0x168  /  0x1e04  : The elevator shakes and judders. It seems to be moving. 
+0x169  /  0x1e24  : You skillfully twist the right wires together with the pliers. 
+0x16a  /  0x1e46  : A stuffed-shirt sits behind the desk. He slowly finishes his work and then stands up, advances and crushes your fingers in an ultra-firm handshake. 'Well', he emotes with emphasised sincerity, 'You did well in starting the traffic, so here is a small token of our esteem'. He presents you with a small gift before striding out
+0x16b  /  0x1ef8  : You've engaged the manual over-ride! The traffic on the screen starts slowly moving and soon it's all clear. A slow voice booms from a loudspeaker: 'You have been of considerable service by clearing the jam. Come to my office for a reward.'
+0x16c  /  0x1f7e  : like a view of a city-wide traffic jam - almost gridlock. Automated cars have ground to a halt because of a failure of the computerised signalling system
+0x16d  /  0x1fd7  : Cars jam the road. 
+0x16e  /  0x1fe3  : You try putting granules in the lamp
+0x16f  /  0x1ff5  : No shoplifting!
+0x170  /  0x2001  : He doesn't want that. 
+0x171  /  0x2010  : He sells
+0x172  /  0x2015  : It's too expensive - you've not got enough money to buy that. 
+0x173  /  0x203d  : He takes 
+0x174  /  0x2043  :  notes from the reward money for
+0x175  /  0x2056  : Don't do that, it's rude!
+
+0x176  /  0x2066  : The shopkeeper examines the wallet closely, and makes an excuse to go into the back of the shop. Time passes and you get more and more worried. Finally, someone enters the shop through the door behind you. It's a policeman! 'I'm sorry', he says, 'but this wallet belongs to Mr Jones. It was stolen a week ago. I'll have to return it to him'. 
+0x177  /  0x2124  : What do you want to pay
+0x178  /  0x2133  : The canoe floats away. 
+0x179  /  0x2142  : The canoe is firmly anchored. 
+0x17a  /  0x2156  : You can't swim across the ocean! 
+0x17b  /  0x216a  : You leave the canoe. 
+0x17c  /  0x2175  : The lamp is able to burn on, using the air trapped under the bowl. 
+0x17d  /  0x2198  : The lamp is extinguished. 
+0x17e  /  0x21a9  : The roof collapses! 
+0x17f  /  0x21b5  : You are forced to bob up for air. 
+0x180  /  0x21ca  : You're under water. 
+0x181  /  0x21d6  : You lose your footing on the smooth rock shaft and slip downwards.. 
+0x182  /  0x21fe  : 'IDENTIFY! IDENTIFY! PROVIDE CLEARANCE INFORMATION!'
+0x183  /  0x2231  : The layer of floating peat is too thin to bear any weight and you fall through into the sucking ooze beneath. 
+0x184  /  0x2266  : It's marshy and the footing looks very uncertain. Are you sure
+0x185  /  0x2288  : You pan for gold. 
+0x186  /  0x2294  : A spider grabs the glue, which it needs for its webs, and scuttles off happily
+0x187  /  0x22c3  : A great spider, as big as a horse, is hiding in the cave. It looks very hungry, as if it's having trouble catching prey. Unfortunately, it has no trouble catching you!
+0x188  /  0x2320  : The lamp is lit and shines brightly.
+0x189  /  0x2334  : The lamp's empty.
+0x18a  /  0x233f  : It flares brightly, illuminating your surroundings. 
+0x18b  /  0x2361  : You skillfully carve a canoe from the log. The instructions in the manual make the whole process delightfully simple
+0x18c  /  0x239f  : You're trapped in the parachute!
+0x18d  /  0x23b1  : You fall free of the parachute and tumble through the tree. Eventually a branch breaks your fall. 
+0x18e  /  0x23e2  : An invisible barrier seems to block the way. 
+0x18f  /  0x23fc  : You've won! A peal of bells rings out to mark your triumph, and to summon the people for a victory celebration. The King runs in and shakes you by the hand before leading you in a triumphal procession through cheering crowds.
+ 
+The carnival lasts for days, culminating with your enthronement as Ruler of the Emerald Isle and Supreme Arbitrator of decisions. Well done!!
+ 
+If you enjoyed this game, why not try 'Red Moon' and 'the Price of Magik', later games in the same series.
+
+0x190  /  0x2514  : 'Correct!', the guard leaves
+0x191  /  0x2526  : spiral stairs cut into the trunk of a tree
+0x192  /  0x253c  : a gloomy cave which smells of sea weed
+0x193  /  0x2553  : a damp muddy tunnel
+0x194  /  0x2561  : clinging seaweed
+0x195  /  0x256b  : the skeleton of a wrecked ship which rests on a bed of thick mud. Its timbers are thickly encrusted by weeds and waving worms but look well preserved: the ship was once a galleon
+0x196  /  0x25c8  : a claustrophobic hollow beneath the base of the flint
+0x197  /  0x25e6  : a carved bubble in the rock. It is richly decorated with heiroglyphics and pictograms
+0x198  /  0x2618  : a hi-tech complex, deep underground and decorated with LCDs, WYSIWYG icons and recycled QLunks. Looks awful
+0x199  /  0x265f  : the control centre, surrounded by instrumentation of every kind
+0x19a  /  0x2683  : a bare metal room
+0x19b  /  0x268e  : a junction where the main tunnel ends. Low passages lead east and south
+0x19c  /  0x26b3  : a wide cavern
+0x19d  /  0x26bc  : a loose pile of coarse mining debris
+0x19e  /  0x26d1  : a dusty tunnel through the rock
+0x19f  /  0x26e1  : a dead end. The low passage ends at a tool-scarred wall
+0x1a0  /  0x26fe  : the smallest cave
+0x1a1  /  0x2706  : a teeny-weeny tunnel
+0x1a2  /  0x2715  : a twisty tunnel
+0x1a3  /  0x271f  : a grotty grotto
+0x1a4  /  0x2729  : a cosy cave
+0x1a5  /  0x2730  : an immense rock-throat, just below the ground
+0x1a6  /  0x2749  : crude caverns
+0x1a7  /  0x2752  : a cleft through limestone rock
+0x1a8  /  0x2763  : a damp hollow deep underground
+0x1a9  /  0x2777  : smooth riven rocks, forming a steep chimney down into the heart of the mountain
+0x1aa  /  0x27a1  : a smooth vertical shaft
+0x1ab  /  0x27b2  : an ancient lava chamber, partly filled by large lumps of broken rock
+0x1ac  /  0x27db  : a sea cave, half submerged by the waves. Breakers roll in from the ocean, each one filling the cave entrance as it passes and slamming into the far wall with a dull boom. You are in imminent danger of being swept away
+0x1ad  /  0x284c  : a draughty blow-hole within the cliff. Strong winds threaten to dislodge your footing on the slimey rocks
+0x1ae  /  0x2888  : the cargo bay of the aircraft
+0x1af  /  0x2898  : a tumbledown, termite-gnawed shed
+0x1b0  /  0x28ae  : a stone chamber
+0x1b1  /  0x28b7  : a thin tunnel which follows a natural fissure through the rocks
+0x1b2  /  0x28da  : a granite grotto
+0x1b3  /  0x28e4  : a tiny tunnel
+0x1b4  /  0x28ed  : an ornate opening between richly-decorated pillars
+0x1b5  /  0x290a  : a temple antechamber
+0x1b6  /  0x2917  : a low crawl
+0x1b7  /  0x291f  : a greasy grotto deep under the ground. Oily drops ooze from the ceiling and slide down the walls to the slippery floor
+0x1b8  /  0x295a  : a very tall tree
+0x1b9  /  0x2963  : a maze of interlinked branches in the forest
+0x1ba  /  0x2979  : a maze of interlinked branches in the forest
+0x1bb  /  0x298f  : the topmost branches of a mangrove
+0x1bc  /  0x29a2  : a slender bridge which leads east to a wooden city perched high in the trees
+0x1bd  /  0x29c7  : the main square of the tree city, standing on a platform of wooden boards between which you can glimpse the twilight jungle below. Light wooden buildings surround the square and walkways lead away in many directions
+0x1be  /  0x2a3a  : the north bridge of the tree city
+0x1bf  /  0x2a4a  : the plaza at the east end of the city. A clocktower rises above
+0x1c0  /  0x2a6b  : the high clocktower, surrounded by gears and bells
+0x1c1  /  0x2a88  : a pathway junction
+0x1c2  /  0x2a93  : the edge of a pond where water has collected on matted leaves
+0x1c3  /  0x2ab4  : on creaking wooden steps
+0x1c4  /  0x2ac3  : a cloud garden of lichens, orchid and fungi. The portico of a museum rises to the north
+0x1c5  /  0x2af3  : a municipal museum
+0x1c6  /  0x2b01  : a wide north-south alleyway leading to the gates of a splendid palace
+0x1c7  /  0x2b22  : the palace quad amongst classical buildings
+0x1c8  /  0x2b3c  : the hanging gardens. Beautiful climbing plants dangle from every branch and blossoms perfume the air
+0x1c9  /  0x2b74  : the great east hall of the palace
+0x1ca  /  0x2b83  : the dress circle, amidst half-completed clothes
+0x1cb  /  0x2ba0  : the west hall
+0x1cc  /  0x2ba8  : a copper-coloured chamber
+0x1cd  /  0x2bb7  : the landing at the top of the stairs. Splendid rooms are visible to north and west
+0x1ce  /  0x2bdd  : a treasure chamber piled high with sturdy chests and iron boxes. White light shines from a splendid room to the west
+0x1cf  /  0x2c19  : a beautiful room
+0x1d0  /  0x2c25  : the throneroom: a great long chamber with its ceiling supported by a single beam. A red carpet leads west
+0x1d1  /  0x2c5d  : the King's private apartment
+0x1d2  /  0x2c6e  : a massive kitchen
+0x1d3  /  0x2c79  : the palace yard, east of the main buildings. Steps lead down through a tree to a railway station far below, almost hidden by leaves
+0x1d4  /  0x2cbb  : a railway platform, south of a railway line across the forest floor. Great trees tower overhead, dwarfing the stone building to the east, and a steep staircase leads upwards through the trunk of one of them
+0x1d5  /  0x2d21  : an automated ticket office
+0x1d6  /  0x2d31  : bridge steps
+0x1d7  /  0x2d3a  : a substantial wooden bridge over the railway line
+0x1d8  /  0x2d53  : bridge steps
+0x1d9  /  0x2d5c  : a dirty platform, strewn with leaves, north of the railway line. Dim light filters down through the dense forest canopy far above
+0x1da  /  0x2da2  : a seaside railway station, north of the track and between two stone buildings. A perfect sandy beach stretches away north
+0x1db  /  0x2de0  : a neat signal box beside the railway line. A rack of long levers, locked in position, lines one wall below a dirty window
+0x1dc  /  0x2e1f  : the reception room of a small police station. A high counter divided the room into two halves and wanted posters hide the damp patches on the walls
+0x1dd  /  0x2e65  : the middle of a splendid sandy beach
+0x1de  /  0x2e7b  : between rugged rocks at the left end of the beach. A small, round, ominous cave leads west into a low cliff
+0x1df  /  0x2eaf  : shifting sand dunes which sprawl against the cliffs. A tumbledown wooden shack, cobbled together from peeling boards, sprawls on a mound to the east
+0x1e0  /  0x2eff  : a verminous wooden shack
+0x1e1  /  0x2f0e  : clifftop scrub which clings to the tall mounds of pebbles on the right of the beach
+0x1e2  /  0x2f39  : a flat grassy area above the sea. A faint track crosses it, sloping down slightly towards the east
+0x1e3  /  0x2f6c  : the entrance of an old mine, almost blocked by fallen debris. Interesting rocks abound around you, but the crystals are too small to have any value
+0x1e4  /  0x2fbd  : breaking surf, bobbing about in the waves
+0x1e5  /  0x2fd5  : the ocean
+0x1e6  /  0x2fdb  : island waters
+0x1e7  /  0x2fe4  : desert island dunes
+0x1e8  /  0x2ff1  : the north of the island, amidst rocks and sandhills
+0x1e9  /  0x300d  : the cool shade of an impressive palm tree
+0x1ea  /  0x3026  : the crown of a Phillips palm, high above the ground. Great thick leaves sprout punkily from the soft fibrous bark swathing its trunk
+0x1eb  /  0x3070  : dire straights, tossed by turbulent waves and menaced by sharp rocks
+0x1ec  /  0x3099  : crystal water
+0x1ed  /  0x30a1  : a reef of bright coral. Colourful shells carpet the seabed and day-glo fishes practice syncronised swimming
+0x1ee  /  0x30e5  : a shady cove below towering cliffs
+0x1ef  /  0x30fa  : nibbled grass atop a sheer cliff. Flatlands, distorted by shimmering heat, extend east into the distance
+0x1f0  /  0x3134  : a hot cave entrance looking out on to cracked lava. Parched hills stretch away to the southeast and in the opposite direction is a small volcano which belches sulphurous steam across the land
+0x1f1  /  0x3196  : volcanic fumes at the edge of a bubbling crater. The heat is intense
+0x1f2  /  0x31be  : a cool, cracked lava flow on the steep slopes of the volcano. Deep fissures block further progress, so you'll have to return the way you came
+0x1f3  /  0x320e  : the foothills
+0x1f4  /  0x3216  : Boot Hill
+0x1f5  /  0x321d  : more foothills
+0x1f6  /  0x3226  : tedious foothills
+0x1f7  /  0x3231  : endless foothills
+0x1f8  /  0x323c  : boring foothills
+0x1f9  /  0x3245  : dull foothills
+0x1fa  /  0x324e  : a windy ridge
+0x1fb  /  0x3257  : a bank of multi-coloured gravel beside a small south-flowing stream
+0x1fc  /  0x327b  : a shallow stream which seeps from a morass of saturated peat to the north and trickles south towards the lower ground
+0x1fd  /  0x32b4  : soggy sedge tussocks beside a bog covered by a thin peat crust
+0x1fe  /  0x32d8  : the high moor, surrounded by heather and yellow gorse ("Cor. 'Struth. Funny kinda plants for the tropics!", you think)
+0x1ff  /  0x331f  : horrid heights, near the top of the mountain chain which runs down the east side of Emerald Isle
+0x200  /  0x3351  : harsh moors, beside a smooth stone outcrop which apparently consists of a single colossal flint. Slime coats the slippery surface of the flint, reflecting small images of the bleak landscape
+0x201  /  0x33b7  : a hollow on top of the stone. It seems a mystic place
+0x202  /  0x33d3  : a soggy patch at the head of a valley to the west. Barren hills ascend to the north and east. A small stream trickes down from the north hills and heads west along the valley, gaining strength as it flows
+0x203  /  0x343c  : the valley, on the north bank of a turbulent river which rushes past, heading west over polished boulders
+0x204  /  0x3473  : a deep river valley, on the north bank of the waters. A continuous rushing noise comes from the west, drifting up on a damp breeze
+0x205  /  0x34b9  : hill slopes south of the river. Dense vegetation blocks the way south
+0x206  /  0x34d6  : the spray of a high waterfall which plummets onto the rocks below. You have a superb view of the western lowlands, covered by unbroken forest which stretches as far as the eye can see
+0x207  /  0x3535  : a hill moor, north of a region of small trees
+0x208  /  0x354b  : deep gravel on a little hill
+0x209  /  0x355b  : steep scree fallen from the slopes to the north. A path leads south through stunted trees
+0x20a  /  0x3583  : the edge of the woods, pushing between creepers and thornbushes
+0x20b  /  0x35a6  : deciduous domains
+0x20c  /  0x35b3  : a copse
+0x20d  /  0x35b8  : clammy shrubs which drip water
+0x20e  /  0x35cb  : a clearing
+0x20f  /  0x35d2  : dead woodland
+0x210  /  0x35dc  : the high wood
+0x211  /  0x35e4  : rich vegetation
+0x212  /  0x35ee  : dappled sunlight
+0x213  /  0x35f9  : sparse shrubs
+0x214  /  0x3602  : dying trees, uprooted in the recent past
+0x215  /  0x3617  : scrubland with straggly thornbushes
+0x216  /  0x362d  : a faint path which meanders roughly north and east through parched grass
+0x217  /  0x3651  : a flat plain paved with shattered gravestones. An impressive monument towers above, casting a sharp shadow across the fragments of shattered marble
+0x218  /  0x36a5  : the western edge of a wide dust bowl
+0x219  /  0x36ba  : dusty flat dust flats
+0x21a  /  0x36c9  : wasteland
+0x21b  /  0x36cf  : pudding desert
+0x21c  /  0x36d8  : semi-desert in the middle of the shimmering dust flats
+0x21d  /  0x36f5  : deadlands at the far northwest of the baked plain. Further progress is blocked by sheer mountain walls
+0x21e  /  0x372d  : baked sand
+0x21f  /  0x3735  : dustlands
+0x220  /  0x373d  : the plain
+0x221  /  0x3743  : a scree slope at the bottom of a high mountain
+0x222  /  0x375c  : a plain plain
+0x223  /  0x3764  : a sandy plain
+0x224  /  0x376d  : a twisting path up the mountainside which leads to a little cave far above
+0x225  /  0x3794  : a rocky peak, standing on a wide ledge outside a dark cave
+0x226  /  0x37b3  : a garden path, leading south from the desert through cultivated land. A few buildings are visible to the south
+0x227  /  0x37e8  : a junction of winding tracks
+0x228  /  0x37f6  : a neat road junction
+0x229  /  0x3803  : the village green
+0x22a  /  0x380e  : a straight street which leads west to the village in one direction and eventually curves towards the north in the other direction
+0x22b  /  0x3852  : a mall between low buildings. Paths lead towards the main part of the village
+0x22c  /  0x3879  : a small town high street
+0x22d  /  0x3884  : a footpath
+0x22e  /  0x388b  : a cobble square at the west end of the village. A single road leaves the square towards the east, and bright-canopied shops are all around. There's no one in sight
+0x22f  /  0x38e1  : an antique shoppe, obviously established by a former King with an eye to the tourist trade
+0x230  /  0x3912  : a grocer's shop which contains sells good food of every kind. You won't find full-fat sausages or reject EEC butter here (or diet pills for that matter)
+0x231  /  0x396e  : the apothecary's shop. There is only one, small room and this is lined with shelves which support thousands of stoppered glass jars containing herbs and extracts
+0x232  /  0x39c7  : an ironmonger's shop. The walls are festooned with wood and iron tools of every kind, and cooking pots dangle from the ceiling. A small forge stands in a wide alcove at one side of the main room
+0x233  /  0x3a26  : the north end of the beach. A buttress of rock slabs, leaning against the cliffs, cuts across the beach and blocks movement north
+0x234  /  0x3a68  : white sand under vertical granite cliffs
+0x235  /  0x3a81  : the south end of the beach, beside a sea-level cave
+0x236  /  0x3a99  : an overhanging clifftop, beside a blowhole from which surges salty air
+0x237  /  0x3ac1  : a cleft cliff, home for a vast roost of seabirds. They circle overhead, shrieking curses
+0x238  /  0x3af5  : a neat path running north-south. A landslide has carried away the northern part of the part and it's not possible to go further
+0x239  /  0x3b38  : a gravelled coastal path which runs north-south along the hills near the sea
+0x23a  /  0x3b5e  : a small parking bay
+0x23b  /  0x3b68  : a lonely corner
+0x23c  /  0x3b72  : a road
+0x23d  /  0x3b77  : the edge of a modern city of tall buildings and faded lights. Junk food wrappers clog the gutters
+0x23e  /  0x3bae  : mean streets
+0x23f  /  0x3bb6  : city streets
+0x240  /  0x3bbe  : streets of shame
+0x241  /  0x3bc7  : central park, an extensive expanse of ancient parkland in the heart of the city
+0x242  /  0x3bf2  : the way out
+0x243  /  0x3bf9  : a pretty cobble square. A horrid skyscraper rises to the south, like a monstrous carbuncle
+0x244  /  0x3c28  : the foyer of the high-rise building, knee-deep in carpet. Scorching air blasts down from ceiling grills above the entrance door. A smart elevator stands in front of you, to the east
+0x245  /  0x3c87  : a small elevator, decorated in the most up-to-date fashion. The walls are coated with a textured finish, resembling a giant cheese grater, and the floor carpet is designed to enhance static charging. The ceiling is translucent plastic, lit from above, but enough dust has gathered upon it to ensure that the elevator lighting is twilight at best
+0x246  /  0x3d44  : the front passage, a narrow N/S corridor between partitions
+0x247  /  0x3d69  : the back corridor which is blocked by a huge pile of returned Plectrum computers
+0x248  /  0x3d97  : a small office, almost filled by a polished semi-circular wooden desk. Picture windows look out over the cityscape far below
+0x249  /  0x3de0  : a token park, apparently intended as a canine toilet
+0x24a  /  0x3e01  : the south side park
+0x24b  /  0x3e0b  : the main road
+0x24c  /  0x3e14  : a normally-busy road
+0x24d  /  0x3e23  : the road, between manicured verges
+0x24e  /  0x3e39  : the way
+0x24f  /  0x3e3e  : an big flat lorrypark
+0x250  /  0x3e4d  : the deserted airport lounge, a room furnished in the best possible taste (like a cross between a MacRonald's and a multi-storey carpark)
+0x251  /  0x3e9a  : the runway
+0x252  /  0x3ea1  : the shadow of a wide-bodied aircraft in the middle of the runway. Steps lead in to the cabin of the 'plane
+0x253  /  0x3ed7  : the aircraft, standing between rows of cramped plastic-covered seats. The aisle leads south to the cockpit and down to the cargo bay
+0x254  /  0x3f19  : the cockpit, surrounded by dials and indicators. Unfortunately the plane is out of fuel, many of the wires have been cut, it needs a crew of three and the engines cannot be started without groundcrew help. There's no escape from the island this way
+0x255  /  0x3fa0  : a terminus platform, east of the railway line
+0x256  /  0x3fb8  : a square
+0x257  /  0x3fbe  : a cottage hospital with echoing corridors and a distinct smell
+0x258  /  0x3fe2  : a native village of low huts
+0x259  /  0x3ff5  : a mudpatch where paths cross in a morass of churned-up ground
+0x25a  /  0x401b  : grey ooze which is infested by leeches and carnivorous worms
+0x25b  /  0x403d  : the mud
+0x25c  /  0x4043  : an unhealthy mire
+0x25d  /  0x404e  : mist marshes from which rise clouds of biting insects
+0x25e  /  0x406b  : a swamp
+0x25f  /  0x4071  : a marsh
+0x260  /  0x4076  : rainforest
+0x261  /  0x407d  : a dense forest
+0x262  /  0x4086  : cloud forest
+0x263  /  0x408f  : marsh mud to the west of a slow river
+0x264  /  0x40a4  : the shallows of a wide north-south river which slides gently between the forest trees
+0x265  /  0x40d0  : long reeds growing beside the river
+0x266  /  0x40e2  : whispering grass beside a river
+0x267  /  0x40f2  : the east riverbank
+0x268  /  0x40fd  : the river cliff
+0x269  /  0x4107  : the far bank of the river
+0x26a  /  0x4113  : tall trees
+0x26b  /  0x4119  : rainforest
+0x26c  /  0x4120  : the forest
+0x26d  /  0x4127  : tall trees
+0x26e  /  0x412d  : bright flowers beside a cracked stone wall
+0x26f  /  0x4144  : a path
+0x270  /  0x4148  : a mound
+0x271  /  0x414e  : an east-west avenue of trees which leads east to an old city of overgrown stone
+0x272  /  0x4177  : an arch
+0x273  /  0x417b  : a small, square courtyard, overgrown by ivy
+0x274  /  0x4195  : a temple to the sun. Light streams through a round window in the domed roof and refracts from glass ornaments which decorate the walls
+0x275  /  0x41d7  : the crypt, between piled sarcophagi
+0x276  /  0x41ef  : tawdry
+0x277  /  0x41f5  : cheap
+0x278  /  0x41f9  : rare
+0x279  /  0x41fc  : a pretty penny
+0x27a  /  0x4205  : tatty. It's valid for any one journey - just present it when you get on a train
+0x27b  /  0x4235  : better value than a single and very simple. It's valid for 2 train journeys which can be made at any time (older players may remember when UK railway tickets could be used in this straightforward way)
+0x27c  /  0x42ab  : splendid
+0x27d  /  0x42b1  : almost full, with enough matches to last a long time
+0x27e  /  0x42cf  : like an unusual form of chemical fuel
+0x27f  /  0x42e4  : very impressive. It's multi-coloured wood with complicated printing
+0x280  /  0x430d  : green and crinkly
+0x281  /  0x4319  : like a tattered sketch of an ancient galleon, apparently submerged
+0x282  /  0x4341  : very simple, with a single metal bar at the business end. It would not be much use in any real lock
+0x283  /  0x4377  : big, impressive and intricate: decorated with a pattern of coiled dragons
+0x284  /  0x43a2  : fairly small, with a long chain of light metal
+0x285  /  0x43ba  : sharp
+0x286  /  0x43be  : like a Victorian cycle lamp
+0x287  /  0x43ca  : much-used, with a host of circular scratches all over the inner surface
+0x288  /  0x43f3  : somewhat like a loft-ladder and consists of several sliding parts
+0x289  /  0x4417  : to be a utilitarian claw-hammer
+0x28a  /  0x442a  : like a DIY guide to boat-building
+0x28b  /  0x4440  : strong, but only a few metres long
+0x28c  /  0x4457  : fairly strong and long enough for any purpose
+0x28d  /  0x4472  : smooth and polished, convex and about two inches across
+0x28e  /  0x4490  : tattered and oil-stained, with a stale smell
+0x28f  /  0x44ac  : small, well-engineered and with plastic handles
+0x290  /  0x44c7  : like the finest silk cloth
+0x291  /  0x44d5  : exceedingly sharp
+0x292  /  0x44e1  : warped but quite strong
+0x293  /  0x44f0  : sticky and seems to be an extract from arthropod glands
+0x294  /  0x450f  : small but useful
+0x295  /  0x4519  : strange, with leather straps and fastenings
+0x296  /  0x4531  : reflective, woven from smooth glass fibres
+0x297  /  0x454b  : like the sort of thing you would expect to find in an adventure game
+0x298  /  0x4572  : 
+0x299  /  0x4573  : 
+0x29a  /  0x4574  : like a comprehensive Foreign-to-English dictionary
+0x29b  /  0x4595  : like it belongs to Mr Jones, a prominent local dignitary
+0x29c  /  0x45b8  : like a glass wok
+0x29d  /  0x45c2  : like part of a picket fence
+0x29e  /  0x45d2  : tasty
+0x29f  /  0x45d6  : like a hooked pole
+0x2a0  /  0x45e0  : crude but seaworthy
+0x2a1  /  0x45ec  : like a big lump of tree, marked with the word 'Conqueror'
+0x2a2  /  0x460c  : to be a great useless lump of granite
+0x2a3  /  0x4622  : pretty
+0x2a4  /  0x4626  : like a picture of a palm tree beside a cross
+0x2a5  /  0x463f  : pretty
+0x2a6  /  0x4643  : pretty
+0x2a7  /  0x4647  : pretty
+0x2a8  /  0x464b  : pretty
+0x2a9  /  0x464f  : pretty
+0x2aa  /  0x4653  : sharp
+0x2ab  /  0x4657  : pretty
+0x2ac  /  0x465b  : pretty
+0x2ad  /  0x465f  : pretty
+0x2ae  /  0x4663  : archaeologically crucial
+0x2af  /  0x4674  : very u indeed, despite being made from animal carcases
+0x2b0  /  0x4691  : shiney
+0x2b1  /  0x4696  : charming
+0x2b2  /  0x469c  : golden
+0x2b3  /  0x46a2  : like an original painting by Godfrey Dowson
+0x2b4  /  0x46bc  : familiar
+0x2b5  /  0x46c2  : familiar
+0x2b6  /  0x46c8  : pretty
+0x2b7  /  0x46cc  : 
+0x2b8  /  0x46cd  : 
+0x2b9  /  0x46ce  : 
+0x2ba  /  0x46cf  : 
+0x2bb  /  0x46d0  : wet
+0x2bc  /  0x46d3  : 
+0x2bd  /  0x46d4  : 
+0x2be  /  0x46d5  : 
+0x2bf  /  0x46d6  : 
+0x2c0  /  0x46d7  : 
+0x2c1  /  0x46d8  : 
+0x2c2  /  0x46d9  : 
+0x2c3  /  0x46da  : 
+0x2c4  /  0x46db  : 
+0x2c5  /  0x46dc  : 
+0x2c6  /  0x46dd  : large, with finely-detailed musculature. It points one finger at the ceiling
+0x2c7  /  0x4707  : rough and craggy
+0x2c8  /  0x4710  : small and red
+0x2c9  /  0x4715  : like a simplified design of a row of mountains
+0x2ca  /  0x472f  : saggy and precarious
+0x2cb  /  0x473c  : amazing, with massive cast-iron gears. It's a splendid example of Victorian technology
+0x2cc  /  0x476d  : like an icon to the Sun-god. Worshippers point up at him
+0x2cd  /  0x478c  : quite modern, but extremely badly made
+0x2ce  /  0x47a4  : quite profound: 'balance your options if you want to get on in life'
+0x2cf  /  0x47cf  : too small
+0x2d0  /  0x47d3  : very large and truly horrible
+0x2d1  /  0x47e4  : like an official pronouncement: 'Her Royal Highness, the Blessed Margaret, has decreed that XX treasures are enough for most purposes (though incentives must be maintained)'
+0x2d2  /  0x4850  : plastic
+0x2d3  /  0x4856  : like the sort of thing all railway authorities should adopt. It seems that you simply insert the appropriate amount of money to get a ticket. No queuing, no delays, no wage bill for ticket office staff
+0x2d4  /  0x48c8  : like a row of very large flat-screen TVs
+0x2d5  /  0x48de  : very old. Apparently it's a monument to Sir Shaun Abbott led the first expedition to Emerald Isle ages ago
+0x2d6  /  0x491e  : like a treasure-marker
+0x2d7  /  0x492b  : like sharp limestone, protruding from the ground
+0x2d8  /  0x4945  : very deep indeed
+0x2d9  /  0x494f  : like a plaque to the Unknown Adventurer, 'who died in every way imaginable', and to Shaun, 'who proved that men can move mountains'
+0x2da  /  0x499f  : small-ish, square and held in place by a couple of small screws
+0x2db  /  0x49c0  : slimy
+0x2dc  /  0x49c5  : golden. It is decorated with a stylised sun, surrounded by winged creatures
+0x2dd  /  0x49f1  : religious and describes the sort of life expected of Godly people. Seems like hard work
+0x2de  /  0x4a26  : to be about a contest for the heir to the Kingdom. All you have to do is to meet the simple conditions and you'll be eligible to take over from the King. As is traditional in publicity for "free" competitions, the rules and victory conditions are not described
+0x2df  /  0x4ab4  : almost useless. The west arm reads 'ROAD CLOSED', the south arm reads 'TO THE AIRPORT' and the east arm points towards the 'CITY CENTRE'
+0x2e0  /  0x4b0b  : small, flimsy and apparently useless
+0x2e1  /  0x4b21  : coin operated. Its slot will take all types of coin
+0x2e2  /  0x4b40  : like a very large version of a spider's web. Peculiarly, the strands are not sticky
+0x2e3  /  0x4b6d  : ominous
+0x2e4  /  0x4b72  : high above, hanging over the nearby river
+0x2e5  /  0x4b88  : out over the city below
+0x2e6  /  0x4b93  : thin and twisted with peeling insulation
+0x2e7  /  0x4ba8  : profound: 'You will never ascend to the gods if you send your possessions before you'
+0x2e8  /  0x4bdd  : Victorian. The engine is steam-powered and pulls a line of richly decorated carriaged with leather seats
+0x2e9  /  0x4c13  : scruffy
+0x2ea  /  0x4c19  : <EOM>

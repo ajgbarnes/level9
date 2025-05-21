@@ -1,0 +1,373 @@
+Return to Eden - Location Exit Definition
+---------------------------------------------
+
+Bit configuration:
+
+Bit 0 - where the direction can be used inversely
+Bit 1 - whether this direction should be hidden
+Bit 2 - if there is a door in this direction
+
+
+                            (Inv.)
+Address From  To  Dir       Bit 0 Bit 1 Bit 2 MsgId Location Text
+------- ---- ---- --------- ----- ----- ----- ----- -------------
+0x0020  0x01 0x03 NORTH     Yes   No    No    0x191 beside a stratoglider in a meadow of strange bright flowers. A warm breeze wafts gently through the long grass
+0x0022  0x01 0x04 EAST      Yes   No    No    0x191 beside a stratoglider in a meadow of strange bright flowers. A warm breeze wafts gently through the long grass
+0x0024  0x01 0x05 SOUTH     Yes   No    No    0x191 beside a stratoglider in a meadow of strange bright flowers. A warm breeze wafts gently through the long grass
+0x0026  0x01 0x02 WEST      Yes   No    No    0x191 beside a stratoglider in a meadow of strange bright flowers. A warm breeze wafts gently through the long grass
+0x0028  0x02 0x03 NORTH     No    No    No    0x192 in whispering blue grass
+0x002a  0x02 0x05 SOUTH     No    No    No    0x192 in whispering blue grass
+0x002c  0x02 0x02 WEST      No    No    No    0x192 in whispering blue grass
+0x002e  0x03 0x03 NORTH     No    No    No    0x193 wandering through dancing butterflies
+0x0030  0x03 0x06 EAST      No    No    No    0x193 wandering through dancing butterflies
+0x0032  0x03 0x02 WEST      No    No    No    0x193 wandering through dancing butterflies
+0x0034  0x04 0x03 NORTH     No    No    No    0x194 on a huge mole-hill. The ground is very soft
+0x0036  0x04 0x06 EAST      Yes   No    No    0x194 on a huge mole-hill. The ground is very soft
+0x0038  0x04 0x05 SOUTH     No    No    No    0x194 on a huge mole-hill. The ground is very soft
+0x003a  0x04 0x0d DOWN      Yes   No    No    0x194 on a huge mole-hill. The ground is very soft
+0x003c  0x05 0x06 EAST      No    No    No    0x195 wandering on the plain
+0x003e  0x05 0x05 SOUTH     No    No    No    0x195 wandering on the plain
+0x0040  0x05 0x02 WEST      Yes   No    No    0x195 wandering on the plain
+0x0042  0x06 0x03 NORTH     No    No    No    0x196 strolling pleasantly through the blue grass
+0x0044  0x06 0x06 EAST      No    No    No    0x196 strolling pleasantly through the blue grass
+0x0046  0x06 0x05 SOUTH     No    No    No    0x196 strolling pleasantly through the blue grass
+0x0048  0x07 0x09 NORTH     Yes   No    No    0x197 beside the charred remains of a spacecraft on a bleak, burnt plain
+0x004a  0x07 0x0a EAST      Yes   No    No    0x197 beside the charred remains of a spacecraft on a bleak, burnt plain
+0x004c  0x07 0x0b SOUTH     Yes   No    No    0x197 beside the charred remains of a spacecraft on a bleak, burnt plain
+0x004e  0x07 0x08 WEST      Yes   No    No    0x197 beside the charred remains of a spacecraft on a bleak, burnt plain
+0x0050  0x08 0x09 NORTH     No    No    No    0x198 on a blasted plain
+0x0052  0x08 0x0b SOUTH     No    No    No    0x198 on a blasted plain
+0x0054  0x08 0x08 WEST      No    No    No    0x198 on a blasted plain
+0x0056  0x09 0x09 NORTH     No    No    No    0x199 on a burnt and ruined plain
+0x0058  0x09 0x0a EAST      No    No    No    0x199 on a burnt and ruined plain
+0x005a  0x09 0x08 WEST      No    No    No    0x199 on a burnt and ruined plain
+0x005c  0x0a 0x09 NORTH     No    No    No    0x19a trudging through the ashes
+0x005e  0x0a 0x0c EAST      Yes   No    No    0x19a trudging through the ashes
+0x0060  0x0a 0x0b SOUTH     No    No    No    0x19a trudging through the ashes
+0x0062  0x0b 0x0a EAST      No    No    No    0x19b in the ashes
+0x0064  0x0b 0x0b SOUTH     No    No    No    0x19b in the ashes
+0x0066  0x0b 0x08 WEST      No    No    No    0x19b in the ashes
+0x0068  0x0c 0x09 NORTH     No    No    No    0x19c on a blasted heath. One or two plants still live
+0x006a  0x0c 0x0b SOUTH     No    No    No    0x19c on a blasted heath. One or two plants still live
+0x006c  0x0d 0x0e DOWN      Yes   No    No    0x19d inside the mole-hill
+0x006e  0x0e 0x0f DOWN      Yes   No    No    0x19e in a steep tunnel
+0x0070  0x0f 0x11 EAST      Yes   No    No    0x19f in a network of earthy passages
+0x0072  0x0f 0x0f SOUTH     No    No    No    0x19f in a network of earthy passages
+0x0074  0x0f 0x0f WEST      No    No    No    0x19f in a network of earthy passages
+0x0076  0x10 0x11 SOUTH     Yes   No    No    0x1a0 in a blocked passage
+0x0078  0x11 0x13 EAST      Yes   No    No    0x1a1 in an immense, domed cave
+0x007a  0x12 0x11 NORTH     Yes   No    No    0x1a2 in a comfortable cave strewn with soft leaves
+0x007c  0x13 0x15 UP        Yes   No    No    0x1a3 at a tunnel junction
+0x007e  0x14 0x13 WEST      Yes   No    No    0x1a4 at the tunnel's end
+0x0080  0x15 0x07 UP        Yes   No    No    0x1a5 scrabbling on loose earth
+0x0082  0x16 0x15 WEST      Yes   No    No    0x1a6 in a tunnel which ends at a solid rock face
+0x0084  0x17 0x17 NORTH     No    Yes   No    0x1a7 in a maze of maize
+0x0086  0x17 0x18 EAST      No    Yes   No    0x1a7 in a maze of maize
+0x0088  0x17 0x40 SOUTH     No    Yes   No    0x1a7 in a maze of maize
+0x008a  0x17 0x17 WEST      No    Yes   No    0x1a7 in a maze of maize
+0x008c  0x18 0x18 NORTH     No    Yes   No    0x1a8 in a maze of maize
+0x008e  0x18 0x17 EAST      No    Yes   No    0x1a8 in a maze of maize
+0x0090  0x18 0x40 SOUTH     No    Yes   No    0x1a8 in a maze of maize
+0x0092  0x18 0x19 WEST      No    Yes   No    0x1a8 in a maze of maize
+0x0094  0x19 0x18 NORTH     No    Yes   No    0x1a9 in a maze of maize
+0x0096  0x19 0x19 EAST      No    Yes   No    0x1a9 in a maze of maize
+0x0098  0x19 0x1a SOUTH     No    Yes   No    0x1a9 in a maze of maize
+0x009a  0x19 0x17 WEST      No    Yes   No    0x1a9 in a maze of maize
+0x009c  0x1a 0x19 NORTH     No    Yes   No    0x1aa in a maze of maize
+0x009e  0x1a 0x1a EAST      No    Yes   No    0x1aa in a maze of maize
+0x00a0  0x1a 0x41 SOUTH     No    Yes   No    0x1aa in a maze of maize
+0x00a2  0x1a 0x19 WEST      No    Yes   No    0x1aa in a maze of maize
+0x00a4  0x1b 0xff <Missing> No    No    No    0x1ab 
+0x00a6  0x1c 0x3b OUTSIDE   Yes   No    No    0x1ac inside the houseplant
+0x00a8  0x1d 0x39 OUTSIDE   No    No    No    0x1ad in a human-bean husk
+0x00aa  0x1e 0x1f EAST      Yes   No    No    0x1ae on a trunk road
+0x00ac  0x1e 0x2a WEST      Yes   No    No    0x1ae on a trunk road
+0x00ae  0x1f 0x20 SOUTHWEST Yes   No    No    0x1af amongst the aerial roots of a giant tree
+0x00b0  0x20 0x23 SOUTH     Yes   No    No    0x1b0 in the heart-wood, amidst radiating branches
+0x00b2  0x21 0x1f NORTH     Yes   No    No    0x1b1 on a north-south trunk root
+0x00b4  0x22 0x2b NORTH     Yes   No    No    0x1b2 in the giant redwood tree
+0x00b6  0x23 0x22 WEST      Yes   No    No    0x1b3 in the very giant greenwood tree
+0x00b8  0x24 0x21 NORTH     Yes   No    No    0x1b4 within a confusion of tangled twigs
+0x00ba  0x25 0x2d WEST      Yes   No    No    0x1b5 on a platform east of the branch line
+0x00bc  0x26 0x2d NORTH     Yes   No    No    0x1b6 at the tip of a tree
+0x00be  0x27 0x28 NORTH     No    No    No    0x1b7 
+0x00c0  0x28 0x42 NORTH     Yes   No    No    0x1b8 in the shade of great trees
+0x00c2  0x28 0x2e EAST      Yes   No    No    0x1b8 in the shade of great trees
+0x00c4  0x28 0x29 SOUTH     Yes   No    No    0x1b8 in the shade of great trees
+0x00c6  0x29 0x30 EAST      Yes   No    No    0x1b9 in the Cathedral Forest
+0x00c8  0x2a 0x2b SOUTH     Yes   No    No    0x1ba standing on bent boughs
+0x00ca  0x2b 0x20 EAST      Yes   No    No    0x1bb halfway up the giant tree
+0x00cc  0x2c 0x2d SOUTH     Yes   No    No    0x1bc in the treetops. The forest stretches south from a meandering river, below you, and continues on to the sea. To the east, the forest ends and cultivated land can be seen. Beyond this is an enormous dome
+0x00ce  0x2d 0x2c NORTH     Yes   No    No    0x1bd clinging to the topmost branches
+0x00d0  0x2e 0x30 SOUTH     Yes   No    No    0x1be in luxuriant undergrowth
+0x00d2  0x2f 0x2e WEST      Yes   No    No    0x1bf amongst twisted tree roots
+0x00d4  0x30 0x31 EAST      Yes   No    No    0x1c0 feeling claustrophobic. The trees press tightly together
+0x00d6  0x31 0x63 EAST      Yes   No    No    0x1c1 squeezing through the hot-house forest
+0x00d8  0x32 0x29 NORTH     Yes   No    No    0x1c2 beside a leafpile
+0x00da  0x33 0x30 NORTH     Yes   No    No    0x1c3 on a woodpile. The branches are lower here and one is almost within reach
+0x00dc  0x33 0x23 UP        Yes   No    No    0x1c3 on a woodpile. The branches are lower here and one is almost within reach
+0x00de  0x34 0x31 NORTH     Yes   No    No    0x1c4 under the spreading chestnut tree
+0x00e0  0x34 0x64 EAST      Yes   No    No    0x1c4 under the spreading chestnut tree
+0x00e2  0x35 0x36 SOUTH     Yes   No    No    0x1c5 deep in the bush country
+0x00e4  0x36 0x3b EAST      Yes   No    No    0x1c6 in Keystone Coppice
+0x00e6  0x37 0x3e NORTH     Yes   No    No    0x1c7 on a well-trodden path
+0x00e8  0x37 0x35 SOUTH     Yes   No    No    0x1c7 on a well-trodden path
+0x00ea  0x37 0x0c WEST      Yes   No    No    0x1c7 on a well-trodden path
+0x00ec  0x38 0x37 WEST      Yes   No    No    0x1c8 in pleasant woodland
+0x00ee  0x39 0x38 NORTH     Yes   No    No    0x1c9 at a bend in the forest path
+0x00f0  0x3a 0x38 WEST      Yes   No    No    0x1ca in a grove of young saplings
+0x00f2  0x3b 0x3a NORTH     Yes   No    No    0x1cb on green sward which ends at a high cliff
+0x00f4  0x3b 0x39 NW        Yes   No    No    0x1cb on green sward which ends at a high cliff
+0x00f6  0x3b 0x1c UP        Yes   Yes   No    0x1cb on green sward which ends at a high cliff
+0x00f8  0x3b 0x29 DOWN      No    No    No    0x1cb on green sward which ends at a high cliff
+0x00fa  0x3c 0x4b NORTH     Yes   No    No    0x1cc on the cliff top, south of a tremendous waterfall
+0x00fc  0x3c 0x38 SOUTHWEST Yes   No    No    0x1cc on the cliff top, south of a tremendous waterfall
+0x00fe  0x3d 0x42 DOWN      No    No    No    0x1cd on a tiny island at the brink of an awe-inspiring waterfall
+0x0100  0x3e 0x47 NORTH     Yes   No    No    0x1ce on the riverbank. Maize grows on the opposite bank
+0x0102  0x3e 0x3f EAST      Yes   No    No    0x1ce on the riverbank. Maize grows on the opposite bank
+0x0104  0x3f 0x49 NORTH     Yes   No    No    0x1cf in soggy woodland
+0x0106  0x3f 0x3c EAST      Yes   No    No    0x1cf in soggy woodland
+0x0108  0x40 0x17 NORTH     No    No    No    0x1d0 on the river bank at the north side of the river. In the distance is a field of maize
+0x010a  0x40 0x41 EAST      Yes   No    No    0x1d0 on the river bank at the north side of the river. In the distance is a field of maize
+0x010c  0x40 0x48 SOUTH     Yes   No    No    0x1d0 on the river bank at the north side of the river. In the distance is a field of maize
+0x010e  0x41 0x4a SOUTH     Yes   No    No    0x1d1 on the north bank of the river near a huge waterfall
+0x0110  0x42 0x43 EAST      Yes   No    No    0x1d2 in a dense jungle south of a huge waterfall
+0x0112  0x43 0x2e SOUTH     Yes   No    No    0x1d3 in a pleasant water meadow by a quagmire
+0x0114  0x44 0x43 WEST      Yes   No    No    0x1d4 in treacherous fenland
+0x0116  0x45 0x42 NORTH     No    No    No    0x1d5 
+0x0118  0x46 0x48 EAST      No    No    No    0x1d6 sailing near the north bank
+0x011a  0x46 0x49 SOUTH     No    No    No    0x1d6 sailing near the north bank
+0x011c  0x46 0x46 WEST      No    No    No    0x1d6 sailing near the north bank
+0x011e  0x47 0x48 NORTH     No    No    No    0x1d7 on the river, close to the south bank
+0x0120  0x47 0x49 EAST      No    No    No    0x1d7 on the river, close to the south bank
+0x0122  0x47 0x47 WEST      No    No    No    0x1d7 on the river, close to the south bank
+0x0124  0x48 0x4a EAST      No    No    No    0x1d8 below the north bank of the river
+0x0126  0x48 0x4b SOUTH     No    No    No    0x1d8 below the north bank of the river
+0x0128  0x48 0x48 WEST      No    No    No    0x1d8 below the north bank of the river
+0x012a  0x49 0x4a NORTH     No    No    No    0x1d9 near the south bank of the river
+0x012c  0x49 0x4b EAST      No    No    No    0x1d9 near the south bank of the river
+0x012e  0x49 0x49 WEST      No    No    No    0x1d9 near the south bank of the river
+0x0130  0x4a 0x3d EAST      No    No    No    0x1da on the river near the north bank. The water is speeding up
+0x0132  0x4a 0x3d SOUTH     No    No    No    0x1da on the river near the north bank. The water is speeding up
+0x0134  0x4a 0x4a WEST      No    No    No    0x1da on the river near the north bank. The water is speeding up
+0x0136  0x4b 0x3d NORTH     No    No    No    0x1db sailing beside the south bank, just upstream from an enormous waterfall
+0x0138  0x4b 0x3d EAST      No    No    No    0x1db sailing beside the south bank, just upstream from an enormous waterfall
+0x013a  0x4b 0x4b WEST      No    No    No    0x1db sailing beside the south bank, just upstream from an enormous waterfall
+0x013c  0x4c 0x4d EAST      Yes   No    No    0x1dc swimming just below the surface of the cool river
+0x013e  0x4d 0x4e EAST      Yes   No    No    0x1dd swimming underwater in the cool river
+0x0140  0x4e 0x4f EAST      Yes   No    No    0x1de swimming underwater through a myriad water plants
+0x0142  0x4f 0x50 EAST      Yes   No    No    0x1df swimming further down-stream
+0x0144  0x50 0x51 EAST      Yes   No    No    0x1e0 near the river bed
+0x0146  0x51 0x52 EAST      Yes   No    No    0x1e1 swimming at the bottom of the river
+0x0148  0x52 0x83 UP        Yes   No    No    0x1e2 swimming in a tunnel under the city wall
+0x014a  0x53 0x54 NORTH     No    No    No    0x1e3 
+0x014c  0x54 0x5b NEAST     Yes   No    No    0x1e4 on the beach. Cliffs rear up to the west
+0x014e  0x54 0x55 EAST      Yes   No    No    0x1e4 on the beach. Cliffs rear up to the west
+0x0150  0x55 0x5b NORTH     Yes   No    No    0x1e5 on the beach beside the sea side. To the west is a gate and north lies a wheatfield
+0x0152  0x55 0x56 EAST      Yes   No    No    0x1e5 on the beach beside the sea side. To the west is a gate and north lies a wheatfield
+0x0154  0x56 0x5a NORTH     Yes   No    No    0x1e6 on the beach, south of a huge wheatfield
+0x0156  0x56 0x57 EAST      Yes   No    No    0x1e6 on the beach, south of a huge wheatfield
+0x0158  0x57 0x58 NORTH     Yes   No    No    0x1e7 at the east end of the beach. A wide river flows lazily from the north
+0x015a  0x58 0x5a WEST      Yes   No    No    0x1e8 in a wheatfield by a wide river
+0x015c  0x59 0x4c NORTH     Yes   No    No    0x1e9 in the north-west corner of the wheat, on the bank of a wide river
+0x015e  0x59 0x5c EAST      Yes   No    No    0x1e9 in the north-west corner of the wheat, on the bank of a wide river
+0x0160  0x5a 0x5c NORTH     Yes   No    No    0x1ea in the middle of a field of golden wheat. To the south lies the beach
+0x0162  0x5a 0x5b WEST      Yes   No    No    0x1ea in the middle of a field of golden wheat. To the south lies the beach
+0x0164  0x5b 0x59 NORTH     Yes   No    No    0x1eb at the south-west edge of the wheatfield. To the west is an unscaleable wall
+0x0166  0x5c 0x5d EAST      Yes   No    No    0x1ec in the middle of the wheatfield high above a wide river
+0x0168  0x5d 0x58 SOUTH     Yes   No    No    0x1ed in the north-east corner of the wheatfield
+0x016a  0x5e 0x5d WEST      No    No    No    0x1ee outside a small door
+0x016c  0x5e 0x6d INTO      No    No    Yes   0x1ee outside a small door
+0x016e  0x5f 0x60 SOUTH     Yes   No    No    0x1ef on clear land south of an observation tower
+0x0170  0x60 0x54 SOUTH     Yes   No    No    0x1f0 on a stretch of clear land west of a high wall
+0x0172  0x61 0x5f EAST      Yes   No    No    0x1f1 on a patch of clear land. To the north-east over the river is a huge observation tower
+0x0174  0x61 0x62 SOUTH     Yes   No    No    0x1f1 on a patch of clear land. To the north-east over the river is a huge observation tower
+0x0176  0x62 0x60 EAST      Yes   No    No    0x1f2 on clear land
+0x0178  0x63 0x61 EAST      Yes   No    No    0x1f3 at the edge of the forest, looking out onto the city's defenses
+0x017a  0x63 0x64 SOUTH     Yes   No    No    0x1f3 at the edge of the forest, looking out onto the city's defenses
+0x017c  0x64 0x62 EAST      Yes   No    No    0x1f4 at the eastern edge of the forest. Open land lies east and to the south sea-weed rears onto a smooth beach
+0x017e  0x65 0x69 NORTH     No    No    No    0x1f5 on the north platform. It's suspended by a vine
+0x0180  0x66 0x69 NORTH     No    No    No    0x1f6 on the south platform, supported by a vine over a pulley
+0x0182  0x67 0x69 NORTH     No    No    No    0x1f7 
+0x0184  0x68 0x69 NORTH     No    No    No    0x1f8 
+0x0186  0x69 0x6a DOWN      Yes   No    No    0x1f9 up a sheer cliff
+0x0188  0x6a 0x6b NORTH     Yes   No    No    0x1fa in the Black Mountains
+0x018a  0x6a 0x6a SOUTH     No    No    No    0x1fa in the Black Mountains
+0x018c  0x6a 0x6e DOWN      Yes   No    No    0x1fa in the Black Mountains
+0x018e  0x6b 0x6b NORTH     No    No    No    0x1fb in the Black Mountains
+0x0190  0x6b 0x69 UP        No    No    No    0x1fb in the Black Mountains
+0x0192  0x6b 0x7e DOWN      Yes   No    No    0x1fb in the Black Mountains
+0x0194  0x6c 0x6d OUTSIDE   Yes   No    No    0x1fc in a little kitchen
+0x0196  0x6d 0x6e NORTH     Yes   No    No    0x1fd beside a little house on the prairie
+0x0198  0x6d 0x71 EAST      Yes   No    No    0x1fd beside a little house on the prairie
+0x019a  0x6e 0x7e NORTH     Yes   No    No    0x1fe in the Broken Lands
+0x019c  0x6e 0x72 EAST      Yes   No    No    0x1fe in the Broken Lands
+0x019e  0x6f 0x71 NORTH     Yes   No    No    0x1ff beside the Well at the World's End
+0x01a0  0x6f 0x70 DOWN      Yes   Yes   No    0x1ff beside the Well at the World's End
+0x01a2  0x70 0x6f OUTSIDE   Yes   No    No    0x200 in the Well of Souls
+0x01a4  0x71 0x72 NORTH     Yes   No    No    0x201 deep in Yearwood
+0x01a6  0x71 0x78 EAST      Yes   No    No    0x201 deep in Yearwood
+0x01a8  0x72 0x73 EAST      Yes   No    No    0x202 at the end of a road from the east
+0x01aa  0x73 0x78 SOUTH     Yes   No    No    0x203 on a long and winding road past a brick wall
+0x01ac  0x74 0x73 WEST      Yes   No    No    0x204 on a yellow brick road
+0x01ae  0x75 0x74 WEST      Yes   No    No    0x205 at the Gate of Ivril
+0x01b0  0x76 0x75 WEST      Yes   No    No    0x206 in the ancient city of Lankhmar
+0x01b2  0x77 0x76 SOUTH     Yes   No    No    0x207 in the Old Curiosity Shop
+0x01b4  0x78 0x79 EAST      Yes   No    No    0x208 in Duncton Wood
+0x01b6  0x79 0x74 NORTH     Yes   No    No    0x209 in the Dream Park. Cloying incense clogs the air
+0x01b8  0x79 0x7b EAST      Yes   No    No    0x209 in the Dream Park. Cloying incense clogs the air
+0x01ba  0x79 0xab SOUTH     No    No    No    0x209 in the Dream Park. Cloying incense clogs the air
+0x01bc  0x7a 0x75 SOUTH     Yes   No    No    0x20a in a sweltering tropical hothouse
+0x01be  0x7b 0x75 NORTH     Yes   No    No    0x20b at the Fountains of Paradise
+0x01c0  0x7c 0x7d INTO      Yes   No    No    0x20c in a casino on the Island of the Mighty
+0x01c2  0x7d 0x7e OUTSIDE   Yes   No    No    0x20d 
+0x01c4  0x7e 0x7f EAST      Yes   No    No    0x20e on the Shores of Death, near a landing stage
+0x01c6  0x7f 0x72 SOUTH     Yes   No    No    0x20f at Earthsea. An unscaleable wall lies to the east
+0x01c8  0x80 0x81 EAST      No    No    No    0x210 at the Vermilion Sands Nudist Beach. "Leave your woes with your clothes"
+0x01ca  0x80 0x73 SOUTH     No    No    No    0x210 at the Vermilion Sands Nudist Beach. "Leave your woes with your clothes"
+0x01cc  0x80 0x7f WEST      No    No    No    0x210 at the Vermilion Sands Nudist Beach. "Leave your woes with your clothes"
+0x01ce  0x81 0x74 SOUTH     Yes   No    No    0x211 on many coloured sand, east of a wall
+0x01d0  0x82 0x81 NORTH     No    No    No    0x212 
+0x01d2  0x83 0x89 SOUTH     Yes   No    No    0x213 in an east-west river-tunnel. A doorway leads south. A grating noise echoes from the east
+0x01d4  0x84 0x83 WEST      Yes   No    No    0x214 south of the river, in a damp tunnel under the city wall
+0x01d6  0x85 0x86 EAST      Yes   No    No    0x215 in a blocked ventilator shaft
+0x01d8  0x86 0x8d DOWN      No    No    No    0x216 at a ventilator junction
+0x01da  0x87 0x86 DOWN      Yes   No    No    0x217 in the ventilation system
+0x01dc  0x88 0x87 WEST      Yes   No    No    0x218 at a dead-end ventilator pipe
+0x01de  0x89 0x8a SOUTH     Yes   No    No    0x219 at the north end of an echoing hall hall hall
+0x01e0  0x8a 0x8b SOUTH     Yes   No    No    0x21a in an echoing hall
+0x01e2  0x8b 0x8c SOUTH     Yes   No    No    0x21b south of the echo chamber
+0x01e4  0x8c 0x8d SOUTH     Yes   No    No    0x21c between massive double doors
+0x01e6  0x8d 0x86 EAST      No    No    No    0x21d at a cross-junction
+0x01e8  0x8d 0x8e SOUTH     Yes   No    No    0x21d at a cross-junction
+0x01ea  0x8e 0x90 SOUTHEAST Yes   No    No    0x21e at the north end of a bare hall. In the centre is a blazing fire
+0x01ec  0x8e 0x8f SOUTHWEST Yes   No    No    0x21e at the north end of a bare hall. In the centre is a blazing fire
+0x01ee  0x8f 0x9a EAST      Yes   No    No    0x21f in the huge hall west of the fire
+0x01f0  0x90 0x9a WEST      Yes   No    No    0x220 in the hall east of the fire
+0x01f2  0x91 0x9a NORTH     Yes   No    No    0x221 at a throne made from robot parts
+0x01f4  0x91 0x90 NEAST     Yes   No    No    0x221 at a throne made from robot parts
+0x01f6  0x91 0x8f NW        Yes   No    No    0x221 at a throne made from robot parts
+0x01f8  0x92 0x8e WEST      Yes   No    No    0x222 in an air-conditioning duct
+0x01fa  0x93 0x92 WEST      Yes   No    No    0x223 at a duct junction
+0x01fc  0x94 0x93 SOUTH     Yes   No    No    0x224 at the end of the duct
+0x01fe  0x95 0x93 NORTH     Yes   No    No    0x225 at the duct terminus
+0x0200  0x96 0x93 WEST      Yes   No    No    0x226 beside a hatch in the duct
+0x0202  0x96 0x81 UP        Yes   No    No    0x226 beside a hatch in the duct
+0x0204  0x97 0x93 UP        Yes   No    No    0x227 in a very tight recess
+0x0206  0x97 0xab OUTSIDE   Yes   No    No    0x227 in a very tight recess
+0x0208  0x98 0x8d EAST      Yes   No    No    0x228 in a room of twisty roots
+0x020a  0x99 0x8e EAST      Yes   No    No    0x229 amidst a pile of electrical cabling
+0x020c  0x9a 0x8e NORTH     Yes   No    No    0x22a 
+0x020e  0x9b 0x9a NORTH     No    No    No    0x22b 
+0x0210  0x9c 0x9a NORTH     No    No    No    0x22c 
+0x0212  0x9d 0x9a NORTH     No    No    No    0x22d 
+0x0214  0x9e 0x9a NORTH     No    No    No    0x22e 
+0x0216  0x9f 0x9a NORTH     No    No    No    0x22f 
+0x0218  0xa0 0x9a NORTH     No    No    No    0x230 
+0x021a  0xa1 0x9a NORTH     No    No    No    0x231 
+0x021c  0xa2 0x9a NORTH     No    No    No    0x232 
+0x021e  0xa3 0x9a NORTH     No    No    No    0x233 
+0x0220  0xa4 0x9a NORTH     No    No    No    0x234 
+0x0222  0xa5 0xa6 EAST      Yes   No    No    0x235 in a dark tunnel
+0x0224  0xa6 0xa7 EAST      Yes   No    No    0x236 
+0x0226  0xa7 0xa8 EAST      Yes   No    No    0x237 
+0x0228  0xa8 0xa9 EAST      Yes   No    No    0x238 in a dimly-lit train tunnel
+0x022a  0xa9 0xa5 EAST      Yes   No    No    0x239 on the track below the platform
+0x022c  0xaa 0xa9 SOUTH     Yes   No    No    0x23a on a grubby subway platform
+0x022e  0xaa 0xa9 DOWN      Yes   No    No    0x23a on a grubby subway platform
+0x0230  0xab 0xaa SOUTH     Yes   No    No    0x23b at the station ticket barrier
+0x0232  0xac 0xaa NORTH     Yes   No    No    0x23c on a tatty bench in a shabby train
+0x0234  0xad 0xab NORTH     No    No    No    0x23d 
+0x0236  0xae 0xab NORTH     No    No    Yes   0x23e 
+0x0238  0xaf 0xb0 OUTSIDE   Yes   Yes   Yes   0x23f in a blue glass elevator
+0x023a  0xaf 0xb0 SOUTH     Yes   No    Yes   0x23f in a blue glass elevator
+0x023c  0xb0 0xab SOUTH     Yes   No    No    0x240 near the floor-button of an elevator. If you walked down the corridor, you'd be_
+0x023e  0xb1 0xb0 NORTH     Yes   No    No    0x241 at Grindpin and Clone, unisex dental stylists
+0x0240  0xb2 0xb0 NORTH     Yes   No    No    0x242 in the Mid-lloyd Bank: "Come and listen to the talking bank"
+0x0242  0xb3 0xb0 NORTH     Yes   No    No    0x243 in the Orange-Cross Charity shop
+0x0244  0xb4 0xb0 NORTH     Yes   No    No    0x244 at Ly, Gazump and Connem: Estate Agents
+0x0246  0xb5 0xb0 NORTH     Yes   No    No    0x245 in Mssrs Bodger, Bungler and Co. D.I.Y products for the amateur handyman
+0x0248  0xb6 0x8d UP        No    No    No    0x246 
+0x024a  0xb7 0xb0 NORTH     Yes   No    No    0x247 in the hospital. Gleaming Nightingales clank along endless corridors
+0x024c  0xb8 0xb0 NORTH     Yes   No    No    0x248 
+0x024e  0xb9 0xb0 NORTH     Yes   No    No    0x249 at the Lost Property dept
+0x0250  0xba 0xb0 NORTH     Yes   No    No    0x24a in Sharkey's Travel Agents
+0x0252  0xbb 0xb0 NORTH     Yes   No    No    0x24b 
+0x0254  0xbc 0xb0 NORTH     Yes   No    No    0x24c at the cop shop
+0x0256  0xbd 0xb0 NORTH     Yes   No    No    0x24d in the hall of an unoccupied habihome
+0x0258  0xbe 0xb0 NORTH     Yes   No    No    0x24e in the hall of your habihome
+0x025a  0xbf 0xbb NORTH     Yes   No    No    0x24f 
+0x025c  0xc0 0xbc WEST      Yes   No    No    0x250 behind bars in a cell
+0x025e  0xc1 0xc0 WEST      No    No    No    0x251 in a maximum security prison
+0x0260  0xc2 0xbd NORTH     Yes   No    No    0x252 in a bodymaint. Gym equipment is scattered about
+0x0262  0xc3 0xbe NORTH     Yes   No    No    0x253 in your bodymaint
+0x0264  0xc4 0xbd WEST      Yes   No    No    0x254 in a vacant habihome
+0x0266  0xc5 0xbe WEST      Yes   No    No    0x255 in your own comfortable habihome. There's no place like home
+0x0268  0xc6 0xc4 WEST      Yes   No    No    0x256 on a balcony with a splendid view over the park
+0x026a  0xc7 0xc5 WEST      Yes   No    No    0x257 on your balcony. There is a spectacular view of apartment pyramids
+0x026c  0xc8 0x87 DOWN      Yes   No    No    0x258 on the roof
+0x026e  0xc9 0xab SOUTH     Yes   No    No    0x259 in the foyer of City Hall
+0x0270  0xca 0xcd NORTH     Yes   No    No    0x25a in the palatial reception area
+0x0272  0xca 0xc9 SOUTH     Yes   No    No    0x25a in the palatial reception area
+0x0274  0xcb 0xca EAST      Yes   No    No    0x25b in a plastiwood-panelled committee room
+0x0276  0xcc 0xca WEST      Yes   No    No    0x25c in a voting booth
+0x0278  0xcd 0xcd NORTH     No    Yes   No    0x25d in the corridors of power
+0x027a  0xcd 0xcd EAST      No    Yes   No    0x25d in the corridors of power
+0x027c  0xcd 0xca SOUTH     Yes   Yes   No    0x25d in the corridors of power
+0x027e  0xcd 0xce WEST      Yes   Yes   No    0x25d in the corridors of power
+0x0280  0xce 0xce SOUTH     No    Yes   No    0x25e in the corridors of power
+0x0282  0xce 0xce WEST      No    Yes   No    0x25e in the corridors of power
+0x0284  0xcf 0xcf NORTH     No    Yes   No    0x25f in the corridors of power
+0x0286  0xcf 0xd0 EAST      No    Yes   No    0x25f in the corridors of power
+0x0288  0xcf 0xce SOUTH     Yes   Yes   No    0x25f in the corridors of power
+0x028a  0xcf 0xcf WEST      No    Yes   No    0x25f in the corridors of power
+0x028c  0xd0 0xcf SOUTH     No    No    No    0x260 in the council chamber
+0x028e  0xd1 0xd0 SOUTH     Yes   No    No    0x261 in the board room
+0x0290  0xd2 0xd1 SOUTH     Yes   No    No    0x262 in the city father's computer room
+0x0292  0xd3 0xd2 UP        Yes   No    No    0x263 on the seat of power under an enormous holoscreen
+0x0294  0xd4 0xab NORTH     No    No    No    0x264 
+0x0296  0xd5 0xab NORTH     Yes   No    No    0x265 
+0x0298  0xd6 0xd7 EAST      Yes   No    No    0x266 at the check-in
+0x029a  0xd7 0xab SOUTH     Yes   No    No    0x267 in the spaceport waiting room. Dozens of waldroids lie around waiting
+0x029c  0xd8 0xd7 WEST      Yes   No    No    0x268 in the spaceport enquiry area
+0x029e  0xd9 0xd8 WEST      Yes   No    No    0x269 at the enquiry desk
+0x02a0  0xda 0xd8 SOUTH     Yes   No    No    0x26a in the duty-free shop. Rows of exotic objects with exotic prices confront you
+0x02a2  0xdb 0xd7 SOUTH     Yes   No    No    0x26b in the embarkation lounge
+0x02a4  0xdc 0xf5 NORTH     No    No    No    0x26c in the green lane through Customs
+0x02a6  0xdc 0xdb SOUTH     Yes   No    No    0x26c in the green lane through Customs
+0x02a8  0xdd 0xde EAST      Yes   No    No    0x26d west of a huge docking bay
+0x02aa  0xde 0xdf NORTH     Yes   No    Yes   0x26e east of the docking bay, beside an airlock and a starbike
+0x02ac  0xdf 0xe5 NORTH     Yes   No    Yes   0x26f in an airlock with iris-doors
+0x02ae  0xe0 0xe1 EAST      Yes   No    No    0x270 where the cylinder ends
+0x02b0  0xe1 0xe4 NORTH     Yes   No    No    0x271 at a plasteel junction
+0x02b2  0xe2 0xe1 WEST      Yes   No    Yes   0x272 in a cupboard
+0x02b4  0xe3 0xe4 EAST      Yes   No    No    0x273 where the cylinder ends
+0x02b6  0xe4 0xe1 NORTH     Yes   No    No    0x274 at a junction of wide cylinders
+0x02b8  0xe4 0xe5 EAST      Yes   No    No    0x274 at a junction of wide cylinders
+0x02ba  0xe5 0xe6 EAST      Yes   No    No    0x275 in a long tubeway beside an air-lock
+0x02bc  0xe6 0xe7 EAST      No    Yes   Yes   0x276 in a soft tube
+0x02be  0xe6 0xe7 INTO      No    No    Yes   0x276 in a soft tube
+0x02c0  0xe7 0xe8 EAST      Yes   No    No    0x277 in a habiviron activity area
+0x02c2  0xe8 0xe9 EAST      Yes   No    Yes   0x278 in a rest-zone
+0x02c4  0xe9 0xe8 WEST      No    No    Yes   0x279 in a small smooth cubicle
+0x02c6  0xea 0xe6 DOWN      Yes   No    No    0x27a in a dirty air-duct
+0x02c8  0xea 0xe6 OUTSIDE   No    Yes   No    0x27a in a dirty air-duct
+0x02ca  0xeb 0xec EAST      Yes   No    No    0x27b in the Snowball 9 control room
+0x02cc  0xec 0xed NORTH     Yes   No    No    0x27c in a north-south walkway
+0x02ce  0xec 0xed SOUTH     Yes   No    No    0x27c in a north-south walkway
+0x02d0  0xed 0xee EAST      Yes   No    No    0x27d at a T-junction
+0x02d2  0xee 0xef DOWN      Yes   No    No    0x27e in an east-west transit tube
+0x02d4  0xef 0xf0 DOWN      Yes   No    No    0x27f on a wide sloping ramp
+0x02d6  0xf0 0xf1 WEST      Yes   No    No    0x280 on a ledge inside a cylinder
+0x02d8  0xf1 0xf0 NORTH     No    No    No    0x281 above Jacob's ladder
+0x02da  0xf1 0xf0 SOUTH     No    No    No    0x281 above Jacob's ladder
+0x02dc  0xf1 0xf0 WEST      No    No    No    0x281 above Jacob's ladder
+0x02de  0xf1 0xf1 DOWN      No    No    No    0x281 above Jacob's ladder
+0x02e0  0xf2 0xf3 NORTH     Yes   No    No    0x282 in a padded room
+0x02e2  0xf3 0x01 DOWN      Yes   Yes   No    0x283 in the control room of a crashed stratoglider. A vision screen shows the strange plants on Eden. There's an opening behind you
+0x02e4  0xf3 0x01 OUTSIDE   Yes   No    No    0x283 in the control room of a crashed stratoglider. A vision screen shows the strange plants on Eden. There's an opening behind you
+0x02e6  0xf4 0xf3 WEST      Yes   Yes   No    0x284 in a walk-in cupboard
+0x02e8  0xf4 0xf3 OUTSIDE   Yes   No    No    0x284 in a walk-in cupboard
+0x02ea  0xf5 0xdd OUTSIDE   No    No    No    0x285 in a space bus
+0x02ec  0xf6 0xf5 UP        Yes   No    No    0x286 in the cargo hold of the space bus
+0x02ee  0xf7 0xde OUTSIDE   Yes   No    No    0x287 astride a starbike

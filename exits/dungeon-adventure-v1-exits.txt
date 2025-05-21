@@ -8,343 +8,343 @@ Bit 1 - If set this a teleporation between a black and white dot and prints 'The
 Bit 2 - not used, always set to 0x00 but printed here as 'No'
 
 
-                        (Inv.)
-Address From  To  Dir   Bit 0 Bit 1 Bit 2 MsgId Location Text
-------- ---- ---- ----- ----- ----- ----- ----- -------------
-0x6b20  0x01 0x02 East   Yes   No    No    0x1f5 north of the dry swamp, below a cliff and east of a deep chasm
-0x6b22  0x01 0x03 South  Yes   No    No    0x1f5 north of the dry swamp, below a cliff and east of a deep chasm
-0x6b24  0x02 0x04 South  Yes   No    No    0x1f6 north of the dry marsh, below a sheer cliff
-0x6b26  0x03 0x04 East   Yes   No    No    0x1f7 on a small mound, surrounded by fallen stones
-0x6b28  0x03 0x05 South  Yes   No    No    0x1f7 on a small mound, surrounded by fallen stones
-0x6b2a  0x03 0xd1 West   No    No    No    0x1f7 on a small mound, surrounded by fallen stones
-0x6b2c  0x03 0xd1 Down   No    No    No    0x1f7 on a small mound, surrounded by fallen stones
-0x6b2e  0x04 0x05 South  No    No    No    0x1f8 beside a muddy puddle
-0x6b30  0x05 0x03 North  Yes   No    No    0x1f9 on powdery peat beside a north-south chasm
-0x6b32  0x05 0x07 South  Yes   No    No    0x1f9 on powdery peat beside a north-south chasm
-0x6b34  0x05 0xd1 West   Yes   No    No    0x1f9 on powdery peat beside a north-south chasm
-0x6b36  0x05 0xd1 Down   Yes   No    No    0x1f9 on powdery peat beside a north-south chasm
-0x6b38  0x06 0x05 North  No    No    No    0x1fa on a mound of rubble
-0x6b3a  0x06 0x08 South  Yes   No    No    0x1fa on a mound of rubble
-0x6b3c  0x06 0xd1 West   No    No    No    0x1fa on a mound of rubble
-0x6b3e  0x06 0xd1 Down   No    No    No    0x1fa on a mound of rubble
-0x6b40  0x07 0x06 West   Yes   No    No    0x1fb on dry, powdery peat
-0x6b42  0x08 0x2c Up     Yes   No    No    0x1fc below a ramp up the outside of the black tower._Powdery peat leads north
-0x6b44  0x08 0x2c South  Yes   No    No    0x1fc below a ramp up the outside of the black tower._Powdery peat leads north
-0x6b46  0x09 0x0a Down   Yes   No    No    0x1fd at the top of the "straight stairs", a short distance below a gate-house
-0x6b48  0x0a 0x0b Down   Yes   No    No    0x1fe half-way up the "straight stairs"
-0x6b4a  0x0b 0x0c Down   Yes   No    No    0x1ff below the "straight stairs"
-0x6b4c  0x0c 0x0d Down   Yes   No    No    0x200 in a gully above the "winding stairs"
-0x6b4e  0x0c 0xcf North  Yes   No    No    0x200 in a gully above the "winding stairs"
-0x6b50  0x0c 0xcf Enter  Yes   No    No    0x200 in a gully above the "winding stairs"
-0x6b52  0x0d 0x0e Down   Yes   No    No    0x201 on the "winding stairs", carved into exposed rock
-0x6b54  0x0e 0x0f Down   Yes   No    No    0x202 on the "winding stairs", leading across a vertical slab of exposed rock
-0x6b56  0x0f 0x23 Down   Yes   No    No    0x203 in a sheltered gully below a winding staircase
-0x6b58  0x10 0x12 Down   Yes   No    No    0x204 on a sturdy branch over the clearing
-0x6b5a  0x11 0x12 South  Yes   No    No    0x205 in a forest clearing
-0x6b5c  0x12 0x15 South  Yes   No    No    0x206 at the edge of the forest, beneath a particularly large tree. You can just glimpse a large clearing to the north
-0x6b5e  0x13 0x16 South  Yes   No    No    0x207 on the edge of the forest. You can go no further
-0x6b60  0x14 0x31 East   Yes   No    No    0x208 on an east-west road south of the river. A gigantic orc's head is carved into the cliff north of the river, its tongue forming a bridge over the waters to you. A ruined tower stands on top of_the cliff
-0x6b62  0x14 0x19 South  Yes   No    No    0x208 on an east-west road south of the river. A gigantic orc's head is carved into the cliff north of the river, its tongue forming a bridge over the waters to you. A ruined tower stands on top of_the cliff
-0x6b64  0x14 0x21 Cross  Yes   No    No    0x208 on an east-west road south of the river. A gigantic orc's head is carved into the cliff north of the river, its tongue forming a bridge over the waters to you. A ruined tower stands on top of_the cliff
-0x6b66  0x15 0x16 East   Yes   No    No    0x209 on an east-west road through the forest
-0x6b68  0x15 0x1b South  Yes   No    No    0x209 on an east-west road through the forest
-0x6b6a  0x16 0xe2 East   No    Yes   No    0x20a on an east-west road through the forest
-0x6b6c  0x17 0x18 East   Yes   No    No    0x20b within a circle of distorted monoliths, etched into grotesque figures by the acid rain. Lightning arcs overhead, revealing the stark horror of this haunted place, while thunder echoes from every crag
-0x6b6e  0x17 0x18 Down   Yes   No    No    0x20b within a circle of distorted monoliths, etched into grotesque figures by the acid rain. Lightning arcs overhead, revealing the stark horror of this haunted place, while thunder echoes from every crag
-0x6b70  0x18 0x19 East   Yes   No    No    0x20c on the side of a steep hill which rises into the clouds. Rumblings emanate from above
-0x6b72  0x18 0x19 Down   Yes   No    No    0x20c on the side of a steep hill which rises into the clouds. Rumblings emanate from above
-0x6b74  0x18 0x20 South  No    No    No    0x20c on the side of a steep hill which rises into the clouds. Rumblings emanate from above
-0x6b76  0x19 0x1a East   Yes   No    No    0x20d on a grassy plain
-0x6b78  0x1a 0x20 South  No    No    No    0x20e below a small mound which is completely dwarfed_by a huge untidy nest
-0x6b7a  0x1b 0x1a West   Yes   No    No    0x20f on the edge of the forest
-0x6b7c  0x1c 0x16 North  Yes   No    No    0x210 in a clump of bushes on the edge of the forest
-0x6b7e  0x1d 0x1e Down   No    No    No    0x211 in a round room with large windows and no doors. A narrow ladder leads down beneath a green pedestal
-0x6b80  0x1e 0x19 North  Yes   No    No    0x212 below a tower of polished marble
-0x6b82  0x1e 0x19 East   No    No    No    0x212 below a tower of polished marble
-0x6b84  0x1f 0x1a Down   Yes   No    No    0x213 in a huge nest
-0x6b86  0x20 0x1e North  Yes   No    No    0x214 on a grassy plain which seems to go on for ever
-0x6b88  0x20 0x20 East   No    No    No    0x214 on a grassy plain which seems to go on for ever
-0x6b8a  0x20 0x20 South  No    No    No    0x214 on a grassy plain which seems to go on for ever
-0x6b8c  0x20 0x20 West   No    No    No    0x214 on a grassy plain which seems to go on for ever
-0x6b8e  0x21 0xd8 North  Yes   No    No    0x215 on a wide stone bridge which stretches north-south across the placid waters of a huge river. At_the north end, the bridge enters a gaping stone_mouth in the cliff
-0x6b90  0x21 0xd8 Enter  Yes   No    No    0x215 on a wide stone bridge which stretches north-south across the placid waters of a huge river. At_the north end, the bridge enters a gaping stone_mouth in the cliff
-0x6b92  0x21 0x14 South  Yes   No    No    0x215 on a wide stone bridge which stretches north-south across the placid waters of a huge river. At_the north end, the bridge enters a gaping stone_mouth in the cliff
-0x6b94  0x21 0x14 Cross  Yes   No    No    0x215 on a wide stone bridge which stretches north-south across the placid waters of a huge river. At_the north end, the bridge enters a gaping stone_mouth in the cliff
-0x6b96  0x22 0x29 North  Yes   No    No    0x216 outside the gatehouse
-0x6b98  0x22 0x29 Enter  Yes   No    No    0x216 outside the gatehouse
-0x6b9a  0x22 0x09 Down   Yes   No    No    0x216 outside the gatehouse
-0x6b9c  0x23 0x26 Down   Yes   No    No    0x217 on a smooth rock dome, below a narrow path
-0x6b9e  0x24 0xd5 Enter  Yes   No    No    0x218 in a crumbling stone ear. Great lumps of rock have sloughed off and you can go no further
-0x6ba0  0x25 0x26 East   Yes   No    No    0x219 on the shattered right cheek of the great stone_face
-0x6ba2  0x26 0x27 East   Yes   No    No    0x21a standing on an enormous stone nose, projecting far out over the river below. To the south, at the end of the nose, is a large white building dwarfed to the apparant size of a pimple, and above is a great rock dome
-0x6ba4  0x26 0x5e South  Yes   No    No    0x21a standing on an enormous stone nose, projecting far out over the river below. To the south, at the end of the nose, is a large white building dwarfed to the apparant size of a pimple, and above is a great rock dome
-0x6ba6  0x26 0x5e Enter  Yes   No    No    0x21a standing on an enormous stone nose, projecting far out over the river below. To the south, at the end of the nose, is a large white building dwarfed to the apparant size of a pimple, and above is a great rock dome
-0x6ba8  0x27 0x28 East   Yes   No    No    0x21b on the left cheek of the great stone face
-0x6baa  0x28 0xd6 Enter  Yes   No    No    0x21c in a stone left ear. Paths lead west and into the rock
-0x6bac  0x29 0x2a North  Yes   No    No    0x21d in an arch-way below the gate-house. A bridge leads north to the foot of a shattered black tower. A violet pedestal stands to one side of the arch
-0x6bae  0x29 0x22 Down   Yes   No    No    0x21d in an arch-way below the gate-house. A bridge leads north to the foot of a shattered black tower. A violet pedestal stands to one side of the arch
-0x6bb0  0x2a 0xd0 North  Yes   No    No    0x21e on a narrow north-south bridge
-0x6bb2  0x2a 0xd0 Enter  Yes   No    No    0x21e on a narrow north-south bridge
-0x6bb4  0x2b 0x68 North  Yes   No    No    0x21f in a sloping passage
-0x6bb6  0x2b 0x68 Up     No    No    No    0x21f in a sloping passage
-0x6bb8  0x2c 0x2b Up     Yes   No    No    0x220 on a ramp down the black tower
-0x6bba  0x2c 0x2b Up     Yes   No    No    0x220 on a ramp down the black tower
-0x6bbc  0x2d 0x01 South  Yes   No    No    0x221 on a dead-end flight of shattered steps
-0x6bbe  0x2e 0x02 Down   No    No    No    0x222 in the roc's nest, where it brings "food" for storage
-0x6bc0  0x2f 0xdf North  No    Yes   No    0x223 south of the river, on the edge of a vast field_of poppies which stretches west as far as the eye can see. A somnolant perfume hangs heavy on the breeze
-0x6bc2  0x2f 0x30 East   Yes   No    No    0x223 south of the river, on the edge of a vast field_of poppies which stretches west as far as the eye can see. A somnolant perfume hangs heavy on the breeze
-0x6bc4  0x2f 0x18 South  No    No    No    0x223 south of the river, on the edge of a vast field_of poppies which stretches west as far as the eye can see. A somnolant perfume hangs heavy on the breeze
-0x6bc6  0x2f 0xe3 West   No    Yes   No    0x223 south of the river, on the edge of a vast field_of poppies which stretches west as far as the eye can see. A somnolant perfume hangs heavy on the breeze
-0x6bc8  0x30 0xdf North  No    Yes   No    0x224 on an east-west road, south of the river and north of a steep, treeless hill
-0x6bca  0x30 0x14 East   Yes   No    No    0x224 on an east-west road, south of the river and north of a steep, treeless hill
-0x6bcc  0x30 0x18 South  Yes   No    No    0x224 on an east-west road, south of the river and north of a steep, treeless hill
-0x6bce  0x31 0x15 East   Yes   No    No    0x225 on an east-west road beside the river and north_of a flat grassy plain. A line of stepping stones leads to a small island in the water
-0x6bd0  0x31 0x1a South  Yes   No    No    0x225 on an east-west road beside the river and north_of a flat grassy plain. A line of stepping stones leads to a small island in the water
-0x6bd2  0x31 0x35 Cross  No    No    No    0x225 on an east-west road beside the river and north_of a flat grassy plain. A line of stepping stones leads to a small island in the water
-0x6bd4  0x32 0xdf East   No    Yes   No    0x226 on a mud-bank, north of a wide river. A stone bridge spans the waters, reaching from the granite cliffs above to the flat lands of the far bank, and a path climbs up to it
-0x6bd6  0x32 0xdf South  Yes   Yes   No    0x226 on a mud-bank, north of a wide river. A stone bridge spans the waters, reaching from the granite cliffs above to the flat lands of the far bank, and a path climbs up to it
-0x6bd8  0x32 0xdf SEast  No    Yes   No    0x226 on a mud-bank, north of a wide river. A stone bridge spans the waters, reaching from the granite cliffs above to the flat lands of the far bank, and a path climbs up to it
-0x6bda  0x32 0xdf SWest  No    Yes   No    0x226 on a mud-bank, north of a wide river. A stone bridge spans the waters, reaching from the granite cliffs above to the flat lands of the far bank, and a path climbs up to it
-0x6bdc  0x32 0xdf West   No    Yes   No    0x226 on a mud-bank, north of a wide river. A stone bridge spans the waters, reaching from the granite cliffs above to the flat lands of the far bank, and a path climbs up to it
-0x6bde  0x32 0x21 Up     Yes   No    No    0x226 on a mud-bank, north of a wide river. A stone bridge spans the waters, reaching from the granite cliffs above to the flat lands of the far bank, and a path climbs up to it
-0x6be0  0x33 0x34 South  Yes   No    No    0x227 under the killer-willow tree
-0x6be2  0x34 0xdf East   No    Yes   No    0x228 on the southern end of a small island, reached by stepping stones from the south. The far end of the island is occupied by a viscious-looking willow tree with six long rubbery branches
-0x6be4  0x34 0x35 South  Yes   No    No    0x228 on the southern end of a small island, reached by stepping stones from the south. The far end of the island is occupied by a viscious-looking willow tree with six long rubbery branches
-0x6be6  0x34 0x35 Cross  No    No    No    0x228 on the southern end of a small island, reached by stepping stones from the south. The far end of the island is occupied by a viscious-looking willow tree with six long rubbery branches
-0x6be8  0x34 0xdf West   No    Yes   No    0x228 on the southern end of a small island, reached by stepping stones from the south. The far end of the island is occupied by a viscious-looking willow tree with six long rubbery branches
-0x6bea  0x35 0xdf East   No    Yes   No    0x229 on stepping stones leading north to an island
-0x6bec  0x35 0x31 South  Yes   No    No    0x229 on stepping stones leading north to an island
-0x6bee  0x35 0xdf West   No    Yes   No    0x229 on stepping stones leading north to an island
-0x6bf0  0x35 0x34 Cross  No    No    No    0x229 on stepping stones leading north to an island
-0x6bf2  0x36 0xe4 North  No    Yes   No    0x22a on the floor of a cavern, beside a clump of evil green toadstools. Liquid slime oozes from the north and paths lead south and up
-0x6bf4  0x36 0x9a Up     Yes   No    No    0x22a on the floor of a cavern, beside a clump of evil green toadstools. Liquid slime oozes from the north and paths lead south and up
-0x6bf6  0x37 0xa8 South  Yes   No    No    0x22b in the middle of the floor of a giant cove, in a giant ants' nest. Small footprints lead north and south
-0x6bf8  0x38 0x37 South  Yes   No    No    0x22c North of the cave floor, below a huge grey mushroom
-0x6bfa  0x39 0x3a North  Yes   No    No    0x22d at the end of an aqueduct designed to drip water evenly into the depths of a deep pit below. The aqueduct leads north, a narrow fissure leads south, and steps lead down into the pit
-0x6bfc  0x3a 0x3b North  Yes   No    No    0x22e walking on the bed of an empty aqueduct which crosses a vast dark pit
-0x6bfe  0x3b 0x3c North  Yes   No    No    0x22f in a damp north-south pipe
-0x6c00  0x3c 0x3d North  Yes   No    No    0x230 on an aqueduct
-0x6c02  0x3d 0xc3 North  No    No    No    0x231 in a paved tunnel below a silver pedestal. Water trickles from a silver hoop painted on one wall and seeps south. An armoured door leads east and a crack splits the north wall
-0x6c04  0x3d 0xa6 East   Yes   No    No    0x231 in a paved tunnel below a silver pedestal. Water trickles from a silver hoop painted on one wall and seeps south. An armoured door leads east and a crack splits the north wall
-0x6c06  0x3e 0x54 Up     Yes   No    No    0x232 standing in shallow water at the foot of the ramp. A ladder slopes northwards to a higher part of the ramp
-0x6c08  0x3e 0x4d North  Yes   No    No    0x232 standing in shallow water at the foot of the ramp. A ladder slopes northwards to a higher part of the ramp
-0x6c0a  0x3f 0x40 Down   Yes   No    No    0x233 on a wide spiral ramp which descends clockwise round an immense pit. A small dark tunnel leads north. But these are matters of little significance for the north wall of the tunnel is covered with a miriad moving images of writhing tormented creatures and your gaze is locked on them. Your sanity is draining away!! If you don't act quickly your soul will be captured by the wall
-0x6c0c  0x40 0x41 Down   Yes   No    No    0x234 on the ramp which descends clockwise around the_edges of a very deep pit. To the east is an opening into a red-gold room
-0x6c0e  0x41 0x42 Down   Yes   No    No    0x235 on the ramp, beside a doorway with small holes up one edge
-0x6c10  0x42 0x43 Down   Yes   No    No    0x236 on the ramp, outside a dark doorway
-0x6c12  0x43 0x44 Down   Yes   No    No    0x237 on a loose section of the ramp
-0x6c14  0x44 0x45 Down   Yes   No    No    0x238 on the ramp, outside a round opening
-0x6c16  0x44 0xb2 West   Yes   No    No    0x238 on the ramp, outside a round opening
-0x6c18  0x44 0xb2 Enter  Yes   No    No    0x238 on the ramp, outside a round opening
-0x6c1a  0x45 0x46 Down   Yes   No    No    0x239 on a wobbly section of the ramp
-0x6c1c  0x46 0x47 Down   Yes   No    No    0x23a on the ramp, outside a long room with scratches_on floor and ceiling
-0x6c1e  0x47 0x48 Down   Yes   No    No    0x23b on the ramp. A hand sign points into a narrow opening
-0x6c20  0x48 0x49 Down   Yes   No    No    0x23c on the ramp, outside a narrow doorway from which drifts a sharp, acrid smell
-0x6c22  0x49 0x4a Down   Yes   No    No    0x23d on the ramp, outside a rubbery doorway
-0x6c24  0x4a 0x4b Down   Yes   No    No    0x23e pn the ramp, outside a square doorway
-0x6c26  0x4b 0x4c Down   Yes   No    No    0x23f on the ramp, outside an opening to a pale room
-0x6c28  0x4b 0xb9 Enter  No    No    No    0x23f on the ramp, outside an opening to a pale room
-0x6c2a  0x4c 0x4d Down   Yes   No    No    0x240 on the ramp, outside an evil dark entrance
-0x6c2c  0x4d 0x4e Down   Yes   No    No    0x241 on the ramp. A ladder slopes southwards to a lower part of the ramp
-0x6c2e  0x4e 0x4f Down   Yes   Yes   No    0x242 on the ramp. A sign over a doorway reads: "Congratulations! You have won a uniquely valuable reward! Just walk in and answer a simple question to claim your prize!"
-0x6c30  0x4e 0xbb Enter  No    No    No    0x242 on the ramp. A sign over a doorway reads: "Congratulations! You have won a uniquely valuable reward! Just walk in and answer a simple question to claim your prize!"
-0x6c32  0x4f 0x50 Down   Yes   Yes   No    0x243 You are on deadly slime, slipping towards the edge of the ramp%
-0x6c34  0x50 0x51 Down   Yes   No    No    0x244 on the ramp outside an ornate entrance. The ramp above looks dodgy
-0x6c36  0x51 0x52 Down   Yes   No    No    0x245 on the ramp. A doorway bears the following message: "To escape the dungeon, collect 9 gems and go through this door. Leaving without the gems will cause your death". Clearly you must be in the central dungeon of the Demon Lord!
-0x6c38  0x51 0xbf East   No    No    No    0x245 on the ramp. A doorway bears the following message: "To escape the dungeon, collect 9 gems and go through this door. Leaving without the gems will cause your death". Clearly you must be in the central dungeon of the Demon Lord!
-0x6c3a  0x51 0xbf Enter  No    No    No    0x245 on the ramp. A doorway bears the following message: "To escape the dungeon, collect 9 gems and go through this door. Leaving without the gems will cause your death". Clearly you must be in the central dungeon of the Demon Lord!
-0x6c3c  0x52 0x53 Down   Yes   No    No    0x246 on the ramp, outside a doorway
-0x6c3e  0x53 0x54 Down   Yes   No    No    0x247 on the ramp
-0x6c40  0x54 0x3e Down   Yes   No    No    0x248 on a massive spiral ramp which twists down into_dark waters and up into the gloom above. Sea-spray wafts from a nearby doorway
-0x6c42  0x55 0x70 Down   Yes   No    No    0x249 standing on a small round platform surrounded by a cylinder of red light
-0x6c44  0x56 0x7e Down   Yes   No    No    0x24a standing on a small round platform surrounded by a cylinder of orange light
-0x6c46  0x57 0x85 Down   Yes   No    No    0x24b standing on a small round platform surrounded by a cylinder of yellow light
-0x6c48  0x58 0x1d Down   Yes   No    No    0x24c standing on a small round platform surrounded by a cylinder of green light
-0x6c4a  0x59 0x62 Down   Yes   No    No    0x24d standing on a small round platform surrounded by a cylinder of blue light
-0x6c4c  0x5a 0x29 Down   Yes   No    No    0x24e standing on a small round platform surrounded by a cylinder of violet light
-0x6c4e  0x5b 0xac Down   Yes   No    No    0x24f standing on a small round platform surrounded by a cylinder of impenetrable darkness
-0x6c50  0x5c 0x3d Down   Yes   No    No    0x250 standing on a small round platform surrounded by a cylinder of silvery light
-0x6c52  0x5d 0x68 Down   Yes   No    No    0x251 sitting on an ornate throne. There are nine numbered buttons along the left arm-rest
-0x6c54  0x5e 0x5f East   Yes   No    No    0x252 just inside the entrance to the wight house, at_the northwest corner of a large gloomy room with four pillars. The nearest pillar has fallen and blocks your way south. In the middle of the southern wall is a shadowey alcove
-0x6c56  0x5f 0x60 East   Yes   No    No    0x253 in the middle of the north wall of the wight house
-0x6c58  0x5f 0x62 South  Yes   No    No    0x253 in the middle of the north wall of the wight house
-0x6c5a  0x60 0x61 South  Yes   No    No    0x254 in the northeast corner
-0x6c5c  0x61 0x66 South  Yes   No    No    0x255 in the middle of the east wall
-0x6c5e  0x62 0x61 East   Yes   No    No    0x256 in the middle of the wight house, below a blue pedestal
-0x6c60  0x62 0x63 West   Yes   No    No    0x256 in the middle of the wight house, below a blue pedestal
-0x6c62  0x63 0x64 South  Yes   No    No    0x257 in the middle of the west wall. The way north is blocked by a fallen pillar
-0x6c64  0x64 0x65 East   Yes   No    No    0x258 in the southwest corner
-0x6c66  0x65 0x62 North  Yes   No    No    0x259 in the middle of the south wall of the wight house. A musty alcove opens behind you
-0x6c68  0x66 0x65 West   Yes   No    No    0x25a in the southeast corner
-0x6c6a  0x67 0x65 North  Yes   No    No    0x25b in the crypt, beside a rotting coffin
-0x6c6c  0x67 0x65 Leave  Yes   No    No    0x25b in the crypt, beside a rotting coffin
-0x6c6e  0x68 0xa9 East   Yes   No    No    0x25c in a long throne room lined with skin. There is_a large doorway in the middle of each wall and a central granite throne
-0x6c70  0x68 0xaa Down   No    No    No    0x25c in a long throne room lined with skin. There is_a large doorway in the middle of each wall and a central granite throne
-0x6c72  0x69 0x5d Up     No    No    No    0x25d in an odd little room, below a granite throne
-0x6c74  0x6a 0x68 South  Yes   No    No    0x25e at a bend in a corridor which goes west and south
-0x6c76  0x6b 0x6a East   Yes   No    No    0x25f in an east-west corridor beside an opening to the north
-0x6c78  0x6c 0x6b East   Yes   No    No    0x260 in a blocked corridor
-0x6c7a  0x6d 0x6b South  Yes   No    No    0x261 in a north-south corridor which ends at a t-junction
-0x6c7c  0x6e 0x6d South  Yes   No    No    0x262 on a steep flight of stairs
-0x6c7e  0x6e 0x6d Up     Yes   No    No    0x262 on a steep flight of stairs
-0x6c80  0x6f 0x6e Up     Yes   No    No    0x263 in the pit: a large pentagonal room, blackened by some past explosion and with a wide crack in the east wall
-0x6c82  0x70 0xde North  No    Yes   No    0x264 in a cylindrical room with eight exits, hewn from the rock. A pride of lions is carved over the_north door
-0x6c84  0x71 0x70 SEast  Yes   No    No    0x265 dead-end room, painted matt black. You'll have to return the way you came
-0x6c86  0x71 0x70 Leave  No    No    No    0x265 dead-end room, painted matt black. You'll have to return the way you came
-0x6c88  0x72 0x70 Leave  No    No    No    0x266 in a second dead-end black room
-0x6c8a  0x72 0x70 SWest  Yes   No    No    0x266 in a second dead-end black room
-0x6c8c  0x73 0x74 East   Yes   No    No    0x267 at the west of a long room with many pillars. The only exit is at the other end
-0x6c8e  0x74 0x70 East   Yes   No    No    0x268 at the east end of a long room. Its roof is supported by dozens of stone pillars
-0x6c90  0x75 0x70 West   Yes   No    No    0x269 in an empty stable with exits to east and west
-0x6c92  0x76 0x75 West   Yes   No    No    0x26a in a rough-hewn store room, filled by a haystack
-0x6c94  0x77 0x78 East   Yes   No    No    0x26b at a junction in a steeply sloping u-shaped passage which leads northeast and northwest. Three round rocks protrude beside an opening to the east
-0x6c96  0x77 0x70 NWest  Yes   No    No    0x26b at a junction in a steeply sloping u-shaped passage which leads northeast and northwest. Three round rocks protrude beside an opening to the east
-0x6c98  0x77 0x70 Down   No    No    No    0x26b at a junction in a steeply sloping u-shaped passage which leads northeast and northwest. Three round rocks protrude beside an opening to the east
-0x6c9a  0x78 0x79 East   No    No    No    0x26c in a damp hemispherical cave with an opening to_the east
-0x6c9c  0x79 0x77 West   Yes   No    No    0x26d a room carved out of rugged rock with a large outcrop of stone in the middle of the floor. There is an exit to the west
-0x6c9e  0x7a 0x70 NEast  Yes   No    No    0x26e on a flight of crumbling steps
-0x6ca0  0x7a 0x70 Down   No    No    No    0x26e on a flight of crumbling steps
-0x6ca2  0x7b 0x7a NEast  Yes   No    No    0x26f in a steep earthy passage
-0x6ca4  0x7b 0x7c Up     No    No    No    0x26f in a steep earthy passage
-0x6ca6  0x7b 0x7a Down   Yes   No    No    0x26f in a steep earthy passage
-0x6ca8  0x7c 0x7b NEast  Yes   No    No    0x270 in the lower chamber. There are 6 exits
-0x6caa  0x7c 0xcb Down   No    No    No    0x270 in the lower chamber. There are 6 exits
-0x6cac  0x7d 0x7c Down   Yes   No    No    0x271 in the upper chamber, warmed by a current of rising air. Openings lead southeast, southwest and_down
-0x6cae  0x7e 0x7c NEast  Yes   No    No    0x272 in a round passage, blocked by a large rounded stone which is covered by a pattern of swirling grooves. There is an orange pedestal in the centre of the NE-SW passage
-0x6cb0  0x7f 0x7c South  Yes   No    No    0x273 at a tight junction above a narrow pit
-0x6cb2  0x7f 0xcc Down   No    No    No    0x273 at a tight junction above a narrow pit
-0x6cb4  0x80 0x99 North  Yes   No    No    0x274 in a tall cavern with a large central fireplace_and a wide brick chimney leading upwards. There_are openings all around
-0x6cb6  0x80 0x77 SWest  Yes   No    No    0x274 in a tall cavern with a large central fireplace_and a wide brick chimney leading upwards. There_are openings all around
-0x6cb8  0x80 0x77 Down   Yes   No    No    0x274 in a tall cavern with a large central fireplace_and a wide brick chimney leading upwards. There_are openings all around
-0x6cba  0x80 0x9b NWest  Yes   No    No    0x274 in a tall cavern with a large central fireplace_and a wide brick chimney leading upwards. There_are openings all around
-0x6cbc  0x81 0x80 Down   Yes   No    No    0x275 in an oppressive chimney
-0x6cbe  0x81 0x80 Leave  Yes   No    No    0x275 in an oppressive chimney
-0x6cc0  0x82 0x81 Down   Yes   No    No    0x276 outside a glowing alcove
-0x6cc2  0x83 0x82 Down   Yes   No    No    0x277 at a blockage in the chimney
-0x6cc4  0x84 0x39 North  Yes   No    No    0x278 in a dry north-south fissure, apparantly blocked at the southern end
-0x6cc6  0x85 0x80 East   Yes   No    No    0x279 at the end of a long east-west corridor lined with worn flagstones. A yellow pedestal stands in_the middle of the road and doorways lead north and south
-0x6cc8  0x86 0x85 East   Yes   No    No    0x27a in a long east-west corridor with doorways to north and south
-0x6cca  0x87 0x86 East   Yes   No    No    0x27b at the junction where the corridor ends
-0x6ccc  0x88 0x87 East   Yes   No    No    0x27c in a neat panelled room. There is a walk-in cupboard to the south, a wide doorway to the east and narrow openings west and down
-0x6cce  0x88 0x7f West   No    No    No    0x27c in a neat panelled room. There is a walk-in cupboard to the south, a wide doorway to the east and narrow openings west and down
-0x6cd0  0x89 0x88 North  Yes   No    No    0x27d in a cupboard
-0x6cd2  0x89 0x88 Leave  Yes   No    No    0x27d in a cupboard
-0x6cd4  0x8a 0x85 North  Yes   No    No    0x27e in a filthy, dead-end cell
-0x6cd6  0x8b 0x86 North  Yes   No    No    0x27f in a filthy, dead-end cell
-0x6cd8  0x8c 0x87 North  Yes   No    No    0x280 in a filthy, dead-end cell
-0x6cda  0x8d 0x85 South  Yes   No    No    0x281 in a filthy, dead-end cell
-0x6cdc  0x8e 0x86 South  Yes   No    No    0x282 in a filthy, dead-end cell
-0x6cde  0x8f 0x87 South  Yes   No    No    0x283 in a filthy, dead-end cell
-0x6ce0  0x90 0x80 West   Yes   No    No    0x284 in a crude narrow east-west corridor, hacked out of the rock
-0x6ce2  0x91 0x90 West   Yes   No    No    0x285 at a junction between north-south and east-west_passages
-0x6ce4  0x92 0x91 West   Yes   No    No    0x286 beside a rockfall which blocks the passage
-0x6ce6  0x93 0x80 North  Yes   No    No    0x287 in the armoury. The weapons have rusted away, leaving stains on walls and floor
-0x6ce8  0x94 0x80 NWest  Yes   No    No    0x288 in a looted toolroom
-0x6cea  0x95 0x91 North  Yes   No    No    0x289 in an empty store-cave
-0x6cec  0x96 0x80 Down   Yes   No    No    0x28a climbing a flight of narrow, cramped steps
-0x6cee  0x96 0x80 SWest  Yes   No    No    0x28a climbing a flight of narrow, cramped steps
-0x6cf0  0x97 0x96 Down   Yes   No    No    0x28b at a dead-end.
-0x6cf2  0x98 0x91 South  Yes   No    No    0x28c in a giant, vacant, rats nest
-0x6cf4  0x99 0x36 North  Yes   No    No    0x28d in a damp, musty north-south corridor
-0x6cf6  0x9a 0x9b Up     Yes   No    No    0x28e clinging to a rock-face
-0x6cf8  0x9b 0x9d North  Yes   No    No    0x28f on a wide ledge half-way up the south side of a_tall cave. Steps lead up and down. Several small, brightly patterned, psychaedelic mushrooms grow at the back of the ledge
-0x6cfa  0x9b 0x9d Cross  No    No    No    0x28f on a wide ledge half-way up the south side of a_tall cave. Steps lead up and down. Several small, brightly patterned, psychaedelic mushrooms grow at the back of the ledge
-0x6cfc  0x9b 0x9c Up     Yes   No    No    0x28f on a wide ledge half-way up the south side of a_tall cave. Steps lead up and down. Several small, brightly patterned, psychaedelic mushrooms grow at the back of the ledge
-0x6cfe  0x9c 0x39 Up     Yes   No    No    0x290 clinging to crumbling steps up the rock wall
-0x6d00  0x9d 0x9e North  Yes   No    No    0x291 on a magnificent golden pathway running north-south through the air
-0x6d02  0x9d 0x9e Cross  Yes   No    No    0x291 on a magnificent golden pathway running north-south through the air
-0x6d04  0x9e 0x9f North  Yes   No    No    0x292 on a narrow ledge between the splendid golden pathway and a narrow tunnel
-0x6d06  0x9f 0xa1 North  Yes   No    No    0x293 in a narrow north-south passage through the rock. A peculiar sweet smell emerges from an opening to the west
-0x6d08  0xa0 0x9f East   Yes   No    No    0x294 in the troll's squalid store room, amidst junk of every kind. Astrological symbols and slogans cover the walls and a cloying incense smell clogs your nostrils. The only exit is east, between clumps of tasty pink mushrooms. The troll is slumped in a stupor in one corner
-0x6d0a  0xa1 0xa2 North  Yes   No    No    0x295 on a wide ledge outside a tunnel entrance. A wooden bridge leads north across a deep cavern and_steps lead up and down
-0x6d0c  0xa1 0xa2 Cross  No    No    No    0x295 on a wide ledge outside a tunnel entrance. A wooden bridge leads north across a deep cavern and_steps lead up and down
-0x6d0e  0xa2 0xa3 North  Yes   No    No    0x296 on a sturdy bridge across a cave
-0x6d10  0xa2 0xa3 Cross  Yes   No    No    0x296 on a sturdy bridge across a cave
-0x6d12  0xa3 0xa4 North  Yes   No    No    0x297 on a wide ledge between a sturdy bridge and a fissure in the rock. You keep bumping into objects that you can't see
-0x6d14  0xa4 0xa5 North  Yes   No    No    0x298 in a small fissure that narrows as it winds north
-0x6d16  0xa5 0xa6 West   No    No    No    0x299 crawling through tiny cracks which lead west and south
-0x6d18  0xa6 0xa5 East   Yes   No    No    0x29a in the strong room. An iron door leads west and_a narrow crack splits the east wall
-0x6d1a  0xa7 0xa1 Down   Yes   No    No    0x29b on cliff steps, broken by rock-falls
-0x6d1c  0xa8 0xa1 Up     Yes   No    No    0x29c south a vast cavern floor, beside some small grey mushrooms. Tiny footprints lead north
-0x6d1e  0xa9 0xaa Down   No    No    No    0x29d in a viewing gallery over a deep pit. A chute leads down
-0x6d20  0xaa 0x3f Down   No    No    No    0x29e below a sign "Your fate is sealed! Your only hope is to descend into the Central Dungeon and collect 9 gems. Succeed and you will be free!"
-0x6d22  0xab 0x3f South  Yes   No    No    0x29f in a dead-end dark room
-0x6d24  0xab 0x3f Leave  Yes   No    No    0x29f in a dead-end dark room
-0x6d26  0xac 0x42 West   Yes   No    No    0x2a0 in a dead-end dark room, below a black pedastal
-0x6d28  0xac 0x42 Leave  Yes   No    No    0x2a0 in a dead-end dark room, below a black pedastal
-0x6d2a  0xad 0xae East   Yes   No    No    0x2a1 in a treasure chamber
-0x6d2c  0xae 0xaf East   Yes   No    No    0x2a2 in the west crusher room beside a door into a treasure chamber
-0x6d2e  0xaf 0x46 East   Yes   No    No    0x2a3 in the east crusher room beside an opening back_to the ramp
-0x6d30  0xaf 0x46 Leave  Yes   No    No    0x2a3 in the east crusher room beside an opening back_to the ramp
-0x6d32  0xb0 0x40 West   Yes   No    No    0x2a4 in a circular room of red-gold metal.%Gold rings cover the floor
-0x6d34  0xb0 0x40 Leave  Yes   No    No    0x2a4 in a circular room of red-gold metal.%Gold rings cover the floor
-0x6d36  0xb1 0x41 West   Yes   No    No    0x2a5 in a dead end, below a gallows tree from which a bloodless corpse hangs by one foot
-0x6d38  0xb1 0x41 Leave  Yes   No    No    0x2a5 in a dead end, below a gallows tree from which a bloodless corpse hangs by one foot
-0x6d3a  0xb2 0xb3 Down   No    No    No    0x2a6 on the brink of a deep, dark pit
-0x6d3c  0xb3 0x4c East   Yes   No    No    0x2a7 in a deep, eerie-dark pit
-0x6d3e  0xb3 0x4c Leave  Yes   No    No    0x2a7 in a deep, eerie-dark pit
-0x6d40  0xb4 0x47 South  Yes   No    No    0x2a8 in a small soft room between five large round fleshy pillars
-0x6d42  0xb4 0x47 Leave  Yes   No    No    0x2a8 in a small soft room between five large round fleshy pillars
-0x6d44  0xb5 0x48 West   Yes   No    No    0x2a9 in a dusty room, entered from the west and with_a long shelf along the east wall
-0x6d46  0xb5 0x48 Leave  Yes   No    No    0x2a9 in a dusty room, entered from the west and with_a long shelf along the east wall
-0x6d48  0xb6 0x49 West   Yes   No    No    0x2aa in a short east-west corridor
-0x6d4a  0xb6 0x49 Leave  Yes   No    No    0x2aa in a short east-west corridor
-0x6d4c  0xb7 0xb6 West   Yes   No    No    0x2ab in a room surfaced with black glass
-0x6d4e  0xb7 0xb6 Leave  Yes   No    No    0x2ab in a room surfaced with black glass
-0x6d50  0xb8 0x4a West   Yes   No    No    0x2ac in the box room
-0x6d52  0xb8 0x4a Leave  Yes   No    No    0x2ac in the box room
-0x6d54  0xb9 0xba West   No    No    No    0x2ad in the condemned cell. The only way out is to go west
-0x6d56  0xba 0x4b North  No    No    No    0x2ae in the guard room. An exit leads north
-0x6d58  0xba 0x4b Leave  No    No    No    0x2ae in the guard room. An exit leads north
-0x6d5a  0xbb 0xbc West   No    No    No    0x2af in the "Skinner box": a blank room with no way out - just nine buttons in a vertical line up one wall. The buttons are numbered 1 to 9 and a discrete notice reads "choose the best"
-0x6d5c  0xbc 0x4e West   No    No    No    0x2b0 in the reward room. This is empty too and has only 5 numbered buttons, labelled as follows...% 1: Great wealth;% 2: Eternal life;% 3: World peace;% 4: Mystery prize;% 5: Nothing.%A sign invites you to choose your prize
-0x6d5e  0xbd 0x50 West   Yes   No    No    0x2b1 in the statue room. An incomprehensible abstract sculpture of hoops, spirals and loops sprawls around on a small circular platform in the middle of the floor. The entrance is to the west
-0x6d60  0xbd 0x50 Leave  Yes   No    No    0x2b1 in the statue room. An incomprehensible abstract sculpture of hoops, spirals and loops sprawls around on a small circular platform in the middle of the floor. The entrance is to the west
-0x6d62  0xbe 0xbd West   Yes   No    No    0x2b2 in an ornate, dead-end room
-0x6d64  0xbe 0xbd Leave  Yes   No    No    0x2b2 in an ornate, dead-end room
-0x6d66  0xbf 0x62 East   No    No    No    0x2b3 in the "Exit" chamber. You seem to have survived the Central Dungeon! There is only one way out...
-0x6d68  0xbf 0x62 Leave  No    No    No    0x2b3 in the "Exit" chamber. You seem to have survived the Central Dungeon! There is only one way out...
-0x6d6a  0xc0 0x52 West   Yes   No    No    0x2b4 in an empty room
-0x6d6c  0xc0 0x52 Leave  Yes   No    No    0x2b4 in an empty room
-0x6d6e  0xc1 0x52 West   No    No    No    0x2b5 in an empty room
-0x6d70  0xc1 0x52 Leave  No    No    No    0x2b5 in an empty room
-0x6d72  0xc1 0xc0 Down   Yes   No    No    0x2b5 in an empty room
-0x6d74  0xc2 0xc1 West   Yes   No    No    0x2b6 in a treasure vault. A low crawl leads west
-0x6d76  0xc2 0xc1 Leave  Yes   No    No    0x2b6 in a treasure vault. A low crawl leads west
-0x6d78  0xc3 0x54 East   Yes   No    No    0x2b7 in the Salt Cellar, surrounded by pillars of salt
-0x6d7a  0xc3 0x54 Leave  Yes   No    No    0x2b7 in the Salt Cellar, surrounded by pillars of salt
-0x6d7c  0xc4 0x32 Leave  No    No    No    0x2b8 696
-0x6d7e  0xc5 0x32 Leave  No    No    No    0x2b9 697
-0x6d80  0xc6 0x32 Leave  No    No    No    0x2ba 698
-0x6d82  0xc7 0x32 Leave  No    No    No    0x2bb 699
-0x6d84  0xc8 0xd7 Leave  No    No    No    0x2bc on the ceiling of a fine room. A chandelier lies beside you and the floor of the room is far above
-0x6d86  0xc9 0xca East   Yes   No    No    0x2bd on the carpetted floor of a comfortable homely room, beside a door to the east.
-0x6d88  0xca 0xdc Leave  No    No    No    0x2be in a large store room. You realise that this is_the ideal place to leave any treasures that you_find, so as to get full points for them. Doors lead west and to the outside. A machine resembling a six-foot cube with a single red button sits_in one corner
-0x6d8a  0xcb 0xcc North  Yes   No    No    0x2bf in a smooth, round north-south passage. A flickering light is visible to the north
-0x6d8c  0xcc 0xcd North  Yes   No    No    0x2c0 at a junction in the round, north-south passage, illuminated by a jet of flame from the floor.%To the east is a treasure vault, completely filled with valuables of every kind
-0x6d8e  0xcc 0xde East   No    Yes   No    0x2c0 at a junction in the round, north-south passage, illuminated by a jet of flame from the floor.%To the east is a treasure vault, completely filled with valuables of every kind
-0x6d90  0xcd 0x70 North  Yes   No    No    0x2c1 in a north-south passage. A dry red stain spreads from beneath a fallen stone
-0x6d92  0xce 0x82 East   Yes   No    No    0x2c2 in a hot alcove, lit by the flames of a fire elemental
-0x6d94  0xce 0x82 Leave  Yes   No    No    0x2c2 in a hot alcove, lit by the flames of a fire elemental
-0x6d96  0xcf 0x84 North  Yes   No    No    0x2c3 in a huge cave of glistering rock. New passages_lead north and south
-0x6d98  0xcf 0x84 Enter  Yes   No    No    0x2c3 in a huge cave of glistering rock. New passages_lead north and south
-0x6d9a  0xd0 0x68 East   Yes   No    No    0x2c4 in a corridor bending south and east
-0x6d9c  0xd0 0x68 Enter  Yes   No    No    0x2c4 in a corridor bending south and east
-0x6d9e  0xd1 0x6f West   Yes   No    No    0x2c5 at the bottom of a deep chasm where the earth has been split assunder by a massive explosion. Narrow cracks lead west and down
-0x6da0  0xd1 0x3f Down   No    No    No    0x2c5 at the bottom of a deep chasm where the earth has been split assunder by a massive explosion. Narrow cracks lead west and down
-0x6da2  0xd2 0x7d NEast  Yes   No    No    0x2c6 in the right eye-socket of the stone face
-0x6da4  0xd2 0xde Down   No    No    No    0x2c6 in the right eye-socket of the stone face
-0x6da6  0xd2 0x7d Enter  Yes   No    No    0x2c6 in the right eye-socket of the stone face
-0x6da8  0xd3 0x7d NWest  Yes   No    No    0x2c7 in the left eye-socket of the stone face
-0x6daa  0xd3 0xde Down   No    No    No    0x2c7 in the left eye-socket of the stone face
-0x6dac  0xd3 0x7d Enter  No    No    No    0x2c7 in the left eye-socket of the stone face
-0x6dae  0xd4 0x7c NWest  Yes   No    No    0x2c8 in a wide, smelly passage opening to the outside, high above the river
-0x6db0  0xd4 0xde Down   No    No    No    0x2c8 in a wide, smelly passage opening to the outside, high above the river
-0x6db2  0xd4 0x7c Enter  Yes   No    No    0x2c8 in a wide, smelly passage opening to the outside, high above the river
-0x6db4  0xd5 0x7f East   Yes   No    No    0x2c9 in a winding, sticky east-west passage to the outside
-0x6db6  0xd5 0x24 West   No    No    No    0x2c9 in a winding, sticky east-west passage to the outside
-0x6db8  0xd6 0x28 East   No    No    No    0x2ca in a winding, sticky east-west passage to the outside
-0x6dba  0xd6 0x7f West   Yes   No    No    0x2ca in a winding, sticky east-west passage to the outside
-0x6dbc  0xd7 0xc8 Enter  Yes   No    No    0x2cb inside a large wooden box. A small door leads deeper into the box
-0x6dbe  0xd8 0xcb North  Yes   No    No    0x2cc in a gloomy cavern, between rows of jagged, pointed stalagmites. A fetid odour drifts from a wide round passage to the north
-0x6dc0  0xd8 0xcb Enter  Yes   No    No    0x2cc in a gloomy cavern, between rows of jagged, pointed stalagmites. A fetid odour drifts from a wide round passage to the north
+                            (Inv.)
+Address From  To  Dir       Bit 0 Bit 1 Bit 2 MsgId Location Text
+------- ---- ---- --------- ----- ----- ----- ----- -------------
+0x6b20  0x01 0x02 EAST      Yes   No    No    0x1f5 north of the dry swamp, below a cliff and east of a deep chasm
+0x6b22  0x01 0x03 SOUTH     Yes   No    No    0x1f5 north of the dry swamp, below a cliff and east of a deep chasm
+0x6b24  0x02 0x04 SOUTH     Yes   No    No    0x1f6 north of the dry marsh, below a sheer cliff
+0x6b26  0x03 0x04 EAST      Yes   No    No    0x1f7 on a small mound, surrounded by fallen stones
+0x6b28  0x03 0x05 SOUTH     Yes   No    No    0x1f7 on a small mound, surrounded by fallen stones
+0x6b2a  0x03 0xd1 WEST      No    No    No    0x1f7 on a small mound, surrounded by fallen stones
+0x6b2c  0x03 0xd1 DOWNWARDS No    No    No    0x1f7 on a small mound, surrounded by fallen stones
+0x6b2e  0x04 0x05 SOUTH     No    No    No    0x1f8 beside a muddy puddle
+0x6b30  0x05 0x03 NORTH     Yes   No    No    0x1f9 on powdery peat beside a north-south chasm
+0x6b32  0x05 0x07 SOUTH     Yes   No    No    0x1f9 on powdery peat beside a north-south chasm
+0x6b34  0x05 0xd1 WEST      Yes   No    No    0x1f9 on powdery peat beside a north-south chasm
+0x6b36  0x05 0xd1 DOWNWARDS Yes   No    No    0x1f9 on powdery peat beside a north-south chasm
+0x6b38  0x06 0x05 NORTH     No    No    No    0x1fa on a mound of rubble
+0x6b3a  0x06 0x08 SOUTH     Yes   No    No    0x1fa on a mound of rubble
+0x6b3c  0x06 0xd1 WEST      No    No    No    0x1fa on a mound of rubble
+0x6b3e  0x06 0xd1 DOWNWARDS No    No    No    0x1fa on a mound of rubble
+0x6b40  0x07 0x06 WEST      Yes   No    No    0x1fb on dry, powdery peat
+0x6b42  0x08 0x2c UPWARDS   Yes   No    No    0x1fc below a ramp up the outside of the black tower._Powdery peat leads north
+0x6b44  0x08 0x2c SOUTH     Yes   No    No    0x1fc below a ramp up the outside of the black tower._Powdery peat leads north
+0x6b46  0x09 0x0a DOWNWARDS Yes   No    No    0x1fd at the top of the "straight stairs", a short distance below a gate-house
+0x6b48  0x0a 0x0b DOWNWARDS Yes   No    No    0x1fe half-way up the "straight stairs"
+0x6b4a  0x0b 0x0c DOWNWARDS Yes   No    No    0x1ff below the "straight stairs"
+0x6b4c  0x0c 0x0d DOWNWARDS Yes   No    No    0x200 in a gully above the "winding stairs"
+0x6b4e  0x0c 0xcf NORTH     Yes   No    No    0x200 in a gully above the "winding stairs"
+0x6b50  0x0c 0xcf INSIDE    Yes   No    No    0x200 in a gully above the "winding stairs"
+0x6b52  0x0d 0x0e DOWNWARDS Yes   No    No    0x201 on the "winding stairs", carved into exposed rock
+0x6b54  0x0e 0x0f DOWNWARDS Yes   No    No    0x202 on the "winding stairs", leading across a vertical slab of exposed rock
+0x6b56  0x0f 0x23 DOWNWARDS Yes   No    No    0x203 in a sheltered gully below a winding staircase
+0x6b58  0x10 0x12 DOWNWARDS Yes   No    No    0x204 on a sturdy branch over the clearing
+0x6b5a  0x11 0x12 SOUTH     Yes   No    No    0x205 in a forest clearing
+0x6b5c  0x12 0x15 SOUTH     Yes   No    No    0x206 at the edge of the forest, beneath a particularly large tree. You can just glimpse a large clearing to the north
+0x6b5e  0x13 0x16 SOUTH     Yes   No    No    0x207 on the edge of the forest. You can go no further
+0x6b60  0x14 0x31 EAST      Yes   No    No    0x208 on an east-west road south of the river. A gigantic orc's head is carved into the cliff north of the river, its tongue forming a bridge over the waters to you. A ruined tower stands on top of_the cliff
+0x6b62  0x14 0x19 SOUTH     Yes   No    No    0x208 on an east-west road south of the river. A gigantic orc's head is carved into the cliff north of the river, its tongue forming a bridge over the waters to you. A ruined tower stands on top of_the cliff
+0x6b64  0x14 0x21 CROSS     Yes   No    No    0x208 on an east-west road south of the river. A gigantic orc's head is carved into the cliff north of the river, its tongue forming a bridge over the waters to you. A ruined tower stands on top of_the cliff
+0x6b66  0x15 0x16 EAST      Yes   No    No    0x209 on an east-west road through the forest
+0x6b68  0x15 0x1b SOUTH     Yes   No    No    0x209 on an east-west road through the forest
+0x6b6a  0x16 0xe2 EAST      No    Yes   No    0x20a on an east-west road through the forest
+0x6b6c  0x17 0x18 EAST      Yes   No    No    0x20b within a circle of distorted monoliths, etched into grotesque figures by the acid rain. Lightning arcs overhead, revealing the stark horror of this haunted place, while thunder echoes from every crag
+0x6b6e  0x17 0x18 DOWNWARDS Yes   No    No    0x20b within a circle of distorted monoliths, etched into grotesque figures by the acid rain. Lightning arcs overhead, revealing the stark horror of this haunted place, while thunder echoes from every crag
+0x6b70  0x18 0x19 EAST      Yes   No    No    0x20c on the side of a steep hill which rises into the clouds. Rumblings emanate from above
+0x6b72  0x18 0x19 DOWNWARDS Yes   No    No    0x20c on the side of a steep hill which rises into the clouds. Rumblings emanate from above
+0x6b74  0x18 0x20 SOUTH     No    No    No    0x20c on the side of a steep hill which rises into the clouds. Rumblings emanate from above
+0x6b76  0x19 0x1a EAST      Yes   No    No    0x20d on a grassy plain
+0x6b78  0x1a 0x20 SOUTH     No    No    No    0x20e below a small mound which is completely dwarfed_by a huge untidy nest
+0x6b7a  0x1b 0x1a WEST      Yes   No    No    0x20f on the edge of the forest
+0x6b7c  0x1c 0x16 NORTH     Yes   No    No    0x210 in a clump of bushes on the edge of the forest
+0x6b7e  0x1d 0x1e DOWNWARDS No    No    No    0x211 in a round room with large windows and no doors. A narrow ladder leads down beneath a green pedestal
+0x6b80  0x1e 0x19 NORTH     Yes   No    No    0x212 below a tower of polished marble
+0x6b82  0x1e 0x19 EAST      No    No    No    0x212 below a tower of polished marble
+0x6b84  0x1f 0x1a DOWNWARDS Yes   No    No    0x213 in a huge nest
+0x6b86  0x20 0x1e NORTH     Yes   No    No    0x214 on a grassy plain which seems to go on for ever
+0x6b88  0x20 0x20 EAST      No    No    No    0x214 on a grassy plain which seems to go on for ever
+0x6b8a  0x20 0x20 SOUTH     No    No    No    0x214 on a grassy plain which seems to go on for ever
+0x6b8c  0x20 0x20 WEST      No    No    No    0x214 on a grassy plain which seems to go on for ever
+0x6b8e  0x21 0xd8 NORTH     Yes   No    No    0x215 on a wide stone bridge which stretches north-south across the placid waters of a huge river. At_the north end, the bridge enters a gaping stone_mouth in the cliff
+0x6b90  0x21 0xd8 INSIDE    Yes   No    No    0x215 on a wide stone bridge which stretches north-south across the placid waters of a huge river. At_the north end, the bridge enters a gaping stone_mouth in the cliff
+0x6b92  0x21 0x14 SOUTH     Yes   No    No    0x215 on a wide stone bridge which stretches north-south across the placid waters of a huge river. At_the north end, the bridge enters a gaping stone_mouth in the cliff
+0x6b94  0x21 0x14 CROSS     Yes   No    No    0x215 on a wide stone bridge which stretches north-south across the placid waters of a huge river. At_the north end, the bridge enters a gaping stone_mouth in the cliff
+0x6b96  0x22 0x29 NORTH     Yes   No    No    0x216 outside the gatehouse
+0x6b98  0x22 0x29 INSIDE    Yes   No    No    0x216 outside the gatehouse
+0x6b9a  0x22 0x09 DOWNWARDS Yes   No    No    0x216 outside the gatehouse
+0x6b9c  0x23 0x26 DOWNWARDS Yes   No    No    0x217 on a smooth rock dome, below a narrow path
+0x6b9e  0x24 0xd5 INSIDE    Yes   No    No    0x218 in a crumbling stone ear. Great lumps of rock have sloughed off and you can go no further
+0x6ba0  0x25 0x26 EAST      Yes   No    No    0x219 on the shattered right cheek of the great stone_face
+0x6ba2  0x26 0x27 EAST      Yes   No    No    0x21a standing on an enormous stone nose, projecting far out over the river below. To the south, at the end of the nose, is a large white building dwarfed to the apparant size of a pimple, and above is a great rock dome
+0x6ba4  0x26 0x5e SOUTH     Yes   No    No    0x21a standing on an enormous stone nose, projecting far out over the river below. To the south, at the end of the nose, is a large white building dwarfed to the apparant size of a pimple, and above is a great rock dome
+0x6ba6  0x26 0x5e INSIDE    Yes   No    No    0x21a standing on an enormous stone nose, projecting far out over the river below. To the south, at the end of the nose, is a large white building dwarfed to the apparant size of a pimple, and above is a great rock dome
+0x6ba8  0x27 0x28 EAST      Yes   No    No    0x21b on the left cheek of the great stone face
+0x6baa  0x28 0xd6 INSIDE    Yes   No    No    0x21c in a stone left ear. Paths lead west and into the rock
+0x6bac  0x29 0x2a NORTH     Yes   No    No    0x21d in an arch-way below the gate-house. A bridge leads north to the foot of a shattered black tower. A violet pedestal stands to one side of the arch
+0x6bae  0x29 0x22 DOWNWARDS Yes   No    No    0x21d in an arch-way below the gate-house. A bridge leads north to the foot of a shattered black tower. A violet pedestal stands to one side of the arch
+0x6bb0  0x2a 0xd0 NORTH     Yes   No    No    0x21e on a narrow north-south bridge
+0x6bb2  0x2a 0xd0 INSIDE    Yes   No    No    0x21e on a narrow north-south bridge
+0x6bb4  0x2b 0x68 NORTH     Yes   No    No    0x21f in a sloping passage
+0x6bb6  0x2b 0x68 UPWARDS   No    No    No    0x21f in a sloping passage
+0x6bb8  0x2c 0x2b UPWARDS   Yes   No    No    0x220 on a ramp down the black tower
+0x6bba  0x2c 0x2b UPWARDS   Yes   No    No    0x220 on a ramp down the black tower
+0x6bbc  0x2d 0x01 SOUTH     Yes   No    No    0x221 on a dead-end flight of shattered steps
+0x6bbe  0x2e 0x02 DOWNWARDS No    No    No    0x222 in the roc's nest, where it brings "food" for storage
+0x6bc0  0x2f 0xdf NORTH     No    Yes   No    0x223 south of the river, on the edge of a vast field_of poppies which stretches west as far as the eye can see. A somnolant perfume hangs heavy on the breeze
+0x6bc2  0x2f 0x30 EAST      Yes   No    No    0x223 south of the river, on the edge of a vast field_of poppies which stretches west as far as the eye can see. A somnolant perfume hangs heavy on the breeze
+0x6bc4  0x2f 0x18 SOUTH     No    No    No    0x223 south of the river, on the edge of a vast field_of poppies which stretches west as far as the eye can see. A somnolant perfume hangs heavy on the breeze
+0x6bc6  0x2f 0xe3 WEST      No    Yes   No    0x223 south of the river, on the edge of a vast field_of poppies which stretches west as far as the eye can see. A somnolant perfume hangs heavy on the breeze
+0x6bc8  0x30 0xdf NORTH     No    Yes   No    0x224 on an east-west road, south of the river and north of a steep, treeless hill
+0x6bca  0x30 0x14 EAST      Yes   No    No    0x224 on an east-west road, south of the river and north of a steep, treeless hill
+0x6bcc  0x30 0x18 SOUTH     Yes   No    No    0x224 on an east-west road, south of the river and north of a steep, treeless hill
+0x6bce  0x31 0x15 EAST      Yes   No    No    0x225 on an east-west road beside the river and north_of a flat grassy plain. A line of stepping stones leads to a small island in the water
+0x6bd0  0x31 0x1a SOUTH     Yes   No    No    0x225 on an east-west road beside the river and north_of a flat grassy plain. A line of stepping stones leads to a small island in the water
+0x6bd2  0x31 0x35 CROSS     No    No    No    0x225 on an east-west road beside the river and north_of a flat grassy plain. A line of stepping stones leads to a small island in the water
+0x6bd4  0x32 0xdf EAST      No    Yes   No    0x226 on a mud-bank, north of a wide river. A stone bridge spans the waters, reaching from the granite cliffs above to the flat lands of the far bank, and a path climbs up to it
+0x6bd6  0x32 0xdf SOUTH     Yes   Yes   No    0x226 on a mud-bank, north of a wide river. A stone bridge spans the waters, reaching from the granite cliffs above to the flat lands of the far bank, and a path climbs up to it
+0x6bd8  0x32 0xdf SOUTHEAST No    Yes   No    0x226 on a mud-bank, north of a wide river. A stone bridge spans the waters, reaching from the granite cliffs above to the flat lands of the far bank, and a path climbs up to it
+0x6bda  0x32 0xdf SOUTHWEST No    Yes   No    0x226 on a mud-bank, north of a wide river. A stone bridge spans the waters, reaching from the granite cliffs above to the flat lands of the far bank, and a path climbs up to it
+0x6bdc  0x32 0xdf WEST      No    Yes   No    0x226 on a mud-bank, north of a wide river. A stone bridge spans the waters, reaching from the granite cliffs above to the flat lands of the far bank, and a path climbs up to it
+0x6bde  0x32 0x21 UPWARDS   Yes   No    No    0x226 on a mud-bank, north of a wide river. A stone bridge spans the waters, reaching from the granite cliffs above to the flat lands of the far bank, and a path climbs up to it
+0x6be0  0x33 0x34 SOUTH     Yes   No    No    0x227 under the killer-willow tree
+0x6be2  0x34 0xdf EAST      No    Yes   No    0x228 on the southern end of a small island, reached by stepping stones from the south. The far end of the island is occupied by a viscious-looking willow tree with six long rubbery branches
+0x6be4  0x34 0x35 SOUTH     Yes   No    No    0x228 on the southern end of a small island, reached by stepping stones from the south. The far end of the island is occupied by a viscious-looking willow tree with six long rubbery branches
+0x6be6  0x34 0x35 CROSS     No    No    No    0x228 on the southern end of a small island, reached by stepping stones from the south. The far end of the island is occupied by a viscious-looking willow tree with six long rubbery branches
+0x6be8  0x34 0xdf WEST      No    Yes   No    0x228 on the southern end of a small island, reached by stepping stones from the south. The far end of the island is occupied by a viscious-looking willow tree with six long rubbery branches
+0x6bea  0x35 0xdf EAST      No    Yes   No    0x229 on stepping stones leading north to an island
+0x6bec  0x35 0x31 SOUTH     Yes   No    No    0x229 on stepping stones leading north to an island
+0x6bee  0x35 0xdf WEST      No    Yes   No    0x229 on stepping stones leading north to an island
+0x6bf0  0x35 0x34 CROSS     No    No    No    0x229 on stepping stones leading north to an island
+0x6bf2  0x36 0xe4 NORTH     No    Yes   No    0x22a on the floor of a cavern, beside a clump of evil green toadstools. Liquid slime oozes from the north and paths lead south and up
+0x6bf4  0x36 0x9a UPWARDS   Yes   No    No    0x22a on the floor of a cavern, beside a clump of evil green toadstools. Liquid slime oozes from the north and paths lead south and up
+0x6bf6  0x37 0xa8 SOUTH     Yes   No    No    0x22b in the middle of the floor of a giant cove, in a giant ants' nest. Small footprints lead north and south
+0x6bf8  0x38 0x37 SOUTH     Yes   No    No    0x22c North of the cave floor, below a huge grey mushroom
+0x6bfa  0x39 0x3a NORTH     Yes   No    No    0x22d at the end of an aqueduct designed to drip water evenly into the depths of a deep pit below. The aqueduct leads north, a narrow fissure leads south, and steps lead down into the pit
+0x6bfc  0x3a 0x3b NORTH     Yes   No    No    0x22e walking on the bed of an empty aqueduct which crosses a vast dark pit
+0x6bfe  0x3b 0x3c NORTH     Yes   No    No    0x22f in a damp north-south pipe
+0x6c00  0x3c 0x3d NORTH     Yes   No    No    0x230 on an aqueduct
+0x6c02  0x3d 0xc3 NORTH     No    No    No    0x231 in a paved tunnel below a silver pedestal. Water trickles from a silver hoop painted on one wall and seeps south. An armoured door leads east and a crack splits the north wall
+0x6c04  0x3d 0xa6 EAST      Yes   No    No    0x231 in a paved tunnel below a silver pedestal. Water trickles from a silver hoop painted on one wall and seeps south. An armoured door leads east and a crack splits the north wall
+0x6c06  0x3e 0x54 UPWARDS   Yes   No    No    0x232 standing in shallow water at the foot of the ramp. A ladder slopes northwards to a higher part of the ramp
+0x6c08  0x3e 0x4d NORTH     Yes   No    No    0x232 standing in shallow water at the foot of the ramp. A ladder slopes northwards to a higher part of the ramp
+0x6c0a  0x3f 0x40 DOWNWARDS Yes   No    No    0x233 on a wide spiral ramp which descends clockwise round an immense pit. A small dark tunnel leads north. But these are matters of little significance for the north wall of the tunnel is covered with a miriad moving images of writhing tormented creatures and your gaze is locked on them. Your sanity is draining away!! If you don't act quickly your soul will be captured by the wall
+0x6c0c  0x40 0x41 DOWNWARDS Yes   No    No    0x234 on the ramp which descends clockwise around the_edges of a very deep pit. To the east is an opening into a red-gold room
+0x6c0e  0x41 0x42 DOWNWARDS Yes   No    No    0x235 on the ramp, beside a doorway with small holes up one edge
+0x6c10  0x42 0x43 DOWNWARDS Yes   No    No    0x236 on the ramp, outside a dark doorway
+0x6c12  0x43 0x44 DOWNWARDS Yes   No    No    0x237 on a loose section of the ramp
+0x6c14  0x44 0x45 DOWNWARDS Yes   No    No    0x238 on the ramp, outside a round opening
+0x6c16  0x44 0xb2 WEST      Yes   No    No    0x238 on the ramp, outside a round opening
+0x6c18  0x44 0xb2 INSIDE    Yes   No    No    0x238 on the ramp, outside a round opening
+0x6c1a  0x45 0x46 DOWNWARDS Yes   No    No    0x239 on a wobbly section of the ramp
+0x6c1c  0x46 0x47 DOWNWARDS Yes   No    No    0x23a on the ramp, outside a long room with scratches_on floor and ceiling
+0x6c1e  0x47 0x48 DOWNWARDS Yes   No    No    0x23b on the ramp. A hand sign points into a narrow opening
+0x6c20  0x48 0x49 DOWNWARDS Yes   No    No    0x23c on the ramp, outside a narrow doorway from which drifts a sharp, acrid smell
+0x6c22  0x49 0x4a DOWNWARDS Yes   No    No    0x23d on the ramp, outside a rubbery doorway
+0x6c24  0x4a 0x4b DOWNWARDS Yes   No    No    0x23e pn the ramp, outside a square doorway
+0x6c26  0x4b 0x4c DOWNWARDS Yes   No    No    0x23f on the ramp, outside an opening to a pale room
+0x6c28  0x4b 0xb9 INSIDE    No    No    No    0x23f on the ramp, outside an opening to a pale room
+0x6c2a  0x4c 0x4d DOWNWARDS Yes   No    No    0x240 on the ramp, outside an evil dark entrance
+0x6c2c  0x4d 0x4e DOWNWARDS Yes   No    No    0x241 on the ramp. A ladder slopes southwards to a lower part of the ramp
+0x6c2e  0x4e 0x4f DOWNWARDS Yes   Yes   No    0x242 on the ramp. A sign over a doorway reads: "Congratulations! You have won a uniquely valuable reward! Just walk in and answer a simple question to claim your prize!"
+0x6c30  0x4e 0xbb INSIDE    No    No    No    0x242 on the ramp. A sign over a doorway reads: "Congratulations! You have won a uniquely valuable reward! Just walk in and answer a simple question to claim your prize!"
+0x6c32  0x4f 0x50 DOWNWARDS Yes   Yes   No    0x243 You are on deadly slime, slipping towards the edge of the ramp%
+0x6c34  0x50 0x51 DOWNWARDS Yes   No    No    0x244 on the ramp outside an ornate entrance. The ramp above looks dodgy
+0x6c36  0x51 0x52 DOWNWARDS Yes   No    No    0x245 on the ramp. A doorway bears the following message: "To escape the dungeon, collect 9 gems and go through this door. Leaving without the gems will cause your death". Clearly you must be in the central dungeon of the Demon Lord!
+0x6c38  0x51 0xbf EAST      No    No    No    0x245 on the ramp. A doorway bears the following message: "To escape the dungeon, collect 9 gems and go through this door. Leaving without the gems will cause your death". Clearly you must be in the central dungeon of the Demon Lord!
+0x6c3a  0x51 0xbf INSIDE    No    No    No    0x245 on the ramp. A doorway bears the following message: "To escape the dungeon, collect 9 gems and go through this door. Leaving without the gems will cause your death". Clearly you must be in the central dungeon of the Demon Lord!
+0x6c3c  0x52 0x53 DOWNWARDS Yes   No    No    0x246 on the ramp, outside a doorway
+0x6c3e  0x53 0x54 DOWNWARDS Yes   No    No    0x247 on the ramp
+0x6c40  0x54 0x3e DOWNWARDS Yes   No    No    0x248 on a massive spiral ramp which twists down into_dark waters and up into the gloom above. Sea-spray wafts from a nearby doorway
+0x6c42  0x55 0x70 DOWNWARDS Yes   No    No    0x249 standing on a small round platform surrounded by a cylinder of red light
+0x6c44  0x56 0x7e DOWNWARDS Yes   No    No    0x24a standing on a small round platform surrounded by a cylinder of orange light
+0x6c46  0x57 0x85 DOWNWARDS Yes   No    No    0x24b standing on a small round platform surrounded by a cylinder of yellow light
+0x6c48  0x58 0x1d DOWNWARDS Yes   No    No    0x24c standing on a small round platform surrounded by a cylinder of green light
+0x6c4a  0x59 0x62 DOWNWARDS Yes   No    No    0x24d standing on a small round platform surrounded by a cylinder of blue light
+0x6c4c  0x5a 0x29 DOWNWARDS Yes   No    No    0x24e standing on a small round platform surrounded by a cylinder of violet light
+0x6c4e  0x5b 0xac DOWNWARDS Yes   No    No    0x24f standing on a small round platform surrounded by a cylinder of impenetrable darkness
+0x6c50  0x5c 0x3d DOWNWARDS Yes   No    No    0x250 standing on a small round platform surrounded by a cylinder of silvery light
+0x6c52  0x5d 0x68 DOWNWARDS Yes   No    No    0x251 sitting on an ornate throne. There are nine numbered buttons along the left arm-rest
+0x6c54  0x5e 0x5f EAST      Yes   No    No    0x252 just inside the entrance to the wight house, at_the northwest corner of a large gloomy room with four pillars. The nearest pillar has fallen and blocks your way south. In the middle of the southern wall is a shadowey alcove
+0x6c56  0x5f 0x60 EAST      Yes   No    No    0x253 in the middle of the north wall of the wight house
+0x6c58  0x5f 0x62 SOUTH     Yes   No    No    0x253 in the middle of the north wall of the wight house
+0x6c5a  0x60 0x61 SOUTH     Yes   No    No    0x254 in the northeast corner
+0x6c5c  0x61 0x66 SOUTH     Yes   No    No    0x255 in the middle of the east wall
+0x6c5e  0x62 0x61 EAST      Yes   No    No    0x256 in the middle of the wight house, below a blue pedestal
+0x6c60  0x62 0x63 WEST      Yes   No    No    0x256 in the middle of the wight house, below a blue pedestal
+0x6c62  0x63 0x64 SOUTH     Yes   No    No    0x257 in the middle of the west wall. The way north is blocked by a fallen pillar
+0x6c64  0x64 0x65 EAST      Yes   No    No    0x258 in the southwest corner
+0x6c66  0x65 0x62 NORTH     Yes   No    No    0x259 in the middle of the south wall of the wight house. A musty alcove opens behind you
+0x6c68  0x66 0x65 WEST      Yes   No    No    0x25a in the southeast corner
+0x6c6a  0x67 0x65 NORTH     Yes   No    No    0x25b in the crypt, beside a rotting coffin
+0x6c6c  0x67 0x65 OUTSIDE   Yes   No    No    0x25b in the crypt, beside a rotting coffin
+0x6c6e  0x68 0xa9 EAST      Yes   No    No    0x25c in a long throne room lined with skin. There is_a large doorway in the middle of each wall and a central granite throne
+0x6c70  0x68 0xaa DOWNWARDS No    No    No    0x25c in a long throne room lined with skin. There is_a large doorway in the middle of each wall and a central granite throne
+0x6c72  0x69 0x5d UPWARDS   No    No    No    0x25d in an odd little room, below a granite throne
+0x6c74  0x6a 0x68 SOUTH     Yes   No    No    0x25e at a bend in a corridor which goes west and south
+0x6c76  0x6b 0x6a EAST      Yes   No    No    0x25f in an east-west corridor beside an opening to the north
+0x6c78  0x6c 0x6b EAST      Yes   No    No    0x260 in a blocked corridor
+0x6c7a  0x6d 0x6b SOUTH     Yes   No    No    0x261 in a north-south corridor which ends at a t-junction
+0x6c7c  0x6e 0x6d SOUTH     Yes   No    No    0x262 on a steep flight of stairs
+0x6c7e  0x6e 0x6d UPWARDS   Yes   No    No    0x262 on a steep flight of stairs
+0x6c80  0x6f 0x6e UPWARDS   Yes   No    No    0x263 in the pit: a large pentagonal room, blackened by some past explosion and with a wide crack in the east wall
+0x6c82  0x70 0xde NORTH     No    Yes   No    0x264 in a cylindrical room with eight exits, hewn from the rock. A pride of lions is carved over the_north door
+0x6c84  0x71 0x70 SOUTHEAST Yes   No    No    0x265 dead-end room, painted matt black. You'll have to return the way you came
+0x6c86  0x71 0x70 OUTSIDE   No    No    No    0x265 dead-end room, painted matt black. You'll have to return the way you came
+0x6c88  0x72 0x70 OUTSIDE   No    No    No    0x266 in a second dead-end black room
+0x6c8a  0x72 0x70 SOUTHWEST Yes   No    No    0x266 in a second dead-end black room
+0x6c8c  0x73 0x74 EAST      Yes   No    No    0x267 at the west of a long room with many pillars. The only exit is at the other end
+0x6c8e  0x74 0x70 EAST      Yes   No    No    0x268 at the east end of a long room. Its roof is supported by dozens of stone pillars
+0x6c90  0x75 0x70 WEST      Yes   No    No    0x269 in an empty stable with exits to east and west
+0x6c92  0x76 0x75 WEST      Yes   No    No    0x26a in a rough-hewn store room, filled by a haystack
+0x6c94  0x77 0x78 EAST      Yes   No    No    0x26b at a junction in a steeply sloping u-shaped passage which leads northeast and northwest. Three round rocks protrude beside an opening to the east
+0x6c96  0x77 0x70 NWEST     Yes   No    No    0x26b at a junction in a steeply sloping u-shaped passage which leads northeast and northwest. Three round rocks protrude beside an opening to the east
+0x6c98  0x77 0x70 DOWNWARDS No    No    No    0x26b at a junction in a steeply sloping u-shaped passage which leads northeast and northwest. Three round rocks protrude beside an opening to the east
+0x6c9a  0x78 0x79 EAST      No    No    No    0x26c in a damp hemispherical cave with an opening to_the east
+0x6c9c  0x79 0x77 WEST      Yes   No    No    0x26d a room carved out of rugged rock with a large outcrop of stone in the middle of the floor. There is an exit to the west
+0x6c9e  0x7a 0x70 NEAST     Yes   No    No    0x26e on a flight of crumbling steps
+0x6ca0  0x7a 0x70 DOWNWARDS No    No    No    0x26e on a flight of crumbling steps
+0x6ca2  0x7b 0x7a NEAST     Yes   No    No    0x26f in a steep earthy passage
+0x6ca4  0x7b 0x7c UPWARDS   No    No    No    0x26f in a steep earthy passage
+0x6ca6  0x7b 0x7a DOWNWARDS Yes   No    No    0x26f in a steep earthy passage
+0x6ca8  0x7c 0x7b NEAST     Yes   No    No    0x270 in the lower chamber. There are 6 exits
+0x6caa  0x7c 0xcb DOWNWARDS No    No    No    0x270 in the lower chamber. There are 6 exits
+0x6cac  0x7d 0x7c DOWNWARDS Yes   No    No    0x271 in the upper chamber, warmed by a current of rising air. Openings lead southeast, southwest and_down
+0x6cae  0x7e 0x7c NEAST     Yes   No    No    0x272 in a round passage, blocked by a large rounded stone which is covered by a pattern of swirling grooves. There is an orange pedestal in the centre of the NE-SW passage
+0x6cb0  0x7f 0x7c SOUTH     Yes   No    No    0x273 at a tight junction above a narrow pit
+0x6cb2  0x7f 0xcc DOWNWARDS No    No    No    0x273 at a tight junction above a narrow pit
+0x6cb4  0x80 0x99 NORTH     Yes   No    No    0x274 in a tall cavern with a large central fireplace_and a wide brick chimney leading upwards. There_are openings all around
+0x6cb6  0x80 0x77 SOUTHWEST Yes   No    No    0x274 in a tall cavern with a large central fireplace_and a wide brick chimney leading upwards. There_are openings all around
+0x6cb8  0x80 0x77 DOWNWARDS Yes   No    No    0x274 in a tall cavern with a large central fireplace_and a wide brick chimney leading upwards. There_are openings all around
+0x6cba  0x80 0x9b NWEST     Yes   No    No    0x274 in a tall cavern with a large central fireplace_and a wide brick chimney leading upwards. There_are openings all around
+0x6cbc  0x81 0x80 DOWNWARDS Yes   No    No    0x275 in an oppressive chimney
+0x6cbe  0x81 0x80 OUTSIDE   Yes   No    No    0x275 in an oppressive chimney
+0x6cc0  0x82 0x81 DOWNWARDS Yes   No    No    0x276 outside a glowing alcove
+0x6cc2  0x83 0x82 DOWNWARDS Yes   No    No    0x277 at a blockage in the chimney
+0x6cc4  0x84 0x39 NORTH     Yes   No    No    0x278 in a dry north-south fissure, apparantly blocked at the southern end
+0x6cc6  0x85 0x80 EAST      Yes   No    No    0x279 at the end of a long east-west corridor lined with worn flagstones. A yellow pedestal stands in_the middle of the road and doorways lead north and south
+0x6cc8  0x86 0x85 EAST      Yes   No    No    0x27a in a long east-west corridor with doorways to north and south
+0x6cca  0x87 0x86 EAST      Yes   No    No    0x27b at the junction where the corridor ends
+0x6ccc  0x88 0x87 EAST      Yes   No    No    0x27c in a neat panelled room. There is a walk-in cupboard to the south, a wide doorway to the east and narrow openings west and down
+0x6cce  0x88 0x7f WEST      No    No    No    0x27c in a neat panelled room. There is a walk-in cupboard to the south, a wide doorway to the east and narrow openings west and down
+0x6cd0  0x89 0x88 NORTH     Yes   No    No    0x27d in a cupboard
+0x6cd2  0x89 0x88 OUTSIDE   Yes   No    No    0x27d in a cupboard
+0x6cd4  0x8a 0x85 NORTH     Yes   No    No    0x27e in a filthy, dead-end cell
+0x6cd6  0x8b 0x86 NORTH     Yes   No    No    0x27f in a filthy, dead-end cell
+0x6cd8  0x8c 0x87 NORTH     Yes   No    No    0x280 in a filthy, dead-end cell
+0x6cda  0x8d 0x85 SOUTH     Yes   No    No    0x281 in a filthy, dead-end cell
+0x6cdc  0x8e 0x86 SOUTH     Yes   No    No    0x282 in a filthy, dead-end cell
+0x6cde  0x8f 0x87 SOUTH     Yes   No    No    0x283 in a filthy, dead-end cell
+0x6ce0  0x90 0x80 WEST      Yes   No    No    0x284 in a crude narrow east-west corridor, hacked out of the rock
+0x6ce2  0x91 0x90 WEST      Yes   No    No    0x285 at a junction between north-south and east-west_passages
+0x6ce4  0x92 0x91 WEST      Yes   No    No    0x286 beside a rockfall which blocks the passage
+0x6ce6  0x93 0x80 NORTH     Yes   No    No    0x287 in the armoury. The weapons have rusted away, leaving stains on walls and floor
+0x6ce8  0x94 0x80 NWEST     Yes   No    No    0x288 in a looted toolroom
+0x6cea  0x95 0x91 NORTH     Yes   No    No    0x289 in an empty store-cave
+0x6cec  0x96 0x80 DOWNWARDS Yes   No    No    0x28a climbing a flight of narrow, cramped steps
+0x6cee  0x96 0x80 SOUTHWEST Yes   No    No    0x28a climbing a flight of narrow, cramped steps
+0x6cf0  0x97 0x96 DOWNWARDS Yes   No    No    0x28b at a dead-end.
+0x6cf2  0x98 0x91 SOUTH     Yes   No    No    0x28c in a giant, vacant, rats nest
+0x6cf4  0x99 0x36 NORTH     Yes   No    No    0x28d in a damp, musty north-south corridor
+0x6cf6  0x9a 0x9b UPWARDS   Yes   No    No    0x28e clinging to a rock-face
+0x6cf8  0x9b 0x9d NORTH     Yes   No    No    0x28f on a wide ledge half-way up the south side of a_tall cave. Steps lead up and down. Several small, brightly patterned, psychaedelic mushrooms grow at the back of the ledge
+0x6cfa  0x9b 0x9d CROSS     No    No    No    0x28f on a wide ledge half-way up the south side of a_tall cave. Steps lead up and down. Several small, brightly patterned, psychaedelic mushrooms grow at the back of the ledge
+0x6cfc  0x9b 0x9c UPWARDS   Yes   No    No    0x28f on a wide ledge half-way up the south side of a_tall cave. Steps lead up and down. Several small, brightly patterned, psychaedelic mushrooms grow at the back of the ledge
+0x6cfe  0x9c 0x39 UPWARDS   Yes   No    No    0x290 clinging to crumbling steps up the rock wall
+0x6d00  0x9d 0x9e NORTH     Yes   No    No    0x291 on a magnificent golden pathway running north-south through the air
+0x6d02  0x9d 0x9e CROSS     Yes   No    No    0x291 on a magnificent golden pathway running north-south through the air
+0x6d04  0x9e 0x9f NORTH     Yes   No    No    0x292 on a narrow ledge between the splendid golden pathway and a narrow tunnel
+0x6d06  0x9f 0xa1 NORTH     Yes   No    No    0x293 in a narrow north-south passage through the rock. A peculiar sweet smell emerges from an opening to the west
+0x6d08  0xa0 0x9f EAST      Yes   No    No    0x294 in the troll's squalid store room, amidst junk of every kind. Astrological symbols and slogans cover the walls and a cloying incense smell clogs your nostrils. The only exit is east, between clumps of tasty pink mushrooms. The troll is slumped in a stupor in one corner
+0x6d0a  0xa1 0xa2 NORTH     Yes   No    No    0x295 on a wide ledge outside a tunnel entrance. A wooden bridge leads north across a deep cavern and_steps lead up and down
+0x6d0c  0xa1 0xa2 CROSS     No    No    No    0x295 on a wide ledge outside a tunnel entrance. A wooden bridge leads north across a deep cavern and_steps lead up and down
+0x6d0e  0xa2 0xa3 NORTH     Yes   No    No    0x296 on a sturdy bridge across a cave
+0x6d10  0xa2 0xa3 CROSS     Yes   No    No    0x296 on a sturdy bridge across a cave
+0x6d12  0xa3 0xa4 NORTH     Yes   No    No    0x297 on a wide ledge between a sturdy bridge and a fissure in the rock. You keep bumping into objects that you can't see
+0x6d14  0xa4 0xa5 NORTH     Yes   No    No    0x298 in a small fissure that narrows as it winds north
+0x6d16  0xa5 0xa6 WEST      No    No    No    0x299 crawling through tiny cracks which lead west and south
+0x6d18  0xa6 0xa5 EAST      Yes   No    No    0x29a in the strong room. An iron door leads west and_a narrow crack splits the east wall
+0x6d1a  0xa7 0xa1 DOWNWARDS Yes   No    No    0x29b on cliff steps, broken by rock-falls
+0x6d1c  0xa8 0xa1 UPWARDS   Yes   No    No    0x29c south a vast cavern floor, beside some small grey mushrooms. Tiny footprints lead north
+0x6d1e  0xa9 0xaa DOWNWARDS No    No    No    0x29d in a viewing gallery over a deep pit. A chute leads down
+0x6d20  0xaa 0x3f DOWNWARDS No    No    No    0x29e below a sign "Your fate is sealed! Your only hope is to descend into the Central Dungeon and collect 9 gems. Succeed and you will be free!"
+0x6d22  0xab 0x3f SOUTH     Yes   No    No    0x29f in a dead-end dark room
+0x6d24  0xab 0x3f OUTSIDE   Yes   No    No    0x29f in a dead-end dark room
+0x6d26  0xac 0x42 WEST      Yes   No    No    0x2a0 in a dead-end dark room, below a black pedastal
+0x6d28  0xac 0x42 OUTSIDE   Yes   No    No    0x2a0 in a dead-end dark room, below a black pedastal
+0x6d2a  0xad 0xae EAST      Yes   No    No    0x2a1 in a treasure chamber
+0x6d2c  0xae 0xaf EAST      Yes   No    No    0x2a2 in the west crusher room beside a door into a treasure chamber
+0x6d2e  0xaf 0x46 EAST      Yes   No    No    0x2a3 in the east crusher room beside an opening back_to the ramp
+0x6d30  0xaf 0x46 OUTSIDE   Yes   No    No    0x2a3 in the east crusher room beside an opening back_to the ramp
+0x6d32  0xb0 0x40 WEST      Yes   No    No    0x2a4 in a circular room of red-gold metal.%Gold rings cover the floor
+0x6d34  0xb0 0x40 OUTSIDE   Yes   No    No    0x2a4 in a circular room of red-gold metal.%Gold rings cover the floor
+0x6d36  0xb1 0x41 WEST      Yes   No    No    0x2a5 in a dead end, below a gallows tree from which a bloodless corpse hangs by one foot
+0x6d38  0xb1 0x41 OUTSIDE   Yes   No    No    0x2a5 in a dead end, below a gallows tree from which a bloodless corpse hangs by one foot
+0x6d3a  0xb2 0xb3 DOWNWARDS No    No    No    0x2a6 on the brink of a deep, dark pit
+0x6d3c  0xb3 0x4c EAST      Yes   No    No    0x2a7 in a deep, eerie-dark pit
+0x6d3e  0xb3 0x4c OUTSIDE   Yes   No    No    0x2a7 in a deep, eerie-dark pit
+0x6d40  0xb4 0x47 SOUTH     Yes   No    No    0x2a8 in a small soft room between five large round fleshy pillars
+0x6d42  0xb4 0x47 OUTSIDE   Yes   No    No    0x2a8 in a small soft room between five large round fleshy pillars
+0x6d44  0xb5 0x48 WEST      Yes   No    No    0x2a9 in a dusty room, entered from the west and with_a long shelf along the east wall
+0x6d46  0xb5 0x48 OUTSIDE   Yes   No    No    0x2a9 in a dusty room, entered from the west and with_a long shelf along the east wall
+0x6d48  0xb6 0x49 WEST      Yes   No    No    0x2aa in a short east-west corridor
+0x6d4a  0xb6 0x49 OUTSIDE   Yes   No    No    0x2aa in a short east-west corridor
+0x6d4c  0xb7 0xb6 WEST      Yes   No    No    0x2ab in a room surfaced with black glass
+0x6d4e  0xb7 0xb6 OUTSIDE   Yes   No    No    0x2ab in a room surfaced with black glass
+0x6d50  0xb8 0x4a WEST      Yes   No    No    0x2ac in the box room
+0x6d52  0xb8 0x4a OUTSIDE   Yes   No    No    0x2ac in the box room
+0x6d54  0xb9 0xba WEST      No    No    No    0x2ad in the condemned cell. The only way out is to go west
+0x6d56  0xba 0x4b NORTH     No    No    No    0x2ae in the guard room. An exit leads north
+0x6d58  0xba 0x4b OUTSIDE   No    No    No    0x2ae in the guard room. An exit leads north
+0x6d5a  0xbb 0xbc WEST      No    No    No    0x2af in the "Skinner box": a blank room with no way out - just nine buttons in a vertical line up one wall. The buttons are numbered 1 to 9 and a discrete notice reads "choose the best"
+0x6d5c  0xbc 0x4e WEST      No    No    No    0x2b0 in the reward room. This is empty too and has only 5 numbered buttons, labelled as follows...% 1: Great wealth;% 2: Eternal life;% 3: World peace;% 4: Mystery prize;% 5: Nothing.%A sign invites you to choose your prize
+0x6d5e  0xbd 0x50 WEST      Yes   No    No    0x2b1 in the statue room. An incomprehensible abstract sculpture of hoops, spirals and loops sprawls around on a small circular platform in the middle of the floor. The entrance is to the west
+0x6d60  0xbd 0x50 OUTSIDE   Yes   No    No    0x2b1 in the statue room. An incomprehensible abstract sculpture of hoops, spirals and loops sprawls around on a small circular platform in the middle of the floor. The entrance is to the west
+0x6d62  0xbe 0xbd WEST      Yes   No    No    0x2b2 in an ornate, dead-end room
+0x6d64  0xbe 0xbd OUTSIDE   Yes   No    No    0x2b2 in an ornate, dead-end room
+0x6d66  0xbf 0x62 EAST      No    No    No    0x2b3 in the "Exit" chamber. You seem to have survived the Central Dungeon! There is only one way out...
+0x6d68  0xbf 0x62 OUTSIDE   No    No    No    0x2b3 in the "Exit" chamber. You seem to have survived the Central Dungeon! There is only one way out...
+0x6d6a  0xc0 0x52 WEST      Yes   No    No    0x2b4 in an empty room
+0x6d6c  0xc0 0x52 OUTSIDE   Yes   No    No    0x2b4 in an empty room
+0x6d6e  0xc1 0x52 WEST      No    No    No    0x2b5 in an empty room
+0x6d70  0xc1 0x52 OUTSIDE   No    No    No    0x2b5 in an empty room
+0x6d72  0xc1 0xc0 DOWNWARDS Yes   No    No    0x2b5 in an empty room
+0x6d74  0xc2 0xc1 WEST      Yes   No    No    0x2b6 in a treasure vault. A low crawl leads west
+0x6d76  0xc2 0xc1 OUTSIDE   Yes   No    No    0x2b6 in a treasure vault. A low crawl leads west
+0x6d78  0xc3 0x54 EAST      Yes   No    No    0x2b7 in the Salt Cellar, surrounded by pillars of salt
+0x6d7a  0xc3 0x54 OUTSIDE   Yes   No    No    0x2b7 in the Salt Cellar, surrounded by pillars of salt
+0x6d7c  0xc4 0x32 OUTSIDE   No    No    No    0x2b8 696
+0x6d7e  0xc5 0x32 OUTSIDE   No    No    No    0x2b9 697
+0x6d80  0xc6 0x32 OUTSIDE   No    No    No    0x2ba 698
+0x6d82  0xc7 0x32 OUTSIDE   No    No    No    0x2bb 699
+0x6d84  0xc8 0xd7 OUTSIDE   No    No    No    0x2bc on the ceiling of a fine room. A chandelier lies beside you and the floor of the room is far above
+0x6d86  0xc9 0xca EAST      Yes   No    No    0x2bd on the carpetted floor of a comfortable homely room, beside a door to the east.
+0x6d88  0xca 0xdc OUTSIDE   No    No    No    0x2be in a large store room. You realise that this is_the ideal place to leave any treasures that you_find, so as to get full points for them. Doors lead west and to the outside. A machine resembling a six-foot cube with a single red button sits_in one corner
+0x6d8a  0xcb 0xcc NORTH     Yes   No    No    0x2bf in a smooth, round north-south passage. A flickering light is visible to the north
+0x6d8c  0xcc 0xcd NORTH     Yes   No    No    0x2c0 at a junction in the round, north-south passage, illuminated by a jet of flame from the floor.%To the east is a treasure vault, completely filled with valuables of every kind
+0x6d8e  0xcc 0xde EAST      No    Yes   No    0x2c0 at a junction in the round, north-south passage, illuminated by a jet of flame from the floor.%To the east is a treasure vault, completely filled with valuables of every kind
+0x6d90  0xcd 0x70 NORTH     Yes   No    No    0x2c1 in a north-south passage. A dry red stain spreads from beneath a fallen stone
+0x6d92  0xce 0x82 EAST      Yes   No    No    0x2c2 in a hot alcove, lit by the flames of a fire elemental
+0x6d94  0xce 0x82 OUTSIDE   Yes   No    No    0x2c2 in a hot alcove, lit by the flames of a fire elemental
+0x6d96  0xcf 0x84 NORTH     Yes   No    No    0x2c3 in a huge cave of glistering rock. New passages_lead north and south
+0x6d98  0xcf 0x84 INSIDE    Yes   No    No    0x2c3 in a huge cave of glistering rock. New passages_lead north and south
+0x6d9a  0xd0 0x68 EAST      Yes   No    No    0x2c4 in a corridor bending south and east
+0x6d9c  0xd0 0x68 INSIDE    Yes   No    No    0x2c4 in a corridor bending south and east
+0x6d9e  0xd1 0x6f WEST      Yes   No    No    0x2c5 at the bottom of a deep chasm where the earth has been split assunder by a massive explosion. Narrow cracks lead west and down
+0x6da0  0xd1 0x3f DOWNWARDS No    No    No    0x2c5 at the bottom of a deep chasm where the earth has been split assunder by a massive explosion. Narrow cracks lead west and down
+0x6da2  0xd2 0x7d NEAST     Yes   No    No    0x2c6 in the right eye-socket of the stone face
+0x6da4  0xd2 0xde DOWNWARDS No    No    No    0x2c6 in the right eye-socket of the stone face
+0x6da6  0xd2 0x7d INSIDE    Yes   No    No    0x2c6 in the right eye-socket of the stone face
+0x6da8  0xd3 0x7d NWEST     Yes   No    No    0x2c7 in the left eye-socket of the stone face
+0x6daa  0xd3 0xde DOWNWARDS No    No    No    0x2c7 in the left eye-socket of the stone face
+0x6dac  0xd3 0x7d INSIDE    No    No    No    0x2c7 in the left eye-socket of the stone face
+0x6dae  0xd4 0x7c NWEST     Yes   No    No    0x2c8 in a wide, smelly passage opening to the outside, high above the river
+0x6db0  0xd4 0xde DOWNWARDS No    No    No    0x2c8 in a wide, smelly passage opening to the outside, high above the river
+0x6db2  0xd4 0x7c INSIDE    Yes   No    No    0x2c8 in a wide, smelly passage opening to the outside, high above the river
+0x6db4  0xd5 0x7f EAST      Yes   No    No    0x2c9 in a winding, sticky east-west passage to the outside
+0x6db6  0xd5 0x24 WEST      No    No    No    0x2c9 in a winding, sticky east-west passage to the outside
+0x6db8  0xd6 0x28 EAST      No    No    No    0x2ca in a winding, sticky east-west passage to the outside
+0x6dba  0xd6 0x7f WEST      Yes   No    No    0x2ca in a winding, sticky east-west passage to the outside
+0x6dbc  0xd7 0xc8 INSIDE    Yes   No    No    0x2cb inside a large wooden box. A small door leads deeper into the box
+0x6dbe  0xd8 0xcb NORTH     Yes   No    No    0x2cc in a gloomy cavern, between rows of jagged, pointed stalagmites. A fetid odour drifts from a wide round passage to the north
+0x6dc0  0xd8 0xcb INSIDE    Yes   No    No    0x2cc in a gloomy cavern, between rows of jagged, pointed stalagmites. A fetid odour drifts from a wide round passage to the north
