@@ -1,0 +1,360 @@
+Emerald Isle - Location Exit Definition
+---------------------------------------------
+
+Bit configuration:
+
+Bit 0 - where the direction can be used inversely
+Bit 1 - whether this direction should be hidden
+Bit 2 - if there is a door in this direction
+
+
+                            (Inv.)
+Address From  To  Dir       Bit 0 Bit 1 Bit 2 MsgId Location Text
+------- ---- ---- --------- ----- ----- ----- ----- -------------
+0x0020  0x01 0x44 DOWN      Yes   No    No    0x191 spiral stairs cut into the trunk of a tree
+0x0022  0x02 0x03 SOUTH     Yes   No    No    0x192 a gloomy cave which smells of sea weed
+0x0024  0x03 0x60 WEST      Yes   No    No    0x193 a damp muddy tunnel
+0x0026  0x04 0x55 UP        Yes   No    No    0x194 clinging seaweed
+0x0028  0x05 0x54 UP        Yes   No    No    0x195 the skeleton of a wrecked ship which rests on a bed of thick mud. Its timbers are thickly encrusted by weeds and waving worms but look well preserved: the ship was once a galleon
+0x002a  0x06 0x70 OUT       Yes   No    No    0x196 a claustrophobic hollow beneath the base of the flint
+0x002c  0x07 0x87 UP        Yes   No    No    0x197 a carved bubble in the rock. It is richly decorated with heiroglyphics and pictograms
+0x002e  0x08 0x07 NORTH     Yes   No    No    0x198 a hi-tech complex, deep underground and decorated with LCDs, WYSIWYG icons and recycled QLunks. Looks awful
+0x0030  0x09 0x08 NORTH     Yes   No    Yes   0x199 the control centre, surrounded by instrumentation of every kind
+0x0032  0x0a 0x08 WEST      Yes   No    No    0x19a a bare metal room
+0x0034  0x0b 0x53 NORTH     Yes   No    No    0x19b a junction where the main tunnel ends. Low passages lead east and south
+0x0036  0x0c 0x0b WEST      Yes   No    No    0x19c a wide cavern
+0x0038  0x0d 0x0e NORTH     Yes   No    No    0x19d a loose pile of coarse mining debris
+0x003a  0x0e 0x0b NORTH     Yes   No    No    0x19e a dusty tunnel through the rock
+0x003c  0x0f 0x0c WEST      Yes   No    No    0x19f a dead end. The low passage ends at a tool-scarred wall
+0x003e  0x10 0x76 UP        No    No    No    0x1a0 the smallest cave
+0x0040  0x10 0x4d WEST      No    No    No    0x1a0 the smallest cave
+0x0042  0x11 0x10 NORTH     Yes   No    No    0x1a1 a teeny-weeny tunnel
+0x0044  0x12 0x11 NORTH     Yes   No    No    0x1a2 a twisty tunnel
+0x0046  0x13 0x12 WEST      Yes   No    No    0x1a3 a grotty grotto
+0x0048  0x14 0x13 UP        Yes   No    No    0x1a4 a cosy cave
+0x004a  0x14 0x4d WEST      No    No    No    0x1a4 a cosy cave
+0x004c  0x15 0x76 UP        No    No    No    0x1a5 an immense rock-throat, just below the ground
+0x004e  0x16 0x15 WEST      Yes   No    No    0x1a6 crude caverns
+0x0050  0x17 0x16 SOUTH     Yes   No    No    0x1a7 a cleft through limestone rock
+0x0052  0x18 0x17 WEST      Yes   No    No    0x1a8 a damp hollow deep underground
+0x0054  0x19 0x95 OUT       Yes   No    No    0x1a9 smooth riven rocks, forming a steep chimney down into the heart of the mountain
+0x0056  0x1a 0x19 UP        Yes   No    No    0x1aa a smooth vertical shaft
+0x0058  0x1b 0x1a UP        Yes   No    No    0x1ab an ancient lava chamber, partly filled by large lumps of broken rock
+0x005a  0x1c 0x1d UP        Yes   No    No    0x1ac a sea cave, half submerged by the waves. Breakers roll in from the ocean, each one filling the cave entrance as it passes and slamming into the far wall with a dull boom. You are in imminent danger of being swept away
+0x005c  0x1d 0xa6 UP        Yes   Yes   No    0x1ad a draughty blow-hole within the cliff. Strong winds threaten to dislodge your footing on the slimey rocks
+0x005e  0x1d 0xa6 OUT       Yes   No    No    0x1ad a draughty blow-hole within the cliff. Strong winds threaten to dislodge your footing on the slimey rocks
+0x0060  0x1e 0xc3 UP        Yes   No    No    0x1ae the cargo bay of the aircraft
+0x0062  0x1f 0xe3 SOUTH     Yes   No    No    0x1af a tumbledown, termite-gnawed shed
+0x0064  0x20 0xe5 OUT       Yes   No    No    0x1b0 a stone chamber
+0x0066  0x21 0x20 WEST      Yes   No    No    0x1b1 a thin tunnel which follows a natural fissure through the rocks
+0x0068  0x22 0x21 NORTH     Yes   No    No    0x1b2 a granite grotto
+0x006a  0x23 0x24 EAST      Yes   No    No    0x1b3 a tiny tunnel
+0x006c  0x24 0x22 NORTH     Yes   No    No    0x1b4 an ornate opening between richly-decorated pillars
+0x006e  0x25 0x23 NORTH     Yes   No    No    0x1b5 a temple antechamber
+0x0070  0x26 0x25 EAST      Yes   No    No    0x1b6 a low crawl
+0x0072  0x27 0x26 UP        Yes   No    No    0x1b7 a greasy grotto deep under the ground. Oily drops ooze from the ceiling and slide down the walls to the slippery floor
+0x0074  0x28 0x29 DOWN      Yes   No    No    0x1b8 a very tall tree
+0x0076  0x29 0x2c EAST      Yes   No    No    0x1b9 a maze of interlinked branches in the forest
+0x0078  0x2a 0x29 NORTH     Yes   No    No    0x1ba a maze of interlinked branches in the forest
+0x007a  0x2a 0x29 EAST      Yes   No    No    0x1ba a maze of interlinked branches in the forest
+0x007c  0x2a 0x29 SOUTH     Yes   No    No    0x1ba a maze of interlinked branches in the forest
+0x007e  0x2a 0x29 WEST      Yes   No    No    0x1ba a maze of interlinked branches in the forest
+0x0080  0x2b 0x2a DOWN      Yes   No    No    0x1bb the topmost branches of a mangrove
+0x0082  0x2c 0x2d EAST      Yes   No    No    0x1bc a slender bridge which leads east to a wooden city perched high in the trees
+0x0084  0x2d 0x36 SOUTH     Yes   No    No    0x1bd the main square of the tree city, standing on a platform of wooden boards between which you can glimpse the twilight jungle below. Light wooden buildings surround the square and walkways lead away in many directions
+0x0086  0x2e 0x2a NORTH     Yes   No    No    0x1be the north bridge of the tree city
+0x0088  0x2e 0x2d SOUTH     Yes   No    No    0x1be the north bridge of the tree city
+0x008a  0x2f 0x2d WEST      Yes   No    No    0x1bf the plaza at the east end of the city. A clocktower rises above
+0x008c  0x30 0x2f DOWN      Yes   No    No    0x1c0 the high clocktower, surrounded by gears and bells
+0x008e  0x31 0x2d NW        Yes   No    Yes   0x1c1 a pathway junction
+0x0090  0x32 0x31 EAST      Yes   No    No    0x1c2 the edge of a pond where water has collected on matted leaves
+0x0092  0x33 0x31 DOWN      Yes   No    No    0x1c3 on creaking wooden steps
+0x0094  0x34 0x33 DOWN      Yes   No    No    0x1c4 a cloud garden of lichens, orchid and fungi. The portico of a museum rises to the north
+0x0096  0x35 0x34 SOUTH     Yes   No    No    0x1c5 a municipal museum
+0x0098  0x36 0x37 SOUTH     Yes   No    No    0x1c6 a wide north-south alleyway leading to the gates of a splendid palace
+0x009a  0x37 0x39 SOUTH     Yes   No    No    0x1c7 the palace quad amongst classical buildings
+0x009c  0x38 0x37 WEST      Yes   No    No    0x1c8 the hanging gardens. Beautiful climbing plants dangle from every branch and blossoms perfume the air
+0x009e  0x39 0x3b WEST      Yes   No    No    0x1c9 the great east hall of the palace
+0x00a0  0x3a 0x39 WEST      Yes   No    No    0x1ca the dress circle, amidst half-completed clothes
+0x00a2  0x3b 0x42 WEST      Yes   No    No    0x1cb the west hall
+0x00a4  0x3c 0x3b NORTH     Yes   No    No    0x1cc a copper-coloured chamber
+0x00a6  0x3d 0x3b DOWN      Yes   No    No    0x1cd the landing at the top of the stairs. Splendid rooms are visible to north and west
+0x00a8  0x3e 0x3d SOUTH     Yes   No    No    0x1ce a treasure chamber piled high with sturdy chests and iron boxes. White light shines from a splendid room to the west
+0x00aa  0x3f 0x3e EAST      Yes   No    No    0x1cf a beautiful room
+0x00ac  0x40 0x3d EAST      Yes   No    No    0x1d0 the throneroom: a great long chamber with its ceiling supported by a single beam. A red carpet leads west
+0x00ae  0x41 0x40 EAST      Yes   No    No    0x1d1 the King's private apartment
+0x00b0  0x42 0x43 WEST      Yes   No    No    0x1d2 a massive kitchen
+0x00b2  0x43 0x01 DOWN      Yes   No    No    0x1d3 the palace yard, east of the main buildings. Steps lead down through a tree to a railway station far below, almost hidden by leaves
+0x00b4  0x44 0xe6 INTO      No    Yes   No    0x1d4 a railway platform, south of a railway line across the forest floor. Great trees tower overhead, dwarfing the stone building to the east, and a steep staircase leads upwards through the trunk of one of them
+0x00b6  0x44 0xe6 NORTH     No    No    No    0x1d4 a railway platform, south of a railway line across the forest floor. Great trees tower overhead, dwarfing the stone building to the east, and a steep staircase leads upwards through the trunk of one of them
+0x00b8  0x44 0x01 INTO      Yes   Yes   No    0x1d4 a railway platform, south of a railway line across the forest floor. Great trees tower overhead, dwarfing the stone building to the east, and a steep staircase leads upwards through the trunk of one of them
+0x00ba  0x45 0x44 WEST      Yes   No    No    0x1d5 an automated ticket office
+0x00bc  0x46 0x44 EAST      Yes   No    Yes   0x1d6 bridge steps
+0x00be  0x47 0x46 SOUTH     Yes   No    No    0x1d7 a substantial wooden bridge over the railway line
+0x00c0  0x48 0x47 SOUTH     Yes   No    No    0x1d8 bridge steps
+0x00c2  0x49 0x48 WEST      Yes   No    No    0x1d9 a dirty platform, strewn with leaves, north of the railway line. Dim light filters down through the dense forest canopy far above
+0x00c4  0x49 0xe6 INTO      No    Yes   No    0x1d9 a dirty platform, strewn with leaves, north of the railway line. Dim light filters down through the dense forest canopy far above
+0x00c6  0x49 0xe6 SOUTH     No    No    No    0x1d9 a dirty platform, strewn with leaves, north of the railway line. Dim light filters down through the dense forest canopy far above
+0x00c8  0x4a 0xe6 INTO      No    Yes   No    0x1da a seaside railway station, north of the track and between two stone buildings. A perfect sandy beach stretches away north
+0x00ca  0x4a 0xe6 SOUTH     No    No    No    0x1da a seaside railway station, north of the track and between two stone buildings. A perfect sandy beach stretches away north
+0x00cc  0x4a 0x4d NORTH     Yes   No    No    0x1da a seaside railway station, north of the track and between two stone buildings. A perfect sandy beach stretches away north
+0x00ce  0x4b 0x4a WEST      Yes   No    No    0x1db a neat signal box beside the railway line. A rack of long levers, locked in position, lines one wall below a dirty window
+0x00d0  0x4c 0x4a EAST      Yes   No    No    0x1dc the reception room of a small police station. A high counter divided the room into two halves and wanted posters hide the damp patches on the walls
+0x00d2  0x4d 0x4f SOUTHWEST Yes   No    No    0x1dd the middle of a splendid sandy beach
+0x00d4  0x4d 0x4e WEST      Yes   No    No    0x1dd the middle of a splendid sandy beach
+0x00d6  0x4e 0x54 NORTH     No    No    No    0x1de between rugged rocks at the left end of the beach. A small, round, ominous cave leads west into a low cliff
+0x00d8  0x4e 0x02 WEST      Yes   No    No    0x1de between rugged rocks at the left end of the beach. A small, round, ominous cave leads west into a low cliff
+0x00da  0x4f 0x4e NORTH     Yes   No    No    0x1df shifting sand dunes which sprawl against the cliffs. A tumbledown wooden shack, cobbled together from peeling boards, sprawls on a mound to the east
+0x00dc  0x50 0x4f WEST      Yes   No    No    0x1e0 a verminous wooden shack
+0x00de  0x51 0x4d WEST      Yes   No    No    0x1e1 clifftop scrub which clings to the tall mounds of pebbles on the right of the beach
+0x00e0  0x52 0x51 WEST      Yes   No    No    0x1e2 a flat grassy area above the sea. A faint track crosses it, sloping down slightly towards the east
+0x00e2  0x53 0x52 WEST      Yes   No    No    0x1e3 the entrance of an old mine, almost blocked by fallen debris. Interesting rocks abound around you, but the crystals are too small to have any value
+0x00e4  0x54 0x4d SOUTH     Yes   No    No    0x1e4 breaking surf, bobbing about in the waves
+0x00e6  0x55 0x04 SOUTHEAST Yes   No    No    0x1e5 the ocean
+0x00e8  0x55 0x54 SOUTH     Yes   No    No    0x1e5 the ocean
+0x00ea  0x56 0x57 NORTH     Yes   No    No    0x1e6 island waters
+0x00ec  0x56 0x55 SOUTH     Yes   No    No    0x1e6 island waters
+0x00ee  0x57 0x59 NW        Yes   No    No    0x1e7 desert island dunes
+0x00f0  0x57 0x56 SOUTH     Yes   No    No    0x1e7 desert island dunes
+0x00f2  0x58 0x5b SOUTH     No    No    No    0x1e8 the north of the island, amidst rocks and sandhills
+0x00f4  0x58 0x57 SOUTHWEST Yes   No    No    0x1e8 the north of the island, amidst rocks and sandhills
+0x00f6  0x59 0x58 EAST      Yes   No    No    0x1e9 the cool shade of an impressive palm tree
+0x00f8  0x5a 0x59 DOWN      Yes   No    No    0x1ea the crown of a Phillips palm, high above the ground. Great thick leaves sprout punkily from the soft fibrous bark swathing its trunk
+0x00fa  0x5b 0x57 WEST      Yes   No    No    0x1eb dire straights, tossed by turbulent waves and menaced by sharp rocks
+0x00fc  0x5c 0x56 EAST      Yes   No    No    0x1ec crystal water
+0x00fe  0x5c 0xa4 WEST      Yes   No    No    0x1ec crystal water
+0x0100  0x5d 0x5c UP        Yes   No    No    0x1ed a reef of bright coral. Colourful shells carpet the seabed and day-glo fishes practice syncronised swimming
+0x0102  0x5e 0x5b WEST      Yes   No    No    0x1ee a shady cove below towering cliffs
+0x0104  0x5f 0x5e DOWN      Yes   No    No    0x1ef nibbled grass atop a sheer cliff. Flatlands, distorted by shimmering heat, extend east into the distance
+0x0106  0x60 0x63 SOUTHEAST Yes   No    No    0x1f0 a hot cave entrance looking out on to cracked lava. Parched hills stretch away to the southeast and in the opposite direction is a small volcano which belches sulphurous steam across the land
+0x0108  0x61 0x60 SOUTHEAST Yes   No    No    0x1f1 volcanic fumes at the edge of a bubbling crater. The heat is intense
+0x010a  0x62 0x60 NE        Yes   No    No    0x1f2 a cool, cracked lava flow on the steep slopes of the volcano. Deep fissures block further progress, so you'll have to return the way you came
+0x010c  0x63 0x63 NORTH     No    No    No    0x1f3 the foothills
+0x010e  0x63 0x63 WEST      No    No    No    0x1f3 the foothills
+0x0110  0x63 0x64 EAST      Yes   No    No    0x1f3 the foothills
+0x0112  0x63 0x64 SOUTH     Yes   No    No    0x1f3 the foothills
+0x0114  0x64 0x65 EAST      No    No    No    0x1f4 Boot Hill
+0x0116  0x64 0x66 SOUTH     No    No    No    0x1f4 Boot Hill
+0x0118  0x65 0x66 NORTH     No    No    No    0x1f5 more foothills
+0x011a  0x65 0x66 EAST      No    No    No    0x1f5 more foothills
+0x011c  0x65 0x64 SOUTH     No    No    No    0x1f5 more foothills
+0x011e  0x65 0x64 WEST      No    No    No    0x1f5 more foothills
+0x0120  0x66 0x67 NORTH     No    No    No    0x1f6 tedious foothills
+0x0122  0x66 0x65 EAST      No    No    No    0x1f6 tedious foothills
+0x0124  0x66 0x69 SOUTH     Yes   No    No    0x1f6 tedious foothills
+0x0126  0x66 0x64 WEST      No    No    No    0x1f6 tedious foothills
+0x0128  0x67 0x66 NORTH     No    No    No    0x1f7 endless foothills
+0x012a  0x67 0x68 EAST      No    No    No    0x1f7 endless foothills
+0x012c  0x67 0x67 SOUTH     No    No    No    0x1f7 endless foothills
+0x012e  0x67 0x67 WEST      No    No    No    0x1f7 endless foothills
+0x0130  0x68 0x67 NORTH     Yes   No    No    0x1f8 boring foothills
+0x0132  0x68 0x65 EAST      Yes   No    No    0x1f8 boring foothills
+0x0134  0x68 0x69 SOUTH     Yes   No    No    0x1f8 boring foothills
+0x0136  0x68 0x6a WEST      Yes   No    No    0x1f8 boring foothills
+0x0138  0x69 0x66 NORTH     Yes   No    No    0x1f9 dull foothills
+0x013a  0x69 0x6b EAST      Yes   No    No    0x1f9 dull foothills
+0x013c  0x69 0x69 SOUTH     Yes   No    No    0x1f9 dull foothills
+0x013e  0x69 0x68 WEST      No    No    No    0x1f9 dull foothills
+0x0140  0x6a 0x74 DOWN      Yes   No    No    0x1fa a windy ridge
+0x0142  0x6b 0x72 DOWN      Yes   Yes   No    0x1fb a bank of multi-coloured gravel beside a small south-flowing stream
+0x0144  0x6b 0x72 SOUTH     Yes   No    No    0x1fb a bank of multi-coloured gravel beside a small south-flowing stream
+0x0146  0x6c 0x6b DOWN      Yes   Yes   No    0x1fc a shallow stream which seeps from a morass of saturated peat to the north and trickles south towards the lower ground
+0x0148  0x6c 0x6b SOUTH     Yes   No    No    0x1fc a shallow stream which seeps from a morass of saturated peat to the north and trickles south towards the lower ground
+0x014a  0x6d 0x6f UP        Yes   No    No    0x1fd soggy sedge tussocks beside a bog covered by a thin peat crust
+0x014c  0x6d 0x6c DOWN      Yes   No    No    0x1fd soggy sedge tussocks beside a bog covered by a thin peat crust
+0x014e  0x6e 0x6d SOUTH     Yes   No    No    0x1fe the high moor, surrounded by heather and yellow gorse ("Cor. 'Struth. Funny kinda plants for the tropics!", you think)
+0x0150  0x6f 0x6e WEST      Yes   No    No    0x1ff horrid heights, near the top of the mountain chain which runs down the east side of Emerald Isle
+0x0152  0x70 0x6f SOUTH     Yes   No    No    0x200 harsh moors, beside a smooth stone outcrop which apparently consists of a single colossal flint. Slime coats the slippery surface of the flint, reflecting small images of the bleak landscape
+0x0154  0x71 0x70 DOWN      Yes   No    No    0x201 a hollow on top of the stone. It seems a mystic place
+0x0156  0x72 0x73 DOWN      Yes   Yes   No    0x202 a soggy patch at the head of a valley to the west. Barren hills ascend to the north and east. A small stream trickes down from the north hills and heads west along the valley, gaining strength as it flows
+0x0158  0x72 0x77 EAST      Yes   No    No    0x202 a soggy patch at the head of a valley to the west. Barren hills ascend to the north and east. A small stream trickes down from the north hills and heads west along the valley, gaining strength as it flows
+0x015a  0x73 0x75 CROSS     No    No    No    0x203 the valley, on the north bank of a turbulent river which rushes past, heading west over polished boulders
+0x015c  0x73 0x75 SOUTH     No    Yes   No    0x203 the valley, on the north bank of a turbulent river which rushes past, heading west over polished boulders
+0x015e  0x73 0x74 DOWN      Yes   Yes   No    0x203 the valley, on the north bank of a turbulent river which rushes past, heading west over polished boulders
+0x0160  0x73 0x72 EAST      Yes   No    No    0x203 the valley, on the north bank of a turbulent river which rushes past, heading west over polished boulders
+0x0162  0x74 0x75 CROSS     Yes   No    No    0x204 a deep river valley, on the north bank of the waters. A continuous rushing noise comes from the west, drifting up on a damp breeze
+0x0164  0x74 0x75 SOUTH     Yes   Yes   No    0x204 a deep river valley, on the north bank of the waters. A continuous rushing noise comes from the west, drifting up on a damp breeze
+0x0166  0x74 0x73 EAST      Yes   No    No    0x204 a deep river valley, on the north bank of the waters. A continuous rushing noise comes from the west, drifting up on a damp breeze
+0x0168  0x75 0x74 CROSS     Yes   No    No    0x205 hill slopes south of the river. Dense vegetation blocks the way south
+0x016a  0x75 0x76 UP        Yes   Yes   No    0x205 hill slopes south of the river. Dense vegetation blocks the way south
+0x016c  0x76 0x75 EAST      Yes   No    No    0x206 the spray of a high waterfall which plummets onto the rocks below. You have a superb view of the western lowlands, covered by unbroken forest which stretches as far as the eye can see
+0x016e  0x76 0x15 DOWN      Yes   No    No    0x206 the spray of a high waterfall which plummets onto the rocks below. You have a superb view of the western lowlands, covered by unbroken forest which stretches as far as the eye can see
+0x0170  0x77 0x78 EAST      Yes   No    No    0x207 a hill moor, north of a region of small trees
+0x0172  0x77 0x79 DOWN      Yes   No    No    0x207 a hill moor, north of a region of small trees
+0x0174  0x78 0x79 SOUTH     Yes   No    No    0x208 deep gravel on a little hill
+0x0176  0x79 0x7a SOUTH     Yes   No    No    0x209 steep scree fallen from the slopes to the north. A path leads south through stunted trees
+0x0178  0x7a 0x7b SOUTH     Yes   No    No    0x20a the edge of the woods, pushing between creepers and thornbushes
+0x017a  0x7a 0x7f WEST      No    No    No    0x20a the edge of the woods, pushing between creepers and thornbushes
+0x017c  0x7b 0x7c SOUTH     Yes   No    No    0x20b deciduous domains
+0x017e  0x7b 0x7f WEST      Yes   No    No    0x20b deciduous domains
+0x0180  0x7c 0x7d SOUTH     No    No    No    0x20c a copse
+0x0182  0x7c 0x7e WEST      Yes   No    No    0x20c a copse
+0x0184  0x7d 0x82 WEST      Yes   No    No    0x20d clammy shrubs which drip water
+0x0186  0x7e 0x7d SOUTH     Yes   No    No    0x20e a clearing
+0x0188  0x7e 0x81 WEST      Yes   No    No    0x20e a clearing
+0x018a  0x7f 0x80 NORTH     No    No    No    0x20f dead woodland
+0x018c  0x7f 0x7e SOUTH     Yes   No    No    0x20f dead woodland
+0x018e  0x7f 0x80 WEST      Yes   No    No    0x20f dead woodland
+0x0190  0x80 0x7f NORTH     Yes   No    No    0x210 the high wood
+0x0192  0x80 0x81 SOUTH     Yes   No    No    0x210 the high wood
+0x0194  0x80 0x84 WEST      Yes   No    No    0x210 the high wood
+0x0196  0x81 0x82 SOUTH     Yes   No    No    0x211 rich vegetation
+0x0198  0x81 0x83 WEST      Yes   No    No    0x211 rich vegetation
+0x019a  0x82 0x83 NW        Yes   No    No    0x212 dappled sunlight
+0x019c  0x83 0x85 WEST      Yes   No    No    0x213 sparse shrubs
+0x019e  0x84 0x83 SOUTH     Yes   No    No    0x214 dying trees, uprooted in the recent past
+0x01a0  0x85 0x84 NORTH     No    No    No    0x215 scrubland with straggly thornbushes
+0x01a2  0x86 0x85 EAST      Yes   No    No    0x216 a faint path which meanders roughly north and east through parched grass
+0x01a4  0x87 0x86 SOUTH     Yes   No    No    0x217 a flat plain paved with shattered gravestones. An impressive monument towers above, casting a sharp shadow across the fragments of shattered marble
+0x01a6  0x88 0x89 EAST      Yes   No    No    0x218 the western edge of a wide dust bowl
+0x01a8  0x88 0x8f SOUTH     Yes   No    No    0x218 the western edge of a wide dust bowl
+0x01aa  0x88 0x8e SOUTHEAST Yes   No    No    0x218 the western edge of a wide dust bowl
+0x01ac  0x88 0x5f WEST      Yes   No    No    0x218 the western edge of a wide dust bowl
+0x01ae  0x89 0x8c EAST      Yes   No    No    0x219 dusty flat dust flats
+0x01b0  0x89 0x8e SOUTH     Yes   No    No    0x219 dusty flat dust flats
+0x01b2  0x8a 0x8b EAST      Yes   No    No    0x21a wasteland
+0x01b4  0x8a 0x88 SOUTH     Yes   No    No    0x21a wasteland
+0x01b6  0x8a 0x89 SOUTHEAST Yes   No    No    0x21a wasteland
+0x01b8  0x8b 0x8d EAST      Yes   No    No    0x21b pudding desert
+0x01ba  0x8b 0x89 SOUTH     Yes   No    No    0x21b pudding desert
+0x01bc  0x8b 0x8c SOUTHEAST Yes   No    No    0x21b pudding desert
+0x01be  0x8c 0x91 SOUTH     Yes   No    No    0x21c semi-desert in the middle of the shimmering dust flats
+0x01c0  0x8c 0x92 SOUTHEAST Yes   No    No    0x21c semi-desert in the middle of the shimmering dust flats
+0x01c2  0x8d 0x8c SOUTH     Yes   No    No    0x21d deadlands at the far northwest of the baked plain. Further progress is blocked by sheer mountain walls
+0x01c4  0x8e 0x91 EAST      Yes   No    No    0x21e baked sand
+0x01c6  0x8e 0x90 SOUTH     Yes   No    No    0x21e baked sand
+0x01c8  0x8f 0x8e NE        Yes   No    No    0x21f dustlands
+0x01ca  0x8f 0x90 EAST      Yes   No    No    0x21f dustlands
+0x01cc  0x90 0x91 NE        No    No    No    0x220 the plain
+0x01ce  0x90 0x93 EAST      Yes   No    No    0x220 the plain
+0x01d0  0x90 0x96 SOUTHEAST Yes   No    No    0x220 the plain
+0x01d2  0x91 0x93 SOUTHEAST Yes   No    No    0x221 a scree slope at the bottom of a high mountain
+0x01d4  0x91 0x90 SOUTH     No    No    No    0x221 a scree slope at the bottom of a high mountain
+0x01d6  0x92 0x93 SOUTH     Yes   No    No    0x222 a plain plain
+0x01d8  0x93 0x96 SOUTH     Yes   No    No    0x223 a sandy plain
+0x01da  0x94 0x91 DOWN      Yes   No    No    0x224 a twisting path up the mountainside which leads to a little cave far above
+0x01dc  0x95 0x94 DOWN      Yes   No    No    0x225 a rocky peak, standing on a wide ledge outside a dark cave
+0x01de  0x96 0x97 SOUTH     Yes   No    No    0x226 a garden path, leading south from the desert through cultivated land. A few buildings are visible to the south
+0x01e0  0x97 0x98 WEST      Yes   No    No    0x227 a junction of winding tracks
+0x01e2  0x98 0x99 SOUTH     Yes   No    No    0x228 a neat road junction
+0x01e4  0x98 0x9d WEST      Yes   No    No    0x228 a neat road junction
+0x01e6  0x99 0x9c WEST      Yes   No    No    0x229 the village green
+0x01e8  0x9a 0x99 WEST      Yes   No    No    0x22a a straight street which leads west to the village in one direction and eventually curves towards the north in the other direction
+0x01ea  0x9b 0x9a SOUTHWEST Yes   No    No    0x22b a mall between low buildings. Paths lead towards the main part of the village
+0x01ec  0x9b 0x97 WEST      Yes   No    No    0x22b a mall between low buildings. Paths lead towards the main part of the village
+0x01ee  0x9c 0x9e WEST      Yes   No    No    0x22c a small town high street
+0x01f0  0x9d 0x9c SOUTH     Yes   No    No    0x22d a footpath
+0x01f2  0x9e 0x9c EAST      Yes   No    No    0x22e a cobble square at the west end of the village. A single road leaves the square towards the east, and bright-canopied shops are all around. There's no one in sight
+0x01f4  0x9f 0x9e SOUTH     Yes   No    No    0x22f an antique shoppe, obviously established by a former King with an eye to the tourist trade
+0x01f6  0xa0 0x9e SOUTHEAST Yes   No    No    0x230 a grocer's shop which contains sells good food of every kind. You won't find full-fat sausages or reject EEC butter here (or diet pills for that matter)
+0x01f8  0xa1 0x9e NE        Yes   No    No    0x231 the apothecary's shop. There is only one, small room and this is lined with shelves which support thousands of stoppered glass jars containing herbs and extracts
+0x01fa  0xa2 0x9e NORTH     Yes   No    No    0x232 an ironmonger's shop. The walls are festooned with wood and iron tools of every kind, and cooking pots dangle from the ceiling. A small forge stands in a wide alcove at one side of the main room
+0x01fc  0xa3 0xa3 NORTH     No    No    No    0x233 the north end of the beach. A buttress of rock slabs, leaning against the cliffs, cuts across the beach and blocks movement north
+0x01fe  0xa3 0x5c NE        No    No    No    0x233 the north end of the beach. A buttress of rock slabs, leaning against the cliffs, cuts across the beach and blocks movement north
+0x0200  0xa3 0x5c EAST      No    No    No    0x233 the north end of the beach. A buttress of rock slabs, leaning against the cliffs, cuts across the beach and blocks movement north
+0x0202  0xa3 0x5c SOUTHEAST No    No    No    0x233 the north end of the beach. A buttress of rock slabs, leaning against the cliffs, cuts across the beach and blocks movement north
+0x0204  0xa3 0xa4 SOUTH     Yes   No    No    0x233 the north end of the beach. A buttress of rock slabs, leaning against the cliffs, cuts across the beach and blocks movement north
+0x0206  0xa4 0x5c NE        No    No    No    0x234 white sand under vertical granite cliffs
+0x0208  0xa4 0x5c EAST      No    No    No    0x234 white sand under vertical granite cliffs
+0x020a  0xa4 0x5c SOUTHEAST No    No    No    0x234 white sand under vertical granite cliffs
+0x020c  0xa4 0xa5 SOUTH     Yes   No    No    0x234 white sand under vertical granite cliffs
+0x020e  0xa5 0x5c NE        No    No    No    0x235 the south end of the beach, beside a sea-level cave
+0x0210  0xa5 0x5c EAST      No    No    No    0x235 the south end of the beach, beside a sea-level cave
+0x0212  0xa5 0x5c SOUTH     No    No    No    0x235 the south end of the beach, beside a sea-level cave
+0x0214  0xa5 0x1c INTO      Yes   No    No    0x235 the south end of the beach, beside a sea-level cave
+0x0216  0xa6 0xa9 WEST      Yes   No    No    0x236 an overhanging clifftop, beside a blowhole from which surges salty air
+0x0218  0xa7 0xa7 NORTH     No    No    No    0x237 a cleft cliff, home for a vast roost of seabirds. They circle overhead, shrieking curses
+0x021a  0xa7 0xa6 SOUTH     Yes   No    No    0x237 a cleft cliff, home for a vast roost of seabirds. They circle overhead, shrieking curses
+0x021c  0xa7 0xa8 WEST      Yes   No    No    0x237 a cleft cliff, home for a vast roost of seabirds. They circle overhead, shrieking curses
+0x021e  0xa8 0xa9 SOUTH     Yes   No    No    0x238 a neat path running north-south. A landslide has carried away the northern part of the part and it's not possible to go further
+0x0220  0xa8 0xaa WEST      No    No    No    0x238 a neat path running north-south. A landslide has carried away the northern part of the part and it's not possible to go further
+0x0222  0xa9 0xac SOUTH     Yes   No    No    0x239 a gravelled coastal path which runs north-south along the hills near the sea
+0x0224  0xa9 0xaa WEST      Yes   No    No    0x239 a gravelled coastal path which runs north-south along the hills near the sea
+0x0226  0xaa 0xab SOUTH     Yes   No    No    0x23a a small parking bay
+0x0228  0xab 0xac EAST      Yes   No    No    0x23b a lonely corner
+0x022a  0xac 0xad SOUTH     Yes   No    No    0x23c a road
+0x022c  0xad 0xb0 EAST      No    No    No    0x23d the edge of a modern city of tall buildings and faded lights. Junk food wrappers clog the gutters
+0x022e  0xad 0xaf SOUTH     Yes   No    No    0x23d the edge of a modern city of tall buildings and faded lights. Junk food wrappers clog the gutters
+0x0230  0xad 0xae WEST      No    No    No    0x23d the edge of a modern city of tall buildings and faded lights. Junk food wrappers clog the gutters
+0x0232  0xae 0xb1 SOUTH     Yes   No    No    0x23e mean streets
+0x0234  0xae 0xae WEST      No    No    No    0x23e mean streets
+0x0236  0xaf 0xb2 SOUTH     Yes   No    No    0x23f city streets
+0x0238  0xaf 0xae WEST      Yes   No    No    0x23f city streets
+0x023a  0xb0 0xb3 SOUTH     Yes   No    No    0x240 streets of shame
+0x023c  0xb0 0xaf WEST      Yes   No    No    0x240 streets of shame
+0x023e  0xb1 0xba SOUTH     Yes   No    No    0x241 central park, an extensive expanse of ancient parkland in the heart of the city
+0x0240  0xb1 0xb9 WEST      Yes   No    No    0x241 central park, an extensive expanse of ancient parkland in the heart of the city
+0x0242  0xb2 0xbb SOUTH     Yes   No    No    0x242 the way out
+0x0244  0xb2 0xb1 WEST      Yes   No    No    0x242 the way out
+0x0246  0xb3 0xb2 WEST      Yes   No    No    0x243 a pretty cobble square. A horrid skyscraper rises to the south, like a monstrous carbuncle
+0x0248  0xb4 0xb3 NORTH     Yes   No    No    0x244 the foyer of the high-rise building, knee-deep in carpet. Scorching air blasts down from ceiling grills above the entrance door. A smart elevator stands in front of you, to the east
+0x024a  0xb5 0xb4 WEST      Yes   No    No    0x245 a small elevator, decorated in the most up-to-date fashion. The walls are coated with a textured finish, resembling a giant cheese grater, and the floor carpet is designed to enhance static charging. The ceiling is translucent plastic, lit from above, but enough dust has gathered upon it to ensure that the elevator lighting is twilight at best
+0x024c  0xb6 0xb5 EAST      No    No    No    0x246 the front passage, a narrow N/S corridor between partitions
+0x024e  0xb7 0xb6 NORTH     Yes   No    No    0x247 the back corridor which is blocked by a huge pile of returned Plectrum computers
+0x0250  0xb8 0xb6 SOUTH     Yes   No    No    0x248 a small office, almost filled by a polished semi-circular wooden desk. Picture windows look out over the cityscape far below
+0x0252  0xb9 0xba SOUTH     No    No    No    0x249 a token park, apparently intended as a canine toilet
+0x0254  0xba 0xbc SOUTH     Yes   No    No    0x24a the south side park
+0x0256  0xbb 0xbc WEST      Yes   No    No    0x24b the main road
+0x0258  0xbc 0xbd WEST      Yes   No    No    0x24c a normally-busy road
+0x025a  0xbd 0xbe SOUTH     Yes   No    No    0x24d the road, between manicured verges
+0x025c  0xbe 0xbf EAST      Yes   No    No    0x24e the way
+0x025e  0xbf 0xc0 SOUTH     Yes   No    No    0x24f an big flat lorrypark
+0x0260  0xc0 0xc1 EAST      Yes   No    No    0x250 the deserted airport lounge, a room furnished in the best possible taste (like a cross between a MacRonald's and a multi-storey carpark)
+0x0262  0xc1 0xc2 EAST      Yes   No    No    0x251 the runway
+0x0264  0xc2 0xc1 WEST      Yes   No    No    0x252 the shadow of a wide-bodied aircraft in the middle of the runway. Steps lead in to the cabin of the 'plane
+0x0266  0xc3 0xc2 OUT       Yes   No    No    0x253 the aircraft, standing between rows of cramped plastic-covered seats. The aisle leads south to the cockpit and down to the cargo bay
+0x0268  0xc4 0xc3 NORTH     Yes   No    No    0x254 the cockpit, surrounded by dials and indicators. Unfortunately the plane is out of fuel, many of the wires have been cut, it needs a crew of three and the engines cannot be started without groundcrew help. There's no escape from the island this way
+0x026a  0xc5 0xe6 INTO      No    Yes   No    0x255 a terminus platform, east of the railway line
+0x026c  0xc5 0xe6 WEST      No    No    No    0x255 a terminus platform, east of the railway line
+0x026e  0xc6 0xc8 SOUTH     Yes   No    No    0x256 a square
+0x0270  0xc7 0xc6 SOUTH     Yes   No    No    0x257 a cottage hospital with echoing corridors and a distinct smell
+0x0272  0xc8 0xc5 SOUTH     Yes   No    No    0x258 a native village of low huts
+0x0274  0xc8 0xc9 EAST      Yes   No    No    0x258 a native village of low huts
+0x0276  0xc9 0xca EAST      Yes   No    No    0x259 a mudpatch where paths cross in a morass of churned-up ground
+0x0278  0xca 0xcd EAST      Yes   No    No    0x25a grey ooze which is infested by leeches and carnivorous worms
+0x027a  0xca 0xce SOUTH     Yes   No    No    0x25a grey ooze which is infested by leeches and carnivorous worms
+0x027c  0xcb 0xcc EAST      Yes   No    No    0x25b the mud
+0x027e  0xcb 0xca SOUTH     Yes   No    No    0x25b the mud
+0x0280  0xcc 0xd2 EAST      Yes   No    No    0x25c an unhealthy mire
+0x0282  0xcc 0xcd SOUTH     Yes   No    No    0x25c an unhealthy mire
+0x0284  0xcd 0xd1 EAST      Yes   No    No    0x25d mist marshes from which rise clouds of biting insects
+0x0286  0xcd 0xcf SOUTH     Yes   No    No    0x25d mist marshes from which rise clouds of biting insects
+0x0288  0xce 0xcf EAST      Yes   No    No    0x25e a swamp
+0x028a  0xcf 0xd1 NE        Yes   No    No    0x25f a marsh
+0x028c  0xcf 0xd0 EAST      Yes   No    No    0x25f a marsh
+0x028e  0xd0 0xd6 EAST      Yes   No    No    0x260 rainforest
+0x0290  0xd1 0xd5 EAST      Yes   No    No    0x261 a dense forest
+0x0292  0xd1 0xd0 SOUTH     Yes   No    No    0x261 a dense forest
+0x0294  0xd2 0xd3 NE        Yes   No    No    0x262 cloud forest
+0x0296  0xd2 0xd4 EAST      Yes   No    No    0x262 cloud forest
+0x0298  0xd2 0xd1 SOUTH     Yes   No    No    0x262 cloud forest
+0x029a  0xd3 0xd3 NORTH     No    No    No    0x263 marsh mud to the west of a slow river
+0x029c  0xd3 0xd7 EAST      Yes   No    No    0x263 marsh mud to the west of a slow river
+0x029e  0xd3 0xd4 SOUTH     Yes   No    No    0x263 marsh mud to the west of a slow river
+0x02a0  0xd4 0xd8 EAST      No    No    No    0x264 the shallows of a wide north-south river which slides gently between the forest trees
+0x02a2  0xd4 0xd5 SOUTH     Yes   No    No    0x264 the shallows of a wide north-south river which slides gently between the forest trees
+0x02a4  0xd5 0xd8 EAST      Yes   No    No    0x265 long reeds growing beside the river
+0x02a6  0xd5 0xd6 SOUTH     Yes   No    No    0x265 long reeds growing beside the river
+0x02a8  0xd6 0xd9 EAST      Yes   No    No    0x266 whispering grass beside a river
+0x02aa  0xd6 0xd0 SOUTH     No    No    No    0x266 whispering grass beside a river
+0x02ac  0xd7 0xda EAST      Yes   No    No    0x267 the east riverbank
+0x02ae  0xd7 0xdb SOUTHEAST Yes   No    No    0x267 the east riverbank
+0x02b0  0xd7 0xd8 SOUTH     Yes   No    No    0x267 the east riverbank
+0x02b2  0xd8 0xdc EAST      Yes   No    No    0x268 the river cliff
+0x02b4  0xd8 0xd9 SOUTH     Yes   No    No    0x268 the river cliff
+0x02b6  0xd9 0xdd EAST      Yes   No    No    0x269 the far bank of the river
+0x02b8  0xda 0xde SOUTHEAST Yes   No    No    0x26a tall trees
+0x02ba  0xda 0xdb SOUTH     Yes   No    No    0x26a tall trees
+0x02bc  0xdb 0xde NE        Yes   No    No    0x26b rainforest
+0x02be  0xdb 0xdc SOUTH     Yes   No    No    0x26b rainforest
+0x02c0  0xdc 0xdf EAST      Yes   No    No    0x26c the forest
+0x02c2  0xdc 0xdd SOUTH     Yes   No    No    0x26c the forest
+0x02c4  0xdd 0xe0 EAST      Yes   No    No    0x26d tall trees
+0x02c6  0xde 0xdf SOUTH     Yes   No    No    0x26e bright flowers beside a cracked stone wall
+0x02c8  0xdf 0xe0 SOUTH     Yes   No    No    0x26f a path
+0x02ca  0xe0 0xdd NORTH     No    No    No    0x270 a mound
+0x02cc  0xe1 0xdf WEST      Yes   No    No    0x271 an east-west avenue of trees which leads east to an old city of overgrown stone
+0x02ce  0xe2 0xe1 WEST      Yes   No    No    0x272 an arch
+0x02d0  0xe3 0xe2 SOUTH     Yes   No    No    0x273 a small, square courtyard, overgrown by ivy
+0x02d2  0xe4 0xe2 UP        Yes   No    No    0x274 a temple to the sun. Light streams through a round window in the domed roof and refracts from glass ornaments which decorate the walls
+0x02d4  0xe5 0xe4 NORTH     Yes   No    No    0x275 the crypt, between piled sarcophagi

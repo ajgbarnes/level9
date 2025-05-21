@@ -35,6 +35,7 @@
 ###############################################################################
 v1Configuration = {
     "adventure" : {
+        "name"              : "Adventure Quest",
         "version"           : 1,
         "filename"          : "roms/ADQUEST",
         "script"            : "test-scripts/adventure-quest-v1.txt",
@@ -54,7 +55,15 @@ v1Configuration = {
             None        
         ],
     },    
+    "adventurev2" : {
+        "name"              : "Adventure Quest",
+        "version"           : 2,
+        "filename"          : "roms/adventure-quest-v2.dat",
+        "script"            : "test-scripts/adventure-quest-v2.txt",
+        "locationsStartMsgId" : 0x12d,
+    },
     "colossal" : {
+        "name"              : "Colossal Adventure",
         "version"           : 1,
         "filename"          : "roms/Coloss2",
         "script"            : "test-scripts/colossal-adventure-v1.txt",
@@ -74,7 +83,15 @@ v1Configuration = {
             0x00d0                
         ],
     },    
+    "colossalv2" : {
+        "name"              : "Colossal Adventure",
+        "version"           : 2,
+        "filename"          : "roms/colossal-adventure-v2.dat",
+        "script"            : "test-scripts/colossal-adventure-v2.txt",
+        "locationsStartMsgId" : 0x64,
+    },
     "dungeon" : {
+        "name"              : "Dungeon Adventure",
         "version"           : 1,
         "filename"          : "roms/Dungeo2",
         "script"            : "test-scripts/dungeon-adventure-v1.txt",
@@ -94,12 +111,37 @@ v1Configuration = {
             None
         ]
     },    
-    "eden" : {
+    "dungeonv2" : {
+        "name"              : "Dungeon Adventure",
         "version"           : 2,
-        "filename"          : "roms/edenobj.bin",
+        "filename"          : "roms/dungeon-adventure-v2.dat",
+        "script"            : "test-scripts/dungeon-adventure-v2.txt",
+        "locationsStartMsgId" : 0x1f4,
+    },
+    "eden" : {
+        "name"              : "Return to Eden",
+        "version"           : 2,
+        #"filename"          : "roms/edenobj.bin",
+        "filename"          : "roms/return-to-eden-v2.dat",
         "script"            : "test-scripts/return-to-eden-v2.txt",
+        "locationsStartMsgId" : 0x190,
+    },
+    "erik" : {
+        "name"              : "Erik the Viking",
+        "version"           : 2,
+        "filename"          : "roms/erik-the-viking-v2.dat",
+        "script"            : "test-scripts/erik-the-viking-v2.txt",
+        "locationsStartMsgId" : 0x190,
+    },
+    "isle" : {
+        "name"              : "Emerald Isle",
+        "version"           : 2,
+        "filename"          : "roms/emerald-isle-v2.dat",
+        "script"            : "test-scripts/emerald-isle-v2.txt",
+        "locationsStartMsgId" : 0x190,
     },  
     "lords" : {
+        "name"              : "Lords of Time",
         "version"           : 1,
         "filename"          : "roms/LORDSOF",
         #"filename"          : "roms/lot.tzx",
@@ -122,7 +164,22 @@ v1Configuration = {
             0x0100
         ]
     },
+    "lordsv2" : {
+        "name"              : "Lords of Time",
+        "version"           : 2,
+        "filename"          : "roms/lords-of-time-v2.dat",
+        "script"            : "test-scripts/lords-of-time-v2.txt",
+        "locationsStartMsgId" : 0x190,
+    },
+    "redmoon" : {
+        "name"              : "Red Moon",
+        "version"           : 2,
+        "filename"          : "roms/red-moon-v2.dat",
+        "script"            : "test-scripts/red-moon-v2.txt",
+        "locationsStartMsgId" : 0x190,
+    },
     "snowball" : {
+        "name"              : "Snowball",
         "version"           : 1,
         "filename"          : "roms/SNOWBAL",
         "script"            : "test-scripts/snowball-v1.txt",
@@ -141,5 +198,12 @@ v1Configuration = {
             None, 
             None            
         ],
-    }
+    },
+    "snowballv2" : {
+        "name"              : "Snowball",
+        "version"           : 2,
+        "filename"          : "roms/snowball-v2.dat",
+        "script"            : "test-scripts/snowball-v2.txt",
+        "locationsStartMsgId" : 0x190,
+    },
 }

@@ -13,9 +13,9 @@
 # - Snowball (1983)
 # - Lords of Time (1983)
 #
-# Nascent support for v2 files - only tested with Emerald Isle so far
+# Complete support for v2 files - tested with all v2 games
 #
-# Will extend this at some point to v3 and v4.
+# Initial extension to v3 and v4 prepared.
 #
 # This is actually the second iteration as the first looked quite similar to the
 # assembly code when I was working out what it all did. 
@@ -64,8 +64,8 @@ inverseDirectionTable = [0x00, 0x04, 0x06, 0x07, 0x01, 0x08, 0x02, 0x03,
 vm_variables_previous  = [0]*256
 vm_variables           = [0]*256
 vm_stack               = []
-vm_listarea            = [0]*512
-vm_listarea_previous   = [0]*512
+vm_listarea            = [0]*2048
+vm_listarea_previous   = [0]*2048
 vm_dictionary          = {}
 
 vm_breakpoints         = []
@@ -116,7 +116,7 @@ opCodes=[
 	"screen(v2)",
 	"cleartg(v2)",
 	"picture(v2)",
-	"nop",
+	"getnextobject(v3)",
 	"ifeqct",
 	"ifnect",
 	"ifltct",
@@ -219,8 +219,6 @@ def _process_hash_commands(data, pc, userInput):
         case ['#dict' | '#dictionary']:
             for word in vm_dictionary.keys():
                 print(word.replace("'", "") + " ", end='')
-                if word == '9':
-                    break
             print("")
 
         # Sets the random seed which can be used by the A-Code
@@ -442,12 +440,12 @@ def _getAddrForFragment(data, fragmentNumber):
     #print("-----",hex(commonFragmentsAddr))
     address=commonFragmentsAddr
 
-    if(version == 1):
+    if(messageVersion == 1):
         while fragmentNumber:
             if(data[address]==1):
                 fragmentNumber = fragmentNumber - 1
             address=address+1
-    else:
+    elif messageVersion == 2:
         # The common fragments address is one out for some reason!
         # BBC Micro code subtracts 1 from it too
         address = address - 1
@@ -478,35 +476,45 @@ def _getAddrForMessageN(data, messageNumber):
 
     messagesAddress = messagesStartAddr
 
-    if(version == 1):    
+    if(messageVersion == 1):
     
         # Keeping looping until the nth message is found
         while messageNumber:
             byte = data[messagesAddress]
 
             if(byte == 0):
-                logging.error("ERROR couldn't find nth string")
+                logging.error("Error: couldn't find nth string")
                 sys.exit(1)
             elif(byte == 1):
                 messageNumber = messageNumber - 1
             
             messagesAddress = messagesAddress + 1
-    else:
+    elif messageVersion == 2:
         # Subtract 1 from the message number as they are zero
         # based indexed in the game file
-        #messageNumber = messageNumber - 1 
+        messageNumber = messageNumber - 1
         while messageNumber:
 
             messageLength = data[messagesAddress]
+            while not data[messagesAddress]:
+                messagesAddress = messagesAddress + 1
+                messageLength = messageLength + 255 + data[messagesAddress]
+
+            if messagesAddress >= commonFragmentsAddr:
+                print("Error: Didn't find nth string")
+                sys.exit()
 
             messagesAddress = messagesAddress + messageLength
 
             messageNumber = messageNumber - 1
+    elif messageVersion == 3:
+        # Placeholder until implemented
+        return messageNumber
 
     return messagesAddress 
 
 ###############################################################################
-# _getMessageV1
+# _getMessage
 #
 # Decode the message at the passed address. Does NOT print it to the screen.
 # Loop through each byte:
@@ -526,7 +534,7 @@ def _getMessage(data, msgAddress):
 
     message=''
 
-    if(version == 1):
+    if(messageVersion == 1):
         byte = data[msgAddress]
         while byte:
             if(byte >= 0x5E):
@@ -549,10 +557,16 @@ def _getMessage(data, msgAddress):
             msgAddress = msgAddress + 1
             byte = data[msgAddress]
 
-    else:
+    elif messageVersion == 2:
         # BBC Micro only allows 1 byte length for strings
         # in v2 at least for return to eden
-        msgLength = data[msgAddress] - 1
+        # Other platforms allow multiple 255 extensions
+        msgLength = data[msgAddress]
+        while not data[msgAddress]:
+            msgAddress = msgAddress + 1
+            msgLength = msgLength + 255 + data[msgAddress]
+
+        msgLength = msgLength - 1
     
         msgAddress = msgAddress + 1
 
@@ -574,6 +588,8 @@ def _getMessage(data, msgAddress):
 
             msgAddress = msgAddress + 1
             msgLength = msgLength - 1
+    elif messageVersion >= 3:
+        message = '<Missing>'+hex(msgAddress)+'%'
 
     return message
 
@@ -684,29 +700,66 @@ def _findAndPrintLetters(iterations, bytearray):
 ###############################################################################
 def _printAllMessages(data,messagesStartAddr):
 
-    counter=0
     startAddress=messagesStartAddr
     address=startAddress
-
-    print(hex(counter)," / ",hex(address)," : ",end='')
-
     byte = data[address]
 
-    while(byte):
-        if(byte>=0x5E):
-            _findAndPrintLetters(byte, data)
-            pass
-        elif(byte < 0x5E and byte > 0x02):
-            _printCharacter(byte)
-        elif(byte == 2):
-            break
-        else:
-            print("")
-            counter=counter+1
-            print(hex(counter)," / ",hex(address+1)," : ",end='')
+    if messageVersion == 1:
+        counter=0
+        print(hex(counter)," / ",hex(address)," : ",end='')
+        while(byte):
+            if(byte>=0x5E):
+                _findAndPrintLetters(byte, data)
+                pass
+            elif(byte < 0x5E and byte > 0x02):
+                _printCharacter(byte)
+            elif(byte == 2):
+                break
+            else:
+                print("")
+                counter=counter+1
+                print(hex(counter)," / ",hex(address+1)," : ",end='')
 
-        address=address+1
-        byte = data[address]            
+            address=address+1
+            byte = data[address]
+    elif messageVersion == 2:
+        counter=1
+        print(hex(counter)," / ",hex(address)," : ",end='')
+        while address < commonFragmentsAddr - 4:
+            message = ''
+            length = byte
+            while not data[address]:
+                address = address + 1
+                length = length + 255 + data[address]
+
+            length = length - 1
+            address = address + 1
+            byte = data[address]
+
+            while length:
+                if(byte >= 0x5E):
+                    fragmentNumber = byte - 0x5E
+                    fragmentAddr = _getAddrForFragment(data,fragmentNumber)
+
+                    newMessage = _getMessage(data, fragmentAddr)
+                    message = message + newMessage
+
+                elif(byte < 0x03):
+                    break
+                else:
+                    message = message + str(chr(byte+0x1D))
+
+                length = length - 1
+                address = address + 1
+                byte = data[address]
+
+            message = message.replace('_', ' ')
+            message = message.replace('%', '\n')
+            print(message)
+            counter=counter+1
+            print(hex(counter)," / ",hex(address)," : ",end='')
+
+    print("<EOM>")
 
 ###############################################################################
 # _printAllExits
@@ -723,7 +776,39 @@ def _printAllMessages(data,messagesStartAddr):
 def _printAllExits(data,exitsAddr):
 
     match game:
-        case "snowball":
+        case "redmoon":
+            print("Red Moon - Location Exit Definition")
+            print("---------------------------------------------\n")
+            print("Bit configuration:\n")
+            print("Bit 0 - where the direction can be used inversely")
+            print("Bit 1 - whether this direction should be hidden")
+            print("Bit 2 - if there is a door in this direction")
+            print("\n")
+        case "isle":
+            print("Emerald Isle - Location Exit Definition")
+            print("---------------------------------------------\n")
+            print("Bit configuration:\n")
+            print("Bit 0 - where the direction can be used inversely")
+            print("Bit 1 - whether this direction should be hidden")
+            print("Bit 2 - if there is a door in this direction")
+            print("\n")
+        case "erik":
+            print("Erik the Viking - Location Exit Definition")
+            print("---------------------------------------------\n")
+            print("Bit configuration:\n")
+            print("Bit 0 - where the direction can be used inversely")
+            print("Bit 1 - whether this direction should be hidden")
+            print("Bit 2 - if there is a door in this direction")
+            print("\n")
+        case "eden":
+            print("Return to Eden - Location Exit Definition")
+            print("---------------------------------------------\n")
+            print("Bit configuration:\n")
+            print("Bit 0 - where the direction can be used inversely")
+            print("Bit 1 - whether this direction should be hidden")
+            print("Bit 2 - if there is a door in this direction")
+            print("\n")
+        case "snowball" | "snowballv2":
             print("Snowball Adventure - Location Exit Definition")
             print("---------------------------------------------\n")
             print("Bit configuration:\n")
@@ -731,7 +816,7 @@ def _printAllExits(data,exitsAddr):
             print("Bit 1 - whether this direction should be hidden")
             print("Bit 2 - if there is a door in this direction")
             print("\n")
-        case "lords":
+        case "lords" | "lordsv2":
             print("Lords of Time - Location Exit Definitions")
             print("-----------------------------------------\n")
             print("Bit configuration:\n")
@@ -739,7 +824,7 @@ def _printAllExits(data,exitsAddr):
             print("Bit 1 - whether this direction should be hidden")
             print("Bit 2 - if there is a door in this direction")
             print("\n")
-        case "adventure":
+        case "adventure" | "adventurev2":
             print("Adventure Quest- Location Exit Definitions")
             print("---------------------------------------------\n")
             print("Bit configuration:\n")
@@ -747,7 +832,7 @@ def _printAllExits(data,exitsAddr):
             print("Bit 1 - if player cannot move in that direction but print the location's description as a message")
             print("Bit 2 - not used, always set to 0x00 but printed here as 'No'")
             print("\n")
-        case "dungeon":
+        case "dungeon" | "dungeonv2":
             print("Dungeon Adventure - Location Exit Definitions")
             print("---------------------------------------------\n")
             print("Bit configuration:\n")
@@ -755,7 +840,7 @@ def _printAllExits(data,exitsAddr):
             print("Bit 1 - If set this a teleporation between a black and white dot and prints 'There is a sensation of rapid movement..'")
             print("Bit 2 - not used, always set to 0x00 but printed here as 'No'")
             print("\n")
-        case "colossal":
+        case "colossal" | "colossalv2":
             print("Colossal Adventure - Location Exit Definitions")
             print("----------------------------------------------\n")
             print("Bit configuration:\n")
@@ -826,15 +911,17 @@ def _printAllExits(data,exitsAddr):
 # 
 # Parameters: 
 #    data           - the game file byte array
-#    dictionaryddr  - start address in the game file of the dictionary
 #
 # Returns:
 #   n/a
 ###############################################################################
-def vm_fn_load_dictionary(data,dictionaryAddr,printDict):
+def vm_fn_load_dictionary(data,printDict):
     codeNext = False
 
     word=""
+
+    if engineVersion >= 3:
+        return
 
     address=dictionaryAddr
 
@@ -845,13 +932,21 @@ def vm_fn_load_dictionary(data,dictionaryAddr,printDict):
         if codeNext:
             if(printDict):
                 print(hex(byte), " / ",hex(wordStart),word)
-            vm_dictionary[word]=byte
+            if not word in vm_dictionary.keys():
+                vm_dictionary[word]=byte
+            elif(printDict):
+                print("duplicate entry in dictionary:", word, hex(vm_dictionary[word]))
             codeNext=False
             word=""
+            wordStart = address+1
         else:
             if byte>=127:
                 codeNext=True
-            word = word + chr(byte & 0x7F)
+            c = chr(byte & 0x7F)
+            if c in ['?','-','\'','/','!','.',','] or c.isupper() or c.isdigit():
+                word = word + c
+            else:
+                break
 
         address=address+1
         byte = data[address]
@@ -885,27 +980,31 @@ def vm_fn_load_dictionary(data,dictionaryAddr,printDict):
 # Returns:
 #   Updated program counter
 ###############################################################################
-def vm_fn_listhandler(data,opCode,pc,version):
+def vm_fn_listhandler(data,opCode,pc,engineVersion):
 
     listNumber = opCode & 0b00011111
     
-    if(version == 1 and listNumber > 0x05):
-        print(f'Version 1 games only supported 5 lists and this is accessing list {listNumber}')
+    if(engineVersion == 1 and listNumber > 5):
+        print(f'Error: Version 1 games only supported 5 lists and this is accessing list {listNumber}')
         sys.exit()
-    elif(version == 2 and listNumber > 0x10):
-        print(f'Version 2 games only supported 10 lists and this is accessing list {listNumber}')
+    elif(engineVersion == 2 and listNumber > 10):
+        print(f'Error: Version 2 games only supported 9 lists and this is accessing list {listNumber}')
         sys.exit()
+    elif(engineVersion >= 3 and listNumber > 10):
+        print(f'Error: Version 3-4 games only supported 10 lists (0-9) and this is accessing list {listNumber}')
 
-    if(version == 1):
+    if(engineVersion == 1):
         # Get the list offset - if it is negative then it is 
         # a reference (static) list in the game code, otherwise
         # it's a working dynamic list in vm_listarea
         listOffset = v1Configuration[game]['lists'][listNumber-1]
-    else:
+    elif engineVersion == 2:
         # In v2 
         offsetInTable = listNumber * 2
         listOffset    = data[0x06 + offsetInTable] + data[0x07 + offsetInTable] * 256
-
+    elif engineVersion >= 3:
+        offsetInTable = listNumber * 2
+        listOffset    = data[0x14 + offsetInTable] + data[0x15 + offsetInTable] * 256
 
     if(opCode >= 0b11100000): # 0xE0
         # listvv
@@ -917,14 +1016,14 @@ def vm_fn_listhandler(data,opCode,pc,version):
         pc=pc+1        
         variable2=data[pc]
 
-        if(version == 1):
+        if(engineVersion == 1):
             if(listOffset < 0):
                 print('Error: Update to reference list attempted ', hex(opCode), hex(pc))
                 sys.exit()
 
             offset = listOffset + vm_variables[variable1]
             vm_listarea[offset] = vm_variables[variable2]
-        else:
+        elif(engineVersion >= 2):
             if(listOffset < 0x7E00):
                 print('Error: Update to reference list attempted ', hex(opCode), hex(pc))
                 sys.exit()
@@ -946,7 +1045,7 @@ def vm_fn_listhandler(data,opCode,pc,version):
         pc=pc+1
         variable = data[pc]
 
-        if(version ==1):
+        if(engineVersion ==1):
 
             # this isn't right.... but not used by v1 games
             if(listOffset < 0):
@@ -954,7 +1053,7 @@ def vm_fn_listhandler(data,opCode,pc,version):
                 sys.exit()
 
             vm_variables[variable] = vm_listarea[listOffset+constant]
-        else: 
+        elif(engineVersion >= 2):
             if(listOffset < 0x7E00):
                 offset = listOffset + constant
                 vm_variables[variable] = data[offset]
@@ -977,13 +1076,13 @@ def vm_fn_listhandler(data,opCode,pc,version):
         pc=pc+1
         variable2 = data[pc]
 
-        if(version==1):
+        if(engineVersion==1):
             if(listOffset >= 0):
                 vm_variables[variable2] = vm_listarea[listOffset+vm_variables[variable1]]
             else:
                 listItemAddress=aCodeStartAddr+listOffset+vm_variables[variable1]
                 vm_variables[variable2] = data[listItemAddress]
-        else: 
+        elif(engineVersion >= 2):
             if(listOffset >= 0x7E00):
                 vm_variables[variable2] = vm_listarea[listOffset-0x8000+vm_variables[variable1]]
             else:
@@ -1006,7 +1105,7 @@ def vm_fn_listhandler(data,opCode,pc,version):
         pc=pc+1
         variable = data[pc]
 
-        if(version ==1):
+        if(engineVersion ==1):
             if(listOffset<0):
                 print('Error: Update to reference list attempted ', hex(opCode), hex(pc))
                 sys.exit()
@@ -1014,7 +1113,7 @@ def vm_fn_listhandler(data,opCode,pc,version):
             offset = listOffset + constant
             vm_listarea[offset] = vm_variables[variable]
 
-        else:
+        elif(engineVersion >= 2):
             if(listOffset < 0x7E00):
                 print('Error: Update to reference list attempted ', hex(opCode), hex(pc))
                 sys.exit()                        
@@ -1066,6 +1165,10 @@ def vm_fn_goto(data, opCode, pc):
             print(f"Gosub 0x{pc+1:04x}")
         else:
             print(f"Goto 0x{pc+1:04x}")
+
+    if pc >= len(data) or pc < aCodeStartAddr:
+        print('Error: jump out of range')
+        sys.exit()
 
     return pc
 
@@ -1166,14 +1269,12 @@ def vm_fn_messagev(data, opCode, pc):
 
     nthMessage = vm_variables[operand1]
 
-    if(version > 1):
-        nthMessage = nthMessage - 1
-
     if(debugging):
         print(f"Print message var[0x{operand1:02x}] (0x{vm_variables[operand1]:04x})")        
 
-    address = _getAddrForMessageN(data, nthMessage)
-    _printMessage(data, address)
+    if nthMessage > 0:
+        address = _getAddrForMessageN(data, nthMessage)
+        _printMessage(data, address)
 
     return pc
 
@@ -1213,9 +1314,6 @@ def vm_fn_messagec(data, opCode, pc):
         if(debugging):
             print(f"Print messsage (constant) 0x{nthMessage:04x}")
 
-    if(version > 1):
-        nthMessage = nthMessage - 1
-    
     address = _getAddrForMessageN(data, nthMessage)
     _printMessage(data, address)
 
@@ -1225,12 +1323,13 @@ def vm_fn_messagec(data, opCode, pc):
 # vm_fn_function()
 #
 # Performs one of the following functions based on the operand:
-# 1 - exit
+# 1 - exit (driver call in v3-v4)
 # 2 - generate new random seed
 # 3 - save game
 # 4 - load game
 # 5 - Reset all the variables to zero
 # 6 - Clear the stack
+# 250 - Print String (debugging aid for v3-4)
 # 
 # Parameters: 
 #    data           - the game file byte array
@@ -1246,9 +1345,13 @@ def vm_fn_function(data,opCode,pc):
     requiredFunction = data[pc]
     match requiredFunction:
         case 1:
-            if(debugging):
-                print(f"Function - Quit ({requiredFunction:#0{4}x})")
-            sys.exit(0)
+            if engineVersion < 3:
+                if(debugging):
+                    print(f"Function - Quit ({requiredFunction:#0{4}x})")
+                sys.exit(0)
+            else:
+                if(debugging):
+                    print(f"Function - Driver Call ({requiredFunction:#0{4}x})")
         case 2:
             pc=pc+1
             variableToSet=data[pc]
@@ -1288,8 +1391,20 @@ def vm_fn_function(data,opCode,pc):
                 print(f"Function - Clear Stack ({requiredFunction:#0{4}x})")            
             # Clear the stack
             vm_stack.clear()
+        case 250:
+            if engineVersion < 3:
+                print(f'Error: Function - Print String ({requiredFunction:02x}) not supported in version '+engineVersion)
+                sys.exit()
+            pc=pc+1
+            operand=''
+            while pc < len(data) and data[pc]:
+                operand2=operand2+chr(data[pc])
+                pc=pc+1
+            if(debugging):
+                print(f"Function - Print String ({requiredFunction:#0{4}x}) \"{operand}\"")
+
         case other:
-            print(f'Unknown function {requiredFunction:02x}')
+            print(f'Error: Unknown function {requiredFunction:02x}')
             sys.exit()
 
     return pc
@@ -1613,10 +1728,14 @@ def vm_fn_jump(data, opCode, pc):
     tableOffset   = vm_variables[offsetVar] * 2
     jumpTableAddress = aCodeStartAddr + aCodeOffset + tableOffset
 
-    pc = aCodeStartAddr + data[jumpTableAddress] + (data[jumpTableAddress+1] * 256) - 1
-
     if(debugging):
         print(f"Jump to address in 0x{jumpTableAddress:04x}(0x{pc+1:04x})")    
+
+    if jumpTableAddress >= len(data):
+        print("Error: Jump Table at invalid address")
+        sys.exit()
+
+    pc = aCodeStartAddr + data[jumpTableAddress] + (data[jumpTableAddress+1] * 256) - 1
 
     return pc    
 
@@ -1714,6 +1833,44 @@ def vm_fn_cleartg(data, opCode, pc):
 
     return pc
 
+def vm_fn_get_next_object(data, opCode, pc):
+
+    # <cmd> <variable1> <variable2> <variable3> <variable4> <variable5> <variable6>
+    pc=pc+1
+    # max object?
+    variable1 = data[pc]
+
+    pc=pc+1
+    # high search pos
+    variable2 = data[pc]
+
+    pc=pc+1
+    # search pos
+    variable3 = data[pc]
+
+    pc=pc+1
+    # object
+    variable4 = data[pc]
+
+    pc=pc+1
+    # num objects
+    variable5 = data[pc]
+
+    pc=pc+1
+    # search depth
+    variable6 = data[pc]
+
+    if(debugging):
+       print(f"Get Next Object var[{variable1:#0{4}x}] var[{variable2:#0{4}x}] var[{variable3:#0{4}x}] var[{variable4:#0{4}x}] var[{variable5:#0{4}x}] var[{variable6:#0{4}x}]")
+
+    return pc
+
+def vm_fn_print_input(data, opCode, pc):
+
+    if(debugging):
+        print(f"Print Input")
+
+    return pc
 
 ###############################################################################
 # vm_fn_exit()
@@ -2089,8 +2246,9 @@ def vm_fn_ifgtct(data,opCode,pc):
     return vm_fn_ifxxct(data,opCode,pc,">")
 
 ###############################################################################
-# _find_v1_a_code_start()
+# _autodetect_game()
 #
+# Autodetect v2-3-4 games and if not found then:
 # Loop through the v1 game configurations and look for the byte signature for
 # each - stop on the first signature that matches and return the start address
 # where the signature was found.
@@ -2102,12 +2260,33 @@ def vm_fn_ifgtct(data,opCode,pc):
 # Returns:
 #   Start address of the A-Code and game indicator
 ###############################################################################
-def _find_v1_a_code_start(data, version):
+def _autodetect_game(data, engineVersion):
     game = 'unknown'
     startAddress = -1
 
+    if engineVersion < 2:
+        length = data[0x1c] + data [0x1d] * 256
+        if length > 0 and length + 1 <= len(data):
+            checksum = 0
+            for j in range(0x20, length + 1):
+                checksum = checksum + data[j];
+            if checksum & 0xff == data[0x1e]:
+                engineVersion = 2
+
+    if engineVersion < 3:
+        length = data[0x00] + data [0x01] * 256
+        if length > 0 and length + 1 <= len(data):
+            checksum = 0
+            for j in range(length + 1):
+                checksum = checksum + data[j];
+            if checksum & 0xff == 0:
+                if length >= 0x8500:
+                    engineVersion = 4
+                else:
+                    engineVersion = 3
+
     # Either it's a v1 file or unknown so scan the file 
-    if(version < 2):
+    if(engineVersion < 2):
         for gameKey in v1Configuration:
             # Skip if the configuration is for a non-v1 file 
             # we'll test it later to see if it's v2
@@ -2116,17 +2295,55 @@ def _find_v1_a_code_start(data, version):
             signatureBytes = v1Configuration[gameKey]['signatureBytes']
             startAddress  = data.find(signatureBytes)
             if startAddress != -1:
+                name = v1Configuration[gameKey]['name']
                 game = gameKey
+                if engineVersion != 1:
+                    print('[Identified v1 game: "'+name+'" --game '+game+']')
+                    engineVersion = 1
                 break
 
-    
-    # Check to see if this was a v2 game instead
-    if(startAddress > -1):
-        version = 1
-    else: 
+    if engineVersion == 2:
         startAddress = data[0x1a] + data [0x1b] *256
+    elif engineVersion >= 3:
+        startAddress = data[0x28] + data [0x29] *256
 
-    return startAddress, game
+    return startAddress, game, engineVersion
+
+###############################################################################
+# _identify_game()
+#
+# Identify v2-3-4 games (already autodetected) based on the "Welcome to" part
+# in some well-known key descriptions.
+#
+#
+# Parameters:
+# none
+#
+# Returns:
+#   game indicator
+###############################################################################
+def _identify_game(engineVersion):
+    for msg in [0x01, 0xa0, 0xe6, 0xff]:
+        address = _getAddrForMessageN(data, msg)
+        desc=_getMessage(data, address)
+        if "Welcome to" in desc:
+            for gameKey in v1Configuration:
+                if v1Configuration[gameKey]['version'] == engineVersion:
+                    name = v1Configuration[gameKey]['name']
+                    if name in desc:
+                        game = gameKey
+                        print('[Identified v'+str(engineVersion)+' game: "'+name+'" --game '+game+']')
+                        break
+
+    # Remove this placeholder when v3-4 messages are implemented
+    if engineVersion >= 3:
+        game = 'unknownv3-4'
+        print('[Could not identify v'+str(engineVersion)+' game: n/i!]')
+
+    if game == 'unknown':
+        print("[Could not identify v"+str(engineVersion)+" game!]")
+
+    return game
 
 
 ############################################################
@@ -2180,11 +2397,11 @@ logging.basicConfig(filename='parser.log', encoding='utf-8', level=debugLevel)
 if(args.game):
     game     = args.game
     filename = v1Configuration[game]['filename']
-    version  = v1Configuration[game]['version']
-
+    engineVersion = v1Configuration[game]['version']
 else:
+    game     = None
     filename = args.file
-    version  = -1
+    engineVersion = -1
 
 # Load the game file
 with open(filename,'rb') as dataFile:
@@ -2192,16 +2409,55 @@ with open(filename,'rb') as dataFile:
     dataFile.close()
 
 # Identify the game (do this anyway for preconfigured ones)
-aCodeStartAddr, foundGame = _find_v1_a_code_start(data, version)
+aCodeStartAddr, foundGame, engineVersion = _autodetect_game(data, engineVersion)
 
-# If 
+# If game was not given, maybe we can detect it
 if(not game):
     game = foundGame
 
+# The message database of some v2 games is still on v1
+# Initialize it first to be the same as the game version
+messageVersion = engineVersion
+if(engineVersion == 1):
+    # Derive the location of the major game partsffunction based on offsets in the v1 configuration
+    dictionaryAddr       = aCodeStartAddr + v1Configuration[game]['offsets']['dictionaryOffset']
+    exitsAddr            = aCodeStartAddr + v1Configuration[game]['offsets']['exitsOffset'] 
+    messagesStartAddr    = aCodeStartAddr + v1Configuration[game]['offsets']['messagesOffset']
+    commonFragmentsAddr  = aCodeStartAddr + v1Configuration[game]['offsets']['fragmentsOffset']
+elif(engineVersion == 2):
+    dictionaryAddr       = data[0x06] + data [0x07] *256
+    messagesStartAddr    = data[0x00] + data [0x01] *256
+    exitsAddr            = data[0x04] + data [0x05] *256
+    commonFragmentsAddr  = data[0x02] + data [0x03] *256
+    # v1 msg db starts with an empty one
+    if data[messagesStartAddr] == 1:
+        messageVersion = 1
+elif(engineVersion >= 3):
+    messagesStartAddr    = data[0x02] + data [0x03] *256
+    messagesLen          = data[0x04] + data [0x05] *256
+    dictionaryAddr       = data[0x06] + data [0x07] *256
+    dictionaryLen        = data[0x08] + data [0x09] *256
+    dictionaryDataAddr   = data[0x0a] + data [0x0b] *256
+    dictionaryDataLen    = data[0x0c] + data [0x0d] *256
+    wordTableAddr        = data[0x0e] + data [0x0f] *256
+    unknownAddr          = data[0x10] + data [0x11] *256
+    exitsAddr            = data[0x12] + data [0x13] *256
+
+# Identify autodetected v2-3-4 game
+if game == 'unknown':
+    game = _identify_game(engineVersion)
+
 # If it couldn't be identified then quit
 if(aCodeStartAddr < 0 or game == 'unknown'):
-    print('Unable to identify the Level 9 Version 1 or Version 2 game in ' + filename)
+    print('Unable to detect a Level 9 game in ' + filename)
     sys.exit()
+
+# Retrieve locationsStartMsgId
+if game in v1Configuration and 'locationsStartMsgId' in v1Configuration[game]:
+    locationsStartMsgId = v1Configuration[game]['locationsStartMsgId']
+else:
+    # Set a reasonable default for locationsStartMsgId
+    locationsStartMsgId = 0x190
 
 # If a script file was specified, open it
 if(args.script):
@@ -2209,28 +2465,14 @@ if(args.script):
 
 # If autoGame was specified, use the default script file
 if(args.autoGame):
-    scriptFile = open(v1Configuration[game]['script'],'r')    
-
-if(version == 1):
-    # Derive the location of the major game partsffunction based on offsets in the v1 configuration
-    dictionaryAddr       = aCodeStartAddr + v1Configuration[game]['offsets']['dictionaryOffset']
-    exitsAddr            = aCodeStartAddr + v1Configuration[game]['offsets']['exitsOffset'] 
-    messagesStartAddr    = aCodeStartAddr + v1Configuration[game]['offsets']['messagesOffset']
-    commonFragmentsAddr  = aCodeStartAddr + v1Configuration[game]['offsets']['fragmentsOffset']
-    locationsStartMsgId  =                  v1Configuration[game]['locationsStartMsgId']
-else:
-    dictionaryAddr       = data[0x06] + data [0x07] *256
-    messagesStartAddr    = data[0x00] + data [0x01] *256
-    exitsAddr            = data[0x04] + data [0x05] *256
-    commonFragmentsAddr  = data[0x02] + data [0x03] *256
-    #locationsStartMsgId TODO
+    scriptFile = open(v1Configuration[game]['script'],'r')
 
 # Set the program counter to the start of the A-Code
 pc = aCodeStartAddr
 maxpc = pc
 
 # Load and decode the dictionary 
-vm_fn_load_dictionary(data,dictionaryAddr, args.dictionary)
+vm_fn_load_dictionary(data, args.dictionary)
 if(args.dictionary):
     sys.exit()
 
@@ -2260,7 +2502,7 @@ while(True):
         cmds.add(opCode)
         if(debugging):
             print(f"\033[93m0x{pc:04x} (0x{opCode:02x}) listhandler ", end='')
-        pc = vm_fn_listhandler(data,opCode,pc,version)
+        pc = vm_fn_listhandler(data,opCode,pc,engineVersion)
     else:
         if(debugging):
             print(f"\033[93m0x{pc:04x} (0x{opCodeClean:02x}) {opCodes[opCodeClean]:11s} ",end='')
@@ -2308,6 +2550,8 @@ while(True):
                 pc = vm_fn_cleartg(data, opCode, pc)
             case 0x16:
                 pc = vm_fn_picture(data, opCode, pc)
+            case 0x17:
+                pc = vm_fn_get_next_object(data, opCode, pc)
             case 0x18:
                 pc = vm_fn_ifeqct(data, opCode, pc)
             case 0x19:
@@ -2316,6 +2560,8 @@ while(True):
                 pc = vm_fn_ifltct(data, opCode, pc)                                
             case 0x1b:
                 pc = vm_fn_ifgtct(data, opCode, pc)
+            case 0x1c:
+                pc = vm_fn_print_input(data, opCode, pc)
             case other:
                 print(f'Illegal opCode {opCodeClean:02x} at {pc:04x}')
                 break

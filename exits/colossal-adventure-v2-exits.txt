@@ -1,0 +1,447 @@
+Colossal Adventure - Location Exit Definitions
+----------------------------------------------
+
+Bit configuration:
+
+Bit 0 - where the direction can be used inversely
+Bit 1 - if there is a 'door' in this direction between locations
+Bit 2 - not used, always set to 0x00 but printed here as 'No'
+
+
+                            (Inv.)
+Address From  To  Dir       Bit 0 Bit 1 Bit 2 MsgId Location Text
+------- ---- ---- --------- ----- ----- ----- ----- -------------
+0x0020  0x01 0x0e INSIDE    Yes   No    No    0x065 You are standing beside a small brick building at the end of a road from the north. A river flows south. To the north is open country and all around is dense forest
+0x0022  0x01 0x15 NORTH     Yes   No    No    0x065 You are standing beside a small brick building at the end of a road from the north. A river flows south. To the north is open country and all around is dense forest
+0x0024  0x01 0x0e EAST      Yes   No    No    0x065 You are standing beside a small brick building at the end of a road from the north. A river flows south. To the north is open country and all around is dense forest
+0x0026  0x01 0x02 SOUTH     Yes   No    No    0x065 You are standing beside a small brick building at the end of a road from the north. A river flows south. To the north is open country and all around is dense forest
+0x0028  0x02 0x03 SOUTH     Yes   No    No    0x066 You are in a valley beside a stream which cascades along a rocky bed on its way south. The valley is lined by woodland trees and you can hear birds singing from their branches
+0x002a  0x02 0x08 EAST      Yes   No    No    0x066 You are in a valley beside a stream which cascades along a rocky bed on its way south. The valley is lined by woodland trees and you can hear birds singing from their branches
+0x002c  0x02 0x08 NEAST     No    No    No    0x066 You are in a valley beside a stream which cascades along a rocky bed on its way south. The valley is lined by woodland trees and you can hear birds singing from their branches
+0x002e  0x02 0x08 UPWARDS   Yes   No    No    0x066 You are in a valley beside a stream which cascades along a rocky bed on its way south. The valley is lined by woodland trees and you can hear birds singing from their branches
+0x0030  0x02 0x07 WEST      No    No    No    0x066 You are in a valley beside a stream which cascades along a rocky bed on its way south. The valley is lined by woodland trees and you can hear birds singing from their branches
+0x0032  0x03 0x04 SOUTH     Yes   No    No    0x067 You are in a tree-lined valley beside a stream which seeps away down many small cracks in the ground. Downstream, to the south, the valley narrows and the streambed contains only dry rocks
+0x0034  0x03 0x09 EAST      No    No    No    0x067 You are in a tree-lined valley beside a stream which seeps away down many small cracks in the ground. Downstream, to the south, the valley narrows and the streambed contains only dry rocks
+0x0036  0x03 0x0a WEST      No    No    No    0x067 You are in a tree-lined valley beside a stream which seeps away down many small cracks in the ground. Downstream, to the south, the valley narrows and the streambed contains only dry rocks
+0x0038  0x04 0x05 SOUTH     Yes   No    No    0x068 You are in a 20-foot depression in a deep, narrow valley sloping down to the south. The steep sides of the valley are overgrown with brambles
+0x003a  0x04 0x07 EAST      No    No    No    0x068 You are in a 20-foot depression in a deep, narrow valley sloping down to the south. The steep sides of the valley are overgrown with brambles
+0x003c  0x04 0x11 INSIDE    No    Yes   No    0x068 You are in a 20-foot depression in a deep, narrow valley sloping down to the south. The steep sides of the valley are overgrown with brambles
+0x003e  0x04 0x11 DOWN      No    Yes   No    0x068 You are in a 20-foot depression in a deep, narrow valley sloping down to the south. The steep sides of the valley are overgrown with brambles
+0x0040  0x05 0x06 SOUTH     Yes   No    No    0x069 You are in a steep rocky gulley which slopes down to the south
+0x0042  0x05 0x07 WEST      No    No    No    0x069 You are in a steep rocky gulley which slopes down to the south
+0x0044  0x05 0x07 EAST      No    No    No    0x069 You are in a steep rocky gulley which slopes down to the south
+0x0046  0x06 0x07 WEST      No    No    No    0x06a You are at the top of a dried-up waterfall. A sheer east-west cliff slices through the land, giving you an astonishing view of the southlands spread out like a map below you. A river emerges from the base of the cliff 1000 feet below and meanders away, but there is no way down to it. A steep gulley winds down towards you from the north through the woods on top of the cliff
+0x0048  0x06 0xff SOUTH     No    No    No    0x06a You are at the top of a dried-up waterfall. A sheer east-west cliff slices through the land, giving you an astonishing view of the southlands spread out like a map below you. A river emerges from the base of the cliff 1000 feet below and meanders away, but there is no way down to it. A steep gulley winds down towards you from the north through the woods on top of the cliff
+0x004a  0x06 0xff JUMP      No    No    No    0x06a You are at the top of a dried-up waterfall. A sheer east-west cliff slices through the land, giving you an astonishing view of the southlands spread out like a map below you. A river emerges from the base of the cliff 1000 feet below and meanders away, but there is no way down to it. A steep gulley winds down towards you from the north through the woods on top of the cliff
+0x004c  0x06 0x07 EAST      No    No    No    0x06a You are at the top of a dried-up waterfall. A sheer east-west cliff slices through the land, giving you an astonishing view of the southlands spread out like a map below you. A river emerges from the base of the cliff 1000 feet below and meanders away, but there is no way down to it. A steep gulley winds down towards you from the north through the woods on top of the cliff
+0x004e  0x07 0x07 WEST      No    No    No    0x06b You are in dense forest, completely surrounded by trees
+0x0050  0x07 0xa6 SOUTH     Yes   No    No    0x06b You are in dense forest, completely surrounded by trees
+0x0052  0x07 0x07 EAST      No    No    No    0x06b You are in dense forest, completely surrounded by trees
+0x0054  0x07 0x08 NORTH     Yes   No    No    0x06b You are in dense forest, completely surrounded by trees
+0x0056  0x07 0xa6 UPWARDS   Yes   No    No    0x06b You are in dense forest, completely surrounded by trees
+0x0058  0x08 0x09 NEAST     Yes   No    No    0x06c You are in a pleasant wood on the east side of a valley. You can hear the sound of rushing water from a river below
+0x005a  0x08 0x09 NORTH     Yes   No    No    0x06c You are in a pleasant wood on the east side of a valley. You can hear the sound of rushing water from a river below
+0x005c  0x09 0x09 NORTH     No    No    No    0x06d You are lost in the forest
+0x005e  0x09 0x0a WEST      No    No    No    0x06d You are lost in the forest
+0x0060  0x09 0x09 SEAST     No    No    No    0x06d You are lost in the forest
+0x0062  0x09 0x0a EAST      Yes   No    No    0x06d You are lost in the forest
+0x0064  0x09 0x0d SOUTH     No    No    No    0x06d You are lost in the forest
+0x0066  0x0a 0x0b SOUTH     No    No    No    0x06e You are lost in the forest
+0x0068  0x0a 0x0a NORTH     No    No    No    0x06e You are lost in the forest
+0x006a  0x0b 0xe2 NORTH     No    No    No    0x06f You are standing beside a huge oak tree in the depths of the forest. A partly-broken branch hangs down, resting one end on the ground, and you could easily climb the tree if you tried
+0x006c  0x0b 0x0c UPWARDS   No    No    No    0x06f You are standing beside a huge oak tree in the depths of the forest. A partly-broken branch hangs down, resting one end on the ground, and you could easily climb the tree if you tried
+0x006e  0x0b 0x0c CLIMB     No    No    No    0x06f You are standing beside a huge oak tree in the depths of the forest. A partly-broken branch hangs down, resting one end on the ground, and you could easily climb the tree if you tried
+0x0070  0x0b 0x0d SOUTH     No    No    No    0x06f You are standing beside a huge oak tree in the depths of the forest. A partly-broken branch hangs down, resting one end on the ground, and you could easily climb the tree if you tried
+0x0072  0x0c 0x0a DOWN      No    No    No    0x070 You are sitting in the branches of a huge tree and have a splendid view of the forest which stretches in all directions. You can see a huge spire to the south: beyond this the land seems to fall away. In the far north an active volcano belches fumes into the air, and to the west a narrow valley cuts through the trees
+0x0074  0x0d 0x08 EAST      No    No    No    0x071 You are at a picnic spot littered with small tables and benches carved roughly from tree-trunks. In the centre a large stencilled sign saying 'no litter' is attached to one of the tables
+0x0076  0x0d 0x04 SOUTH     No    No    No    0x071 You are at a picnic spot littered with small tables and benches carved roughly from tree-trunks. In the centre a large stencilled sign saying 'no litter' is attached to one of the tables
+0x0078  0x0d 0x04 SWEST     No    No    No    0x071 You are at a picnic spot littered with small tables and benches carved roughly from tree-trunks. In the centre a large stencilled sign saying 'no litter' is attached to one of the tables
+0x007a  0x0d 0x02 WEST      No    No    No    0x071 You are at a picnic spot littered with small tables and benches carved roughly from tree-trunks. In the centre a large stencilled sign saying 'no litter' is attached to one of the tables
+0x007c  0x0d 0x01 NWEST     No    No    No    0x071 You are at a picnic spot littered with small tables and benches carved roughly from tree-trunks. In the centre a large stencilled sign saying 'no litter' is attached to one of the tables
+0x007e  0x0d 0x01 NORTH     No    No    No    0x071 You are at a picnic spot littered with small tables and benches carved roughly from tree-trunks. In the centre a large stencilled sign saying 'no litter' is attached to one of the tables
+0x0080  0x0e 0x0f EAST      Yes   No    No    0x072 You are in a small building with a well in the middle of the only room. A rusty ladder leads down the well into darkness
+0x0082  0x0e 0x29 DOWN      Yes   No    No    0x072 You are in a small building with a well in the middle of the only room. A rusty ladder leads down the well into darkness
+0x0084  0x0e 0x29 CLIMB     Yes   No    No    0x072 You are in a small building with a well in the middle of the only room. A rusty ladder leads down the well into darkness
+0x0086  0x0f 0x10 EAST      Yes   No    No    0x073 You are on a small hill. To the north, an active volcano throws a plume of ash into the air. A path leads east and you can see a small brick building surrounded by woodland far away to the west. To the south, a spire rises into the clouds
+0x0088  0x0f 0x0a SOUTH     No    No    No    0x073 You are on a small hill. To the north, an active volcano throws a plume of ash into the air. A path leads east and you can see a small brick building surrounded by woodland far away to the west. To the south, a spire rises into the clouds
+0x008a  0x10 0xff JUMP      No    No    No    0x074 You are at a cliff edge. A path from the west ends here
+0x008c  0x11 0x1b WEST      Yes   No    No    0x075 You are in a tiny rocky cave below a grate to the surface. A low crawl leads west into darkness
+0x008e  0x11 0x04 OUTSIDE   No    Yes   No    0x075 You are in a tiny rocky cave below a grate to the surface. A low crawl leads west into darkness
+0x0090  0x11 0x04 UPWARDS   No    Yes   No    0x075 You are in a tiny rocky cave below a grate to the surface. A low crawl leads west into darkness
+0x0092  0x12 0x1a NEAST     No    No    No    0x076 You are in the Plover room: a small chamber glowing with an eerie green light. An extremely narrow crack leads west and an ominous dark corridor exits to the northeast
+0x0094  0x13 0x14 JUMP      No    No    No    0x077 You are in Heaven, sitting on a cloud and strumming a harp. It's not quite what you expected: rather boring in fact
+0x0096  0x14 0x00 <Missing> No    No    No    0x078 You are in Hell. The air is very hot and there is a strong stench of brimstone. It is definitely not boring, but slightly more painful than Heaven was!
+0x0098  0x15 0x15 WEST      No    No    No    0x079 You are in open countryside. A road leads to a building in the south, surrounded by woods. A spire rises into the clouds beyond
+0x009a  0x15 0x15 NORTH     No    No    No    0x079 You are in open countryside. A road leads to a building in the south, surrounded by woods. A spire rises into the clouds beyond
+0x009c  0x15 0x16 EAST      Yes   No    No    0x079 You are in open countryside. A road leads to a building in the south, surrounded by woods. A spire rises into the clouds beyond
+0x009e  0x16 0x16 NORTH     No    No    No    0x07a You are on scrubland, in a thicket of dense hawthorn
+0x00a0  0x16 0x17 EAST      Yes   No    No    0x07a You are on scrubland, in a thicket of dense hawthorn
+0x00a2  0x17 0x0f SOUTH     Yes   No    No    0x07b You are on a vast expanse of lava south of an active volcano. There is a small hill to the south
+0x00a4  0x17 0x18 EAST      Yes   No    No    0x07b You are on a vast expanse of lava south of an active volcano. There is a small hill to the south
+0x00a6  0x17 0x19 NORTH     No    No    No    0x07b You are on a vast expanse of lava south of an active volcano. There is a small hill to the south
+0x00a8  0x18 0x10 SOUTH     Yes   No    No    0x07c You are surrounded by an expanse of jagged rocks,split by former volcanic eruptions
+0x00aa  0x18 0x19 NORTH     Yes   No    No    0x07c You are surrounded by an expanse of jagged rocks,split by former volcanic eruptions
+0x00ac  0x18 0x18 EAST      No    No    No    0x07c You are surrounded by an expanse of jagged rocks,split by former volcanic eruptions
+0x00ae  0x19 0x19 NORTH     No    No    No    0x07d You are at the very rim of a volcano, above a pit of bubbling lava. Far below you is a small opening in the side of the crater but there is no way down to it. A huge plume of ash rises slowly from the fires below and floats sluggishly down to the east
+0x00b0  0x19 0x17 WEST      No    No    No    0x07d You are at the very rim of a volcano, above a pit of bubbling lava. Far below you is a small opening in the side of the crater but there is no way down to it. A huge plume of ash rises slowly from the fires below and floats sluggishly down to the east
+0x00b2  0x19 0x19 EAST      No    No    No    0x07d You are at the very rim of a volcano, above a pit of bubbling lava. Far below you is a small opening in the side of the crater but there is no way down to it. A huge plume of ash rises slowly from the fires below and floats sluggishly down to the east
+0x00b4  0x1a 0x12 SOUTH     No    No    No    0x07e You are in a room with matt black walls. A plaque reads 'Congratulations on bringing light to the dark room!'. The only exit is south
+0x00b6  0x1b 0x1c WEST      Yes   No    No    0x07f You are crawling painfully over cobbles in a low passage. A dim light filters from the east
+0x00b8  0x1c 0x1d WEST      Yes   No    No    0x080 You are in a room filled with debris washed from the surface. The cobbles end here, but an awkward canyon continues west. 'The magic word is XYZZY' is scratched on the wall in crude runes
+0x00ba  0x1d 0x1e WEST      Yes   No    No    0x081 You are in an awkwardly sloping east-west canyon
+0x00bc  0x1e 0x1f WEST      Yes   No    No    0x082 You are in a splendid chamber in an east-west canyon. The walls are frozen rivers of orange stone and a carved pillar rises to the ceiling 30 feet above. The floor is formed from smooth marble slabs, and is slightly worn in the centre
+0x00be  0x1f 0x32 DOWN      Yes   No    No    0x083 The passage from the east ends here. At your feet is a pit from which mist coils upwards
+0x00c0  0x20 0x21 NEAST     No    No    No    0x084 You are on the northeast side of a deep chasm crossed by a rickety bridge. A draught blows towards an opening where the path enters the cliff to the northeast
+0x00c2  0x21 0x20 WEST      No    No    No    0x085 You are in a low east-west corridor
+0x00c4  0x21 0x22 EAST      Yes   No    No    0x085 You are in a low east-west corridor
+0x00c6  0x22 0x23 NEAST     No    No    No    0x086 You are at a fork in the path with openings to west, northeast and southeast. A steady draught blows northeast and you can hear a quiet rumbling noise
+0x00c8  0x22 0x26 SEAST     No    No    No    0x086 You are at a fork in the path with openings to west, northeast and southeast. A steady draught blows northeast and you can hear a quiet rumbling noise
+0x00ca  0x22 0x26 DOWN      Yes   No    No    0x086 You are at a fork in the path with openings to west, northeast and southeast. A steady draught blows northeast and you can hear a quiet rumbling noise
+0x00cc  0x23 0x22 SOUTH     No    No    No    0x087 You are at a junction with warm walls. From a passage to the north comes a continuous roar, so loud that the entire cave trembles. Other entrances lead east and south
+0x00ce  0x23 0x24 EAST      Yes   No    No    0x087 You are at a junction with warm walls. From a passage to the north comes a continuous roar, so loud that the entire cave trembles. Other entrances lead east and south
+0x00d0  0x23 0x25 NORTH     Yes   No    No    0x087 You are at a junction with warm walls. From a passage to the north comes a continuous roar, so loud that the entire cave trembles. Other entrances lead east and south
+0x00d2  0x24 0x00 <Missing> No    No    No    0x088 You are in a small chamber filled with huge boulders. The walls are very warm and the heated air is stifling. The only exit is a crawl to the west, from which direction comes a low rumbling
+0x00d4  0x25 0xff JUMP      No    No    No    0x089 You are at the edge of a volcano with a fantastic view over the crater. Great gouts of molten lava surge upwards before cascading into the depths and the thunder from the pit is deafening. The cracked and broken rocks of the cavern walls glare blood-red with an eerie light which reflects in macabre shifting shapes. An immense river of fire plummets from a gorge in the far wall, crashing into the pit, and to your left a column of blistering steam screams into the air. A dark forboding passage leaves to the south. The very Devil himself could have created this
+0x00d6  0x26 0x22 NORTH     No    No    No    0x08a You are in a steeply sloping limestone passage lined with twisted rock formations
+0x00d8  0x26 0x27 SOUTH     No    No    No    0x08a You are in a steeply sloping limestone passage lined with twisted rock formations
+0x00da  0x26 0x27 DOWN      Yes   No    No    0x08a You are in a steeply sloping limestone passage lined with twisted rock formations
+0x00dc  0x27 0x28 EAST      Yes   No    No    0x08b You are in a barren room outside a small room used for keeping animals: a sign reads 'WARE BEAR'. A passage slopes upwards
+0x00de  0x27 0x28 INSIDE    Yes   No    No    0x08b You are in a barren room outside a small room used for keeping animals: a sign reads 'WARE BEAR'. A passage slopes upwards
+0x00e0  0x28 0x00 <Missing> No    No    No    0x08c You are inside the bear room
+0x00e2  0x29 0x00 <Missing> No    No    No    0x08d You are down a dry well which smells rather disgusting. A ladder leads up to a small circle of light far above
+0x00e4  0x2a 0x00 <Missing> No    No    No    0x08e 
+0x00e6  0x2b 0x00 <Missing> No    No    No    0x08f 
+0x00e8  0x2c 0x00 <Missing> No    No    No    0x090 
+0x00ea  0x2d 0x00 <Missing> No    No    No    0x091 
+0x00ec  0x2e 0x00 <Missing> No    No    No    0x092 
+0x00ee  0x2f 0x00 <Missing> No    No    No    0x093 
+0x00f0  0x30 0x00 <Missing> No    No    No    0x094 
+0x00f2  0x31 0x00 <Missing> No    No    No    0x095 
+0x00f4  0x32 0x33 SOUTH     Yes   No    No    0x096 You are at the east end of the Hall of Mists, filled with wisps of cloud which sway to and fro as if alive. There are passages on both sides and a narrow path leading up to a small opening above. A grand stone staircase leads downwards to the north
+0x00f6  0x32 0x3a WEST      Yes   No    No    0x096 You are at the east end of the Hall of Mists, filled with wisps of cloud which sway to and fro as if alive. There are passages on both sides and a narrow path leading up to a small opening above. A grand stone staircase leads downwards to the north
+0x00f8  0x32 0x34 NORTH     No    No    No    0x096 You are at the east end of the Hall of Mists, filled with wisps of cloud which sway to and fro as if alive. There are passages on both sides and a narrow path leading up to a small opening above. A grand stone staircase leads downwards to the north
+0x00fa  0x32 0x1f EAST      No    No    No    0x096 You are at the east end of the Hall of Mists, filled with wisps of cloud which sway to and fro as if alive. There are passages on both sides and a narrow path leading up to a small opening above. A grand stone staircase leads downwards to the north
+0x00fc  0x32 0x1f CLIMB     No    No    No    0x096 You are at the east end of the Hall of Mists, filled with wisps of cloud which sway to and fro as if alive. There are passages on both sides and a narrow path leading up to a small opening above. A grand stone staircase leads downwards to the north
+0x00fe  0x33 0x00 <Missing> No    No    No    0x097 You are in a long low room with a crude note pinned to the wall saying 'You won't get it up to the pit'
+0x0100  0x34 0x35 SOUTH     No    Yes   No    0x098 You are in the Hall of the Mountain Kings, a huge room decorated with majestic statues. The east wall is covered by trophies and the mounted heads of elves and monsters with a carved granite throne standing beneath them. The hall is hung about with the tattered remains of rich tapestries and has large doorways on all sides
+0x0102  0x34 0x41 WEST      No    Yes   No    0x098 You are in the Hall of the Mountain Kings, a huge room decorated with majestic statues. The east wall is covered by trophies and the mounted heads of elves and monsters with a carved granite throne standing beneath them. The hall is hung about with the tattered remains of rich tapestries and has large doorways on all sides
+0x0104  0x34 0x36 NORTH     No    Yes   No    0x098 You are in the Hall of the Mountain Kings, a huge room decorated with majestic statues. The east wall is covered by trophies and the mounted heads of elves and monsters with a carved granite throne standing beneath them. The hall is hung about with the tattered remains of rich tapestries and has large doorways on all sides
+0x0106  0x34 0x32 EAST      No    No    No    0x098 You are in the Hall of the Mountain Kings, a huge room decorated with majestic statues. The east wall is covered by trophies and the mounted heads of elves and monsters with a carved granite throne standing beneath them. The hall is hung about with the tattered remains of rich tapestries and has large doorways on all sides
+0x0108  0x34 0x42 SWEST     No    Yes   No    0x098 You are in the Hall of the Mountain Kings, a huge room decorated with majestic statues. The east wall is covered by trophies and the mounted heads of elves and monsters with a carved granite throne standing beneath them. The hall is hung about with the tattered remains of rich tapestries and has large doorways on all sides
+0x010a  0x34 0x32 UPWARDS   Yes   No    No    0x098 You are in the Hall of the Mountain Kings, a huge room decorated with majestic statues. The east wall is covered by trophies and the mounted heads of elves and monsters with a carved granite throne standing beneath them. The hall is hung about with the tattered remains of rich tapestries and has large doorways on all sides
+0x010c  0x35 0x34 NORTH     No    No    No    0x099 You are in the south side chamber of the Hall of the Mountain Kings
+0x010e  0x36 0x34 SOUTH     No    No    No    0x09a You are in a low north-south passage at a hole in the floor. This goes down to an east-west passage below
+0x0110  0x36 0x37 NORTH     Yes   No    No    0x09a You are in a low north-south passage at a hole in the floor. This goes down to an east-west passage below
+0x0112  0x36 0x62 DOWN      Yes   No    No    0x09a You are in a low north-south passage at a hole in the floor. This goes down to an east-west passage below
+0x0114  0x37 0x38 WEST      Yes   No    No    0x09b You are in a huge room with passages to the south and west and a maze of broken rock to the east. 'Y2' is carved on a rock in the very centre of the room
+0x0116  0x37 0x39 EAST      No    No    No    0x09b You are in a huge room with passages to the south and west and a maze of broken rock to the east. 'Y2' is carved on a rock in the very centre of the room
+0x0118  0x38 0xff JUMP      Yes   No    No    0x09c You are at a window overlooking a huge canyon. The floor is just visible over 50 feet below, covered by drifting white mist. On the opposite side of the canyon is a window into a lighted room_and you can just make out a shadowy figure watching your every movement
+0x011a  0x39 0x37 DOWN      No    No    No    0x09d You are in a jumble of rocks with small cracks everywhere
+0x011c  0x39 0x32 UPWARDS   No    No    No    0x09d You are in a jumble of rocks with small cracks everywhere
+0x011e  0x3a 0x3b CROSS     Yes   Yes   No    0x09e You are on the east bank of a wide fissure slicing completely across the Hall of Mists. The white fog is very thick here and the fissure is much too wide to jump
+0x0120  0x3a 0x3b WEST      Yes   Yes   No    0x09e You are on the east bank of a wide fissure slicing completely across the Hall of Mists. The white fog is very thick here and the fissure is much too wide to jump
+0x0122  0x3b 0x3c WEST      Yes   No    No    0x09f You are on the west bank of a wide fissure slicing completely across the Hall of Mists. Dense fog rises from the fissure and spreads out on either side of it
+0x0124  0x3b 0x3c NORTH     No    No    No    0x09f You are on the west bank of a wide fissure slicing completely across the Hall of Mists. Dense fog rises from the fissure and spreads out on either side of it
+0x0126  0x3c 0x3b NORTH     No    No    No    0x0a0 You are at the west end of the Hall of Mists. To the south is a little passage, six feet off the ground. A low wide crawl continues west and another goes north
+0x0128  0x3c 0x3d WEST      Yes   No    No    0x0a0 You are at the west end of the Hall of Mists. To the south is a little passage, six feet off the ground. A low wide crawl continues west and another goes north
+0x012a  0x3c 0x8a SOUTH     No    No    No    0x0a0 You are at the west end of the Hall of Mists. To the south is a little passage, six feet off the ground. A low wide crawl continues west and another goes north
+0x012c  0x3c 0x92 UPWARDS   No    No    No    0x0a0 You are at the west end of the Hall of Mists. To the south is a little passage, six feet off the ground. A low wide crawl continues west and another goes north
+0x012e  0x3d 0x3c UPWARDS   No    No    No    0x0a1 You are at the east end of a very long hall apparently without side chambers. A low crawl continues east, and to the north is a small round hole
+0x0130  0x3d 0x3e WEST      Yes   No    No    0x0a1 You are at the east end of a very long hall apparently without side chambers. A low crawl continues east, and to the north is a small round hole
+0x0132  0x3d 0x3f NORTH     No    No    No    0x0a1 You are at the east end of a very long hall apparently without side chambers. A low crawl continues east, and to the north is a small round hole
+0x0134  0x3d 0x3f DOWN      No    No    No    0x0a1 You are at the east end of a very long hall apparently without side chambers. A low crawl continues east, and to the north is a small round hole
+0x0136  0x3e 0x92 SOUTH     No    No    No    0x0a2 You are at the west end of a very long featureless hall which joins up with a narrow north-south passage
+0x0138  0x3e 0x3f NORTH     Yes   No    No    0x0a2 You are at the west end of a very long featureless hall which joins up with a narrow north-south passage
+0x013a  0x3f 0x3f WEST      No    No    No    0x0a3 You are at a cross-over of high north-south passage and a low east-west one
+0x013c  0x3f 0x40 NORTH     Yes   No    No    0x0a3 You are at a cross-over of high north-south passage and a low east-west one
+0x013e  0x3f 0x41 EAST      Yes   No    No    0x0a3 You are at a cross-over of high north-south passage and a low east-west one
+0x0140  0x40 0x00 <Missing> No    No    No    0x0a4 You are at a dead end
+0x0142  0x41 0x34 EAST      No    No    No    0x0a5 You are in the west side chamber of the Hall of_the Mountain Kings. A passage continues west
+0x0144  0x42 0x34 EAST      No    No    No    0x0a6 You are in a secret east-west canyon above a very tight north-canyon 15 feet below. If you climbed down, you might not be able to get back up again
+0x0146  0x42 0x44 WEST      Yes   No    No    0x0a6 You are in a secret east-west canyon above a very tight north-canyon 15 feet below. If you climbed down, you might not be able to get back up again
+0x0148  0x42 0x57 DOWN      Yes   No    No    0x0a6 You are in a secret east-west canyon above a very tight north-canyon 15 feet below. If you climbed down, you might not be able to get back up again
+0x014a  0x43 0x45 NORTH     Yes   No    No    0x0a7 You are in a wide north-south canyon partly filled with shifting mist, at a place where a slab of floor has collapsed into the room below to leave a large hole
+0x014c  0x43 0x6a DOWN      Yes   No    No    0x0a7 You are in a wide north-south canyon partly filled with shifting mist, at a place where a slab of floor has collapsed into the room below to leave a large hole
+0x014e  0x44 0x43 NORTH     Yes   No    No    0x0a8 You are at the junction between the south end of a secret north-south canyon and the west end of a secret east-west canyon
+0x0150  0x45 0x46 NORTH     Yes   No    No    0x0a9 You are in a huge north-south canyon, partly filled by white mist seeping from the north. Far above, an enormous two-sided mirror is suspended between the cavern walls. (The mirror is obviously provided for the use of the dwarves who are extremely vain.) There is a small window in either wall, level with the mirror.
+0x0152  0x46 0x00 <Missing> No    No    No    0x0aa You are on the edge of a massive underground reservoir which stretches as far as the eye can see. An opaque cloud of white mist rises from the lake and streams upwards and south through the only exit. You can hear splashing water from within the mist: obviously the lake is filled by a large stream
+0x0154  0x47 0x4a WEST      No    No    No    0x0ab You are in a magnificent cavern with a rushing stream which cascades over a sparkling waterfall, flows into a roaring whirlpool and disappears through a hole in the floor. Huge passages exit to south and west
+0x0156  0x47 0x4a UPWARDS   No    No    No    0x0ab You are in a magnificent cavern with a rushing stream which cascades over a sparkling waterfall, flows into a roaring whirlpool and disappears through a hole in the floor. Huge passages exit to south and west
+0x0158  0x48 0x49 DOWN      Yes   No    No    0x0ac You are on the brink of a small, clean, climable pit. A crawl leads west
+0x015a  0x48 0x62 WEST      Yes   No    No    0x0ac You are on the brink of a small, clean, climable pit. A crawl leads west
+0x015c  0x49 0x48 CLIMB     No    No    No    0x0ad You are at the bottom of a pit, standing in about 6 inches of icy water
+0x015e  0x4a 0x64 DOWN      No    No    No    0x0ae You are at the top of a steep incline above a large room. You could climb down, but would not be able to climb back up. A passage leads back the way you came, from the north
+0x0160  0x4a 0x47 NORTH     No    No    No    0x0ae You are at the top of a steep incline above a large room. You could climb down, but would not be able to climb back up. A passage leads back the way you came, from the north
+0x0162  0x4b 0x4e WEST      No    No    No    0x0af You are following a wide path round the outer edge of a large cavern far below. Through thick white mist, splashing water can be heard in the distance below. The mist rises from the cavern and up through a hole in the roof. The path exits to south and west
+0x0164  0x4c 0x4d EAST      No    No    No    0x0b0 You are in an ante-room leading to a large passage to the east. Small passages go west and up. The remains of recent digging are evident and a sign floating in mid-air flashes 'CAVE UNDER CONSTRUCTION: PROCEED AT YOUR OWN RISK (Witt Construction PLC)'
+0x0166  0x4c 0x66 UPWARDS   Yes   No    No    0x0b0 You are in an ante-room leading to a large passage to the east. Small passages go west and up. The remains of recent digging are evident and a sign floating in mid-air flashes 'CAVE UNDER CONSTRUCTION: PROCEED AT YOUR OWN RISK (Witt Construction PLC)'
+0x0168  0x4c 0x52 WEST      No    No    No    0x0b0 You are in an ante-room leading to a large passage to the east. Small passages go west and up. The remains of recent digging are evident and a sign floating in mid-air flashes 'CAVE UNDER CONSTRUCTION: PROCEED AT YOUR OWN RISK (Witt Construction PLC)'
+0x016a  0x4d 0x4c SOUTH     No    No    No    0x0b1 You are at Witt's End. A maze of tiny passages have been dug in all directions as the first phase in constructing a new cavern
+0x016c  0x4e 0x4b NWEST     No    No    No    0x0b2 You are in an alcove at the end of a winding path from the northwest. An eerie light shines through an extremely tight entrance to the east
+0x016e  0x4e 0x12 EAST      Yes   No    No    0x0b2 You are in an alcove at the end of a winding path from the northwest. An eerie light shines through an extremely tight entrance to the east
+0x0170  0x4f 0x00 <Missing> No    No    No    0x0b3 You are in an arched hall. The ceiling has collapsed so you will have to return the way you came
+0x0172  0x50 0x51 DOWN      Yes   No    No    0x0b4 You are in a steeply sloping corridor with sharp walls
+0x0174  0x51 0x00 <Missing> No    No    No    0x0b5 You are in a cul-de-sac at the lower end of a steeply sloping passage. Pieces of broken shell are strewn all over the floor
+0x0176  0x52 0x68 WEST      No    No    No    0x0b6 You are in Bedquilt, a long east-west passage with holes all around. There are so many holes that you can't tell which is which and so exploration can only be at random
+0x0178  0x52 0xf4 NORTH     No    No    No    0x0b6 You are in Bedquilt, a long east-west passage with holes all around. There are so many holes that you can't tell which is which and so exploration can only be at random
+0x017a  0x52 0xf4 NEAST     No    No    No    0x0b6 You are in Bedquilt, a long east-west passage with holes all around. There are so many holes that you can't tell which is which and so exploration can only be at random
+0x017c  0x52 0xf4 SEAST     No    No    No    0x0b6 You are in Bedquilt, a long east-west passage with holes all around. There are so many holes that you can't tell which is which and so exploration can only be at random
+0x017e  0x52 0xf4 SOUTH     No    No    No    0x0b6 You are in Bedquilt, a long east-west passage with holes all around. There are so many holes that you can't tell which is which and so exploration can only be at random
+0x0180  0x52 0xf4 SWEST     No    No    No    0x0b6 You are in Bedquilt, a long east-west passage with holes all around. There are so many holes that you can't tell which is which and so exploration can only be at random
+0x0182  0x52 0xf4 NWEST     No    No    No    0x0b6 You are in Bedquilt, a long east-west passage with holes all around. There are so many holes that you can't tell which is which and so exploration can only be at random
+0x0184  0x52 0xf4 UPWARDS   No    No    No    0x0b6 You are in Bedquilt, a long east-west passage with holes all around. There are so many holes that you can't tell which is which and so exploration can only be at random
+0x0186  0x52 0xf4 DOWN      No    No    No    0x0b6 You are in Bedquilt, a long east-west passage with holes all around. There are so many holes that you can't tell which is which and so exploration can only be at random
+0x0188  0x52 0xf4 INSIDE    No    No    No    0x0b6 You are in Bedquilt, a long east-west passage with holes all around. There are so many holes that you can't tell which is which and so exploration can only be at random
+0x018a  0x52 0xf4 OUTSIDE   No    No    No    0x0b6 You are in Bedquilt, a long east-west passage with holes all around. There are so many holes that you can't tell which is which and so exploration can only be at random
+0x018c  0x52 0xf4 JUMP      No    No    No    0x0b6 You are in Bedquilt, a long east-west passage with holes all around. There are so many holes that you can't tell which is which and so exploration can only be at random
+0x018e  0x52 0xf4 CLIMB     No    No    No    0x0b6 You are in Bedquilt, a long east-west passage with holes all around. There are so many holes that you can't tell which is which and so exploration can only be at random
+0x0190  0x52 0x66 EAST      Yes   No    No    0x0b6 You are in Bedquilt, a long east-west passage with holes all around. There are so many holes that you can't tell which is which and so exploration can only be at random
+0x0192  0x53 0x00 <Missing> No    No    No    0x0b7 You are at a dead end crawl
+0x0194  0x54 0x00 <Missing> No    No    No    0x0b8 You are in the soft room. The walls are hidden behind velvet curtains, a thick pile carpet covers the floor, and dense moss grows on the ceiling
+0x0196  0x55 0x68 NORTH     No    No    No    0x0b9 You are in a tall east-west canyon with a narrow chink to the north
+0x0198  0x55 0x56 WEST      No    No    No    0x0b9 You are in a tall east-west canyon with a narrow chink to the north
+0x019a  0x55 0x57 EAST      No    No    No    0x0b9 You are in a tall east-west canyon with a narrow chink to the north
+0x019c  0x56 0x55 SOUTH     No    No    No    0x0ba The north-south canyon ends in a mass of boulders: there is no way to go further north
+0x019e  0x57 0x55 NORTH     No    No    No    0x0bb You are at a wide place in a very tight north-south canyon
+0x01a0  0x57 0x58 SOUTH     Yes   No    No    0x0bb You are at a wide place in a very tight north-south canyon
+0x01a2  0x58 0x00 <Missing> No    No    No    0x0bc You are at the south end of a very tight north-south canyon. The canyon becomes too narrow for you to go further
+0x01a4  0x59 0x64 DOWN      No    No    No    0x0bd You are in a twisting corridor which leads north in one direction and slopes down in the other.
+0x01a6  0x59 0x5d NORTH     No    No    No    0x0bd You are in a twisting corridor which leads north in one direction and slopes down in the other.
+0x01a8  0x5a 0x00 <Missing> No    No    No    0x0be You are in the east pit beside an oil well
+0x01aa  0x5b 0x5c DOWN      Yes   No    No    0x0bf You are at the west end of the twopit room, above a deep pit. A passage continues west
+0x01ac  0x5b 0x6a WEST      No    No    No    0x0bf You are at the west end of the twopit room, above a deep pit. A passage continues west
+0x01ae  0x5c 0x5e CLIMB     No    Yes   No    0x0c0 You are at the bottom of the west pit - 20 feet_below the floor of two-pit. You can see a large_hole in the wall far above
+0x01b0  0x5d 0x59 SWEST     No    No    No    0x0c1 You are on the southwest side of a chasm crossed by a rickety bridge. The path crossing the bridge joins a tunnel to the southwest
+0x01b2  0x5d 0x20 NEAST     Yes   No    No    0x0c1 You are on the southwest side of a chasm crossed by a rickety bridge. The path crossing the bridge joins a tunnel to the southwest
+0x01b4  0x5d 0x20 CROSS     Yes   No    No    0x0c1 You are on the southwest side of a chasm crossed by a rickety bridge. The path crossing the bridge joins a tunnel to the southwest
+0x01b6  0x5e 0x5c EAST      No    No    No    0x0c2 You are in a long narrow corridor, stretching out of sight to the west. To the east is a hole through which you can see a profusion of leaves.
+0x01b8  0x5e 0x5c DOWN      No    No    No    0x0c2 You are in a long narrow corridor, stretching out of sight to the west. To the east is a hole through which you can see a profusion of leaves.
+0x01ba  0x5e 0x5f WEST      No    No    No    0x0c2 You are in a long narrow corridor, stretching out of sight to the west. To the east is a hole through which you can see a profusion of leaves.
+0x01bc  0x5f 0x5e SOUTH     No    No    No    0x0c3 You are in the Giant Room filled with enormous furniture and with no ceiling (or perhaps it is just too high for your lamp to show it). Cavernous passages lead north, south and east. On the west wall is the inscription 'FEE FIE FOE FOO'
+0x01be  0x5f 0x60 EAST      Yes   No    No    0x0c3 You are in the Giant Room filled with enormous furniture and with no ceiling (or perhaps it is just too high for your lamp to show it). Cavernous passages lead north, south and east. On the west wall is the inscription 'FEE FIE FOE FOO'
+0x01c0  0x5f 0x6b NORTH     Yes   No    No    0x0c3 You are in the Giant Room filled with enormous furniture and with no ceiling (or perhaps it is just too high for your lamp to show it). Cavernous passages lead north, south and east. On the west wall is the inscription 'FEE FIE FOE FOO'
+0x01c2  0x60 0x00 <Missing> No    No    No    0x0c4 The passage is blocked by a recent cave-in and you cannot go further east. You will have to retrace your steps
+0x01c4  0x61 0x6d NORTH     Yes   No    No    0x0c5 You are in a secret north-south canyon above a sizable passage
+0x01c6  0x61 0x6e SOUTH     Yes   No    No    0x0c5 You are in a secret north-south canyon above a sizable passage
+0x01c8  0x61 0x52 EAST      No    No    No    0x0c5 You are in a secret north-south canyon above a sizable passage
+0x01ca  0x62 0x63 WEST      Yes   No    No    0x0c6 You are in a dirty broken passage. To the east is a low crawl and to the west is a large passage. There is a hole in the ceiling above
+0x01cc  0x63 0x66 DOWN      Yes   No    No    0x0c7 You are in a large room knee-deep in dust. There are cracks everywhere and a passage leading east. You could wriggle down a hole to a junction below
+0x01ce  0x64 0x65 SEAST     No    No    No    0x0c8 You are in a large low room with exits to north, southeast and southwest
+0x01d0  0x64 0x59 SWEST     No    No    No    0x0c8 You are in a large low room with exits to north, southeast and southwest
+0x01d2  0x64 0x53 NORTH     Yes   No    No    0x0c8 You are in a large low room with exits to north, southeast and southwest
+0x01d4  0x65 0x4b NORTH     Yes   No    No    0x0c9 This is the oriental room. Oriental tapestries and drawings cover the walls, and chimes make quiet music high above. Gently sloping passages lead north, west and southeast
+0x01d6  0x65 0x4b UPWARDS   No    No    No    0x0c9 This is the oriental room. Oriental tapestries and drawings cover the walls, and chimes make quiet music high above. Gently sloping passages lead north, west and southeast
+0x01d8  0x65 0x64 WEST      No    No    No    0x0c9 This is the oriental room. Oriental tapestries and drawings cover the walls, and chimes make quiet music high above. Gently sloping passages lead north, west and southeast
+0x01da  0x65 0x68 SEAST     No    No    No    0x0c9 This is the oriental room. Oriental tapestries and drawings cover the walls, and chimes make quiet music high above. Gently sloping passages lead north, west and southeast
+0x01dc  0x66 0x67 NORTH     Yes   No    No    0x0ca You are at a complex junction. A low hands and knees passage from the north joins a higher crawl from the east to make a 5 foot passage going west. You could also climb up through a hole in the ceiling. A salty smell blows from the north and you can hear a quiet murmuring
+0x01de  0x66 0x4c EAST      No    No    No    0x0ca You are at a complex junction. A low hands and knees passage from the north joins a higher crawl from the east to make a 5 foot passage going west. You could also climb up through a hole in the ceiling. A salty smell blows from the north and you can hear a quiet murmuring
+0x01e0  0x67 0x4f UPWARDS   Yes   No    No    0x0cb You are in a room decorated with millions of shells embedded in the walls. A shallow passage leads down and a steeper one leads up. A low passage leaves to the south. You can hear the sound of the sea far away and seem to feel salt spray on your face
+0x01e2  0x67 0x50 DOWN      Yes   No    No    0x0cb You are in a room decorated with millions of shells embedded in the walls. A shallow passage leads down and a steeper one leads up. A low passage leaves to the south. You can hear the sound of the sea far away and seem to feel salt spray on your face
+0x01e4  0x68 0x52 NEAST     No    No    No    0x0cc You are in a room whose walls resemble swiss cheese. It smells a bit cheesy too. Obvious passages lead west, east and northeast, but there could well be others
+0x01e6  0x68 0x55 SOUTH     Yes   No    No    0x0cc You are in a room whose walls resemble swiss cheese. It smells a bit cheesy too. Obvious passages lead west, east and northeast, but there could well be others
+0x01e8  0x68 0x54 EAST      Yes   No    No    0x0cc You are in a room whose walls resemble swiss cheese. It smells a bit cheesy too. Obvious passages lead west, east and northeast, but there could well be others
+0x01ea  0x68 0x69 WEST      Yes   No    No    0x0cc You are in a room whose walls resemble swiss cheese. It smells a bit cheesy too. Obvious passages lead west, east and northeast, but there could well be others
+0x01ec  0x68 0x65 NWEST     No    No    No    0x0cc You are in a room whose walls resemble swiss cheese. It smells a bit cheesy too. Obvious passages lead west, east and northeast, but there could well be others
+0x01ee  0x69 0x5a DOWN      Yes   No    No    0x0cd You are at the eastern end of a long room with two pits in the floor. You are near the east pit, and the many thin stone slabs littering the room would make descending it simple. A path bypasses the pits to connect passages from east and west. There are holes all around, but the only large one is high above the west pit, out of easy reach
+0x01f0  0x69 0x5b WEST      Yes   No    No    0x0cd You are at the eastern end of a long room with two pits in the floor. You are near the east pit, and the many thin stone slabs littering the room would make descending it simple. A path bypasses the pits to connect passages from east and west. There are holes all around, but the only large one is high above the west pit, out of easy reach
+0x01f2  0x6a 0x52 NORTH     No    No    No    0x0ce You are in a large, low, circular room almost filled by a huge slab of rock fallen from the ceiling. To east and west are large passages, completely filled by boulders. Low, small passages lead north and south: the south one bends east round some boulders
+0x01f4  0x6a 0x5b SOUTH     No    No    No    0x0ce You are in a large, low, circular room almost filled by a huge slab of rock fallen from the ceiling. To east and west are large passages, completely filled by boulders. Low, small passages lead north and south: the south one bends east round some boulders
+0x01f6  0x6b 0x47 NORTH     Yes   Yes   No    0x0cf You are in a gigantic north-south passage
+0x01f8  0x6c 0x6d WEST      No    No    No    0x0d0 You are at a window overlooking a huge canyon. On the other side is a lighted window at which you can just make out a shadowy figure peering back
+0x01fa  0x6d 0x6c NORTH     No    No    No    0x0d1 You are at a junction between a secret north-south canyon and a passage to the southeast
+0x01fc  0x6d 0x52 SEAST     No    No    No    0x0d1 You are at a junction between a secret north-south canyon and a passage to the southeast
+0x01fe  0x6e 0x74 DOWN      No    No    No    0x0d2 You are at the southern end of a secret north-south canyon. A stalagtite hangs down from the ceiling: you could climb down it to a room below but not get back up
+0x0200  0x6f 0x00 <Missing> No    No    No    0x0d3 
+0x0202  0x70 0x00 <Missing> No    No    No    0x0d4 
+0x0204  0x71 0x00 <Missing> No    No    No    0x0d5 
+0x0206  0x72 0x00 <Missing> No    No    No    0x0d6 
+0x0208  0x73 0x00 <Missing> No    No    No    0x0d7 You are at a dead end
+0x020a  0x74 0x86 SOUTH     No    No    No    0x0d8 You are in a maze of twisty little passages, all the same. You could climb down a massive orange column, but might not be able to climb back up. The maze continues on this level
+0x020c  0x74 0x1e DOWN      No    No    No    0x0d8 You are in a maze of twisty little passages, all the same. You could climb down a massive orange column, but might not be able to climb back up. The maze continues on this level
+0x020e  0x74 0x8b EAST      No    No    No    0x0d8 You are in a maze of twisty little passages, all the same. You could climb down a massive orange column, but might not be able to climb back up. The maze continues on this level
+0x0210  0x74 0x89 NORTH     Yes   No    No    0x0d8 You are in a maze of twisty little passages, all the same. You could climb down a massive orange column, but might not be able to climb back up. The maze continues on this level
+0x0212  0x75 0x00 <Missing> No    No    No    0x0d9 You are in a maze of twisty little passages, all the same
+0x0214  0x76 0x8c NORTH     No    No    No    0x0da You are in a maze of twisty little passages, all the same
+0x0216  0x76 0x77 EAST      Yes   No    No    0x0da You are in a maze of twisty little passages, all the same
+0x0218  0x76 0x75 UPWARDS   Yes   No    No    0x0da You are in a maze of twisty little passages, all the same
+0x021a  0x76 0x75 DOWN      Yes   No    No    0x0da You are in a maze of twisty little passages, all the same
+0x021c  0x76 0x78 SOUTH     No    No    No    0x0da You are in a maze of twisty little passages, all the same
+0x021e  0x77 0x00 <Missing> No    No    No    0x0db You are at a dead end
+0x0220  0x78 0x76 EAST      No    No    No    0x0dc You are at a dead end
+0x0222  0x79 0x00 <Missing> No    No    No    0x0dd You are at a dead end
+0x0224  0x7a 0x00 <Missing> No    No    No    0x0de You are at a dead end
+0x0226  0x7b 0x7b WEST      No    No    No    0x0df You are in a maze of twisty little passages, all the same
+0x0228  0x7b 0x7b SOUTH     No    No    No    0x0df You are in a maze of twisty little passages, all the same
+0x022a  0x7b 0x7a EAST      Yes   No    No    0x0df You are in a maze of twisty little passages, all the same
+0x022c  0x7b 0x8a NORTH     No    No    No    0x0df You are in a maze of twisty little passages, all the same
+0x022e  0x7c 0x8c EAST      No    No    No    0x0e0 You are in a maze of twisty little passages, all the same
+0x0230  0x7c 0x79 NORTH     Yes   No    No    0x0e0 You are in a maze of twisty little passages, all the same
+0x0232  0x7c 0x7d DOWN      Yes   No    No    0x0e0 You are in a maze of twisty little passages, all the same
+0x0234  0x7c 0x7e SOUTH     No    No    No    0x0e0 You are in a maze of twisty little passages, all the same
+0x0236  0x7d 0x00 <Missing> No    No    No    0x0e1 You are at a dead end
+0x0238  0x7e 0x7c EAST      No    No    No    0x0e2 You are in a maze of twisty little passages, all the same
+0x023a  0x7e 0x7f WEST      Yes   No    No    0x0e2 You are in a maze of twisty little passages, all the same
+0x023c  0x7e 0x80 UPWARDS   Yes   No    No    0x0e2 You are in a maze of twisty little passages, all the same
+0x023e  0x7e 0x81 SOUTH     No    No    No    0x0e2 You are in a maze of twisty little passages, all the same
+0x0240  0x7f 0x80 WEST      No    No    No    0x0e3 You are in a maze of twisty little passages, all the same
+0x0242  0x80 0x7f WEST      No    No    No    0x0e4 You are in a maze of twisty little passages, all the same
+0x0244  0x80 0x82 SOUTH     No    No    No    0x0e4 You are in a maze of twisty little passages, all the same
+0x0246  0x80 0x81 EAST      No    No    No    0x0e4 You are in a maze of twisty little passages, all the same
+0x0248  0x81 0x7e WEST      No    No    No    0x0e5 You are in a maze of twisty little passages, all the same
+0x024a  0x81 0x82 SOUTH     Yes   No    No    0x0e5 You are in a maze of twisty little passages, all the same
+0x024c  0x81 0x87 NORTH     No    No    No    0x0e5 You are in a maze of twisty little passages, all the same
+0x024e  0x81 0x80 EAST      No    No    No    0x0e5 You are in a maze of twisty little passages, all the same
+0x0250  0x81 0x84 DOWN      Yes   No    No    0x0e5 You are in a maze of twisty little passages, all the same
+0x0252  0x82 0x80 WEST      No    No    No    0x0e6 You are in a maze of twisty little passages, all the same
+0x0254  0x82 0x83 SOUTH     No    No    No    0x0e6 You are in a maze of twisty little passages, all the same
+0x0256  0x83 0x82 WEST      No    No    No    0x0e7 You are at a dead end
+0x0258  0x84 0x00 <Missing> No    No    No    0x0e8 You are at a dead end
+0x025a  0x85 0x87 UPWARDS   No    No    No    0x0e9 You are at a dead end
+0x025c  0x86 0x74 EAST      No    No    No    0x0ea You are at a dead end
+0x025e  0x87 0x81 WEST      No    No    No    0x0eb You are in a maze of twisty little passages, all the same
+0x0260  0x87 0x85 DOWN      No    No    No    0x0eb You are in a maze of twisty little passages, all the same
+0x0262  0x87 0x74 EAST      Yes   No    No    0x0eb You are in a maze of twisty little passages, all the same
+0x0264  0x88 0x00 <Missing> No    No    No    0x0ec You are at a dead end
+0x0266  0x89 0x88 WEST      Yes   No    No    0x0ed You are in a maze of twisty little passages, all the same
+0x0268  0x8a 0x3c NORTH     Yes   No    No    0x0ee You are in a maze of twisty little passages, all the same
+0x026a  0x8a 0x3e UPWARDS   No    No    No    0x0ee You are in a maze of twisty little passages, all the same
+0x026c  0x8a 0x8c EAST      Yes   No    No    0x0ee You are in a maze of twisty little passages, all the same
+0x026e  0x8a 0x7b WEST      No    No    No    0x0ee You are in a maze of twisty little passages, all the same
+0x0270  0x8b 0x74 NORTH     No    No    No    0x0ef You are in a maze of twisty little passages, all the same
+0x0272  0x8b 0x73 NWEST     Yes   No    No    0x0ef You are in a maze of twisty little passages, all the same
+0x0274  0x8b 0x89 WEST      Yes   No    No    0x0ef You are in a maze of twisty little passages, all the same
+0x0276  0x8c 0x7c SOUTH     No    No    No    0x0f0 You are in a maze of twisty little passages, all the same
+0x0278  0x8c 0x76 EAST      No    No    No    0x0f0 You are in a maze of twisty little passages, all the same
+0x027a  0x8d 0x00 <Missing> No    No    No    0x0f1 
+0x027c  0x8e 0x00 <Missing> No    No    No    0x0f2 
+0x027e  0x8f 0x00 <Missing> No    No    No    0x0f3 
+0x0280  0x90 0x00 <Missing> No    No    No    0x0f4 
+0x0282  0x91 0x00 <Missing> No    No    No    0x0f5 You are in a maze of twisty little passages, all different. There is a vending machine marked 'batteries for sale' and a notice saying 'the pirate keeps his chest in the other maze'
+0x0284  0x92 0x3e UPWARDS   No    No    No    0x0f6 You are in a maze of twisty little passages, all different
+0x0286  0x93 0x00 <Missing> No    No    No    0x0f7 You are in a maze of twisty little passages, all different
+0x0288  0x94 0x00 <Missing> No    No    No    0x0f8 You are in a maze of twisty little passages, all different
+0x028a  0x95 0x00 <Missing> No    No    No    0x0f9 You are in a maze of twisty little passages, all different
+0x028c  0x96 0x3e DOWN      No    No    No    0x0fa You are in a maze of twisty little passages, all different
+0x028e  0x97 0x3e WEST      No    No    No    0x0fb You are in a maze of twisty little passages, all different
+0x0290  0x98 0x3e EAST      No    No    No    0x0fc You are in a maze of twisty little passages, all different
+0x0292  0x99 0x00 <Missing> No    No    No    0x0fd You are in a maze of twisty little passages, all different
+0x0294  0x9a 0x00 <Missing> No    No    No    0x0fe You are in a maze of twisty little passages, all different
+0x0296  0x9b 0x00 <Missing> No    No    No    0x0ff You are in a maze of twisty little passages, all different
+0x0298  0x9c 0x00 <Missing> No    No    No    0x100 You are in a maze of twisty little passages, all different
+0x029a  0x9d 0x00 <Missing> No    No    No    0x101 You are in a maze of twisty little passages, all different
+0x029c  0x9e 0x00 <Missing> No    No    No    0x102 You are in a maze of twisty little passages, all different
+0x029e  0x9f 0x00 <Missing> No    No    No    0x103 You are in a maze of twisty little passages, all different
+0x02a0  0xa0 0x00 <Missing> No    No    No    0x104 You are in a maze of twisty little passages, all different
+0x02a2  0xa1 0x00 <Missing> No    No    No    0x105 You are in a maze of twisty little passages, all different
+0x02a4  0xa2 0x00 <Missing> No    No    No    0x106 You are in a maze of twisty little passages, all different
+0x02a6  0xa3 0x00 <Missing> No    No    No    0x107 You are in a maze of twisty little passages, all different
+0x02a8  0xa4 0x00 <Missing> No    No    No    0x108 You are in a maze of twisty little passages, all different
+0x02aa  0xa5 0x00 <Missing> No    No    No    0x109 You are in a maze of twisty little passages, all different
+0x02ac  0xa6 0xa7 SOUTH     Yes   No    No    0x10a You are on a steep hillside rising up through the wood
+0x02ae  0xa6 0xa7 UPWARDS   Yes   No    No    0x10a You are on a steep hillside rising up through the wood
+0x02b0  0xa7 0xa8 SOUTH     Yes   No    No    0x10b You are on a very steep hillside rising high above the surrounding woodland
+0x02b2  0xa7 0xa8 UPWARDS   Yes   No    No    0x10b You are on a very steep hillside rising high above the surrounding woodland
+0x02b4  0xa8 0x00 <Missing> No    No    No    0x10c The trees thin out and an unclimable spire of polished rock rises from a clearing in the forest.
+0x02b6  0xa9 0xaa WEST      Yes   No    No    0x10d You are at the northeast end of a vast cave, surrounded by snoring dwarves. A welded grate covers a pit of green snakes and young beanstalks, and bits of broken vending machine litter the floor. Hundreds of small passages, just large enough for the dwarves but not for you, lead in all directions
+0x02b8  0xa9 0xaa SWEST     Yes   No    No    0x10d You are at the northeast end of a vast cave, surrounded by snoring dwarves. A welded grate covers a pit of green snakes and young beanstalks, and bits of broken vending machine litter the floor. Hundreds of small passages, just large enough for the dwarves but not for you, lead in all directions
+0x02ba  0xa9 0xaa SOUTH     Yes   No    No    0x10d You are at the northeast end of a vast cave, surrounded by snoring dwarves. A welded grate covers a pit of green snakes and young beanstalks, and bits of broken vending machine litter the floor. Hundreds of small passages, just large enough for the dwarves but not for you, lead in all directions
+0x02bc  0xaa 0xfc WEST      No    No    No    0x10e You are at the southwest end of a vast hall filled with a loud snoring emerging from a large heap at the other side. Bats skim around the ceiling far above and high in one wall is stuck a trident (perhaps it lodged in a crevice when thrown at one of the bats). The cavern walls are honeycombed with tiny passages, just too small for you
+0x02be  0xab 0xaa EAST      No    No    No    0x10f You are in a narrow east-west corridor, carved crudely out of the rock. The floor is littered with rock fragments left when the secret stone door at the east end of the corridor was shattered
+0x02c0  0xab 0xac WEST      Yes   No    No    0x10f You are in a narrow east-west corridor, carved crudely out of the rock. The floor is littered with rock fragments left when the secret stone door at the east end of the corridor was shattered
+0x02c2  0xac 0x00 <Missing> No    No    No    0x110 The east-west corridor continues
+0x02c4  0xad 0xac EAST      Yes   No    No    0x111 You are in an east-west corridor beside an iron ladder which reaches up through a round hole in the ceiling. The corridor continues
+0x02c6  0xad 0xae WEST      Yes   No    No    0x111 You are in an east-west corridor beside an iron ladder which reaches up through a round hole in the ceiling. The corridor continues
+0x02c8  0xad 0xaf UPWARDS   Yes   No    No    0x111 You are in an east-west corridor beside an iron ladder which reaches up through a round hole in the ceiling. The corridor continues
+0x02ca  0xae 0x00 <Missing> No    No    No    0x112 The east-west corridor continues, but is completely blocked by rubbish. You had better retrace your steps
+0x02cc  0xaf 0xb0 UPWARDS   Yes   No    No    0x113 You are on a metal ladder rising up a stone shaft
+0x02ce  0xb0 0xb1 UPWARDS   Yes   No    No    0x114 You are further up the ladder
+0x02d0  0xb1 0x00 <Missing> No    No    No    0x115 You are on a metal ladder, climbing up through a stone shaft
+0x02d2  0xb2 0xb1 DOWN      Yes   No    No    0x116 You are near the top of a metal ladder. There is a circular opening above
+0x02d4  0xb2 0xb3 UPWARDS   Yes   No    No    0x116 You are near the top of a metal ladder. There is a circular opening above
+0x02d6  0xb3 0xb4 WEST      Yes   No    No    0x117 You are a in network of stone passages beside a_pit. The passages lead in all directions
+0x02d8  0xb3 0xb4 SOUTH     No    No    No    0x117 You are a in network of stone passages beside a_pit. The passages lead in all directions
+0x02da  0xb3 0xb7 EAST      No    No    No    0x117 You are a in network of stone passages beside a_pit. The passages lead in all directions
+0x02dc  0xb3 0xba NORTH     No    No    No    0x117 You are a in network of stone passages beside a_pit. The passages lead in all directions
+0x02de  0xb4 0xb4 SOUTH     No    No    No    0x118 You are in a network of stone passages, which lead in all directions
+0x02e0  0xb4 0xb6 WEST      No    No    No    0x118 You are in a network of stone passages, which lead in all directions
+0x02e2  0xb4 0xb6 NORTH     Yes   No    No    0x118 You are in a network of stone passages, which lead in all directions
+0x02e4  0xb5 0x00 <Missing> No    No    No    0x119 You are in a network of stone passages, which lead in all directions
+0x02e6  0xb6 0xb6 WEST      No    No    No    0x11a You are in a network of stone passages, which lead in all directions
+0x02e8  0xb6 0xb6 NORTH     No    No    No    0x11a You are in a network of stone passages, which lead in all directions
+0x02ea  0xb6 0xba EAST      No    No    No    0x11a You are in a network of stone passages, which lead in all directions
+0x02ec  0xb7 0xba WEST      No    No    No    0x11b You are in a network of stone passages, which lead in all directions
+0x02ee  0xb7 0xbb SOUTH     No    No    No    0x11b You are in a network of stone passages, which lead in all directions
+0x02f0  0xb7 0xb3 EAST      No    No    No    0x11b You are in a network of stone passages, which lead in all directions
+0x02f2  0xb7 0xbc DOWN      Yes   No    No    0x11b You are in a network of stone passages, which lead in all directions
+0x02f4  0xb8 0xba NORTH     No    No    No    0x11c You are in a network of stone passages, which lead in all directions
+0x02f6  0xb9 0xbb EAST      No    No    No    0x11d You are in a network of stone passages, which lead in all directions
+0x02f8  0xb9 0xbb SOUTH     Yes   No    No    0x11d You are in a network of stone passages, which lead in all directions
+0x02fa  0xba 0xb4 SOUTH     No    No    No    0x11e You are in a network of stone passages, which lead in all directions
+0x02fc  0xba 0xba EAST      No    No    No    0x11e You are in a network of stone passages, which lead in all directions
+0x02fe  0xba 0xb8 NORTH     No    No    No    0x11e You are in a network of stone passages, which lead in all directions
+0x0300  0xba 0xb9 EAST      Yes   No    No    0x11e You are in a network of stone passages, which lead in all directions
+0x0302  0xba 0xb7 SOUTH     Yes   No    No    0x11e You are in a network of stone passages, which lead in all directions
+0x0304  0xba 0xba WEST      No    No    No    0x11e You are in a network of stone passages, which lead in all directions
+0x0306  0xbb 0xb7 WEST      No    No    No    0x11f You are in a network of stone passages
+0x0308  0xbb 0xb3 SOUTH     No    No    No    0x11f You are in a network of stone passages
+0x030a  0xbc 0xbd EAST      Yes   No    No    0x120 You are in an east-west passage lined with large square stones, from each of which hangs a set of rusty iron manacles. The ceiling drips water which falls onto heaps of decaying refuse covering the floor. There is an open trap-door in the roof and a small stone staircase leads up into the darkness behind it
+0x030c  0xbc 0xbe WEST      Yes   No    No    0x120 You are in an east-west passage lined with large square stones, from each of which hangs a set of rusty iron manacles. The ceiling drips water which falls onto heaps of decaying refuse covering the floor. There is an open trap-door in the roof and a small stone staircase leads up into the darkness behind it
+0x030e  0xbd 0x00 <Missing> No    No    No    0x121 You are in a torture chamber with an exit to the west. The room is cluttered with odd and unusual items which fortunately you do not recognise!
+0x0310  0xbe 0xbf NORTH     Yes   No    No    0x122 You are in long straight passage, lined with slabs of stone from which hang rusted manacles. The passage gets wider to the west. Scratches on the floor lead to a narrow entrance sloping downwards to the north, as if many heavy objects had been dragged in that direction
+0x0312  0xbe 0xc0 WEST      Yes   No    No    0x122 You are in long straight passage, lined with slabs of stone from which hang rusted manacles. The passage gets wider to the west. Scratches on the floor lead to a narrow entrance sloping downwards to the north, as if many heavy objects had been dragged in that direction
+0x0314  0xbf 0x00 <Missing> No    No    No    0x123 You are at a dead end
+0x0316  0xc0 0xc1 NORTH     Yes   No    No    0x124 You are in a wide east-west dungeon walkway between cells to the north and south. The passage continues to east and west. The cells have no doors: clearly these would not be necessary as there are enough chains suspended from the walls to hold any number of prisoners
+0x0318  0xc0 0xc2 SOUTH     Yes   No    No    0x124 You are in a wide east-west dungeon walkway between cells to the north and south. The passage continues to east and west. The cells have no doors: clearly these would not be necessary as there are enough chains suspended from the walls to hold any number of prisoners
+0x031a  0xc0 0xc3 WEST      Yes   No    No    0x124 You are in a wide east-west dungeon walkway between cells to the north and south. The passage continues to east and west. The cells have no doors: clearly these would not be necessary as there are enough chains suspended from the walls to hold any number of prisoners
+0x031c  0xc1 0x00 <Missing> No    No    No    0x125 You are in a dingy dungeon cell with an entrance to the south. Rows of manacles line the east and west walls
+0x031e  0xc2 0x00 <Missing> No    No    No    0x126 You are in a dingy dungeon cell with an entrance to the north. Rows of manacles line the east and west walls
+0x0320  0xc3 0x00 <Missing> No    No    No    0x127 You are on the east bank of a wide fissure which cuts completely across the dungeon walkway. A river of lava bubbles far below in the chasm, and foul acrid fumes rise up
+0x0322  0xc4 0x00 <Missing> No    No    No    0x128 
+0x0324  0xc5 0xc6 WEST      Yes   No    No    0x129 You are on the west bank of a wide fissure which cuts right across the dungeon walkway. Far below in the fissure a river of lava bubbles slowly, sending up clouds of foul acrid fumes
+0x0326  0xc6 0xc7 WEST      Yes   No    No    0x12a You are in an east-west dungeon walkway near the dungeon entrance
+0x0328  0xc7 0xcb UPWARDS   Yes   No    No    0x12b You are on a spiral stone staircase
+0x032a  0xc8 0xc7 UPWARDS   Yes   No    No    0x12c You are on a spiral stone staircase
+0x032c  0xc9 0xc8 UPWARDS   Yes   No    No    0x12d You are on a spiral stone staircase
+0x032e  0xca 0xc9 UPWARDS   Yes   No    No    0x12e You are at the bottom of the pit, in a large pentagonal room inscribed with weird symbols. The floor is caked with dried blood, scratched with complex markings. A wide stone staircase winds up from the pit towards a dim circle of light at the top of the staircase, far above
+0x0330  0xcb 0xcc UPWARDS   Yes   No    No    0x12f You are on a spiral stone staircase
+0x0332  0xcc 0xcd UPWARDS   Yes   No    No    0x130 You are on a spiral stone staircase
+0x0334  0xcd 0xce UPWARDS   Yes   No    No    0x131 You are on a spiral stone staircase
+0x0336  0xce 0xcf UPWARDS   Yes   No    No    0x132 You are on a spiral stone staircase
+0x0338  0xcf 0xd0 UPWARDS   Yes   No    No    0x133 You are on a spiral stone staircase
+0x033a  0xd0 0xd1 UPWARDS   Yes   No    No    0x134 You are on a spiral stone staircase
+0x033c  0xd1 0x00 <Missing> No    No    No    0x135 You are at the top of a high stone pinnacle surrounded by clouds. You look down through gaps between them and see a carpet of trees far below, stretching in all directions. To the north, the forest eventually thins into scrub as it approaches the slopes of a volcano. To the west a stream winds south along a narrow valley, and to the east the woodland continues as far as the eye can see. The staircase is the only way down
+0x033e  0xd2 0xda NORTH     Yes   No    No    0x136 You at the edge of a huge cavern which is almost filled by a huge web hanging from the centre of the ceiling. Behind you, to the west, is an exit back to the spiral staircase
+0x0340  0xd2 0xd3 SOUTH     Yes   No    No    0x136 You at the edge of a huge cavern which is almost filled by a huge web hanging from the centre of the ceiling. Behind you, to the west, is an exit back to the spiral staircase
+0x0342  0xd2 0xce WEST      Yes   No    No    0x136 You at the edge of a huge cavern which is almost filled by a huge web hanging from the centre of the ceiling. Behind you, to the west, is an exit back to the spiral staircase
+0x0344  0xd3 0x00 <Missing> No    No    No    0x137 You are southwest of a huge web, hanging heavily from the cavern roof
+0x0346  0xd4 0xd3 WEST      Yes   No    No    0x138 You are south of a huge, dirty web
+0x0348  0xd4 0xd5 EAST      Yes   No    No    0x138 You are south of a huge, dirty web
+0x034a  0xd5 0x00 <Missing> No    No    No    0x139 You are southeast of a huge web which sags heavily from the cavern ceiling
+0x034c  0xd6 0xd7 NORTH     Yes   No    No    0x13a You are east of a huge web which hangs down from the cavern roof
+0x034e  0xd6 0xd5 SOUTH     Yes   No    No    0x13a You are east of a huge web which hangs down from the cavern roof
+0x0350  0xd7 0x00 <Missing> No    No    No    0x13b You are northeast of a huge web which hangs heavily from the cavern roof
+0x0352  0xd8 0xd9 NORTH     Yes   No    No    0x13c You are in amongst the strands of a huge web that rises to the roof. You might be able to escape up a strand
+0x0354  0xd8 0xd7 NEAST     Yes   No    No    0x13c You are in amongst the strands of a huge web that rises to the roof. You might be able to escape up a strand
+0x0356  0xd8 0xd6 EAST      Yes   No    No    0x13c You are in amongst the strands of a huge web that rises to the roof. You might be able to escape up a strand
+0x0358  0xd8 0xd5 SEAST     Yes   No    No    0x13c You are in amongst the strands of a huge web that rises to the roof. You might be able to escape up a strand
+0x035a  0xd8 0xd4 SOUTH     Yes   No    No    0x13c You are in amongst the strands of a huge web that rises to the roof. You might be able to escape up a strand
+0x035c  0xd8 0xd3 SWEST     Yes   No    No    0x13c You are in amongst the strands of a huge web that rises to the roof. You might be able to escape up a strand
+0x035e  0xd8 0xd2 WEST      Yes   No    No    0x13c You are in amongst the strands of a huge web that rises to the roof. You might be able to escape up a strand
+0x0360  0xd8 0xda NWEST     Yes   No    No    0x13c You are in amongst the strands of a huge web that rises to the roof. You might be able to escape up a strand
+0x0362  0xd8 0xdb UPWARDS   Yes   No    No    0x13c You are in amongst the strands of a huge web that rises to the roof. You might be able to escape up a strand
+0x0364  0xd9 0xda WEST      Yes   No    No    0x13d You are north of a huge web which hangs in folds from the cavern ceiling
+0x0366  0xd9 0xd7 EAST      Yes   No    No    0x13d You are north of a huge web which hangs in folds from the cavern ceiling
+0x0368  0xda 0x00 <Missing> No    No    No    0x13e You are northwest of a huge web, rising up towards the cavern ceiling
+0x036a  0xdb 0xdc UPWARDS   Yes   No    No    0x13f You are clinging to thick strands of sticky grey web in the middle of a huge cavern. You can either go up, further into the web, or back down to the cavern floor far below
+0x036c  0xdc 0xdd WEST      Yes   No    No    0x140 You are on a ledge above the cavern. It was once a magnificent place, judging from the fabulous carvings jutting out of the mess. A large round passage, exactly the same size as the spider, leads west
+0x036e  0xdd 0xde WEST      Yes   No    No    0x141 You are in the spider's lair, surrounded by thick sticky web. The stench is unbearable but fortunately there is no spider in sight. Round, narrow entrances lead east and west through the web
+0x0370  0xde 0xdf WEST      Yes   No    No    0x142 You are in a slimy east-west passage, almost blocked by strands of thick grey web to the east. A rain of water cascades from the walls and ceiling, forming a small stream which trickles away to the west. The drip of water drowns out all other sounds
+0x0372  0xdf 0xe0 WEST      Yes   No    No    0x143 You are in a low east-west passage beside an underground stream. Water trickles down the sides of the passage leaving brown stains and the stream is really getting quite deep
+0x0374  0xe0 0xe1 NORTH     Yes   No    No    0x144 You are beside an underground stream. To the west the stream completely fills the passage but there is a narrow opening to the north
+0x0376  0xe0 0xe3 WEST      No    No    No    0x144 You are beside an underground stream. To the west the stream completely fills the passage but there is a narrow opening to the north
+0x0378  0xe1 0x00 <Missing> No    No    No    0x145 You are at a dead end
+0x037a  0xe2 0x09 NORTH     No    No    No    0x146 You are lost in the forest
+0x037c  0xe2 0x09 EAST      No    No    No    0x146 You are lost in the forest
+0x037e  0xe2 0x0b SOUTH     No    No    No    0x146 You are lost in the forest
+0x0380  0xe3 0x46 UPWARDS   No    No    No    0x147 You are swept along by the stream and held below the water. The current is not particularly strong, however, so you feel that you are in no danger. Fortunately your lamp seems to be waterproof
+0x0382  0xe3 0x46 OUTSIDE   No    No    No    0x147 You are swept along by the stream and held below the water. The current is not particularly strong, however, so you feel that you are in no danger. Fortunately your lamp seems to be waterproof
