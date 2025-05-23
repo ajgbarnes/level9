@@ -1,0 +1,806 @@
+0x1  /  0xd7d  :  
+0x2  /  0xd7f  : 
+0x3  /  0xd80  : , 
+0x4  /  0xd83  : . 
+0x5  /  0xd86  : 
+
+0x6  /  0xd88  :  and 
+0x7  /  0xd8d  : .
+
+0x8  /  0xd90  : north
+0x9  /  0xd94  : northeast
+0xa  /  0xd9a  : east
+0xb  /  0xd9d  : south
+0xc  /  0xd9f  : southeast
+0xd  /  0xda5  : southwest
+0xe  /  0xda9  : west
+0xf  /  0xdac  : northwest
+0x10  /  0xdb2  : up
+0x11  /  0xdb5  : down
+0x12  /  0xdb9  : in
+0x13  /  0xdbb  : out
+0x14  /  0xdbe  : across
+0x15  /  0xdc2  : Exits are 
+0x16  /  0xdca  :  to a door
+0x17  /  0xdce  :  through an open door
+0x18  /  0xdda  : 
+You are 
+0x19  /  0xddf  : You own 
+0x1a  /  0xde4  : And you're wearing 
+0x1b  /  0xdf3  : You can see 
+0x1c  /  0xdfa  : 
+What now?
+0x1d  /  0xe02  : I don't understand
+0x1e  /  0xe0e  : Eh?
+0x1f  /  0xe12  : Arfle barfle gloop?
+0x20  /  0xe20  : You'll need to say more than that!
+0x21  /  0xe36  : Could you elaborate?
+0x22  /  0xe45  : Sorry, I can't guess what you mean
+0x23  /  0xe5c  : Could you rephrase that?
+0x24  /  0xe6c  : Please be more specific
+0x25  /  0xe79  : I don't quite understand
+0x26  /  0xe89  : Keep it simple, please
+0x27  /  0xe97  : You can't.
+0x28  /  0xe9e  : Don't be silly!
+0x29  /  0xea8  : You can't see
+0x2a  /  0xeb0  : You don't have
+0x2b  /  0xeb9  : You already have 
+0x2c  /  0xec4  : You can't carry any more
+0x2d  /  0xed2  : You can't take
+0x2e  /  0xedb  : You can't wear
+0x2f  /  0xee4  : You're carrying too much to take
+0x30  /  0xef9  : 
+0x31  /  0xefa  : 
+0x32  /  0xefb  : Nothing happens
+0x33  /  0xf06  : Doesn't seem to work
+0x34  /  0xf14  : There's no effect
+0x35  /  0xf20  : Really stop?
+0x36  /  0xf29  : 
+Another game?
+0x37  /  0xf33  : Really restore?
+0x38  /  0xf3d  : 
+YES or NO, please
+0x39  /  0xf4b  : 
+You score 
+0x3a  /  0xf52  :  out of 1000
+0x3b  /  0xf5b  : Sorry, I can't tell you any more
+0x3c  /  0xf6f  :  nothing.
+
+0x3d  /  0xf76  : You can't go in that direction
+0x3e  /  0xf87  : You bump into a door
+0x3f  /  0xf91  : The door closes behind you
+0x40  /  0xf9e  : It's already open
+0x41  /  0xfaa  : It's already closed
+0x42  /  0xfb7  : There's nothing to open
+0x43  /  0xfc3  : There's nothing to close
+0x44  /  0xfcf  : Only a fool would attack
+0x45  /  0xfdf  : You find nothing
+0x46  /  0xfe8  : The only visible exit is 
+0x47  /  0xff8  : 
+0x48  /  0xff9  :  tied together
+0x49  /  0x1001  :  which is open
+0x4a  /  0x100a  :  (one match is lit)
+0x4b  /  0x1017  :  burning brightly
+0x4c  /  0x1021  :  peering down from above
+0x4d  /  0x1030  :  full of water
+0x4e  /  0x1038  :  tied up
+0x4f  /  0x103e  :  glowing white-hot
+0x50  /  0x104b  : an olive branch
+0x51  /  0x1057  : a golden buckle
+0x52  /  0x1062  : the jester's cap
+0x53  /  0x106b  : a silicon chip
+0x54  /  0x1075  : a tightly-closed box
+0x55  /  0x1083  : a diamond teardrop
+0x56  /  0x108e  : an ivory tusk
+0x57  /  0x1099  : a little dragon's wing
+0x58  /  0x10a6  : a dinosaur egg
+0x59  /  0x10af  : a rotten apple
+0x5a  /  0x10b9  : a battered suit of armour
+0x5b  /  0x10c8  : a meaty bone
+0x5c  /  0x10d1  : a grimy brown bottle
+0x5d  /  0x10df  : a bunch of green leaves
+0x5e  /  0x10ef  : a pack of playing cards
+0x5f  /  0x10fe  : an oriental rug
+0x60  /  0x1109  : a jewellery case
+0x61  /  0x1114  : a cask of ale
+0x62  /  0x111d  : a green frog
+0x63  /  0x1126  : a bunch of keys
+0x64  /  0x1133  : a rugged gauntlet
+0x65  /  0x1140  : a drinking horn
+0x66  /  0x114a  : a fine golden hourglass
+0x67  /  0x1159  : a little icicle
+0x68  /  0x1162  : a lightsabre
+0x69  /  0x116b  : an inlaid looking-glass
+0x6a  /  0x117b  : a lute
+0x6b  /  0x1180  : a matchbox
+0x6c  /  0x1189  : a fine metronome
+0x6d  /  0x1194  : a milestone
+0x6e  /  0x119c  : a mirror
+0x6f  /  0x11a2  : a stone pot
+0x70  /  0x11a9  : a delicate little screwdriver
+0x71  /  0x11ba  : a Masai spear
+0x72  /  0x11c4  : some sweetmeats
+0x73  /  0x11cf  : valerian
+0x74  /  0x11d5  : The Wheel
+0x75  /  0x11da  : 
+0x76  /  0x11db  : a sharp axe
+0x77  /  0x11e3  : a silver bell
+0x78  /  0x11e8  : a gallon petrol can
+0x79  /  0x11f3  : a silver candelabra
+0x7a  /  0x11fd  : a candle
+0x7b  /  0x1203  : 
+0x7c  /  0x1204  : a filmy cloak
+0x7d  /  0x120f  : a stone club
+0x7e  /  0x1218  : a fur coat
+0x7f  /  0x121f  : a jewelled coffer
+0x80  /  0x122c  : a silver coin
+0x81  /  0x1232  : a jewelled crown
+0x82  /  0x123e  : an emerald
+0x83  /  0x1246  : 
+0x84  /  0x1247  : an onyx figurine
+0x85  /  0x1253  : a firefly
+0x86  /  0x125a  : some delicious food
+0x87  /  0x1267  : a galactic groat
+0x88  /  0x1271  : a joker
+0x89  /  0x1277  : a fine sharp sword
+0x8a  /  0x1283  : a carved lodestone
+0x8b  /  0x128e  : a lur
+0x8c  /  0x1292  : a scrap of parchment
+0x8d  /  0x12a0  : an old mattress
+0x8e  /  0x12a9  : a weighted net
+0x8f  /  0x12b3  : a gold nugget
+0x90  /  0x12bd  : a tin opener
+0x91  /  0x12c5  : a painted pebble
+0x92  /  0x12cf  : a glass phial
+0x93  /  0x12d9  : a grubby pick
+0x94  /  0x12e3  : two short planks
+0x95  /  0x12f0  : a grapple-firing rocket
+0x96  /  0x12ff  : a coil of rope
+0x97  /  0x1309  : a curved ruby
+0x98  /  0x1312  : a battered rucksack
+0x99  /  0x131f  : winged shoes
+0x9a  /  0x1327  : a shovel
+0x9b  /  0x132d  : a fallen star
+0x9c  /  0x1335  : a tin of catfood
+0x9d  /  0x1340  : a long trident
+0x9e  /  0x134a  : a porcelain vase
+0x9f  /  0x1356  : a tiger tooth
+0xa0  /  0x135e  : Welcome to "Lords of Time" from Level 9 Computing. You are sitting in the comfort of your own home, debugging your latest program before submitting it for us to market. Suddenly there is a blinding flash...
+
+0xa1  /  0x13d9  : a grandfather clock large enough to climb into
+0xa2  /  0x13f6  : huge cogs numbered 1 to 9
+0xa3  /  0x1409  : a massive pendulum
+0xa4  /  0x1417  : a cast-iron cauldron
+0xa5  /  0x1425  : a pile of family rubbish
+0xa6  /  0x1434  : a wall cupboard
+0xa7  /  0x143f  : a weeping willow
+0xa8  /  0x1448  : a red Porsche
+0xa9  /  0x1450  : a wall of ice blocking the way south
+0xaa  /  0x1462  : a clear lake of very cold water to the northwest
+0xab  /  0x1479  : a sheet of smooth ice leading northwest
+0xac  /  0x148d  : a cube of ice round the throne
+0xad  /  0x149f  : a moored viking longship with a fierce dragon prow
+0xae  /  0x14be  : a rocking stone to the west
+0xaf  /  0x14cb  : a huge iron-bound chest
+0xb0  /  0x14db  : a recessed handle
+0xb1  /  0x14e6  : an ottoman
+0xb2  /  0x14ee  : a twee little well labelled "Water of Strength"
+0xb3  /  0x150b  : a grate in the south wall
+0xb4  /  0x1516  : a marble basin full of water
+0xb5  /  0x1527  : a crude black archway
+0xb6  /  0x1537  : a jumble of broken robots
+0xb7  /  0x1549  : a silicate workbench
+0xb8  /  0x1557  : many cruel metal cages in which the evil Timelords have imprisoned zillions of cute creatures
+0xb9  /  0x1590  : thick bars which imprison hundreds of poor people
+0xba  /  0x15af  : a compost heap, spilling onto the path
+0xbb  /  0x15c1  : a jumble of dry wood
+0xbc  /  0x15ce  : a picture of a kindly old man
+0xbd  /  0x15de  : a mushroom ring
+0xbe  /  0x15e8  : It's dark!
+
+0xbf  /  0x15f1  : Be more careful in future!
+0xc0  /  0x1603  : The picture comes to life: "I am Father Time and I have chosen you to help defend history against 9 evil Timelords. You must collect 9 items, each marked with an hourglass. Good Luck!"
+0xc1  /  0x167e  : The animals bound away
+0xc2  /  0x168c  : The people are free and hurry away, handing you a reward
+0xc3  /  0x16ab  : The bottle is loosened
+0xc4  /  0x16b8  : It's held fast
+0xc5  /  0x16c2  : 
+A skeleton hand strangles you!
+0xc6  /  0x16d7  : 
+A scorpion stings!
+0xc7  /  0x16e4  : 
+Lightning strikes!
+0xc8  /  0x16f1  : 
+Father Time appears. "Do not be afraid. What you are about to see is the future if the Timelords win. There is still time to defeat them."
+
+0xc9  /  0x1746  : the Tooth Fairy
+0xca  /  0x1750  : a woolly mammoth blocking your escape
+0xcb  /  0x1767  : a sabre-toothed tiger
+0xcc  /  0x1774  : an Allosaurus
+0xcd  /  0x177d  : a Tyrannosaurus Rex
+0xce  /  0x178a  : a Brontosaurus
+0xcf  /  0x1793  : a group of cavemen
+0xd0  /  0x179f  : a caveman dragging a struggling cavewoman by her hair
+0xd1  /  0x17bd  : an animated cave skeleton
+0xd2  /  0x17cd  : a rotund bartender
+0xd3  /  0x17d9  : an unfortunate wretch in the stocks
+0xd4  /  0x17f1  : a thirsty messenger of the King
+0xd5  /  0x1803  : a genuine fire-breathing dragon
+0xd6  /  0x1817  : the Black Knight
+0xd7  /  0x181b  : a fair prince
+0xd8  /  0x1824  : Pirate Pete
+0xd9  /  0x182a  : a jester
+0xda  /  0x182f  : a shivering Viking guard
+0xdb  /  0x183e  : a ghost
+0xdc  /  0x1843  : two Roman sentries beside the gate
+0xdd  /  0x1856  : a massively-muscled gladiator
+0xde  /  0x1868  : a fierce lion
+0xdf  /  0x1871  : a splendid android
+0xe0  /  0x187c  : a fierce cyberman waving a sword
+0xe1  /  0x1891  : a single beautiful narcissus standing proudly amongst the weeds
+0xe2  /  0x18b7  : a silver fox
+0xe3  /  0x18bd  : two hunting dogs
+0xe4  /  0x18ca  : Needs winding
+0xe5  /  0x18d1  : The room shakes
+0xe6  /  0x18d9  : That magic word doesn't work
+0xe7  /  0x18ec  : A force field blocks you: "Payment, please"
+0xe8  /  0x190a  : "Entry now authorised today"
+0xe9  /  0x191e  : An inspection panel opens
+0xea  /  0x192e  : The cyberman blocks you
+0xeb  /  0x193c  : "Ta, love"
+
+0xec  /  0x1945  : No one here wants
+0xed  /  0x1952  : You can't fill
+0xee  /  0x195a  : You can't empty
+0xef  /  0x1965  : YEUCH! No, you can't eat
+0xf0  /  0x1977  : There's no one to give it to
+0xf1  /  0x1988  : You find
+0xf2  /  0x198d  : It's closed
+0xf3  /  0x1995  : If you insist.. There's no accounting for taste!
+0xf4  /  0x19b2  : That was delicious!
+0xf5  /  0x19bf  : Your vision clears. Someone's here!
+0xf6  /  0x19d6  : Something slaps the coin from your hand!
+0xf7  /  0x19ec  : The fairy snatches it back. "This coin may not be taken", she trills, "It may only be exchanged for a tooth!"
+0xf8  /  0x1a2b  : You can't quite reach the keys
+0xf9  /  0x1a3d  : The magnetic lodestone attracts the keys
+0xfa  /  0x1a54  : The tree speaks: "When I was planted the stream was clear and sparkling. Now I am old, it is polluted and I just want to die."
+0xfb  /  0x1a9f  : You need an axe
+0xfc  /  0x1aa9  : With one swift blow you cut down the tree and it falls with a peaceful sigh. One sparkling teardrop remains.
+0xfd  /  0x1ae7  : The planks are too short to cross the stream
+0xfe  /  0x1afc  : You tie the planks into a longer plank
+0xff  /  0x1b10  : The tied planks bridge the stream
+0x100  /  0x1b20  : With what shall you tie them?
+0x101  /  0x1b2f  : The stream is too wide to cross
+0x102  /  0x1b3d  : You've already done that!
+0x103  /  0x1b4e  : 
+You have no spear! The tiger attacks..
+0x104  /  0x1b65  : The lake freezes round the icicle!
+0x105  /  0x1b79  : Petrol soaks into the ground.
+
+0x106  /  0x1b8c  : You pour out the petrol and discard its can
+0x107  /  0x1ba3  : That's towards the mammoth! You are trapped.
+0x108  /  0x1bbc  : The petrol burns up with a whoosh!
+0x109  /  0x1bd0  :  The mammoth is so surprised that it jumps clean out of its skin and runs off in terror!
+0x10a  /  0x1c02  : You have no fire
+0x10b  /  0x1c0c  : It burns brightly
+0x10c  /  0x1c17  : It's empty!
+0x10d  /  0x1c21  : It burns well
+0x10e  /  0x1c2a  : The match goes out
+0x10f  /  0x1c35  : And goes out.
+
+0x110  /  0x1c40  : 
+The candle flickers
+
+0x111  /  0x1c4e  : 
+You feel very cold!
+
+0x112  /  0x1c5b  : The cavepeople grunt to each other
+0x113  /  0x1c6f  : The cavepeople grunt louder, at you
+0x114  /  0x1c82  : The cavemen advance, waving sticks
+0x115  /  0x1c96  : The cavemen attack!
+0x116  /  0x1ca2  : The door opens.
+0x117  /  0x1caa  : The Black Knight strides forwards
+0x118  /  0x1cb7  : The Black Knight draws his sword
+0x119  /  0x1cc4  : The Black Knight attacks 
+0x11a  /  0x1cce  : The Black Knight attacks again!
+0x11b  /  0x1cdb  : but the armour protects you. 
+0x11c  /  0x1ced  : The prince leaps to your defence 
+0x11d  /  0x1d01  : but can find no sword and is killed easily.
+0x11e  /  0x1d19  : and kills the evil Black Knight. He carries the body away
+0x11f  /  0x1d35  : You're in a hole
+0x120  /  0x1d40  : You're in a deep hole
+0x121  /  0x1d4c  : You're in a deep hole which collapses, burying you!
+0x122  /  0x1d6b  : 
+Pirate Pete steals
+0x123  /  0x1d76  : The lur booms out, summoning a horde of Vikings. 
+0x124  /  0x1d93  : They are furious that Pirate Pete is not here!
+0x125  /  0x1dab  : They grab the pirate and drag him off, rewarding you with an olive branch
+0x126  /  0x1dd6  : The viking is delighted by the warm fur and hands you a lur. "There is a reward for capturing the pirate", he says
+0x127  /  0x1e11  : 
+It's very hot
+
+0x128  /  0x1e1c  : 
+You'll die without water!
+
+0x129  /  0x1e2b  : 
+The heat is too much!
+
+0x12a  /  0x1e38  : 
+The lion struggles free
+0x12b  /  0x1e46  : The lion attacks!
+0x12c  /  0x1e50  : Tears rain down from the willow tree
+0x12d  /  0x1e64  : The tree is dead
+0x12e  /  0x1e6c  : Planks bridge the stream
+0x12f  /  0x1e79  : There's a hole to the south
+0x130  /  0x1e85  : The wood burns warmly
+0x131  /  0x1e92  : The dinosaur approaches menacingly
+0x132  /  0x1ea5  : A secret door leads east
+0x133  /  0x1eb1  : The plant is eating you
+0x134  /  0x1ebd  : I didn't expect that!
+0x135  /  0x1ecc  : The Timelords notice you and summon their tebbit
+0x136  /  0x1ee7  :  releasing liquid paraquat 
+0x137  /  0x1ef7  : which kills the plant
+0x138  /  0x1f04  : "Woof!"
+0x139  /  0x1f0b  : "WOOF! WOOF! YAP! GRRR!"
+0x13a  /  0x1f21  : "ARF! ARF! ARF! AOOOUL!" Guards arrive..
+0x13b  /  0x1f41  : You feel VERY strong!
+0x13c  /  0x1f50  : Just what you needed! 
+0x13d  /  0x1f60  : , chasing the cavemen
+0x13e  /  0x1f6d  : It wanders away
+0x13f  /  0x1f76  :  and from the debris appears
+0x140  /  0x1f85  : The air shimmers
+0x141  /  0x1f8f  : The dinosaur kills you
+0x142  /  0x1f9b  : The killer dinosaurs kill each other
+0x143  /  0x1fae  : The dinosaur blocks you
+0x144  /  0x1fba  : The ice cube shatters, freeing the Snow Queen. She smiles, taps your shoulder with a sword and glides away
+0x145  /  0x1ff9  : The ice wall shatters
+0x146  /  0x2004  : MMMMMMM!
+0x147  /  0x200d  : Only a real dodo would kiss
+0x148  /  0x201f  : The frog turns into a handsome prince!
+0x149  /  0x2037  : Nice try, but the icicle is out of reach
+0x14a  /  0x204e  : 
+The din shakes the icicle loose
+0x14b  /  0x2060  : Noisy little beggar, aren't you!
+0x14c  /  0x2076  : The bad tooth comes loose easily. The tiger is delighted and bounds off joyfully
+0x14d  /  0x20a1  : It has a lean and hungry look, and could be in pain. Be careful!
+0x14e  /  0x20c8  : The tiger is friendly now, but seems to be in pain
+0x14f  /  0x20e3  : The tiger purrs deafeningly
+0x150  /  0x20f3  : The tiger pats one puffy cheek with a paw
+0x151  /  0x210b  : The tiger winces and roars quietly
+0x152  /  0x211d  : The fox grabs the bone and slinks off
+0x153  /  0x2132  : The fox trips you up
+0x154  /  0x2140  : The tiger blocks you, snarling to show its impressive array of mottled teeth
+0x155  /  0x216b  : You forgot to open it! 
+0x156  /  0x217a  : The tiger does not like that one bit. It attacks..
+0x157  /  0x2197  : Oops! Smashed to smithereens
+0x158  /  0x21a9  : The vile smell of whale-meat assails your nostrils
+0x159  /  0x21ca  : The dragon stalks off in a huff
+0x15a  /  0x21dc  : The dragon lets you climb on his back and you travel along quite happily, back the way you came, until you reach the edge of a moat. The dragon tries to fly over it but only succeeds in belly-flopping into the water. It slinks off, dripping
+0x15b  /  0x225f  : "I feel like a walk now, would you like a ride on my back?"
+0x15c  /  0x2287  : The dragon eats the food with obvious relish: "Thanks mate, that was very good - could have done with a touch more mustard though."
+
+0x15d  /  0x22d0  : The android exchanges your coin for a Galactic Groat
+0x15e  /  0x22f0  : The tooth fairy examines it closely and says, "This isn't our usual kind of tooth, most odd - tell you what, I'll swap it for one silver coin. Is that a deal?"
+0x15f  /  0x2348  : "Mmm. Perhaps I could throw in a firefly too. OK?"
+0x160  /  0x2369  : "Then you'll get NOTHING!"
+0x161  /  0x237d  : 
+The fairy takes your tooth and leaves.
+0x162  /  0x2391  : The tiger gulps down the food greedily and purrs at you
+0x163  /  0x23b0  : The brontosaurus grabs the leaves and pulls them into the air. It carries you out of the pit!
+0x164  /  0x23dc  : "OK, the ale's yours"
+0x165  /  0x23ea  : Not worth enough
+0x166  /  0x23f5  : "Thanks very much! Just what I wanted!" The messenger drinks the ale and shares some of his food with you
+0x167  /  0x242e  : The Jester laughs with glee, "Thank you my friend"! He gives you his belled cap before dancing off
+0x168  /  0x2463  : The narcissus squeaks with joy and rewards you with a lodestone. He admires himself delightedly in the looking-glass
+0x169  /  0x24a6  : The dogs gulp down the delicacies, wagging their tails, before waddling off for a nap
+0x16a  /  0x24d9  : What a queer thing to do to
+0x16b  /  0x24e8  : Your blows are futile
+0x16c  /  0x24f6  : You attack ferociously, scaring off
+0x16d  /  0x250c  : 
+It is marked with an hourglass symbol
+0x16e  /  0x2524  : Time goes by 
+0x16f  /  0x252f  : 
+It is a valuable treasure
+0x170  /  0x253e  :  balanced precariously on a shelf
+0x171  /  0x2550  :  rolling on the ground
+0x172  /  0x255c  :  hanging on the wall
+0x173  /  0x2565  :  lying on blood-stained snow
+0x174  /  0x2576  :  poking out of the earth
+0x175  /  0x257f  :  scattered about
+0x176  /  0x258a  :  on a green-baize table
+0x177  /  0x259a  :  hanging on the wall
+0x178  /  0x25a3  :  on the dressing table
+0x179  /  0x25ac  :  on a rough wooden table
+0x17a  /  0x25ba  :  sitting on a lily pad
+0x17b  /  0x25c5  :  pushed out of reach under the shed door
+0x17c  /  0x25d7  :  in the dust
+0x17d  /  0x25dd  :  on a table
+0x17e  /  0x25e4  :  on the mantlepiece
+0x17f  /  0x25ef  :  hanging from the ceiling
+0x180  /  0x25fe  :  standing in a rack
+0x181  /  0x2607  :  on the wall
+0x182  /  0x260b  :  propped in the corner
+0x183  /  0x2616  :  on the table
+0x184  /  0x261b  :  in pride of place
+0x185  /  0x2625  :  beside the road
+0x186  /  0x262b  :  half-buried in the earth
+0x187  /  0x2636  :  on a stone shelf
+0x188  /  0x2640  :  on the workbench
+0x189  /  0x2649  :  hanging on the wall
+0x18a  /  0x2652  :  on a carved sideboard
+0x18b  /  0x2661  :  hidden amongst the delphiniums
+0x18c  /  0x2674  :  propped up in a corner
+0x18d  /  0x2682  : 
+0x18e  /  0x2683  : 
+0x18f  /  0x2684  : 
+0x190  /  0x2685  : 
+You've been killed.
+
+0x191  /  0x2693  : in your own living room
+0x192  /  0x269e  : in a large, cold looking room
+0x193  /  0x26ad  : inside a gigantic clock
+0x194  /  0x26ba  : at the end of a gravel drive which bends to the southwest. The grassy lawns beside the drive are edged with the vibrant colours of summer flowers. A narrow country road runs north-south
+0x195  /  0x271b  : at roadworks where the road ends
+0x196  /  0x272d  : on a winding gravel drive
+0x197  /  0x273a  : outside a delightful country cottage
+0x198  /  0x274f  : in a bright hallway at the foot of a carpetted stairway
+0x199  /  0x276a  : on the landing at the top of the stairs
+0x19a  /  0x277a  : in a cramped store-room
+0x19b  /  0x2787  : in a plushly carpeted master bedroom
+0x19c  /  0x279a  : in a lovely old-fashioned kitchen
+0x19d  /  0x27af  : in the living room, a long comfortable room decorated in autumn shades of brown and gold. A patio door leads to the garden
+0x19e  /  0x27ef  : on a patio, decorated with urns of flowers. A crazy-paving path winds southwest across the lawn to a garden shed. The garden ends at a wooden fence
+0x19f  /  0x283d  : in the flower garden
+0x1a0  /  0x2847  : at the end of the garden beside a five foot fence covered in ivy
+0x1a1  /  0x2867  : beside a fence on the east bank of a wide, dirty stream clogged with crisp packets and MacRonalds boxes
+0x1a2  /  0x289d  : further upstream where the filthy stream is quite narrow. A lone narcissus grows amidst the nettles on the opposite bank
+0x1a3  /  0x28e0  : west of the stream
+0x1a4  /  0x28e8  : outside a garden shed
+0x1a5  /  0x28f2  : in a cluttered garden shed
+0x1a6  /  0x2902  : beside the polluted stream
+0x1a7  /  0x290d  : at a garden gate which opens onto a paved path leading east
+0x1a8  /  0x292c  : on a paved path which leads east-west beside the garden
+0x1a9  /  0x2947  : in a carport with an an examination pit in the floor
+0x1aa  /  0x2963  : standing on splintered ice in a deep valley. The sky is very grey and the wind is blowing very hard
+0x1ab  /  0x2993  : walking unsteadily across a slippery ice sheet
+0x1ac  /  0x29ac  : on very smooth ice
+0x1ad  /  0x29b7  : at the edge of the ice, where drifting snow has banked up at the foot of the mountains
+0x1ae  /  0x29e2  : where a rocky track leads up the mountain
+0x1af  /  0x29fb  : laboriously climbing the snow-covered mountain
+0x1b0  /  0x2a18  : at an armchair hollow in the mountainside, below a cave
+0x1b1  /  0x2a35  : on a ledge outside an odoriferous cave
+0x1b2  /  0x2a4b  : in a huge subterranean chamber with smooth walls
+0x1b3  /  0x2a68  : in the freezing cave
+0x1b4  /  0x2a71  : at a junction
+0x1b5  /  0x2a75  : in a silver fox lair
+0x1b6  /  0x2a7f  : in the silver-veined cave
+0x1b7  /  0x2a88  : in the hidden silver vault
+0x1b8  /  0x2a95  : in a splendid frost chamber
+0x1b9  /  0x2aa5  : in a dark, eerie cave melted from slushy black ice
+0x1ba  /  0x2ac6  : in the frozen forest, amidst tall, snow-laden trees
+0x1bb  /  0x2ae1  : in an intricate alpine garden
+0x1bc  /  0x2af3  : in a miniature throne room. A crack in the ice leads south
+0x1bd  /  0x2b0e  :  beside a pool of icy water
+0x1be  /  0x2b1a  : ankle-deep in icy water
+0x1bf  /  0x2b26  : sloshing along, thigh deep in icy water which is getting deeper
+0x1c0  /  0x2b47  : swimming in freezing water
+0x1c1  /  0x2b56  : standing below a small hill rising from a lush green grassy valley. There's an opening in the hillside. Far to the east is a watering hole, surrounded by grazing animals
+0x1c2  /  0x2baa  : west of the waterhole. The grazing animals watch you with interest: some of them look very large
+0x1c3  /  0x2bda  : by a pool of muddy water. The grazing dinosaurs walk slowly away as you approach
+0x1c4  /  0x2c0a  : west of the hill
+0x1c5  /  0x2c11  : on the prairie
+0x1c6  /  0x2c19  : in a deep pit, presumably an animal trap
+0x1c7  /  0x2c31  : by the edge of the pit
+0x1c8  /  0x2c3b  : climbing a well-worn path
+0x1c9  /  0x2c4b  : on a wide ledge outside a warm cave
+0x1ca  /  0x2c5b  : in a large dry cave, warmed by a blazing fire
+0x1cb  /  0x2c75  : in a store cave
+0x1cc  /  0x2c7d  : in the handicraft cave. The cavemen have obviously been very busy as there are lots of bone bowls and stone dishes on the floor
+0x1cd  /  0x2cc1  : the junk-strewn pebble and shell room where the cave people make cheap gifts for barter with travellers
+0x1ce  /  0x2cfd  : in the smallest cave
+0x1cf  /  0x2d04  : in the painting studio. Clearly minimalism is all the rage
+0x1d0  /  0x2d1f  : in the stone age armoury
+0x1d1  /  0x2d2c  : in the trophy cave. Skeleton heads hang from the walls - some of them were human
+0x1d2  /  0x2d56  : in the treasure vault
+0x1d3  /  0x2d61  : crossing a wooden bridge over an exceedingly deep crevasse
+0x1d4  /  0x2d82  : in the invention room. You find odd scribblings on the walls and find half-finished tools on the floor
+0x1d5  /  0x2db6  : in the invention alcove: "JWAAMTETS" is enscribed high on one wall
+0x1d6  /  0x2ddd  : in a small recess which sounds hollow underfoot
+0x1d7  /  0x2df8  : at the end of a road leading north. High stone walls block the view to east and west
+0x1d8  /  0x2e22  : at a bend in the enclosed road
+0x1d9  /  0x2e31  : on the road, which now cuts across a small village green. To the north is a small mediaeval ale-house with wattled walls and a thatched roof
+0x1da  /  0x2e7d  : in the bar: a grubby room with straw on the floor - not at all the sort of place you usually frequent
+0x1db  /  0x2eac  : on a cobbled street leading past a dense copse to a splendid castle in the east
+0x1dc  /  0x2ed2  : at the Cobble Square west of the castle. There are pillories and stocks here, surrounded by a jeering crowd
+0x1dd  /  0x2f0b  : in front of the imposing castle entrance. The drawbridge is raised
+0x1de  /  0x2f2f  : in the copse
+0x1df  /  0x2f35  : at the edge of the copse
+0x1e0  /  0x2f3f  : deep in the copse
+0x1e1  /  0x2f47  : in the copse
+0x1e2  /  0x2f4d  : on the north bank of the moat
+0x1e3  /  0x2f5c  : standing in ankle deep scummy water below the south bank of the moat
+0x1e4  /  0x2f7c  : at the castle entrance, between two tall battle-scarred towers
+0x1e5  /  0x2fa1  : in the courtyard within the castle walls. Battered armour and notched swords litter the blood-soaked ground. The Keep stands open to the southeast
+0x1e6  /  0x2fec  : in the armoury
+0x1e7  /  0x2ff3  : at the Keep entrance, in a small stone room
+0x1e8  /  0x3007  : in a storeroom piled high with kegs and barrels
+0x1e9  /  0x3023  : in the rush-strewn Great Hall
+0x1ea  /  0x3031  : above a narrow flight of stairs
+0x1eb  /  0x3044  : descending the steep stairs
+0x1ec  /  0x3050  : in the dungeons which are dank and depressing. There's a red cross on the wall and the earth floor looks disturbed
+0x1ed  /  0x308a  : on a beach in a small bay surrounded by overhanging cliffs. Breakers roll in from the sea to the north, rocking the viking longship drawn up on the sand north of you
+0x1ee  /  0x30e4  : at the edge of the sea
+0x1ef  /  0x30ec  : on board the ship
+0x1f0  /  0x30f6  : between the sea and towering cliffs
+0x1f1  /  0x310a  : on the beach. There's a cave to the southeast
+0x1f2  /  0x3120  : outside a sea cave
+0x1f3  /  0x3128  : in a low cave smelling of seaweed
+0x1f4  /  0x313a  : in an empty cave
+0x1f5  /  0x3145  : an old, musty, dry cave floored with very soft earth
+0x1f6  /  0x3164  : walking along a sloping east-west passage. The ground is very damp and seaweed clings to the walls
+0x1f7  /  0x3198  : further along the damp passage, beside the entrance to a small cave
+0x1f8  /  0x31b8  : in an obnoxious cave deep down in the rocks, beside a slimy little pool
+0x1f9  /  0x31dc  : 
+0x1fa  /  0x31dd  : in a hands and knees crawl. An opening slopes down to the north
+0x1fb  /  0x3200  : 
+0x1fc  /  0x3201  : at a junction of the tunnel and a vertical fissure
+0x1fd  /  0x3219  : 
+0x1fe  /  0x321a  : in a tight fissure
+0x1ff  /  0x3225  : above the hole in a cave which shows signs of habitation: the ashes from a recent fire smoulder acridly
+0x200  /  0x3261  : in the pirate's hideout
+0x201  /  0x326d  : in the large, empty chest
+0x202  /  0x327b  : in the entrance porch of an impressive country house with exposed oak beams
+0x203  /  0x32a8  : in a u-shaped hallway with doors to east and west. A magnificent staircase sweeps upwards to a gallery above
+0x204  /  0x32e5  : at the north end of the banqueting hall
+0x205  /  0x32f6  : at the south end of the hall
+0x206  /  0x3300  : at the north end of a long room used for relaxation
+0x207  /  0x331b  : at the south end of the long room, between two tables
+0x208  /  0x3335  : at the top of the stairway, in the minstrel's gallery. A short staircase leads up
+0x209  /  0x335a  : climbing the short stairs. Several wall panels sound hollow
+0x20a  /  0x337d  : in the middle of a long east-west portrait gallery. Leaded windows overlook the beautiful knot gardens below
+0x20b  /  0x33bc  : at the west end of the portrait gallery
+0x20c  /  0x33cf  : in a bedroom with a four poster bed
+0x20d  /  0x33e1  : in the bedroom of the master of the house
+0x20e  /  0x33f2  : at the east end of the long gallery
+0x20f  /  0x3401  : in a bedroom, hung about with lavender
+0x210  /  0x3417  : in the music room
+0x211  /  0x341f  : in a hedge maze
+0x212  /  0x3427  : in a hedge maze
+0x213  /  0x342f  : in a hedge maze
+0x214  /  0x3437  : in a hedge maze
+0x215  /  0x343f  : in the middle of the maze
+0x216  /  0x3449  : in a hedge maze
+0x217  /  0x3451  : in a hedge maze
+0x218  /  0x3459  : in a hedge maze
+0x219  /  0x3461  : in a hedge maze
+0x21a  /  0x3469  : down the well, within reach of the water
+0x21b  /  0x347e  : on a road leading north through the gates of a walled city
+0x21c  /  0x349b  : outside the north entrance of an amphitheatre: an enormous circular building of gleaming marble and decorated with heroic statues. You can hear the roar of the crowds inside
+0x21d  /  0x34f6  : just inside the gates, at a junction
+0x21e  /  0x3503  : on the steps of a small temple. Stone columns support the lintel over its doorway
+0x21f  /  0x352f  : inside the temple, which contains shrines to many gods
+0x220  /  0x354d  : at a road junction
+0x221  /  0x3554  : in a spartan barracks, beside an iron-bound locker
+0x222  /  0x3573  : inside the locker where soldiers store their weapons
+0x223  /  0x358c  : on a long straight road north from the gatehouse. Around you are the buildings of a small garrison town
+0x224  /  0x35c3  : in the forum: an open courtyard surrounded by buildings
+0x225  /  0x35e4  : in the market, at a vegetable stall. Ladies, wearing long flowing robes gathered at the waist and clasped at the shoulder, are jostling to get the best buy
+0x226  /  0x3630  : in the market, at a bread stall
+0x227  /  0x363f  : in a butcher's shop
+0x228  /  0x364c  : outside a tavern
+0x229  /  0x3654  : in the deserted treasury
+0x22a  /  0x365f  : in the arena of the amphitheatre, surrounded by an immense cheering crowd
+0x22b  /  0x3686  : in the south end of the caldarium. Steps lead down into a great square bath decorated with dolphin mosaics
+0x22c  /  0x36be  : beside a stone dolphin which pours out cold water
+0x22d  /  0x36d8  : in the hot baths
+0x22e  /  0x36e1  : in the hypocaust
+0x22f  /  0x36e9  : in the hypocaust
+0x230  /  0x36f1  : in the hypocaust
+0x231  /  0x36f9  : in the hypocaust
+0x232  /  0x3701  : in the hypocaust
+0x233  /  0x3709  : in the hypocaust
+0x234  /  0x3711  : on a flat rocky plain which stretches for miles. It is covered by fine grey dust. The night air is cold. Luminous walkways travel east and west
+0x235  /  0x3765  : at a walkway junction
+0x236  /  0x376e  : at the Intergalactic Bureau-de-Change
+0x237  /  0x3786  : at the foot of the Milky Way, a long sparkling pathway which climbs up into space
+0x238  /  0x37b4  : halfway up the Milky Way
+0x239  /  0x37c5  : at the top of the Milky Way, amidst brightly twinkling stars
+0x23a  /  0x37e7  : lost among the stars
+0x23b  /  0x37f1  : on a walkway south. A neon sign flashes "Walkway to Mars"
+0x23c  /  0x3812  : at a walkway junction on the grey plain
+0x23d  /  0x3822  : at the end of the north walkway. If you continue it will be on foot
+0x23e  /  0x3846  : standing on a floating metal platform, suspended in mid-air. To the north is a starship
+0x23f  /  0x3873  : inside the starship
+0x240  /  0x387b  : in a green sleep room
+0x241  /  0x3888  : in a space swimming pool, splashing around on a colossal water drop which wobbles in mid-air
+0x242  /  0x38bc  : in a control room, surrounded by instrument panels
+0x243  /  0x38d9  : on the edge of a wide crater
+0x244  /  0x38e7  : in a dull, lifeless crater. High up the west wall is an opening
+0x245  /  0x390c  : in a colossal habidome
+0x246  /  0x391a  : in a long room. A guard stands beside each door
+0x247  /  0x3934  : in the alcove room. Only one alcove is open
+0x248  /  0x394b  : in a cubicle
+0x249  /  0x3953  : in a room with no roof. An opening is visible far above
+0x24a  /  0x3971  : outside a sports and aerobotics arena
+0x24b  /  0x3986  : beside a deep tropical pool
+0x24c  /  0x3994  : in a dark, dingy hole between a ladder and a low tunnel
+0x24d  /  0x39b3  : in the fencing hall
+0x24e  /  0x39bb  : in a robot repair shop
+0x24f  /  0x39c9  : in a fair field full of flowers. Butterflies flitter happily in the bright sunshine and a heady perfume fills the air. You could be in paradise
+0x250  /  0x3a17  : in front of an ugly arch: "ABANDON HOPE ALL YE WHO ENTER HERE"
+0x251  /  0x3a4c  : in the Ruined Land. Where trees and grasses once grew is a smouldering wasteland and the sun hangs low as a huge ball of red fire. The heat is terrible and the ground below your feet quivers as though in agony
+0x252  /  0x3ab9  : amidst the smoking ruins of a small village
+0x253  /  0x3ace  : on the brink of a deep crack
+0x254  /  0x3add  : at the bottom of a deep, earthy pit. The walls are too crumbly to climb
+0x255  /  0x3b01  : in a stifling maze of decayed earthy passages
+0x256  /  0x3b17  : in a putrescent chamber
+0x257  /  0x3b25  : at a junction between foul passages
+0x258  /  0x3b37  : in a square white room, some sort of experimental laboratory
+0x259  /  0x3b5a  : in a worse laboratory
+0x25a  /  0x3b66  : in a room full of strange plants which grab at you. One flower is enormous
+0x25b  /  0x3b91  : inside the plant. Sharp hairs block your escape and the walls ooze digestive juices
+0x25c  /  0x3bbe  : climbing down a sticky tube
+0x25d  /  0x3bcf  : inside the tangled roots of the giant plant
+0x25e  /  0x3be3  : in a low, earthy tunnel
+0x25f  /  0x3bf0  : at the end of the earthy tunnel. Crude steps lead upwards
+0x260  /  0x3c0e  : climbing steep, treacherous stairs
+0x261  /  0x3c21  : squeezing your way up the narrow stairs
+0x262  /  0x3c37  : at the top of the stairs. You can feel a trapdoor above
+0x263  /  0x3c52  : under a long table. Seated round it are nine men, presumably the Evil Timelords
+0x264  /  0x3c83  : standing behind the Evil Timelords as they discuss their evil plans
+0x265  /  0x3caa  : at a dark dead end
+0x266  /  0x3cb5  : at a dark dead end
+0x267  /  0x3cc0  : at a dark dead end
+0x268  /  0x3ccb  : at a crossing of country roads
+0x269  /  0x3cdc  : on a long, straight road. To the west, it shimmers and fades away
+0x26a  /  0x3d03  : on a long road. It fades to mist in the east
+0x26b  /  0x3d19  : lost in the mists of time
+0x26c  /  0x3d25  : A water scorpion bites you!
+0x26d  /  0x3d36  : A giant squid attacks!
+0x26e  /  0x3d46  : Seaweed engulfs you!
+0x26f  /  0x3d55  : This walkway is under construction and collapses!
+0x270  /  0x3d73  : Would you like to be resurrected?
+0x271  /  0x3d88  : Sorry, the sand's run out
+0x272  /  0x3d97  : Clouds of sand billow up...
+
+0x273  /  0x3da9  : Into the cauldron!
+0x274  /  0x3db5  : 
+The recipe is complete! Your surroundings fade away as the structure of time is repaired. You have won!
+
+0x275  /  0x3df0  : 
+0x276  /  0x3df1  : A symbol of peace
+0x277  /  0x3dfd  : Solid gold. Very Valuable!
+0x278  /  0x3e0e  : A floppy, red and blue cap with bells attached
+0x279  /  0x3e2a  : A 68006, I think
+0x27a  /  0x3e37  : "This box contains an evil eye;
+if opened, you would surely die!"
+0x27b  /  0x3e62  : It sparkles brightly
+0x27c  /  0x3e6e  : Heavy, but very valuable
+0x27d  /  0x3e7f  : Too small for flying!
+0x27e  /  0x3e8c  : Large, warm and leathery
+0x27f  /  0x3e9a  : Yeuch!
+0x280  /  0x3ea1  : Just your size
+0x281  /  0x3eac  : Delicious, if you like that sort of thing
+0x282  /  0x3ec5  : Marked with a skull
+0x283  /  0x3ed1  : They seem fresh-cut
+0x284  /  0x3edf  : A complete set of playing cards
+0x285  /  0x3ef2  : Hand-embroidered
+0x286  /  0x3eff  : Very valuable!
+0x287  /  0x3f08  : Real Ale, of course
+0x288  /  0x3f15  : Cute
+0x289  /  0x3f19  : The keys are of all sizes
+0x28a  /  0x3f26  : An ordinary asbestos glove
+0x28b  /  0x3f37  : A great ox-horn, bound with gold
+0x28c  /  0x3f4c  : The sands have almost run through!
+0x28d  /  0x3f60  : Nothing special
+0x28e  /  0x3f6a  : A weapon
+0x28f  /  0x3f70  : Cor! You look prettier every day
+0x290  /  0x3f83  : A mediaeval guitar
+0x291  /  0x3f91  :  matches are left
+0x292  /  0x3f9d  : I dunno what this does!
+0x293  /  0x3fac  : "Hope village"
+0x294  /  0x3fb7  : The mirror seems to expand, sucking you in!
+0x295  /  0x3fd0  : A fine example of stone age work
+0x296  /  0x3fe4  : Extremely delicate
+0x297  /  0x3fef  : A colourful souvenir
+0x298  /  0x3ffd  : Delicious pastries
+0x299  /  0x4008  : A magical herb
+0x29a  /  0x4013  : The first hard disc!
+0x29b  /  0x401e  : 
+0x29c  /  0x401f  : A general-purpose axe
+0x29d  /  0x402d  : Small and dainty
+0x29e  /  0x4037  : It's full
+0x29f  /  0x403e  : Solid silver
+0x2a0  /  0x4044  : Wax
+0x2a1  /  0x4048  : 
+0x2a2  /  0x4049  : It seems to diffract light oddly
+0x2a3  /  0x405e  : Heavy and dangerous-looking
+0x2a4  /  0x4071  : Warm, course fur, rather smelly
+0x2a5  /  0x4086  : Empty, but bejewelled
+0x2a6  /  0x4098  : Very small, very thin and very old
+0x2a7  /  0x40a5  : Wow!
+0x2a8  /  0x40a9  : Very big!
+0x2a9  /  0x40af  : 
+0x2aa  /  0x40b0  : a carved tiger
+0x2ab  /  0x40b9  : It glows brightly
+0x2ac  /  0x40c4  : Spiced bread with pickles
+0x2ad  /  0x40d4  : A black metal disc with a gold edge
+0x2ae  /  0x40e9  : It shows the picture of a jester
+0x2af  /  0x40f7  : 
+0x2b0  /  0x40f8  : A chunk of metallic ore
+0x2b1  /  0x4107  : A musical instrument made from a horn
+0x2b2  /  0x411e  : To the sunset you must go,
+keeping high and never low.
+In a sheltered, hidden cove
+you will find a treasure trove.
+Pitfalls you are sure to meet,
+you may even get wet feet!,
+but in the end you're sure to greet
+that dreadful scoundrel, Pirate Pete!
+0x2b3  /  0x41b3  : Well padded
+0x2b4  /  0x41bc  : Tough ropes with lead weights round the edge
+0x2b5  /  0x41d6  : Very valuable
+0x2b6  /  0x41de  : A tin-opener of the "butterfly" type
+0x2b7  /  0x41f6  : Painted white, with black eye-markings
+0x2b8  /  0x4211  : Glass
+0x2b9  /  0x4215  : For hacking at hard material
+0x2ba  /  0x4224  : The planks are sturdy wood
+0x2bb  /  0x4233  : a grapple-firing rocket
+0x2bc  /  0x4242  : A short hessian rope
+0x2bd  /  0x424e  : The ruby acts as a lense
+0x2be  /  0x425b  : If worn, the backpack should help you carry more
+0x2bf  /  0x4278  : Magical winged shoes!
+0x2c0  /  0x4287  : Battered and rusty
+0x2c1  /  0x4292  : A most unusual object!
+0x2c2  /  0x42a3  : Kattomush: "Maiow-thwatering goodness for Kitty"
+0x2c3  /  0x42c4  : a lethal weapon
+0x2c4  /  0x42cd  : A small, valuable vase
+0x2c5  /  0x42da  : It is in poor shape
+0x2c6  /  0x42e5  : 
+0x2c7  /  0x42e6  : Water? Where?
+0x2c8  /  0x42f0  : Pete blocks you
+0x2c9  /  0x42f8  : Ghostly footsteps plod to the short stairs and fade away
+0x2ca  /  0x4319  : A panel moves!
+0x2cb  /  0x4323  : A jester appears: "The Lord of Misrule is angry for I have lost one of the tools of my trade. Have you seen it?"
+0x2cc  /  0x4364  : The god Mercury appears and solemnly hands you a pair of winged sandals
+0x2cd  /  0x438e  : "SHOW SOME RESPECT!"
+0x2ce  /  0x43a3  : It's very good
+0x2cf  /  0x43ac  : The skeleton collapses in a heap of dry bones
+0x2d0  /  0x43c7  : The skeleton blocks you
+0x2d1  /  0x43d5  : The vile caveman is knocked off the bridge. The rescued woman thanks you profusely and presses something into your hand
+0x2d2  /  0x4416  : You receive 6,000,000 volts up the arm
+0x2d3  /  0x4430  : The narcissus bends away, sadly, "I'm doomed to spend my life admiring my reflection. But this water's so dirty that I can hardly see to admire my beautiful face in it."
+0x2d4  /  0x4497  : "Oy! Pay for that!"
+0x2d5  /  0x44a6  : Shame on you! You're in the stocks now!
+0x2d6  /  0x44bc  : The Black Knight is in the way
+0x2d7  /  0x44c3  : The ground is too hard
+0x2d8  /  0x44cf  : The ground under your feet gives way
+0x2d9  /  0x44e4  : I don't really want that, but thanks!
+0x2da  /  0x44fb  : It rolls away
+0x2db  /  0x4503  : The chest opens and a bearded rogue leaps out: "Ahoy there me hearty! Oi be Pirate Pete what gets me pleasure from robbing weary travellers like thee!"
+
+0x2dc  /  0x455b  : You've nothing left to steal! Pirate Pete is furious..
+0x2dd  /  0x4579  : The stone blocks you
+0x2de  /  0x4584  : The dogs turn up their cultured noses
+0x2df  /  0x459c  : A gladiator steals the buckle and runs south to the arena!
+0x2e0  /  0x45bb  : It comes loose
+0x2e1  /  0x45c3  : You're not strong enough
+0x2e2  /  0x45d2  : The grating blocks you
+0x2e3  /  0x45de  : It entangles the lion
+0x2e4  /  0x45e8  : The trident pins the net in place, holding the lion securely
+0x2e5  /  0x4605  : The gladiator is too quick for you - he blocks your escape
+0x2e6  /  0x4624  : The hot star burns you!
+0x2e7  /  0x4632  : The gauntlet finally catches fire! 
+0x2e8  /  0x4649  : The water cools the star in a hissing of steam
+0x2e9  /  0x465d  : "YOU'RE NOT AUTHORISED TO DO THAT!"
+0x2ea  /  0x4681  : There's nothing to break your fall
+0x2eb  /  0x4692  : The mattress breaks your fall
+0x2ec  /  0x46a2  : and you climb its rope
+0x2ed  /  0x46af  : The components are too minute to see
+0x2ee  /  0x46c2  : Your lightsabre makes short work of the cyberman
+0x2ef  /  0x46e1  : The rocket shoots up 
+0x2f0  /  0x46ee  : but falls back
+0x2f1  /  0x46f8  :  that.
+
+0x2f2  /  0x46fe  : You hear nothing special
+0x2f3  /  0x470a  : <EOM>

@@ -1,10 +1,10 @@
 import json
 
-fSnowball    = open("..\\src\\snowball\\memory-locations.json")
-fLords       = open("..\\src\\lords-of-time\\memory-locations.json")
-fColossal    = open("..\\src\\colossal-adventure\\memory-locations.json")
-fDungeon     = open("..\\src\\dungeon-adventure\\memory-locations.json")
-fAdventure   = open("..\\src\\adventure-quest\\memory-locations.json")
+fSnowball    = open("src/snowball/memory-locations.json")
+fLords       = open("src/lords-of-time/memory-locations.json")
+fColossal    = open("src/colossal-adventure/memory-locations.json")
+fDungeon     = open("src/dungeon-adventure/memory-locations.json")
+fAdventure   = open("src/adventure-quest/memory-locations.json")
 
 snowballDict  = json.load(fSnowball)[0]
 lordsDict     = json.load(fLords)[0]

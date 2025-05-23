@@ -74,30 +74,56 @@ def _getAddrForFragment(data, fragmentNumber):
 
     address=commonFragmentsAddr
 
-    while fragmentNumber:
-        if(data[address]==1):
+    if mversion == 1:
+        while fragmentNumber:
+            if(data[address]==1):
+                fragmentNumber = fragmentNumber - 1
+            address=address+1
+    else:
+        # The common fragments address is one out for some reason!
+        # BBC Micro code subtracts 1 from it too
+        address = address - 1
+        while fragmentNumber:
+            messageLength = data[address]
+            address= address + messageLength
+            #print(hex(fragmentNumber),hex(data[address]), hex(address))
             fragmentNumber = fragmentNumber - 1
-        address=address+1
+        #print(hex(fragmentNumber),hex(data[address]), hex(address))
 
     return address
 
-def _getAddrForMessageN(data, nthMessage):
+def _getAddrForMessageN(data, messageNumber):
 
     messagesAddress = messagesStartAddr
 
-    # Do I subtract 1...
-    
-    # Keeping looping until the nth message is found
-    while nthMessage:
-        byte = data[messagesAddress]
+    if mversion == 1:
+        # Keeping looping until the nth message is found
+        while messageNumber:
+            byte = data[messagesAddress]
 
-        if(byte == 0):
-            print("ERROR didn't find nth string")
-            break
-        elif(byte == 1):
-            nthMessage = nthMessage - 1
+            if(byte == 0):
+                print("ERROR didn't find nth string")
+                break
+            elif(byte == 1):
+                messageNumber = messageNumber - 1
         
-        messagesAddress = messagesAddress + 1
+            messagesAddress = messagesAddress + 1
+    else:
+        # Subtract 1 from the message number as they are zero
+        # based indexed in the game file
+        messageNumber = messageNumber - 1
+        while messageNumber:
+            #print(hex(messagesAddress), hex(data[messagesAddress]))
+            messageLength = data[messagesAddress]
+            while not data[messagesAddress]:
+                messagesAddress = messagesAddress + 1
+                messageLength = messageLength + 255 + data[messagesAddress]
+
+            messagesAddress = messagesAddress + messageLength
+
+            messageNumber = messageNumber - 1
+        #print(hex(messagesAddress), hex(data[messagesAddress]))
+        #print("with eoo", hex(messagesAddress + 0xe00))
         
     return messagesAddress 
 
@@ -105,26 +131,58 @@ def _getMessage(data, msgAddress):
 
     message=''
 
-    byte = data[msgAddress]
-    while byte:
-        if(byte >= int("5E",16)):
-            fragmentNumber = byte - int("5E",16)
-            fragmentAddr = _getAddrForFragment(data,fragmentNumber)
-            newMessage = _getMessage(data, fragmentAddr)
-            message = message + newMessage
+    if mversion == 1:
+        byte = data[msgAddress]
+        while byte:
+            if(byte >= int("5E",16)):
+                fragmentNumber = byte - int("5E",16)
+                fragmentAddr = _getAddrForFragment(data,fragmentNumber)
+                newMessage = _getMessage(data, fragmentAddr)
+                message = message + newMessage
 
-        elif(byte == int("2",16)):
-            # Doesn't appear to be used
-            pass
-        elif(byte == int("1",16)):
-            # End of fragment or string
-            break
-        else:
-            message = message + str(chr(byte+0x1D))
-            #_getCharacter(byte)
+            elif(byte == int("2",16)):
+                # Used to denote end of some fragments?
+                break
+            elif(byte == int("1",16)):
+                # End of fragment or string
+                break
+            else:
+                message = message + str(chr(byte+0x1D))
+                #_getCharacter(byte)
+
+            msgAddress = msgAddress + 1
+            byte = data[msgAddress]
+    else:
+        # BBC Micro only allows 1 byte length for strings
+        # in v2 at least for return to eden
+        # Other platforms allow multiple 255 extensions
+        msgLength = data[msgAddress]
+        while not data[msgAddress]:
+            msgAddress = msgAddress + 1
+            msgLength = msgLength + 255 + data[msgAddress]
+
+        msgLength = msgLength - 1
 
         msgAddress = msgAddress + 1
-        byte = data[msgAddress]
+
+        while msgLength:
+            byte = data[msgAddress]
+            if(byte >= 0x5E):
+                fragmentNumber = byte - 0x5E
+                fragmentAddr = _getAddrForFragment(data,fragmentNumber)
+
+                newMessage = _getMessage(data, fragmentAddr)
+                message = message + newMessage
+                pass
+
+            elif(byte < 0x03):
+                # End of fragment or string
+                break
+            else:
+                message = message + str(chr(byte+0x1D))
+
+            msgAddress = msgAddress + 1
+            msgLength = msgLength - 1
 
     return message
 
@@ -183,12 +241,14 @@ def vm_fn_load_dictionary(data):
             word=""
             wordStart=address+1
             count=count+1
-            if(game == 'colossal' and count > 0x99):
-                break
         else:
             if byte>=127:
                 codeNext=True
-            word = word + chr(byte & int("01111111",2))
+            c = chr(byte & 0x7F)
+            if c in ['?','-','\\','/','!','.',','] or c.isalnum():
+                word = word + c
+            else:
+                break
 
         address=address+1
         byte = data[address]
@@ -200,11 +260,22 @@ def vm_listhandler(data,opCode,pc):
     cmdAddress =pc
     listNumber = opCode & 0b00011111
     
-    if(opCode & 0b00011111 > 0x05):
+    if(version == 1 and listNumber > 0x05):
         print(f'Version 1 games only supported 5 lists and this is accessing list {opCode & 0b00011111}')
         sys.exit()
+    elif(version == 2 and listNumber > 0x10):
+        print(f'Version 2 games only supported 10 lists and this is accessing list {opCode & 0b00011111}')
+        sys.exit()
 
-    listOffset = v1Configuration[game]['lists'][listNumber-1]    
+    if(version == 1):
+        # Get the list offset - if it is negative then it is
+        # a reference (static) list in the game code, otherwise
+        # it's a working dynamic list in vm_listarea
+        listOffset = v1Configuration[game]['lists'][listNumber-1]
+    else:
+        # In v2
+        offsetInTable = listNumber * 2
+        listOffset    = data[0x06 + offsetInTable] + data[0x07 + offsetInTable] * 256
 
     if(opCode >= 0b11100000): # 0xE0
         # list#x[ variable[ <operand1> ]] = variable[ <operand2>  ]
@@ -531,6 +602,53 @@ def vm_fn_jump(data, opCode, pc):
 
     return pc
 
+def vm_fn_screen(data, opCode, pc):
+
+    cmdAddress = pc
+
+    # Get the indicator for text (0x00) or graphics (0x01)
+    # to show
+    pc=pc+1
+    constant1 = data[pc]
+
+    # If switching to graphics mode (0x01) then there will be a second
+    # operand that indicates which mode to switch to - although not used
+    # by the BBC as it uses a small Mode 5 window
+    if(constant1 > 0x00):
+        pc=pc+1
+        constant2 = data[pc]
+        msg=f"Screen graphmode ({constant2:#0{4}x})"
+    else:
+        msg=f"Screen textmode"
+
+    _print_code(opCode, cmdAddress, msg)
+
+    return pc
+
+def vm_fn_picture(data, opCode, pc):
+
+    cmdAddress = pc
+
+    pc=pc+1
+    constant1 = data[pc]
+
+    msg=f"Picture var[{constant1:#0{4}x}]"
+    _print_code(opCode, cmdAddress, msg)
+
+    return pc
+
+def vm_fn_cleartg(data, opCode, pc):
+
+    cmdAddress = pc
+
+    pc=pc+1
+    constant1 = data[pc]
+
+    msg=f"Cleartg graphmode ({constant1:#0{4}x})"
+    _print_code(opCode, cmdAddress, msg)
+
+    return pc
+
 def vm_fn_exit(data, opCode, pc):
 
     cmdAddress = pc
@@ -664,8 +782,9 @@ def vm_fn_ifgtct(data,opCode,pc):
 
 
 ###############################################################################
-# _find_v1_a_code_start()
+# _autodetect_game()
 #
+# Autodetect v2 games and if not found then:
 # Loop through the v1 game configurations and look for the byte signature for
 # each - stop on the first signature that matches and return the start address
 # where the signature was found.
@@ -677,29 +796,75 @@ def vm_fn_ifgtct(data,opCode,pc):
 # Returns:
 #   Start address of the A-Code and game indicator
 ###############################################################################
-def _find_v1_a_code_start(data):
+def _autodetect_game(data, version):
     game = 'unknown'
     startAddress = -1
 
-    for gameKey in v1Configuration:
-        signatureBytes = v1Configuration[gameKey]['signatureBytes']
-        startAddress  = data.find(signatureBytes)
-        if startAddress != -1:
-            game = gameKey
-            break
-    
-    return startAddress, game
+    if version < 2:
+        length = data[0x1c] + data [0x1d] * 256
+        if length > 0 and length + 1 <= len(data):
+            checksum = 0
+            for j in range(0x20, length + 1):
+                checksum = checksum + data[j];
+            if checksum & 0xff == data[0x1e]:
+                version = 2
+
+    # Either it's a v1 file or unknown so scan the file
+    if(version < 2):
+        for gameKey in v1Configuration:
+            # Skip if the configuration is for a non-v1 file
+            # we'll test it later to see if it's v2
+            if('signatureBytes' not in v1Configuration[gameKey]):
+                continue
+            signatureBytes = v1Configuration[gameKey]['signatureBytes']
+            startAddress  = data.find(signatureBytes)
+            if startAddress != -1:
+                name = v1Configuration[gameKey]['name']
+                game = gameKey
+                if version != 1:
+                    print('[Identified v1 game: "'+name+'" --game '+game+']')
+                    version = 1
+                break
+
+    if version == 2:
+        startAddress = data[0x1a] + data [0x1b] *256
+
+    return startAddress, game, version
+
+###############################################################################
+# _identify_v2_game()
+#
+# Identify v2 games (already autodetected) based on the "Welcome to" part
+# in some well-known key descriptions.
+#
+#
+# Parameters:
+# none
+#
+# Returns:
+#   game indicator
+###############################################################################
+def _identify_v2_game():
+    for msg in [0x01, 0xa0, 0xe6, 0xff]:
+        address = _getAddrForMessageN(data, msg)
+        desc=_getMessage(data, address)
+        if "Welcome to" in desc:
+            for gameKey in v1Configuration:
+                if v1Configuration[gameKey]['version'] == 2:
+                    name = v1Configuration[gameKey]['name']
+                    if name in desc:
+                        game = gameKey
+                        print('[Identified v2 game: "'+name+'" --game '+game+']')
+                        break
+
+    if game == 'unknown':
+        print("[Could not identify v2 game!]")
+
+    return game
 
 def printJumpTable(data,pc):
-    # nextGoto = 0
-    # for i in gotoTable:
-    #     if ( pc < i):
-    #         nextGoto = i
-    #         break
-    #     if (pc >= i):
-    #         continue
-
     counter = 0
+    empty = 0
 
     print("Jump Table       (Idx) ")
     print('**************************************************************************')
@@ -714,11 +879,15 @@ def printJumpTable(data,pc):
         pc = pc+2
         counter = counter + 1
 
-        if(game == 'colossal' and counter == 0x5f):
-            break
-        elif(game == 'adventure' and counter == 0x2c):
-            break
+        if not dictionaryWord:
+            empty = empty + 1
+            if empty == 6:
+                pc = pc - 2 * empty
+                break
+        else:
+            empty = 0
 
+    print("*** Ignore last 6 (empty) entries ***")
     print('**************************************************************************')
     
     return pc
@@ -730,28 +899,60 @@ def printJumpTable(data,pc):
 # Set up the command line arguments so the game
 # to analyse can be specified on a switch
 parser = argparse.ArgumentParser()
-parser.add_argument('-g','--game', type=str, choices= v1Configuration.keys(),required=True)
+parserGroup = parser.add_mutually_exclusive_group(required=True)
+parserGroup.add_argument('-g','--game', type=str, choices=v1Configuration.keys())
+parserGroup.add_argument('-f','--file', type=str)
 args = parser.parse_args()
 
-game = args.game
-
-filename = v1Configuration[game]['filename']
+# Check to see if they specified a game or a file
+if(args.game):
+    game     = args.game
+    filename = v1Configuration[game]['filename']
+    version  = v1Configuration[game]['version']
+else:
+    game     = None
+    filename = args.file
+    version  = -1
 
 with open(filename,'rb') as dataFile:
     data = bytearray(dataFile.read())
     dataFile.close()
 
 # Identify the game (do this anyway for preconfigured ones)
-aCodeStartAddr, game = _find_v1_a_code_start(data)
+aCodeStartAddr, foundGame, version = _autodetect_game(data, version)
 
-# Derive the location of the major game parts based on offsets in the v1 configuration
-dictionaryAddr       = aCodeStartAddr + v1Configuration[game]['offsets']['dictionaryOffset']
-exitsAddr            = aCodeStartAddr + v1Configuration[game]['offsets']['exitsOffset'] 
-messagesStartAddr    = aCodeStartAddr + v1Configuration[game]['offsets']['messagesOffset']
-commonFragmentsAddr  = aCodeStartAddr + v1Configuration[game]['offsets']['fragmentsOffset']
+# If game was not given, maybe we can detect it
+if(not game):
+    game = foundGame
+
+# The message database of some v2 games is still on v1
+# Initialize it first to be the same as the game version
+mversion = version
+if(version == 1):
+    # Derive the location of the major game partsffunction based on offsets in the v1 configuration
+    dictionaryAddr       = aCodeStartAddr + v1Configuration[game]['offsets']['dictionaryOffset']
+    exitsAddr            = aCodeStartAddr + v1Configuration[game]['offsets']['exitsOffset']
+    messagesStartAddr    = aCodeStartAddr + v1Configuration[game]['offsets']['messagesOffset']
+    commonFragmentsAddr  = aCodeStartAddr + v1Configuration[game]['offsets']['fragmentsOffset']
+elif(version == 2):
+    dictionaryAddr       = data[0x06] + data [0x07] *256
+    messagesStartAddr    = data[0x00] + data [0x01] *256
+    exitsAddr            = data[0x04] + data [0x05] *256
+    commonFragmentsAddr  = data[0x02] + data [0x03] *256
+    # v1 msg db starts with an empty one
+    if data[messagesStartAddr] == 1:
+        mversion = 1
+    # Identify autodetected v2 game
+    if game == 'unknown':
+        game = _identify_v2_game()
+
+# If it couldn't be identified then quit
+if(aCodeStartAddr < 0 or game == 'unknown'):
+    print('Unable to detect a Level 9 Version 1 or Version 2 game in ' + filename)
+    sys.exit()
 
 print('**************************************************************************')
-print('Level 9 A-Code game dissassembly for')
+print('Level 9 A-Code game dissassembly for "'+game+'" (v'+str(version)+')')
 print('**************************************************************************')
 
 pc = aCodeStartAddr
@@ -763,14 +964,12 @@ with open(filename,'rb') as fr:
 
     cmds = set()
 
-    print(hex(pc))
-    
     while(True):
         # Get the next instruction / opCode
         opCode = data[pc]
         opCodeClean = opCode & int("1F",16)
 
-        if((data[pc] == 0x0 and data[pc+1] == 0x0) or (pc < aCodeStartAddr)):
+        if(pc+3 >= len(data) or (pc < aCodeStartAddr) or (version == 1 and data[pc] == 0 and data[pc+1] == 0)):
             print('**************************************************************************')
             print('Level 9 A-Code game dissassembly complete')
             print('**************************************************************************')
@@ -818,6 +1017,12 @@ with open(filename,'rb') as fr:
             pc = vm_fn_ifltvt(data,opCode,pc)
         elif(opCodeClean == 19):
             pc = vm_fn_ifgtvt(data,opCode,pc)     
+        elif(opCodeClean == 20):
+            pc = vm_fn_screen(data,opCode,pc)
+        elif(opCodeClean == 21):
+            pc = vm_fn_cleartg(data,opCode,pc)
+        elif(opCodeClean == 22):
+            pc = vm_fn_picture(data,opCode,pc)
         elif(opCodeClean == 24):
             pc=vm_fn_ifeqct(data,opCode,pc)
         elif(opCodeClean == 25):            

@@ -1,0 +1,760 @@
+0x1  /  0x9e5  :  
+0x2  /  0x9e7  : 
+0x3  /  0x9e8  : , 
+0x4  /  0x9eb  : . 
+0x5  /  0x9ee  : 
+
+0x6  /  0x9f0  :  and 
+0x7  /  0x9f4  : .
+
+0x8  /  0x9f7  : north
+0x9  /  0x9fb  : northeast
+0xa  /  0xa01  : east
+0xb  /  0xa04  : south
+0xc  /  0xa06  : southeast
+0xd  /  0xa0a  : southwest
+0xe  /  0xa0e  : west
+0xf  /  0xa11  : northwest
+0x10  /  0xa17  : up
+0x11  /  0xa1a  : down
+0x12  /  0xa1e  : in
+0x13  /  0xa20  : out
+0x14  /  0xa23  : across
+0x15  /  0xa27  : Exits lead 
+0x16  /  0xa2f  :  (through a door)
+0x17  /  0xa39  :  (through an open door)
+0x18  /  0xa46  : 
+You are 
+0x19  /  0xa4c  : You own 
+0x1a  /  0xa51  : And you're wearing 
+0x1b  /  0xa5f  : You can see 
+0x1c  /  0xa66  : 
+What now?
+0x1d  /  0xa6e  : I don't understand
+0x1e  /  0xa7a  : Eh?
+0x1f  /  0xa7e  : Arfle barfle gloop?
+0x20  /  0xa8c  : You'll need to say more than that!
+0x21  /  0xaa1  : Could you elaborate?
+0x22  /  0xaaf  : Sorry, I can't guess what you mean
+0x23  /  0xac6  : Could you rephrase that?
+0x24  /  0xad6  : Please be more specific
+0x25  /  0xae2  : I don't quite understand
+0x26  /  0xaf1  : What a mouthful! I'm only an ignorant micro
+0x27  /  0xb0d  : You can't do that
+0x28  /  0xb17  : Don't be silly!
+0x29  /  0xb23  : You can't see 
+0x2a  /  0xb2c  : You don't have 
+0x2b  /  0xb36  : You already have 
+0x2c  /  0xb40  : You can't carry any more
+0x2d  /  0xb4f  : You can't take that!
+0x2e  /  0xb5c  : You can't wear 
+0x2f  /  0xb65  : You're carrying too much to take 
+0x30  /  0xb7a  : It is dark, you cannot see
+0x31  /  0xb89  : The light is dazzlingly bright
+0x32  /  0xb9b  : Nothing happens
+0x33  /  0xba6  : Doesn't seem to work
+0x34  /  0xbb3  : There's no effect
+0x35  /  0xbc0  : Really stop?
+0x36  /  0xbc9  : Would you like to play again?
+0x37  /  0xbdb  : Really restore?
+0x38  /  0xbe5  : 
+Please answer AFFIRMATIVE or NEGATIVE
+0x39  /  0xc03  : You scored 
+0x3a  /  0xc0a  :  out of 1000
+0x3b  /  0xc13  : It is nothing special
+0x3c  /  0xc1f  : nothing.
+
+0x3d  /  0xc27  : You can't go in that direction
+0x3e  /  0xc37  : You bump your nose on a door
+0x3f  /  0xc47  : The door closes behind you
+
+0x40  /  0xc55  : It's already open
+0x41  /  0xc5f  : It's already closed
+0x42  /  0xc6a  : There's nothing here worth opening
+0x43  /  0xc7e  : There's nothing here worth closing
+0x44  /  0xc92  : There's nothing to attack!
+0x45  /  0xca1  : You find nothing of interest
+0x46  /  0xcaf  : The only visible exit is 
+0x47  /  0xcbe  : What do you want to do with 
+0x48  /  0xcd0  : You find 
+0x49  /  0xcd6  : . It holds 
+0x4a  /  0xcdf  : Indicator lights flicker
+0x4b  /  0xcef  : 
+0x4c  /  0xcf0  : 
+0x4d  /  0xcf1  : 
+0x4e  /  0xcf2  : 
+0x4f  /  0xcf3  : 
+0x50  /  0xcf4  : ceramic body armour
+0x51  /  0xd02  : a translucent visor
+0x52  /  0xd10  : dark glasses
+0x53  /  0xd1a  : a hospital gown
+0x54  /  0xd24  : an intricate bracelet
+0x55  /  0xd31  : a battered bubble helmet
+0x56  /  0xd41  : a kevlar leotard
+0x57  /  0xd4d  : a glittering necklace
+0x58  /  0xd5c  : 
+0x59  /  0xd5d  : 
+0x5a  /  0xd5e  : an aerosol paint can
+0x5b  /  0xd6b  : an LL9 batpak
+0x5c  /  0xd76  : the body of a crew-member
+0x5d  /  0xd85  : a debt card
+0x5e  /  0xd8f  : a cute pussy cat
+0x5f  /  0xd9b  : a freezer coffin
+0x60  /  0xda5  : a square cup
+0x61  /  0xdae  : a pair of linked cylinders
+0x62  /  0xdb9  : an electro-flute
+0x63  /  0xdc6  : a fire extinguisher
+0x64  /  0xdd3  : a diagnostic probe
+0x65  /  0xddf  : a sealed flask
+0x66  /  0xde9  : a red form
+0x67  /  0xdf0  : an orange form
+0x68  /  0xdfa  : a yellow form
+0x69  /  0xe03  : a green form
+0x6a  /  0xe0a  : a hand-gun
+0x6b  /  0xe12  : a holo wand
+0x6c  /  0xe1b  : a bunch of keys
+0x6d  /  0xe24  : 
+0x6e  /  0xe25  : a lance
+0x6f  /  0xe2c  : a portable laser
+0x70  /  0xe36  : a mempak
+0x71  /  0xe3e  : 
+0x72  /  0xe3f  : a memory rope
+0x73  /  0xe48  : 
+0x74  /  0xe49  : 
+0x75  /  0xe4a  : an ultrasound scalpel
+0x76  /  0xe58  : a yin-yang screwdriver
+0x77  /  0xe68  : a titanium shovel
+0x78  /  0xe76  : an adjusting spanner
+0x79  /  0xe82  : a red ticket
+0x7a  /  0xe8a  : a green ticket
+0x7b  /  0xe92  : 
+0x7c  /  0xe93  : a bomb
+0x7d  /  0xe98  : a bumble bearing
+0x7e  /  0xea3  : a maxwell sink
+0x7f  /  0xeae  : a peg warp
+0x80  /  0xeb6  : a 101-way ribbon cable
+0x81  /  0xec7  : a stacker lift
+0x82  /  0xed0  : 
+0x83  /  0xed1  : 
+0x84  /  0xed2  : 
+0x85  /  0xed3  : 
+0x86  /  0xed4  : 
+0x87  /  0xed5  : a lamp
+0x88  /  0xedb  : a video viewer
+0x89  /  0xee7  : a silver tray
+0x8a  /  0xef1  : a floating table
+0x8b  /  0xefa  : a toolbox
+0x8c  /  0xf03  : 
+0x8d  /  0xf04  : You hear nothing extra
+0x8e  /  0xf10  : 
+A psychobot taps you on the shoulder. "Ahem. Your behaviour patterns seem irrational". You feel a hypo.. Then nothing
+0x8f  /  0xf5a  : I didn't think you meant it
+0x90  /  0xf6b  : I didn't expect you to say that!
+0x91  /  0xf80  : Time passes
+0x92  /  0xf89  : There's no one to give it to
+0x93  /  0xf9a  : You can't fill 
+0x94  /  0xfa5  : You can't empty 
+0x95  /  0xfb0  : There's no door here!
+0x96  /  0xfbb  : Yeuch!
+0x97  /  0xfc1  : 
+0x98  /  0xfc2  : 
+0x99  /  0xfc3  : 
+0x9a  /  0xfc4  : 
+0x9b  /  0xfc5  : 
+0x9c  /  0xfc6  : 
+0x9d  /  0xfc7  : 
+0x9e  /  0xfc8  : 
+0x9f  /  0xfc9  : 
+0xa0  /  0xfca  : Welcome to Snowball, an adventure with 7K rooms copyright (C) Level 9 Computing 1983.
+The interstar freezer, Snowball 9, has entered its target starsystem. And it will soon enter the star unless you can do something!
+Enter English phrases (without punctuation) to play, save the Snowball to win. Good Luck!
+
+0xa1  /  0x106e  : In 
+0xa2  /  0x1072  : On 
+0xa3  /  0x1076  : It's empty
+0xa4  /  0x107d  : There's a woman in the coffin
+0xa5  /  0x108c  : "PLEASE RETURN YOUR COFFIN FIRST!"
+0xa6  /  0x10af  : 
+0xa7  /  0x10b0  : . You're standing on a coffin
+0xa8  /  0x10c1  : 
+0xa9  /  0x10c2  : 
+0xaa  /  0x10c3  : The panel has 10 buttons: black, brown, red, orange, yellow, green, blue, purple, grey and white
+0xab  /  0x1101  : The panel has yellow and green buttons
+0xac  /  0x1117  : The button is easy to press
+0xad  /  0x1126  : 
+0xae  /  0x1127  : The door ahead opens
+0xaf  /  0x1132  : The door behind you closes
+0xb0  /  0x113f  : The door is too smooth to grip
+0xb1  /  0x114b  : The trapdoor's too high to reach unless you stand on something
+0xb2  /  0x116a  : You scramble through a trapdoor
+0xb3  /  0x117a  : The door slides open
+0xb4  /  0x1184  : You can feel a pit in the floor
+0xb5  /  0x1194  : There's a trapdoor in the floor
+0xb6  /  0x11a3  : There's a trapdoor in the ceiling
+0xb7  /  0x11b4  : The tube walls are very thin
+0xb8  /  0x11c3  : You notice a lever beside you
+0xb9  /  0x11d2  : There are LEDs under the bed
+0xba  /  0x11e2  : The machine is a bit loose
+0xbb  /  0x11f1  : You notice signs of digging
+0xbc  /  0x1202  : "SORRY! A COLONIST MAY BE LOOSE ON WHITE LEVEL! ELEVATOR SERVICE TO AFFECTED AREAS IS SUSPENDED!"
+0xbd  /  0x1262  : You can't see it
+0xbe  /  0x126b  : You've nothing to dig with
+0xbf  /  0x127b  : You can't dig here!
+0xc0  /  0x1286  : You dent the shovel
+0xc1  /  0x1290  : You're in a tiny hole
+0xc2  /  0x129d  : You're in a large hole
+0xc3  /  0x12aa  : You're at the bottom of a deep pit
+0xc4  /  0x12be  : The bottom of the hole collapses. You fall into space!
+0xc5  /  0x12da  : 
+You've no air to breathe!!
+
+0xc6  /  0x12ee  : 
+Your air supply is running out!
+
+0xc7  /  0x1303  : 
+The paint explodes in the vacuum!
+
+0xc8  /  0x1317  : There's no web that way. You sure?
+0xc9  /  0x1329  : Your attempts to change direction are futile
+0xca  /  0x1343  : Deep snow blocks you
+0xcb  /  0x1351  : You bump into a wall. Ouch!
+0xcc  /  0x1362  : A crate's in the way
+0xcd  /  0x136d  : Padding blocks you
+0xce  /  0x1379  : The elevator arrives with a whoosh and its door opens
+0xcf  /  0x1398  : The floor shakes and the door opens
+0xd0  /  0x13aa  : A coffin slides from an aperture
+0xd1  /  0x13bd  : The indicator lights are
+0xd2  /  0x13ca  :  black
+0xd3  /  0x13cf  :  brown
+0xd4  /  0x13d4  :  red
+0xd5  /  0x13d7  :  orange
+0xd6  /  0x13dd  :  yellow
+0xd7  /  0x13e2  :  green
+0xd8  /  0x13e5  :  blue
+0xd9  /  0x13e9  :  purple
+0xda  /  0x13ef  :  grey
+0xdb  /  0x13f2  :  white
+0xdc  /  0x13f7  : The coffin slides away
+
+0xdd  /  0x1405  : The lid above rises and a light comes on..
+0xde  /  0x141d  : "OK, take something"
+0xdf  /  0x142c  : "I say! Where's your red ticket?"
+0xe0  /  0x1441  : "Not so fast, Citizen. Hand over a green ticket!"
+0xe1  /  0x1461  : The android crushes 
+0xe2  /  0x146a  :  to pulp!
+0xe3  /  0x1471  : The robot takes it and mutters OK
+0xe4  /  0x1485  : "That'll do nicely!!"
+0xe5  /  0x1496  : "Oi! Where's your authorisation form for that?"
+0xe6  /  0x14b4  : The robot snarls and grabs it back. You need the right form
+0xe7  /  0x14d5  : The robot blocks you: "Present your authorisation first!"
+0xe8  /  0x14f9  : "Huh! No good to me!"
+0xe9  /  0x1509  : "Spose I could let you have something.."
+0xea  /  0x1525  : A damaged janitor droid is slumped amidst the junk.
+
+0xeb  /  0x1542  : "Groan!"
+0xec  /  0x1549  : "Please give me a spare part", it wheezes
+0xed  /  0x1561  : Clank.. Scratch.. "help me"
+0xee  /  0x1576  : The robot tries it in place: 
+0xef  /  0x1587  : it's OK. The droid is mended! It rummages around for a reward to give you, then bounces away
+0xf0  /  0x15b9  : GRAUNCH! ZZZAP! hiss..
+0xf1  /  0x15cd  : A dead droid lies nearby
+0xf2  /  0x15d9  : The robot fends you off!
+0xf3  /  0x15e8  : The droid needs 
+0xf4  /  0x15f0  : A notice reads "ADMIN"
+0xf5  /  0x1601  : A notice reads "STORES"
+0xf6  /  0x1613  : The nutrimat machine is decrepit. It's also broken
+0xf7  /  0x1631  : It moves a bit
+0xf8  /  0x1639  : The machine is psionic and designed to dispense your favourite drink
+0xf9  /  0x1662  : . A gap leads west behind the machine
+0xfa  /  0x1675  : A robot head pokes out 
+0xfb  /  0x1684  : "Greetings, Respected Citizen. You are most welcome!"
+0xfc  /  0x16a6  : You slide down a garbage chute..
+0xfd  /  0x16bb  : "BUG OFF, FLESHIE!"
+0xfe  /  0x16ce  : and retracts again with a snort of disgust
+0xff  /  0x16e6  : "DROIDS ONLY!"
+0x100  /  0x16f5  : The couch massages you. It's 
+0x101  /  0x1707  : most invigorating and you feel fitter
+0x102  /  0x171c  : not too bad, but the metal fingers bruise you slightly
+0x103  /  0x173e  : becoming very painful
+0x104  /  0x174c  : fatal!
+0x105  /  0x1751  : The trashbank sucks it in
+0x106  /  0x1761  : The machine fills it with thin lentil custard
+0x107  /  0x177e  : The custard tastes even worse than it looks
+0x108  /  0x1798  : It's empty
+0x109  /  0x179f  :  full of liquid
+0x10a  /  0x17a9  : A scruffy robot shuffles from the 
+0x10b  /  0x17bf  : The scruffy robot shuffles 
+0x10c  /  0x17d0  : cyladder
+0x10d  /  0x17d4  : onto the cyladder and is carried up
+0x10e  /  0x17e4  : top of the cyladder
+0x10f  /  0x17ec  : ramp above
+0x110  /  0x17f2  : up the ramp
+0x111  /  0x17f7  : onto the cyladder and is carried down
+0x112  /  0x1808  : ramp below
+0x113  /  0x180c  : A dumpy droid scuffles about
+0x114  /  0x181d  : : "Tsk! Tsk! Always dusty"
+0x115  /  0x1832  : : "How untidy! Dear, dear"
+0x116  /  0x1843  : : "I'll never get it clean"
+0x117  /  0x1858  : The cyladder has descended, leaving a hole!
+0x118  /  0x1872  : The cyladder rejects you
+0x119  /  0x187e  : You fall through the open cyladder
+0x11a  /  0x188e  : You are carried down
+0x11b  /  0x1899  : You're carried up
+0x11c  /  0x18a5  : You lever it out with the screwdriver
+0x11d  /  0x18b9  : The battery's deep inside, you can't get a grip
+0x11e  /  0x18d5  : 
+The screen lights!
+
+0x11f  /  0x18e1  : 
+The screen fades
+
+0x120  /  0x18ea  : Your coffin code is blue mortuary
+0x121  /  0x18fe  : And there's a frozen crewmember in green with code
+0x122  /  0x191a  : It is closed
+0x123  /  0x1921  : A crewmember is inside
+0x124  /  0x1930  :  (tight shut)
+0x125  /  0x193a  : 
+0x126  /  0x193b  : 
+That's your 100th wall!
+
+0x127  /  0x194e  : 
+You float down..
+
+0x128  /  0x195a  : It IS lit
+0x129  /  0x1960  : It already is
+0x12a  /  0x1968  : You've no power
+0x12b  /  0x1974  : It illuminates brightly
+0x12c  /  0x1983  : It fades to black
+0x12d  /  0x198d  :  shining brightly
+0x12e  /  0x199a  : With what, eh?
+0x12f  /  0x19a5  : You cut a gaping slash and the escaping air sucks you out!
+0x130  /  0x19c7  : Too heavy!
+0x131  /  0x19d0  : 
+The stacker starts to lift it.
+
+0x132  /  0x19e0  : A machine grabs and opens the coffin!
+
+0x133  /  0x19f8  : "Gimme Liquid Sustenance!"
+0x134  /  0x1a0d  : "Must inform.. habidome code.. need water"
+0x135  /  0x1a29  : "Need water to converse"
+0x136  /  0x1a38  : "EEEEEK! YEEEAH! AAAAR!" The screams attract the Nightingales..
+0x137  /  0x1a64  : A Nightingale is rolling away east
+0x138  /  0x1a78  : A Nightingale is here! Its spherical body divides to reveal syringes and grabs. Then it reaches for you...
+0x139  /  0x1ab3  : A black spherical Nightingale is advancing from the west
+0x13a  /  0x1ad3  : A clanking noise comes from the west
+0x13b  /  0x1ae6  : You can hear quiet clanking
+0x13c  /  0x1af7  : The clanking fades away
+0x13d  /  0x1b04  : The clanking pauses outside your room..
+0x13e  /  0x1b19  : Loud clanking comes from outside
+0x13f  /  0x1b2e  : You hear quiet clanking outside
+0x140  /  0x1b41  : There's a faint mechanical noise
+0x141  /  0x1b54  :  A nightingale enters. Its vast bulk splits and a hypo lashes out..
+0x142  /  0x1b7d  : 
+The coffin holding the crewmember is held in place
+
+0x143  /  0x1b9b  : The recoil spins you round
+0x144  /  0x1baa  : The gun matches your speed to the ground's
+0x145  /  0x1bc1  : You could enter a spidroid "hopper"
+0x146  /  0x1bd6  : She drinks it gratefully. Apparently you should visit the habidome whose code is
+0x147  /  0x1c0e  : You need a spanner
+0x148  /  0x1c18  : A massive snowdozer stands beside a pile of fuel blocks, a doorway leads into it. One wide track needs welding
+0x149  /  0x1c57  : A colossal snowdozer towers over you
+0x14a  /  0x1c6b  : No, you CAN'T weld anything here
+0x14b  /  0x1c81  : You can't weld without 
+0x14c  /  0x1c90  : You successfully weld the snowdozer's track. It is mended!
+0x14d  /  0x1cb3  : The dozer won't start until mended
+0x14e  /  0x1cc6  : It turns! A voice intones "Please Leave The Snowdozer"
+0x14f  /  0x1ce3  : The dozer lumbers off, pushing iceblocks to refuel the Snowball's engines as it goes
+0x150  /  0x1d10  : "OUT OF FUEL!"
+0x151  /  0x1d1f  : It turns! Engines Roar! The Snowball turns away from the sun.. YOU HAVE WON!
+
+0x152  /  0x1d4e  : 
+0x153  /  0x1d4f  : 
+0x154  /  0x1d50  : 
+0x155  /  0x1d51  : 
+Sorry, you seem to be dead
+
+0x156  /  0x1d64  : The monorail shuttle arrives and its doors open
+0x157  /  0x1d7d  : The shuttle rushes to the next station and opens its doors
+0x158  /  0x1d99  : It whistles
+
+0x159  /  0x1da2  : A distraught butler robot pushes past and rushes off
+0x15a  /  0x1dc3  : The cat scuffles about, cleaning
+
+0x15b  /  0x1dd7  : It completely cleans the ramp
+0x15c  /  0x1de6  : The ramp is coated in unislime
+0x15d  /  0x1df5  : The cat sucks up 
+0x15e  /  0x1e00  : 
+1 Instructions
+2 Info
+3 Desk
+4 Library
+5 Maps
+6 Redisplay
+0x15f  /  0x1e32  : 
+INFO
+1 Damage
+2 Flight Log
+3 Droids
+4 Passengers
+5 Exit
+0x160  /  0x1e62  : 
+DESK
+1 In-tray
+2 Out-tray
+3 Files
+4 Diary
+5 Exit
+0x161  /  0x1e8d  : 
+MAPS
+1 Overview
+2 Freezers
+3 Accommodation
+4 Engine Unit
+5 Exit
+0x162  /  0x1ec3  : 
+IN-TRAY
+1 Flight
+2 Beta Missing
+3 Help!
+4 Exit
+0x163  /  0x1eee  : 
+OUT-TRAY
+1 Send
+2 Exit
+0x164  /  0x1f04  : instructions: "wear visor, look and blink". (Interface design copyright (c) Level 9 Computing 1983)
+0x165  /  0x1f3c  : a comprehensive technical library with millions of entries
+0x166  /  0x1f61  : the ship to be undamaged
+0x167  /  0x1f70  : that the Snowball has veered off course. It's heading for the sun
+0x168  /  0x1f8e  : all droid positions
+0x169  /  0x1f99  : that all 1,800,000 passengers are well
+0x16a  /  0x1fb3  : an impenetrable filing system
+0x16b  /  0x1fc5  : a page-a-day diary. The author was worried about "Alpha"
+0x16c  /  0x1fea  : a map of the Snowball: engine unit at the front, towing a great hollow ice-asteroid
+0x16d  /  0x2016  : maps of the 10 great freezer disks
+0x16e  /  0x202a  : the accommodation dome embedded in the south of asteroid wall
+0x16f  /  0x204c  : the engine unit: four motors round a vast bay below the control room
+0x170  /  0x206f  : a lengthy message querying the Snowball's flight plan
+0x171  /  0x208a  : a worried message about two crew-members who seem to be missing
+0x172  /  0x20af  : "Help! Alpha is battering down the door"..
+0x173  /  0x20c8  : "Transmission u/s"
+0x174  /  0x20d7  : It becomes brighter
+0x175  /  0x20e1  : The screen changes to show 
+0x176  /  0x20ee  : The screen shows 
+0x177  /  0x20f7  : The screen flickers as you look
+0x178  /  0x210a  : . Then you return to the menu
+0x179  /  0x211b  : A massive waldroid guards the ladder
+0x17a  /  0x212c  : A figure with a petrol bomb stands at the west of the room 
+0x17b  /  0x214a  : The room is on fire!
+0x17c  /  0x2155  : The blaze intensifies
+0x17d  /  0x2162  : The fire blazes fiercely
+0x17e  /  0x2171  : Flames are melting the walls
+0x17f  /  0x2181  : The robot blocks you
+0x180  /  0x218d  : You slip and fall
+0x181  /  0x2197  : A laser blast spears out
+0x182  /  0x21a6  : Burning petrol engulfs you
+0x183  /  0x21b6  : It plays a scale, from low notes to very high
+0x184  /  0x21d0  : . The petrol bomb shatters, surrounding its owner in fire. She staggers back through a hidden airlock - you will not see her again!
+0x185  /  0x2218  : The tray reflects a laser beam back on itself. You hear an explosion
+0x186  /  0x223d  : Carbon dioxide roars out
+0x187  /  0x224c  :  and kills the fire
+0x188  /  0x2259  : Paint puffs from the can
+0x189  /  0x2267  : 
+The paint blinds the robot which staggers away
+0x18a  /  0x2281  : Snowball IX explodes!
+0x18b  /  0x228d  : "Keep back or I throw the bomb!"
+0x18c  /  0x22a2  : "You cannot get to the controls!"
+0x18d  /  0x22b6  : "You won't stop me!"
+0x18e  /  0x22c4  : The flask joins invisibly with the helmet, recharging its air
+0x18f  /  0x22e7  : You feel a surge of acceleration
+0x190  /  0x22f9  :  400
+0x191  /  0x22fe  : at a junction of monomol ropes. Some look negotiable
+0x192  /  0x2319  : in the web
+0x193  /  0x231e  : at a junction
+0x194  /  0x2326  : at a junction in the web. Plasteel ropes lead away
+0x195  /  0x233d  : at a web junction. Ropes lead in many directions
+0x196  /  0x235a  : at a junction of the web
+0x197  /  0x2362  : at a junction of the web
+0x198  /  0x236a  : at a junction of the web
+0x199  /  0x2372  : in the web
+0x19a  /  0x2377  : at a junction of the web
+0x19b  /  0x237f  : in the web
+0x19c  /  0x2384  : at a junction of the web
+0x19d  /  0x238c  : at a junction of the web
+0x19e  /  0x2394  : in the web
+0x19f  /  0x2399  : at a junction of the web
+0x1a0  /  0x23a1  : at a junction of the web
+0x1a1  /  0x23a9  : at a junction of the web
+0x1a2  /  0x23b1  : near the web base
+0x1a3  /  0x23ba  : holding a rope
+0x1a4  /  0x23c4  : at a junction of the web
+0x1a5  /  0x23cc  : at a junction of the web
+0x1a6  /  0x23d4  : on a rope joining solid ice. It fans out as it enters the snow
+0x1a7  /  0x23f7  : floating in space
+0x1a8  /  0x2401  : in space near the inner surface of the hollow snowball protecting the freezers
+0x1a9  /  0x242c  : about to hit the fast moving ice-below. You'd better match velocities..
+0x1aa  /  0x2455  : on a flat snowfield north of an immense unclimbably smooth cliff. A pylon stands nearby
+0x1ab  /  0x2487  : on trodden snow between a tall pylon and a hemidome calling itself the "Snowball Hilton"
+0x1ac  /  0x24b7  : on churned and rutted snow below a tall pylon
+0x1ad  /  0x24d0  : beside the northern ice-cliff which has a tiny cave at its base. A pylon stands nearby
+0x1ae  /  0x2502  : on smooth snow beside a pylon, dwarfed by the north cliff
+0x1af  /  0x251e  : on trampled snow outside a major snowdesic dome. Brilliant light from an entrance split in the hemidome illuminates a nearby pylon
+0x1b0  /  0x2569  : on smooth snow, beside one of a chain of pylons. A ladder leads up the pylon to a cabin
+0x1b1  /  0x258d  : on soft snow outside a sagging warehouse. A dark plastic path leads from the warehouse to a nearby pylon
+0x1b2  /  0x25c3  : at the rim of a colossal hole, hundreds of meters in width. Stars are visible in its depths. The ice-rim is splintered and gouged as if great heavy objects have been pushed over the edge
+0x1b3  /  0x262e  : on a smooth icefield, lightly dusted with powder snow
+0x1b4  /  0x264c  : in a large hanger packed with stratogliders queued for launch. The doors of the first are open ready for embarkation
+0x1b5  /  0x268a  : on a shuttle platform. A button protrudes from the barrier
+0x1b6  /  0x26aa  : on a ladder up the pylon
+0x1b7  /  0x26b6  : in the Robodome. A wide, rippled ramp leads down into the ground
+0x1b8  /  0x26d6  : on a straight ramp
+0x1b9  /  0x26de  : at the west corner of the cave
+0x1ba  /  0x26ea  : at the north corner of the cave
+0x1bb  /  0x26f7  : at the south corner
+0x1bc  /  0x26fd  : at the east corner of the cave
+0x1bd  /  0x270a  : at the base of a straight ramp, in the middle of a cave hacked from the ice
+0x1be  /  0x272a  : in a snowrail carriage. Uncomfortable lumpy benches are moulded from the trash-strewn floor and the filthy windows are opaque. There's a "go" button
+0x1bf  /  0x2780  : in the high control bubble of the Snowdozer. An engraved panel at the front of the cab has a keyhole set into it
+0x1c0  /  0x27b8  : in the snowdozer's engine room
+0x1c1  /  0x27c7  : 
+0x1c2  /  0x27c8  : 
+0x1c3  /  0x27c9  : on a significant cylindrical ledge above steps to a toroidal walkway. Transpex tubes lead away through a maze of wires and machinery
+0x1c4  /  0x281b  : floating in a flexible transpex tube through the central torus of a major freezer unit. Scaled-up mechanisms are visible through the soft walls and, far below, a circular path surrounds you
+0x1c5  /  0x2887  : following a winding transpex tunnel between vast lumpy metallic discs. Tiny light sources flicker far below, providing the only illumination
+0x1c6  /  0x28d8  : on a toroidal walkway
+0x1c7  /  0x28e5  : on a curving path in a 100m torus. A wide glassy tube spans the space above through a net of wires and pipes. A button protrudes from the floor
+0x1c8  /  0x2936  : on a toroidal walkway
+0x1c9  /  0x2943  : on a toroidal walkway
+0x1ca  /  0x2950  : on a toroidal walkway beside a ramp. Tubes criss-cross the space above
+0x1cb  /  0x2975  : on a toroidal walkway
+0x1cc  /  0x2982  : in the winch room beside a pair of linedrives. A trapdoor is bolted to the low ceiling and monofibes hang down into the gloom
+0x1cd  /  0x29be  : clinging to ropes in the gloom
+0x1ce  /  0x29cc  : on the elevator roof
+0x1cf  /  0x29d8  : in a blue glass elevator. A sliding door makes up one wall; the others are featureless apart from a panel of multi-coloured buttons. Square trapdoors show in floor and ceiling
+0x1d0  /  0x2a3b  : clinging to a single rope below the elevator
+0x1d1  /  0x2a51  : in a grimy pit. A rope hangs down from above
+0x1d2  /  0x2a6c  : in a curving e/w corridor south of a wide entrance. A button protrudes from the floor and indicator lights decorate the ceiling
+0x1d3  /  0x2ab2  : in a spotless white alcove beside a complex revival machine
+0x1d4  /  0x2ad3  : in a curving east-west corridor below indicator lights
+0x1d5  /  0x2af1  : in a curving e/w corridor beside a green door. Lights show above it
+0x1d6  /  0x2b12  : in a curving e/w corridor beside a blue door. Lights show above it
+0x1d7  /  0x2b33  : at the entrance to a blue mortuary beside indicator lights and a control panel
+0x1d8  /  0x2b59  : by the entrance to a green mortuary beside lights and a panel
+0x1d9  /  0x2b78  : in a blue mortuary beside a smooth ceramic slab. Lights twinkle beside a trapdoor on the ceiling
+0x1da  /  0x2ba4  : in a green mortuary beside a smooth slab. Indicators illuminate a trapdoor above
+0x1db  /  0x2bcc  : at the south end of a narrowing marblon cylinder. A button emerges beside an airlock door
+0x1dc  /  0x2bf5  : at the north end of a widening marblon cylinder. A button pokes from the floor beside an airlock door
+0x1dd  /  0x2c23  : in a wide simulated-marble tube. An immovable grill is set into the floor, and an empty padded cell can be seen between the bars
+0x1de  /  0x2c6b  : in a vast smooth-surfaced cylinder beside a contoured ramp
+0x1df  /  0x2c81  : standing on smooth simrock on the side of a large tube. A cyladder descends through red light
+0x1e0  /  0x2cae  : standing inside a substantial smooth cylinder. A ramp leads down beside you and a similar, larger ramp is just visible opposite, across the tube
+0x1e1  /  0x2cf1  : in a carpetted massage parlour hung about with red velcron drapes. The ceiling is polished to a mirror finish. A sumptuous leather couch stands in the middle of the floor
+0x1e2  /  0x2d4c  : in a bare storeroom
+0x1e3  /  0x2d56  : in a large low room, surrounded by lights and vids. A barely-audible high pitched humming emerges from a vast display panel with the legend "Snowball IX Freezer Control" to the south. A luminous cyladder rises through the ceiling
+0x1e4  /  0x2dce  : in the southeast corner of freezer control
+0x1e5  /  0x2de1  : in the northeast corner of freezer control
+0x1e6  /  0x2df6  : behind the display panel. You are surrounded by the shiny warm cases of a dozen holojectors
+0x1e7  /  0x2e27  : in a wood-grained library
+0x1e8  /  0x2e37  : in a cramped mempak archive. Locked racks hold titles like Fusion Mechanics, Genetics by Numbers, The Last Christians, Choosing Your Small Business Android, COBOL for the Arcturan Gigabrain, Playgirl the First Hundred Years, and The Human Race and How To Win. Each pack zaps selected highlights (much better than its real contents) at your midbrain
+0x1e9  /  0x2f0f  : in the condo: a small, comfortable rest area. An airbed is suspended from the ceiling
+0x1ea  /  0x2f3d  : in a small tiled room. Very little space is needed to hold a wc, shower and basin but there's nothing of any game-relevance
+0x1eb  /  0x2f80  : in the diner: a minute corner of the condo, equipped for eating etc. A "natural wholefood no chemicals" machine is fixed to the wall, alongside a square hole for garbage
+0x1ec  /  0x2fe3  : in a cupboard
+0x1ed  /  0x2fec  : in a narrow service duct, beside an aircon vent
+0x1ee  /  0x3006  : in a tight e/w crawlway
+0x1ef  /  0x3014  : 
+0x1f0  /  0x3015  : in a dusty corner
+0x1f1  /  0x301d  : on a rubbish tip. A garbage chute is supported by corroded wires far above, much too high for you to reach it
+0x1f2  /  0x305d  : on a great pile of garbage
+0x1f3  /  0x306c  : in an overflowing, broken junk processor (made by GIGO industries)
+0x1f4  /  0x3096  : on a wide ramp to heavy plasteel door. A battery of videyes surround a notable flashing sign: "DROID-HANDLED STORE SERVICE. PRIVATE"
+0x1f5  /  0x30ec  : on a gently sloping spiral ramp above a vast warehouse. Crates reach the ceiling
+0x1f6  /  0x3117  : at a small counter staffed by a faceless android
+0x1f7  /  0x3133  : at a wide counter staffed by a faceless android
+0x1f8  /  0x314e  : in a corner, beside a red ticket machine
+0x1f9  /  0x3160  : in a corner beside a green ticket machine
+0x1fa  /  0x3172  : in a store room
+0x1fb  /  0x3179  : in a beige, kidney-shaped entrance hall south of a buttoned airlock
+0x1fc  /  0x31a0  : in a tasteful pink and green alcove beside a security door. There's a combination panel
+0x1fd  /  0x31ce  : in a small round room
+0x1fe  /  0x31d9  : on narrow, winding stairs leading down to an airlock iris. There is the usual floor button
+0x1ff  /  0x3208  : 
+0x200  /  0x3209  : in a ruined bubble farm
+0x201  /  0x3216  : in an observatory. All the equipment has been systematically broken and the room is in chaos
+0x202  /  0x324b  : at the base of Jacob's Ladder. A very long opaque tube, wound about with plaitted plasteel fibres, rises dead straight above you. A ladder runs up the middle
+0x203  /  0x329b  : climbing Jacob's Ladder. Looking up and down, you realise it must be miles long! However, in some mysterious way, it seems easier to climb than it should
+0x204  /  0x32ef  : climbing Jacob's Ladder. Although you're climbing slowly, it feels as if you're moving very rapidly..
+0x205  /  0x3327  : near the top of Jacob's Ladder. Above is the light at the end of the tunnel
+0x206  /  0x3344  : on a tiny platform, suspended in the middle of a colossal metallic cylinder. A yawning gulf separates the platform from a seemingly-small metallic lip round the outside. Four frail walkways join it across the abyss and a major twisted rope hangs down to support a corroded 5 klom snowball far below
+0x207  /  0x33f0  : on a wide lip west of a colossal red cylinder
+0x208  /  0x3403  : on a wide ledge round the north edge of a huge red cylinder. A thick ramp winds upwards, there's a tiny opening in the cylinder wall, an insubstantial bridge is suspended over the abyss below the cylinder, and if you feel tired of life there's always down..
+0x209  /  0x3482  : on a wide ledge south of the abyss at the bottom of a colossal red cylinder. A 5 klom snowball hangs from a strong (!) wire down the middle of the tube. A spindly bridge joins the wire
+0x20a  /  0x34e1  : on a wide ledge east of the abyss. A small hole enters the cylinder wall nearby, and a narrow bridge leads out over the abyss
+0x20b  /  0x3522  : on a wide sloping ramp west of the red cylinder
+0x20c  /  0x3535  : on a wide sloping ramp south of the red cylinder
+0x20d  /  0x3548  : on a wide sloping ramp east of the red cylinder. Squinting up through the glare, you can make out a bunch of enormous clawhooks - each attached to a segmented wire
+0x20e  /  0x35a1  : at the top of the wide ramp, north of the red cylinder. The ramp curves west through a pair of heavy blast doors
+0x20f  /  0x35d2  : in a wide, dark east-west corridor terminated by blast doors to the east
+0x210  /  0x35f8  : at a T-junction where the dark passage ends at a brightly lit corridor. Looks risky..
+0x211  /  0x3628  : in a bright n/s corridor, at a pair of locked doors. You don't have time to explore the rooms beyond them: the important thing is to go south to the Control Room
+0x212  /  0x3677  : at a junction in a north-south corridor
+0x213  /  0x3686  : at the end of the corridor, beside the entrance to the control room
+0x214  /  0x36a3  : beside the main instrument panel. The only control that you will ever understand (without psychomods/RNA boosts) is a red lever: "manual/autopilot"
+0x215  /  0x36f9  : in a sloping crawlway
+0x216  /  0x3705  : in a sloping crawlway
+0x217  /  0x3711  : 
+0x218  /  0x3712  : in the southwest corner of freezer control, beside a control chair. The south wall is a wavery and obscure confusion of flickery projected vids
+0x219  /  0x3759  : in a comfortable cave carved into warm sandstone. Bright sunlight streams in from the east
+0x21a  /  0x378a  : in a beige alcove at the rear of the cave. A small fire burns at one side, and there's a wide ledge strewn with cut meadowsweet at the other
+0x21b  /  0x37d5  : in one cubicle of a great library. Thousands of people are studying at similar cubicles around, their hushed voices filling the air with a low murmuring
+0x21c  /  0x382f  : in a soft, pink room. Gentle shapes move restfully across the walls to soft musical rhythms
+0x21d  /  0x3864  : in a grey room, lit by flickering candles
+0x21e  /  0x387b  : in a solid black room filled with a glaring white light. Despite the intensity of the illumination, you know it does not show everything clearly. Yet increasing the brightness would only dazzle: concealing more certainly
+0x21f  /  0x38f8  : on a wide sunlit beach of yellow sand. Several large rocky outcrops rise up all around. Gulls call as they soar overhead
+0x220  /  0x3941  : on a desert island in the middle of a sweeping coral atoll. Palm trees rise overhead: their fallen fronds forming a soft heap
+0x221  /  0x398a  : in a superb recreation lounge, surrounded by a great variety of ways of passing the time: dream-games, exercisers, learndromats, fundroids etc. All are irreparably smashed
+0x222  /  0x39f2  : in a sumptuous bathroom with sunken bath, jacuzzi etc.
+0x223  /  0x3a15  : in a bright meadow, full of flowers and sweet grasses
+0x224  /  0x3a34  : under the shade of an old apple tree. The ground is covered with thick, soft moss
+0x225  /  0x3a5f  : in a forest glade (yes, really). Warm sunlight filters through the branches overhead, and cute little furry animals peer out from the undergrowth. Narrow leaf-strewn pathways lead in all directions through fragrant vegetation
+0x226  /  0x3ae4  : in a snake-pit. Venomous reptiles are slithering towards you
+0x227  /  0x3b06  : in an open-plan control room. As the ship flies itself there are few controls, just an assortment of computers and displays of no interest to anyone. They're decades out of date - only kept in case the modern stuff fails
+0x228  /  0x3b85  : in a cylindrical airlock between two iris doors
+0x229  /  0x3b9e  : in a featureless cylindrical airlock between two iris doors
+0x22a  /  0x3bbf  : in a cubic airlock between two iris doors
+0x22b  /  0x3bd5  : in a vertical airlock between two iris doors
+0x22c  /  0x3bec  : in an ice tunnel
+0x22d  /  0x3bf6  : in a tiny stratoglider. It is extensively damaged
+0x22e  /  0x3c12  : in a padded room
+0x22f  /  0x3c1a  : in the flexible bubble body of a spidroid
+0x230  /  0x3c31  : in a vast docking bay, surrounded by piles of metallic junk. The massive exterior doors are open to space and, through them, lights are visible in the far south. A thickly knotted rope stretches into the void. At the back of the docking bay is an airlock iris with a floor button
+0x231  /  0x3cc5  : in the bright, tidy docking bay of the crew habidome. An airlock iris (with button) leads further into the dome
+0x232  /  0x3d00  : sitting on a plasteel container high up in the Robot Stores. More crates stretch south as far as you can see, while to the north is a revolting expanse of garbage. There's a square aperture in the wall by your head
+0x233  /  0x3d77  : north of a wall of crates
+0x234  /  0x3d86  : in a cramped space between crates and piles of rubbish
+0x235  /  0x3da4  : on a sloping junk heap
+0x236  /  0x3db1  : in a gangway between stacked cases
+0x237  /  0x3dc4  : at the base of a spiral ramp, surrounded by stacked crates and containers
+0x238  /  0x3de9  : in a gangway between stacked cases
+0x239  /  0x3dfc  : in an aisle between stacked cases
+0x23a  /  0x3e0e  : in the stores. Piles of cases stretch in all directions
+0x23b  /  0x3e2b  : in an aisle between stacked cases in the stores
+0x23c  /  0x3e43  : in an aisle between crates in the stores
+0x23d  /  0x3e58  : in a gangway between stacked containers
+0x23e  /  0x3e6f  : in a sponge-lined coffin
+0x23f  /  0x3e7c  : lying on a comfortable couch
+0x240  /  0x3e8c  : in a broken waldo cocoon
+0x241  /  0x3e9a  : on the airbed, floating amidst warm air currents
+0x242  /  0x3eb6  : in a padded cell. The walls are lined by Tuffkwilt (TM) padding, and the only door (in the ceiling) cannot be opened by you: a wide passageway is visible through its bars. A "Nutrimat" machine is the only furniture
+0x243  /  0x3f30  : seated at the console
+0x244  /  0x3f3a  : 
+0x245  /  0x3f3b  : 
+0x246  /  0x3f3c  : 
+0x247  /  0x3f3d  : 
+0x248  /  0x3f3e  : 
+0x249  /  0x3f3f  : 
+0x24a  /  0x3f40  : 
+0x24b  /  0x3f41  : 
+0x24c  /  0x3f42  : 
+0x24d  /  0x3f43  : 
+0x24e  /  0x3f44  : 
+0x24f  /  0x3f45  : 
+0x250  /  0x3f46  : 
+0x251  /  0x3f47  : 
+0x252  /  0x3f48  : 
+0x253  /  0x3f49  : 
+0x254  /  0x3f4a  : 
+0x255  /  0x3f4b  : 
+0x256  /  0x3f4c  : on a great pile of garbage
+0x257  /  0x3f5b  : 
+0x258  /  0x3f5c  : in the southwest corner of Freezer Control, beside a control chair. To the south is an alcove full of machinery
+0x259  /  0x3f90  : in a beige room
+0x25a  /  0x3f98  : in a beige bedroom
+0x25b  /  0x3fa2  : in a pink room
+0x25c  /  0x3fa8  : in a pink bedroom
+0x25d  /  0x3fb1  : in a russet room
+0x25e  /  0x3fb9  : in a russet bedroom beside a crude pit
+0x25f  /  0x3fcb  : in a yellow room
+0x260  /  0x3fd1  : in a yellow bedroom
+0x261  /  0x3fda  : in a well-equipped, but spartan, recreation lounge
+0x262  /  0x3ffa  : in an ugly bathroom
+0x263  /  0x4006  : in a pale green room
+0x264  /  0x4010  : in a green bedroom
+0x265  /  0x4019  : in a large round room with many exits
+0x266  /  0x402c  : in a crudely gouged pit
+0x267  /  0x4039  : 
+0x268  /  0x403a  : 
+0x269  /  0x403b  : 
+0x26a  /  0x403c  : 
+0x26b  /  0x403d  : 
+0x26c  /  0x403e  : 
+0x26d  /  0x403f  : 
+0x26e  /  0x4040  : 
+0x26f  /  0x4041  : 
+0x270  /  0x4042  : 
+0x271  /  0x4043  : 
+0x272  /  0x4044  : 
+0x273  /  0x4045  : 
+0x274  /  0x4046  : 
+0x275  /  0x4047  : 
+0x276  /  0x4048  : The armour is scarred by hot metal splashes. It's just your size
+0x277  /  0x406c  : Very intricate: translucent with an embedded sensor web
+0x278  /  0x408e  : Ordinary sun-watcher specs
+0x279  /  0x40a0  : An ugly garment which fits like a second skin.. perhaps a hippo's
+0x27a  /  0x40cc  : Clustered glowgems indicate
+0x27b  /  0x40dc  : A standard USAR vac-hat. It would attach to a suit collar and has a connector at the back
+0x27c  /  0x4112  : Just your size: full-body with monokini reinforcement and a circular metal collar. Very tough material
+0x27d  /  0x4155  : It's an impressive status symbol: as worn by the elite
+0x27e  /  0x4178  : 
+0x27f  /  0x4179  : 
+0x280  /  0x417a  : A light, pressurised, 100 ml can. Paint jets out if you squeeze it
+0x281  /  0x41a4  : A miniature dilithium crystal battery
+0x282  /  0x41bc  : Dead, I'm afraid
+0x283  /  0x41c8  : The card is green, tastefully inlaid in purple
+0x284  /  0x41e4  : The cat feels hard and boney, with a large circular mouth. It vibrates as you hold it
+0x285  /  0x4216  : It's smooth and black with indicators showing
+0x286  /  0x422d  : The expanded polystyrene cup is an engineering triumph. Even its defects (the slow leaking of the contents and the release of toxins from the plastic) led directly to the crucial Maxwell Heatsink!
+0x287  /  0x429b  : The two cylinders are labelled O2 and C2H2 respectively
+0x288  /  0x42b9  : The flute can play high or low notes. Or, indeed, a tune
+0x289  /  0x42dc  : A one-shot, carbon-dioxide fire extinguisher: "squeeze to activate"
+0x28a  /  0x4308  : An infomatic probe for android faults. Attach to your robot
+0x28b  /  0x432a  : The flask is labelled "Mineral Air, Spring-bottled for natural freshness". There's a flexiconnector at one end
+0x28c  /  0x4370  : A P45! It's incomprehensible jargon
+0x28d  /  0x4386  : A UB40, written in Eurogibburocratish
+0x28e  /  0x43a2  : An ominous P1. Simple and concise, but all it does is reference other forms
+0x28f  /  0x43d0  : The form is almost entirely propoganda for the current government's policies
+0x290  /  0x43fe  : It has no ammunition and a wide, tapering nozzle
+0x291  /  0x441d  : The wand whistles and vibrates as it moves
+0x292  /  0x4438  : The obligatory bunch of keys that crops up in all adventures
+0x293  /  0x445a  : 
+0x294  /  0x445b  : It looks like a welding lance
+0x295  /  0x446c  : The laser is partially melted and will never work again
+0x296  /  0x448d  : According to the label, it holds details of passengers
+0x297  /  0x44b0  : 
+0x298  /  0x44b1  : It's very odd
+0x299  /  0x44ba  : 
+0x29a  /  0x44bb  : 
+0x29b  /  0x44bc  : Very sharp
+0x29c  /  0x44c3  : It's an ordinary screwdriver with a double-curved blade to maximise screwtop grip
+0x29d  /  0x44f8  : The shovel has a light foamed blade: ideal for digging snow
+0x29e  /  0x451c  : The spanner will fit any bolt
+0x29f  /  0x452f  : It's red
+0x2a0  /  0x4534  : It's green
+0x2a1  /  0x453a  : 
+0x2a2  /  0x453b  : It looks dangerous
+0x2a3  /  0x4547  : Looks like something out of a robot
+0x2a4  /  0x455b  : A droid component
+0x2a5  /  0x4564  : A robot part
+0x2a6  /  0x456c  : A robot spare
+0x2a7  /  0x4574  : A tow-behind lifter, suitable for moving coffins
+0x2a8  /  0x4590  : 
+0x2a9  /  0x4591  : 
+0x2aa  /  0x4592  : 
+0x2ab  /  0x4593  : 
+0x2ac  /  0x4594  : 
+0x2ad  /  0x4595  : Battery-powered
+0x2ae  /  0x45a0  : The viewer has openings for a battery and a mempak
+0x2af  /  0x45bf  : It's perfectly polished
+0x2b0  /  0x45cf  : It floats in mid-air
+0x2b1  /  0x45db  : A very well-engineered toolbox
+0x2b2  /  0x45f0  : <EOM>
