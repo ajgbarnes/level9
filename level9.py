@@ -68,7 +68,12 @@ vm_listarea            = [0]*512
 vm_listarea_previous   = [0]*512
 vm_dictionary          = {}
 
+vm_breakpoints         = []
+vm_return_breakpoints  = []
+
 charsWrittenToLine = 0
+
+debugStepping=False
 
 ###############################################################################
 # Default randomseed for game events - can be set at any time with
@@ -159,7 +164,7 @@ directions = [
 #    False - invalid format
 ###############################################################################
 def isValidHex(string):
-    return re.search("^0x[0-9a-fA-F]{1,3}$", string) is not None
+    return re.search("^0x[0-9a-fA-F]{1,6}$", string) is not None
     
 ###############################################################################
 # signal_handler()
@@ -197,7 +202,10 @@ def signal_handler(signum, frame):
 # #list          - lists all the values in the listarea
 # #dict          - print the dictionary for the game
 # 
-# 
+# Colours are pritng by injecting ANSI control characters 
+# \033[92m is green
+# \033[0m  is black
+#  
 #
 # Parameters: 
 #    data      - the game file byte array
@@ -221,6 +229,13 @@ def _process_hash_commands(data, pc, userInput):
     #    vm_listarea[x]=0xff
 
     match strippedInput.split():
+        case ['#d' | '#debug']:
+            debugging = True
+            debugStepping = True
+
+        case ['#nodebug']:
+            debugging = False
+            debugStepping = False
 
         # Prints the dictionary
         case ['#dict' | '#dictionary']:
@@ -326,6 +341,89 @@ def _process_hash_commands(data, pc, userInput):
         case other:
             print('Invalid command')
 
+
+###############################################################################
+# _process_debug
+###############################################################################
+def _process_debug(data, pc, opCode, opCodeClean, debugpc):
+
+    debugCommand = ""
+    global debugStepping
+    global vm_return_breakpoints
+    global vm_breakpoints
+
+    if(debugpc in vm_return_breakpoints):
+            vm_return_breakpoints.pop()
+            debugStepping=True        
+
+    
+    while(debugCommand ==""):
+        print("(debug) ",end='')
+        debugCommand = input().strip().lower()
+        if(debugCommand == ""):
+            debugCommand = "s"
+        match debugCommand.split():
+            # Continue just breaks and goes back to the vm
+            case ["?"]:
+                print("b <addr>                  : set a-code breakpoint at <addr> e.g. b 0x4e7b")
+                print("bl                        : list breakpoints")
+                print("db <idx>                  : delete breakpoint <idx>")
+                print("")
+                print("c                         : continue")
+                print("s                         : step (in)")
+                print("n                         : next (step over) - only for gosub, steps otherwise")
+                print("<enter>                   : same as step (in)")
+                print("")
+                print("d, dict, dictionary       : print the dictionary")
+                print("m, msg, messsage <id>     : print message number <id>")
+                print("")
+                print("l,list                    : print all variables in a table")
+                print("sl, setlist <idx> <value> : set dynamic list item to value (both in hexadecimal)")
+                print("")
+                print("sv, setvar <var> <value>  : set variable to value (both in hexadecimal)")
+                print("v,vars                    : print all variables in a table")
+                print("")
+                print("Debug output is: <fileoffset> (<opcode>) <list or command name> <live list or command with values")
+                print("")
+                print("Hash commands do NOT work in (debug) mode - use the equivalent above")
+            case ["b", address]:
+                if(isValidHex(address) and len(address) == 6):
+                    vm_breakpoints.append(int(address,16))
+            case ["bl" | "blist"]:
+                index = 0
+                for breakpoint in vm_breakpoints:
+                    print(f"{index:2d}: 0x{breakpoint:04x}")
+            case ['c']:
+                debugStepping=False
+                break
+            case ["db", breakpointIndex]:
+                if(breakpointIndex.isdigit()):
+                    if(int(breakpointIndex)>-1 and int(breakpointIndex)<len(vm_breakpoints)):
+                        del vm_breakpoints[int(breakpointIndex)]
+            case ['d' | 'dict' | 'dictionary']:
+                _process_hash_commands(data, pc, f"#dictionary")
+            case ['l' | 'list']:
+                _process_hash_commands(data, pc, f"#list")
+            case ['m' | 'msg' | 'message', index]:
+                _process_hash_commands(data, pc, f"#msg {index}")                                             
+            case ['n']:
+                if(not opCode & 0x80 and opCodeClean == 0x01):
+                    vm_return_breakpoints.append(vm_stack[-1]+1)
+                    debugStepping=False
+                break
+            case ['s' ]:
+                debugStepping=True
+                break
+            case [ 'sl' | 'setlist', variable, value ]:
+                _process_hash_commands(data, pc, f"#setlist {variable} {value}")
+            case [ 'sv' | 'setvars', variable, value ]:
+                _process_hash_commands(data, pc, f"#setvar {variable} {value}")
+            case ['v' | 'vars']:
+                _process_hash_commands(data, pc, f"#vars")
+            case other:
+                print("???")
+        debugCommand = ""
+
 ###############################################################################
 # _getSignedNumber
 #
@@ -419,16 +517,12 @@ def _getAddrForMessageN(data, messageNumber):
         # based indexed in the game file
         #messageNumber = messageNumber - 1 
         while messageNumber:
-            #print(hex(messagesAddress), hex(data[messagesAddress]))
+
             messageLength = data[messagesAddress]
 
             messagesAddress = messagesAddress + messageLength
 
             messageNumber = messageNumber - 1
-        #print(hex(messagesAddress), hex(data[messagesAddress]))
-        #print("with eoo", hex(messagesAddress + 0xe00))
-
-    #print("messageAddress",hex(messagesAddress))
 
     return messagesAddress 
 
@@ -483,8 +577,6 @@ def _getMessage(data, msgAddress):
     
         msgAddress = msgAddress + 1
 
-        #print(hex(msgLength))
-
         while msgLength:
             byte = data[msgAddress]
             if(byte >= 0x5E):
@@ -530,6 +622,9 @@ def _printMessage(data, msgAddress):
 
     message=_getMessage(data,msgAddress)
 
+    # Reset the colour to white
+    print("\033[0m",end='')
+
     for character in message:
         if(character == '%' and charsWrittenToLine>2):
             print('\n',end='')
@@ -561,6 +656,7 @@ def _printCharacter(byte):
         print(" ")
     else:
         print(chr(byte+29),end='')
+
 ###############################################################################
 # _findAndPrintLetters
 #
@@ -721,12 +817,9 @@ def _printAllExits(data,exitsAddr):
             messageId = fromLocation + locationsStartMsgId
 
             address = _getAddrForMessageN(data, messageId)
-            message = _getMessageV1(data, address)
+            message = _getMessage(data, address)
             if(not (hideNulls and exitDirection == 0)):
                 print(f'0x{exitPointer:04x}  0x{fromLocation:02x} 0x{targetLocation:02x} {directions[exitDirection]:<5}  {reverseValid:<5} {bit1:<5} {bit2:<5} 0x{messageId:03x} {message}')
-            if(targetLocation == 0xfe):
-                print('uh oh')
-                sys.exit()
 
             # Check the 8th bit - if it's set it's the last exit
             # for this location
@@ -813,10 +906,10 @@ def vm_fn_listhandler(data,opCode,pc,version):
     listNumber = opCode & 0b00011111
     
     if(version == 1 and listNumber > 0x05):
-        print(f'Version 1 games only supported 5 lists and this is accessing list {opCode & 0b00011111}')
+        print(f'Version 1 games only supported 5 lists and this is accessing list {listNumber}')
         sys.exit()
     elif(version == 2 and listNumber > 0x10):
-        print(f'Version 2 games only supported 10 lists and this is accessing list {opCode & 0b00011111}')
+        print(f'Version 2 games only supported 10 lists and this is accessing list {listNumber}')
         sys.exit()
 
     if(version == 1):
@@ -829,15 +922,17 @@ def vm_fn_listhandler(data,opCode,pc,version):
         offsetInTable = listNumber * 2
         listOffset    = data[0x06 + offsetInTable] + data[0x07 + offsetInTable] * 256
 
+
     if(opCode >= 0b11100000): # 0xE0
-        # list#x[ variable[ <operand1> ]] = variable[ <operand2> ]
+        # list#x[ variable[ <operand1> ]]  = variable[ <operand2> ]
+        # list#x[ variable[ <variable1>]] = variable[ <variable2> ]
         pc=pc+1        
         variable1=data[pc]
 
         pc=pc+1        
         variable2=data[pc]
 
-        if(version ==1):
+        if(version == 1):
             if(listOffset < 0):
                 print('Error: Update to reference list attempted ', hex(opCode), hex(pc))
                 sys.exit()
@@ -848,12 +943,17 @@ def vm_fn_listhandler(data,opCode,pc,version):
             if(listOffset < 0x7E00):
                 print('Error: Update to reference list attempted ', hex(opCode), hex(pc))
                 sys.exit()
+
             offset = listOffset - 0x8000 + vm_variables[variable1]
             vm_listarea[offset] = vm_variables[variable2]
+
+        if(debugging):  
+            print(f"Set list#{listNumber}[0x{variable1:02x}] = var[0x{variable2:02x}] (0x{vm_variables[variable2]:02x})")
             
 
     elif(opCode >= 0b11000000): # 0xC0
-        # variable[ <operand2> ] = list#x[ <operand1> ]
+        # variable[ <operand2> ] = list#x[ <operand1>]
+        # variable[ <variable> ] = list#x[ constant  ]
 
         pc=pc+1
         constant = data[pc]
@@ -877,8 +977,13 @@ def vm_fn_listhandler(data,opCode,pc,version):
                 offset = listOffset- 0x8000 + constant
                 vm_variables[variable] = vm_listarea[offset]
 
+        if(debugging): 
+            print(f"Set var[0x{variable:02x}] = list#{listNumber}[0x{constant:02x}] (0x{vm_variables[variable]:02x})")
+
+
     elif(opCode >= 0b10100000): # 0xA0
-        # variable[ <operand2> ] = list#x[ variable[ <operand1> ]]
+        # variable[ <operand2>  ] = list#x[ variable[ <operand1> ]]
+        # variable[ <variable2> ] = list#x[ variable[ <variable1> ]]
 
         pc=pc+1
         variable1 = data[pc]
@@ -899,9 +1004,14 @@ def vm_fn_listhandler(data,opCode,pc,version):
                 listItemAddress=listOffset+vm_variables[variable1]
                 vm_variables[variable2] = data[listItemAddress]
 
+        if(debugging): 
+            print(f"Set var[0x{variable2:02x}] = list#{listNumber}[var[0x{variable1:02x}]] (0x{vm_variables[variable2]:02x})")
+
+
             
     else: # > 0b1000000 / 0x80
-        # list#x[ <operand1> ] = variable[ <operand2> ]
+        # list#x[ <operand1>  ] = variable[ <operand2>  ]
+        # list#x[ <variable1> ] = variable[ <variable2> ]
 
         pc=pc+1
         variable1 = data[pc]
@@ -916,6 +1026,7 @@ def vm_fn_listhandler(data,opCode,pc,version):
 
             offset = listOffset + variable1
             vm_listarea[offset] = vm_variables[variable2]
+
         else:
             if(listOffset < 0x7E00):
                 print('Error: Update to reference list attempted ', hex(opCode), hex(pc))
@@ -923,6 +1034,9 @@ def vm_fn_listhandler(data,opCode,pc,version):
 
             offset = listOffset - 0x8000 + variable1
             vm_listarea[offset] = vm_variables[variable2]
+
+        if(debugging):
+            print(f"Set list#{listNumber}[0x{variable1:02x}] = var[0x{variable2:02x}] (0x{vm_variables[variable2]:02x})")
 
 
     return pc
@@ -953,12 +1067,19 @@ def vm_fn_goto(data, opCode, pc):
         # Single (it's set)
         offset=_getSignedNumber(operand1)
         pc=pc+offset-1
+
     else:
         # Double (it's not set)
         pc=pc+1    
         operand2=data[pc]
         offset=(256 * operand2) + operand1
         pc=aCodeStartAddr+offset-1
+
+    if(debugging):
+        if(opCode & 0x1f == 0x01):
+            print(f"Gosub 0x{pc+1:04x}")
+        else:
+            print(f"Goto 0x{pc+1:04x}")
 
     return pc
 
@@ -1007,6 +1128,9 @@ def vm_fn_intreturn(data, opCode, pc):
     
     pc=vm_stack.pop()
 
+    if(debugging):
+        print("Return")
+
     return pc
 
 ###############################################################################
@@ -1027,8 +1151,11 @@ def vm_fn_printnumber(data, opCode, pc):
     # Get the first operand
     pc=pc+1
     variable1 = data[pc]
+
+    if(debugging):
+        print(f"Print number var[0x{variable1:02x})]({vm_variables[variable1]:04x}")
     
-    print(str(vm_variables[variable1]),end='')
+    print(f"\033[0m{vm_variables[variable1]}",end='')
 
     return pc    
 
@@ -1055,6 +1182,9 @@ def vm_fn_messagev(data, opCode, pc):
 
     if(version > 1):
         nthMessage = nthMessage - 1
+
+    if(debugging):
+        print(f"Print message var[0x{operand1:02x}] (0x{vm_variables[operand1]:04x})")        
 
     address = _getAddrForMessageN(data, nthMessage)
     _printMessage(data, address)
@@ -1087,10 +1217,15 @@ def vm_fn_messagec(data, opCode, pc):
     # there are two
     if (opCode & 0b01000000):
         nthMessage = operand1  
+
+        if(debugging):
+            print(f"Print messsage (constant) 0x{nthMessage:02x}")                            
     else:
         pc=pc+1
         operand2=data[pc]
         nthMessage = (operand2 * 256 ) + operand1
+        if(debugging):
+            print(f"Print messsage (constant) 0x{nthMessage:04x}")
 
     if(version > 1):
         nthMessage = nthMessage - 1
@@ -1125,20 +1260,29 @@ def vm_fn_function(data,opCode,pc):
     requiredFunction = data[pc]
     match requiredFunction:
         case 1:
+            if(debugging):
+                print(f"Function - Quit ({requiredFunction:#0{4}x})")
             sys.exit(0)
         case 2:
             pc=pc+1
             variableToSet=data[pc]
 
+            if(debugging):
+                print(f"Function - Random - Set var[{variableToSet:#0{4}x}]=<random number>")
+
             randomseed=(((((randomseed<<8) + 0x0a - randomseed) <<2) + randomseed) + 1) & 0xffff
             vm_variables[variableToSet]=randomseed & 0xff            
         case 3:
+            if(debugging):
+                print(f"Function - Save ({requiredFunction:#0{4}x})")
             with open(game+".sav", "wb") as save_file:
                 for var in (vm_variables):
                     save_file.write(var.to_bytes(2,'big'))
                 for li in (vm_listarea):
                     save_file.write(li.to_bytes(1,'big'))   
         case 4:
+            if(debugging):
+                print(f"Function - Restore ({requiredFunction:#0{4}x})")
             with open(game+".sav", "rb") as load_file:
                 for i in range(0, len(vm_variables)):
                     bytes=load_file.read(2)
@@ -1148,10 +1292,14 @@ def vm_fn_function(data,opCode,pc):
                     bytes=load_file.read(1)
                     vm_listarea[i] = int.from_bytes(bytes, 'big')
         case 5: 
+            if(debugging):
+                print(f"Function - Clear Workspace ({requiredFunction:#0{4}x})")
             # Reset all the variables to zero
             for i in range(0,len(vm_variables)):
                 vm_variables[i]=0
         case 6:
+            if(debugging):
+                print(f"Function - Clear Stack ({requiredFunction:#0{4}x})")            
             # Clear the stack
             vm_stack.clear()
         case other:
@@ -1202,14 +1350,15 @@ def vm_fn_input(data,opCode,pc):
     pc=pc+1
     wordCountVar=data[pc]
 
-    wordCount=0
+    if(debugging):
+        print(f"Input - results in word1 var[0x{firstWordVar:02x}], word2 var[0x{secondWordVar:02x}], word3 var[0x{thirdWordVar:02x}], count var[0x{wordCountVar:02x}]")
+        print(f"\033[0m", end='')
 
     while(True):
         userInput = ''
         hashCommand = False	    
           
         if(scriptFile):
-            #time.sleep(1)
             while(True):
                 userInput = scriptFile.readline()
                 if(userInput == ""):
@@ -1222,7 +1371,6 @@ def vm_fn_input(data,opCode,pc):
                 if(userInput != ''):
                     break
             print(userInput)
-            #time.sleep(0.8)
             userInput=userInput.upper()
         else:
             # Get user input
@@ -1314,6 +1462,9 @@ def vm_fn_varcon(data,opCode,pc):
         pc=pc+1
         variable=data[pc]
 
+    if(debugging):
+        print(f"Set var[0x{variable:02x}] = (constant) 0x{constant:02x}")
+
     # Set the variable value to the constant 
     vm_variables[variable] = constant
 
@@ -1344,6 +1495,9 @@ def vm_fn_varvar(data,opCode,pc):
 
     vm_variables[targetVar] = vm_variables[sourceVar]
 
+    if(debugging):
+        print(f"Set var[0x{targetVar:02x}] = var[0x{sourceVar:02x})] (0x{vm_variables[sourceVar]:04x})")
+
     return pc
 
 ###############################################################################
@@ -1369,6 +1523,9 @@ def vm_fn_add(data, opCode, pc):
     pc=pc+1
     secondVar = data[pc]
 
+    if(debugging):
+        print(f"Set var[0x{secondVar:02x}] = var[0x{firstVar:02x}] (0x{vm_variables[firstVar]:04x}) + var[0x{secondVar:02x}] (0x{vm_variables[secondVar]:04x})")
+
     vm_variables[secondVar] = vm_variables[firstVar] + vm_variables[secondVar]
 
     return pc   
@@ -1378,7 +1535,7 @@ def vm_fn_add(data, opCode, pc):
 #
 # Set the variable2's value to variable2's value minus variable1's value
 #
-# Variable[operand2] = variable[operand1] + variable[operand2]
+# Variable[operand2] = variable[operand2] - variable[operand1]
 # 
 # Parameters: 
 #    data           - the game file byte array
@@ -1394,6 +1551,9 @@ def vm_fn_sub(data, opCode, pc):
 
     pc=pc+1
     secondVar = data[pc]
+
+    if(debugging):
+        print(f"Set var[0x{secondVar:02x}] = var[0x{secondVar:02x}] (0x{vm_variables[secondVar]:04x}) - var[0x{firstVar:02x}] (0x{vm_variables[firstVar]:04x})")
 
     vm_variables[secondVar] = vm_variables[secondVar] - vm_variables[firstVar]
 
@@ -1467,9 +1627,10 @@ def vm_fn_jump(data, opCode, pc):
     tableOffset   = vm_variables[offsetVar] * 2
     jumpTableAddress = aCodeStartAddr + aCodeOffset + tableOffset
 
-    #print(hex(aCodeOffset), hex(offsetVar), hex(vm_variables[offsetVar]), hex(data[jumpTableAddress] + (data[jumpTableAddress+1] * 256)))
-
     pc = aCodeStartAddr + data[jumpTableAddress] + (data[jumpTableAddress+1] * 256) - 1
+
+    if(debugging):
+        print(f"Jump to address in 0x{jumpTableAddress:04x}(0x{pc+1:04x})")    
 
     return pc    
 
@@ -1511,6 +1672,12 @@ def vm_fn_screen(data, opCode, pc):
         pc=pc+1
         constant2 = data[pc]
 
+    if(debugging):
+        if(constant1 == 0x00):
+            print("Screen "+hex(constant1))
+        else:
+            print("Screen " + hex(constant1) +" " + hex(constant2))
+
     return pc
 
 ###############################################################################
@@ -1532,6 +1699,9 @@ def vm_fn_picture(data, opCode, pc):
     pc=pc+1
     constant1 = data[pc]
 
+    if(debugging):
+        print(hex(constant1))    
+
     return pc
 
 ###############################################################################
@@ -1552,6 +1722,9 @@ def vm_fn_cleartg(data, opCode, pc):
 
     pc=pc+1
     constant1 = data[pc]
+
+    if(debugging):
+        print(hex(constant1))        
 
     return pc
 
@@ -1655,6 +1828,9 @@ def vm_fn_exit(data, opCode, pc):
             # Move to the next exit
             exitPointer += 2
 
+    if(debugging):
+        print(f"Exits - check location var[0x{currentLocationVar:02x}] ({vm_variables[currentLocationVar]:04x}) can move var[0x{moveDirectionVar:02x}] ({directions[vm_variables[moveDirectionVar]]}) exit flags: var[0x{exitFlagsVar:02x}] (0x{vm_variables[exitFlagsVar]:02x}) target location: var[0x{targetLocationVar:02x})] (0x{vm_variables[targetLocationVar]:02x})")
+
     return pc
 
 ###############################################################################
@@ -1695,6 +1871,7 @@ def vm_fn_ifxxvt(data,opCode,pc,operation):
         offset = _getSignedNumber(operand3)
         targetAddress = pc + offset -1 
     else:
+
         # If bit 6 is NOT set then there will be two operands and it will be 
         # relative to the start of the A-code 
         pc=pc+1
@@ -1702,6 +1879,9 @@ def vm_fn_ifxxvt(data,opCode,pc,operation):
         offset=(256 * operand4) + operand3
 
         targetAddress=aCodeStartAddr+offset-1
+
+    if(debugging):
+        print(f"If var[0x{variable1:2x}] (0x{vm_variables[variable1]:04x}) {operation:2s} var[0x{variable2:02x})] (0x{vm_variables[variable2]:04x}) goto 0x{targetAddress+1:04x}")  
 
     if(eval("vm_variables[variable1] "+operation+" vm_variables[variable2]")):
         pc = targetAddress
@@ -1763,6 +1943,10 @@ def vm_fn_ifxxct(data,opCode,pc,operation):
         offsetHigher = data[pc]
 
         targetAddress = (256 * offsetHigher + offsetLower) + aCodeStartAddr - 1
+
+    if(debugging):
+        print(f"If var[0x{variable:2x}] (0x{vm_variables[variable]:04x}) {operation:2s} (constant) 0x{constant:04x} goto 0x{targetAddress+1:04x}")  
+
 
     if(eval("vm_variables[variable] "+operation+" constant")):
         pc = targetAddress
@@ -1959,6 +2143,8 @@ def _find_v1_a_code_start(data, version):
 ############################################################
 cmds = set()
 
+debugging=False
+
 # Handle CTRL+C gracefully
 signal.signal(signal.SIGINT, signal_handler)
 
@@ -1983,9 +2169,13 @@ parserGroup3.add_argument('-a', '--autoGame', required=False, action='store_true
 
 # Not used so much any more but was during development of this
 parser.add_argument('--logging', type=str, choices=['info','debug'],required=False)
+parser.add_argument('--debug', required=False, action='store_true')
 
 # Parse the arguments
 args = parser.parse_args()  
+
+# Check to see if the a-code opcodes should be printed for debugging
+debugging = args.debug
 
 # Check to see what logging level is required
 if(args.logging and args.logging == 'debug'):
@@ -2009,7 +2199,6 @@ else:
 with open(filename,'rb') as dataFile:
     data = bytearray(dataFile.read())
     dataFile.close()
-
 
 # Identify the game (do this anyway for preconfigured ones)
 aCodeStartAddr, foundGame = _find_v1_a_code_start(data, version)
@@ -2065,6 +2254,10 @@ if(args.exits):
     _printAllExits(data,exitsAddr)
     sys.exit()
 
+# If in debug mode, stop the a-code vm on the first instruction
+if(debugging):
+    vm_breakpoints.append(aCodeStartAddr)
+
 # Main virtual machine loop - find the next operator in the A-Code and
 # despatch it to a command or the list handler
 while(True):
@@ -2073,13 +2266,16 @@ while(True):
     opCode = data[pc]
     opCodeClean = opCode & 0x1F
     
+    debugpc = pc
 
     if(opCode & 0x80):
         cmds.add(opCode)
+        if(debugging):
+            print(f"\033[93m0x{pc:04x} (0x{opCode:02x}) listhandler ", end='')
         pc = vm_fn_listhandler(data,opCode,pc,version)
-        #print(hex(pc), hex(opCodeClean), "listhandler")
     else:
-        #print(hex(pc), hex(opCodeClean), opCodes[opCodeClean])
+        if(debugging):
+            print(f"\033[93m0x{pc:04x} (0x{opCodeClean:02x}) {opCodes[opCodeClean]:11s} ",end='')
         cmds.add(opCodeClean)
         match opCodeClean:
             case 0x00:
@@ -2135,5 +2331,11 @@ while(True):
             case other:
                 print(f'Illegal opCode {opCodeClean:02x} at {pc:04x}')
                 break
+
+    # Check to see if debugging is switched on (don't do anything if not)
+    # then see if the pc had a breakpoint against it or it's a return breakpoint
+    # or if the code is currently being stepped through
+    if(debugging and (debugpc in vm_breakpoints or debugpc in vm_return_breakpoints or debugStepping)):
+        _process_debug(pc,data,opCode, opCodeClean, debugpc)
 
     pc=pc+1
