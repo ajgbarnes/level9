@@ -219,7 +219,10 @@ def signal_handler(signum, frame):
 ###############################################################################
 def _process_hash_commands(data, pc, userInput):
     global randomseed
+    global debugging
+    global debugStepping
 
+    print(data, pc, userInput)
     buffer=""
 
     strippedInput = userInput.strip().lower()
@@ -325,11 +328,15 @@ def _process_hash_commands(data, pc, userInput):
 
         # Print all values in the dynamic list area
         case ['#message' | '#msg', number]:
+            number == "11"
+            print(number, type(number))
             if(number.isdigit()):
+                print("1", str(int(number)))
                 address = _getAddrForMessageN(data, int(number))
                 _printMessage(data, address)
                 print("")                
             elif(isValidHex(number)):
+                print("2")
                 address = _getAddrForMessageN(data, int(number, 16))
                 _printMessage(data, address)                
                 print("")
@@ -370,8 +377,8 @@ def _process_debug(data, pc, opCode, opCodeClean, debugpc):
                 print("db <idx>                  : delete breakpoint <idx>")
                 print("")
                 print("c                         : continue")
+                print("n                         : next (step over) - only for gosub, steps otherwise")                
                 print("s                         : step (in)")
-                print("n                         : next (step over) - only for gosub, steps otherwise")
                 print("<enter>                   : same as step (in)")
                 print("")
                 print("d, dict, dictionary       : print the dictionary")
@@ -405,13 +412,15 @@ def _process_debug(data, pc, opCode, opCodeClean, debugpc):
             case ['l' | 'list']:
                 _process_hash_commands(data, pc, f"#list")
             case ['m' | 'msg' | 'message', index]:
-                _process_hash_commands(data, pc, f"#msg {index}")                                             
+                print(f"{index}")
+                message = f"#message {index}"
+                _process_hash_commands(data, pc, message)   
             case ['n']:
                 if(not opCode & 0x80 and opCodeClean == 0x01):
                     vm_return_breakpoints.append(vm_stack[-1]+1)
                     debugStepping=False
                 break
-            case ['s' ]:
+            case [ 's' ]:
                 debugStepping=True
                 break
             case [ 'sl' | 'setlist', variable, value ]:
@@ -1945,7 +1954,7 @@ def vm_fn_ifxxct(data,opCode,pc,operation):
         targetAddress = (256 * offsetHigher + offsetLower) + aCodeStartAddr - 1
 
     if(debugging):
-        print(f"If var[0x{variable:2x}] (0x{vm_variables[variable]:04x}) {operation:2s} (constant) 0x{constant:04x} goto 0x{targetAddress+1:04x}")  
+        print(f"If var[0x{variable:02x}] (0x{vm_variables[variable]:04x}) {operation:2s} (constant) 0x{constant:04x} goto 0x{targetAddress+1:04x}")  
 
 
     if(eval("vm_variables[variable] "+operation+" constant")):
