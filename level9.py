@@ -222,7 +222,6 @@ def _process_hash_commands(data, pc, userInput):
     global debugging
     global debugStepping
 
-    print(data, pc, userInput)
     buffer=""
 
     strippedInput = userInput.strip().lower()
