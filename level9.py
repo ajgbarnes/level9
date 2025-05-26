@@ -327,10 +327,7 @@ def _process_hash_commands(data, pc, userInput):
 
         # Print all values in the dynamic list area
         case ['#message' | '#msg', number]:
-            number == "11"
-            print(number, type(number))
             if(number.isdigit()):
-                print("1", str(int(number)))
                 address = _getAddrForMessageN(data, int(number))
                 _printMessage(data, address)
                 print("")                
@@ -411,9 +408,7 @@ def _process_debug(data, pc, opCode, opCodeClean, debugpc):
             case ['l' | 'list']:
                 _process_hash_commands(data, pc, f"#list")
             case ['m' | 'msg' | 'message', index]:
-                print(f"{index}")
-                message = f"#message {index}"
-                _process_hash_commands(data, pc, message)   
+                _process_hash_commands(data, pc, f"#message {index}")   
             case ['n']:
                 if(not opCode & 0x80 and opCodeClean == 0x01):
                     vm_return_breakpoints.append(vm_stack[-1]+1)
@@ -2344,6 +2339,6 @@ while(True):
     # then see if the pc had a breakpoint against it or it's a return breakpoint
     # or if the code is currently being stepped through
     if(debugging and (debugpc in vm_breakpoints or debugpc in vm_return_breakpoints or debugStepping)):
-        _process_debug(pc,data,opCode, opCodeClean, debugpc)
+        _process_debug(data,pc,opCode, opCodeClean, debugpc)
 
     pc=pc+1
