@@ -127,30 +127,6 @@ opCodes=[
 	"ilins",
 ]
 
-##############################################################################
-# Used to look up the directions when printing exit descriptions - each 
-# exit description has a direction associated with it from 1 to 15
-##############################################################################
-directions = [
-    "  -  ",
-    "North",
-    "NEast",
-    "East",
-    "South",
-    "SEast",
-    "SWest",
-    "West",
-    "NWest",
-    "Up",
-    "Down",
-    "Enter",
-    "Leave",
-    "Cross",
-    "Climb",
-    "Jump"
-]
-
-
 ###############################################################################
 # isValidHex()
 #
@@ -788,9 +764,9 @@ def _printAllExits(data,exitsAddr):
             print("Bit 2 - not used, always set to 0x00 but printed here as 'No'")
             print("\n")
 
-    print(f'                        (Inv.)')
-    print(f'Address From  To  Dir   Bit 0 Bit 1 Bit 2 MsgId Location Text')
-    print(f'------- ---- ---- ----- ----- ----- ----- ----- -------------')
+    print(f'                            (Inv.)')
+    print(f'Address From  To  Dir       Bit 0 Bit 1 Bit 2 MsgId Location Text')
+    print(f'------- ---- ---- --------- ----- ----- ----- ----- -------------')
 
     fromLocation = 0
     exitPointer = exitsAddr
@@ -822,7 +798,12 @@ def _printAllExits(data,exitsAddr):
             address = _getAddrForMessageN(data, messageId)
             message = _getMessage(data, address)
             if(not (hideNulls and exitDirection == 0)):
-                print(f'0x{exitPointer:04x}  0x{fromLocation:02x} 0x{targetLocation:02x} {directions[exitDirection]:<5}  {reverseValid:<5} {bit1:<5} {bit2:<5} 0x{messageId:03x} {message}')
+                textDirection = "<Missing>"
+                for term, id in vm_dictionary.items():
+                    if id == exitDirection:
+                        textDirection = term
+                        break
+                print(f'0x{exitPointer:04x}  0x{fromLocation:02x} 0x{targetLocation:02x} {textDirection:<9} {reverseValid:<5} {bit1:<5} {bit2:<5} 0x{messageId:03x} {message}')
 
             # Check the 8th bit - if it's set it's the last exit
             # for this location
@@ -1832,7 +1813,12 @@ def vm_fn_exit(data, opCode, pc):
             exitPointer += 2
 
     if(debugging):
-        print(f"Exits - check location var[0x{currentLocationVar:02x}] ({vm_variables[currentLocationVar]:04x}) can move var[0x{moveDirectionVar:02x}] ({directions[vm_variables[moveDirectionVar]]}) exit flags: var[0x{exitFlagsVar:02x}] (0x{vm_variables[exitFlagsVar]:02x}) target location: var[0x{targetLocationVar:02x})] (0x{vm_variables[targetLocationVar]:02x})")
+        textDirection = "<Missing>"
+        for term, id in vm_dictionary.items():
+            if id == vm_variables[moveDirectionVar]:
+                textDirection = term
+                break
+        print(f"Exits - check location var[0x{currentLocationVar:02x}] ({vm_variables[currentLocationVar]:04x}) can move var[0x{moveDirectionVar:02x}] ({textDirection}) exit flags: var[0x{exitFlagsVar:02x}] (0x{vm_variables[exitFlagsVar]:02x}) target location: var[0x{targetLocationVar:02x})] (0x{vm_variables[targetLocationVar]:02x})")
 
     return pc
 
@@ -2236,9 +2222,6 @@ else:
     exitsAddr            = data[0x04] + data [0x05] *256
     commonFragmentsAddr  = data[0x02] + data [0x03] *256
     #locationsStartMsgId TODO
-
-# print(hex(dictionaryAddr))4
-# print(hex(exitsAddr))
 
 # Set the program counter to the start of the A-Code
 pc = aCodeStartAddr
