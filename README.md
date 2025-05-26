@@ -156,7 +156,7 @@ Now released and should work with games from the BBC Micro, Oric, ZX Spectrum et
 * Snowball (V1)
 * Return to Eden (v2)
 
-It was intended to be ultra portable so rus on the command line for now (that will change to support graphics but allow a user to choose).  
+It was intended to be ultra portable so runs on the command line for now (that will change to support graphics but allow a user to choose).  
 
 Here is a recording of it running through a scripted input game showing [Level 9's Lords of Time](https://www.youtube.com/watch?v=epD8R3tzTPk).  It currently works with ALL v1 Level 9 games for the BBC Micro and tested with a few from the Oric (.tap) and ZX Spectrum (.tzx). Others may work - I have not tried any C64 versions yet partly because I don't understand the D64 format yet (doesn't appear to preserve the binary in "raw" that can be read and interpreted)
 
@@ -224,6 +224,46 @@ options:
   -a, --autoGame
   --logging {info,debug}
 ```
+
+# (Experimental) Debugger
+
+This is a NEW feature and somewhat experimental. Allows breakpoints to be set, A-code to be stepped through, variables and lists to be inspected and set. 
+
+To start the game with the debugger active, use one of the following options or shorter switch based options:
+
+```
+python level9.py --game <game-name> --debug
+python level9.py --game <game-name> --script <script name> --debug
+python level9.py --game <game-name> --autoGame --debug
+```
+
+It will immediately break at the first line of A-code and open the debugger.  Typing ? will list the following help that shows the accepted commands:
+
+```
+b <addr>                  : set a-code breakpoint at <addr> e.g. b 0x4e7b
+bl                        : list breakpoints
+db <idx>                  : delete breakpoint <idx>
+
+c                         : continue
+s                         : step (in)
+n                         : next (step over) - only for gosub, steps otherwise
+<enter>                   : same as step (in)
+
+d, dict, dictionary       : print the dictionary
+m, msg, messsage <id>     : print message number <id>
+
+l,list                    : print all variables in a table
+sl, setlist <idx> <value> : set dynamic list item to value (both in hexadecimal)
+
+sv, setvar <var> <value>  : set variable to value (both in hexadecimal)
+v,vars                    : print all variables in a table
+
+Debug output is: <fileoffset> (<opcode>) <list or command name> <live list or command with values
+
+Hash commands do NOT work in (debug) mode - use the equivalent above
+```
+
+Code will be coloured in yellow and text output to the screen in white.
 
 ## TODO
 
