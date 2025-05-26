@@ -276,10 +276,12 @@ The interpreter has been extended to include the following commands, mostly for 
 
 |Command|Description|
 | --- | --- | 
+|#debug | switch into debug mode after the next player input|
 |#dict / #dictionary  | print the dictionary for the game|
 |#exits | print all the exit defintions for the game|
 |#list |lists all the values in the listarea (these can be manipulated with #setlist to e.g. put objects in your current location or inventory)|
 |#message \<number\> |print message number|
+|#nodebug | switch into non-debug mode after the next player input|
 |#seed \<number\>|sets the random seed to the value - useful for debugging when a game contains random events|
 |#setlist \<number\> \<value\> | Set item <number> to <value>. Can be decimal or hexadecimal values (0xNN)|
 |#setvar \<number\> \<value\> |Sets variable to the value. Can be decimal or hexadecimal values (0xNN)|
