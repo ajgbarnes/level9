@@ -258,7 +258,7 @@ sl, setlist <idx> <value> : set dynamic list item to value (both in hexadecimal)
 sv, setvar <var> <value>  : set variable to value (both in hexadecimal)
 v,vars                    : print all variables in a table
 
-Debug output is: <fileoffset> (<opcode>) <list or command name> <live list or command with values
+Debug output is: <fileoffset> (<opcode>) <list or command name> <live list or command with values>
 
 Hash commands do NOT work in (debug) mode - use the equivalent above
 ```
