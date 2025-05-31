@@ -98,7 +98,15 @@ v1Configuration = {
         "version"           : 2,
         "filename"          : "roms/edenobj.bin",
         "script"            : "test-scripts/return-to-eden-v2.txt",
+        "locationsStartMsgId" : 0x190,        
     },  
+    "isle" : {
+        "name"              : "Emerald Isle",
+        "version"           : 2,
+        "filename"          : "roms/emerald.tzx"
+        "script"            : "test-scripts/emerald-isle-v2.txt",
+        "locationsStartMsgId" : 0x190,
+    },      
     "lords" : {
         "version"           : 1,
         "filename"          : "roms/LORDSOF",
