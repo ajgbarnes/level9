@@ -265,10 +265,55 @@ Hash commands do NOT work in (debug) mode - use the equivalent above
 
 Code will be coloured in yellow and text output to the screen in white.
 
-## TODO
+# Level 9 Bulk Generator / Test Harness
 
-1. Write up how the compression algorithm seems to work for common word fragments / messages
-2. Add a Python UI so it's prepared for the graphics (as an option)
+Useful for testing changes made to level9.py.  Written as a python script for portability rather than say a .bat or .sh command. 
+
+Will run thorugh the l9config.py file and test against each game it finds in there. 
+
+The support usage patterns can be found by typing the following on the command ine:
+
+``` 
+python level9-bulk-gen.py
+```
+
+This will respond with:
+
+```
+usage: level9-bulk-gen.py [-h] (-d | -m | -e | -a)
+level9-bulk-gen.py: error: one of the arguments -d/--dictionary -m/--messages -e/--exits -a/--autoGame is required
+```
+To test ALL games or see them played out in full, use the **--autoGame** switch as below:
+
+```
+python level9-bulk-gen.py --autoGame
+or
+python level9-bulk-gen.py --a
+```
+
+To generate exit definitions for ALL games, use the **--exits** switch as below:
+
+```
+python level9-bulk-gen.py --exits
+or
+python level9-bulk-gen.py --e
+```
+
+To generate dictionaries for ALL games, use the **--dictionary** switch as below:
+
+```
+python level9-bulk-gen.py --dictionary
+or
+python level9-bulk-gen.py --d
+```
+
+To generate descriptions for ALL games, use the **--messages** switch as below:
+
+```
+python level9-bulk-gen.py --messages
+or
+python level9-bulk-gen.py --m
+```
 
 ## Level 9 Additional Commands
 
