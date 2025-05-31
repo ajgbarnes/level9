@@ -274,45 +274,45 @@ Will run thorugh the l9config.py file and test against each game it finds in the
 The support usage patterns can be found by typing the following on the command ine:
 
 ``` 
-python level9-bulk-gen.py
+python level9-bulk.py
 ```
 
 This will respond with:
 
 ```
-usage: level9-bulk-gen.py [-h] (-d | -m | -e | -a)
-level9-bulk-gen.py: error: one of the arguments -d/--dictionary -m/--messages -e/--exits -a/--autoGame is required
+usage: level9-bulk.py [-h] (-d | -m | -e | -a)
+level9-bulk.py: error: one of the arguments -d/--dictionary -m/--messages -e/--exits -a/--autoGame is required
 ```
 To test ALL games or see them played out in full, use the **--autoGame** switch as below:
 
 ```
-python level9-bulk-gen.py --autoGame
+python level9-bulk.py --autoGame
 or
-python level9-bulk-gen.py --a
+python level9-bulk.py --a
 ```
 
 To generate exit definitions for ALL games, use the **--exits** switch as below:
 
 ```
-python level9-bulk-gen.py --exits
+python level9-bulk.py --exits
 or
-python level9-bulk-gen.py --e
+python level9-bulk.py --e
 ```
 
 To generate dictionaries for ALL games, use the **--dictionary** switch as below:
 
 ```
-python level9-bulk-gen.py --dictionary
+python level9-bulk.py --dictionary
 or
-python level9-bulk-gen.py --d
+python level9-bulk.py --d
 ```
 
 To generate descriptions for ALL games, use the **--messages** switch as below:
 
 ```
-python level9-bulk-gen.py --messages
+python level9-bulk.py --messages
 or
-python level9-bulk-gen.py --m
+python level9-bulk.py --m
 ```
 
 ## Level 9 Additional Commands
