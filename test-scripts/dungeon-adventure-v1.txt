@@ -745,3 +745,4 @@ E;
 E;
 E [a hollow voice intones "This is your referee speaking. If you continue on this road you will return safe to civilisation and the game will end. Are you sure that you want to?"];
 YES;
+N;
