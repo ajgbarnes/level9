@@ -514,3 +514,4 @@ PRESS EXTINGUISHER [the Nitrogen kills the fire];
 W;
 PULL LEVER;
 N;
+N;
