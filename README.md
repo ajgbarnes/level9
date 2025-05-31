@@ -6,9 +6,15 @@ These are absolutely iconic adventure games for the BBC Micro - always been fasc
 
 I do not hold the copyright to the original games, only the python programs that inspect and read them. The original game Copyright remains with Level 9.
 
-Thank you to David Kinder and Glen Summers for their work on the C Level 9 interpreter.
-
 Feedback and comments are always appreciated to help preserve and understand the internals of this classic.
+
+# Credits
+
+Thank you to David Kinder and Glen Summers for their work on the [C Level 9 interpreter].(https://github.com/DavidKinder/Level9/tree/master)
+
+Thank you to [Filip Balyu](https://github.com/balyuf) for his help and support with the v2/v3/v4 support (sorry, always had to do it in my style!)
+
+Thank you to [Neil Hunter](https://github.com/neildhunter) for his invaluable review of the version 1 specification  and multiple corrections.
 
 # Level 9 Version 1 Specification
 
