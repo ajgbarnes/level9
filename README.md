@@ -291,7 +291,7 @@ or
 python level9-bulk.py --a
 ```
 
-To generate exit definitions for ALL games, use the **--exits** switch as below:
+To list the exit definitions for ALL games, use the **--exits** switch as below:
 
 ```
 python level9-bulk.py --exits
@@ -299,7 +299,7 @@ or
 python level9-bulk.py --e
 ```
 
-To generate dictionaries for ALL games, use the **--dictionary** switch as below:
+To list the supported dictionary entries for ALL games, use the **--dictionary** switch as below:
 
 ```
 python level9-bulk.py --dictionary
@@ -307,7 +307,7 @@ or
 python level9-bulk.py --d
 ```
 
-To generate descriptions for ALL games, use the **--messages** switch as below:
+To list in-game descriptions for ALL games, use the **--messages** switch as below:
 
 ```
 python level9-bulk.py --messages
