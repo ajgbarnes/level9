@@ -515,3 +515,4 @@ N;
 D;
 D;
 N [the Phoenix helps you defeating the Demon Lord. The country is saved!];
+N;
