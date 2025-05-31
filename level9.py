@@ -868,13 +868,13 @@ def vm_fn_load_dictionary(data,dictionaryAddr,printDict):
 # (outside the game code) list. The list number to look up is 
 # contained in the bottom 5 bits of the opCode.  
 #
-# 0xE0 - 0xE5
+# 0xE0 - 0xE5 - listvv
 #      list#x[ variable[ <operand1> ]] = variable[ <operand2> 
-# 0xC0 - 0xC5
+# 0xC0 - 0xC5 - listv1c
 #      variable[ <operand2> ] = list#x[ <operand1> ]
-# 0xA0 - 0xA5
+# 0xA0 - 0xA5 - listv1v
 #      variable[ <operand2> ] = list#x[ variable[ <operand1> ]]
-# 0x80 - 0x85
+# 0x80 - 0x85 - listc1v
 #      list#x[ <operand1> ] = variable[ <operand2> ]
 # 
 # Parameters: 
@@ -908,6 +908,7 @@ def vm_fn_listhandler(data,opCode,pc,version):
 
 
     if(opCode >= 0b11100000): # 0xE0
+        # listvv
         # list#x[ variable[ <operand1> ]]  = variable[ <operand2> ]
         # list#x[ variable[ <variable1>]] = variable[ <variable2> ]
         pc=pc+1        
@@ -932,10 +933,10 @@ def vm_fn_listhandler(data,opCode,pc,version):
             vm_listarea[offset] = vm_variables[variable2]
 
         if(debugging):  
-            print(f"Set list#{listNumber}[0x{variable1:02x}] = var[0x{variable2:02x}] (0x{vm_variables[variable2]:02x})")
-            
+            print(f"Set list#{listNumber}[var[0x{variable1:02x}]] = var[0x{variable2:02x}] (0x{vm_variables[variable2]:02x})")           
 
     elif(opCode >= 0b11000000): # 0xC0
+        # listv1c
         # variable[ <operand2> ] = list#x[ <operand1>]
         # variable[ <variable> ] = list#x[ constant  ]
 
@@ -966,6 +967,7 @@ def vm_fn_listhandler(data,opCode,pc,version):
 
 
     elif(opCode >= 0b10100000): # 0xA0
+        # listv1v
         # variable[ <operand2>  ] = list#x[ variable[ <operand1> ]]
         # variable[ <variable2> ] = list#x[ variable[ <variable1> ]]
 
@@ -994,34 +996,34 @@ def vm_fn_listhandler(data,opCode,pc,version):
 
             
     else: # > 0b1000000 / 0x80
+        # listc1v
         # list#x[ <operand1>  ] = variable[ <operand2>  ]
-        # list#x[ <variable1> ] = variable[ <variable2> ]
+        # list#x[ <constant> ]  = variable[ <variable> ]
 
         pc=pc+1
-        variable1 = data[pc]
+        constant = data[pc]
 
         pc=pc+1
-        variable2 = data[pc]
+        variable = data[pc]
 
         if(version ==1):
             if(listOffset<0):
                 print('Error: Update to reference list attempted ', hex(opCode), hex(pc))
                 sys.exit()
 
-            offset = listOffset + variable1
-            vm_listarea[offset] = vm_variables[variable2]
+            offset = listOffset + constant
+            vm_listarea[offset] = vm_variables[variable]
 
         else:
             if(listOffset < 0x7E00):
                 print('Error: Update to reference list attempted ', hex(opCode), hex(pc))
                 sys.exit()                        
 
-            offset = listOffset - 0x8000 + variable1
-            vm_listarea[offset] = vm_variables[variable2]
+            offset = listOffset - 0x8000 + constant
+            vm_listarea[offset] = vm_variables[variable]
 
         if(debugging):
-            print(f"Set list#{listNumber}[0x{variable1:02x}] = var[0x{variable2:02x}] (0x{vm_variables[variable2]:02x})")
-
+            print(f"Set list#{listNumber}[0x{constant:02x}] = var[0x{variable:02x}] (0x{vm_variables[variable]:02x})")
 
     return pc
 
