@@ -532,4 +532,5 @@ throw tear;
 throw buckle;
 w;
 e;
-throw chip [all ingredients are now in the cauldron, and soon the timelords are defeated. way to go!!]; 56
+throw chip [all ingredients are now in the cauldron, and soon the timelords are defeated. way to go!!];
+n;
