@@ -13,7 +13,8 @@
 # - Snowball (1983)
 # - Lords of Time (1983)
 #
-# Nascent support for v2 files - only tested with Emerald Isle so far
+# Nascent support for v2 files - only tested with Emerald Isle and Return to Eden 
+# so far...
 #
 # Will extend this at some point to v3 and v4.
 #
@@ -518,7 +519,7 @@ def _getAddrForMessageN(data, messageNumber):
             messageAddress = messageAddress + messageLength
 
             if(messageAddress >= commonFragmentsAddr):
-                print(f"Error: Coldn't find message number {requestedMessageNumber}")
+                print(f"Error: Couldn't find message number {requestedMessageNumber}")
                 sys.exit(1)
 
             messageNumber = messageNumber - 1
