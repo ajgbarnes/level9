@@ -891,10 +891,10 @@ def vm_fn_listhandler(data,opCode,pc,version):
     
     if(version == 1 and listNumber > 0x05):
         print(f'Version 1 games only supported 5 lists and this is accessing list {listNumber}')
-        sys.exit()
+        sys.exit(1)
     elif(version == 2 and listNumber > 0x10):
         print(f'Version 2 games only supported 10 lists and this is accessing list {listNumber}')
-        sys.exit()
+        sys.exit(1)
 
     if(version == 1):
         # Get the list offset - if it is negative then it is 
@@ -920,14 +920,14 @@ def vm_fn_listhandler(data,opCode,pc,version):
         if(version == 1):
             if(listOffset < 0):
                 print('Error: Update to reference list attempted ', hex(opCode), hex(pc))
-                sys.exit()
+                sys.exit(1)
 
             offset = listOffset + vm_variables[variable1]
             vm_listarea[offset] = vm_variables[variable2]
         else:
             if(listOffset < 0x7E00):
                 print('Error: Update to reference list attempted ', hex(opCode), hex(pc))
-                sys.exit()
+                sys.exit(1)
 
             offset = listOffset - 0x8000 + vm_variables[variable1]
             vm_listarea[offset] = vm_variables[variable2]
@@ -951,7 +951,7 @@ def vm_fn_listhandler(data,opCode,pc,version):
             # this isn't right.... but not used by v1 games
             if(listOffset < 0):
                 print('Error: Update to reference list attempted ', hex(opCode), hex(pc))
-                sys.exit()
+                sys.exit(1)
 
             vm_variables[variable] = vm_listarea[listOffset+constant]
         else: 
@@ -1009,7 +1009,7 @@ def vm_fn_listhandler(data,opCode,pc,version):
         if(version ==1):
             if(listOffset<0):
                 print('Error: Update to reference list attempted ', hex(opCode), hex(pc))
-                sys.exit()
+                sys.exit(1)
 
             offset = listOffset + constant
             vm_listarea[offset] = vm_variables[variable]
@@ -1017,7 +1017,7 @@ def vm_fn_listhandler(data,opCode,pc,version):
         else:
             if(listOffset < 0x7E00):
                 print('Error: Update to reference list attempted ', hex(opCode), hex(pc))
-                sys.exit()                        
+                sys.exit(1)                        
 
             offset = listOffset - 0x8000 + constant
             vm_listarea[offset] = vm_variables[variable]
@@ -1290,7 +1290,7 @@ def vm_fn_function(data,opCode,pc):
             vm_stack.clear()
         case other:
             print(f'Unknown function {requiredFunction:02x}')
-            sys.exit()
+            sys.exit(1)
 
     return pc
 
@@ -2201,7 +2201,7 @@ if(not game):
 # If it couldn't be identified then quit
 if(aCodeStartAddr < 0 or game == 'unknown'):
     print('Unable to identify the Level 9 Version 1 or Version 2 game in ' + filename)
-    sys.exit()
+    sys.exit(1)
 
 # If a script file was specified, open it
 if(args.script):
@@ -2232,15 +2232,15 @@ maxpc = pc
 # Load and decode the dictionary 
 vm_fn_load_dictionary(data,dictionaryAddr, args.dictionary)
 if(args.dictionary):
-    sys.exit()
+    sys.exit(0)
 
 if(args.messages):
     _printAllMessages(data, messagesStartAddr)
-    sys.exit()
+    sys.exit(0)
 
 if(args.exits):
     _printAllExits(data,exitsAddr)
-    sys.exit()
+    sys.exit(0)
 
 # If in debug mode, stop the a-code vm on the first instruction
 if(debugging):
