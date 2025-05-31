@@ -513,3 +513,4 @@ PLAY FLUTE [it shatters the bomb and engulfs the female figure in flames];
 PRESS EXTINGUISHER [the Nitrogen kills the fire];
 W;
 PULL LEVER;
+N;
