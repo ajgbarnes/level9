@@ -43,7 +43,7 @@ import logging
 import argparse
 
 ###############################################################################
-# Load the version1 file configuration information
+# Load the Level 9 game configuration information
 ###############################################################################
 from l9config import v1Configuration
 
@@ -362,7 +362,7 @@ def _process_debug(data, pc, opCode, opCodeClean, debugpc):
                 print("sv, setvar <var> <value>  : set variable to value (both in hexadecimal)")
                 print("v,vars                    : print all variables in a table")
                 print("")
-                print("Debug output is: <fileoffset> (<opcode>) <list or command name> <live list or command with values")
+                print("Debug output is: <fileoffset> (<opcode>) <list or command name> <current list or command with values>")
                 print("")
                 print("Hash commands do NOT work in (debug) mode - use the equivalent above")
             case ["b", address]:
@@ -442,7 +442,7 @@ def _getAddrForFragment(data, fragmentNumber):
     #print("-----",hex(commonFragmentsAddr))
     address=commonFragmentsAddr
 
-    if(version == 1):
+    if(engineVersion == 1):
         while fragmentNumber:
             if(data[address]==1):
                 fragmentNumber = fragmentNumber - 1
@@ -476,37 +476,57 @@ def _getAddrForFragment(data, fragmentNumber):
 ###############################################################################
 def _getAddrForMessageN(data, messageNumber):
 
-    messagesAddress = messagesStartAddr
+    # Set the message address to the start of the messages memory block
+    messageAddress = messagesStartAddr
+    requestedMessageNumber = messageNumber
 
-    if(version == 1):    
+    if(messageVersion == 1):    
     
         # Keeping looping until the nth message is found
         while messageNumber:
-            byte = data[messagesAddress]
+            byte = data[messageAddress]
 
             if(byte == 0):
-                logging.error("ERROR couldn't find nth string")
+                print(f"Error: couldn't find nth string {requestedMessageNumber}")
                 sys.exit(1)
             elif(byte == 1):
                 messageNumber = messageNumber - 1
             
-            messagesAddress = messagesAddress + 1
-    else:
+            messageAddress = messageAddress + 1
+
+    elif(messageVersion == 2):
         # Subtract 1 from the message number as they are zero
         # based indexed in the game file
-        #messageNumber = messageNumber - 1 
+        messageNumber = messageNumber - 1 
+
         while messageNumber:
+            messageLength = data[messageAddress]
 
-            messageLength = data[messagesAddress]
+            # For message 2 games on non-BBC Micro platforms, if the message lengh is greater than 255
+            # at least one or more of the first bytes will be set to 0x00 and will be terminated with a 
+            # value that is < 255 that should also be added to the length.
+            # 
+            # Examples:
+            # 08       - message length = 8
+            # 00 08    - message length = 255 + 8 = 263
+            # 00 00 08 - message length = 255 + 255 + 8 = 518
+            # and so on...
+            while(data[messageAddress] == 0x00): 
+                messageAddress = messageAddress + 1
+                messageLength = messageLength + 255 + data[messageAddress]        
 
-            messagesAddress = messagesAddress + messageLength
+            messageAddress = messageAddress + messageLength
+
+            if(messageAddress >= commonFragmentsAddr):
+                print(f"Error: Coldn't find message number {requestedMessageNumber}")
+                sys.exit(1)
 
             messageNumber = messageNumber - 1
 
-    return messagesAddress 
+    return messageAddress 
 
 ###############################################################################
-# _getMessageV1
+# _getMessage
 #
 # Decode the message at the passed address. Does NOT print it to the screen.
 # Loop through each byte:
@@ -526,7 +546,7 @@ def _getMessage(data, msgAddress):
 
     message=''
 
-    if(version == 1):
+    if(engineVersion == 1):
         byte = data[msgAddress]
         while byte:
             if(byte >= 0x5E):
@@ -550,10 +570,22 @@ def _getMessage(data, msgAddress):
             byte = data[msgAddress]
 
     else:
-        # BBC Micro only allows 1 byte length for strings
-        # in v2 at least for return to eden
-        msgLength = data[msgAddress] - 1
-    
+        # For message 2 games on non-BBC Micro platforms, if the message lengh is greater than 255
+        # at least one or more of the first bytes will be set to 0x00 and will be terminated with a 
+        # value that is < 255 that should also be added to the length.
+        # 
+        # Examples:
+        # 08       - message length = 8
+        # 00 08    - message length = 255 + 8 = 263
+        # 00 00 08 - message length = 255 + 255 + 8 = 518
+        # and so on...
+        msgLength = data[msgAddress]
+
+        while(data[msgAddress] == 0x00):
+            msgAddress = msgAddress + 1
+            msgLength = msgLength + 255 + data[msgAddress]
+
+        msgLength = msgLength - 1
         msgAddress = msgAddress + 1
 
         while msgLength:
@@ -564,7 +596,6 @@ def _getMessage(data, msgAddress):
 
                 newMessage = _getMessage(data, fragmentAddr)
                 message = message + newMessage
-                pass
 
             elif(byte < 0x03):
                 # End of fragment or string
@@ -885,18 +916,18 @@ def vm_fn_load_dictionary(data,dictionaryAddr,printDict):
 # Returns:
 #   Updated program counter
 ###############################################################################
-def vm_fn_listhandler(data,opCode,pc,version):
+def vm_fn_listhandler(data,opCode,pc,engineVersion):
 
     listNumber = opCode & 0b00011111
     
-    if(version == 1 and listNumber > 0x05):
+    if(engineVersion == 1 and listNumber > 0x05):
         print(f'Version 1 games only supported 5 lists and this is accessing list {listNumber}')
         sys.exit(1)
-    elif(version == 2 and listNumber > 0x10):
+    elif(engineVersion == 2 and listNumber > 0x10):
         print(f'Version 2 games only supported 10 lists and this is accessing list {listNumber}')
         sys.exit(1)
 
-    if(version == 1):
+    if(engineVersion == 1):
         # Get the list offset - if it is negative then it is 
         # a reference (static) list in the game code, otherwise
         # it's a working dynamic list in vm_listarea
@@ -917,7 +948,7 @@ def vm_fn_listhandler(data,opCode,pc,version):
         pc=pc+1        
         variable2=data[pc]
 
-        if(version == 1):
+        if(engineVersion == 1):
             if(listOffset < 0):
                 print('Error: Update to reference list attempted ', hex(opCode), hex(pc))
                 sys.exit(1)
@@ -946,7 +977,7 @@ def vm_fn_listhandler(data,opCode,pc,version):
         pc=pc+1
         variable = data[pc]
 
-        if(version ==1):
+        if(engineVersion ==1):
 
             # this isn't right.... but not used by v1 games
             if(listOffset < 0):
@@ -977,7 +1008,7 @@ def vm_fn_listhandler(data,opCode,pc,version):
         pc=pc+1
         variable2 = data[pc]
 
-        if(version==1):
+        if(engineVersion==1):
             if(listOffset >= 0):
                 vm_variables[variable2] = vm_listarea[listOffset+vm_variables[variable1]]
             else:
@@ -1006,7 +1037,7 @@ def vm_fn_listhandler(data,opCode,pc,version):
         pc=pc+1
         variable = data[pc]
 
-        if(version ==1):
+        if(engineVersion ==1):
             if(listOffset<0):
                 print('Error: Update to reference list attempted ', hex(opCode), hex(pc))
                 sys.exit(1)
@@ -1164,16 +1195,14 @@ def vm_fn_messagev(data, opCode, pc):
     pc=pc+1
     operand1 = data[pc]
 
-    nthMessage = vm_variables[operand1]
-
-    if(version > 1):
-        nthMessage = nthMessage - 1
+    messageNumber = vm_variables[operand1]
 
     if(debugging):
-        print(f"Print message var[0x{operand1:02x}] (0x{vm_variables[operand1]:04x})")        
+        print(f"Print message var[0x{operand1:02x}] (0x{vm_variables[operand1]:04x})")     
 
-    address = _getAddrForMessageN(data, nthMessage)
-    _printMessage(data, address)
+    if(messageNumber > 0):
+        address = _getAddrForMessageN(data, messageNumber)
+        _printMessage(data, address)
 
     return pc
 
@@ -1196,27 +1225,25 @@ def vm_fn_messagec(data, opCode, pc):
     pc=pc+1
     operand1 = data[pc]
     operand2 = None
-    nthMessage = 0;
+    messageNumber = 0
 
     # If the 7th bit is set in the opCode
     # then there is only one operand, otherwise
     # there are two
     if (opCode & 0b01000000):
-        nthMessage = operand1  
+        messageNumber = operand1  
 
         if(debugging):
-            print(f"Print messsage (constant) 0x{nthMessage:02x}")                            
+            print(f"Print messsage (constant) 0x{messageNumber:02x}")                            
     else:
         pc=pc+1
         operand2=data[pc]
-        nthMessage = (operand2 * 256 ) + operand1
+        messageNumber = (operand2 * 256 ) + operand1
         if(debugging):
-            print(f"Print messsage (constant) 0x{nthMessage:04x}")
-
-    if(version > 1):
-        nthMessage = nthMessage - 1
+            print(f"Print messsage (constant) 0x{messageNumber:04x}")
     
-    address = _getAddrForMessageN(data, nthMessage)
+    address = _getAddrForMessageN(data, messageNumber)
+
     _printMessage(data, address)
 
     return pc
@@ -2102,12 +2129,12 @@ def vm_fn_ifgtct(data,opCode,pc):
 # Returns:
 #   Start address of the A-Code and game indicator
 ###############################################################################
-def _find_v1_a_code_start(data, version):
+def _find_v1_a_code_start(data, engineVersion):
     game = 'unknown'
     startAddress = -1
 
     # Either it's a v1 file or unknown so scan the file 
-    if(version < 2):
+    if(engineVersion < 2):
         for gameKey in v1Configuration:
             # Skip if the configuration is for a non-v1 file 
             # we'll test it later to see if it's v2
@@ -2122,7 +2149,7 @@ def _find_v1_a_code_start(data, version):
     
     # Check to see if this was a v2 game instead
     if(startAddress > -1):
-        version = 1
+        engineVersion = 1
     else: 
         startAddress = data[0x1a] + data [0x1b] *256
 
@@ -2134,6 +2161,9 @@ def _find_v1_a_code_start(data, version):
 ############################################################
 cmds = set()
 
+# Initialise important variables
+engineVersion  = -1
+messageVersion = -1
 debugging=False
 
 # Handle CTRL+C gracefully
@@ -2158,9 +2188,12 @@ parserGroup3 = parser.add_mutually_exclusive_group(required=False)
 parserGroup3.add_argument('-s', '--script', type=str, required=False)
 parserGroup3.add_argument('-a', '--autoGame', required=False, action='store_true')
 
-# Not used so much any more but was during development of this
-parser.add_argument('--logging', type=str, choices=['info','debug'],required=False)
+# Add a debug option to enable the debugger
 parser.add_argument('--debug', required=False, action='store_true')
+
+# Not used so much any more but was during development of this - left in case I need it later
+parser.add_argument('--logging', type=str, choices=['info','debug'],required=False)
+
 
 # Parse the arguments
 args = parser.parse_args()  
@@ -2180,11 +2213,11 @@ logging.basicConfig(filename='parser.log', encoding='utf-8', level=debugLevel)
 if(args.game):
     game     = args.game
     filename = v1Configuration[game]['filename']
-    version  = v1Configuration[game]['version']
+    engineVersion  = v1Configuration[game]['version']
 
 else:
     filename = args.file
-    version  = -1
+    engineVersion  = -1
 
 # Load the game file
 with open(filename,'rb') as dataFile:
@@ -2192,7 +2225,7 @@ with open(filename,'rb') as dataFile:
     dataFile.close()
 
 # Identify the game (do this anyway for preconfigured ones)
-aCodeStartAddr, foundGame = _find_v1_a_code_start(data, version)
+aCodeStartAddr, foundGame = _find_v1_a_code_start(data, engineVersion)
 
 # If 
 if(not game):
@@ -2211,19 +2244,38 @@ if(args.script):
 if(args.autoGame):
     scriptFile = open(v1Configuration[game]['script'],'r')    
 
-if(version == 1):
-    # Derive the location of the major game partsffunction based on offsets in the v1 configuration
+if(engineVersion == 1):
+    # Derive the location of the major game partsffunction based on offsets in the v1 configuration    
     dictionaryAddr       = aCodeStartAddr + v1Configuration[game]['offsets']['dictionaryOffset']
     exitsAddr            = aCodeStartAddr + v1Configuration[game]['offsets']['exitsOffset'] 
     messagesStartAddr    = aCodeStartAddr + v1Configuration[game]['offsets']['messagesOffset']
     commonFragmentsAddr  = aCodeStartAddr + v1Configuration[game]['offsets']['fragmentsOffset']
     locationsStartMsgId  =                  v1Configuration[game]['locationsStartMsgId']
-else:
+
+    # All games that use the version 1 engine use the messaging version 1 format
+    messageVersion       = engineVersion
+elif(engineVersion == 2):
     dictionaryAddr       = data[0x06] + data [0x07] *256
     messagesStartAddr    = data[0x00] + data [0x01] *256
     exitsAddr            = data[0x04] + data [0x05] *256
     commonFragmentsAddr  = data[0x02] + data [0x03] *256
     #locationsStartMsgId TODO
+
+    # Some games that use the version 2 engine use the messaging version 2 format however
+    # some games that use the version 2 engine use the messaging version 1 format
+    # This is indicated by the presence of a 0x01 at the start of the message data
+    # (Thanks for Filip Balyu for saving me so much time on this)
+    if data[messagesStartAddr] == 0x01:
+        messageVersion       = 1
+    else:
+        messageVersion       = engineVersion
+#elif(engineVersion >= 3):
+
+    # All games that use the version 3 engine use the messaging version 3 format
+    # All games that use the version 4 engine use the messaging version 4 format
+    # messageVersion       = engineVersion    
+
+print(engineVersion, messageVersion)
 
 # Set the program counter to the start of the A-Code
 pc = aCodeStartAddr
@@ -2260,7 +2312,7 @@ while(True):
         cmds.add(opCode)
         if(debugging):
             print(f"\033[93m0x{pc:04x} (0x{opCode:02x}) listhandler ", end='')
-        pc = vm_fn_listhandler(data,opCode,pc,version)
+        pc = vm_fn_listhandler(data,opCode,pc,engineVersion)
     else:
         if(debugging):
             print(f"\033[93m0x{pc:04x} (0x{opCodeClean:02x}) {opCodes[opCodeClean]:11s} ",end='')
