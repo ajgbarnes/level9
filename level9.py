@@ -439,8 +439,6 @@ def _getSignedNumber(byte):
 ###############################################################################
 def _getAddrForFragment(data, fragmentNumber):
   
-    #print("-----",hex(fragmentNumber))
-    #print("-----",hex(commonFragmentsAddr))
     address=commonFragmentsAddr
 
     if(engineVersion == 1):
@@ -455,9 +453,7 @@ def _getAddrForFragment(data, fragmentNumber):
         while fragmentNumber:
             messageLength = data[address]
             address= address + messageLength
-            #print(hex(fragmentNumber),hex(data[address]), hex(address))
             fragmentNumber = fragmentNumber - 1
-        #print(hex(fragmentNumber),hex(data[address]), hex(address))
 
     return address
 
