@@ -1300,7 +1300,6 @@ def vm_fn_function(data,opCode,pc):
             with open(game+".sav", "rb") as load_file:
                 for i in range(0, len(vm_variables)):
                     bytes=load_file.read(2)
-                    print(i)
                     vm_variables[i] = int.from_bytes(bytes, 'big')
                 for i in range(0, len(vm_listarea)-1):
                     bytes=load_file.read(1)
